@@ -2,7 +2,8 @@ module.exports = {
     "env": {
         "browser": true,
         "amd": true,
-        "jquery": true
+        "jquery": true,
+        "es6": true
     },
     "parserOptions": {
         "ecmaVersion": 6
@@ -12,8 +13,9 @@ module.exports = {
     ],
     "extends": [
         "eslint:recommended",
-        "plugin:security/recommended"
-    ],  
+        "plugin:security/recommended",
+        "plugin:react/recommended"
+    ],
     "rules": {
         "indent": [
             "error",
@@ -55,5 +57,10 @@ module.exports = {
         'security/detect-possible-timing-attacks': 1,
         'security/detect-pseudoRandomBytes': 1,
         'security/detect-unsafe-regex': 1
+    },
+    "settings": {
+        "react": {
+            "version": "detect"
+        }
     }
 };

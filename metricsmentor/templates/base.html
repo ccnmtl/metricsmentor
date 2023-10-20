@@ -12,7 +12,7 @@
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
 
         <!-- Local CSS -->
-        <link href="{{STATIC_URL}}css/main.css" rel="stylesheet">
+        <link href="{{STATIC_URL}}build/main.css" rel="stylesheet">
         {% block css %}{% endblock %}
 
         <!-- Standard Meta Data -->
@@ -60,9 +60,8 @@
                 <span class="skiplink-text">Skip to main content</span>
             </div>
         </a>
-
-        <header>
         {% block topnavbar %}
+        <header>
             <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
                 <a class="navbar-brand" href="#" title="Home">Metrics Mentor</a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#topNavbar" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -92,7 +91,7 @@
                             {% else %}
                             {{ request.user.username }}
                             {% endif %}
-                        (<a href="/accounts/logout/?next=/" title="Log Out">logout</a>)
+                        (<a href="/accounts/logout/?next=/" title="Log Out">Logout</a>)
                         {% endif %}
                         </span>
                     </li>
@@ -104,10 +103,12 @@
                 </ul>
                 {% endblock %}
             </nav>
-        {% endblock %}
         </header>
+        {% endblock %}
+        {% block pagetitle %}{% endblock %}
+        {% block content %}{% endblock %}
 
-        <main role="main" class="pb-4">
+        {% comment %} <main role="main" class="pb-4">
             <section class="jumbotron text-center">
                 <div class="container">
                     <h1 class="jumbotron-heading">Banner placeholder</h1>
@@ -186,8 +187,8 @@
                 </div>
             </section>
 
-        </main>
-
+        </main> {% endcomment %}
+        {% block footer %}
         <footer class="bg-light text-dark pt-2 pb-5">
             <ul class="nav d-flex justify-content-center">
                 <li class="nav-item">
@@ -209,15 +210,10 @@
             </span>
 
         </footer>
+        {% endblock %}
 
         <script src="{{STATIC_URL}}js/lib/jquery-3.3.1.min.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.3/umd/popper.min.js" integrity="sha384-ZMP7rVo3mIykV+2+9J3UJ46jBk0WLaUAdn689aCwoqbBJiSnjAK/l8WvCWPIPm49" crossorigin="anonymous"></script>
-        <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
-
-
-        <script
-            data-main="{{STATIC_URL}}js/src/main.js"
-            src="{{STATIC_URL}}js/lib/require/require.js"></script>
 
         {% if SENTRY_PUBLIC_DSN %}
             <script
@@ -260,18 +256,6 @@
                 You are impersonating.<br />
                 <a class="btn" href="{% url 'impersonate-stop' %}" title="Stop impersonate">stop</a>
             </div>
-        {% endif %}
-
-        {% if GA_CODE %}
-            <!-- Google tag (gtag.js) -->
-            <script async src="https://www.googletagmanager.com/gtag/js?id={{GA_CODE}}"></script>
-                <script>
-                window.dataLayer = window.dataLayer || [];
-                function gtag(){dataLayer.push(arguments);}
-                gtag('js', new Date());
-
-                gtag('config', '{{GA_CODE}}', {'anonymize_ip': true});
-            </script>
         {% endif %}
     </body>
 </html>
