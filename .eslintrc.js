@@ -1,48 +1,49 @@
 module.exports = {
-    "env": {
-        "browser": true,
-        "amd": true,
-        "jquery": true,
-        "es6": true
+    'env': {
+        'browser': true,
+        'amd': true,
+        'jquery': true,
+        'es6': true
     },
-    "parserOptions": {
-        "ecmaVersion": 6
+    'parserOptions': {
+        'ecmaVersion': 6,
+        'sourceType': 'module'
     },
-    "plugins": [
-        "security",
+    'plugins': [
+        'security',
     ],
-    "extends": [
-        "eslint:recommended",
-        "plugin:security/recommended",
-        "plugin:react/recommended"
+    'extends': [
+        'eslint:recommended',
+        'plugin:security/recommended',
+        'plugin:react/recommended'
     ],
-    "rules": {
-        "indent": [
-            "error",
+    'rules': {
+        'indent': [
+            'error',
             4
         ],
-        "linebreak-style": [
-            "error",
-            "unix"
+        'linebreak-style': [
+            'error',
+            'unix'
         ],
-        "no-unused-vars": [
-            "error",
-            {"vars": "all", "args": "none"}
+        'no-unused-vars': [
+            'error',
+            {'vars': 'all', 'args': 'none'}
         ],
-        "quotes": [
-            "error",
-            "single"
+        'quotes': [
+            'error',
+            'single'
         ],
-        "semi": [
-            "error",
-            "always"
+        'semi': [
+            'error',
+            'always'
         ],
-        "max-len": [2, {"code": 80, "tabWidth": 4, "ignoreUrls": true}],
-        "space-before-function-paren": ["error", "never"],
-        "space-in-parens": ["error", "never"],
-        "no-trailing-spaces": ["error"],
-        "key-spacing": ["error", { "beforeColon": false }],
-        "func-call-spacing": ["error", "never"],
+        'max-len': [2, {'code': 80, 'tabWidth': 4, 'ignoreUrls': true}],
+        'space-before-function-paren': ['error', 'never'],
+        'space-in-parens': ['error', 'never'],
+        'no-trailing-spaces': ['error'],
+        'key-spacing': ['error', { 'beforeColon': false }],
+        'func-call-spacing': ['error', 'never'],
 
         'security/detect-buffer-noassert': 1,
         'security/detect-child-process': 1,
@@ -58,9 +59,9 @@ module.exports = {
         'security/detect-pseudoRandomBytes': 1,
         'security/detect-unsafe-regex': 1
     },
-    "settings": {
-        "react": {
-            "version": "detect"
+    'settings': {
+        'react': {
+            'version': 'detect'
         }
     }
 };

@@ -10,7 +10,7 @@ module.exports = {
         publicPath: '/media/build/'
     },
     resolve: {
-        extensions: ['*', '.jsx', '.js']
+        extensions: ['.jsx', '.js']
     },
     module: {
         rules: [
@@ -28,7 +28,8 @@ module.exports = {
                     {
                         loader: 'babel-loader',
                         options: {
-                            presets: ['@babel/preset-env', '@babel/preset-react']
+                            presets: ['@babel/preset-env',
+                                '@babel/preset-react']
                         }
                     }
                 ]
@@ -77,14 +78,5 @@ module.exports = {
         new webpack.DefinePlugin({
             __BUILD__: JSON.stringify(Date.now())
         })
-    ].concat([new MiniCssExtractPlugin()]),
-
-    devServer: {
-        port: 8000,
-        historyApiFallback: true,
-        devMiddleware: {
-            writeToDisk: true,
-        },
-        publicPath: '/media/build/'
-    }
+    ].concat([new MiniCssExtractPlugin()])
 };
