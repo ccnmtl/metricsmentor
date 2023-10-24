@@ -58,3 +58,6 @@ cypress/fixtures/
 \#*
 uploads
 reports
+
+# docker db
+data/db
