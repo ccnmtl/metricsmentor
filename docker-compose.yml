@@ -7,8 +7,10 @@ services:
       - POSTGRES_DB=postgres
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=postgres
-  web:
-    build: .
+  backend:
+    build: 
+      context: .
+      dockerfile: Dockerfile.backend
     command: >
       sh -c "python manage.py migrate --noinput --settings=metricsmentor.settings_docker &&
              python manage.py runserver --settings=metricsmentor.settings_docker 0.0.0.0:8000"
@@ -22,3 +24,13 @@ services:
       - POSTGRES_PASSWORD=postgres
     depends_on:
       - db
+  frontend:
+    build:
+      context: .
+      dockerfile: Dockerfile.frontend
+    ports:
+      - "9091:9091"
+    volumes:
+      - .:/src
+    depends_on:
+      - backend
