@@ -1,0 +1,13 @@
+Dear colleague,
+
+You have successfully created a new Metrics Mentor connection for {{course.title}}.
+
+The Center for Teaching and Learning (CTL) offers instructors a TODO:
+
+CTL learning designers can help you conceptualize and set up. We are also happy to offer in-person training sessions for your class. Please email us at ctl-metricsmentor@columbia.edu to request a consultation or training.
+
+Metrics Mentor is designed and maintained here at the CTL, and we are always eager to receive ideas from the Columbia community – please let us know how it goes! We hope you have a successful semester using Metrics Mentor.
+
+
+Thanks,
+The Metrics Mentor Team

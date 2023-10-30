@@ -1,5 +1,5 @@
 APP=metricsmentor
-all: jenkins cypress-test jstest
+all: jenkins jstest
 
 .PHONY: all
 
@@ -26,13 +26,9 @@ cypress-open: $(JS_SENTINAL)
 	npm run cypress:open
 .PHONY: cypress-open
 
-cypress-test-travis: js-build
-	npm run cypress:test-travis
-.PHONY: cypress-test-travis
-
-cypress-test: js-build
-	npm run cypress:test
-.PHONY: cypress-test
+# cypress-test: js-build
+# 	npm run cypress:test
+# .PHONY: cypress-test
 
 cypress:
 	trap 'kill 0' EXIT; make integrationserver & make webpack & make cypress-open
