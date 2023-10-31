@@ -1,5 +1,5 @@
 APP=metricsmentor
-all: jenkins jstest
+all: jenkins jstest js-build
 
 .PHONY: all
 
