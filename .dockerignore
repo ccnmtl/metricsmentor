@@ -6,3 +6,4 @@ data
 .cache
 __pycache__
 .gitignore
+local_settings.py

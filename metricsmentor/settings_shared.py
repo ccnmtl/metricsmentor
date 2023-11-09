@@ -25,6 +25,10 @@ INSTALLED_APPS += [  # noqa
 THUMBNAIL_SUBDIR = "thumbs"
 LOGIN_REDIRECT_URL = "/"
 
+ALLOWED_HOSTS += [  # noqa
+    '*'
+]
+
 ACCOUNT_ACTIVATION_DAYS = 7
 DEFAULT_AUTO_FIELD = 'django.db.models.AutoField'
 
