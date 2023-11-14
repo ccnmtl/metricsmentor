@@ -13,6 +13,7 @@ phases:
       - aws --version
       - aws ecr get-login-password --region $AWS_DEFAULT_REGION | docker login --username AWS --password-stdin $AWS_ACCOUNT
       - REPOSITORY_URI=$ECR_REPOSITORY_URI
+      - echo $REPOSITORY_URI
       - COMMIT_HASH=$(echo $CODEBUILD_RESOLVED_SOURCE_VERSION | cut -c 1-7)
       - IMAGE_TAG=staging_${COMMIT_HASH:=latest}
       - GITHUB_BRANCH_NAME="${CODEBUILD_WEBHOOK_HEAD_REF#refs/heads/}"

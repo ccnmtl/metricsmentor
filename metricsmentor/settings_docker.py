@@ -6,16 +6,10 @@ from metricsmentor.settings_shared import *  # noqa: F401,F403
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': os.environ.get('POSTGRES_NAME'),
+        'NAME': 'metricsmentor',
         'USER': os.environ.get('POSTGRES_USER'),
         'PASSWORD': os.environ.get('POSTGRES_PASSWORD'),
-        'HOST': 'db',
+        'HOST': os.environ.get('HOST'),
         'PORT': 5432,
     }
 }
-
-
-try:
-    from metricsmentor.local_settings import *  # noqa: F401,F403
-except ImportError:
-    pass
