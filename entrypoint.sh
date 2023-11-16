@@ -1,6 +1,7 @@
 #!/bin/sh
 
-python manage.py migrate --noinput --settings=metricsmentor.settings_docker
+export DJANGO_SETTINGS_MODULE=metricsmentor.settings_docker
 
-# gunicorn metricsmentor.wsgi:application --bind 0.0.0.0:8000 --settings=metricsmentor.settings_docker
-python manage.py runserver --settings=metricsmentor.settings_docker 0.0.0.0:8000
+python manage.py migrate --noinput
+
+gunicorn metricsmentor.wsgi:application --bind 0.0.0.0:8000
