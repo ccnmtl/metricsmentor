@@ -1,4 +1,4 @@
-Django==4.2.3
+Django==4.2.7
 asgiref==3.7.2
 httplib2==0.22.0
 backports.zoneinfo;python_version<"3.9"
