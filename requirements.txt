@@ -81,7 +81,7 @@ django-flatblocks==1.0.0
 djangorestframework==3.14.0
 
 django-storages==1.14
-ctlsettings @ git+https://github.com/ccnmtl/ctlsettings@main
+ctlsettings==0.3.0
 
 django-reversion==5.0.6
 text_unidecode==1.3
