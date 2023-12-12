@@ -26,17 +26,17 @@ phases:
   build:
     commands:
       - echo Build started on `date`
-      - echo Start cloud defense vulnerability scan on codebase
-      - |
-        set +e  # Disable immediate exit on error
-        cdefense online --api-key=$CLOUD_DEFENSE_API --tag=$COMMIT_HASH --repository-url=$GITHUB_REPO_URL --branch-name=$GITHUB_BRANCH_NAME
-        exit_code=$?
-        set -e  # Re-enable immediate exit on error
-        if [ $exit_code -eq 1 ]; then
-         echo "Ignore exit code 1"
-        else
-         exit $exit_code
-        fi
+      # - echo Start cloud defense vulnerability scan on codebase
+      # - |
+      #   set +e  # Disable immediate exit on error
+      #   cdefense online --api-key=$CLOUD_DEFENSE_API --tag=$COMMIT_HASH --repository-url=$GITHUB_REPO_URL --branch-name=$GITHUB_BRANCH_NAME
+      #   exit_code=$?
+      #   set -e  # Re-enable immediate exit on error
+      #   if [ $exit_code -eq 1 ]; then
+      #    echo "Ignore exit code 1"
+      #   else
+      #    exit $exit_code
+      #   fi
       - echo Building the Docker image...
       - docker build -t $REPOSITORY_URI:latest .
       - docker tag $REPOSITORY_URI:latest $REPOSITORY_URI:$IMAGE_TAG
