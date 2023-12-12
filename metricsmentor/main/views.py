@@ -2,6 +2,7 @@ import re
 
 from courseaffils.columbia import CourseStringTemplate, CanvasTemplate
 from courseaffils.models import Course
+from courseaffils.views import get_courses_for_user
 from django.conf import settings
 from django.contrib import messages
 from django.contrib.auth.mixins import (
@@ -26,12 +27,40 @@ class IndexView(TemplateView):
         if request.user.is_anonymous:
             return super(IndexView, self).dispatch(request, *args, *kwargs)
 
-        qs = Course.objects.filter(group__user=request.user)
-        if qs.count() == 1:
-            course_url = reverse('course-detail-view', args=[qs.first().id])
-            return HttpResponseRedirect(course_url)
-        else:
-            return HttpResponseRedirect(reverse('course-list-view'))
+        return HttpResponseRedirect(reverse('course-list-view'))
+        # qs = Course.objects.filter(group__user=request.user)
+        # if qs.count() == 1:
+        #     course_url = reverse('course-detail-view', args=[qs.first().id])
+        #     return HttpResponseRedirect(course_url)
+        # else:
+        #     return HttpResponseRedirect(reverse('course-list-view'))
+
+
+class DashboardView(LoginRequiredMixin, TemplateView):
+    template_name = 'main/courses.html'
+    http_method_names = ['get', 'post']
+
+    def get_context_data(self, **kwargs):
+        print('dashboard view')
+        return {
+            'user': self.request.user,
+            'courses': get_courses_for_user(
+                self.request.user).order_by('title'),
+            'page_type': 'dashboard'
+        }
+
+
+class CourseDetailView(LoggedInCourseMixin, DetailView):
+    model = Course
+
+    def get_context_data(self, **kwargs):
+        is_faculty = self.object.is_true_faculty(self.request.user)
+        print('course detail view')
+
+        return {
+            'course': self.object,
+            'is_faculty': is_faculty,
+        }
 
 
 class LTICourseCreate(LoginRequiredMixin, View):
@@ -156,15 +185,3 @@ class LTICourseSelector(LoginRequiredMixin, View):
             url = '/'
 
         return HttpResponseRedirect(url)
-
-
-class CourseDetailView(LoggedInCourseMixin, DetailView):
-    model = Course
-
-    def get_context_data(self, **kwargs):
-        is_faculty = self.object.is_true_faculty(self.request.user)
-
-        return {
-            'course': self.object,
-            'is_faculty': is_faculty,
-        }

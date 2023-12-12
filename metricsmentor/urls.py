@@ -29,6 +29,8 @@ urlpatterns = [
              views.LTICourseCreate.as_view(), name='lti-course-create'),
      re_path(r'^course/lti/(?P<context>\w[^/]*)/$',
              views.LTICourseSelector.as_view(), name='lti-course-select'),
+     path('^$', views.DashboardView.as_view(), name='course-list-view'),
+
      re_path(r'^course/(?P<pk>\d+)/$', views.CourseDetailView.as_view(),
              name='course-detail-view'),
 ]
