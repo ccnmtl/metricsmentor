@@ -12,8 +12,8 @@ services:
       context: .
       dockerfile: Dockerfile.backend
     command: >
-      sh -c "python manage.py migrate --noinput --settings=metricsmentor.settings_docker &&
-             python manage.py runserver --settings=metricsmentor.settings_docker 0.0.0.0:8000"
+      sh -c "python manage.py migrate --noinput --settings=metricsmentor.settings_docker_dev &&
+             python manage.py runserver --settings=metricsmentor.settings_docker_dev 0.0.0.0:8000"
     volumes:
       - .:/src
     ports:
