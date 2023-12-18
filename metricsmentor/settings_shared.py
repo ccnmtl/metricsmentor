@@ -17,7 +17,7 @@ USE_TZ = True
 INSTALLED_APPS += [  # noqa
     'django_bootstrap5',
     'django_extensions',
-    'metricsmentor.main',
+    'metricsmentor',
     'courseaffils',
     'lti_provider',
 ]
