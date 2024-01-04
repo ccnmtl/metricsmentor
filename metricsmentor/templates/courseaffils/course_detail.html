@@ -11,6 +11,11 @@
         {% if course.info.termyear %}<div>Semester: {{ course.info.termyear }}</div>{% endif %}
         <div><b>Your role:</b> {% if is_faculty %}Instructor{% else %}Student{% endif %}</div>
     </div>
+    <div class="col-12">
+        <div>
+            <a href="{% url 'simulation-dashboard-view' %}"> ENTER SIMS</a>
+        </div>
+    </div>
 </div>
 
 {% endblock %}

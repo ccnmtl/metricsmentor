@@ -36,12 +36,12 @@ class IndexView(TemplateView):
         #     return HttpResponseRedirect(reverse('course-list-view'))
 
 
-class DashboardView(LoginRequiredMixin, TemplateView):
+class CoursesView(LoginRequiredMixin, TemplateView):
     template_name = 'main/courses.html'
     http_method_names = ['get', 'post']
 
     def get_context_data(self, **kwargs):
-        print('dashboard view')
+
         return {
             'user': self.request.user,
             'courses': get_courses_for_user(
@@ -60,6 +60,16 @@ class CourseDetailView(LoggedInCourseMixin, DetailView):
         return {
             'course': self.object,
             'is_faculty': is_faculty,
+        }
+
+
+class SimulationDashboardView(LoggedInCourseMixin, TemplateView):
+    template_name = 'main/simulation_dashboard.html'
+
+    def get_context_data(self, **kwargs):
+
+        return {
+            'user': self.request.user,
         }
 
 
