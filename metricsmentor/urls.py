@@ -10,6 +10,9 @@ admin.autodiscover()
 
 
 urlpatterns = [
+
+     re_path(r'simulations/', views.SimulationDashboardView.as_view(),
+             name='simulation-dashboard-view'),
      path('', views.IndexView.as_view()),
      path('admin/', admin.site.urls),
 
@@ -29,10 +32,11 @@ urlpatterns = [
              views.LTICourseCreate.as_view(), name='lti-course-create'),
      re_path(r'^course/lti/(?P<context>\w[^/]*)/$',
              views.LTICourseSelector.as_view(), name='lti-course-select'),
-     path('^$', views.DashboardView.as_view(), name='course-list-view'),
+     path('courses/', views.CoursesView.as_view(), name='course-list-view'),
 
      re_path(r'^course/(?P<pk>\d+)/$', views.CourseDetailView.as_view(),
              name='course-detail-view'),
+
 ]
 
 

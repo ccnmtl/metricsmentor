@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+{% load static %}
+
+{% block js %}
+    <script src="{% static 'build/bundle.js' %}"></script>
+{% endblock %}
+
+{% block content %}
+<main class="main-app" id="react-root"></main>
+{% endblock %}
