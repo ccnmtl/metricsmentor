@@ -18,6 +18,7 @@ INSTALLED_APPS += [  # noqa
     'django_bootstrap5',
     'django_extensions',
     'metricsmentor',
+    'metricsmentor.main',
     'courseaffils',
     'lti_provider',
 ]
