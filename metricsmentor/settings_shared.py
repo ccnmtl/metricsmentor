@@ -33,8 +33,6 @@ ALLOWED_HOSTS += [  # noqa
 ACCOUNT_ACTIVATION_DAYS = 7
 DEFAULT_AUTO_FIELD = 'django.db.models.AutoField'
 
-SECURE_PROXY_SSL_HEADER = ('HTTP_X_FORWARDED_PROTO', 'https')
-
 AUTHENTICATION_BACKENDS += [  # noqa
     'lti_provider.auth.LTIBackend',
 ]
