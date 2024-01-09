@@ -6,15 +6,18 @@ module.exports = {
         'es6': true
     },
     'parserOptions': {
-        'ecmaVersion': 6,
-        'sourceType': 'module'
+        'ecmaVersion': 2018,
+        'sourceType': 'module',
+        'ecmaFeatures': {
+            jsx: true,
+        },
     },
     'plugins': [
         'security',
     ],
     'extends': [
         'eslint:recommended',
-        'plugin:security/recommended',
+        'plugin:security/recommended-legacy',
         'plugin:react/recommended'
     ],
     'rules': {

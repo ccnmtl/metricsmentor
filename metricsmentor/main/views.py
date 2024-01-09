@@ -18,6 +18,10 @@ from django.views.generic.detail import DetailView
 from lti_provider.models import LTICourseContext
 from metricsmentor.main.utils import send_template_email
 from metricsmentor.mixins import LoggedInCourseMixin
+from django.http import JsonResponse
+from django.views.decorators.csrf import csrf_exempt
+from scipy.stats import linregress
+import json
 
 
 class IndexView(TemplateView):
@@ -195,3 +199,24 @@ class LTICourseSelector(LoginRequiredMixin, View):
             url = '/'
 
         return HttpResponseRedirect(url)
+
+
+@csrf_exempt
+def calculate_regression(request):
+    if request.method == 'POST':
+        data = json.loads(request.body.decode('utf-8'))
+        x_values = data.get('x_values', [])
+        y_values = data.get('y_values', [])
+
+        if x_values and y_values:
+            result = linregress(x_values, y_values)
+
+            return JsonResponse({
+                'slope': result.slope,
+                'intercept': result.intercept,
+                'rvalue': result.rvalue,
+                'pvalue': result.pvalue,
+                'stderr': result.stderr,
+            })
+
+    return JsonResponse({'error': 'Invalid data.'}, status=400)

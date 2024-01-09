@@ -5,9 +5,9 @@ from django.views.generic import TemplateView
 from django.views.static import serve
 from django_cas_ng import views as cas_views
 from metricsmentor.main import views
+from metricsmentor.main.views import calculate_regression
 
 admin.autodiscover()
-
 
 urlpatterns = [
 
@@ -36,6 +36,8 @@ urlpatterns = [
 
      re_path(r'^course/(?P<pk>\d+)/$', views.CourseDetailView.as_view(),
              name='course-detail-view'),
+     path('calculate_regression/', calculate_regression,
+          name='calculate_regression'),
 
 ]
 
