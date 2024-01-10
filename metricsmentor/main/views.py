@@ -9,6 +9,7 @@ from django.contrib.auth.mixins import (
     LoginRequiredMixin
 )
 from django.contrib.auth.models import Group
+from django.shortcuts import render
 from django.http import (
     HttpResponseRedirect
 )
@@ -220,3 +221,7 @@ def calculate_regression(request):
             })
 
     return JsonResponse({'error': 'Invalid data.'}, status=400)
+
+
+def handler404(request):
+    return render(request, '404.html')

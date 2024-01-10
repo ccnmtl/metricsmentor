@@ -11,12 +11,14 @@ from metricsmentor.main.views import calculate_regression
 urlpatterns = [
     path('accounts/', include('django.contrib.auth.urls')),
 
-    path('', views.IndexView.as_view()),
     path('admin/', admin.site.urls),
+    path('accounts/login/', views.handler404),
+    path('accounts/logout/', views.handler404),
+    re_path(r'^accounts/', include('django.contrib.auth.urls')),
+
+    path('', views.IndexView.as_view()),
     re_path(r'simulations/', views.SimulationDashboardView.as_view(),
             name='simulation-dashboard-view'),
-    #      path('', views.IndexView.as_view()),
-    #      path('admin/', admin.site.urls),
 
     path('accounts/', include('django.contrib.auth.urls')),
     path('cas/login', cas_views.LoginView.as_view(),
