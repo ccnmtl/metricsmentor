@@ -37,6 +37,9 @@ AUTHENTICATION_BACKENDS += [  # noqa
     'lti_provider.auth.LTIBackend',
 ]
 
+SERVER_EMAIL = 'automated@mail.ctl.columbia.edu'
+CONTACT_US_EMAIL = 'ctl-metricsmentor@columbia.edu'
+
 LTI_TOOL_CONFIGURATION = {
     'title': 'Metrics Mentor',
     'description': 'Econometrics Simulations',
