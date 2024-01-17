@@ -4,7 +4,7 @@ import { ScatterPlot } from './scatterPlot';
 export const SimulationOne = () => {
     const [N, setN] = useState(50);
     const [correlation, setCorrelation] = useState(0.7);
-    const [seed, setSeed] = useState('yourSeedString');
+    const [seed, setSeed] = useState('seedString');
 
     const handleNChange = (e) => {
         setN(Math.max(50, parseInt(e.target.value, 10)));
