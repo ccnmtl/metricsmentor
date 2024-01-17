@@ -39,6 +39,13 @@ AUTHENTICATION_BACKENDS += [  # noqa
 
 SERVER_EMAIL = 'automated@mail.ctl.columbia.edu'
 CONTACT_US_EMAIL = 'ctl-metricsmentor@columbia.edu'
+EMAIL_BACKEND = 'django_smtp_ssl.SSLEmailBackend'
+EMAIL_USE_TLS = True
+EMAIL_HOST = os.environ.get('EMAIL_HOST')
+EMAIL_PORT = os.environ.get('EMAIL_PORT')
+EMAIL_HOST_USER = os.environ.get('SES_USERNAME')
+EMAIL_HOST_PASSWORD = os.environ.get('SES_PASSWORD')
+
 
 LTI_TOOL_CONFIGURATION = {
     'title': 'Metrics Mentor',
@@ -54,6 +61,14 @@ LTI_TOOL_CONFIGURATION = {
     'frame_width': 1024,
     'frame_height': 1024,
     'allow_ta_access': True
+}
+
+PYLTI_CONFIG = {
+    'consumers': {
+        os.environ.get('PYLTI_CONSUMER'): {
+            'secret': os.environ.get('PYLTI_SECRET')
+        }
+    }
 }
 
 COURSEAFFILS_COURSESTRING_MAPPER = CourseStringMapper
