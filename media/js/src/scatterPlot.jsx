@@ -29,7 +29,7 @@ export const ScatterPlot = ({ N, correlation, seed }) => {
         const y_values = data.map(point => point.y);
 
         try {
-            const response = await axios.post('http://localhost:8000/calculate_regression/', {
+            const response = await axios.post('/calculate_regression/', {
                 x_values,
                 y_values,
             });
