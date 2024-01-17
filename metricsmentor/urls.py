@@ -9,16 +9,9 @@ from metricsmentor.main.views import calculate_regression
 
 
 urlpatterns = [
-    path('accounts/', include('django.contrib.auth.urls')),
-
-    path('admin/', admin.site.urls),
-    path('accounts/login/', views.handler404),
-    path('accounts/logout/', views.handler404),
     re_path(r'^accounts/', include('django.contrib.auth.urls')),
 
-    path('', views.IndexView.as_view()),
-    re_path(r'simulations/', views.SimulationDashboardView.as_view(),
-            name='simulation-dashboard-view'),
+    path('admin/', admin.site.urls),
 
     path('accounts/', include('django.contrib.auth.urls')),
     path('cas/login', cas_views.LoginView.as_view(),
@@ -26,16 +19,24 @@ urlpatterns = [
     path('cas/logout', cas_views.LogoutView.as_view(),
          name='cas_ng_logout'),
 
+    re_path(r'lti/', include('lti_provider.urls')),
+    re_path(r'^course/lti/create/',
+            views.LTICourseCreate.as_view(), name='lti-course-create'),
+    re_path(r'^course/lti/(?P<context>\w[^/]*)/$',
+            views.LTICourseSelector.as_view(), name='lti-course-select'),
+
+
+
+    re_path('^$', views.IndexView.as_view()),
+    re_path(r'simulations/', views.SimulationDashboardView.as_view(),
+            name='simulation-dashboard-view'),
+
     path('_impersonate/', include('impersonate.urls')),
     path('stats/', TemplateView.as_view(template_name="stats.html")),
     path('smoketest/', include('smoketest.urls')),
     path('uploads/<str:path>',
          serve, {'document_root': settings.MEDIA_ROOT}),
-    path(r'lti/', include('lti_provider.urls')),
-    re_path(r'^course/lti/create/$',
-            views.LTICourseCreate.as_view(), name='lti-course-create'),
-    re_path(r'^course/lti/(?P<context>\w[^/]*)/$',
-            views.LTICourseSelector.as_view(), name='lti-course-select'),
+
     path('courses/', views.CoursesView.as_view(), name='course-list-view'),
 
     re_path(r'^course/(?P<pk>\d+)/$', views.CourseDetailView.as_view(),
