@@ -54,7 +54,9 @@ export const ScatterPlot = ({ N, correlation, seed }) => {
     }, [N, correlation, seed]);
 
     useEffect(() => {
-        calculateRegression();
+        if(data.length > 0) {
+            calculateRegression();
+        }
     }, [data]);
 
     return (
