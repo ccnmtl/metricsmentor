@@ -12,13 +12,14 @@ export const ScatterPlot = ({ N, correlation, seed }) => {
         const rng = seedrandom(seed);
 
         const generatedData = [];
+        if(correlation) {
+            for (let i = 0; i < N; i++) {
+                const x = rng();
+                const y = correlation * x + Math.sqrt(1 - Math.pow(
+                    correlation, 2)) * rng();
 
-        for (let i = 0; i < N; i++) {
-            const x = rng();
-            const y = correlation * x + Math.sqrt(1 - Math.pow(
-                correlation, 2)) * rng();
-
-            generatedData.push({ x, y });
+                generatedData.push({ x, y });
+            }
         }
 
         return generatedData;
