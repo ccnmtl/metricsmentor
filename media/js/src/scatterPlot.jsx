@@ -75,7 +75,10 @@ export const ScatterPlot = ({ N, correlation, seed }) => {
             layout={{
                 xaxis: { title: 'X Axis' },
                 yaxis: { title: 'Y Axis' },
+
             }}
+            useResizeHandler={true}
+            style={{ width: '100%', height: '100%' }}
             config={{
                 scrollZoom: true,
                 displayModeBar: true,

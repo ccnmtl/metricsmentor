@@ -108,16 +108,6 @@
         {% block pagetitle %}{% endblock %}
         {% block content %}{% endblock %}
 
-        {% comment %} <main role="main" class="pb-4">
-
-            <section id="content">
-                <div class="container">
-                    {% block pagetitle %}{% endblock %}
-                    {% block content %}{% endblock %}
-                </div>
-            </section>
-
-        </main> {% endcomment %}
         {% block footer %}
         <footer class="bg-light text-dark pt-2 pb-5">
             <ul class="nav d-flex justify-content-center">
@@ -134,7 +124,7 @@
 
             <span itemscope itemtype="https://schema.org/EducationalOrganization">
                 <a href="https://ctl.columbia.edu" target="_blank" itemprop="url" title="Center for Teaching and Learning at Columbia University">
-                    <img src="{{STATIC_URL}}img/logo-ctl-color.png" class="mx-auto d-block img-fluid mt-3" alt="" itemprop="logo" width="290" />
+                    <img src="{{STATIC_URL}}img/logo-ctl-color.png" class="mx-auto img-fluid mt-3" alt="" itemprop="logo" width="290" />
                     <span class="visually-hidden" itemprop="name">Center for Teaching and Learning at Columbia University</span>
                 </a>
             </span>
