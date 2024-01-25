@@ -5,14 +5,17 @@ WORKDIR /src
 COPY requirements.txt .
 
 RUN apt-get update && \
- apt-get install -y \
-    nodejs npm
+    apt-get install -y \
+    nodejs npm && \
+    apt-get clean
+
+SHELL ["/bin/bash", "-o", "pipefail", "-c"]
 
 RUN curl -fsSL https://deb.nodesource.com/setup_current.x | bash - && \
     apt-get install -y nodejs
 
-RUN pip install --upgrade pip && \
-    pip install --no-deps -r requirements.txt
+RUN pip install --no-cache-dir --upgrade pip && \
+    pip install --no-cache-dir --no-deps -r requirements.txt
 COPY . .
 
 RUN rm -rf local_settings.py
