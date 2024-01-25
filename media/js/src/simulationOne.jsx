@@ -20,21 +20,33 @@ export const SimulationOne = () => {
 
     return (
         <div>
-            <label>
-                N:
-                <input type='number' min='50'
-                    value={N} onChange={handleNChange} />
-            </label>
-            <label>
-                R:
-                <input type='number' step='0.01' min='-1' max='1'
-                    value={correlation} onChange={handleCorrelationChange} />
-            </label>
-            <label>
-                Seed:
-                <input type='text' value={seed} onChange={handleSeedChange} />
-            </label>
-            <ScatterPlot N={N} correlation={correlation} seed={seed} />
+            <div className='row'>
+                <div className='col-2'>
+                    <div className='row ms-2 mt-5'>
+                        <label> N:
+                            <input type='number' min='50' max='500'
+                                value={N} onChange={handleNChange} />
+                        </label>
+                    </div>
+                    <div className='row ms-2'>
+                        <label> R:
+                            <input type='number' step='0.01' min='-1'
+                                max='1'
+                                value={correlation}
+                                onChange={handleCorrelationChange} />
+                        </label>
+                    </div>
+                    <div className='row ms-2'>
+                        <label> Seed:
+                            <input type='text' value={seed}
+                                onChange={handleSeedChange} />
+                        </label>
+                    </div>
+                </div>
+                <div className='col-10' style={{height: '100%'}}>
+                    <ScatterPlot N={N} correlation={correlation} seed={seed} />
+                </div>
+            </div>
         </div>
     );
 };
