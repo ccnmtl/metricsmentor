@@ -5,6 +5,10 @@ export const SimulationOne = () => {
     const [N, setN] = useState(50);
     const [correlation, setCorrelation] = useState(0.5);
     const [seed, setSeed] = useState('seedString');
+    const [slope, setSlope] = useState(null);
+    const [intercept, setIntercept] = useState(null);
+    const [stderror, setStderror] = useState(null);
+    const [appRvalue, setAppRvalue] = useState(null);
 
     const handleNChange = (e) => {
         setN(parseInt(e.target.value));
@@ -23,28 +27,66 @@ export const SimulationOne = () => {
             <div className='row'>
                 <div className='col-2'>
                     <div className='row ms-2 mt-5'>
-                        <label> N:
+                        <label> Sample size, N:
                             <input type='number' min='50' max='500'
+                                className='ms-2 mt-2'
                                 value={N} onChange={handleNChange} />
                         </label>
                     </div>
                     <div className='row ms-2'>
-                        <label> R:
+                        <label> Correlation coefficient, r :
                             <input type='number' step='0.01' min='-1'
-                                max='1'
-                                value={correlation}
+                                max='1' value={correlation}
+                                className='ms-2 mt-2'
                                 onChange={handleCorrelationChange} />
                         </label>
                     </div>
                     <div className='row ms-2'>
                         <label> Seed:
                             <input type='text' value={seed}
+                                className='ms-2 mt-2'
                                 onChange={handleSeedChange} />
                         </label>
                     </div>
+                    {slope !== null && (
+                        <>
+                            <div>
+                                <div className='row ms-4 mt-2'>
+                                   y= β&#770; 0 + β&#770; 1x
+                                </div>
+                                <div className='row ms-2 mt-2'>
+                                    <label> Slope: {slope} </label>
+                                </div>
+                                <div className='row ms-2'>
+                                    <label> Application R: {appRvalue} </label>
+                                </div>
+                                <div className='row ms-2'>
+                                    <label> Intercept: {intercept} </label>
+                                </div>
+                                <div className='row ms-2'>
+                                    <label> StdErr: {stderror} </label>
+                                </div>
+                            </div>
+                            <div>
+
+                            </div>
+                        </>
+                    )}
                 </div>
                 <div className='col-10' style={{height: '100%'}}>
-                    <ScatterPlot N={N} correlation={correlation} seed={seed} />
+                    <ScatterPlot
+                        N={N}
+                        correlation={correlation}
+                        seed={seed}
+                        slope={slope}
+                        setSlope={setSlope}
+                        stderror={stderror}
+                        setStderror={setStderror}
+                        intercept={intercept}
+                        setIntercept={setIntercept}
+                        appRvalue={appRvalue}
+                        setAppRvalue={setAppRvalue}
+                    />
                 </div>
             </div>
         </div>

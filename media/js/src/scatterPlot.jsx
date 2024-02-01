@@ -4,7 +4,9 @@ import seedrandom from 'seedrandom';
 import axios from 'axios';
 import PropTypes from 'prop-types';
 
-export const ScatterPlot = ({ N, correlation, seed }) => {
+export const ScatterPlot = ({ N, correlation, seed, appRvalue, setAppRvalue,
+    setSlope, setIntercept, setStderror, slope, stderror, intercept
+}) => {
     const [data, setData] = useState([]);
     const [regressionLine, setRegressionLine] = useState(null);
 
@@ -14,9 +16,9 @@ export const ScatterPlot = ({ N, correlation, seed }) => {
         const generatedData = [];
         if(correlation) {
             for (let i = 0; i < N; i++) {
-                const x = rng();
-                const y = correlation * x + Math.sqrt(1 - Math.pow(
-                    correlation, 2)) * rng();
+                const x = Math.round(rng() * 100);
+                const y = Math.round(correlation * x + Math.sqrt(
+                    1 - Math.pow(correlation, 2)) * rng() * 100);
 
                 generatedData.push({ x, y });
             }
@@ -35,7 +37,12 @@ export const ScatterPlot = ({ N, correlation, seed }) => {
                 y_values,
             });
 
-            const { slope, intercept } = response.data;
+            const { slope, intercept, rvalue, stderr } = response.data;
+
+            setAppRvalue(rvalue);
+            setSlope(slope);
+            setIntercept(intercept);
+            setStderror(stderr);
 
             setRegressionLine({
                 type: 'scatter',
@@ -94,4 +101,12 @@ ScatterPlot.propTypes = {
     N: PropTypes.number.isRequired,
     correlation: PropTypes.number.isRequired,
     seed: PropTypes.string.isRequired,
+    appRvalue: PropTypes.number,
+    setAppRvalue: PropTypes.func,
+    setSlope: PropTypes.func,
+    setIntercept: PropTypes.func,
+    setStderror: PropTypes.func,
+    slope: PropTypes.number,
+    stderror: PropTypes.number,
+    intercept: PropTypes.number
 };
