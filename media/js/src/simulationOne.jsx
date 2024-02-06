@@ -34,12 +34,13 @@ export const SimulationOne = () => {
                         </label>
                     </div>
                     <div className='row ms-2'>
-                        <label> Correlation coefficient, r :
-                            <input type='number' step='0.01' min='-1'
-                                max='1' value={correlation}
-                                className='ms-2 mt-2'
-                                onChange={handleCorrelationChange} />
-                        </label>
+                        <label htmlFor="correlation" className="form-label">
+                        Correlation coefficient, r : {correlation} </label>
+                        <input type='range' step='0.01' min='-1'
+                            max='1' value={correlation}
+                            className='form-range'
+                            id='correlation'
+                            onChange={handleCorrelationChange} />
                     </div>
                     <div className='row ms-2'>
                         <label> Seed:
@@ -52,7 +53,10 @@ export const SimulationOne = () => {
                         <>
                             <div>
                                 <div className='row ms-4 mt-2'>
-                                   y= β&#770; 0 + β&#770; 1x
+                                    y= β&#770; 0 + β&#770; 1x
+                                </div>
+                                <div className='row ms-4 mt-2'>
+                                    y = {slope} + {intercept}x
                                 </div>
                                 <div className='row ms-2 mt-2'>
                                     <label> Slope: {slope} </label>
@@ -65,6 +69,12 @@ export const SimulationOne = () => {
                                 </div>
                                 <div className='row ms-2'>
                                     <label> StdErr: {stderror} </label>
+                                </div>
+                                <div className='row ms-2'>
+                                    <label>
+                                        t = {slope.toFixed(2)} - 0 /
+                                        {stderror.toFixed(2)}
+                                    </label>
                                 </div>
                             </div>
                             <div>

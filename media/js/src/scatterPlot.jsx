@@ -4,8 +4,8 @@ import seedrandom from 'seedrandom';
 import axios from 'axios';
 import PropTypes from 'prop-types';
 
-export const ScatterPlot = ({ N, correlation, seed, appRvalue, setAppRvalue,
-    setSlope, setIntercept, setStderror, slope, stderror, intercept
+export const ScatterPlot = ({ N, correlation, seed, setAppRvalue,
+    setSlope, setIntercept, setStderror
 }) => {
     const [data, setData] = useState([]);
     const [regressionLine, setRegressionLine] = useState(null);
@@ -14,7 +14,7 @@ export const ScatterPlot = ({ N, correlation, seed, appRvalue, setAppRvalue,
         const rng = seedrandom(seed);
 
         const generatedData = [];
-        if(correlation) {
+        if (typeof correlation === 'number') {
             for (let i = 0; i < N; i++) {
                 const x = Math.round(rng() * 100);
                 const y = Math.round(correlation * x + Math.sqrt(
