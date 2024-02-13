@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { ScatterPlot } from './scatterPlot';
 import { Katex } from './katexComponent';
 
@@ -14,6 +14,19 @@ export const SimulationOne = () => {
     const [userSE, setUserSE] = useState(0);
     const [userBetaOne, setUserBetaOne] = useState(0);
     const [userBetaOneTwo, setUserBetaOneTwo] = useState(0);
+    const [valueMatch, setValueMatch] = useState(false);
+
+    useEffect(() => {
+        // Check if all values are not null before performing comparison
+        if (intercept !== null) {
+            setValueMatch(
+                parseFloat(intercept.toFixed(3)) === parseFloat(userBetaOneHat)
+                && parseFloat(stderror.toFixed(3)) === parseFloat(userSE) &&
+                parseFloat(intercept.toFixed(3)) === parseFloat(userBetaOneTwo)
+            );
+        }
+    }, [intercept, stderror, slope, userBetaOneHat,
+        userSE, userBetaOne, userBetaOneTwo]);
 
 
     const handleNChange = (e) => {
@@ -122,8 +135,11 @@ export const SimulationOne = () => {
                                     <div className='row ms-2'>
                                         <div className='input-group mb-3'>
                                             t =
-                                            <input type='number'
-                                                style={{width: '10%'}}
+                                            <input type='text'
+                                                style={{
+                                                    width: '10%',
+                                                    borderColor: valueMatch ?
+                                                        'green' : 'red' }}
                                                 onChange={
                                                     handleBetaOneHatChange
                                                 }
@@ -131,7 +147,7 @@ export const SimulationOne = () => {
                                                 me-1 ms-1
                                             form-control-sm box-2' />
                                             -
-                                            <input type='number'
+                                            <input type='text'
                                                 style={{width: '10%'}}
                                                 onChange={handleBetaOneChange}
                                                 defaultValue={0}
@@ -139,14 +155,20 @@ export const SimulationOne = () => {
                                                  me-1 ms-1
                                             form-control-sm box-2' />
                                             /
-                                            <input type='number'
-                                                style={{width: '10%'}}
+                                            <input type='text'
+                                                style={{
+                                                    width: '10%',
+                                                    borderColor: valueMatch ?
+                                                        'green' : 'red' }}
                                                 onChange={handleUserSEChange}
                                                 className='form-control
                                                  me-1 ms-1
                                             form-control-sm box-2' />
-                                            <input type='number'
-                                                style={{width: '10%'}}
+                                            <input type='text'
+                                                style={{
+                                                    width: '10%',
+                                                    borderColor: valueMatch ?
+                                                        'green' : 'red' }}
                                                 onChange={
                                                     handleBetaOneChangeTwo
                                                 }
