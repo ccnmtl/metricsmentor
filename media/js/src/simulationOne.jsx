@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { ScatterPlot } from './scatterPlot';
 import { Katex } from './katexComponent';
 
@@ -13,7 +13,18 @@ export const SimulationOne = () => {
     const [userBetaOneHat, setUserBetaOneHat] = useState(0);
     const [userSE, setUserSE] = useState(0);
     const [userBetaOne, setUserBetaOne] = useState(0);
-    const [userBetaOneTwo, setUserBetaOneTwo] = useState(0);
+    const [valueMatch, setValueMatch] = useState(false);
+
+    useEffect(() => {
+        // Check if all values are not null before performing comparison
+        if (intercept !== null) {
+            setValueMatch(
+                parseFloat(intercept.toFixed(3)) === parseFloat(userBetaOneHat)
+                && parseFloat(stderror.toFixed(3)) === parseFloat(userSE)
+            );
+        }
+    }, [intercept, stderror, slope, userBetaOneHat,
+        userSE, userBetaOne]);
 
 
     const handleNChange = (e) => {
@@ -38,10 +49,6 @@ export const SimulationOne = () => {
 
     const handleBetaOneChange = (e) => {
         setUserBetaOne(e.target.value);
-    };
-
-    const handleBetaOneChangeTwo = (e) => {
-        setUserBetaOneTwo(e.target.value);
     };
 
     const tEquation =
@@ -118,44 +125,46 @@ export const SimulationOne = () => {
                                 <div className='row ms-2 mt-2 mb-3'>
                                     <Katex tex={tEquation} />
                                 </div>
-                                <form>
-                                    <div className='row ms-2'>
-                                        <div className='input-group mb-3'>
+
+                                <div className='row ms-2'>
+                                    <div className='input-group mb-3'>
                                             t =
-                                            <input type='number'
-                                                style={{width: '10%'}}
-                                                onChange={
-                                                    handleBetaOneHatChange
-                                                }
-                                                className='form-control
+                                        <input type='text'
+                                            style={{
+                                                width: '10%',
+                                                borderColor: valueMatch ?
+                                                    'green' : 'red' }}
+                                            onChange={
+                                                handleBetaOneHatChange
+                                            }
+                                            className='form-control
                                                 me-1 ms-1
                                             form-control-sm box-2' />
                                             -
-                                            <input type='number'
-                                                style={{width: '10%'}}
-                                                onChange={handleBetaOneChange}
-                                                defaultValue={0}
-                                                className='form-control
+                                        <input type='text'
+                                            style={{width: '10%'}}
+                                            onChange={handleBetaOneChange}
+                                            defaultValue={0}
+                                            className='form-control
                                                  me-1 ms-1
                                             form-control-sm box-2' />
                                             /
-                                            <input type='number'
-                                                style={{width: '10%'}}
-                                                onChange={handleUserSEChange}
-                                                className='form-control
+                                        <input type='text'
+                                            style={{
+                                                width: '10%',
+                                                borderColor: valueMatch ?
+                                                    'green' : 'red' }}
+                                            onChange={handleUserSEChange}
+                                            className='form-control
                                                  me-1 ms-1
                                             form-control-sm box-2' />
-                                            <input type='number'
-                                                style={{width: '10%'}}
-                                                onChange={
-                                                    handleBetaOneChangeTwo
-                                                }
-                                                className='form-control
-                                                 me-1 ms-1
-                                            form-control-sm box-2' />
-                                        </div>
                                     </div>
-                                </form>
+                                </div>
+                                {valueMatch && (
+                                    <div className='row ms-5'>
+                                        = {(slope / stderror).toFixed(3)}
+                                    </div>
+                                )}
                             </div>
                         </>
                     )}
