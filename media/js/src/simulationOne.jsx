@@ -88,7 +88,7 @@ export const SimulationOne = () => {
                             <div>
                                 <div className='row ms-2 mt-2'>
                                     <label className='form-label fst-italic'>
-                                        App r = {appRvalue}
+                                        App r = {appRvalue.toFixed(2)}
                                     </label>
                                 </div>
                                 <div className='row ms-2 mt-3'>
@@ -104,7 +104,7 @@ export const SimulationOne = () => {
                                     <label>
                                         <Katex tex={
                                             // eslint-disable-next-line max-len
-                                            `\\hat{\\beta_0} = ${slope.toFixed(2)}`
+                                            `\\hat{\\beta_0} = ${slope.toFixed(3)}`
                                         } />
                                     </label>
                                 </div>
@@ -120,6 +120,11 @@ export const SimulationOne = () => {
                                     <label>
                                         <Katex tex={
                                             `{SE} = ${stderror.toFixed(3)}`} />
+                                    </label>
+                                </div>
+                                <div className='row ms-2'>
+                                    <label>
+                                        <Katex tex={'\\Eta_0 = 0'} />
                                     </label>
                                 </div>
                                 <div className='row ms-2 mt-2 mb-3'>
