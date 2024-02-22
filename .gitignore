@@ -60,4 +60,4 @@ uploads
 reports
 
 # docker db
-data/db
+data
