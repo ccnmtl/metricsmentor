@@ -1,0 +1,26 @@
+services:
+  backend:
+    build: 
+      context: .
+      dockerfile: Dockerfile.backend
+    command: >
+      sh -c "python manage.py migrate --noinput --settings=metricsmentor.settings_docker_dev &&
+             python manage.py runserver --settings=metricsmentor.settings_docker_dev 0.0.0.0:8000"
+    volumes:
+      - .:/src
+    ports:
+      - "8000:8000"
+    environment:
+      - POSTGRES_NAME=metricsmentor
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+  frontend:
+    build:
+      context: .
+      dockerfile: Dockerfile.frontend
+    ports:
+      - "9091:9091"
+    volumes:
+      - .:/src
+    depends_on:
+      - backend
