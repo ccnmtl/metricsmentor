@@ -12,19 +12,22 @@ export const SimulationOne = () => {
     const [appRvalue, setAppRvalue] = useState(null);
     const [userBetaOneHat, setUserBetaOneHat] = useState(0);
     const [userSE, setUserSE] = useState(0);
-    const [userBetaOne, setUserBetaOne] = useState(0);
-    const [valueMatch, setValueMatch] = useState(false);
+    const [betaOneError, setBetaOneError] = useState(false);
+    const [userSEError, setUserSEError] = useState(false);
+
 
     useEffect(() => {
-        // Check if all values are not null before performing comparison
+
         if (intercept !== null) {
-            setValueMatch(
-                parseFloat(intercept.toFixed(3)) === parseFloat(userBetaOneHat)
-                && parseFloat(stderror.toFixed(3)) === parseFloat(userSE)
-            );
+            const isBetaOneHatValid =
+                parseFloat(intercept.toFixed(3)) === parseFloat(userBetaOneHat);
+            const isStdErrorValid =
+                parseFloat(stderror.toFixed(3)) === parseFloat(userSE);
+
+            setBetaOneError(!isBetaOneHatValid);
+            setUserSEError(!isStdErrorValid);
         }
-    }, [intercept, stderror, slope, userBetaOneHat,
-        userSE, userBetaOne]);
+    }, [intercept, stderror, userBetaOneHat, userSE]);
 
 
     const handleNChange = (e) => {
@@ -45,10 +48,6 @@ export const SimulationOne = () => {
 
     const handleUserSEChange = (e) => {
         setUserSE(e.target.value);
-    };
-
-    const handleBetaOneChange = (e) => {
-        setUserBetaOne(e.target.value);
     };
 
     const tEquation =
@@ -135,37 +134,28 @@ export const SimulationOne = () => {
                                     <div className='input-group mb-3'>
                                             t =
                                         <input type='text'
-                                            style={{
-                                                width: '10%',
-                                                borderColor: valueMatch ?
-                                                    'green' : 'red' }}
-                                            onChange={
-                                                handleBetaOneHatChange
-                                            }
-                                            className='form-control
-                                                me-1 ms-1
-                                            form-control-sm box-2' />
+                                            style={{ width: '10%', borderColor:
+                                             betaOneError ? 'red' : 'green' }}
+                                            onChange={handleBetaOneHatChange}
+                                            className='form-control me-1 ms-1
+                                                form-control-sm box-2' />
                                             -
                                         <input type='text'
                                             style={{width: '10%'}}
-                                            onChange={handleBetaOneChange}
                                             defaultValue={0}
                                             className='form-control
                                                  me-1 ms-1
                                             form-control-sm box-2' />
                                             /
                                         <input type='text'
-                                            style={{
-                                                width: '10%',
-                                                borderColor: valueMatch ?
-                                                    'green' : 'red' }}
+                                            style={{ width: '10%', borderColor:
+                                             userSEError ? 'red' : 'green' }}
                                             onChange={handleUserSEChange}
-                                            className='form-control
-                                                 me-1 ms-1
-                                            form-control-sm box-2' />
+                                            className='form-control me-1 ms-1
+                                             form-control-sm box-2' />
                                     </div>
                                 </div>
-                                {valueMatch && (
+                                {(!betaOneError && !userSEError) && (
                                     <div className='row ms-5'>
                                         = {(slope / stderror).toFixed(3)}
                                     </div>
