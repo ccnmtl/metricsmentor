@@ -61,7 +61,3 @@ reports
 
 # docker db
 data
-
-# docker local
-local_setting/
-local_setting/docker-compose.yml
