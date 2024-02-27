@@ -60,7 +60,7 @@ uploads
 reports
 
 # docker db
-data/db
+data
 
 # docker local
 local_setting/
