@@ -6,7 +6,7 @@ all: jenkins jstest js-build
 include *.mk
 
 integrationserver: $(PY_SENTINAL)
-	$(MANAGE) integrationserver --noinput
+	$(MANAGE) integrationserver --noinput --skip-checks
 .PHONY: integrationserver
 
 webpack: $(JS_SENTINAL)

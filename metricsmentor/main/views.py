@@ -68,7 +68,7 @@ class CourseDetailView(LoggedInCourseMixin, DetailView):
         }
 
 
-class SimulationDashboardView(LoggedInCourseMixin, TemplateView):
+class SimulationDashboardView(LoginRequiredMixin, TemplateView):
     template_name = 'main/simulation_dashboard.html'
 
     def get_context_data(self, **kwargs):
