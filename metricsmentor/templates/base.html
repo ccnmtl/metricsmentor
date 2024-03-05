@@ -69,13 +69,13 @@
     </head>
     <body>
 
-        <a id="skippy" class="visually-hidden-focusable" href="#content">
-            <div class="container">
-                <span class="skiplink-text">Skip to main content</span>
-            </div>
-        </a>
         {% block topnavbar %}
         <header>
+            <div class="skippy">
+                <div class="container p-0">
+                    <a class=" d-inline-block p-2 m-1" href="#maincontent">Skip to main content</a>
+                </div>
+            </div>
             <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
                 <a class="navbar-brand" href="#" title="Home">Metrics Mentor</a>
                 <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#topNavbar" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
