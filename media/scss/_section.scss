@@ -1,0 +1,15 @@
+.section-homepage {
+    padding: 2rem 15px;
+    border-top: 1px solid $gray-300;
+    @extend .container;
+    @include media-breakpoint-up(sm) {
+        padding: 4rem 0;
+    }
+    @include media-breakpoint-up(lg) {
+        border-top: none;
+    }
+}
+
+.section--bookends {
+    text-align: center;
+}

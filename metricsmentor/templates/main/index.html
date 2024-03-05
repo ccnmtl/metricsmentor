@@ -4,8 +4,28 @@
 {% block title %}Graphical Interactive Simulations for Econometrics{% endblock %}
 
 {% block content %}
-<main>
-    <h1>Home Page</h1>
+<header class="main-banner banner-hero">
+    <div class="container d-flex justify-content-center banner-hero__container">
+    <figure class="main-banner__avatar banner-hero__avatar align-self-center" aria-hidden="true">
+        <img src="{{STATIC_URL}}img/logo-metricsmentor-temp.svg" />
+    </figure>
+    <h1 class="align-self-center">
+        <span class="main-banner__title banner-hero__title">Metrics Mentor</span>
+        <span class="main-banner__text banner-hero__text primary-text">A short but descriptive tagline here</span>
+    </h1>
+    </div>
+</header>
+
+<section class="section-homepage section--bookends">
+    <h2>
+        Teaching and learning with time and space
+    </h2>
+    <p>
+        Locus Tempus is a powerful application designed to facilitate map-based learning activities across disciplines. Locus Tempus features tools for authoring maps, inviting collaborators, and analyzing data spatially and temporally.
+    </p>
+</section>
+
+<h1>Home Page</h1>
     <p>This is the home page</p>
     {% if request.user.is_anonymous %}
     <a href="/accounts/login/?next=/" class="btn btn-primary btn-lg" title="Log In">Log In</a>
@@ -18,5 +38,4 @@
         {% endif %}
     (<a href="/accounts/logout/?next=/" title="Log Out">Logout</a>)
     {% endif %}
-</main>
 {% endblock %}
