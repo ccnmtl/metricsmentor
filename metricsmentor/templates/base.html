@@ -68,7 +68,6 @@
         {% block feeds %}{% endblock %}
     </head>
     <body>
-
         {% block topnavbar %}
         <header>
             <div class="skippy">
@@ -76,50 +75,43 @@
                     <a class=" d-inline-block p-2 m-1" href="#maincontent">Skip to main content</a>
                 </div>
             </div>
-            <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
-                <a class="navbar-brand" href="#" title="Home">Metrics Mentor</a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#topNavbar" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-
-                <div class="collapse navbar-collapse" id="topNavbar">
-                    <ul class="navbar-nav mr-auto">
-                        <li class="nav-item">
-                            <a class="nav-link" href="#" title="Home">Home</a>
+            <div class="navbar top-bar">
+                <div class="container top-bar__container">
+                    <a href="/" class="navbar-brand d-flex align-items-center">
+                        <img class="gn-i me-3 outline-icon" alt="" src="{{STATIC_URL}}img/logo-metricsmentor-bw.svg">
+                        <img class="gn-i me-3 color-icon" alt="" src="{{STATIC_URL}}img/logo-metricsmentor.svg">
+                        <span class="visually-hidden">Go to main page for</span><span>Metrics Mentor</span>
+                    </a>
+        
+                    <ul class="nav col-auto top-bar__nav">
+                        <li>
+                            {% if request.user.is_anonymous %}
+                                <a href="/accounts/login/?next=/" title="Log In" class="nav-link">Sign In</a>
+                            {% else %}
+                                Hello, 
+                                {% if request.user.last_name %}
+                                    {{request.user.first_name}} {{request.user.last_name}}
+                                {% else %}
+                                    {{ request.user.username }}
+                                {% endif %}
+                                (<a href="/accounts/logout/?next=/" title="Log Out">Sign out</a>)
+                            {% endif %}    
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#" title="Link">Link</a>
+                        {% if request.user.is_superuser %}
+                        <li>
+                            <a href="{% url 'impersonate-list' %}" title="Impersonate" class="nav-link">
+                            Impersonate
+                            </a>
                         </li>
+                        {% endif %}
                     </ul>
                 </div>
-
-                {% block usernav %}
-                <ul class="navbar-nav flex-row ml-md-auto d-md-flex">
-                    <li class="nav-item"><span class="nav-link">
-                        {% if request.user.is_anonymous %}
-                        <a href="/accounts/login/?next=/" title="Log In">Log In</a>
-                        {% else %}
-                        Logged in as
-                            {% if request.user.last_name %}
-                            {{request.user.first_name}} {{request.user.last_name}}
-                            {% else %}
-                            {{ request.user.username }}
-                            {% endif %}
-                        (<a href="/accounts/logout/?next=/" title="Log Out">Logout</a>)
-                        {% endif %}
-                        </span>
-                    </li>
-                    {% if request.user.is_superuser %}
-                    <li class="nav-item">
-                        <a href="{% url 'impersonate-list' %}" title="Impersonate" class="nav-link">impersonate</a>
-                    </li>
-                    {% endif %}
-                </ul>
-                {% endblock %}
-            </nav>
+            </div>
         </header>
         {% endblock %}
+
         {% block pagetitle %}{% endblock %}
+
         {% block content %}{% endblock %}
 
         {% block footer %}
