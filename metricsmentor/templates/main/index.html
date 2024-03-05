@@ -4,7 +4,7 @@
 {% block title %}Graphical Interactive Simulations for Econometrics{% endblock %}
 
 {% block content %}
-<div>
+<main>
     <h1>Home Page</h1>
     <p>This is the home page</p>
     {% if request.user.is_anonymous %}
@@ -18,5 +18,5 @@
         {% endif %}
     (<a href="/accounts/logout/?next=/" title="Log Out">Logout</a>)
     {% endif %}
-</div>
+</main>
 {% endblock %}
