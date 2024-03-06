@@ -25,8 +25,7 @@ from scipy.stats import linregress
 import json
 
 
-class IndexView(TemplateView):
-    template_name = "main/index.html"
+class IndexView(LoginRequiredMixin, TemplateView):
 
     def dispatch(self, request, *args, **kwargs):
         if request.user.is_anonymous:
