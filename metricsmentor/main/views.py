@@ -25,21 +25,6 @@ from scipy.stats import linregress
 import json
 
 
-class IndexView(LoginRequiredMixin, TemplateView):
-
-    def dispatch(self, request, *args, **kwargs):
-        if request.user.is_anonymous:
-            return super(IndexView, self).dispatch(request, *args, *kwargs)
-
-        return HttpResponseRedirect(reverse('course-list-view'))
-        # qs = Course.objects.filter(group__user=request.user)
-        # if qs.count() == 1:
-        #     course_url = reverse('course-detail-view', args=[qs.first().id])
-        #     return HttpResponseRedirect(course_url)
-        # else:
-        #     return HttpResponseRedirect(reverse('course-list-view'))
-
-
 class CoursesView(LoginRequiredMixin, TemplateView):
     template_name = 'main/courses.html'
     http_method_names = ['get', 'post']
@@ -71,9 +56,12 @@ class SimulationDashboardView(LoginRequiredMixin, TemplateView):
     template_name = 'main/simulation_dashboard.html'
 
     def get_context_data(self, **kwargs):
+        course_id = self.kwargs.get('pk', None)
+        course = Course.objects.get(pk=course_id)
 
         return {
             'user': self.request.user,
+            'course': course,
         }
 
 

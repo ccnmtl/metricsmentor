@@ -1,6 +1,9 @@
 import React from 'react';
+import { useParams, Link } from 'react-router-dom';
 
 export const Dashboard = () => {
+
+    let { courseId } = useParams();
 
     return (
         <div className='card' style={{width: '18rem'}}>
@@ -9,9 +12,10 @@ export const Dashboard = () => {
                 <p className='card-text'>
                     Lorum ipsum dolor sit amet, consectetur adipiscing elit.
                 </p>
-                <a href='/simulations/1/' className='btn btn-primary'>
+                <Link to={`/course/${courseId}/simulations/1/`}
+                    className='btn btn-primary'>
                     Go
-                </a>
+                </Link>
             </div>
         </div>
     );
