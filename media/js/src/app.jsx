@@ -7,8 +7,10 @@ export const App = () => {
     return (
         <Router>
             <Routes>
-                <Route path="/simulations" element={<Dashboard />} />
-                <Route path="/simulations/1/" element={<SimulationOne />} />
+                <Route path='course/:courseId/simulations/'
+                    element={<Dashboard />} />
+                <Route path='course/:courseId/simulations/1/'
+                    element={<SimulationOne />} />
 
             </Routes>
         </Router>

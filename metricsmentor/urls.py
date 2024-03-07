@@ -27,8 +27,9 @@ urlpatterns = [
 
 
 
-    re_path('^$', views.IndexView.as_view()),
-    re_path(r'simulations/', views.SimulationDashboardView.as_view(),
+    re_path('^$', views.CoursesView.as_view()),
+    re_path(r'^course/(?P<pk>\d+)/simulations/',
+            views.SimulationDashboardView.as_view(),
             name='simulation-dashboard-view'),
 
     path('_impersonate/', include('impersonate.urls')),
