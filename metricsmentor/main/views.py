@@ -223,7 +223,7 @@ class SaveSim1GraphView(LoggedInCourseMixin, View):
         json_data = json.loads(request.body)
         graph_data = json_data.get('data')
         user = request.user
-        course_pk = json_data.get('coursePk')
+        course_pk = graph_data.get('coursePk')
         course = Course.objects.get(pk=course_pk)
 
         graph = Graph.objects.create(user=user, simulation=1,

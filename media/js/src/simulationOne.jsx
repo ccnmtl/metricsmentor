@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { ScatterPlot } from './scatterPlot';
 import { Katex } from './katexComponent';
 import { authedFetch } from './utils';
+import { SimulationOneQuiz } from './simulationOneQuiz';
 
 export const SimulationOne = () => {
     const [N, setN] = useState(50);
@@ -15,11 +16,12 @@ export const SimulationOne = () => {
     const [userSE, setUserSE] = useState(0);
     const [betaOneError, setBetaOneError] = useState(false);
     const [userSEError, setUserSEError] = useState(false);
+    const [startQuiz, setStartQuiz] = useState(false);
 
     const simContainer = document.querySelector('#react-root');
 
     const coursePk =
-        simContainer ? simContainer.dataset.course : '';
+        simContainer ? Number(simContainer.dataset.course) : '';
 
     useEffect(() => {
 
@@ -40,11 +42,10 @@ export const SimulationOne = () => {
             coursePk
         };
 
-        console.log(data);
-
         return authedFetch('/api/save-sim1-graph/', 'POST', {data})
             .then(function(response) {
-                if (response.status === 200) {
+                if (response.status === 201) {
+                    setStartQuiz(true);
                     return response.json();
                 } else {
                     throw 'Error  ' +
@@ -83,7 +84,7 @@ export const SimulationOne = () => {
                     <div className='row ms-2 mt-5'>
                         <label className='fst-italic'> n:
                             <input type='number' min='50' max='500'
-                                className='ms-2 mt-2'
+                                className='ms-2 mt-2' disabled={startQuiz}
                                 value={N} onChange={handleNChange} />
                         </label>
                     </div>
@@ -95,12 +96,12 @@ export const SimulationOne = () => {
                         <input type='range' step='0.01' min='-1'
                             max='1' value={correlation}
                             className='form-range'
-                            id='correlation'
+                            id='correlation' disabled={startQuiz}
                             onChange={handleCorrelationChange} />
                     </div>
                     <div className='row ms-2 mt-2'>
                         <label> Seed:
-                            <input type='text' value={seed}
+                            <input type='text' value={seed} disabled={startQuiz}
                                 className='ms-1 mt-2' size='10'
                                 onChange={handleSeedChange} />
                         </label>
@@ -190,6 +191,9 @@ export const SimulationOne = () => {
                                     Save Graph Data
                                 </button>
                             </div>
+                            {startQuiz && (
+                                <SimulationOneQuiz coursePk={coursePk} />
+                            )}
                         </>
                     )}
                 </div>
