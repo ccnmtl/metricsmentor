@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { ScatterPlot } from './scatterPlot';
 import { Katex } from './katexComponent';
+import { authedFetch } from './utils';
 
 export const SimulationOne = () => {
     const [N, setN] = useState(50);
@@ -15,6 +16,10 @@ export const SimulationOne = () => {
     const [betaOneError, setBetaOneError] = useState(false);
     const [userSEError, setUserSEError] = useState(false);
 
+    const simContainer = document.querySelector('#react-root');
+
+    const coursePk =
+        simContainer ? simContainer.dataset.course : '';
 
     useEffect(() => {
 
@@ -29,6 +34,24 @@ export const SimulationOne = () => {
         }
     }, [intercept, stderror, userBetaOneHat, userSE]);
 
+    const saveGraphData = async() => {
+        const data = {
+            N, correlation, seed, slope, intercept, stderror, appRvalue,
+            coursePk
+        };
+
+        console.log(data);
+
+        return authedFetch('/api/save-sim1-graph/', 'POST', {data})
+            .then(function(response) {
+                if (response.status === 200) {
+                    return response.json();
+                } else {
+                    throw 'Error  ' +
+                `(${response.status}) ${response.statusText}`;
+                }
+            });
+    };
 
     const handleNChange = (e) => {
         setN(parseInt(e.target.value));
@@ -160,6 +183,12 @@ export const SimulationOne = () => {
                                         = {(slope / stderror).toFixed(3)}
                                     </div>
                                 )}
+                            </div>
+                            <div className='row ms-2 mt-2'>
+                                <button className='btn btn-primary'
+                                    onClick={saveGraphData}>
+                                    Save Graph Data
+                                </button>
                             </div>
                         </>
                     )}

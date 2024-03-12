@@ -5,7 +5,6 @@ from django.views.generic import TemplateView
 from django.views.static import serve
 from django_cas_ng import views as cas_views
 from metricsmentor.main import views
-from metricsmentor.main.views import calculate_regression
 
 
 urlpatterns = [
@@ -42,8 +41,10 @@ urlpatterns = [
 
     re_path(r'^course/(?P<pk>\d+)/$', views.CourseDetailView.as_view(),
             name='course-detail-view'),
-    path('calculate_regression/', calculate_regression,
-         name='calculate_regression')
+    path('calculate_regression/', views.calculate_regression,
+         name='calculate_regression'),
+    path('api/save-sim1-graph/', views.SaveSim1GraphView.as_view(),
+         name='save_sim1_graph'),
 
 ]
 
