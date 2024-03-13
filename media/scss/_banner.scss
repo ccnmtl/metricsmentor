@@ -68,20 +68,20 @@
 }
 
 .banner-hero {
-    height: 10rem;
+    min-height: 10rem;
     position: relative;
     color: $gray-md-900;
     background-position: bottom -5rem left 0;
     @include media-breakpoint-up(md) {
-        height: 16rem;
+        min-height: 16rem;
         background-position: bottom;
     }
     @include media-breakpoint-up(lg) {
-        height: 18rem;
+        min-height: 18rem;
         background-position: bottom;
     }
     @include media-breakpoint-up(xl) {
-        height: 24rem;
+        min-height: 24rem;
         background-position: bottom;
     }
     &__container {
@@ -101,13 +101,13 @@
         font-weight: 500;
         text-shadow: 0 2px 5px rgba(0,0,0,.14), 0 1px 5px rgba(0,0,0,.12), 0 2px 4px rgba(0,0,0,.12);
         @include media-breakpoint-up(md) {
-            font-size: 3.125rem;
+            font-size: 2.75rem;
         }
         @include media-breakpoint-up(lg) {
-            font-size: 4rem;
+            font-size: 3.125rem;
         }
         @include media-breakpoint-up(xl) {
-            font-size: 5rem;
+            font-size: 4rem;
         }
     }
     &__text {
