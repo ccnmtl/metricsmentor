@@ -85,15 +85,12 @@
         background-position: bottom;
     }
     &__container {
-        margin-top: 1rem;
+        border: 0.125rem solid red;
         @include media-breakpoint-up(md) {
-            margin-top: 3.25rem;
         }
         @include media-breakpoint-up(lg) {
-            margin-top: 4rem;
         }
         @include media-breakpoint-up(xl) {
-            margin-top: 6rem;
         }
     }
     &__title {
