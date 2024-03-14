@@ -19,8 +19,10 @@ from django.views.generic.detail import DetailView
 from lti_provider.models import LTICourseContext
 from metricsmentor.main.utils import send_template_email
 from metricsmentor.mixins import LoggedInCourseMixin
+from metricsmentor.main.models import Graph
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
+from django.utils.decorators import method_decorator
 from scipy.stats import linregress
 import json
 
@@ -44,7 +46,6 @@ class CourseDetailView(LoggedInCourseMixin, DetailView):
 
     def get_context_data(self, **kwargs):
         is_faculty = self.object.is_true_faculty(self.request.user)
-        print('course detail view')
 
         return {
             'course': self.object,
@@ -212,3 +213,23 @@ def calculate_regression(request):
 
 def handler404(request):
     return render(request, '404.html')
+
+
+@method_decorator(csrf_exempt, name='dispatch')
+class SaveSim1GraphView(LoggedInCourseMixin, View):
+
+    def post(self, request):
+
+        json_data = json.loads(request.body)
+        graph_data = json_data.get('data')
+        user = request.user
+        course_pk = graph_data.get('coursePk')
+        course = Course.objects.get(pk=course_pk)
+
+        graph = Graph.objects.create(user=user, simulation=1,
+                                     data=graph_data, course=course)
+
+        print(f'Graph data saved successfully: {graph}')
+
+        return JsonResponse({'message': 'Graph data saved successfully'},
+                            status=201)
