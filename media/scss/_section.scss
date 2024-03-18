@@ -14,7 +14,20 @@
     text-align: center;
 }
 
-.section--loginbox {
-    padding: 1rem 0;
+.loginbox {
+    padding: 0;
     background-color: $gray-md-400;
+    align-self: center !important;
+    text-align: center !important;
+    p {
+        margin: 0;
+        padding: 0;
+    }
+    &__body {
+        padding: 1rem;
+        border-bottom: 0.0625rem solid $gray-md-300;
+        &:last-child {
+            border-bottom: 0;
+        }
+    }
 }

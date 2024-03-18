@@ -4,53 +4,64 @@
 
 {% block content %}
 <header class="main-banner banner-hero d-flex align-items-center justify-content-center">
-    <div class="container row border">
+    <div class="container row">
         <h1 class="col-8 align-self-center">
             <span class="main-banner__title banner-hero__title">Descriptive Tagline</span>
             <span class="main-banner__text banner-hero__text primary-text">A short, informational blurb, or a pithy teaser of the application</span>
         </h1>
-        <section class="col-4 align-self-center text-center">
-
-            <div class="section--loginbox">
-
+        <section class="col-4 loginbox">
+            <div class="loginbox__body">
                 <form class="text-center" method="get" action="/cas/login">
                     <input type="hidden" name="next" value="/" />
                     <input class="btn btn-primary" type="submit" value="Sign in with Columbia UNI" />
                     <p class="small mt-2 mb-0"><a href="https://cuit.columbia.edu/cuit/manage-my-uni" title="Learn more about UNI" target="_blank">What is a UNI?</a></p>
                 </form>
-
-                <hr class="seperator" />
-
+            </div>
+            <div class="loginbox__body">
                 {% if form.errors %}
                     <div class="alert alert-danger" role="alert">
                         <div><b>Invalid username or password</b></div>
                     </div>
                 {% endif %}
-                
                 <form class="text-center" name="login_local" method="post" action=".">
                     {% csrf_token %}
                     <div class="login-local-form" {% if not form.errors %}style="display: none"{% endif %}>
                         <div class="form-group">
-                            <label for="id_username">Username</label>
-                            <input id="id_username" maxlength="254"
+                            <label for="id_username" class="form-label"><span>Username</span></label>
+                                <input id="id_username" maxlength="254"
                                     name="username" type="text"
                                     class="form-control" autofocus>
                         </div>
                 
                         <div class="form-group">
-                            <label for="id_password">Password</label>
-                            <input id="id_password" name="password" type="password" class="form-control">
+                            <label for="id_password" class="form-label"><span>Password</span></label>
+                                <input id="id_password"
+                                    name="password"
+                                    type="password"
+                                    class="form-control">
                         </div>
                     </div>
-                    <input id="guest-login" class="btn btn-primary" type="button" value="Sign in as Guest" {% if form.errors %}style="display: none"{% endif %}
-                        onclick="jQuery('.login-local-form').show(); jQuery(this).hide(); return false;"/>
-                    <input class="btn btn-primary login-local-form" type="submit" value="Log In" {% if not form.errors %}style="display: none;"{% endif %} />                        
+                    <input id="guest-login"
+                        class="btn btn-primary"
+                        type="button"
+                        value="Sign in as Guest"
+                        {% if form.errors %}style="display: none"{% endif %}
+                        onclick="jQuery('.login-local-form').show(); jQuery('.login-local-form-cancel').show(); jQuery(this).hide(); return false;"/>
+                    <input
+                        class="btn btn-primary login-local-form"
+                        type="submit"
+                        value="Log In"
+                        {% if not form.errors %}style="display: none;"{% endif %} />
+                    <button
+                        class="btn btn-link login-local-form-cancel"
+                        type="button"
+                        {% if not form.errors %}style="display: none;"{% endif %}
+                        onclick="jQuery('.login-local-form').hide(); jQuery('#guest-login').show(); jQuery(this).hide(); return false;">Cancel</button>
                     <input type="hidden" name="next" value="{{ next|urlencode }}" />
                     <p class="small mt-2 mb-0"><a href="/accounts/password_reset/" title="Reset Password">Forgot Password?</a></p>
                 </form>
-
-                <hr class="seperator" />
-
+            </div>
+            <div class="loginbox__body">
                 <p>Contact us</p>
             </div>
         </section>
