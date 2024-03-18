@@ -25,9 +25,22 @@
     }
     &__body {
         padding: 1rem;
-        border-bottom: 0.0625rem solid $gray-md-300;
+        border-bottom: 0;
+        border-right: 0.0625rem solid $gray-md-300;
         &:last-child {
-            border-bottom: 0;
+            border-right: 0;
+        }
+        @include media-breakpoint-up(lg) {
+            border-bottom: 0.0625rem solid $gray-md-300;
+            border-right: 0;
+            &:last-child {
+                border-bottom: 0;
+            }
         }
     }
+}
+
+.section--feature {
+    margin: auto;
+    text-align: center;
 }
