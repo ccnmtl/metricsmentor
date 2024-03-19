@@ -4,9 +4,11 @@ services:
     volumes:
       - ./data/db:/var/lib/postgresql/data
     environment:
-      - POSTGRES_DB=postgres
+      - POSTGRES_DB=metricsmentor
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=postgres
+    ports:
+      - "5432:5432"
   backend:
     build: 
       context: .
@@ -19,7 +21,7 @@ services:
     ports:
       - "8000:8000"
     environment:
-      - POSTGRES_NAME=postgres
+      - POSTGRES_NAME=metricsmentor
       - POSTGRES_USER=postgres
       - POSTGRES_PASSWORD=postgres
     depends_on:
