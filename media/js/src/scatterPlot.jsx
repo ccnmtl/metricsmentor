@@ -5,7 +5,7 @@ import axios from 'axios';
 import PropTypes from 'prop-types';
 
 export const ScatterPlot = ({ N, correlation, seed, setAppRvalue,
-    setSlope, setIntercept, setStderror
+    setSlope, setIntercept, setStderror, setPvalue
 }) => {
     const [data, setData] = useState([]);
     const [regressionLine, setRegressionLine] = useState(null);
@@ -37,12 +37,13 @@ export const ScatterPlot = ({ N, correlation, seed, setAppRvalue,
                 y_values,
             });
 
-            const { slope, intercept, rvalue, stderr } = response.data;
+            const { slope, intercept, rvalue, stderr, pvalue } = response.data;
 
             setAppRvalue(rvalue);
             setSlope(slope);
             setIntercept(intercept);
             setStderror(stderr);
+            setPvalue(pvalue);
 
             setRegressionLine({
                 type: 'scatter',
@@ -108,5 +109,7 @@ ScatterPlot.propTypes = {
     setStderror: PropTypes.func,
     slope: PropTypes.number,
     stderror: PropTypes.number,
-    intercept: PropTypes.number
+    intercept: PropTypes.number,
+    pvalue: PropTypes.number,
+    setPvalue: PropTypes.func
 };

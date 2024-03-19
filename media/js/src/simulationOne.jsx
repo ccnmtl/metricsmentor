@@ -4,6 +4,13 @@ import { Katex } from './katexComponent';
 import { authedFetch } from './utils';
 import { SimulationOneQuiz } from './simulationOneQuiz';
 
+
+// const CURRENT_USER = window.MetricsMentor.currentUser.id;
+const simContainer = document.querySelector('#react-root');
+
+const coursePk =
+    simContainer ? Number(simContainer.dataset.course) : '';
+
 export const SimulationOne = () => {
     const [N, setN] = useState(50);
     const [correlation, setCorrelation] = useState(0.5);
@@ -14,14 +21,11 @@ export const SimulationOne = () => {
     const [appRvalue, setAppRvalue] = useState(null);
     const [userBetaOneHat, setUserBetaOneHat] = useState(0);
     const [userSE, setUserSE] = useState(0);
+    const [pvalue, setPvalue] = useState(null);
     const [betaOneError, setBetaOneError] = useState(false);
     const [userSEError, setUserSEError] = useState(false);
     const [startQuiz, setStartQuiz] = useState(false);
 
-    const simContainer = document.querySelector('#react-root');
-
-    const coursePk =
-        simContainer ? Number(simContainer.dataset.course) : '';
 
     useEffect(() => {
 
@@ -39,7 +43,7 @@ export const SimulationOne = () => {
     const saveGraphData = async() => {
         const data = {
             N, correlation, seed, slope, intercept, stderror, appRvalue,
-            coursePk
+            coursePk, tvalue, pvalue
         };
 
         return authedFetch('/api/save-sim1-graph/', 'POST', {data})
@@ -74,6 +78,7 @@ export const SimulationOne = () => {
         setUserSE(e.target.value);
     };
 
+    const tvalue = (slope / stderror).toFixed(3);
     const tEquation =
     't = \\frac{\\hat{\\beta}_1 - \\beta_1}{SE(\\hat{\\beta_1})}';
 
@@ -181,7 +186,7 @@ export const SimulationOne = () => {
                                 </div>
                                 {(!betaOneError && !userSEError) && (
                                     <div className='row ms-5'>
-                                        = {(slope / stderror).toFixed(3)}
+                                        = {tvalue}
                                     </div>
                                 )}
                             </div>
@@ -192,7 +197,11 @@ export const SimulationOne = () => {
                                 </button>
                             </div>
                             {startQuiz && (
-                                <SimulationOneQuiz coursePk={coursePk} />
+                                <SimulationOneQuiz
+                                    coursePk={coursePk}
+                                    tvalue={tvalue}
+                                    pvalue={pvalue}
+                                    appRvalue={appRvalue} />
                             )}
                         </>
                     )}
@@ -210,6 +219,8 @@ export const SimulationOne = () => {
                         setIntercept={setIntercept}
                         appRvalue={appRvalue}
                         setAppRvalue={setAppRvalue}
+                        pvalue={pvalue}
+                        setPvalue={setPvalue}
                     />
                 </div>
             </div>
