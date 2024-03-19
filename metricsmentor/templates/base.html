@@ -7,6 +7,7 @@
         <meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <!-- The above 2 meta tags *must* come first in the head; any other head content must come *after* these tags -->
+        <meta name="theme-color" content="#9e9e9e">
 
         <!-- Local CSS -->
         <link href="{{STATIC_URL}}build/main.css" rel="stylesheet">
@@ -21,6 +22,9 @@
         <!-- Dublin Core Metadata -->
         <meta name="DC.Title" content="Metrics Mentor" />
         <meta name="DC.Description" content="" />
+        <meta name="DC.Rights" content="Copyright (c) 2024 Center for Teaching and Learning at Columbia University - Code licensed GNU GPLv3">
+        <meta name="DC.Publisher" content="Center for Teaching and Learning at Columbia University" />
+        <meta name="DC.Contributor" content="Center for Teaching and Learning at Columbia University" />
 
         <!-- Open Graph -->
         <meta property="og:title" content="Metrics Mentor" />
@@ -64,81 +68,76 @@
         {% block feeds %}{% endblock %}
     </head>
     <body>
-
-        <a id="skippy" class="visually-hidden-focusable" href="#content">
-            <div class="container">
-                <span class="skiplink-text">Skip to main content</span>
-            </div>
-        </a>
         {% block topnavbar %}
         <header>
-            <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
-                <a class="navbar-brand" href="#" title="Home">Metrics Mentor</a>
-                <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#topNavbar" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-
-                <div class="collapse navbar-collapse" id="topNavbar">
-                    <ul class="navbar-nav mr-auto">
-                        <li class="nav-item">
-                            <a class="nav-link" href="#" title="Home">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="#" title="Link">Link</a>
-                        </li>
-                    </ul>
+            <div class="skippy">
+                <div class="container p-0">
+                    <a class=" d-inline-block p-2 m-1" href="#maincontent">Skip to main content</a>
                 </div>
-
-                {% block usernav %}
-                <ul class="navbar-nav flex-row ml-md-auto d-md-flex">
-                    <li class="nav-item"><span class="nav-link">
-                        {% if request.user.is_anonymous %}
-                        <a href="/accounts/login/?next=/" title="Log In">Log In</a>
-                        {% else %}
-                        Logged in as
-                            {% if request.user.last_name %}
-                            {{request.user.first_name}} {{request.user.last_name}}
+            </div>
+            <div class="navbar top-bar">
+                <div class="container top-bar__container">
+                    <a href="/" class="navbar-brand d-flex align-items-center">
+                        <img class="gn-i me-3 outline-icon" alt="" src="{{STATIC_URL}}img/logo-metricsmentor-bw.svg">
+                        <img class="gn-i me-3 color-icon" alt="" src="{{STATIC_URL}}img/logo-metricsmentor.svg">
+                        <span class="visually-hidden">Go to main page for</span><span>Metrics Mentor</span>
+                    </a>
+                    <ul class="nav col-auto top-bar__nav">
+                        <li class="d-none d-xxl-block pe-3">Giant monitor xxl</li>
+                        <li class="d-none d-xl-block d-xxl-none pe-3">Big monitor xl</li>
+                        <li class="d-none d-lg-block d-xl-none pe-3">Tablet L lg</li>
+                        <li class="d-none d-md-block d-lg-none pe-3">Tablet P md</li>
+                        <li class="d-none d-sm-block d-md-none pe-3">Smartphone sm</li>
+                        <li class="d-block d-sm-none pe-3">Tiny phone xs</li>
+                        <li>
+                            {% if request.user.is_authenticated %}
+                                Hello, 
+                                {% if request.user.last_name %}
+                                    {{request.user.first_name}} {{request.user.last_name}}
+                                {% else %}
+                                    {{ request.user.username }}
+                                {% endif %}
+                                (<a href="/accounts/logout/?next=/" title="Log Out">Sign out</a>)
                             {% else %}
-                            {{ request.user.username }}
-                            {% endif %}
-                        (<a href="/accounts/logout/?next=/" title="Log Out">Logout</a>)
+                            Anon
+                            {% endif %}    
+                        </li>
+                        {% if request.user.is_superuser %}
+                        <li>
+                            <a href="{% url 'impersonate-list' %}" title="Impersonate" class="nav-link">
+                            Impersonate
+                            </a>
+                        </li>
                         {% endif %}
-                        </span>
-                    </li>
-                    {% if request.user.is_superuser %}
-                    <li class="nav-item">
-                        <a href="{% url 'impersonate-list' %}" title="Impersonate" class="nav-link">impersonate</a>
-                    </li>
-                    {% endif %}
-                </ul>
-                {% endblock %}
-            </nav>
+                    </ul>
+
+                </div>
+            </div>
         </header>
         {% endblock %}
+
         {% block pagetitle %}{% endblock %}
         {% block content %}{% endblock %}
 
         {% block footer %}
-        <footer class="bg-light text-dark pt-2 pb-5">
-            <ul class="nav d-flex justify-content-center">
+        <footer>
+            <div class="container">
+             <ul class="nav navlist--footer">
                 <li class="nav-item">
-                    <a class="nav-link" href="#" title="About">About</a>
+                    <a href="/about/">About Metrics Mentor</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#" title="Help">Help</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#" title="Contact">Contact</a>
+                    <a href="/contact/">Contact Us</a>
                 </li>
             </ul>
-
-            <span itemscope itemtype="https://schema.org/EducationalOrganization">
-                <a href="https://ctl.columbia.edu" target="_blank" itemprop="url" title="Center for Teaching and Learning at Columbia University">
-                    <img src="{{STATIC_URL}}img/logo-ctl-color.png" class="mx-auto img-fluid mt-3" alt="" itemprop="logo" width="290" />
-                    <span class="visually-hidden" itemprop="name">Center for Teaching and Learning at Columbia University</span>
-                </a>
-            </span>
-
+            <p class="ll-license text-center mt-3 fs-6">Metrics Mentor open-source code is on <a itemprop="license" rel="license noopener noreferrer" href="https://github.com/ccnmtl/metricsmentor">Github</a> <span class="text-nowrap">with <a itemprop="license" rel="license noopener noreferrer" href="https://www.gnu.org/licenses/gpl-3.0.en.html">GNU GPLv3</a> license.</span></p>
+            <div class="row my-5">
+                <div itemscope itemtype="http://schema.org/EducationalOrganization" class='text-center py-3'>
+                    <a href="https://ctl.columbia.edu" rel="noopener noreferrer" target="_blank" itemprop="url"><img src="{{STATIC_URL}}img/logo-ctl.svg" class="footer__logo img-fluid" alt="" itemprop="logo" /><span class="visually-hidden" itemprop="name">Center for Teaching and Learning at Columbia University</span></a>
+                </div>
+            </div>
+        
+            </div>
         </footer>
         {% endblock %}
 

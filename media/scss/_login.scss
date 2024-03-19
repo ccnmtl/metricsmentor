@@ -1,0 +1,21 @@
+.loginbox {
+    &__body {
+        .form-label {
+            background-color: inherit;
+            color: $gray-md-700;
+            display: block;
+            margin: -1.25rem 0 0 0;
+            text-align: left !important;
+        }
+        .form-label span {
+            padding: 0 0.25rem;
+            background-color: $gray-md-400;
+        }
+        .form-group {
+            padding: 0.5rem;
+            margin: 0.5rem 0 1.25rem 0;
+            border: 0.0625rem solid $gray-md-600;
+            border-radius: $radius-sm;
+        }
+    }
+}

@@ -1,0 +1,16 @@
+body {
+    position: relative;
+    min-height: 100vh;
+}
+
+main,
+.main-app {
+    padding-bottom: 1rem;
+    min-height: calc(100vh - 20rem);
+}
+
+.content-body {
+    margin-top: 3rem !important;
+    margin-bottom: 3rem !important;
+    font-size: 1.125rem;
+}

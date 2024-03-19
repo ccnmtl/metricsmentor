@@ -3,49 +3,96 @@
 {% block title %}Log in{% endblock %}
 
 {% block content %}
-<div class="row justify-content-md-center">
-    <div class="col-md-auto text-center my-5">
+<main id="maincontent">
+    <header class="main-banner banner-hero d-flex align-items-center justify-content-center">
+        <div class="container row">
+            <h1 class="col-12 col-lg-8 align-self-center">
+                <span class="main-banner__title banner-hero__title">Descriptive Tagline</span>
+                <span class="main-banner__text banner-hero__text primary-text">A short, informational blurb, or a pithy teaser of the application</span>
+            </h1>
+            <section class="col-12 col-lg-4 loginbox row">
+                <div class="loginbox__body col-4 col-lg-12">
+                    <form class="text-center" method="get" action="/cas/login">
+                        <input type="hidden" name="next" value="/" />
+                        <input class="btn btn-primary" type="submit" value="Sign in with Columbia UNI" />
+                        <p class="small mt-2 mb-0"><a href="https://cuit.columbia.edu/cuit/manage-my-uni" title="Learn more about UNI" target="_blank">What is a UNI?</a></p>
+                    </form>
+                </div>
+                <div class="loginbox__body col-4 col-lg-12">
+                    {% if form.errors %}
+                        <div class="alert alert-danger" role="alert">
+                            <div><b>Invalid username or password</b></div>
+                        </div>
+                    {% endif %}
+                    <form class="text-center" name="login_local" method="post" action=".">
+                        {% csrf_token %}
+                        <div class="login-local-form" {% if not form.errors %}style="display: none"{% endif %}>
+                            <div class="form-group">
+                                <label for="id_username" class="form-label"><span>Username</span></label>
+                                    <input id="id_username" maxlength="254"
+                                        name="username" type="text"
+                                        class="form-control" autofocus>
+                            </div>
+                            <div class="form-group">
+                                <label for="id_password" class="form-label"><span>Password</span></label>
+                                    <input id="id_password"
+                                        name="password"
+                                        type="password"
+                                        class="form-control">
+                            </div>
+                        </div>
+                        <input id="guest-login"
+                            class="btn btn-primary"
+                            type="button"
+                            value="Sign in as Guest"
+                            {% if form.errors %}style="display: none"{% endif %}
+                            onclick="jQuery('.login-local-form').show(); jQuery('.login-local-form-cancel').show(); jQuery(this).hide(); return false;"/>
+                        <input
+                            class="btn btn-primary login-local-form"
+                            type="submit"
+                            value="Log In"
+                            {% if not form.errors %}style="display: none;"{% endif %} />
+                        <button
+                            class="btn btn-link login-local-form-cancel"
+                            type="button"
+                            {% if not form.errors %}style="display: none;"{% endif %}
+                            onclick="jQuery('.login-local-form').hide(); jQuery('#guest-login').show(); jQuery(this).hide(); return false;">Cancel</button>
+                        <input type="hidden" name="next" value="{{ next|urlencode }}" />
+                        <p class="small mt-2 mb-0"><a href="/accounts/password_reset/" title="Reset Password">Forgot Password?</a></p>
+                    </form>
+                </div>
+                <div class="loginbox__body col-4 col-lg-12">
+                    <p>Contact us</p>
+                </div>
+            </section>
+        </div>
+    </header>
+    <section class="section-homepage section--bookends">
         <h2>
-            Login
+            Interactive Learning econometrics
         </h2>
-            <p>If you have a Columbia University Network ID (UNI)</p>
-            <form class="text-center" method="get" action="/cas/login">
-                <input type="hidden" name="next" value="/" />
-
-                <input class="btn btn-primary" type="submit" value="Columbia Log In" />
-                <p class="small pt-2"><a href="https://cuit.columbia.edu/cuit/manage-my-uni" title="Learn more about UNI" target="_blank">What is a UNI?</a></p>
-            </form>
-            <hr class="seperator" />
-
-
-        {% if form.errors %}
-            <div class="alert alert-danger" role="alert">
-                <div><b>Invalid username or password</b></div>
-            </div>
-        {% endif %}
-
-        <p>If you have a guest account</p>
-        <form class="text-center" name="login_local" method="post" action=".">
-            {% csrf_token %}
-            <div class="login-local-form" {% if not form.errors %}style="display: none"{% endif %}>
-                <div class="form-group">
-                    <label for="id_username">Username</label>
-                    <input id="id_username" maxlength="254"
-                           name="username" type="text"
-                           class="form-control" autofocus>
-                </div>
-
-                <div class="form-group">
-                    <label for="id_password">Password</label>
-                    <input id="id_password" name="password" type="password" class="form-control">
-                </div>
-            </div>
-            <input id="guest-login" class="btn btn-primary" type="button" value="Guest Log In" {% if form.errors %}style="display: none"{% endif %}
-                onclick="jQuery('.login-local-form').show(); jQuery(this).hide(); return false;"/>
-            <input class="btn btn-primary login-local-form" type="submit" value="Log In" {% if not form.errors %}style="display: none;"{% endif %} />                        
-            <input type="hidden" name="next" value="{{ next|urlencode }}" />
-            <p class="small pt-2"><a href="/accounts/password_reset/" title="Reset Password">Forgot Password?</a></p>
-        </form>
-    </div>
-</div>
+        <p>
+            Optional short paragraph describing the tool. Aliquam dictum pretium risus, quis venenatis ligula accumsan non. Nunc sollicitudin, tellus eu fringilla interdum, erat purus facilisis risus, et.
+        </p>
+    </section>
+    
+    <section class="section-homepage section--feature row">
+            <div class="col-lg-4 px-lg-5 pb-5 pb-lg-0">
+            <svg class="bd-placeholder-img rounded" width="140" height="140" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="var(--bs-secondary-color)"/></svg>
+            <h2 class="pt-3">Feature 1</h2>
+            <p>Some representative placeholder content for the three columns of text below the banner. This is the first column.</p>
+            </div><!-- /.col-lg-4 -->
+            <div class="col-lg-4 px-lg-5 pb-5 pb-lg-0">
+            <svg class="bd-placeholder-img rounded" width="140" height="140" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="var(--bs-secondary-color)"/></svg>
+            <h2 class="pt-3">Feature 2</h2>
+            <p>Another exciting bit of representative placeholder content. This time, we've moved on to the second column.</p>
+            </div><!-- /.col-lg-4 -->
+            <div class="col-lg-4 px-lg-5 pb-5 pb-lg-0">
+            <svg class="bd-placeholder-img rounded" width="140" height="140" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="var(--bs-secondary-color)"/></svg>
+            <h2 class="pt-3">Feature 3</h2>
+            <p>And lastly this, the third column of representative placeholder content.</p>
+            </div><!-- /.col-lg-4 -->
+    </section>
+    
+</main>
 {% endblock %}

@@ -1,0 +1,16 @@
+body {
+    font-family: $font-family-sans-serif-primary;
+    font-weight: 400;
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: $font-family-sans-serif-secondary;
+}
+
+.primary-text {
+    font-family: $font-family-sans-serif-primary;
+}
+
+.secondary-text {
+    font-family: $font-family-sans-serif-secondary;
+}
