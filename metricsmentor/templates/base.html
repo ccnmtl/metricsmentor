@@ -59,7 +59,7 @@
                 baseUrl: '//{{ request.get_host }}',
                 {% if not request.user.is_anonymous %}
                 currentUser: {
-                    id: '{{ request.user.id }}',
+                    id: {{ request.user.id }},
                 },
                 {% endif %}
             }
