@@ -85,7 +85,7 @@ export const SimulationOne = () => {
     return (
         <div>
             <div className='row'>
-                <div className='col-2'>
+                <div className='col-4'>
                     <div className='row ms-2 mt-5'>
                         <label className='fst-italic'> n:
                             <input type='number' min='50' max='500'
@@ -206,7 +206,7 @@ export const SimulationOne = () => {
                         </>
                     )}
                 </div>
-                <div className='col-10' style={{height: '100%'}}>
+                <div className='col-8' style={{height: '100%'}}>
                     <ScatterPlot
                         N={N}
                         correlation={correlation}

@@ -6,5 +6,10 @@
 {% endblock %}
 
 {% block content %}
-<main class="main-app" id="react-root" data-course="{{ course.id }}"></main>
+<main id="maincontent">
+<div class="main-app" id="react-root" data-course="{{ course.id }}"></div>
+</main>
 {% endblock %}
+
+{# Clear the footer blocks for simulation. Need to address sim list page #}
+{% block footer%}{% endblock %}

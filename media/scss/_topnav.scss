@@ -1,11 +1,21 @@
-.top-bar {
+header {
+    //@extend .fixed-top;
+    //height: 3.25rem;
     background-color: $gray-900;
     padding: 0.4rem 0.5rem;
     color: $white;
+    @include media-breakpoint-up(sm) {
+        //height: 4.125rem;
+    }
     @include media-breakpoint-up(md) {
+        //height: 4.125rem;
         padding: 0.5rem 1rem;
     }
+    @include media-breakpoint-up(lg) {
+        //height: 4.125rem;
+    }
 }
+
 
 
 .top-bar__container {
