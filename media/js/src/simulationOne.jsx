@@ -126,13 +126,13 @@ export const SimulationOne = () => {
                                 </div>
                                 <div className='row ms-3 mt-2'>
 
-                                y = {slope.toFixed(2)} + {intercept.toFixed(3)}x
+                                y = {intercept.toFixed(2)} + {slope.toFixed(3)}x
                                 </div>
                                 <div className='row ms-2 mt-2'>
                                     <label>
                                         <Katex tex={
                                             // eslint-disable-next-line max-len
-                                            `\\hat{\\beta_0} = ${slope.toFixed(3)}`
+                                            `\\hat{\\beta_0} = ${intercept.toFixed(3)}`
                                         } />
                                     </label>
                                 </div>
@@ -140,7 +140,7 @@ export const SimulationOne = () => {
                                     <label>
                                         <Katex tex={
                                             // eslint-disable-next-line max-len
-                                            `\\hat{\\beta_1} = ${intercept.toFixed(3)}`
+                                            `\\hat{\\beta_1} = ${slope.toFixed(3)}`
                                         } />
                                     </label>
                                 </div>
