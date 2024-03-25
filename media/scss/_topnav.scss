@@ -6,7 +6,7 @@ header {
     padding-right: 0.5rem;
     color: $white;
     @include media-breakpoint-up(md) {
-        height: 4.125rem;
+        //height: 4.125rem;
         padding-left: 1rem;
         padding-right: 1rem;
     }
@@ -87,4 +87,8 @@ header {
 .gn-i {
     vertical-align: -0.125em;
     fill: $white;
+}
+
+.header--simulation {
+    @extend .fixed-top;
 }
