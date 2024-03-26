@@ -13,7 +13,8 @@ phases:
       - aws --version
       - aws ecr get-login-password --region $AWS_DEFAULT_REGION | docker login --username AWS --password-stdin $AWS_ACCOUNT
       - REPOSITORY_URI=$ECR_REPOSITORY_URI
-      - COMMIT_HASH=$(echo $CODEBUILD_RESOLVED_SOURCE_VERSION | cut -c 1-7)
+      - echo Fetching latest commit hash from master/main branch
+      - COMMIT_HAST=$(git ls-remote https://github.com/ccnmtl/metricsmentor.git refs/heads/main | cut -c 1-7)
       - IMAGE_TAG=prod_${COMMIT_HASH:=latest}
       - GITHUB_REPO_URL="https://${GITHUB_PERSONAL_ACCESS_TOKEN}@${CODEBUILD_SOURCE_REPO_URL#https://}"
       - echo Install cloud defense cli
