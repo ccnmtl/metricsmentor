@@ -3,6 +3,7 @@ import Plot from 'react-plotly.js';
 import seedrandom from 'seedrandom';
 import axios from 'axios';
 import PropTypes from 'prop-types';
+import { saveAs } from 'file-saver';
 
 export const ScatterPlot = ({ N, correlation, seed, setAppRvalue,
     setSlope, setIntercept, setStderror, setPvalue
@@ -57,6 +58,16 @@ export const ScatterPlot = ({ N, correlation, seed, setAppRvalue,
             console.error('Error calculating regression:', error);
         }
     };
+    const exportCSV = () => {
+        const randomData = [
+            ['x', 'y'],
+            ...data.map(point => [point.x, point.y])
+        ];
+
+        const csv = randomData.map(row => row.join(',')).join('\n');
+        const blob = new Blob([csv], { type: 'text/csv;charset=utf-8' });
+        saveAs(blob, 'scatterplot_data.csv');
+    };
 
     useEffect(() => {
         setData(generateData());
@@ -69,32 +80,38 @@ export const ScatterPlot = ({ N, correlation, seed, setAppRvalue,
     }, [data]);
 
     return (
-        <Plot
-            data={[
-                {
-                    type: 'scatter',
-                    mode: 'markers',
-                    x: data.map(point => point.x),
-                    y: data.map(point => point.y),
-                    marker: { color: 'blue' },
-                },
-                regressionLine,
-            ]}
-            layout={{
-                xaxis: { title: 'X Axis' },
-                yaxis: { title: 'Y Axis' },
+        <>
+            <Plot
+                data={[
+                    {
+                        type: 'scatter',
+                        mode: 'markers',
+                        x: data.map(point => point.x),
+                        y: data.map(point => point.y),
+                        marker: { color: 'blue' },
+                    },
+                    regressionLine,
+                ]}
+                layout={{
+                    xaxis: { title: 'X Axis' },
+                    yaxis: { title: 'Y Axis' },
 
-            }}
-            useResizeHandler={true}
-            style={{ width: '100%', height: '100%' }}
-            config={{
-                scrollZoom: true,
-                displayModeBar: true,
-                modeBarButtonsToRemove: [
-                    'toImage', 'resetCameraLastSave3d', 'select2d',
-                    'lasso2d', 'autoScale2d'],
-            }}
-        />
+                }}
+                useResizeHandler={true}
+                style={{ width: '100%', height: '100%' }}
+                config={{
+                    scrollZoom: true,
+                    displayModeBar: true,
+                    modeBarButtonsToRemove: [
+                        'toImage', 'resetCameraLastSave3d', 'select2d',
+                        'lasso2d', 'autoScale2d'],
+                }}
+            />
+            <div className='text-center'>
+                <button className={'btn btn-small btn-secondary mt-3'}
+                    onClick={exportCSV}>Export CSV</button>
+            </div>
+        </>
     );
 };
 
