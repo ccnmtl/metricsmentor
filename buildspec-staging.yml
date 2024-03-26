@@ -26,6 +26,7 @@ phases:
   build:
     commands:
       - echo Build started on `date`
+      - echo $COMMIT_HASH
       # - echo Start cloud defense vulnerability scan on codebase
       # - |
       #   set +e  # Disable immediate exit on error
