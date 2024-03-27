@@ -126,37 +126,37 @@ export const SimulationOne = () => {
                             <div className='row ms-3 mt-2'>
 
                                 y = {intercept.toFixed(2)} + {slope.toFixed(3)}x
-                                </div>
-                                <div className='row ms-2 mt-2'>
-                                    <label>
-                                        <Katex tex={
-                                            // eslint-disable-next-line max-len
-                                            `\\hat{\\beta_0} = ${intercept.toFixed(3)}`
-                                        } />
-                                    </label>
-                                </div>
-                                <div className='row ms-2'>
-                                    <label>
-                                        <Katex tex={
-                                            // eslint-disable-next-line max-len
-                                            `\\hat{\\beta_1} = ${slope.toFixed(3)}`
-                                        } />
-                                    </label>
-                                </div>
-                                <div className='row ms-2'>
-                                    <label>
-                                        <Katex tex={
-                                            `{SE} = ${stderror.toFixed(3)}`} />
-                                    </label>
-                                </div>
-                                <div className='row ms-2'>
-                                    <label>
-                                        <Katex tex={'\\Eta_0 = 0'} />
-                                    </label>
-                                </div>
-                                <div className='row ms-2 mt-2 mb-3'>
-                                    <Katex tex={tEquation} />
-                                </div>
+                            </div>
+                            <div className='row ms-2 mt-2'>
+                                <label>
+                                    <Katex tex={
+                                        // eslint-disable-next-line max-len
+                                        `\\hat{\\beta_0} = ${intercept.toFixed(3)}`
+                                    } />
+                                </label>
+                            </div>
+                            <div className='row ms-2'>
+                                <label>
+                                    <Katex tex={
+                                        // eslint-disable-next-line max-len
+                                        `\\hat{\\beta_1} = ${slope.toFixed(3)}`
+                                    } />
+                                </label>
+                            </div>
+                            <div className='row ms-2'>
+                                <label>
+                                    <Katex tex={
+                                        `{SE} = ${stderror.toFixed(3)}`} />
+                                </label>
+                            </div>
+                            <div className='row ms-2'>
+                                <label>
+                                    <Katex tex={'\\Eta_0 = 0'} />
+                                </label>
+                            </div>
+                            <div className='row ms-2 mt-2 mb-3'>
+                                <Katex tex={tEquation} />
+                            </div>
 
                             <div className='row ms-2'>
                                 <div className='input-group mb-3'>
