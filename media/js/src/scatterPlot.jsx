@@ -88,17 +88,28 @@ export const ScatterPlot = ({ N, correlation, seed, setAppRvalue,
                         mode: 'markers',
                         x: data.map(point => point.x),
                         y: data.map(point => point.y),
-                        marker: { color: 'blue' },
+                        marker: {
+                            color: 'teal',
+                            size: 10,
+                            line: {
+                                width: 1,
+                                color: 'blue',
+                            },
+                        },
                     },
                     regressionLine,
                 ]}
                 layout={{
                     xaxis: { title: 'X Axis' },
-                    yaxis: { title: 'Y Axis' },
-
+                    yaxis: {
+                        title: 'Y Axis',
+                        scaleanchor: 'x',
+                        scaleratio: 1,
+                    },
+                    dragmode: 'pan'
                 }}
                 useResizeHandler={true}
-                style={{ width: '100%', height: '100%' }}
+                style={{ height: '90%' }}
                 config={{
                     scrollZoom: true,
                     displayModeBar: true,
