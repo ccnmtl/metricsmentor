@@ -69,14 +69,13 @@
     </head>
     <body>
         {% block topnavbar %}
-        <header>
+        <header class="header{% block pagetype %}--home{% endblock %}">
             <div class="skippy">
                 <div class="container p-0">
                     <a class=" d-inline-block p-2 m-1" href="#maincontent">Skip to main content</a>
                 </div>
             </div>
-            <div class="navbar top-bar">
-                <div class="container top-bar__container">
+            <nav class="navbar">
                     <a href="/" class="navbar-brand d-flex align-items-center">
                         <img class="gn-i me-3 outline-icon" alt="" src="{{STATIC_URL}}img/logo-metricsmentor-bw.svg">
                         <img class="gn-i me-3 color-icon" alt="" src="{{STATIC_URL}}img/logo-metricsmentor.svg">
@@ -110,9 +109,7 @@
                         </li>
                         {% endif %}
                     </ul>
-
-                </div>
-            </div>
+            </nav>
         </header>
         {% endblock %}
 

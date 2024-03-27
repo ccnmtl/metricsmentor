@@ -1,19 +1,14 @@
-.top-bar {
+header {
+    //@extend .fixed-top;
+    //height: 3.25rem;
     background-color: $gray-900;
-    padding: 0.4rem 0.5rem;
+    padding-left: 0.5rem;
+    padding-right: 0.5rem;
     color: $white;
     @include media-breakpoint-up(md) {
-        padding: 0.5rem 1rem;
-    }
-}
-
-
-.top-bar__container {
-    padding-right: 0;
-    padding-left: 0;
-    @include media-breakpoint-up(md) {
-        padding-right: 0.75rem;
-        padding-left: 0.75rem;
+        //height: 4.125rem;
+        padding-left: 1rem;
+        padding-right: 1rem;
     }
 }
 
@@ -92,4 +87,8 @@
 .gn-i {
     vertical-align: -0.125em;
     fill: $white;
+}
+
+.header--simulation {
+    @extend .fixed-top;
 }

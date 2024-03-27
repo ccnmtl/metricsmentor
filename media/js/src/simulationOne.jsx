@@ -83,146 +83,144 @@ export const SimulationOne = () => {
     't = \\frac{\\hat{\\beta}_1 - \\beta_1}{SE(\\hat{\\beta_1})}';
 
     return (
-        <div>
-            <div className='row'>
-                <div className='col-2'>
-                    <div className='row ms-2 mt-5'>
-                        <label className='fst-italic'> n:
-                            <input type='number' min='50' max='500'
-                                className='ms-2 mt-2' disabled={startQuiz}
-                                value={N} onChange={handleNChange} />
-                        </label>
-                    </div>
-                    <div className='row ms-2 mt-2'>
-                        <label htmlFor='correlation'
-                            className='form-label fst-italic'>
-                            r : {correlation}
-                        </label>
-                        <input type='range' step='0.01' min='-1'
-                            max='1' value={correlation}
-                            className='form-range'
-                            id='correlation' disabled={startQuiz}
-                            onChange={handleCorrelationChange} />
-                    </div>
-                    <div className='row ms-2 mt-2'>
-                        <label> Seed:
-                            <input type='text' value={seed} disabled={startQuiz}
-                                className='ms-1 mt-2' size='10'
-                                onChange={handleSeedChange} />
-                        </label>
-                    </div>
-                    {slope !== null && (
-                        <>
-                            <div>
-                                <div className='row ms-2 mt-2'>
-                                    <label className='form-label fst-italic'>
-                                        App r = {appRvalue.toFixed(2)}
-                                    </label>
-                                </div>
-                                <div className='row ms-2 mt-3'>
-                                    <Katex tex={
-                                        'y = \\hat{\\beta_0} + \\hat{\\beta_1}x'
-                                    } />
-                                </div>
-                                <div className='row ms-3 mt-2'>
+        <div className='simulation'>
+            <div className='simulation__workspace'>
+                <div className='row ms-2 mt-5'>
+                    <label className='fst-italic'> n:
+                        <input type='number' min='50' max='500'
+                            className='ms-2 mt-2' disabled={startQuiz}
+                            value={N} onChange={handleNChange} />
+                    </label>
+                </div>
+                <div className='row ms-2 mt-2'>
+                    <label htmlFor='correlation'
+                        className='form-label fst-italic'>
+                        r : {correlation}
+                    </label>
+                    <input type='range' step='0.01' min='-1'
+                        max='1' value={correlation}
+                        className='form-range'
+                        id='correlation' disabled={startQuiz}
+                        onChange={handleCorrelationChange} />
+                </div>
+                <div className='row ms-2 mt-2'>
+                    <label> Seed:
+                        <input type='text' value={seed} disabled={startQuiz}
+                            className='ms-1 mt-2' size='10'
+                            onChange={handleSeedChange} />
+                    </label>
+                </div>
+                {slope !== null && (
+                    <>
+                        <div>
+                            <div className='row ms-2 mt-2'>
+                                <label className='form-label fst-italic'>
+                                    App r = {appRvalue.toFixed(2)}
+                                </label>
+                            </div>
+                            <div className='row ms-2 mt-3'>
+                                <Katex tex={
+                                    'y = \\hat{\\beta_0} + \\hat{\\beta_1}x'
+                                } />
+                            </div>
+                            <div className='row ms-3 mt-2'>
 
                                 y = {intercept.toFixed(2)} + {slope.toFixed(3)}x
-                                </div>
-                                <div className='row ms-2 mt-2'>
-                                    <label>
-                                        <Katex tex={
-                                            // eslint-disable-next-line max-len
-                                            `\\hat{\\beta_0} = ${intercept.toFixed(3)}`
-                                        } />
-                                    </label>
-                                </div>
-                                <div className='row ms-2'>
-                                    <label>
-                                        <Katex tex={
-                                            // eslint-disable-next-line max-len
-                                            `\\hat{\\beta_1} = ${slope.toFixed(3)}`
-                                        } />
-                                    </label>
-                                </div>
-                                <div className='row ms-2'>
-                                    <label>
-                                        <Katex tex={
-                                            `{SE} = ${stderror.toFixed(3)}`} />
-                                    </label>
-                                </div>
-                                <div className='row ms-2'>
-                                    <label>
-                                        <Katex tex={'\\Eta_0 = 0'} />
-                                    </label>
-                                </div>
-                                <div className='row ms-2 mt-2 mb-3'>
-                                    <Katex tex={tEquation} />
-                                </div>
-
-                                <div className='row ms-2'>
-                                    <div className='input-group mb-3'>
-                                            t =
-                                        <input type='text'
-                                            style={{ width: '10%', borderColor:
-                                             betaOneError ? 'red' : 'green' }}
-                                            onChange={handleBetaOneHatChange}
-                                            className='form-control me-1 ms-1
-                                                form-control-sm box-2' />
-                                            -
-                                        <input type='text'
-                                            style={{width: '10%'}}
-                                            defaultValue={0}
-                                            className='form-control
-                                                 me-1 ms-1
-                                            form-control-sm box-2' />
-                                            /
-                                        <input type='text'
-                                            style={{ width: '10%', borderColor:
-                                             userSEError ? 'red' : 'green' }}
-                                            onChange={handleUserSEChange}
-                                            className='form-control me-1 ms-1
-                                             form-control-sm box-2' />
-                                    </div>
-                                </div>
-                                {(!betaOneError && !userSEError) && (
-                                    <div className='row ms-5'>
-                                        = {tvalue}
-                                    </div>
-                                )}
                             </div>
                             <div className='row ms-2 mt-2'>
-                                <button className='btn btn-primary'
-                                    onClick={saveGraphData}>
-                                    Save Graph Data
-                                </button>
+                                <label>
+                                    <Katex tex={
+                                        // eslint-disable-next-line max-len
+                                        `\\hat{\\beta_0} = ${intercept.toFixed(3)}`
+                                    } />
+                                </label>
                             </div>
-                            {startQuiz && (
-                                <SimulationOneQuiz
-                                    coursePk={coursePk}
-                                    tvalue={tvalue}
-                                    pvalue={pvalue}
-                                    appRvalue={appRvalue} />
+                            <div className='row ms-2'>
+                                <label>
+                                    <Katex tex={
+                                        // eslint-disable-next-line max-len
+                                        `\\hat{\\beta_1} = ${slope.toFixed(3)}`
+                                    } />
+                                </label>
+                            </div>
+                            <div className='row ms-2'>
+                                <label>
+                                    <Katex tex={
+                                        `{SE} = ${stderror.toFixed(3)}`} />
+                                </label>
+                            </div>
+                            <div className='row ms-2'>
+                                <label>
+                                    <Katex tex={'\\Eta_0 = 0'} />
+                                </label>
+                            </div>
+                            <div className='row ms-2 mt-2 mb-3'>
+                                <Katex tex={tEquation} />
+                            </div>
+
+                            <div className='row ms-2'>
+                                <div className='input-group mb-3'>
+                                        t =
+                                    <input type='text'
+                                        style={{ width: '10%', borderColor:
+                                            betaOneError ? 'red' : 'green' }}
+                                        onChange={handleBetaOneHatChange}
+                                        className='form-control me-1 ms-1
+                                            form-control-sm box-2' />
+                                        -
+                                    <input type='text'
+                                        style={{width: '10%'}}
+                                        defaultValue={0}
+                                        className='form-control
+                                                me-1 ms-1
+                                        form-control-sm box-2' />
+                                        /
+                                    <input type='text'
+                                        style={{ width: '10%', borderColor:
+                                            userSEError ? 'red' : 'green' }}
+                                        onChange={handleUserSEChange}
+                                        className='form-control me-1 ms-1
+                                            form-control-sm box-2' />
+                                </div>
+                            </div>
+                            {(!betaOneError && !userSEError) && (
+                                <div className='row ms-5'>
+                                    = {tvalue}
+                                </div>
                             )}
-                        </>
-                    )}
-                </div>
-                <div className='col-10' style={{height: '100%'}}>
-                    <ScatterPlot
-                        N={N}
-                        correlation={correlation}
-                        seed={seed}
-                        slope={slope}
-                        setSlope={setSlope}
-                        stderror={stderror}
-                        setStderror={setStderror}
-                        intercept={intercept}
-                        setIntercept={setIntercept}
-                        appRvalue={appRvalue}
-                        setAppRvalue={setAppRvalue}
-                        pvalue={pvalue}
-                        setPvalue={setPvalue}
-                    />
-                </div>
+                        </div>
+                        <div className='row ms-2 mt-2'>
+                            <button className='btn btn-primary'
+                                onClick={saveGraphData}>
+                                Save Graph Data
+                            </button>
+                        </div>
+                        {startQuiz && (
+                            <SimulationOneQuiz
+                                coursePk={coursePk}
+                                tvalue={tvalue}
+                                pvalue={pvalue}
+                                appRvalue={appRvalue} />
+                        )}
+                    </>
+                )}
+            </div>
+            <div className='simulation__graphspace'>
+                <ScatterPlot
+                    N={N}
+                    correlation={correlation}
+                    seed={seed}
+                    slope={slope}
+                    setSlope={setSlope}
+                    stderror={stderror}
+                    setStderror={setStderror}
+                    intercept={intercept}
+                    setIntercept={setIntercept}
+                    appRvalue={appRvalue}
+                    setAppRvalue={setAppRvalue}
+                    pvalue={pvalue}
+                    setPvalue={setPvalue}
+                />
             </div>
         </div>
     );
