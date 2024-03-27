@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { ScatterPlot } from './scatterPlot';
 import { Katex } from './katexComponent';
 import { authedFetch } from './utils';
@@ -19,26 +19,9 @@ export const SimulationOne = () => {
     const [intercept, setIntercept] = useState(null);
     const [stderror, setStderror] = useState(null);
     const [appRvalue, setAppRvalue] = useState(null);
-    const [userBetaOneHat, setUserBetaOneHat] = useState(0);
-    const [userSE, setUserSE] = useState(0);
     const [pvalue, setPvalue] = useState(null);
-    const [betaOneError, setBetaOneError] = useState(false);
-    const [userSEError, setUserSEError] = useState(false);
     const [startQuiz, setStartQuiz] = useState(false);
 
-
-    useEffect(() => {
-
-        if (intercept !== null) {
-            const isBetaOneHatValid =
-                parseFloat(intercept.toFixed(3)) === parseFloat(userBetaOneHat);
-            const isStdErrorValid =
-                parseFloat(stderror.toFixed(3)) === parseFloat(userSE);
-
-            setBetaOneError(!isBetaOneHatValid);
-            setUserSEError(!isStdErrorValid);
-        }
-    }, [intercept, stderror, userBetaOneHat, userSE]);
 
     const saveGraphData = async() => {
         const data = {
@@ -68,14 +51,6 @@ export const SimulationOne = () => {
 
     const handleSeedChange = (e) => {
         setSeed(e.target.value);
-    };
-
-    const handleBetaOneHatChange = (e) => {
-        setUserBetaOneHat(e.target.value);
-    };
-
-    const handleUserSEChange = (e) => {
-        setUserSE(e.target.value);
     };
 
     const tvalue = (slope / stderror).toFixed(3);
@@ -162,32 +137,28 @@ export const SimulationOne = () => {
                                 <div className='input-group mb-3'>
                                         t =
                                     <input type='text'
-                                        style={{ width: '10%', borderColor:
-                                            betaOneError ? 'red' : 'green' }}
-                                        onChange={handleBetaOneHatChange}
+                                        style={{width: '10%'}}
+                                        value={slope.toFixed(3)}
                                         className='form-control me-1 ms-1
                                             form-control-sm box-2' />
                                         -
                                     <input type='text'
                                         style={{width: '10%'}}
-                                        defaultValue={0}
+                                        value={0}
                                         className='form-control
                                                 me-1 ms-1
                                         form-control-sm box-2' />
                                         /
                                     <input type='text'
-                                        style={{ width: '10%', borderColor:
-                                            userSEError ? 'red' : 'green' }}
-                                        onChange={handleUserSEChange}
+                                        style={{width: '10%'}}
+                                        value={stderror.toFixed(3)}
                                         className='form-control me-1 ms-1
                                             form-control-sm box-2' />
                                 </div>
                             </div>
-                            {(!betaOneError && !userSEError) && (
-                                <div className='row ms-5'>
+                            <div className='row ms-5'>
                                     = {tvalue}
-                                </div>
-                            )}
+                            </div>
                         </div>
                         <div className='row ms-2 mt-2'>
                             <button className='btn btn-primary'
