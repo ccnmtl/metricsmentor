@@ -21,12 +21,13 @@ export const SimulationOne = () => {
     const [appRvalue, setAppRvalue] = useState(null);
     const [pvalue, setPvalue] = useState(null);
     const [startQuiz, setStartQuiz] = useState(false);
+    const [hypothesizedSlope, setHypothesizedSlope] = useState(0);
 
 
     const saveGraphData = async() => {
         const data = {
             N, correlation, seed, slope, intercept, stderror, appRvalue,
-            coursePk, tvalue, pvalue
+            coursePk, tvalue, pvalue, hypothesizedSlope
         };
 
         return authedFetch('/api/save-sim1-graph/', 'POST', {data})
@@ -53,7 +54,11 @@ export const SimulationOne = () => {
         setSeed(e.target.value);
     };
 
-    const tvalue = (slope / stderror).toFixed(3);
+    const handleNullHypothesis = (e) => {
+        setHypothesizedSlope(parseFloat(e.target.value));
+    };
+
+    const tvalue = (slope - hypothesizedSlope / stderror).toFixed(3);
     const tEquation =
     't = \\frac{\\hat{\\beta}_1 - \\beta_1}{SE(\\hat{\\beta_1})}';
 
@@ -90,7 +95,7 @@ export const SimulationOne = () => {
                         <div>
                             <div className='row ms-2 mt-2'>
                                 <label className='form-label fst-italic'>
-                                    App r = {appRvalue.toFixed(2)}
+                                    Application r = {appRvalue.toFixed(2)}
                                 </label>
                             </div>
                             <div className='row ms-2 mt-3'>
@@ -125,14 +130,18 @@ export const SimulationOne = () => {
                                 </label>
                             </div>
                             <div className='row ms-2'>
-                                <label>
-                                    <Katex tex={'\\Eta_0 = 0'} />
+                                <label className='col-2'>
+                                    <Katex tex={'{\\Eta_0} : {\\beta_1} ='} />
                                 </label>
+                                <input size='10' className='col-12 w-25'
+                                    type='number' min='-5' max='5'
+                                    disabled={startQuiz}
+                                    value={hypothesizedSlope}
+                                    onChange={handleNullHypothesis} />
                             </div>
                             <div className='row ms-2 mt-2 mb-3'>
                                 <Katex tex={tEquation} />
                             </div>
-
                             <div className='row ms-2'>
                                 <div className='input-group mb-3'>
                                         t =
@@ -144,7 +153,7 @@ export const SimulationOne = () => {
                                         -
                                     <input type='text'
                                         style={{width: '10%'}}
-                                        value={0}
+                                        value={hypothesizedSlope}
                                         className='form-control
                                                 me-1 ms-1
                                         form-control-sm box-2' />
@@ -171,6 +180,7 @@ export const SimulationOne = () => {
                                 coursePk={coursePk}
                                 tvalue={tvalue}
                                 pvalue={pvalue}
+                                hypothesizedSlope={hypothesizedSlope}
                                 appRvalue={appRvalue} />
                         )}
                     </>
