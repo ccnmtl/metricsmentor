@@ -46,39 +46,39 @@ export const HypothesisTest = ({
             <div>
                 <div>
                     <input
-                        type="radio"
-                        id="significance1"
-                        name="significance"
+                        type='radio'
+                        id='significance1'
+                        name='significance'
                         value={0.01}
                         checked={alpha === 0.01}
                         onChange={handleAlphaChange}
                         disabled={alphaSelected}
                     />
-                    <label htmlFor="significance1">1% (0.01)</label>
+                    <label htmlFor='significance1'>1% (0.01)</label>
                 </div>
                 <div>
                     <input
-                        type="radio"
-                        id="significance5"
-                        name="significance"
+                        type='radio'
+                        id='significance5'
+                        name='significance'
                         value={0.05}
                         checked={alpha === 0.05}
                         onChange={handleAlphaChange}
                         disabled={alphaSelected}
                     />
-                    <label htmlFor="significance5">5% (0.05)</label>
+                    <label htmlFor='significance5'>5% (0.05)</label>
                 </div>
                 <div>
                     <input
-                        type="radio"
-                        id="significance10"
-                        name="significance"
+                        type='radio'
+                        id='significance10'
+                        name='significance'
                         value={0.10}
                         checked={alpha === 0.10}
                         onChange={handleAlphaChange}
                         disabled={alphaSelected}
                     />
-                    <label htmlFor="significance10">10% (0.10)</label>
+                    <label htmlFor='significance10'>10% (0.10)</label>
                 </div>
             </div>
             {alphaSelected && (
