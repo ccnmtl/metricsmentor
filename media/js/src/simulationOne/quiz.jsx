@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import { Katex } from './katexComponent';
+import { Katex } from '../katexComponent';
 
 export const Quiz = ({
     appRvalue, tvalue, pvalue, alpha, hypothesisTest, hypothesis

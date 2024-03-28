@@ -1,7 +1,7 @@
 import React from 'react';
 import { BrowserRouter as Router, Route, Routes  } from 'react-router-dom';
 import { Dashboard } from './dashboard';
-import { SimulationOne } from './simulationOne';
+import { SimulationOne } from './simulationOne/simulationOne';
 
 export const App = () => {
     return (
