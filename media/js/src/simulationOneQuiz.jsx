@@ -3,7 +3,9 @@ import { Katex } from './katexComponent';
 import { HypothesisTest } from './hypothesisTest';
 import PropTypes from 'prop-types';
 
-export const SimulationOneQuiz = ({appRvalue, tvalue, pvalue}) => {
+export const SimulationOneQuiz = ({
+    appRvalue, tvalue, pvalue, hypothesizedSlope
+}) => {
     const [selectedOption, setSelectedOption] = useState(null);
 
     useEffect(() => {
@@ -13,17 +15,23 @@ export const SimulationOneQuiz = ({appRvalue, tvalue, pvalue}) => {
     return (
         <>
             <div className='ms-2 mt-2'>
-                A <Katex tex={'\\Eta_1: {\\beta_1}{\\neq} 0'} />
+                A <Katex tex={
+                    `\\Eta_1: {\\beta_1}{\\neq} ${hypothesizedSlope}`
+                } />
                 <button className='btn btn-sm btn-primary'
                     onClick={() => setSelectedOption('A')}>Do This</button>
             </div>
             <div className='ms-2 mt-2'>
-                B <Katex tex={'\\Eta_1: {\\beta_1}{\\gt} 0'} />
+                B <Katex tex={
+                    `\\Eta_1: {\\beta_1}{\\gt} ${hypothesizedSlope}`
+                } />
                 <button className='btn btn-sm btn-primary'
                     onClick={() => setSelectedOption('B')}>Do This</button>
             </div>
             <div className='ms-2 mt-2'>
-                C <Katex tex={'\\Eta_1: {\\beta_1}{\\lt} 0'} />
+                C <Katex tex={
+                    `\\Eta_1: {\\beta_1}{\\lt} ${hypothesizedSlope}`
+                } />
                 <button className='btn btn-sm btn-primary'
                     onClick={() => setSelectedOption('C')}>Do This</button>
             </div>
@@ -41,7 +49,8 @@ export const SimulationOneQuiz = ({appRvalue, tvalue, pvalue}) => {
 };
 
 SimulationOneQuiz.propTypes = {
-    appRvalue: PropTypes.any.isRequired,
-    tvalue: PropTypes.any.isRequired,
-    pvalue: PropTypes.any.isRequired
+    appRvalue: PropTypes.number.isRequired,
+    tvalue: PropTypes.number.isRequired,
+    pvalue: PropTypes.number.isRequired,
+    hypothesizedSlope: PropTypes.number.isRequired
 };
