@@ -192,6 +192,7 @@ export const SimulationOne = () => {
                                             <input type='text'
                                                 style={{width: '10%'}}
                                                 value={slope.toFixed(3)}
+                                                readOnly
                                                 className='form-control
                                                     me-1 ms-1
                                                     form-control-sm box-2' />
@@ -199,6 +200,7 @@ export const SimulationOne = () => {
                                             <input type='text'
                                                 style={{width: '10%'}}
                                                 value={hypothesizedSlope}
+                                                readOnly
                                                 className='form-control
                                                         me-1 ms-1
                                                 form-control-sm box-2' />
@@ -206,6 +208,7 @@ export const SimulationOne = () => {
                                             <input type='text'
                                                 style={{width: '10%'}}
                                                 value={stderror.toFixed(3)}
+                                                readOnly
                                                 className='form-control
                                                     me-1 ms-1
                                                     form-control-sm box-2' />
