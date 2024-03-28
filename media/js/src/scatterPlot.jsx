@@ -70,7 +70,9 @@ export const ScatterPlot = ({ N, correlation, seed, setAppRvalue,
     };
 
     useEffect(() => {
-        setData(generateData());
+        if(N) {
+            setData(generateData());
+        }
     }, [N, correlation, seed]);
 
     useEffect(() => {
