@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react';
-import { Katex } from './katexComponent';
+import { Katex } from '../katexComponent';
 import { HypothesisTest } from './hypothesisTest';
 import PropTypes from 'prop-types';
 
