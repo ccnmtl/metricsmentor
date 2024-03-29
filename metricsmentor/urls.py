@@ -43,6 +43,8 @@ urlpatterns = [
             name='course-detail-view'),
     path('calculate_regression/', views.calculate_regression,
          name='calculate_regression'),
+    path('calculate_pvalue/', views.calculate_pvalue,
+         name='calculate_pvalue'),
     path('api/save-sim1-graph/', views.SaveSim1GraphView.as_view(),
          name='save_sim1_graph'),
 

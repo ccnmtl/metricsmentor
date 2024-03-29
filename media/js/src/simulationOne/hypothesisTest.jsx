@@ -1,26 +1,29 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Katex } from '../katexComponent';
 import PropTypes from 'prop-types';
-import { Quiz } from './quiz'; // Import the 'Quiz' component
+import { Quiz } from './quiz';
+import axios from 'axios';
 
 export const HypothesisTest = ({
-    selectedOption, appRvalue, tvalue, pvalue
+    selectedOption, appRvalue, tvalue, hypothesizedSlope, n
 }) => {
+    const [pvalues, setPvalues] = useState(null);
+
     let hypothesis;
     let hypothesisTest;
 
     switch (selectedOption) {
     case 'A':
-        hypothesis = '\\beta_1 \\neq 0';
-        hypothesisTest = 'two-tailed';
+        hypothesis = `\\Eta_1: {\\beta_1}{\\neq } ${hypothesizedSlope}`;
+        hypothesisTest = 'p_value_two_sided';
         break;
     case 'B':
-        hypothesis = '\\beta_1 > 0';
-        hypothesisTest = 'right one-tailed';
+        hypothesis = `\\Eta_1: {\\beta_1}{\\gt} ${hypothesizedSlope}`;
+        hypothesisTest = 'p_value_right';
         break;
     case 'C':
-        hypothesis = '\\beta_1 < 0';
-        hypothesisTest = 'left one-tailed';
+        hypothesis =  `\\Eta_1: {\\beta_1}{\\lt} ${hypothesizedSlope}`;
+        hypothesisTest = 'p_value_left';
         break;
     default:
         hypothesis = '';
@@ -35,13 +38,36 @@ export const HypothesisTest = ({
         setAlphaSelected(true);
     };
 
+
+    const calculatePvalue = async() => {
+
+        try {
+            const response = await axios.post('/calculate_pvalue/',
+                {n, tvalue});
+
+            setPvalues(response.data);
+
+        } catch (error) {
+            console.error('Error calculating pvalue:', error);
+        }
+    };
+    let pvalue;
+    if (pvalues) {
+        pvalue = pvalues[hypothesisTest];
+    }
+
+    useEffect(() => {
+        calculatePvalue();
+    }, []);
+
     return (
         <div>
-            <h2>Selected option: {hypothesisTest}</h2>
-            <div>null hypothesis: <Katex tex={'\\beta_1 = 0'} /></div>
-            <div>Hypothesis: <Katex tex={hypothesis} /></div>
-            <div>AppRvalue: {appRvalue.toFixed(3)}</div>
-            <div>Tvalue: {tvalue}</div>
+            <div>
+                <Katex tex={`{\\Eta_0} : {\\beta_1} = ${hypothesizedSlope}`} />
+            </div>
+            <div><Katex tex={hypothesis} /></div>
+            <div>r: {appRvalue.toFixed(3)}</div>
+            <div>t: {tvalue}</div>
             Choose significance level, alpha:
             <div>
                 <div>
@@ -98,7 +124,8 @@ export const HypothesisTest = ({
 HypothesisTest.propTypes = {
     selectedOption: PropTypes.string.isRequired,
     appRvalue: PropTypes.number.isRequired,
-    tvalue: PropTypes.string.isRequired,
+    tvalue: PropTypes.number.isRequired,
     coursePK: PropTypes.number,
-    pvalue: PropTypes.number
+    hypothesizedSlope: PropTypes.any.isRequired,
+    n: PropTypes.number.isRequired,
 };

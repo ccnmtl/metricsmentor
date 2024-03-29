@@ -19,7 +19,6 @@ export const SimulationOne = () => {
     const [intercept, setIntercept] = useState(null);
     const [stderror, setStderror] = useState(null);
     const [appRvalue, setAppRvalue] = useState(null);
-    const [pvalue, setPvalue] = useState(null);
     const [startQuiz, setStartQuiz] = useState(false);
     const [hypothesizedSlope, setHypothesizedSlope] = useState(0);
 
@@ -27,7 +26,7 @@ export const SimulationOne = () => {
     const saveGraphData = async() => {
         const data = {
             N, correlation, seed, slope, intercept, stderror, appRvalue,
-            coursePk, tvalue, pvalue, hypothesizedSlope
+            coursePk, tvalue, hypothesizedSlope
         };
 
         return authedFetch('/api/save-sim1-graph/', 'POST', {data})
@@ -234,8 +233,8 @@ export const SimulationOne = () => {
                             <SimulationOneQuiz
                                 coursePk={coursePk}
                                 tvalue={tvalue}
-                                pvalue={pvalue}
                                 hypothesizedSlope={hypothesizedSlope}
+                                n={N}
                                 appRvalue={appRvalue} />
                         )}
                     </>
@@ -254,8 +253,6 @@ export const SimulationOne = () => {
                     setIntercept={setIntercept}
                     appRvalue={appRvalue}
                     setAppRvalue={setAppRvalue}
-                    pvalue={pvalue}
-                    setPvalue={setPvalue}
                 />
             </div>
         </div>
