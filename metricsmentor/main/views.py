@@ -23,7 +23,7 @@ from metricsmentor.main.models import Graph
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 from django.utils.decorators import method_decorator
-from scipy.stats import linregress
+from scipy.stats import linregress, t
 import json
 
 
@@ -209,6 +209,28 @@ def calculate_regression(request):
             })
 
     return JsonResponse({'error': 'Invalid data.'}, status=400)
+
+
+@csrf_exempt
+def calculate_pvalue(request):
+    if request.method == 'POST':
+        data = json.loads(request.body.decode('utf-8'))
+        n = data.get('n')
+        t_value = data.get('tvalue')
+
+        # degrees of freedom
+        df = n - 2
+        p_value_left = t.cdf(t_value, df)
+        p_value_right = 1 - t.cdf(t_value, df)
+        p_value_two_sided = 2 * t.cdf(-abs(t_value), df)
+
+        return JsonResponse({
+            'p_value_left': p_value_left,
+            'p_value_right': p_value_right,
+            'p_value_two_sided': p_value_two_sided
+        })
+
+    return JsonResponse({'error': 'Invalid data or method.'}, status=400)
 
 
 def handler404(request):

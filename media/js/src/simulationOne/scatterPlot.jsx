@@ -6,7 +6,7 @@ import PropTypes from 'prop-types';
 import { saveAs } from 'file-saver';
 
 export const ScatterPlot = ({ N, correlation, seed, setAppRvalue,
-    setSlope, setIntercept, setStderror, setPvalue
+    setSlope, setIntercept, setStderror
 }) => {
     const [data, setData] = useState([]);
     const [regressionLine, setRegressionLine] = useState(null);
@@ -38,13 +38,12 @@ export const ScatterPlot = ({ N, correlation, seed, setAppRvalue,
                 y_values,
             });
 
-            const { slope, intercept, rvalue, stderr, pvalue } = response.data;
+            const { slope, intercept, rvalue, stderr } = response.data;
 
             setAppRvalue(rvalue);
             setSlope(slope);
             setIntercept(intercept);
             setStderror(stderr);
-            setPvalue(pvalue);
 
             setRegressionLine({
                 type: 'scatter',
@@ -140,6 +139,4 @@ ScatterPlot.propTypes = {
     slope: PropTypes.number,
     stderror: PropTypes.number,
     intercept: PropTypes.number,
-    pvalue: PropTypes.number,
-    setPvalue: PropTypes.func
 };

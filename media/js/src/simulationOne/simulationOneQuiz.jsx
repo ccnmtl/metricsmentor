@@ -4,7 +4,7 @@ import { HypothesisTest } from './hypothesisTest';
 import PropTypes from 'prop-types';
 
 export const SimulationOneQuiz = ({
-    appRvalue, tvalue, pvalue, hypothesizedSlope
+    appRvalue, tvalue, hypothesizedSlope, n
 }) => {
     const [selectedOption, setSelectedOption] = useState(null);
 
@@ -39,9 +39,10 @@ export const SimulationOneQuiz = ({
             {selectedOption && (
                 <HypothesisTest
                     selectedOption={selectedOption}
+                    hypothesizedSlope={hypothesizedSlope}
                     appRvalue={appRvalue}
-                    tvalue={tvalue}
-                    pvalue={pvalue}
+                    tvalue={parseFloat(tvalue)}
+                    n={parseInt(n)}
                 />
             )}
         </>
@@ -50,7 +51,7 @@ export const SimulationOneQuiz = ({
 
 SimulationOneQuiz.propTypes = {
     appRvalue: PropTypes.number.isRequired,
-    tvalue: PropTypes.number.isRequired,
-    pvalue: PropTypes.number.isRequired,
-    hypothesizedSlope: PropTypes.number.isRequired
+    tvalue: PropTypes.string.isRequired,
+    hypothesizedSlope: PropTypes.any.isRequired,
+    n: PropTypes.any.isRequired,
 };
