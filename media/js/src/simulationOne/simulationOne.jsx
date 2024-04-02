@@ -66,9 +66,9 @@ export const SimulationOne = () => {
             <div className='simulation__workspace'>
                 <div className='simulation__step-container d-flex'>
                     <div className='simulation__step-num'>
-                        1
+                        &bull;
                     </div>
-                    <div className='simulation__step-toggle'>
+                    <div className='simulation__step-toggle--down'>
                     </div>
                     <div className='simulation__step-body'>
                         <header className='simulation__step-header'>
@@ -109,15 +109,14 @@ export const SimulationOne = () => {
                             )}
                         </div>
                     </div>
-                </div>
+                </div> {/* div class=simulation__step-container */}
                 {slope !== null && (
                     <>
-
                         <div className='simulation__step-container d-flex'>
                             <div className='simulation__step-num'>
-                                2
+                                &bull;
                             </div>
-                            <div className='simulation__step-toggle'>
+                            <div className='simulation__step-toggle--down'>
                             </div>
                             <div className='simulation__step-body'>
                                 <header className='simulation__step-header'>
@@ -130,39 +129,40 @@ export const SimulationOne = () => {
                                             'y = \\hat{\\beta_0} + \\hat{\\beta_1}x'
                                         } />
                                     </div>
-                                </div>
-                                <div className='row'>
-                                    y = {intercept.toFixed(2)} + {slope.toFixed(3)}x {/* eslint-disable-line max-len */}
-                                </div>
-                                <div className='row'>
-                                    <label>
-                                        <Katex tex={
+                                    <div className='row'>
+                                        y = {intercept.toFixed(2)} + {slope.toFixed(3)}x {/* eslint-disable-line max-len */}
+                                    </div>
+                                    <div className='row'>
+                                        <label>
+                                            <Katex tex={
                                             // eslint-disable-next-line max-len
-                                            `\\hat{\\beta_0} = ${intercept.toFixed(3)}`
-                                        } />
-                                    </label>
-                                </div>
-                                <div className='row'>
-                                    <label>
-                                        <Katex tex={
+                                                `\\hat{\\beta_0} = ${intercept.toFixed(3)}`
+                                            } />
+                                        </label>
+                                    </div>
+                                    <div className='row'>
+                                        <label>
+                                            <Katex tex={
                                             // eslint-disable-next-line max-len
-                                            `\\hat{\\beta_1} = ${slope.toFixed(3)}`
-                                        } />
-                                    </label>
-                                </div>
-                                <div className='row'>
-                                    <label>
-                                        <Katex tex={
-                                            `{SE} = ${stderror.toFixed(3)}`} />
-                                    </label>
+                                                `\\hat{\\beta_1} = ${slope.toFixed(3)}`
+                                            } />
+                                        </label>
+                                    </div>
+                                    <div className='row'>
+                                        <label>
+                                            <Katex tex={
+                                            // eslint-disable-next-line max-len
+                                                `{SE} = ${stderror.toFixed(3)}`} />
+                                        </label>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
+                        </div> {/* div class=simulation__step-container */}
                         <div className='simulation__step-container d-flex'>
                             <div className='simulation__step-num'>
-                                3
+                                &bull;
                             </div>
-                            <div className='simulation__step-toggle'>
+                            <div className='simulation__step-toggle--down'>
                             </div>
                             <div className='simulation__step-body'>
                                 <header className='simulation__step-header'>
@@ -184,7 +184,6 @@ export const SimulationOne = () => {
                                     <div className='row'>
                                         <Katex tex={tEquation} />
                                     </div>
-
                                     <div className='row'>
                                         <div className='input-group mb-3'>
                                                 t =
@@ -218,12 +217,9 @@ export const SimulationOne = () => {
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        </div> {/* div class=simulation__step-container */}
 
-
-                        <div>
-                        </div>
-                        <div className='row'>
+                        <div className="d-flex justify-content-center my-3">
                             <button className='btn btn-primary'
                                 onClick={saveGraphData}>
                                 Save Graph Data
@@ -239,7 +235,7 @@ export const SimulationOne = () => {
                         )}
                     </>
                 )}
-            </div>
+            </div> {/* div class=simulation__workspace */}
             <div className='simulation__graphspace'>
                 <ScatterPlot
                     N={N}
@@ -254,7 +250,7 @@ export const SimulationOne = () => {
                     appRvalue={appRvalue}
                     setAppRvalue={setAppRvalue}
                 />
-            </div>
-        </div>
+            </div> {/* div class=simulation__graphspace */}
+        </div> // div class=simulation
     );
 };

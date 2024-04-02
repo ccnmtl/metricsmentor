@@ -61,14 +61,14 @@ export const HypothesisTest = ({
     }, []);
 
     return (
-        <div>
+        <div className='choosing-alpha border border-primary p-3'>
             <div>
                 <Katex tex={`{\\Eta_0} : {\\beta_1} = ${hypothesizedSlope}`} />
             </div>
             <div><Katex tex={hypothesis} /></div>
             <div>r: {appRvalue.toFixed(3)}</div>
             <div>t: {tvalue}</div>
-            Choose significance level, alpha:
+            <p>Choose significance level, alpha:</p>
             <div>
                 <div>
                     <input
@@ -117,7 +117,7 @@ export const HypothesisTest = ({
                     hypothesis={hypothesis}
                 />
             )}
-        </div>
+        </div>//choosing-alpha
     );
 };
 
