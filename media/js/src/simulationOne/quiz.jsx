@@ -47,7 +47,7 @@ export const Quiz = ({
                 <div>
                     <label htmlFor='pValue'>p = </label>
                     <input
-                        type='number'
+                        type='text'
                         id='pValue'
                         value={userPvalue}
                         onChange={handleUserPvalueChange}
