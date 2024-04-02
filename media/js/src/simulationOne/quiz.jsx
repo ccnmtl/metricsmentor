@@ -39,8 +39,8 @@ export const Quiz = ({
     const pvaluecheck = userPvalue === pvalue;
 
     return (
-        <div>
-            <div>
+        <div className='solving-p-set border border-primary p-3 mt-3'>
+            <div className='input-p'>
                 <p>Look up p value for t-stat</p>
                 p value from table:
                 <div>
@@ -54,10 +54,10 @@ export const Quiz = ({
                             : '2px solid red'}}
                     />
                 </div>
-            </div>
+            </div>{/*input-p*/}
             {pvaluecheck && (
-                <div>
-                Comparing p values to alpha:
+                <div className='p-to-alpha border border-warning p-3 mt-3'>
+                Comparing p values to &alpha;:
                     <div>
                         <input
                             type='radio'
@@ -91,11 +91,11 @@ export const Quiz = ({
                             }
                         </label>
                     </div>
-                </div>
+                </div>//compare-p-to-alpha
             )}
 
             {isCorrect && (
-                <div>
+                <div className='p-val-concl border border-info p-3 mt-3'>
                     <Katex tex={'\\beta_1 = 0'} />
                     <Katex tex={hypothesis} />
                     <div>
@@ -124,7 +124,7 @@ export const Quiz = ({
                     </div>
                 </div>
             )}
-        </div>
+        </div>//solving-p-set
     );
 };
 
