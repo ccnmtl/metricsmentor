@@ -63,64 +63,78 @@ export const HypothesisTest = ({
     }, []);
 
     return (
-        <div className='choosing-alpha border border-primary p-3'>
-            <div>
-                <Katex tex={nullHypothesis} />
+        <>
+            <div className='simulation__step-container d-flex'>
+                <div className='simulation__step-num'>
+                    &bull;
+                </div>
+                <div className='simulation__step-toggle--down'></div>
+                <div className='simulation__step-body'>
+                    <header className='simulation__step-header'>
+                        <h2>Hypothesis test</h2>
+                    </header>
+                    <div className='simulation__step-content'>
+                        <div>
+                            <Katex tex={nullHypothesis} />
+                        </div>
+                        <div><Katex tex={hypothesis} /></div>
+                        <div>r: {appRvalue.toFixed(3)}</div>
+                        <div>t: {tvalue}</div>
+                        <p>Choose significance level, alpha:</p>
+                        <div>
+                            <div>
+                                <input
+                                    type='radio'
+                                    id='significance1'
+                                    name='significance'
+                                    value={0.01}
+                                    checked={alpha === 0.01}
+                                    onChange={handleAlphaChange}
+                                    disabled={alphaSelected}
+                                />
+                                <label htmlFor='significance1'>1% (0.01)</label>
+                            </div>
+                            <div>
+                                <input
+                                    type='radio'
+                                    id='significance5'
+                                    name='significance'
+                                    value={0.05}
+                                    checked={alpha === 0.05}
+                                    onChange={handleAlphaChange}
+                                    disabled={alphaSelected}
+                                />
+                                <label htmlFor='significance5'>5% (0.05)</label>
+                            </div>
+                            <div>
+                                <input
+                                    type='radio'
+                                    id='significance10'
+                                    name='significance'
+                                    value={0.10}
+                                    checked={alpha === 0.10}
+                                    onChange={handleAlphaChange}
+                                    disabled={alphaSelected}
+                                />
+                                <label
+                                    htmlFor='significance10'>10% (0.10)</label>
+                            </div>
+                        </div>
+                        {alphaSelected && (
+                            <Quiz
+                                hypothesisTest={hypothesisTest}
+                                appRvalue={appRvalue}
+                                tvalue={tvalue}
+                                pvalue={parseFloat(pvalue)}
+                                alpha={alpha}
+                                hypothesis={hypothesis}
+                                nullHypothesis={nullHypothesis}
+                            />
+                        )}
+                    </div>
+                </div>
             </div>
-            <div><Katex tex={hypothesis} /></div>
-            <div>r: {appRvalue.toFixed(3)}</div>
-            <div>t: {tvalue}</div>
-            <p>Choose significance level, alpha:</p>
-            <div>
-                <div>
-                    <input
-                        type='radio'
-                        id='significance1'
-                        name='significance'
-                        value={0.01}
-                        checked={alpha === 0.01}
-                        onChange={handleAlphaChange}
-                        disabled={alphaSelected}
-                    />
-                    <label htmlFor='significance1'>1% (0.01)</label>
-                </div>
-                <div>
-                    <input
-                        type='radio'
-                        id='significance5'
-                        name='significance'
-                        value={0.05}
-                        checked={alpha === 0.05}
-                        onChange={handleAlphaChange}
-                        disabled={alphaSelected}
-                    />
-                    <label htmlFor='significance5'>5% (0.05)</label>
-                </div>
-                <div>
-                    <input
-                        type='radio'
-                        id='significance10'
-                        name='significance'
-                        value={0.10}
-                        checked={alpha === 0.10}
-                        onChange={handleAlphaChange}
-                        disabled={alphaSelected}
-                    />
-                    <label htmlFor='significance10'>10% (0.10)</label>
-                </div>
-            </div>
-            {alphaSelected && (
-                <Quiz
-                    hypothesisTest={hypothesisTest}
-                    appRvalue={appRvalue}
-                    tvalue={tvalue}
-                    pvalue={parseFloat(pvalue)}
-                    alpha={alpha}
-                    hypothesis={hypothesis}
-                    nullHypothesis={nullHypothesis}
-                />
-            )}
-        </div>//choosing-alpha
+        </>
     );
 };
 

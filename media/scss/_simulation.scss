@@ -66,6 +66,7 @@
     &__step-num {
         width: 1.5rem;
         height: 1.5rem;
+        flex-shrink: 0;
         display: flex;
         margin-right: 0.25rem;
         justify-content: center; // center horizontally

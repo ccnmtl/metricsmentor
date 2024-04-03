@@ -72,6 +72,29 @@ export const SimulationOne = () => {
                     </div>
                     <div className='simulation__step-body'>
                         <header className='simulation__step-header'>
+                            <h2>Simulation 1</h2>
+                        </header>
+                        <div className='simulation__step-content'>
+                            <p>
+                                In this module, we revisit hypothesis testing
+                                and p-values, concepts you learned in your
+                                prerequisite Statistics course. Through the use
+                                of generated data, you will have the opportunity
+                                to review the methodology involved in hypothesis
+                                testing, including the interpretation of
+                                p-values and critical values.
+                            </p>
+                        </div>
+                    </div>
+                </div> {/* div class=simulation__step-container */}
+                <div className='simulation__step-container d-flex'>
+                    <div className='simulation__step-num'>
+                        &bull;
+                    </div>
+                    <div className='simulation__step-toggle--down'>
+                    </div>
+                    <div className='simulation__step-body'>
+                        <header className='simulation__step-header'>
                             <h2>Graph seeding</h2>
                         </header>
                         <div className='simulation__step-content'>
