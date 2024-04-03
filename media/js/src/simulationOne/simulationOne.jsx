@@ -57,9 +57,9 @@ export const SimulationOne = () => {
         setHypothesizedSlope(parseFloat(e.target.value));
     };
 
-    const tvalue = (slope - hypothesizedSlope / stderror).toFixed(3);
+    const tvalue = ((slope - hypothesizedSlope) / stderror).toFixed(3);
     const tEquation =
-    't = \\frac{\\hat{\\beta}_1 - \\beta_1}{SE(\\hat{\\beta_1})}';
+    't = \\cfrac{\\hat{\\beta}_1 - \\beta_1}{SE(\\hat{\\beta_1})}';
 
     return (
         <div className='simulation'>
@@ -153,7 +153,10 @@ export const SimulationOne = () => {
                                         } />
                                     </div>
                                     <div className='row'>
-                                        y = {intercept.toFixed(2)} + {slope.toFixed(3)}x {/* eslint-disable-line max-len */}
+                                        <Katex tex={
+                                        // eslint-disable-next-line max-len
+                                            `y = ${intercept.toFixed(2)} + ${slope.toFixed(3)}x`
+                                        } />
                                     </div>
                                     <div className='row'>
                                         <label>
@@ -204,10 +207,16 @@ export const SimulationOne = () => {
                                             value={hypothesizedSlope}
                                             onChange={handleNullHypothesis} />
                                     </div>
-                                    <div className='row'>
+                                    <div className='row my-3'>
                                         <Katex tex={tEquation} />
                                     </div>
                                     <div className='row'>
+                                        <div className='input-group my-3'>
+                                            <Katex tex={
+                                            // eslint-disable-next-line max-len
+                                                `t = \\cfrac{${slope.toFixed(3)} - ${hypothesizedSlope}}{${stderror.toFixed(3)}} = ${tvalue}`
+                                            } />
+                                        </div>
                                         <div className='input-group mb-3'>
                                                 t =
                                             <input type='text'
