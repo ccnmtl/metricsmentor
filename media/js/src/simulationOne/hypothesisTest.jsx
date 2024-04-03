@@ -12,6 +12,8 @@ export const HypothesisTest = ({
     let hypothesis;
     let hypothesisTest;
 
+    const nullHypothesis = `\\Eta_0: {\\beta_1} = ${hypothesizedSlope}`;
+
     switch (selectedOption) {
     case 'A':
         hypothesis = `\\Eta_1: {\\beta_1}{\\neq } ${hypothesizedSlope}`;
@@ -53,9 +55,9 @@ export const HypothesisTest = ({
     };
     let pvalue;
     if (pvalues) {
-        pvalue = pvalues[hypothesisTest];
+        pvalue = pvalues[hypothesisTest].toFixed(4);
     }
-
+    // console.log(pvalue);
     useEffect(() => {
         calculatePvalue();
     }, []);
@@ -63,7 +65,7 @@ export const HypothesisTest = ({
     return (
         <div className='choosing-alpha border border-primary p-3'>
             <div>
-                <Katex tex={`{\\Eta_0} : {\\beta_1} = ${hypothesizedSlope}`} />
+                <Katex tex={nullHypothesis} />
             </div>
             <div><Katex tex={hypothesis} /></div>
             <div>r: {appRvalue.toFixed(3)}</div>
@@ -112,9 +114,10 @@ export const HypothesisTest = ({
                     hypothesisTest={hypothesisTest}
                     appRvalue={appRvalue}
                     tvalue={tvalue}
-                    pvalue={pvalue}
+                    pvalue={parseFloat(pvalue)}
                     alpha={alpha}
                     hypothesis={hypothesis}
+                    nullHypothesis={nullHypothesis}
                 />
             )}
         </div>//choosing-alpha

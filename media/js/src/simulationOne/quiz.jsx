@@ -3,7 +3,8 @@ import PropTypes from 'prop-types';
 import { Katex } from '../katexComponent';
 
 export const Quiz = ({
-    appRvalue, tvalue, pvalue, alpha, hypothesisTest, hypothesis
+    appRvalue, tvalue, pvalue, alpha, hypothesisTest, hypothesis,
+    nullHypothesis
 }) => {
 
     const [userPvalue, setUserPvalue] = useState('');
@@ -27,9 +28,9 @@ export const Quiz = ({
     };
 
     const validateComparison = (value) => {
-        if (value === 'greaterThan' && userPvalue > alpha) {
+        if ((value === 'greaterThan') && (pvalue > alpha)) {
             setIsCorrect(true);
-        } else if (value === 'lessThan' && userPvalue < alpha) {
+        } else if ((value === 'lessThan') && (pvalue < alpha)) {
             setIsCorrect(true);
         } else {
             setIsCorrect(false);
@@ -96,7 +97,7 @@ export const Quiz = ({
 
             {isCorrect && (
                 <div className='p-val-concl border border-info p-3 mt-3'>
-                    <Katex tex={'\\beta_1 = 0'} />
+                    <Katex tex={nullHypothesis} />
                     <Katex tex={hypothesis} />
                     <div>
                         <input
@@ -108,7 +109,7 @@ export const Quiz = ({
                             onChange={handleDecisionChange}
                         />
                         <label htmlFor='rejectHypothesis'>
-                            Reject Hypothesis</label>
+                            Reject the Null Hypothesis</label>
                     </div>
                     <div>
                         <input
@@ -120,7 +121,7 @@ export const Quiz = ({
                             onChange={handleDecisionChange}
                         />
                         <label htmlFor='failToRejectHypothesis'>
-                            Fail to Reject Hypothesis</label>
+                            Fail to Reject the Null Hypothesis</label>
                     </div>
                 </div>
             )}
@@ -130,9 +131,10 @@ export const Quiz = ({
 
 Quiz.propTypes = {
     appRvalue: PropTypes.number.isRequired,
-    tvalue: PropTypes.string.isRequired,
+    tvalue: PropTypes.number.isRequired,
     pvalue: PropTypes.number.isRequired,
     alpha: PropTypes.number.isRequired,
     hypothesisTest: PropTypes.string.isRequired,
-    hypothesis: PropTypes.string.isRequired
+    hypothesis: PropTypes.string.isRequired,
+    nullHypothesis: PropTypes.string.isRequired,
 };
