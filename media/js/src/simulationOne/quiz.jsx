@@ -12,9 +12,24 @@ export const Quiz = ({
     const [isCorrect, setIsCorrect] = useState(false);
     const [decision, setDecision] = useState(null);
 
-    const handleUserPvalueChange = (event) => {
-        const newValue = parseFloat(event.target.value);
-        setUserPvalue(newValue);
+
+    const handleUserPvalueChange = (e) => {
+        // Allow number and decimal point
+        const value = e.target.value.replace(/[^\d.-]/g, '');
+
+        // Make sure there is only one decimal point
+        const decimalCount = value.split('.').length - 1;
+        if (decimalCount > 1) return;
+
+        // Check that the negative is at the beginning of the number
+        const negativeCount = value.split('-').length - 1;
+        if (negativeCount > 1 ||
+            (negativeCount === 1 && value.indexOf('-') !== 0))
+        {
+            return;
+        }
+
+        setUserPvalue(value);
     };
 
     const handleComparisonChange = (event) => {
@@ -37,7 +52,7 @@ export const Quiz = ({
         }
     };
 
-    const pvaluecheck = userPvalue === pvalue;
+    const pvaluecheck = parseFloat(userPvalue) === pvalue;
 
     return (
         <div className='solving-p-set border border-primary p-3 mt-3'>
@@ -50,6 +65,7 @@ export const Quiz = ({
                         type='text'
                         id='pValue'
                         value={userPvalue}
+                        disabled={pvaluecheck}
                         onChange={handleUserPvalueChange}
                         style={{border: pvaluecheck ? '2px solid green'
                             : '2px solid red'}}
