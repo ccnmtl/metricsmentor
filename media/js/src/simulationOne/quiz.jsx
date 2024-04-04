@@ -9,8 +9,9 @@ export const Quiz = ({
 
     const [userPvalue, setUserPvalue] = useState('');
     const [comparison, setComparison] = useState(null);
-    const [isCorrect, setIsCorrect] = useState(false);
+    const [isCorrect, setIsCorrect] = useState(null);
     const [decision, setDecision] = useState(null);
+    const [evaluation, setEvaluation] = useState(null);
 
 
     const handleUserPvalueChange = (e) => {
@@ -40,16 +41,19 @@ export const Quiz = ({
 
     const handleDecisionChange = (event) => {
         setDecision(event.target.value);
+        validateDecision(event.target.value);
     };
 
     const validateComparison = (value) => {
-        if ((value === 'greaterThan') && (pvalue > alpha)) {
-            setIsCorrect(true);
-        } else if ((value === 'lessThan') && (pvalue < alpha)) {
-            setIsCorrect(true);
-        } else {
-            setIsCorrect(false);
-        }
+        setIsCorrect(value === (pvalue < alpha ? 'lessThan' : 'greaterThan'));
+    };
+
+    const validateDecision = (value) => {
+        const correctDecision =
+        (pvalue < alpha && value === 'reject') ||
+                    (pvalue > alpha && value === 'failToReject');
+
+        setEvaluation((correctDecision ? 'correct' : 'incorrect'));
     };
 
     const pvaluecheck = parseFloat(userPvalue) === pvalue;
@@ -81,15 +85,12 @@ export const Quiz = ({
                             id='pGreaterThanAlpha'
                             name='comparison'
                             value='greaterThan'
+                            disabled={isCorrect}
                             checked={comparison === 'greaterThan'}
                             onChange={handleComparisonChange}
                         />
                         <label htmlFor='pGreaterThanAlpha'>
                         p &gt; alpha
-                            {comparison === 'greaterThan' && !isCorrect &&
-
-                            <span style={{ color: 'red' }}>Incorrect</span>
-                            }
                         </label>
                     </div>
                     <div>
@@ -98,17 +99,25 @@ export const Quiz = ({
                             id='pLessThanAlpha'
                             name='comparison'
                             value='lessThan'
+                            disabled={isCorrect}
                             checked={comparison === 'lessThan'}
                             onChange={handleComparisonChange}
                         />
                         <label htmlFor='pLessThanAlpha'>p &lt; alpha
-                            {comparison === 'lessThan' && !isCorrect &&
-
-                            <span style={{ color: 'red' }}>Incorrect</span>
-                            }
                         </label>
                     </div>
                 </div>//compare-p-to-alpha
+            )}
+            {isCorrect && (
+                <div>
+                    <span style={{ color: 'green' }}>Correct</span>
+                </div>
+            )}
+
+            {!isCorrect && isCorrect !== null && (
+                <div>
+                    <span style={{ color: 'red' }}>Incorrect</span>
+                </div>
             )}
 
             {isCorrect && (
@@ -121,6 +130,7 @@ export const Quiz = ({
                             id='rejectHypothesis'
                             name='decision'
                             value='reject'
+                            disabled={evaluation === 'correct'}
                             checked={decision === 'reject'}
                             onChange={handleDecisionChange}
                         />
@@ -133,12 +143,22 @@ export const Quiz = ({
                             id='failToRejectHypothesis'
                             name='decision'
                             value='failToReject'
+                            disabled={evaluation === 'correct'}
                             checked={decision === 'failToReject'}
                             onChange={handleDecisionChange}
                         />
                         <label htmlFor='failToRejectHypothesis'>
                             Fail to Reject the Null Hypothesis</label>
                     </div>
+                    {evaluation && (
+                        <div>
+                            {evaluation === 'correct' ? (
+                                <span style={{ color: 'green' }}>Correct</span>
+                            ) : (
+                                <span style={{ color: 'red' }}>Incorrect</span>
+                            )}
+                        </div>
+                    )}
                 </div>
             )}
         </div>//solving-p-set
