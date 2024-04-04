@@ -1,4 +1,5 @@
 .loginbox {
+    margin-top: 1rem;
     &__body {
         .form-label {
             background-color: inherit;
@@ -17,5 +18,8 @@
             border: 0.0625rem solid $gray-md-600;
             border-radius: $radius-sm;
         }
+    }
+    @include media-breakpoint-up(lg) {
+        margin-top: 0;
     }
 }
