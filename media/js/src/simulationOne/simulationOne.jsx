@@ -72,7 +72,14 @@ export const SimulationOne = () => {
                     </div>
                     <div className='simulation__step-body'>
                         <header className='simulation__step-header'>
-                            <h2>Simulation 1</h2>
+                            <h2 className='h2-primary'>
+                                <span className='h2-secondary d-block'>
+                                    Simulation 1</span>
+                                <span className='h2-title d-block'>
+                                    {/* eslint-disable-next-line max-len */}
+                                    {'Hypothesis Testing for Population Slope'}
+                                </span>
+                            </h2>
                         </header>
                         <div className='simulation__step-content'>
                             <p>
@@ -95,15 +102,20 @@ export const SimulationOne = () => {
                     </div>
                     <div className='simulation__step-body'>
                         <header className='simulation__step-header'>
-                            <h2>Graph seeding</h2>
+                            <h2 className='h2-primary'>Graph seeding</h2>
                         </header>
                         <div className='simulation__step-content'>
-                            <label> Seed ID:
-                                <input type='text'
-                                    value={seed} disabled={startQuiz}
-                                    className='ms-1 mt-2' size='10'
-                                    onChange={handleSeedChange} />
-                            </label>
+                            <p>
+                                Let’s start by setting up the graph.
+                                You can set the sample
+                                size, <span className='katex'>
+                                    <span className='mathnormal'>n</span>
+                                </span>,
+                                and the estimated correlation
+                                coefficient, <span className='katex'>
+                                    <span className='mathnormal'>corr()</span>
+                                </span>, to generate the data.
+                            </p>
                             <label className='fst-italic mt-2 d-block'> n:
                                 <input type='number' min='50' max='500'
                                     className='ms-2 mt-2' disabled={startQuiz}
@@ -130,6 +142,12 @@ export const SimulationOne = () => {
                                     </div>
                                 </>
                             )}
+                            <label className='dev-only'> Seed ID:
+                                <input type='text'
+                                    value={seed} disabled={startQuiz}
+                                    className='ms-1 mt-2 dev-only' size='10'
+                                    onChange={handleSeedChange} />
+                            </label>
                         </div>
                     </div>
                 </div> {/* div class=simulation__step-container */}
@@ -143,7 +161,8 @@ export const SimulationOne = () => {
                             </div>
                             <div className='simulation__step-body'>
                                 <header className='simulation__step-header'>
-                                    <h2>Graph Coefficients</h2>
+                                    <h2 className='h2-primary'>
+                                        Graph Coefficients</h2>
                                 </header>
                                 <div className='simulation__step-content'>
                                     <div className='row'>
@@ -192,7 +211,8 @@ export const SimulationOne = () => {
                             </div>
                             <div className='simulation__step-body'>
                                 <header className='simulation__step-header'>
-                                    <h2>Null hypothesis</h2>
+                                    <h2 className='h2-primary'>
+                                        Null hypothesis</h2>
                                 </header>
                                 <div className='simulation__step-content'>
                                     <div className='row'>
