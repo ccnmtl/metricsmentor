@@ -8,7 +8,8 @@ export const HypothesisTest = ({
     selectedOption, appRvalue, tvalue, hypothesizedSlope, n
 }) => {
     const [pvalues, setPvalues] = useState(null);
-
+    const [alpha, setAlpha] = useState(null);
+    const [alphaSelected, setAlphaSelected] = useState(false);
     let hypothesis;
     let hypothesisTest;
 
@@ -17,22 +18,19 @@ export const HypothesisTest = ({
     switch (selectedOption) {
     case 'A':
         hypothesis = `\\Eta_1: {\\beta_1}{\\neq } ${hypothesizedSlope}`;
-        hypothesisTest = 'p_value_two_sided';
+        hypothesisTest = 'value_two_sided';
         break;
     case 'B':
         hypothesis = `\\Eta_1: {\\beta_1}{\\gt} ${hypothesizedSlope}`;
-        hypothesisTest = 'p_value_right';
+        hypothesisTest = 'value_right';
         break;
     case 'C':
         hypothesis =  `\\Eta_1: {\\beta_1}{\\lt} ${hypothesizedSlope}`;
-        hypothesisTest = 'p_value_left';
+        hypothesisTest = 'value_left';
         break;
     default:
         hypothesis = '';
     }
-
-    const [alpha, setAlpha] = useState(null);
-    const [alphaSelected, setAlphaSelected] = useState(false);
 
     const handleAlphaChange = (event) => {
         const newAlpha = parseFloat(event.target.value);
@@ -57,7 +55,7 @@ export const HypothesisTest = ({
     if (pvalues) {
         pvalue = pvalues[hypothesisTest].toFixed(4);
     }
-    // console.log(pvalue);
+
     useEffect(() => {
         calculatePvalue();
     }, []);
@@ -129,6 +127,7 @@ export const HypothesisTest = ({
                                 alpha={alpha}
                                 hypothesis={hypothesis}
                                 nullHypothesis={nullHypothesis}
+                                n={n}
                             />
                         )}
                     </div>
