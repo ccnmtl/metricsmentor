@@ -8,14 +8,14 @@
     <header class="main-banner banner-hero d-flex align-items-center justify-content-center">
         <div class="container row">
             <h1 class="col-12 col-lg-8 align-self-center">
-                <span class="main-banner__title banner-hero__title">Descriptive Tagline</span>
-                <span class="main-banner__text banner-hero__text primary-text">A short, informational blurb, or a pithy teaser of the application</span>
+                <span class="main-banner__title banner-hero__title">Metrics Mentor</span>
+                <span class="main-banner__text banner-hero__text primary-text">A self-guided, interactive platform for learning econometrics through simulations</span>
             </h1>
             <section class="col-12 col-lg-4 loginbox row">
                 <div class="loginbox__body col-4 col-lg-12">
                     <form class="text-center" method="get" action="/cas/login">
                         <input type="hidden" name="next" value="/" />
-                        <input class="btn btn-primary" type="submit" value="Sign in with Columbia UNI" />
+                        <button type="submit">Sign in with Columbia UNI</button>
                         <p class="small mt-2 mb-0"><a href="https://cuit.columbia.edu/cuit/manage-my-uni" title="Learn more about UNI" target="_blank">What is a UNI?</a></p>
                     </form>
                 </div>
@@ -42,20 +42,20 @@
                                         class="form-control">
                             </div>
                         </div>
-                        <input id="guest-login"
-                            class="btn btn-primary"
+                        <button id="guest-login"
                             type="button"
-                            value="Sign in as Guest"
                             {% if form.errors %}style="display: none"{% endif %}
-                            onclick="jQuery('.login-local-form').show(); jQuery('.login-local-form-cancel').show(); jQuery(this).hide(); return false;"/>
-                        <input
-                            class="btn btn-primary login-local-form"
-                            type="submit"
-                            value="Log In"
-                            {% if not form.errors %}style="display: none;"{% endif %} />
+                            onclick="jQuery('.login-local-form').show(); jQuery('.login-local-form-cancel').show(); jQuery(this).hide(); return false;">
+                            Sign in as Guest
+                        </button>
                         <button
-                            class="btn btn-link login-local-form-cancel"
-                            type="button"
+                            class="login-local-form"
+                            type="submit"
+                            {% if not form.errors %}style="display: none;"{% endif %} >
+                            Log In
+                        </button>
+                        <button
+                            class="login-local-form-cancel"
                             {% if not form.errors %}style="display: none;"{% endif %}
                             onclick="jQuery('.login-local-form').hide(); jQuery('#guest-login').show(); jQuery(this).hide(); return false;">Cancel</button>
                         <input type="hidden" name="next" value="{{ next|urlencode }}" />
@@ -80,18 +80,18 @@
     <section class="section-homepage section--feature row">
             <div class="col-lg-4 px-lg-5 pb-5 pb-lg-0">
             <svg class="bd-placeholder-img rounded" width="140" height="140" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="var(--bs-secondary-color)"/></svg>
-            <h2 class="pt-3">Feature 1</h2>
-            <p>Some representative placeholder content for the three columns of text below the banner. This is the first column.</p>
+            <h2 class="pt-3">Visual</h2>
+            <p>Students can visually explore different scenarios in regression analysis.</p>
             </div><!-- /.col-lg-4 -->
             <div class="col-lg-4 px-lg-5 pb-5 pb-lg-0">
             <svg class="bd-placeholder-img rounded" width="140" height="140" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="var(--bs-secondary-color)"/></svg>
-            <h2 class="pt-3">Feature 2</h2>
-            <p>Another exciting bit of representative placeholder content. This time, we've moved on to the second column.</p>
+            <h2 class="pt-3">Graphical</h2>
+            <p>Students can explore 2D and 3D graphs of endogeneity and standard error problems.</p>
             </div><!-- /.col-lg-4 -->
             <div class="col-lg-4 px-lg-5 pb-5 pb-lg-0">
             <svg class="bd-placeholder-img rounded" width="140" height="140" xmlns="http://www.w3.org/2000/svg" role="img" aria-label="Placeholder" preserveAspectRatio="xMidYMid slice" focusable="false"><title>Placeholder</title><rect width="100%" height="100%" fill="var(--bs-secondary-color)"/></svg>
-            <h2 class="pt-3">Feature 3</h2>
-            <p>And lastly this, the third column of representative placeholder content.</p>
+            <h2 class="pt-3">Interactive</h2>
+            <p>Students can change parameters to explore different results.</p>
             </div><!-- /.col-lg-4 -->
     </section>
     

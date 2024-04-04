@@ -1,0 +1,23 @@
+.loginbox {
+    button {
+        @extend .btn;
+        @extend .btn-primary;
+        white-space: nowrap;
+        padding: $btn-padding-y-sm $btn-padding-x-sm;
+        @include media-breakpoint-up(md) {
+            padding: $btn-padding-y $btn-padding-x;
+        }
+    }
+}
+.loginbox .login-local-form-cancel {
+    @extend .btn;
+    @extend .btn-link;
+    white-space: nowrap;
+    padding: $btn-padding-y-sm $btn-padding-x-sm;
+    &:hover {
+        @extend .btn-link;
+    }
+    @include media-breakpoint-up(md) {
+        padding: $btn-padding-y $btn-padding-x;
+    }
+}

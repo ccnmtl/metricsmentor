@@ -4,9 +4,7 @@
     background-color: $gray-md-300;
     background: url('/media/img/bg-banner1.jpg');
     background-repeat: no-repeat;
-    background-size: 150%;
     background-position: bottom -6rem left 0;
-    color: $gray-md-600;
     @include media-breakpoint-up(md) {
         background-size: cover;
         background-position: bottom -5rem left 0;
@@ -21,20 +19,14 @@
         display: block;
         text-shadow: 0 2px 4px rgba(0,0,0,.2), 0 4px 5px rgba(0,0,0,.14), 0 1px 10px rgba(0,0,0,.12);
         margin: 0.25rem 0;
-        font-weight: 600;
     }
     &__subhead {
         display: block;
-        font-size: 1rem;
         text-shadow: 0 2px 4px rgba(0,0,0,.2), 0 4px 5px rgba(0,0,0,.14), 0 1px 10px rgba(0,0,0,.12);
     }
     &__text {
         display: block;
-        font-size: 1rem;
         text-shadow: 0 2px 4px rgba(0,0,0,.2), 0 4px 5px rgba(0,0,0,.14), 0 1px 10px rgba(0,0,0,.12);
-        @include media-breakpoint-up(md) {
-            font-size: 1.25rem;
-        }
     }
     &__avatar {
         display: block;
@@ -70,7 +62,6 @@
 .banner-hero {
     min-height: 10rem;
     position: relative;
-    color: $gray-md-900;
     background-position: bottom -5rem left 0;
     @include media-breakpoint-up(md) {
         min-height: 16rem;
@@ -94,32 +85,10 @@
         }
     }
     &__title {
-        font-size: 2.125rem;
-        font-weight: 500;
         text-shadow: 0 2px 5px rgba(0,0,0,.14), 0 1px 5px rgba(0,0,0,.12), 0 2px 4px rgba(0,0,0,.12);
-        @include media-breakpoint-up(md) {
-            font-size: 2.75rem;
-        }
-        @include media-breakpoint-up(lg) {
-            font-size: 3.125rem;
-        }
-        @include media-breakpoint-up(xl) {
-            font-size: 4rem;
-        }
     }
     &__text {
-        font-size: 1.125rem;
-        font-weight: 400;
         text-shadow: 0 2px 5px rgba(0,0,0,.14), 0 1px 5px rgba(0,0,0,.12), 0 2px 4px rgba(0,0,0,.12);
-        @include media-breakpoint-up(md) {
-            font-size: 1.4rem;
-        }
-        @include media-breakpoint-up(lg) {
-            font-size: 1.75rem;
-        }
-        @include media-breakpoint-up(xl) {
-            font-size: 2rem;
-        }
     }
     &__avatar {
         width: 4.5rem;

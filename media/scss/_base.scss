@@ -26,3 +26,25 @@ main {
     margin-bottom: 3rem !important;
     font-size: 1.125rem;
 }
+
+.viewport-test {
+    font-size: 0.75rem;
+    margin: 0;
+    padding: 0;
+    position: fixed;
+    top: calc(100vh/2 - 5rem);
+    right: 0;
+    z-index: 1000;
+    ul {
+        width: 7.5rem;
+        background-color: $warning;
+        transform: rotate(-90deg);
+        list-style-type: none;
+        margin: 0 -2.5rem 0 0;
+        padding: 0.25rem;
+        li {
+            text-align: center;
+        }
+        text-align: center;
+    }
+}
