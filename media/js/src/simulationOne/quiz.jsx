@@ -5,13 +5,13 @@ import axios from 'axios';
 
 export const Quiz = ({
     appRvalue, tvalue, pvalue, alpha, hypothesisTest, hypothesis,
-    nullHypothesis, n
+    nullHypothesis, n, onComplete, completedChoices
 }) => {
 
     const [criticalValues, setCriticalValues] = useState(null);
     const [userPvalue, setUserPvalue] = useState('');
     const [pvalueComparison, setPvalueComparison] = useState(null);
-    const [isPvalCorrect, setIsPvalCorrect] = useState(null);
+    const [isPvalCompareCorrect, setIsPvalCompareCorrect] = useState(null);
     // eslint-disable-next-line max-len
     const [nullHypothesisChoice1, setNullHypothesisChoice1] = useState(null);
     const [nullHypothesisChoice2, setNullHypothesisChoice2] = useState(null);
@@ -24,43 +24,14 @@ export const Quiz = ({
     // eslint-disable-next-line max-len
     const [isCriticalCompareCorrect, setIsCriticalCompareCorrect] = useState(null);
     const [isCriticalValueCorrect, setIsCriticalValueCorrect] = useState(null);
+    const [isPvalueCorrect, setIsPvalueCorrect] = useState(null);
 
-    const calculateCriticalValue = async() => {
 
-        try {
-            const response = await axios.post('/calculate_critical/',
-                {n, alpha});
-
-            setCriticalValues(response.data);
-
-        } catch (error) {
-            console.error('Error calculating pvalue:', error);
-        }
-    };
-    let criticalValue;
-    if (criticalValues) {
-        criticalValue = criticalValues[hypothesisTest];
-    }
     useEffect(() => {
         calculateCriticalValue();
     }, []);
 
-
-    const handleComparingCritical = (event) => {
-        const newValue = event.target.value;
-        setCompareCritical(newValue);
-        validateCriticalComparison(newValue);
-    };
-
-    const validateCriticalComparison = (value) => {
-        const correctComparison =
-        (Math.abs(tvalue) > criticalValue && value === 'greaterThan') ||
-        (Math.abs(tvalue) <= criticalValue && value === 'lessThan');
-
-        setIsCriticalCompareCorrect(correctComparison);
-    };
-
-
+    // P-Value Logic
     const handleUserPvalueChange = (e) => {
         // Allow number and decimal point
         const value = e.target.value.replace(/[^\d.-]/g, '');
@@ -78,6 +49,7 @@ export const Quiz = ({
         }
 
         setUserPvalue(value);
+        validatePvalue(value);
     };
 
     const handlePvalueComparisonChange = (event) => {
@@ -86,15 +58,48 @@ export const Quiz = ({
         validatePvalueComparison(newValue);
     };
 
+    const validatePvalueComparison = (value) => {
+        setIsPvalCompareCorrect(
+            value === (pvalue < alpha ? 'lessThan' : 'greaterThan')
+        );
+    };
+
+    const validatePvalue = (value) => {
+        setIsPvalueCorrect(parseFloat(value) === pvalue);
+    };
+
     const handleNullHypothesisChoice1Change = (event) => {
         setNullHypothesisChoice1(event.target.value);
         validateHypothesisTest1(event.target.value);
     };
 
-    const handleNullHypothesisChoice2Change = (event) => {
-        setNullHypothesisChoice2(event.target.value);
-        validateHypothesisTest2(event.target.value);
+    const validateHypothesisTest1 = (value) => {
+        const correctDecision =
+        (pvalue < alpha && value === 'reject') ||
+                    (pvalue > alpha && value === 'failToReject');
+
+        setHypothesisTest1validate((correctDecision));
     };
+
+
+    // Critical Value Logic
+    const calculateCriticalValue = async() => {
+
+        try {
+            const response = await axios.post('/calculate_critical/',
+                {n, alpha});
+
+            setCriticalValues(response.data);
+
+        } catch (error) {
+            console.error('Error calculating pvalue:', error);
+        }
+    };
+
+    let criticalValue;
+    if (criticalValues) {
+        criticalValue = criticalValues[hypothesisTest];
+    }
 
     const handleUserCriticalvalueChange = (e) => {
         // Allow number and decimal point
@@ -120,18 +125,24 @@ export const Quiz = ({
     const validateCriticalValue = (value) => {
         setIsCriticalValueCorrect(parseFloat(value) === criticalValue);
     };
-    const validatePvalueComparison = (value) => {
-        setIsPvalCorrect(
-            value === (pvalue < alpha ? 'lessThan' : 'greaterThan')
-        );
+
+    const handleComparingCritical = (event) => {
+        const newValue = event.target.value;
+        setCompareCritical(newValue);
+        validateCriticalComparison(newValue);
     };
 
-    const validateHypothesisTest1 = (value) => {
-        const correctDecision =
-        (pvalue < alpha && value === 'reject') ||
-                    (pvalue > alpha && value === 'failToReject');
+    const validateCriticalComparison = (value) => {
+        const correctComparison =
+        (Math.abs(tvalue) > criticalValue && value === 'greaterThan') ||
+        (Math.abs(tvalue) <= criticalValue && value === 'lessThan');
 
-        setHypothesisTest1validate((correctDecision));
+        setIsCriticalCompareCorrect(correctComparison);
+    };
+
+    const handleNullHypothesisChoice2Change = (event) => {
+        setNullHypothesisChoice2(event.target.value);
+        validateHypothesisTest2(event.target.value);
     };
 
     const validateHypothesisTest2 = (value) => {
@@ -142,8 +153,6 @@ export const Quiz = ({
         setHypothesisTest2validate(correctDecision);
 
     };
-
-    const pvaluecheck = parseFloat(userPvalue) === pvalue;
 
 
     return (
@@ -158,14 +167,23 @@ export const Quiz = ({
                             type='text'
                             id='pValue'
                             value={userPvalue}
-                            disabled={pvaluecheck}
+                            disabled={isPvalueCorrect}
                             onChange={handleUserPvalueChange}
-                            style={{border: pvaluecheck ? '2px solid green'
-                                : '2px solid red'}}
                         />
                     </div>
                 </div>{/*input-p*/}
-                {pvaluecheck && (
+                {isPvalueCorrect && (
+                    <div>
+                        <span style={{ color: 'green' }}>Correct</span>
+                    </div>
+                )}
+                {!isPvalueCorrect && isPvalueCorrect !== null && (
+                    <div>
+                        <span style={{ color: 'red' }}>Incorrect</span>
+                    </div>
+                )}
+
+                {isPvalueCorrect && (
                     <div className='p-to-alpha border border-warning p-3 mt-3'>
                 Comparing p values to &alpha;:
                         <div>
@@ -174,7 +192,7 @@ export const Quiz = ({
                                 id='pGreaterThanAlpha'
                                 name='comparison'
                                 value='greaterThan'
-                                disabled={isPvalCorrect}
+                                disabled={isPvalCompareCorrect}
                                 checked={pvalueComparison === 'greaterThan'}
                                 onChange={handlePvalueComparisonChange}
                             />
@@ -188,7 +206,7 @@ export const Quiz = ({
                                 id='pLessThanAlpha'
                                 name='comparison'
                                 value='lessThan'
-                                disabled={isPvalCorrect}
+                                disabled={isPvalCompareCorrect}
                                 checked={pvalueComparison === 'lessThan'}
                                 onChange={handlePvalueComparisonChange}
                             />
@@ -197,19 +215,19 @@ export const Quiz = ({
                         </div>
                     </div>//compare-p-to-alpha
                 )}
-                {isPvalCorrect && (
+                {isPvalCompareCorrect && (
                     <div>
                         <span style={{ color: 'green' }}>Correct</span>
                     </div>
                 )}
 
-                {!isPvalCorrect && isPvalCorrect !== null && (
+                {!isPvalCompareCorrect && isPvalCompareCorrect !== null && (
                     <div>
                         <span style={{ color: 'red' }}>Incorrect</span>
                     </div>
                 )}
 
-                {isPvalCorrect && (
+                {isPvalCompareCorrect && (
                     <div className='p-val-concl border border-info p-3 mt-3'>
                         <Katex tex={nullHypothesis} />
                         <Katex tex={hypothesis} />
@@ -268,6 +286,7 @@ export const Quiz = ({
                                 type='text'
                                 id='criticalvalue'
                                 value={userCriticalValue}
+                                disabled={isCriticalValueCorrect}
                                 onChange={handleUserCriticalvalueChange}
                             />
                         </div>
@@ -293,6 +312,7 @@ export const Quiz = ({
                                 id='tGreaterThanCritical'
                                 name='criticalcomparison'
                                 value='greaterThan'
+                                disabled={isCriticalCompareCorrect}
                                 checked={compareCritical === 'greaterThan'}
                                 onChange={handleComparingCritical}
                             />
@@ -305,6 +325,7 @@ export const Quiz = ({
                                 id='tLessThanCritical'
                                 name='criticalcomparison'
                                 value='lessThan'
+                                disabled={isCriticalCompareCorrect}
                                 checked={compareCritical === 'lessThan'}
                                 onChange={handleComparingCritical}
                             />
@@ -360,18 +381,26 @@ export const Quiz = ({
                             Fail to Reject the Null Hypothesis</label>
                         </div>
                         {hypothesisTest2validate && (
-                            <div>
-                                {hypothesisTest2validate ? (
-                                    <span style={{ color: 'green' }}>
+                            <>
+                                <div>
+                                    {hypothesisTest2validate ? (
+                                        <span style={{ color: 'green' }}>
                                         Correct</span>
-                                ) : (
-                                    <span style={{ color: 'red' }}>
+                                    ) : (
+                                        <span style={{ color: 'red' }}>
                                         Incorrect</span>
-                                )}
-                            </div>
+                                    )}
+                                </div>
+                                <button className={
+                                    'btn btn-small btn-secondary mt-3'}
+                                onClick={onComplete}>
+                                    Next
+                                </button>
+                            </>
                         )}
                     </div>
                 )}
+
             </div>
         </>
     );
@@ -386,4 +415,6 @@ Quiz.propTypes = {
     hypothesis: PropTypes.string.isRequired,
     nullHypothesis: PropTypes.string.isRequired,
     n: PropTypes.number.isRequired,
+    onComplete: PropTypes.func.isRequired,
+    completedChoices: PropTypes.array.isRequired,
 };
