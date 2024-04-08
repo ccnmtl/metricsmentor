@@ -25,6 +25,7 @@ from django.views.decorators.csrf import csrf_exempt
 from django.utils.decorators import method_decorator
 from scipy.stats import linregress, t
 import json
+import math
 
 
 class CoursesView(LoginRequiredMixin, TemplateView):
@@ -225,9 +226,32 @@ def calculate_pvalue(request):
         p_value_two_sided = 2 * t.cdf(-abs(t_value), df)
 
         return JsonResponse({
-            'p_value_left': p_value_left,
-            'p_value_right': p_value_right,
-            'p_value_two_sided': p_value_two_sided
+            'value_left': p_value_left,
+            'value_right': p_value_right,
+            'value_two_sided': p_value_two_sided
+        })
+
+    return JsonResponse({'error': 'Invalid data or method.'}, status=400)
+
+
+@csrf_exempt
+def calculate_critical_value(request):
+    if request.method == 'POST':
+        data = json.loads(request.body.decode('utf-8'))
+        alpha = data.get('alpha')  # Significance level
+
+        # Calculate critical values
+        critical_value_left = -1.28 if math.isclose(alpha, 0.10) else (
+            -1.64 if math.isclose(alpha, 0.05) else -2.33)
+        critical_value_right = 1.28 if math.isclose(alpha, 0.10) else (
+            1.64 if math.isclose(alpha, 0.05) else 2.33)
+        critical_value_two_sided = 1.64 if math.isclose(alpha, 0.10) else (
+            1.96 if math.isclose(alpha, 0.05) else 2.58)
+
+        return JsonResponse({
+            'value_left': critical_value_left,
+            'value_right': critical_value_right,
+            'value_two_sided': critical_value_two_sided,
         })
 
     return JsonResponse({'error': 'Invalid data or method.'}, status=400)
