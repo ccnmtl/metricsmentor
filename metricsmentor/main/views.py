@@ -25,6 +25,7 @@ from django.views.decorators.csrf import csrf_exempt
 from django.utils.decorators import method_decorator
 from scipy.stats import linregress, t
 import json
+import math
 
 
 class CoursesView(LoginRequiredMixin, TemplateView):
@@ -240,12 +241,12 @@ def calculate_critical_value(request):
         alpha = data.get('alpha')  # Significance level
 
         # Calculate critical values
-        critical_value_left = -1.28 if alpha == 0.10 else (
-            -1.64 if alpha == 0.05 else -2.33)
-        critical_value_right = 1.28 if alpha == 0.10 else (
-            1.64 if alpha == 0.05 else 2.33)
-        critical_value_two_sided = 1.64 if alpha == 0.10 else (
-            1.96 if alpha == 0.05 else 2.58)
+        critical_value_left = -1.28 if math.isclose(alpha, 0.10) else (
+            -1.64 if math.isclose(alpha, 0.05) else -2.33)
+        critical_value_right = 1.28 if math.isclose(alpha, 0.10) else (
+            1.64 if math.isclose(alpha, 0.05) else 2.33)
+        critical_value_two_sided = 1.64 if math.isclose(alpha, 0.10) else (
+            1.96 if math.isclose(alpha, 0.05) else 2.58)
 
         return JsonResponse({
             'value_left': critical_value_left,
