@@ -21,7 +21,7 @@ export const SimulationOneQuiz = ({
                 <div className='simulation__step-toggle--down'></div>
                 <div className='simulation__step-body'>
                     <header className='simulation__step-header'>
-                        <h2>Alternate hypothesis</h2>
+                        <h2 className='h2-primary'>Alternate hypothesis</h2>
                     </header>
                     <div className='simulation__step-content'>
                         <div className='ms-2 mt-2'>
