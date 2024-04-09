@@ -5,7 +5,8 @@ import { Quiz } from './quiz';
 import axios from 'axios';
 
 export const HypothesisTest = ({
-    selectedOption, appRvalue, tvalue, hypothesizedSlope, n
+    selectedOption, appRvalue, tvalue, hypothesizedSlope, n, onComplete,
+    completedChoices
 }) => {
     const [pvalues, setPvalues] = useState(null);
     const [alpha, setAlpha] = useState(null);
@@ -128,6 +129,8 @@ export const HypothesisTest = ({
                                 hypothesis={hypothesis}
                                 nullHypothesis={nullHypothesis}
                                 n={n}
+                                onComplete={onComplete}
+                                completedChoices={completedChoices}
                             />
                         )}
                     </div>
@@ -144,4 +147,6 @@ HypothesisTest.propTypes = {
     coursePK: PropTypes.number,
     hypothesizedSlope: PropTypes.any.isRequired,
     n: PropTypes.number.isRequired,
+    onComplete: PropTypes.func.isRequired,
+    completedChoices: PropTypes.array.isRequired,
 };

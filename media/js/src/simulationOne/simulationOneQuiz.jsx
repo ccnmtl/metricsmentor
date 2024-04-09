@@ -1,16 +1,22 @@
-import React, {useState, useEffect} from 'react';
+import React, { useState } from 'react';
 import { Katex } from '../katexComponent';
 import { HypothesisTest } from './hypothesisTest';
+import { MultipleChoiceQuestion } from './multipleChoiceQuestion';
 import PropTypes from 'prop-types';
 
 export const SimulationOneQuiz = ({
     appRvalue, tvalue, hypothesizedSlope, n
 }) => {
     const [selectedOption, setSelectedOption] = useState(null);
+    const [completedChoices, setCompletedChoices] = useState([]);
 
-    useEffect(() => {
+    const handleChoiceCompletion = () => {
+        setCompletedChoices([...completedChoices, selectedOption]);
+        setSelectedOption(null);
+    };
 
-    }, [appRvalue, tvalue]);
+    const allChoicesCompleted = ['A', 'B', 'C'].every(
+        choice => completedChoices.includes(choice));
 
     return (
         <>
@@ -30,6 +36,7 @@ export const SimulationOneQuiz = ({
                                 `\\Eta_1: {\\beta_1}{\\neq} ${hypothesizedSlope}`
                             } />
                             <button className='btn btn-sm btn-primary'
+                                disabled={completedChoices.includes('A')}
                                 onClick={() => setSelectedOption('A')}>
                                     Do This
                             </button>
@@ -39,6 +46,7 @@ export const SimulationOneQuiz = ({
                                 `\\Eta_1: {\\beta_1}{\\gt} ${hypothesizedSlope}`
                             } />
                             <button className='btn btn-sm btn-primary'
+                                disabled={completedChoices.includes('B')}
                                 onClick={() => setSelectedOption('B')}>
                                     Do This
                             </button>
@@ -48,6 +56,7 @@ export const SimulationOneQuiz = ({
                                 `\\Eta_1: {\\beta_1}{\\lt} ${hypothesizedSlope}`
                             } />
                             <button className='btn btn-sm btn-primary'
+                                disabled={completedChoices.includes('C')}
                                 onClick={() => setSelectedOption('C')}>
                                     Do This
                             </button>
@@ -62,7 +71,27 @@ export const SimulationOneQuiz = ({
                     hypothesizedSlope={hypothesizedSlope}
                     appRvalue={appRvalue}
                     tvalue={parseFloat(tvalue)}
+                    onComplete={handleChoiceCompletion}
                     n={parseInt(n)}
+                    completedChoices={completedChoices}
+                />
+            )}
+            {allChoicesCompleted && (
+                <MultipleChoiceQuestion
+                    question={'Which of the following is TRUE?'}
+                    options={['The closer the correlation between Y and X1 is '
+                    + 'to one, the more likely it is to reject the null ' +
+                    'hypothesis β1 = 0.', 'The closer the correlation ' +
+                    'between Y and X1 is to negative one, the more likely '
+                    + 'it is to reject the null hypothesis β1 = 0.', 'The '
+                    + 'closer the correlation between Y and X1 is to zero, '
+                    + 'the more likely it is to reject the null hypothesis '
+                    +'β1 = 0.', 'The closer the correlation between Y and X1'
+                    + ' is to zero, the less likely it is to reject the null '
+                    + 'hypothesis β1 = 0.', 'None of the above']}
+                    answer={'The closer the correlation between Y and X1 is '
+                    + 'to zero, the less likely it is to reject the null ' +
+                    'hypothesis β1 = 0.'}
                 />
             )}
         </>
