@@ -26,10 +26,11 @@ export const SimulationOne = () => {
     const saveGraphData = async() => {
         const data = {
             N, correlation, seed, slope, intercept, stderror, appRvalue,
-            coursePk, tvalue, hypothesizedSlope
+            tvalue, hypothesizedSlope
         };
 
-        return authedFetch('/api/save-sim1-graph/', 'POST', {data})
+        return authedFetch(
+            `/course/${coursePk}/api/save-sim1-graph/`, 'POST', {data})
             .then(function(response) {
                 if (response.status === 201) {
                     setStartQuiz(true);

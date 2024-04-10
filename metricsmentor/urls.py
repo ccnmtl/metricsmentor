@@ -47,8 +47,9 @@ urlpatterns = [
          name='calculate_pvalue'),
     path('calculate_critical/', views.calculate_critical_value,
          name='calculate_critical_value'),
-    path('api/save-sim1-graph/', views.SaveSim1GraphView.as_view(),
-         name='save_sim1_graph'),
+    re_path(r'^course/(?P<pk>\d+)/api/save-sim1-graph/$',
+            views.SaveSim1GraphView.as_view(),
+            name='save_sim1_graph'),
 
 ]
 

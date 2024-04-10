@@ -264,12 +264,12 @@ def handler404(request):
 @method_decorator(csrf_exempt, name='dispatch')
 class SaveSim1GraphView(LoggedInCourseMixin, View):
 
-    def post(self, request):
+    def post(self, request, *args, **kwargs):
 
         json_data = json.loads(request.body)
         graph_data = json_data.get('data')
         user = request.user
-        course_pk = graph_data.get('coursePk')
+        course_pk = self.kwargs.get('pk')
         course = Course.objects.get(pk=course_pk)
 
         graph = Graph.objects.create(user=user, simulation=1,
