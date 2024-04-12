@@ -6,7 +6,7 @@ import PropTypes from 'prop-types';
 import { saveAs } from 'file-saver';
 
 export const ScatterPlot = ({ N, correlation, seed, setAppRvalue,
-    setSlope, setIntercept, setStderror
+    setSlope, setIntercept, setStderror, plotType
 }) => {
     const [data, setData] = useState([]);
     const [regressionLine, setRegressionLine] = useState(null);
@@ -20,8 +20,11 @@ export const ScatterPlot = ({ N, correlation, seed, setAppRvalue,
                 const x = Math.round(rng() * 100);
                 const y = Math.round(correlation * x + Math.sqrt(
                     1 - Math.pow(correlation, 2)) * rng() * 100);
+                const z = plotType === '3d'
+                    ? Math.round(rng() * 100)
+                    : undefined;
 
-                generatedData.push({ x, y });
+                generatedData.push({ x, y, z });
             }
         }
 
@@ -85,10 +88,13 @@ export const ScatterPlot = ({ N, correlation, seed, setAppRvalue,
             <Plot
                 data={[
                     {
-                        type: 'scatter',
+                        type: plotType === '3d' ? 'scatter3d' : 'scatter',
                         mode: 'markers',
                         x: data.map(point => point.x),
                         y: data.map(point => point.y),
+                        z: plotType === '3d'
+                            ? data.map(point => point.z)
+                            : undefined,
                         marker: {
                             color: 'teal',
                             size: 10,
@@ -141,4 +147,5 @@ ScatterPlot.propTypes = {
     slope: PropTypes.number,
     stderror: PropTypes.number,
     intercept: PropTypes.number,
+    plotType: PropTypes.oneOf(['2d', '3d']).isRequired,
 };

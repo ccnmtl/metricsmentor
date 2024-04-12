@@ -324,6 +324,7 @@ export const SimulationOne = () => {
                     setIntercept={setIntercept}
                     appRvalue={appRvalue}
                     setAppRvalue={setAppRvalue}
+                    plotType={'2d'}
                 />
                 {slope !== null && (
                     <div className='simulation__graph-summary fs-5'>
