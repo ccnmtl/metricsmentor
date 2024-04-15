@@ -229,8 +229,8 @@ export const SimulationOne = () => {
                                     </span> is the independent, or
                                         explanatory, variable.
                                     </p>
-                                    <h2 className='mt-4'>Sample <span className='katex'> <span className='mathnormal'>y</span> {/* eslint-disable-line max-len */}
-                                    </span>-intercept coefficient:</h2>
+                                    <h2 className='mt-4'>Sample <span className='katex'><span className='mathnormal'>y-intercept</span> {/* eslint-disable-line max-len */}
+                                    </span> coefficient:</h2>
                                     <div className='ms-3'>
                                         <Katex tex={
                                         // eslint-disable-next-line max-len
