@@ -114,7 +114,8 @@ h1, h2, h3, h4, h5, h6 {
             line-height: 1.3;
         }
         .h2-primary {
-            font-size: 1rem;
+            font-size: 1.25rem;
+            font-weight: 500;
         }
         .h2-secondary {
             font-size: 0.8725rem;
@@ -126,8 +127,20 @@ h1, h2, h3, h4, h5, h6 {
             font-size: 1rem;
             line-height: 1.5;
         }
+        h2, .h2 {
+            font-family: $font-family-sans-serif-secondary;
+            font-size: 1.0625rem;
+            line-height: 1.3;
+            font-weight: 400;
+        }
         .dev-only {
             color: $gray-md-400;
         }
+    }
+}
+
+.slider-range__input {
+    .scale-value {
+        line-height: 1;
     }
 }

@@ -107,7 +107,7 @@ export const SimulationOne = () => {
                         </header>
                         <div className='simulation__step-content'>
                             <p>
-                                Let’s start by setting up the graph.
+                                Let&rsquo;s start by setting up the graph.
                                 You can set the sample
                                 size, <span className='katex'>
                                     <span className='mathnormal'>n</span>
@@ -117,38 +117,74 @@ export const SimulationOne = () => {
                                     <span className='mathnormal'>corr()</span>
                                 </span>, to generate the data.
                             </p>
-                            <label className='fst-italic mt-2 d-block'> n:
-                                <input type='number' min='50' max='500'
-                                    className='ms-2 mt-2' disabled={startQuiz}
-                                    value={N} onChange={handleNChange} />
-                            </label>
-                            <div className='mt-2'>
-                                <label htmlFor='correlation'
-                                    className='form-label fst-italic'>
-                                    Estimated r : {correlation}
+                            <div className='mt-4'>
+                                <label htmlFor='nSampleSize'
+                                    className='h2 form-label'>
+                                    Sample size, <span className='katex'>
+                                        <span className='mathnormal'>n</span>
+                                    </span>:
                                 </label>
-                                <input type='range' step='0.01' min='-1'
-                                    max='1' value={correlation}
-                                    className='form-range'
-                                    id='correlation' disabled={startQuiz}
-                                    onChange={handleCorrelationChange} />
+                                <input type='number' min='50' max='500'
+                                    id='nSampleSize'
+                                    className='form-control'
+                                    disabled={startQuiz}
+                                    value={N} onChange={handleNChange} />
+                            </div>
+                            <div className='mt-4'>
+                                <label htmlFor='correlation'
+                                    className='h2 form-label'>
+                                    Estimated correlation
+                                coefficient, <span className='katex'>
+                                        <span
+                                            className='mathnormal'>corr()</span>
+                                    </span>:
+                                </label>
+                                <div className='slider-range__box'>
+                                    <div className='slider-range__input'>
+                                        <input type='range' step='0.01' min='-1'
+                                            max='1' value={correlation}
+                                            className='form-range'
+                                            id='correlation'
+                                            disabled={startQuiz}
+                                            // eslint-disable-next-line max-len
+                                            onChange={handleCorrelationChange} />
+                                        <div className='scale-value katex'>
+                                            <span className='mathnormal'>
+                                                {correlation}
+                                            </span>
+                                        </div>
+                                    </div>
+                                    <div className='slider-range__scale'>
+                                        <div className='unit'></div>
+                                        <div className='unit'></div>
+                                        <div className='unit'></div>
+                                        <div className='unit'></div>
+                                        <div className='unit'></div>
+                                        <div className='unit'></div>
+                                        <div className='unit'></div>
+                                        <div className='unit'></div>
+                                        <div className='unit'></div>
+                                    </div>
+                                </div>
                             </div>
                             {slope !== null && (
                                 <>
-                                    <div className='mt-2'>
-                                        <label className={
-                                            'form-label ' + 'fst-italic'}>
-                                            Calculated r = {appRvalue.toFixed(2)} {/* eslint-disable-line max-len */}
-                                        </label>
+                                    <div className='mt-5 h2'>
+                                        Calculated correlation
+                                        coefficient: <span className='katex'>
+                                            <span className='mathnormal'>{appRvalue.toFixed(2)}</span>{/* eslint-disable-line max-len */}
+                                        </span>:
                                     </div>
                                 </>
                             )}
-                            <label className='dev-only'> Seed ID:
-                                <input type='text'
-                                    value={seed} disabled={startQuiz}
-                                    className='ms-1 mt-2 dev-only' size='10'
-                                    onChange={handleSeedChange} />
-                            </label>
+                            <div className='mt-3'>
+                                <label className='dev-only'> Seed ID:
+                                    <input type='text'
+                                        value={seed} disabled={startQuiz}
+                                        className='ms-1 mt-2 dev-only' size='10'
+                                        onChange={handleSeedChange} />
+                                </label>
+                            </div>
                         </div>
                     </div>
                 </div> {/* div class=simulation__step-container */}
@@ -238,35 +274,6 @@ export const SimulationOne = () => {
                                                 `t = \\cfrac{${slope.toFixed(3)} - ${hypothesizedSlope}}{${stderror.toFixed(3)}} = ${tvalue}`
                                             } />
                                         </div>
-                                        <div className='input-group mb-3'>
-                                                t =
-                                            <input type='text'
-                                                style={{width: '10%'}}
-                                                value={slope.toFixed(3)}
-                                                readOnly
-                                                className='form-control
-                                                    me-1 ms-1
-                                                    form-control-sm box-2' />
-                                                -
-                                            <input type='text'
-                                                style={{width: '10%'}}
-                                                value={hypothesizedSlope}
-                                                readOnly
-                                                className='form-control
-                                                        me-1 ms-1
-                                                form-control-sm box-2' />
-                                                /
-                                            <input type='text'
-                                                style={{width: '10%'}}
-                                                value={stderror.toFixed(3)}
-                                                readOnly
-                                                className='form-control
-                                                    me-1 ms-1
-                                                    form-control-sm box-2' />
-                                        </div>
-                                    </div>
-                                    <div className='row'>
-                                            = {tvalue}
                                     </div>
                                 </div>
                             </div>
