@@ -21,6 +21,10 @@ module.exports = {
                 },
             },
             {
+                test: /\.html$/i,
+                loader: "html-loader",
+              },
+            {
                 test: /\.(jsx|js)$/,
                 include: path.resolve(__dirname, 'media/js/src'),
                 exclude: /node_modules/,
@@ -37,17 +41,9 @@ module.exports = {
             {
                 test: /\.(css|scss)$/,
                 use: [
-                    {
-                        loader: MiniCssExtractPlugin.loader,
-                        options: {
-                            publicPath: '',
-                        }
-                    },
+                    MiniCssExtractPlugin.loader,
                     {
                         loader: 'css-loader',
-                        options: {
-                            sourceMap: true,
-                        }
                     },
                     {
                         loader: 'postcss-loader',
@@ -60,6 +56,7 @@ module.exports = {
                             sourceMap: true,
                         }
                     },
+                    'resolve-url-loader', // resolves relative paths in url() statements
                     {
                         loader: 'sass-loader',
                         options: {
@@ -71,7 +68,8 @@ module.exports = {
             {
                 test: /\.(gif|png|jpe?g|svg)$/i,
                 type: 'asset/resource',
-            }]
+            },
+        ]
     },
 
     plugins: [

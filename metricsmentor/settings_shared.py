@@ -2,6 +2,7 @@
 import os.path
 from ctlsettings.shared import common
 from courseaffils.columbia import CourseStringMapper
+import sys
 
 project = 'metricsmentor'
 base = os.path.dirname(__file__)
@@ -72,3 +73,23 @@ PYLTI_CONFIG = {
 }
 
 COURSEAFFILS_COURSESTRING_MAPPER = CourseStringMapper
+
+
+if 'integrationserver' in sys.argv:
+    SESSION_COOKIE_SECURE = False
+    CSRF_COOKIE_SECURE = False
+    PASSWORD_HASHERS = (
+        'django.contrib.auth.hashers.MD5PasswordHasher',
+    )
+
+    DATABASES = {
+            'default': {
+                'ENGINE': 'django.db.backends.sqlite3',
+                'NAME': ':memory:',
+                'HOST': '',
+                'PORT': '',
+                'USER': '',
+                'PASSWORD': '',
+                'ATOMIC_REQUESTS': True,
+            }
+        }

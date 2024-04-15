@@ -18,7 +18,8 @@ module.exports = {
     'extends': [
         'eslint:recommended',
         'plugin:security/recommended-legacy',
-        'plugin:react/recommended'
+        'plugin:react/recommended',
+        'plugin:cypress/recommended'
     ],
     'rules': {
         'indent': [

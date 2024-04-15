@@ -16,3 +16,13 @@ jobs:
           python-version: ${{ matrix.python-version }}
       - name: Build with Makefile
         run: make all
+    steps:
+      - uses: actions/checkout@v4.1.1
+      - name: install memcached headers
+        run: |
+          sudo apt-get update
+          sudo apt install -y libmemcached-dev
+      - name: Run Integration Tests
+        uses: cypress-io/github-action@v6.6.1
+        with:
+          command: npm run cypress:test
