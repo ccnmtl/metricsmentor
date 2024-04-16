@@ -6,7 +6,8 @@ import PropTypes from 'prop-types';
 import { saveAs } from 'file-saver';
 
 export const ScatterPlot = ({ N, correlation, seed, setAppRvalue,
-    setSlope, setIntercept, setStderror
+    setSlope, setIntercept, setStderror, plotType, slopes, setSlopes,
+    stderrs, setStderrs
 }) => {
     const [data, setData] = useState([]);
     const [regressionLine, setRegressionLine] = useState(null);
@@ -20,50 +21,111 @@ export const ScatterPlot = ({ N, correlation, seed, setAppRvalue,
                 const x = Math.round(rng() * 100);
                 const y = Math.round(correlation * x + Math.sqrt(
                     1 - Math.pow(correlation, 2)) * rng() * 100);
+                const z = Math.round(correlation * y + Math.sqrt(
+                    1 - Math.pow(correlation, 2)) * rng() * 100);
 
-                generatedData.push({ x, y });
+                generatedData.push({ x, y, z });
             }
         }
 
         return generatedData;
     };
 
+    // eslint-disable-next-line max-len
+    // const calculateRegressionPlane = (x_values, y_values, slope_x1, slope_x2, intercept) => {
+    //     const regressionPlane = [];
+    //     for (let i = 0; i < x_values.length; i++) {
+    //         for (let j = 0; j < y_values.length; j++) {
+    //             const z =
+    //              slope_x1 * x_values[i] + slope_x2 * y_values[j] + intercept;
+    //             regressionPlane.push(z);
+    //         }
+    //     }
+    //     return regressionPlane;
+    // };
+
     const calculateRegression = async() => {
         const x_values = data.map(point => point.x);
         const y_values = data.map(point => point.y);
+        const z_values = plotType === '3d'
+            ? data.map(point => point.z)
+            : undefined;
 
         try {
-            const response = await axios.post('/calculate_regression/', {
-                x_values,
-                y_values,
-            });
+            let response;
+            if (plotType === '3d') {
 
-            const { slope, intercept, rvalue, stderr } = response.data;
+                response = await axios.post('/calculate_multiple_regression/', {
+                    x1_values: x_values,
+                    x2_values: y_values,
+                    y_values: z_values,
+                });
 
-            setAppRvalue(rvalue);
-            setSlope(slope);
-            setIntercept(intercept);
-            setStderror(stderr);
+                const { slope_x1, slope_x2, intercept, stderr } = response.data;
+                setSlopes([slope_x1, slope_x2]);
+                setIntercept(intercept);
+                setStderrs(stderr);
 
-            setRegressionLine({
-                type: 'scatter',
-                mode: 'lines',
-                x: [Math.min(...x_values), Math.max(...x_values)],
-                y: [slope * Math.min(...x_values) + intercept, slope * Math.max(
-                    ...x_values) + intercept],
-                marker: { color: 'red' },
-            });
+                // Generate a grid of x and y values
+                const x_grid = [...new Set(x_values)].sort((a, b) => a - b);
+                const y_grid = [...new Set(y_values)].sort((a, b) => a - b);
+
+                // Generate a 2D array of z values
+                // eslint-disable-next-line max-len
+                const z_grid = x_grid.map(x => y_grid.map(y => slope_x1 * x + slope_x2 * y + intercept));
+
+                setRegressionLine({
+                    type: 'surface',
+                    x: x_grid,
+                    y: y_grid,
+                    z: z_grid,
+                    colorscale: [[0, 'rgb(0,0,0)'], [1, 'rgb(0,0,0)']],
+                    showscale: false,
+                    opacity: 0.5,
+                });
+
+            } else {
+                response = await axios.post('/calculate_regression/', {
+                    x_values,
+                    y_values,
+                });
+                const { slope, intercept, stderr, rvalue } = response.data;
+                setSlope(slope);
+                setIntercept(intercept);
+                setStderror(stderr);
+                setAppRvalue(rvalue);
+
+                // Calculate regression line for 2D plot
+                setRegressionLine({
+                    type: 'scatter',
+                    mode: 'lines',
+                    x: [Math.min(...x_values), Math.max(...x_values)],
+                    // eslint-disable-next-line max-len
+                    y: [slope * Math.min(...x_values) + intercept, slope * Math.max(...x_values) + intercept],
+                    marker: { color: 'red' },
+                });
+            }
+
         } catch (error) {
             console.error('Error calculating regression:', error);
         }
     };
-    const exportCSV = () => {
-        const randomData = [
-            ['x', 'y'],
-            ...data.map(point => [point.x, point.y])
-        ];
 
-        const csv = randomData.map(row => row.join(',')).join('\n');
+    const exportCSV = () => {
+        let headers = ['x', 'y'];
+        if (plotType === '3d') {
+            headers.push('z');
+        }
+
+        const dataRows = data.map(point => {
+            let row = [point.x, point.y];
+            if (plotType === '3d') {
+                row.push(point.z);
+            }
+            return row.join(',');
+        });
+
+        const csv = [headers.join(','), ...dataRows].join('\n');
         const blob = new Blob([csv], { type: 'text/csv;charset=utf-8' });
         saveAs(blob, 'scatterplot_data.csv');
     };
@@ -78,17 +140,20 @@ export const ScatterPlot = ({ N, correlation, seed, setAppRvalue,
         if(data.length > 0) {
             calculateRegression();
         }
-    }, [data]);
+    }, [data, plotType]);
 
     return (
         <>
             <Plot
                 data={[
                     {
-                        type: 'scatter',
+                        type: (plotType === '3d') ? 'scatter3d' : 'scatter',
                         mode: 'markers',
                         x: data.map(point => point.x),
                         y: data.map(point => point.y),
+                        z: (plotType === '3d')
+                            ? data.map(point => point.z)
+                            : undefined,
                         marker: {
                             color: 'teal',
                             size: 10,
@@ -109,7 +174,7 @@ export const ScatterPlot = ({ N, correlation, seed, setAppRvalue,
                         scaleanchor: 'x',
                         scaleratio: 1,
                     },
-                    dragmode: 'pan'
+                    showlegend: false,
                 }}
                 useResizeHandler={true}
                 style={{ height: '88%' }}
@@ -138,7 +203,15 @@ ScatterPlot.propTypes = {
     setSlope: PropTypes.func,
     setIntercept: PropTypes.func,
     setStderror: PropTypes.func,
-    slope: PropTypes.number,
+    slope: PropTypes.oneOfType([
+        PropTypes.number,
+        PropTypes.arrayOf(PropTypes.number)
+    ]),
     stderror: PropTypes.number,
     intercept: PropTypes.number,
+    plotType: PropTypes.oneOf(['2d', '3d']).isRequired,
+    slopes: PropTypes.arrayOf(PropTypes.number),
+    setSlopes: PropTypes.func,
+    stderrs: PropTypes.arrayOf(PropTypes.number),
+    setStderrs: PropTypes.func
 };

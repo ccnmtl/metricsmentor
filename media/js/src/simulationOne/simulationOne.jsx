@@ -21,6 +21,9 @@ export const SimulationOne = () => {
     const [appRvalue, setAppRvalue] = useState(null);
     const [startQuiz, setStartQuiz] = useState(false);
     const [hypothesizedSlope, setHypothesizedSlope] = useState(0);
+    const [plotType, setPlotType] = useState('2d');
+    const [slopes, setSlopes] = useState([]);
+    const [stderrs, setStderrs] = useState([]);
 
 
     const saveGraphData = async() => {
@@ -56,6 +59,9 @@ export const SimulationOne = () => {
 
     const handleNullHypothesis = (e) => {
         setHypothesizedSlope(parseFloat(e.target.value));
+    };
+    const handlePlotTypeChange = (type) => {
+        setPlotType(type);
     };
 
     const tvalue = ((slope - hypothesizedSlope) / stderror).toFixed(3);
@@ -312,18 +318,37 @@ export const SimulationOne = () => {
                 )}
             </div> {/* div class=simulation__workspace */}
             <div className='simulation__graphspace'>
+                <div className='simulation__tab'>
+                    <button
+                        className={plotType === '2d' ? 'active' : ''}
+                        onClick={() => handlePlotTypeChange('2d')}
+                    >
+                        2D
+                    </button>
+                    <button
+                        className={plotType === '3d' ? 'active' : ''}
+                        onClick={() => handlePlotTypeChange('3d')}
+                    >
+                        3D
+                    </button>
+                </div>
                 <ScatterPlot
                     N={N}
                     correlation={correlation}
                     seed={seed}
                     slope={slope}
+                    slopes={slopes}
+                    setSlopes={setSlopes}
                     setSlope={setSlope}
                     stderror={stderror}
+                    stderrs={stderrs}
+                    setStderrs={setStderrs}
                     setStderror={setStderror}
                     intercept={intercept}
                     setIntercept={setIntercept}
                     appRvalue={appRvalue}
                     setAppRvalue={setAppRvalue}
+                    plotType={plotType}
                 />
                 {slope !== null && (
                     <div className='simulation__graph-summary fs-5'>

@@ -24,6 +24,8 @@ from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 from django.utils.decorators import method_decorator
 from scipy.stats import linregress, t
+import numpy as np
+import statsmodels.api as sm
 import json
 import math
 
@@ -210,6 +212,34 @@ def calculate_regression(request):
             })
 
     return JsonResponse({'error': 'Invalid data.'}, status=400)
+
+
+@csrf_exempt
+def calculate_multiple_regression(request):
+    if request.method == 'POST':
+        data = json.loads(request.body.decode('utf-8'))
+        x1_values = np.array(data.get('x1_values', []))
+        x2_values = np.array(data.get('x2_values', []))
+        y_values = np.array(data.get('y_values', []))
+
+        if x1_values.size and x2_values.size and y_values.size:
+            X = sm.add_constant(np.column_stack((x1_values, x2_values)))
+            model = sm.OLS(y_values, X)
+            result = model.fit()
+
+            # Convert NumPy arrays to Python lists
+            stderr_list = result.bse.tolist()
+
+            return JsonResponse({
+                'slope_x1': result.params[1],
+                'slope_x2': result.params[2],
+                'intercept': result.params[0],
+                'rvalue': np.sqrt(result.rsquared),
+                'pvalue': result.f_pvalue,
+                'stderr': stderr_list,
+            })
+
+    return JsonResponse({'error': 'Invalid data or method.'}, status=400)
 
 
 @csrf_exempt

@@ -109,3 +109,8 @@ django-courseaffils==2.4.0
 
 scipy==1.11.4
 numpy==1.26.3
+statsmodels==0.14.1
+pandas==2.2.2
+pytz==2024.1
+packaging==24.0
+patsy==0.5.6
