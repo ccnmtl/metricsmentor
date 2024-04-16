@@ -43,6 +43,8 @@ urlpatterns = [
             name='course-detail-view'),
     path('calculate_regression/', views.calculate_regression,
          name='calculate_regression'),
+    path('calculate_multiple_regression/', views.calculate_multiple_regression,
+         name='calculate_multiple_regression'),
     path('calculate_pvalue/', views.calculate_pvalue,
          name='calculate_pvalue'),
     path('calculate_critical/', views.calculate_critical_value,
