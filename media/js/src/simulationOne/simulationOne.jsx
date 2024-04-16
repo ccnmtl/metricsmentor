@@ -114,7 +114,7 @@ export const SimulationOne = () => {
                                 </span>,
                                 and the estimated correlation
                                 coefficient, <span className='katex'>
-                                    <span className='mathnormal'>corr()</span>
+                                    <span className='mathnormal'>corr(x,y)</span>
                                 </span>, to generate the data.
                             </p>
                             <div className='mt-4'>
@@ -136,7 +136,7 @@ export const SimulationOne = () => {
                                     Estimated correlation
                                 coefficient, <span className='katex'>
                                         <span
-                                            className='mathnormal'>corr()</span>
+                                            className='mathnormal'>corr(x,y)</span>
                                     </span>:
                                 </label>
                                 <div className='slider-range__box'>
@@ -325,6 +325,22 @@ export const SimulationOne = () => {
                     appRvalue={appRvalue}
                     setAppRvalue={setAppRvalue}
                 />
+                {slope !== null && (
+                    <div className='simulation__graph-summary fs-5'>
+                        <Katex tex={
+                            // eslint-disable-next-line max-len
+                            `\\hat{y} = ${intercept.toFixed(2)} + ${slope.toFixed(3)}x;`
+                        } />
+                        <Katex tex={
+                        // eslint-disable-next-line max-len
+                            `\\hat{\\beta_1} = ${slope.toFixed(3)};`
+                        } />
+                        <Katex tex={
+                        // eslint-disable-next-line max-len
+                            `corr(x,y) = ${appRvalue.toFixed(2)}`
+                        } />
+                    </div>
+                )}
             </div> {/* div class=simulation__graphspace */}
         </div> // div class=simulation
     );
