@@ -27,40 +27,59 @@ export const SimulationOneQuiz = ({
                 <div className='simulation__step-toggle--down'></div>
                 <div className='simulation__step-body'>
                     <header className='simulation__step-header'>
-                        <h2 className='h2-primary'>Alternate hypothesis</h2>
+                        <h2 className='h2-primary'>Alternative hypothesis</h2>
                     </header>
                     <div className='simulation__step-content'>
-                        <div className='ms-2 mt-2'>
-                            A <Katex tex={
+                        <p>
+                            The alternative hypothesis is claim believed to be
+                            true. In this simulation, there are three
+                            alternative hypothesis. Choose one lorem ipsum
+                            dolor sit amet.
+                        </p>
+
+
+                        <ol className="listset-alpha listset-alpha-listnum">
+                            <li className="listset-alpha-card">
+                                <div className="listset-alpha-card__title">
+                                    <Katex tex={
+                                    // eslint-disable-next-line max-len
+                                        `\\Eta_1: {\\beta_1}{\\neq} ${hypothesizedSlope}`
+                                    } />
+                                </div>
+                                <button className='btn btn-sm btn-primary'
+                                    disabled={completedChoices.includes('A')}
+                                    onClick={() => setSelectedOption('A')}>
+                                        Do This
+                                </button>
+                            </li>
+                            <li className="listset-alpha-card">
+                                <div className="listset-alpha-card__title">
+                                    <Katex tex={
+                                    // eslint-disable-next-line max-len
+                                        `\\Eta_1: {\\beta_1}{\\gt} ${hypothesizedSlope}`
+                                    } />
+                                </div>
+                                <button className='btn btn-sm btn-primary'
                                 // eslint-disable-next-line max-len
-                                `\\Eta_1: {\\beta_1}{\\neq} ${hypothesizedSlope}`
-                            } />
-                            <button className='btn btn-sm btn-primary'
-                                disabled={completedChoices.includes('A')}
-                                onClick={() => setSelectedOption('A')}>
-                                    Do This
-                            </button>
-                        </div>
-                        <div className='ms-2 mt-2'>
-                            B <Katex tex={
-                                `\\Eta_1: {\\beta_1}{\\gt} ${hypothesizedSlope}`
-                            } />
-                            <button className='btn btn-sm btn-primary'
-                                disabled={completedChoices.includes('B')}
-                                onClick={() => setSelectedOption('B')}>
-                                    Do This
-                            </button>
-                        </div>
-                        <div className='ms-2 mt-2'>
-                            C <Katex tex={
-                                `\\Eta_1: {\\beta_1}{\\lt} ${hypothesizedSlope}`
-                            } />
-                            <button className='btn btn-sm btn-primary'
-                                disabled={completedChoices.includes('C')}
-                                onClick={() => setSelectedOption('C')}>
-                                    Do This
-                            </button>
-                        </div>
+                                    disabled={completedChoices.includes('B')}
+                                    onClick={() => setSelectedOption('B')}>
+                                        Do This
+                                </button>
+                            </li>
+                            <li className="listset-alpha-card">
+                                <div className="listset-alpha-card__title">
+                                    <Katex tex={
+                                    // eslint-disable-next-line max-len
+                                        `\\Eta_1: {\\beta_1}{\\lt} ${hypothesizedSlope}`
+                                    } />
+                                </div>
+                                <button className='btn btn-sm btn-primary'
+                                    disabled={completedChoices.includes('C')}
+                                    onClick={() => setSelectedOption('C')}>
+                                        Do This
+                                </button>
+                            </li>
+                        </ol>
                     </div>
                 </div>
             </div>
