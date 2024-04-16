@@ -101,6 +101,8 @@ export const ScatterPlot = ({ N, correlation, seed, setAppRvalue,
                     regressionLine,
                 ]}
                 layout={{
+                    title: 'Single Variable Linear Regression',
+                    showlegend: false,
                     xaxis: { title: 'X Axis' },
                     yaxis: {
                         title: 'Y Axis',
@@ -110,7 +112,7 @@ export const ScatterPlot = ({ N, correlation, seed, setAppRvalue,
                     dragmode: 'pan'
                 }}
                 useResizeHandler={true}
-                style={{ height: '90%' }}
+                style={{ height: '88%' }}
                 config={{
                     scrollZoom: true,
                     displayModeBar: true,
@@ -119,8 +121,8 @@ export const ScatterPlot = ({ N, correlation, seed, setAppRvalue,
                         'lasso2d', 'autoScale2d'],
                 }}
             />
-            <div className='text-center'>
-                <button className={'btn btn-small btn-secondary mt-3'}
+            <div className='text-end me-5'>
+                <button className={'btn btn-sm btn-secondary'}
                     onClick={exportCSV}>Export CSV</button>
             </div>
         </>
