@@ -174,7 +174,6 @@ export const ScatterPlot = ({ N, correlation, seed, setAppRvalue,
                         scaleanchor: 'x',
                         scaleratio: 1,
                     },
-                    showlegend: false,
                 }}
                 useResizeHandler={true}
                 style={{ height: '88%' }}
