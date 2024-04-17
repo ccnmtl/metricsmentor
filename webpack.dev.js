@@ -11,6 +11,7 @@ module.exports = merge(common, {
         filename: 'bundle.js'
     },
     devServer: {
+        hot: false,
         port: 9091,
         historyApiFallback: true,
         devMiddleware: {
