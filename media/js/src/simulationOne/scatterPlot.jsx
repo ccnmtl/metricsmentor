@@ -174,6 +174,7 @@ export const ScatterPlot = ({ N, correlation, seed, setAppRvalue,
                         scaleanchor: 'x',
                         scaleratio: 1,
                     },
+                    ...(plotType === '2d' ? { dragmode: 'pan' } : {}),
                 }}
                 useResizeHandler={true}
                 style={{ height: '88%' }}
