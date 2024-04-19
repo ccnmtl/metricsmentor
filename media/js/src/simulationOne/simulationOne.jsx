@@ -120,7 +120,9 @@ export const SimulationOne = () => {
                                 </span>,
                                 and the estimated correlation
                                 coefficient, <span className='katex'>
-                                    <span className='mathnormal'>corr(x,y)</span>
+                                    <span className='mathnormal'>
+                                        corr(x,y)
+                                    </span>
                                 </span>, to generate the data.
                             </p>
                             <div className='mt-4'>
@@ -142,7 +144,8 @@ export const SimulationOne = () => {
                                     Estimated correlation
                                 coefficient, <span className='katex'>
                                         <span
-                                            className='mathnormal'>corr(x,y)</span>
+                                            className='mathnormal'>corr(x,y)
+                                        </span>
                                     </span>:
                                 </label>
                                 <div className='slider-range__box'>
@@ -300,7 +303,7 @@ export const SimulationOne = () => {
                             </div>
                         </div> {/* div class=simulation__step-container */}
 
-                        <div className="d-flex justify-content-center my-3">
+                        <div className='d-flex justify-content-center my-3'>
                             <button className='btn btn-primary'
                                 onClick={saveGraphData}>
                                 Save Graph Data
@@ -319,18 +322,24 @@ export const SimulationOne = () => {
             </div> {/* div class=simulation__workspace */}
             <div className='simulation__graphspace'>
                 <div className='simulation__tab'>
-                    <button
-                        className={plotType === '2d' ? 'active' : ''}
-                        onClick={() => handlePlotTypeChange('2d')}
-                    >
-                        2D
-                    </button>
-                    <button
-                        className={plotType === '3d' ? 'active' : ''}
-                        onClick={() => handlePlotTypeChange('3d')}
-                    >
-                        3D
-                    </button>
+                    <ul className='nav nav-tabs'>
+                        <li className='nav-item'>
+                            <a className={
+                                plotType === '2d'
+                                    ? 'active nav-link'
+                                    : 'nav-link'}
+                            onClick={() => handlePlotTypeChange('2d')}
+                            href='#'>2D</a>
+                        </li>
+                        <li className='nav-item'>
+                            <a className={
+                                plotType === '3d'
+                                    ? 'active nav-link'
+                                    : 'nav-link'}
+                            onClick={() => handlePlotTypeChange('3d')}
+                            href='#'>3D</a>
+                        </li>
+                    </ul>
                 </div>
                 <ScatterPlot
                     N={N}
