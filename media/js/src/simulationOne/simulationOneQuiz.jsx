@@ -38,9 +38,9 @@ export const SimulationOneQuiz = ({
                         </p>
 
 
-                        <ol className="listset-alpha listset-alpha-listnum">
-                            <li className="listset-alpha-card">
-                                <div className="listset-alpha-card__title">
+                        <ol className='listset-alpha listset-alpha-listnum'>
+                            <li className='listset-alpha-card'>
+                                <div className='listset-alpha-card__title'>
                                     <Katex tex={
                                     // eslint-disable-next-line max-len
                                         `\\Eta_1: {\\beta_1}{\\neq} ${hypothesizedSlope}`
@@ -52,8 +52,8 @@ export const SimulationOneQuiz = ({
                                         Do This
                                 </button>
                             </li>
-                            <li className="listset-alpha-card">
-                                <div className="listset-alpha-card__title">
+                            <li className='listset-alpha-card'>
+                                <div className='listset-alpha-card__title'>
                                     <Katex tex={
                                     // eslint-disable-next-line max-len
                                         `\\Eta_1: {\\beta_1}{\\gt} ${hypothesizedSlope}`
@@ -66,8 +66,8 @@ export const SimulationOneQuiz = ({
                                         Do This
                                 </button>
                             </li>
-                            <li className="listset-alpha-card">
-                                <div className="listset-alpha-card__title">
+                            <li className='listset-alpha-card'>
+                                <div className='listset-alpha-card__title'>
                                     <Katex tex={
                                     // eslint-disable-next-line max-len
                                         `\\Eta_1: {\\beta_1}{\\lt} ${hypothesizedSlope}`

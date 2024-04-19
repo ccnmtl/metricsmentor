@@ -25,9 +25,9 @@ export const MultipleChoiceQuestion = ({ question, options, answer }) => {
             {options.map((option, index) => (
                 <div key={index}>
                     <input
-                        type="radio"
+                        type='radio'
                         id={`option-${index}`}
-                        name="options"
+                        name='options'
                         value={option}
                         checked={selectedOption === option}
                         onChange={() => handleOptionSelect(option)}
