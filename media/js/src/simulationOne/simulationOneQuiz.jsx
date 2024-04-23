@@ -1,22 +1,33 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { Katex } from '../katexComponent';
 import { HypothesisTest } from './hypothesisTest';
 import { MultipleChoiceQuestion } from './multipleChoiceQuestion';
 import PropTypes from 'prop-types';
 
 export const SimulationOneQuiz = ({
-    appRvalue, tvalue, hypothesizedSlope, n
+    appRvalue, tvalue, hypothesizedSlope, n, setIs2DCompleted,
+    is2DCompleted
 }) => {
     const [selectedOption, setSelectedOption] = useState(null);
     const [completedChoices, setCompletedChoices] = useState([]);
+
+    const allChoicesCompleted = ['A', 'B', 'C'].every(
+        choice => completedChoices.includes(choice));
 
     const handleChoiceCompletion = () => {
         setCompletedChoices([...completedChoices, selectedOption]);
         setSelectedOption(null);
     };
 
-    const allChoicesCompleted = ['A', 'B', 'C'].every(
-        choice => completedChoices.includes(choice));
+    const is2dCompleted = () => {
+        if (allChoicesCompleted) {
+            setIs2DCompleted(true);
+        }
+    };
+
+    useEffect(() => {
+        is2dCompleted();
+    },[completedChoices, allChoicesCompleted]);
 
     return (
         <>
@@ -122,4 +133,6 @@ SimulationOneQuiz.propTypes = {
     tvalue: PropTypes.string.isRequired,
     hypothesizedSlope: PropTypes.any.isRequired,
     n: PropTypes.any.isRequired,
+    setIs2DCompleted: PropTypes.func.isRequired,
+    is2DCompleted: PropTypes.bool.isRequired,
 };

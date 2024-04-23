@@ -21,10 +21,13 @@ export const ScatterPlot = ({ N, correlation, seed, setAppRvalue,
                 const x = Math.round(rng() * 100);
                 const y = Math.round(correlation * x + Math.sqrt(
                     1 - Math.pow(correlation, 2)) * rng() * 100);
-                const z = Math.round(correlation * y + Math.sqrt(
-                    1 - Math.pow(correlation, 2)) * rng() * 100);
-
-                generatedData.push({ x, y, z });
+                if (plotType === '3d') {
+                    const z = Math.round(correlation * y + Math.sqrt(
+                        1 - Math.pow(correlation, 2)) * rng() * 100);
+                    generatedData.push({ x, y, z });
+                } else {
+                    generatedData.push({ x, y });
+                }
             }
         }
 
@@ -52,10 +55,11 @@ export const ScatterPlot = ({ N, correlation, seed, setAppRvalue,
             : undefined;
 
         try {
-            let response;
-            if (plotType === '3d') {
 
-                response = await axios.post('/calculate_multiple_regression/', {
+            if (plotType === '3d' && z_values[0]) {
+
+                // eslint-disable-next-line max-len
+                const response = await axios.post('/calc_multi_regression/', {
                     x1_values: x_values,
                     x2_values: y_values,
                     y_values: z_values,
@@ -85,11 +89,12 @@ export const ScatterPlot = ({ N, correlation, seed, setAppRvalue,
                 });
 
             } else {
-                response = await axios.post('/calculate_regression/', {
+                const response = await axios.post('/calc_regression/', {
                     x_values,
                     y_values,
                 });
                 const { slope, intercept, stderr, rvalue } = response.data;
+
                 setSlope(slope);
                 setIntercept(intercept);
                 setStderror(stderr);
@@ -101,7 +106,8 @@ export const ScatterPlot = ({ N, correlation, seed, setAppRvalue,
                     mode: 'lines',
                     x: [Math.min(...x_values), Math.max(...x_values)],
                     // eslint-disable-next-line max-len
-                    y: [slope * Math.min(...x_values) + intercept, slope * Math.max(...x_values) + intercept],
+                    y: [slope * Math.min(...x_values) + intercept, slope * Math.max(
+                        ...x_values) + intercept],
                     marker: { color: 'red' },
                 });
             }
@@ -134,7 +140,7 @@ export const ScatterPlot = ({ N, correlation, seed, setAppRvalue,
         if(N) {
             setData(generateData());
         }
-    }, [N, correlation, seed]);
+    }, [N, correlation, seed, plotType]);
 
     useEffect(() => {
         if(data.length > 0) {
@@ -203,10 +209,7 @@ ScatterPlot.propTypes = {
     setSlope: PropTypes.func,
     setIntercept: PropTypes.func,
     setStderror: PropTypes.func,
-    slope: PropTypes.oneOfType([
-        PropTypes.number,
-        PropTypes.arrayOf(PropTypes.number)
-    ]),
+    slope: PropTypes.number,
     stderror: PropTypes.number,
     intercept: PropTypes.number,
     plotType: PropTypes.oneOf(['2d', '3d']).isRequired,

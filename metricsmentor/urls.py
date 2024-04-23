@@ -41,9 +41,9 @@ urlpatterns = [
 
     re_path(r'^course/(?P<pk>\d+)/$', views.CourseDetailView.as_view(),
             name='course-detail-view'),
-    path('calculate_regression/', views.calculate_regression,
+    path('calc_regression/', views.calculate_regression,
          name='calculate_regression'),
-    path('calculate_multiple_regression/', views.calculate_multiple_regression,
+    path('calc_multi_regression/', views.calculate_multiple_regression,
          name='calculate_multiple_regression'),
     path('calculate_pvalue/', views.calculate_pvalue,
          name='calculate_pvalue'),
