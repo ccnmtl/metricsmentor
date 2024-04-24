@@ -24,6 +24,7 @@ export const SimulationOne = () => {
     const [plotType, setPlotType] = useState('2d');
     const [slopes, setSlopes] = useState([]);
     const [stderrs, setStderrs] = useState([]);
+    const [is2DCompleted, setIs2DCompleted] = useState(false);
 
 
     const saveGraphData = async() => {
@@ -315,7 +316,9 @@ export const SimulationOne = () => {
                                 tvalue={tvalue}
                                 hypothesizedSlope={hypothesizedSlope}
                                 n={N}
-                                appRvalue={appRvalue} />
+                                appRvalue={appRvalue}
+                                is2DCompleted={is2DCompleted}
+                                setIs2DCompleted={setIs2DCompleted} />
                         )}
                     </>
                 )}
@@ -335,7 +338,10 @@ export const SimulationOne = () => {
                             <a className={
                                 plotType === '3d'
                                     ? 'active nav-link'
-                                    : 'nav-link'}
+                                    : (!is2DCompleted
+                                        ? 'nav-link disabled'
+                                        : 'nav-link')
+                            }
                             onClick={() => handlePlotTypeChange('3d')}
                             href='#'>3D</a>
                         </li>
