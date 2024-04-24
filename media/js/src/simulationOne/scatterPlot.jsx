@@ -15,20 +15,22 @@ export const ScatterPlot = ({ N, correlation, seed, setAppRvalue,
     const generateData = () => {
         const rng = seedrandom(seed);
 
-        const generatedData = [];
-        if (typeof correlation === 'number') {
+        let generatedData = [...data];
+        if (generatedData.length === 0 && typeof correlation === 'number') {
             for (let i = 0; i < N; i++) {
                 const x = Math.round(rng() * 100);
                 const y = Math.round(correlation * x + Math.sqrt(
                     1 - Math.pow(correlation, 2)) * rng() * 100);
-                if (plotType === '3d') {
-                    const z = Math.round(correlation * y + Math.sqrt(
-                        1 - Math.pow(correlation, 2)) * rng() * 100);
-                    generatedData.push({ x, y, z });
-                } else {
-                    generatedData.push({ x, y });
-                }
+                generatedData.push({ x, y });
             }
+        }
+
+        if (plotType === '3d') {
+            generatedData = generatedData.map(point => ({
+                ...point,
+                z: Math.round(correlation * point.x + Math.sqrt(
+                    1 - Math.pow(correlation, 2)) * rng() * 100)
+            }));
         }
 
         return generatedData;
