@@ -3,6 +3,9 @@ import { ScatterPlot } from './scatterPlot';
 import { Katex } from '../katexComponent';
 import { authedFetch } from '../utils';
 import { SimulationOneQuiz } from './simulationOneQuiz';
+import { SimIntro } from './simulationIntro';
+import { GraphCoefficients } from './graphCoefficientsSection';
+import { NullHypothesisSection } from './nullHypothesisSection';
 
 
 // const CURRENT_USER = window.MetricsMentor.currentUser.id;
@@ -72,36 +75,9 @@ export const SimulationOne = () => {
     return (
         <div className='simulation'>
             <div className='simulation__workspace'>
-                <div className='simulation__step-container d-flex'>
-                    <div className='simulation__step-num'>
-                        &bull;
-                    </div>
-                    <div className='simulation__step-toggle--down'>
-                    </div>
-                    <div className='simulation__step-body'>
-                        <header className='simulation__step-header'>
-                            <h2 className='h2-primary'>
-                                <span className='h2-secondary d-block'>
-                                    Simulation 1</span>
-                                <span className='h2-title d-block'>
-                                    {/* eslint-disable-next-line max-len */}
-                                    {'Hypothesis Testing for Population Slope'}
-                                </span>
-                            </h2>
-                        </header>
-                        <div className='simulation__step-content'>
-                            <p>
-                                In this module, we revisit hypothesis testing
-                                and p-values, concepts you learned in your
-                                prerequisite Statistics course. Through the use
-                                of generated data, you will have the opportunity
-                                to review the methodology involved in hypothesis
-                                testing, including the interpretation of
-                                p-values and critical values.
-                            </p>
-                        </div>
-                    </div>
-                </div> {/* div class=simulation__step-container */}
+
+                <SimIntro plotType={plotType} />
+
                 <div className='simulation__step-container d-flex'>
                     <div className='simulation__step-num'>
                         &bull;
@@ -200,109 +176,21 @@ export const SimulationOne = () => {
                 </div> {/* div class=simulation__step-container */}
                 {slope !== null && (
                     <>
-                        <div className='simulation__step-container d-flex'>
-                            <div className='simulation__step-num'>
-                                &bull;
-                            </div>
-                            <div className='simulation__step-toggle--down'>
-                            </div>
-                            <div className='simulation__step-body'>
-                                <header className='simulation__step-header'>
-                                    <h2 className='h2-primary'>
-                                        Resulting Graph Coefficients</h2>
-                                </header>
-                                <div className='simulation__step-content'>
-                                    <p>
-                                    The graph generated with your sample size
-                                    and correlation coefficient produces the
-                                    following coefficients. Let&rsquo;s look at
-                                    them in detail.
-                                    </p>
-                                    <h2 className='mt-4'>
-                                        Regression line equation:</h2>
-                                    <div className='ms-3 mb-3'>
-                                        <Katex tex={
-                                        // eslint-disable-next-line max-len
-                                            '\\hat{y} = \\hat{\\beta_0} + \\hat{\\beta_1}x'
-                                        } />
-                                    </div>
-                                    <div className='ms-3 mb-3'>
-                                        <Katex tex={
-                                        // eslint-disable-next-line max-len
-                                            `\\hat{y} = ${intercept.toFixed(2)} + ${slope.toFixed(3)}x`
-                                        } />
-                                    </div>
-                                    <p>where <span className='katex'>
-                                        <span className='mathnormal'>y</span> {/* eslint-disable-line max-len */}
-                                    </span> is the dependent variable and
-                                    <span className='katex'> <span className='mathnormal'>x</span> {/* eslint-disable-line max-len */}
-                                    </span> is the independent, or
-                                        explanatory, variable.
-                                    </p>
-                                    <h2 className='mt-4'>Sample <span className='katex'><span className='mathnormal'>y-intercept</span> {/* eslint-disable-line max-len */}
-                                    </span> coefficient:</h2>
-                                    <div className='ms-3'>
-                                        <Katex tex={
-                                        // eslint-disable-next-line max-len
-                                            `\\hat{\\beta_0} = ${intercept.toFixed(3)}`
-                                        } />
-                                    </div>
-                                    <h2 className='mt-4'>Sample slope
-                                        coefficient:</h2>
-                                    <div className='ms-3'>
-                                        <Katex tex={
-                                        // eslint-disable-next-line max-len
-                                            `\\hat{\\beta_1} = ${slope.toFixed(3)}`
-                                        } />
-                                    </div>
-                                    <h2 className='mt-4'>Standard error of
-                                    the sample slope:</h2>
-                                    <div className='ms-3'>
-                                        <Katex tex={
-                                        // eslint-disable-next-line max-len
-                                            `{SE(\\hat{\\beta_1})} = ${stderror.toFixed(3)}`} />
-                                    </div>
-                                </div>
-                            </div>
-                        </div> {/* div class=simulation__step-container */}
-                        <div className='simulation__step-container d-flex'>
-                            <div className='simulation__step-num'>
-                                &bull;
-                            </div>
-                            <div className='simulation__step-toggle--down'>
-                            </div>
-                            <div className='simulation__step-body'>
-                                <header className='simulation__step-header'>
-                                    <h2 className='h2-primary'>
-                                        Null hypothesis</h2>
-                                </header>
-                                <div className='simulation__step-content'>
-                                    <div className='row'>
-                                        <label className='col-3'>
-                                            <Katex tex={
-                                                '{\\Eta_0} : {\\beta_1} ='
-                                            } />
-                                        </label>
-                                        <input size='10' className='col-9 w-25'
-                                            type='number' min='-5' max='5'
-                                            disabled={startQuiz}
-                                            value={hypothesizedSlope}
-                                            onChange={handleNullHypothesis} />
-                                    </div>
-                                    <div className='row my-3'>
-                                        <Katex tex={tEquation} />
-                                    </div>
-                                    <div className='row'>
-                                        <div className='input-group my-3'>
-                                            <Katex tex={
-                                            // eslint-disable-next-line max-len
-                                                `t = \\cfrac{${slope.toFixed(3)} - ${hypothesizedSlope}}{${stderror.toFixed(3)}} = ${tvalue}`
-                                            } />
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div> {/* div class=simulation__step-container */}
+                        <GraphCoefficients
+                            intercept={intercept}
+                            slope={slope}
+                            stderror={stderror}
+                            plotType={plotType}
+                            appRvalue={appRvalue} />
+
+                        <NullHypothesisSection
+                            slope={slope}
+                            stderror={stderror}
+                            tvalue={tvalue}
+                            tEquation={tEquation}
+                            hypothesizedSlope={hypothesizedSlope}
+                            handleNullHypothesis={handleNullHypothesis}
+                            startQuiz={startQuiz} />
 
                         <div className='d-flex justify-content-center my-3'>
                             <button className='btn btn-primary'
