@@ -52,7 +52,7 @@ export const NullHypothesisSection = ({
 NullHypothesisSection.propTypes = {
     slope: PropTypes.number,
     stderror: PropTypes.number,
-    tvalue: PropTypes.number,
+    tvalue: PropTypes.string,
     tEquation: PropTypes.string,
     hypothesizedSlope: PropTypes.number,
     handleNullHypothesis: PropTypes.func,

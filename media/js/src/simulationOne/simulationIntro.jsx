@@ -15,22 +15,31 @@ export const SimIntro = ({plotType}) => {
                         <span className='h2-secondary d-block'>
                         Simulation 1</span>
                         <span className='h2-title d-block'>
-                            {/* eslint-disable-next-line max-len */}
                             {'Hypothesis Testing for Population Slope'}
                         </span>
                     </h2>
                 </header>
-                <div className='simulation__step-content'>
-                    <p>
-                    In this module, we revisit hypothesis testing
-                    and p-values, concepts you learned in your
-                    prerequisite Statistics course. Through the use
-                    of generated data, you will have the opportunity
-                    to review the methodology involved in hypothesis
-                    testing, including the interpretation of
-                    p-values and critical values.
-                    </p>
-                </div>
+                {plotType === '2d' && (
+                    <div className='simulation__step-content'>
+                        <p>
+                            In this module, you will learn about
+                            hypothesis testing for the population slope
+                            in a simple linear regression model. You will
+                            be able to visualize the relationship between
+                            two variables and generate data to test the
+                            null hypothesis that the population slope is
+                            equal to a specified value.
+                        </p>
+                    </div>
+
+                )}
+                {plotType === '3d' && (
+                    <div className='simulation__step-content'>
+                        <p>
+                            3D Placeholder
+                        </p>
+                    </div>
+                )}
             </div>
         </div>
     );
