@@ -14,6 +14,7 @@ module.exports = {
     },
     'plugins': [
         'security',
+        'cypress',
     ],
     'extends': [
         'eslint:recommended',

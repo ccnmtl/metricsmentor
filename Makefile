@@ -1,5 +1,5 @@
 APP=metricsmentor
-all: jenkins cypress-test jstest js-build
+all: jenkins eslint cypress-test jstest js-build
 
 .PHONY: all
 

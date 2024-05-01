@@ -1,12 +1,6 @@
-Cypress.on('uncaught:exception', (err, runnable) => {
-    // returning false here prevents Cypress from
-    // failing the test
-    return false;
-});
-
 beforeEach(() => {
     cy.login('student_one', 'test');
-    cy.visit('/course/1/simulations/1/').wait(0);
+    cy.visit('/course/1/simulations/1/');
 });
 
 describe('cy.login() works as expected', () => {

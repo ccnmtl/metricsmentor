@@ -6,8 +6,15 @@ jobs:
     strategy:
       matrix:
           python-version: ["3.11"]
-          node-version: [18.x]
-    name: Node ${{ matrix.node }} run
+          node-version: [20.x]
+    services:
+      postgres:
+        image: postgres:15
+        env:
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: postgres
+        ports:
+          - 5432:5432
     steps:
       - uses: actions/checkout@v4
       - name: Set up Python ${{ matrix.python-version }}
@@ -16,13 +23,3 @@ jobs:
           python-version: ${{ matrix.python-version }}
       - name: Build with Makefile
         run: make all
-    steps:
-      - uses: actions/checkout@v4.1.1
-      - name: install memcached headers
-        run: |
-          sudo apt-get update
-          sudo apt install -y libmemcached-dev
-      - name: Run Integration Tests
-        uses: cypress-io/github-action@v6.6.1
-        with:
-          command: npm run cypress:test
