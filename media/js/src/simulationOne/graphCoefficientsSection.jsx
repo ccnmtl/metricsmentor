@@ -68,7 +68,7 @@ export const GraphCoefficients = ({
                         </div>
                     </div>
                 )}
-                {plotType === '3d' && (
+                {(plotType === '3d' && slopes.length > 0) && (
                     <div className='simulation__step-content'>
                         <p>
                         3D scatter plot Placeholder
