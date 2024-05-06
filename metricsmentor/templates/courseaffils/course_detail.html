@@ -12,7 +12,7 @@
         <div><b>Your role:</b> {% if is_faculty %}Instructor{% else %}Student{% endif %}</div>
     </div>
     <div class="col-12">
-        <div>
+        <div data-cy="enterSims">
             <a href="{% url 'simulation-dashboard-view' course.id %}"> ENTER SIMS</a>
         </div>
     </div>
