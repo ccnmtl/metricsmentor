@@ -28,6 +28,7 @@ export const SimulationOne = () => {
     const [slopes, setSlopes] = useState([]);
     const [stderrs, setStderrs] = useState([]);
     const [is2DCompleted, setIs2DCompleted] = useState(false);
+    const [showNullHypothesis, setShowNullHypothesis] = useState(false);
 
 
     const saveGraphData = async() => {
@@ -64,8 +65,13 @@ export const SimulationOne = () => {
     const handleNullHypothesis = (e) => {
         setHypothesizedSlope(parseFloat(e.target.value));
     };
+
     const handlePlotTypeChange = (type) => {
         setPlotType(type);
+    };
+
+    const handleShowNullHypothesis = () => {
+        setShowNullHypothesis(true);
     };
 
     const tvalue = ((slope - hypothesizedSlope) / stderror).toFixed(3);
@@ -78,96 +84,96 @@ export const SimulationOne = () => {
 
                 <SimIntro plotType={plotType} />
 
-                <div className='simulation__step-container d-flex'>
-                    <div className='simulation__step-num'>
+                <div className="simulation__step-container d-flex">
+                    <div className="simulation__step-num">
                         &bull;
                     </div>
-                    <div className='simulation__step-toggle--down'>
+                    <div className="simulation__step-toggle--down">
                     </div>
-                    <div className='simulation__step-body'>
-                        <header className='simulation__step-header'>
-                            <h2 className='h2-primary'>Graph seeding</h2>
+                    <div className="simulation__step-body">
+                        <header className="simulation__step-header">
+                            <h2 className="h2-primary">Graph seeding</h2>
                         </header>
-                        <div className='simulation__step-content'>
+                        <div className="simulation__step-content">
                             <p>
                                 Let&rsquo;s start by setting up the graph.
                                 You can set the sample
-                                size, <span className='katex'>
-                                    <span className='mathnormal'>n</span>
+                                size, <span className="katex">
+                                    <span className="mathnormal">n</span>
                                 </span>,
                                 and the estimated correlation
-                                coefficient, <span className='katex'>
-                                    <span className='mathnormal'>
+                                coefficient, <span className="katex">
+                                    <span className="mathnormal">
                                         corr(x,y)
                                     </span>
                                 </span>, to generate the data.
                             </p>
-                            <div className='mt-4'>
-                                <label htmlFor='nSampleSize'
-                                    className='h2 form-label'>
-                                    Sample size, <span className='katex'>
-                                        <span className='mathnormal'>n</span>
+                            <div className="mt-4">
+                                <label htmlFor="nSampleSize"
+                                    className="h2 form-label">
+                                    Sample size, <span className="katex">
+                                        <span className="mathnormal">n</span>
                                     </span>:
                                 </label>
-                                <input type='number' min='50' max='500'
-                                    id='nSampleSize'
-                                    className='form-control'
+                                <input type="number" min="50" max="500"
+                                    id="nSampleSize"
+                                    className="form-control"
                                     disabled={startQuiz}
                                     value={N} onChange={handleNChange} />
                             </div>
-                            <div className='mt-4'>
-                                <label htmlFor='correlation'
-                                    className='h2 form-label'>
+                            <div className="mt-4">
+                                <label htmlFor="correlation"
+                                    className="h2 form-label">
                                     Estimated correlation
-                                coefficient, <span className='katex'>
+                                coefficient, <span className="katex">
                                         <span
-                                            className='mathnormal'>corr(x,y)
+                                            className="mathnormal">corr(x,y)
                                         </span>
                                     </span>:
                                 </label>
-                                <div className='slider-range__box'>
-                                    <div className='slider-range__input'>
-                                        <input type='range' step='0.01' min='-1'
-                                            max='1' value={correlation}
-                                            className='form-range'
-                                            id='correlation'
+                                <div className="slider-range__box">
+                                    <div className="slider-range__input">
+                                        <input type="range" step="0.01" min="-1"
+                                            max="1" value={correlation}
+                                            className="form-range"
+                                            id="correlation"
                                             disabled={startQuiz}
                                             // eslint-disable-next-line max-len
                                             onChange={handleCorrelationChange} />
-                                        <div className='scale-value katex'>
-                                            <span className='mathnormal'>
+                                        <div className="scale-value katex">
+                                            <span className="mathnormal">
                                                 {correlation}
                                             </span>
                                         </div>
                                     </div>
-                                    <div className='slider-range__scale'>
-                                        <div className='unit'></div>
-                                        <div className='unit'></div>
-                                        <div className='unit'></div>
-                                        <div className='unit'></div>
-                                        <div className='unit'></div>
-                                        <div className='unit'></div>
-                                        <div className='unit'></div>
-                                        <div className='unit'></div>
-                                        <div className='unit'></div>
+                                    <div className="slider-range__scale">
+                                        <div className="unit"></div>
+                                        <div className="unit"></div>
+                                        <div className="unit"></div>
+                                        <div className="unit"></div>
+                                        <div className="unit"></div>
+                                        <div className="unit"></div>
+                                        <div className="unit"></div>
+                                        <div className="unit"></div>
+                                        <div className="unit"></div>
                                     </div>
                                 </div>
                             </div>
                             {slope !== null && (
                                 <>
-                                    <div className='mt-5 h2'>
+                                    <div className="mt-5 h2">
                                         Calculated correlation
-                                        coefficient: <span className='katex'>
-                                            <span className='mathnormal'>{appRvalue.toFixed(2)}</span>{/* eslint-disable-line max-len */}
+                                        coefficient: <span className="katex">
+                                            <span className="mathnormal">{appRvalue.toFixed(2)}</span>{/* eslint-disable-line max-len */}
                                         </span>:
                                     </div>
                                 </>
                             )}
-                            <div className='mt-3'>
-                                <label className='dev-only'> Seed ID:
-                                    <input type='text'
+                            <div className="mt-3">
+                                <label className="dev-only"> Seed ID:
+                                    <input type="text"
                                         value={seed} disabled={startQuiz}
-                                        className='ms-1 mt-2 dev-only' size='10'
+                                        className="ms-1 mt-2 dev-only" size="10"
                                         onChange={handleSeedChange} />
                                 </label>
                             </div>
@@ -183,8 +189,9 @@ export const SimulationOne = () => {
                             plotType={plotType}
                             appRvalue={appRvalue}
                             slopes={slopes}
-                            stderrs={stderrs} />
-
+                            stderrs={stderrs}
+                            onShowNullHypothesis={handleShowNullHypothesis} />
+                        {showNullHypothesis && (
                         <NullHypothesisSection
                             slope={slope}
                             stderror={stderror}
@@ -193,9 +200,10 @@ export const SimulationOne = () => {
                             hypothesizedSlope={hypothesizedSlope}
                             handleNullHypothesis={handleNullHypothesis}
                             startQuiz={startQuiz} />
+                        )}
 
-                        <div className='d-flex justify-content-center my-3'>
-                            <button className='btn btn-primary'
+                        <div className="d-flex justify-content-center my-3">
+                            <button className="btn btn-primary"
                                 onClick={saveGraphData}>
                                 Save Graph Data
                             </button>
@@ -213,18 +221,18 @@ export const SimulationOne = () => {
                     </>
                 )}
             </div> {/* div class=simulation__workspace */}
-            <div className='simulation__graphspace'>
-                <div className='simulation__tab'>
-                    <ul className='nav nav-tabs'>
-                        <li className='nav-item'>
+            <div className="simulation__graphspace">
+                <div className="simulation__tab">
+                    <ul className="nav nav-tabs">
+                        <li className="nav-item">
                             <a className={
                                 plotType === '2d'
                                     ? 'active nav-link'
                                     : 'nav-link'}
                             onClick={() => handlePlotTypeChange('2d')}
-                            href='#'>2D</a>
+                            href="#">2D</a>
                         </li>
-                        <li className='nav-item'>
+                        <li className="nav-item">
                             <a className={
                                 plotType === '3d'
                                     ? 'active nav-link'
@@ -233,7 +241,7 @@ export const SimulationOne = () => {
                                         : 'nav-link')
                             }
                             onClick={() => handlePlotTypeChange('3d')}
-                            href='#'>3D</a>
+                            href="#">3D</a>
                         </li>
                     </ul>
                 </div>
@@ -256,7 +264,7 @@ export const SimulationOne = () => {
                     plotType={plotType}
                 />
                 {(slope !== null) && (plotType === '2d') && (
-                    <div className='simulation__graph-summary fs-5'>
+                    <div className="simulation__graph-summary fs-5">
                         <Katex tex={
                             // eslint-disable-next-line max-len
                             `\\hat{y} = ${intercept.toFixed(2)} + ${slope.toFixed(3)}x;`
@@ -270,7 +278,7 @@ export const SimulationOne = () => {
                     </div>
                 )}
                 {(slopes.length > 0) && (plotType === '3d') && (
-                    <div className='simulation__graph-summary fs-5'>
+                    <div className="simulation__graph-summary fs-5">
                         <Katex tex={
                             // eslint-disable-next-line max-len
                             `\\hat{y} = ${intercept.toFixed(2)} + ${slopes[0].toFixed(3)}x_1 + ${slopes[1].toFixed(3)}x_2;`

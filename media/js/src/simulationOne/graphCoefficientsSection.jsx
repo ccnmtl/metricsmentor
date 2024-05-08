@@ -3,8 +3,13 @@ import { Katex } from '../katexComponent';
 import PropTypes from 'prop-types';
 
 export const GraphCoefficients = ({
-    intercept, slope, stderror, appRvalue, plotType, slopes, stderrs
+    intercept, slope, stderror, appRvalue, plotType, slopes, stderrs,
+    onShowNullHypothesis
 }) => {
+    const handleNextClick = () => {
+        onShowNullHypothesis(); // Call the function passed as a prop
+    };
+
     return (
         <div className='simulation__step-container d-flex'>
             <div className='simulation__step-num'>
@@ -66,6 +71,10 @@ export const GraphCoefficients = ({
                                 // eslint-disable-next-line max-len
                                 `{SE(\\hat{\\beta_1})} = ${stderror.toFixed(3)}`} />
                         </div>
+
+                        <button className='btn btn-primary mt-3'
+                            onClick={handleNextClick}> Next
+                        </button>
                     </div>
                 )}
                 {(plotType === '3d' && slopes.length > 0) && (
@@ -117,6 +126,9 @@ export const GraphCoefficients = ({
                                 // eslint-disable-next-line max-len
                                 `{SE(\\hat{\\beta_1})} = ${stderrs[0].toFixed(3)}`} />
                         </div>
+                        <button className='btn btn-primary mt-3'
+                            onClick={handleNextClick}> Next
+                        </button>
                     </div>
                 )}
             </div>
@@ -131,5 +143,6 @@ GraphCoefficients.propTypes = {
     appRvalue: PropTypes.number,
     plotType: PropTypes.string,
     slopes: PropTypes.array,
-    stderrs: PropTypes.array
+    stderrs: PropTypes.array,
+    onShowNullHypothesis: PropTypes.func
 };
