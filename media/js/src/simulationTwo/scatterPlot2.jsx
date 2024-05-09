@@ -11,10 +11,10 @@ export const ScatterPlot2 = ({ setAppRvalue,
 }) => {
     // const [data, setData] = useState([]);
     const data = [
-        { x: 1, y: 2, z: 3 }, { x: 2, y: 3, z: 4}, { x: 3, y: 4, z: 5},
-        { x: 4, y: 5, z: 6}, { x: 5, y: 6, z: 7}, { x: 6, y: 7, z: 8},
-        { x: 7, y: 8, z: 9}, { x: 8, y: 9, z: 10}, { x: 9, y: 10, z: 11},
-        { x: 10, y: 11, z: 12}
+        { x: 1, y: 3, z: 3 }, { x: 2, y: 6, z: 4}, { x: 3, y: 1, z: 5},
+        { x: 4, y: 2, z: 6}, { x: 5, y: 2, z: 7}, { x: 6, y: 25, z: 8},
+        { x: 7, y: 3, z: 9}, { x: 8, y: 8, z: 10}, { x: 9, y: 7, z: 11},
+        { x: 10, y: 8, z: 12}
     ];
     const [regressionLine, setRegressionLine] = useState(null);
     // fetch('../../../../json/Income.json').then(response => (
@@ -141,11 +141,11 @@ export const ScatterPlot2 = ({ setAppRvalue,
                 layout={{
                     title: 'Single Variable Linear Regression',
                     showlegend: false,
-                    xaxis: { title: 'X Axis' },
+                    xaxis: { title: 'X Axis', minallowed: 0},
                     yaxis: {
                         title: 'Y Axis',
-                        scaleanchor: 'x',
                         scaleratio: 1,
+                        minallowed: 0,
                     },
                     ...(plotType === '2d' ? { dragmode: 'pan' } : {}),
                 }}
