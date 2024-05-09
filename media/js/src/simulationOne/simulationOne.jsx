@@ -192,22 +192,24 @@ export const SimulationOne = () => {
                             stderrs={stderrs}
                             onShowNullHypothesis={handleShowNullHypothesis} />
                         {showNullHypothesis && (
-                        <NullHypothesisSection
-                            slope={slope}
-                            stderror={stderror}
-                            tvalue={tvalue}
-                            tEquation={tEquation}
-                            hypothesizedSlope={hypothesizedSlope}
-                            handleNullHypothesis={handleNullHypothesis}
-                            startQuiz={startQuiz} />
-                        )}
+                        <>
+                            <NullHypothesisSection
+                                slope={slope}
+                                stderror={stderror}
+                                tvalue={tvalue}
+                                tEquation={tEquation}
+                                hypothesizedSlope={hypothesizedSlope}
+                                handleNullHypothesis={handleNullHypothesis}
+                                startQuiz={startQuiz} />
 
-                        <div className="d-flex justify-content-center my-3">
-                            <button className="btn btn-primary"
-                                onClick={saveGraphData}>
-                                Save Graph Data
-                            </button>
-                        </div>
+                            <div className="d-flex justify-content-center my-3">
+                                <button className="btn btn-primary"
+                                    onClick={saveGraphData}>
+                                    Save Graph Data
+                                </button>
+                            </div>
+                        </>
+                        )}
                         {startQuiz && (
                             <SimulationOneQuiz
                                 coursePk={coursePk}
