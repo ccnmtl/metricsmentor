@@ -49,13 +49,20 @@ export const Quiz = ({
         }
 
         setUserPvalue(value);
-        validatePvalue(value);
+    };
+
+    const handleNextPvalueButtonClick = () => {
+        validatePvalue(userPvalue);
     };
 
     const handlePvalueComparisonChange = (event) => {
         const newValue = event.target.value;
         setPvalueComparison(newValue);
-        validatePvalueComparison(newValue);
+    };
+
+    const handleNextPvalueComparison = () => {
+        console.log('pvalueComparison:', pvalueComparison);
+        validatePvalueComparison(pvalueComparison);
     };
 
     const validatePvalueComparison = (value) => {
@@ -70,7 +77,10 @@ export const Quiz = ({
 
     const handleNullHypothesisChoice1Change = (event) => {
         setNullHypothesisChoice1(event.target.value);
-        validateHypothesisTest1(event.target.value);
+    };
+
+    const handleNextNullHypothesisChoice1 = () => {
+        validateHypothesisTest1(nullHypothesisChoice1);
     };
 
     const validateHypothesisTest1 = (value) => {
@@ -118,7 +128,6 @@ export const Quiz = ({
         }
 
         setUserCriticalValue(value);
-        validateCriticalValue(value);
 
     };
 
@@ -126,10 +135,17 @@ export const Quiz = ({
         setIsCriticalValueCorrect(parseFloat(value) === criticalValue);
     };
 
+    const handleNextCriticalVal = () => {
+        validateCriticalValue(userCriticalValue);
+    };
+
     const handleComparingCritical = (event) => {
         const newValue = event.target.value;
         setCompareCritical(newValue);
-        validateCriticalComparison(newValue);
+    };
+
+    const handleNextCriticalValCompare = () => {
+        validateCriticalComparison(compareCritical);
     };
 
     const validateCriticalComparison = (value) => {
@@ -142,7 +158,10 @@ export const Quiz = ({
 
     const handleNullHypothesisChoice2Change = (event) => {
         setNullHypothesisChoice2(event.target.value);
-        validateHypothesisTest2(event.target.value);
+    };
+
+    const handleNextNullHypothesisChoice2 = () => {
+        validateHypothesisTest2(nullHypothesisChoice2);
     };
 
     const validateHypothesisTest2 = (value) => {
@@ -172,6 +191,12 @@ export const Quiz = ({
                         />
                     </div>
                 </div>{/*input-p*/}
+                <button
+                    className='btn btn-small btn-primary mt-3'
+                    disabled={isPvalueCorrect}
+                    onClick={handleNextPvalueButtonClick}>
+                    Next
+                </button>
                 {isPvalueCorrect && (
                     <div>
                         <span style={{ color: 'green' }}>Correct</span>
@@ -185,7 +210,7 @@ export const Quiz = ({
 
                 {isPvalueCorrect && (
                     <div className='p-to-alpha border border-warning p-3 mt-3'>
-                Comparing p values to &alpha;:
+                                Comparing p values to &alpha;:
                         <div>
                             <input
                                 type='radio'
@@ -213,6 +238,12 @@ export const Quiz = ({
                             <label htmlFor='pLessThanAlpha'>p &lt; alpha
                             </label>
                         </div>
+                        <button
+                            className='btn btn-small btn-primary mt-3'
+                            disabled={isPvalCompareCorrect}
+                            onClick={handleNextPvalueComparison}>
+                            Next
+                        </button>
                     </div>//compare-p-to-alpha
                 )}
                 {isPvalCompareCorrect && (
@@ -259,6 +290,12 @@ export const Quiz = ({
                             <label htmlFor='failToRejectHypothesis'>
                             Fail to Reject the Null Hypothesis</label>
                         </div>
+                        <button
+                            className='btn btn-small btn-primary mt-3'
+                            disabled={hypothesisTest1validate}
+                            onClick={handleNextNullHypothesisChoice1}>
+                            Next
+                        </button>
                         {hypothesisTest1validate && (
                             <div>
                                 {hypothesisTest1validate ? (
@@ -273,6 +310,8 @@ export const Quiz = ({
                     </div>
                 )}
             </div> {/* solving-p-set */}
+
+            
             <div className='solving-p-set border border-primary p-3 mt-3'>
                 {hypothesisTest1validate && (
                     <div className='input-p'>
@@ -290,6 +329,12 @@ export const Quiz = ({
                                 onChange={handleUserCriticalvalueChange}
                             />
                         </div>
+                        <button
+                            className='btn btn-small btn-primary mt-3'
+                            disabled={isCriticalValueCorrect}
+                            onClick={handleNextCriticalVal}>
+                            Next
+                        </button>
                     </div>
                 )}{/*input-criticalvalue*/}
                 {isCriticalValueCorrect &&(
@@ -332,6 +377,12 @@ export const Quiz = ({
                             <label htmlFor='tLessThanCritical'>
                         |t| &lt; critical value</label>
                         </div>
+                        <button
+                            className='btn btn-small btn-primary mt-3'
+                            disabled={isCriticalCompareCorrect}
+                            onClick={handleNextCriticalValCompare}>
+                            Next
+                        </button>
                     </div>
                     //compare-t-to-criticalvalue
                 )}
@@ -380,6 +431,12 @@ export const Quiz = ({
                             <label htmlFor='failToRejectHypothesis2'>
                             Fail to Reject the Null Hypothesis</label>
                         </div>
+                        <button
+                            className='btn btn-small btn-primary mt-3'
+                            disabled={hypothesisTest2validate}
+                            onClick={handleNextNullHypothesisChoice2}>
+                            Next
+                        </button>
                         {hypothesisTest2validate && (
                             <>
                                 <div>
@@ -391,11 +448,15 @@ export const Quiz = ({
                                         Incorrect</span>
                                     )}
                                 </div>
+                                <div>
+                                    <span style={{ color: 'green' }}>
+                                    You have completed the hypothesis test</span>
                                 <button className={
                                     'btn btn-small btn-secondary mt-3'}
                                 onClick={onComplete}>
-                                    Next
+                                    Proceed To Next Hypothesis
                                 </button>
+                                </div>
                             </>
                         )}
                     </div>

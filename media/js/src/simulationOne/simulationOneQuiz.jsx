@@ -31,16 +31,16 @@ export const SimulationOneQuiz = ({
 
     return (
         <>
-            <div className='simulation__step-container d-flex'>
-                <div className='simulation__step-num'>
+            <div className="simulation__step-container d-flex">
+                <div className="simulation__step-num">
                     &bull;
                 </div>
-                <div className='simulation__step-toggle--down'></div>
-                <div className='simulation__step-body'>
-                    <header className='simulation__step-header'>
-                        <h2 className='h2-primary'>Alternative hypothesis</h2>
+                <div className="simulation__step-toggle--down"></div>
+                <div className="simulation__step-body">
+                    <header className="simulation__step-header">
+                        <h2 className="h2-primary">Alternative hypothesis</h2>
                     </header>
-                    <div className='simulation__step-content'>
+                    <div className="simulation__step-content">
                         <p>
                             The alternative hypothesis is claim believed to be
                             true. In this simulation, there are three
@@ -49,45 +49,45 @@ export const SimulationOneQuiz = ({
                         </p>
 
 
-                        <ol className='listset-alpha listset-alpha-listnum'>
-                            <li className='listset-alpha-card'>
-                                <div className='listset-alpha-card__title'>
+                        <ol className="listset-alpha listset-alpha-listnum">
+                            <li className="listset-alpha-card">
+                                <div className="listset-alpha-card__title">
                                     <Katex tex={
                                     // eslint-disable-next-line max-len
                                         `\\Eta_1: {\\beta_1}{\\neq} ${hypothesizedSlope}`
                                     } />
                                 </div>
-                                <button className='btn btn-sm btn-primary'
+                                <button className="btn btn-sm btn-primary"
                                     disabled={completedChoices.includes('A')}
                                     onClick={() => setSelectedOption('A')}>
-                                        Do This
+                                        Prove
                                 </button>
                             </li>
-                            <li className='listset-alpha-card'>
-                                <div className='listset-alpha-card__title'>
+                            <li className="listset-alpha-card">
+                                <div className="listset-alpha-card__title">
                                     <Katex tex={
                                     // eslint-disable-next-line max-len
                                         `\\Eta_1: {\\beta_1}{\\gt} ${hypothesizedSlope}`
                                     } />
                                 </div>
-                                <button className='btn btn-sm btn-primary'
+                                <button className="btn btn-sm btn-primary"
                                 // eslint-disable-next-line max-len
                                     disabled={completedChoices.includes('B')}
                                     onClick={() => setSelectedOption('B')}>
-                                        Do This
+                                        Prove
                                 </button>
                             </li>
-                            <li className='listset-alpha-card'>
-                                <div className='listset-alpha-card__title'>
+                            <li className="listset-alpha-card">
+                                <div className="listset-alpha-card__title">
                                     <Katex tex={
                                     // eslint-disable-next-line max-len
                                         `\\Eta_1: {\\beta_1}{\\lt} ${hypothesizedSlope}`
                                     } />
                                 </div>
-                                <button className='btn btn-sm btn-primary'
+                                <button className="btn btn-sm btn-primary"
                                     disabled={completedChoices.includes('C')}
                                     onClick={() => setSelectedOption('C')}>
-                                        Do This
+                                        Prove
                                 </button>
                             </li>
                         </ol>
