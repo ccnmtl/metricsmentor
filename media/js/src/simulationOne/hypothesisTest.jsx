@@ -122,7 +122,8 @@ export const HypothesisTest = ({
                             </div>
                         </div>
                         <button className="btn btn-primary mt-3"
-                        onClick={handleNextButtonClick} disabled={alphaSelected}>Next</button>
+                            onClick={handleNextButtonClick}
+                            disabled={alphaSelected}>Next</button>
                         {alphaSelected && (
                             <Quiz
                                 hypothesisTest={hypothesisTest}
