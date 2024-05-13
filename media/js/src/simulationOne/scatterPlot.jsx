@@ -15,8 +15,8 @@ export const ScatterPlot = ({ N, correlation, seed, setAppRvalue,
     const generateData = () => {
         const rng = seedrandom(seed);
 
-        let generatedData = [...data];
-        if (generatedData.length === 0 && typeof correlation === 'number') {
+        let generatedData = [];
+        if (typeof correlation === 'number') {
             for (let i = 0; i < N; i++) {
                 const x = Math.round(rng() * 100);
                 const y = Math.round(correlation * x + Math.sqrt(

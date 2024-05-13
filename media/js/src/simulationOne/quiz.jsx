@@ -61,7 +61,6 @@ export const Quiz = ({
     };
 
     const handleNextPvalueComparison = () => {
-        console.log('pvalueComparison:', pvalueComparison);
         validatePvalueComparison(pvalueComparison);
     };
 
@@ -311,7 +310,7 @@ export const Quiz = ({
                 )}
             </div> {/* solving-p-set */}
 
-            
+
             <div className='solving-p-set border border-primary p-3 mt-3'>
                 {hypothesisTest1validate && (
                     <div className='input-p'>
@@ -450,12 +449,13 @@ export const Quiz = ({
                                 </div>
                                 <div>
                                     <span style={{ color: 'green' }}>
-                                    You have completed the hypothesis test</span>
-                                <button className={
-                                    'btn btn-small btn-secondary mt-3'}
-                                onClick={onComplete}>
+                                    You have completed the hypothesis test
+                                    </span>
+                                    <button className={
+                                        'btn btn-small btn-secondary mt-3'}
+                                    onClick={onComplete}>
                                     Proceed To Next Hypothesis
-                                </button>
+                                    </button>
                                 </div>
                             </>
                         )}
