@@ -194,8 +194,8 @@ export const ScatterPlot = ({ N, correlation, seed, setAppRvalue,
                         'lasso2d', 'autoScale2d'],
                 }}
             />
-            <div className='text-end me-5'>
-                <button className={'btn btn-sm btn-secondary'}
+            <div className="text-end me-5">
+                <button className="btn btn-sm btn-secondary"
                     onClick={exportCSV}>Export CSV</button>
             </div>
         </>

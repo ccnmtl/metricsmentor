@@ -79,8 +79,8 @@ export const SimulationOne = () => {
     't = \\cfrac{\\hat{\\beta}_1 - \\beta_1}{SE(\\hat{\\beta_1})}';
 
     return (
-        <div className='simulation'>
-            <div className='simulation__workspace'>
+        <div className="simulation">
+            <div className="simulation__workspace">
 
                 <SimIntro plotType={plotType} />
 
