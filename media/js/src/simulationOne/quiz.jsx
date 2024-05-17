@@ -175,15 +175,15 @@ export const Quiz = ({
 
     return (
         <>
-            <div className='solving-p-set border border-primary p-3 mt-3'>
-                <div className='input-p'>
+            <div className="solving-p-set border border-primary p-3 mt-3">
+                <div className="input-p">
                     <p>Look up p value for t-stat</p>
                 p value from table:
                     <div>
-                        <label htmlFor='pValue'>p = </label>
+                        <label htmlFor="pValue">p = </label>
                         <input
-                            type='text'
-                            id='pValue'
+                            type="text"
+                            id="pValue"
                             value={userPvalue}
                             disabled={isPvalueCorrect}
                             onChange={handleUserPvalueChange}
@@ -191,7 +191,7 @@ export const Quiz = ({
                     </div>
                 </div>{/*input-p*/}
                 <button
-                    className='btn btn-small btn-primary mt-3'
+                    className="btn btn-small btn-primary mt-3"
                     disabled={isPvalueCorrect}
                     onClick={handleNextPvalueButtonClick}>
                     Next
@@ -208,37 +208,37 @@ export const Quiz = ({
                 )}
 
                 {isPvalueCorrect && (
-                    <div className='p-to-alpha border border-warning p-3 mt-3'>
+                    <div className="p-to-alpha border border-warning p-3 mt-3">
                                 Comparing p values to &alpha;:
                         <div>
                             <input
-                                type='radio'
-                                id='pGreaterThanAlpha'
-                                name='comparison'
-                                value='greaterThan'
+                                type="radio"
+                                id="pGreaterThanAlpha"
+                                name="comparison"
+                                value="greaterThan"
                                 disabled={isPvalCompareCorrect}
                                 checked={pvalueComparison === 'greaterThan'}
                                 onChange={handlePvalueComparisonChange}
                             />
-                            <label htmlFor='pGreaterThanAlpha'>
+                            <label htmlFor="pGreaterThanAlpha">
                         p &gt; alpha
                             </label>
                         </div>
                         <div>
                             <input
-                                type='radio'
-                                id='pLessThanAlpha'
-                                name='comparison'
-                                value='lessThan'
+                                type="radio"
+                                id="pLessThanAlpha"
+                                name="comparison"
+                                value="lessThan"
                                 disabled={isPvalCompareCorrect}
                                 checked={pvalueComparison === 'lessThan'}
                                 onChange={handlePvalueComparisonChange}
                             />
-                            <label htmlFor='pLessThanAlpha'>p &lt; alpha
+                            <label htmlFor="pLessThanAlpha">p &lt; alpha
                             </label>
                         </div>
                         <button
-                            className='btn btn-small btn-primary mt-3'
+                            className="btn btn-small btn-primary mt-3"
                             disabled={isPvalCompareCorrect}
                             onClick={handleNextPvalueComparison}>
                             Next
@@ -258,39 +258,39 @@ export const Quiz = ({
                 )}
 
                 {isPvalCompareCorrect && (
-                    <div className='p-val-concl border border-info p-3 mt-3'>
+                    <div className="p-val-concl border border-info p-3 mt-3">
                         <Katex tex={nullHypothesis} />
                         <Katex tex={hypothesis} />
                         <div>
                             <input
-                                type='radio'
-                                id='rejectHypothesis'
-                                name='decision'
-                                value='reject'
+                                type="radio"
+                                id="rejectHypothesis"
+                                name="decision"
+                                value="reject"
                                 disabled={hypothesisTest1validate}
                                 checked={nullHypothesisChoice1 === 'reject'}
                                 onChange={handleNullHypothesisChoice1Change}
                             />
-                            <label htmlFor='rejectHypothesis'>
+                            <label htmlFor="rejectHypothesis">
                             Reject the Null Hypothesis</label>
                         </div>
                         <div>
                             <input
-                                type='radio'
-                                id='failToRejectHypothesis'
-                                name='decision'
-                                value='failToReject'
+                                type="radio"
+                                id="failToRejectHypothesis"
+                                name="decision"
+                                value="failToReject"
                                 disabled={hypothesisTest1validate}
                                 checked={
                                     nullHypothesisChoice1 === 'failToReject'
                                 }
                                 onChange={handleNullHypothesisChoice1Change}
                             />
-                            <label htmlFor='failToRejectHypothesis'>
+                            <label htmlFor="failToRejectHypothesis">
                             Fail to Reject the Null Hypothesis</label>
                         </div>
                         <button
-                            className='btn btn-small btn-primary mt-3'
+                            className="btn btn-small btn-primary mt-3"
                             disabled={hypothesisTest1validate}
                             onClick={handleNextNullHypothesisChoice1}>
                             Next
@@ -311,25 +311,25 @@ export const Quiz = ({
             </div> {/* solving-p-set */}
 
 
-            <div className='solving-p-set border border-primary p-3 mt-3'>
+            <div className="solving-p-set border border-primary p-3 mt-3">
                 {hypothesisTest1validate && (
-                    <div className='input-p'>
+                    <div className="input-p">
                         <p>Look up critical value for t-stat</p>
 
                         <p>Critical value from table for {alpha} :</p>
                         <div>
-                            <label htmlFor='criticalvalue'>
+                            <label htmlFor="criticalvalue">
                                 critical value = </label>
                             <input
-                                type='text'
-                                id='criticalvalue'
+                                type="text"
+                                id="criticalvalue"
                                 value={userCriticalValue}
                                 disabled={isCriticalValueCorrect}
                                 onChange={handleUserCriticalvalueChange}
                             />
                         </div>
                         <button
-                            className='btn btn-small btn-primary mt-3'
+                            className="btn btn-small btn-primary mt-3"
                             disabled={isCriticalValueCorrect}
                             onClick={handleNextCriticalVal}>
                             Next
@@ -348,36 +348,36 @@ export const Quiz = ({
                     </div>
                 )}
                 {isCriticalValueCorrect && (
-                    <div className='p-val-concl border border-info p-3 mt-3'>
+                    <div className="p-val-concl border border-info p-3 mt-3">
                         <p>Comparing |t| value to critical value:</p>
                         <div>
                             <input
-                                type='radio'
-                                id='tGreaterThanCritical'
-                                name='criticalcomparison'
-                                value='greaterThan'
+                                type="radio"
+                                id="tGreaterThanCritical"
+                                name="criticalcomparison"
+                                value="greaterThan"
                                 disabled={isCriticalCompareCorrect}
                                 checked={compareCritical === 'greaterThan'}
                                 onChange={handleComparingCritical}
                             />
-                            <label htmlFor='tGreaterThanCritical'>
+                            <label htmlFor="tGreaterThanCritical">
                             |t| &gt; critical value</label>
                         </div>
                         <div>
                             <input
-                                type='radio'
-                                id='tLessThanCritical'
-                                name='criticalcomparison'
-                                value='lessThan'
+                                type="radio"
+                                id="tLessThanCritical"
+                                name="criticalcomparison"
+                                value="lessThan"
                                 disabled={isCriticalCompareCorrect}
                                 checked={compareCritical === 'lessThan'}
                                 onChange={handleComparingCritical}
                             />
-                            <label htmlFor='tLessThanCritical'>
+                            <label htmlFor="tLessThanCritical">
                         |t| &lt; critical value</label>
                         </div>
                         <button
-                            className='btn btn-small btn-primary mt-3'
+                            className="btn btn-small btn-primary mt-3"
                             disabled={isCriticalCompareCorrect}
                             onClick={handleNextCriticalValCompare}>
                             Next
@@ -399,39 +399,39 @@ export const Quiz = ({
                  )}
 
                 {isCriticalCompareCorrect && (
-                    <div className='p-val-concl border border-info p-3 mt-3'>
+                    <div className="p-val-concl border border-info p-3 mt-3">
                         <Katex tex={nullHypothesis} />
                         <Katex tex={hypothesis} />
                         <div>
                             <input
-                                type='radio'
-                                id='rejectHypothesis2'
-                                name='decision2'
-                                value='reject'
+                                type="radio"
+                                id="rejectHypothesis2"
+                                name="decision2"
+                                value="reject"
                                 disabled={hypothesisTest2validate}
                                 checked={nullHypothesisChoice2 === 'reject'}
                                 onChange={handleNullHypothesisChoice2Change}
                             />
-                            <label htmlFor='rejectHypothesis2'>
+                            <label htmlFor="rejectHypothesis2">
                             Reject the Null Hypothesis</label>
                         </div>
                         <div>
                             <input
-                                type='radio'
-                                id='failToRejectHypothesis2'
-                                name='decision2'
-                                value='failToReject'
+                                type="radio"
+                                id="failToRejectHypothesis2"
+                                name="decision2"
+                                value="failToReject"
                                 disabled={hypothesisTest2validate}
                                 checked={
                                     nullHypothesisChoice2 === 'failToReject'
                                 }
                                 onChange={handleNullHypothesisChoice2Change}
                             />
-                            <label htmlFor='failToRejectHypothesis2'>
+                            <label htmlFor="failToRejectHypothesis2">
                             Fail to Reject the Null Hypothesis</label>
                         </div>
                         <button
-                            className='btn btn-small btn-primary mt-3'
+                            className="btn btn-small btn-primary mt-3"
                             disabled={hypothesisTest2validate}
                             onClick={handleNextNullHypothesisChoice2}>
                             Next
@@ -451,8 +451,8 @@ export const Quiz = ({
                                     <span style={{ color: 'green' }}>
                                     You have completed the hypothesis test
                                     </span>
-                                    <button className={
-                                        'btn btn-small btn-secondary mt-3'}
+                                    <button className=
+                                        "btn btn-small btn-secondary mt-3"
                                     onClick={onComplete}>
                                     Proceed To Next Hypothesis
                                     </button>

@@ -58,13 +58,13 @@ export const SimulationTwo = () => {
     't = \\cfrac{\\hat{\\beta}_1 - \\beta_1}{SE(\\hat{\\beta_1})}';
 
     return (
-        <div className='simulation'>
-            <div className='simulation__workspace'>
+        <div className="simulation">
+            <div className="simulation__workspace">
 
                 <Sim2Intro plotType={plotType} />
 
-                <div className='simulation__step-container d-flex'>
-                    <div className='simulation__step-num'>
+                <div className="simulation__step-container d-flex">
+                    <div className="simulation__step-num">
                         &bull;
                     </div>
                 </div> {/* div class=simulation__step-container */}
@@ -88,8 +88,8 @@ export const SimulationTwo = () => {
                             handleNullHypothesis={handleNullHypothesis}
                             startQuiz={startQuiz} />
 
-                        <div className='d-flex justify-content-center my-3'>
-                            <button className='btn btn-primary'
+                        <div className="d-flex justify-content-center my-3">
+                            <button className="btn btn-primary"
                                 onClick={saveGraphData}>
                                 Save Graph Data
                             </button>
@@ -104,18 +104,18 @@ export const SimulationTwo = () => {
                     </>
                 )}
             </div> {/* div class=simulation__workspace */}
-            <div className='simulation__graphspace'>
-                <div className='simulation__tab'>
-                    <ul className='nav nav-tabs'>
-                        <li className='nav-item'>
+            <div className="simulation__graphspace">
+                <div className="simulation__tab">
+                    <ul className="nav nav-tabs">
+                        <li className="nav-item">
                             <a className={
                                 plotType === '2d'
                                     ? 'active nav-link'
                                     : 'nav-link'}
                             onClick={() => handlePlotTypeChange('2d')}
-                            href='#'>2D</a>
+                            href="#">2D</a>
                         </li>
-                        <li className='nav-item'>
+                        <li className="nav-item">
                             <a className={
                                 plotType === '3d'
                                     ? 'active nav-link'
@@ -124,7 +124,7 @@ export const SimulationTwo = () => {
                                         : 'nav-link')
                             }
                             onClick={() => handlePlotTypeChange('3d')}
-                            href='#'>3D</a>
+                            href="#">3D</a>
                         </li>
                     </ul>
                 </div>
@@ -144,7 +144,7 @@ export const SimulationTwo = () => {
                     plotType={plotType}
                 />
                 {(slope !== null) && (plotType === '2d') && (
-                    <div className='simulation__graph-summary fs-5'>
+                    <div className="simulation__graph-summary fs-5">
                         <Katex tex={
                             // eslint-disable-next-line max-len
                             `\\hat{y} = ${intercept.toFixed(2)} + ${slope.toFixed(3)}x;`
@@ -158,7 +158,7 @@ export const SimulationTwo = () => {
                     </div>
                 )}
                 {(slopes.length > 0) && (plotType === '3d') && (
-                    <div className='simulation__graph-summary fs-5'>
+                    <div className="simulation__graph-summary fs-5">
                         <Katex tex={
                             // eslint-disable-next-line max-len
                             `\\hat{y} = ${intercept.toFixed(2)} + ${slopes[0].toFixed(3)}x_1 + ${slopes[1].toFixed(3)}x_2;`
