@@ -52,6 +52,7 @@ urlpatterns = [
     re_path(r'^course/(?P<pk>\d+)/api/save-sim1-graph/$',
             views.SaveSim1GraphView.as_view(),
             name='save_sim1_graph'),
+    re_path('^contact/', include('contactus.urls'))
 
 ]
 
