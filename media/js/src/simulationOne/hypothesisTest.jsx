@@ -61,6 +61,8 @@ export const HypothesisTest = ({
 
     useEffect(() => {
         calculatePvalue();
+        document.getElementById('hypothesis-test')
+            .scrollIntoView({ behavior: 'smooth'});
     }, []);
 
     return (
@@ -71,7 +73,9 @@ export const HypothesisTest = ({
                 </div>
                 <div className="simulation__step-toggle--down"></div>
                 <div className="simulation__step-body">
-                    <header className="simulation__step-header">
+                    <header className="simulation__step-header"
+                        id="hypothesis-test"
+                    >
                         <h2>Hypothesis test</h2>
                     </header>
                     <div className="simulation__step-content">

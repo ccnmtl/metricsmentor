@@ -29,6 +29,11 @@ export const SimulationOneQuiz = ({
         is2dCompleted();
     },[completedChoices, allChoicesCompleted]);
 
+    useEffect(() => {
+        document.getElementById('quiz-1')
+            .scrollIntoView({ behavior: 'smooth'});
+    }, []);
+
     return (
         <>
             <div className="simulation__step-container d-flex">
@@ -38,7 +43,8 @@ export const SimulationOneQuiz = ({
                 <div className="simulation__step-toggle--down"></div>
                 <div className="simulation__step-body">
                     <header className="simulation__step-header">
-                        <h2 className="h2-primary">Alternative hypothesis</h2>
+                        <h2 className="h2-primary" id="quiz-1">
+                            Alternative hypothesis</h2>
                     </header>
                     <div className="simulation__step-content">
                         <p>
