@@ -18,9 +18,9 @@ export const ScatterPlot = ({ N, correlation, seed, setAppRvalue,
         let generatedData = [];
         if (typeof correlation === 'number') {
             for (let i = 0; i < N; i++) {
-                const x = Math.round(rng() * 100);
+                const x = Math.round((rng() * 100 - 50) * 2);
                 const y = Math.round(correlation * x + Math.sqrt(
-                    1 - Math.pow(correlation, 2)) * rng() * 100);
+                    1 - Math.pow(correlation, 2)) * (rng() * 100 - 50) * 2);
                 generatedData.push({ x, y });
             }
         }
@@ -29,7 +29,7 @@ export const ScatterPlot = ({ N, correlation, seed, setAppRvalue,
             generatedData = generatedData.map(point => ({
                 ...point,
                 z: Math.round(correlation * point.x + Math.sqrt(
-                    1 - Math.pow(correlation, 2)) * rng() * 100)
+                    1 - Math.pow(correlation, 2)) * (rng() * 100 - 50) * 2)
             }));
         }
 
@@ -176,11 +176,19 @@ export const ScatterPlot = ({ N, correlation, seed, setAppRvalue,
                 layout={{
                     title: 'Single Variable Linear Regression',
                     showlegend: false,
-                    xaxis: { title: 'X Axis' },
+                    xaxis: {
+                        title: 'X Axis',
+                        dtick: 25,
+                        range: [Math.min(...data.map(point => point.y)),
+                            Math.max(...data.map(point => point.y))]
+                    },
                     yaxis: {
                         title: 'Y Axis',
                         scaleanchor: 'x',
                         scaleratio: 1,
+                        dtick: 25,
+                        range: [Math.min(...data.map(point => point.y)) - 10,
+                            Math.max(...data.map(point => point.y)) + 10]
                     },
                     ...(plotType === '2d' ? { dragmode: 'pan' } : {}),
                 }}
