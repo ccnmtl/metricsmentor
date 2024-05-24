@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import { Katex } from '../katexComponent';
 import PropTypes from 'prop-types';
 
@@ -7,6 +7,12 @@ export const NullHypothesisSection = ({
     slope, stderror, tvalue, tEquation, hypothesizedSlope,
     handleNullHypothesis, startQuiz
 }) => {
+
+    useEffect(() => {
+        document.getElementById('null-hypothesis')
+            .scrollIntoView({ behavior: 'smooth'});
+    }, []);
+
     return (
         <div className="simulation__step-container d-flex">
             <div className="simulation__step-num">
@@ -16,7 +22,7 @@ export const NullHypothesisSection = ({
             </div>
             <div className="simulation__step-body">
                 <header className="simulation__step-header">
-                    <h2 className="h2-primary">
+                    <h2 className="h2-primary" id="null-hypothesis">
                     Null hypothesis</h2>
                 </header>
                 <div className="simulation__step-content">

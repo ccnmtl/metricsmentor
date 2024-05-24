@@ -29,7 +29,51 @@ export const Quiz = ({
 
     useEffect(() => {
         calculateCriticalValue();
+        document.getElementById('quiz')
+            .scrollIntoView({ behavior: 'smooth'});
     }, []);
+
+    useEffect(() => {
+        if (isPvalueCorrect) {
+            document.getElementById('pGreaterThanAlpha')
+                .scrollIntoView({ behavior: 'smooth'});
+        }
+    }, [isPvalueCorrect]);
+
+    useEffect(() => {
+        if (isPvalCompareCorrect) {
+            document.getElementById('rejectHypothesis')
+                .scrollIntoView({ behavior: 'smooth'});
+        }
+    }, [isPvalCompareCorrect]);
+
+    useEffect(() => {
+        if (hypothesisTest1validate) {
+            document.getElementById('criticalvalue')
+                .scrollIntoView({ behavior: 'smooth'});
+        }
+    }, [hypothesisTest1validate]);
+
+    useEffect(() => {
+        if (isCriticalValueCorrect) {
+            document.getElementById('tGreaterThanCritical')
+                .scrollIntoView({ behavior: 'smooth'});
+        }
+    }, [isCriticalValueCorrect]);
+
+    useEffect(() => {
+        if (isCriticalCompareCorrect) {
+            document.getElementById('rejectHypothesis2')
+                .scrollIntoView({ behavior: 'smooth'});
+        }
+    }, [isCriticalCompareCorrect]);
+
+    useEffect(() => {
+        if (hypothesisTest2validate) {
+            document.getElementById('proceed')
+                .scrollIntoView({ behavior: 'smooth'});
+        }
+    }, [hypothesisTest2validate]);
 
     // P-Value Logic
     const handleUserPvalueChange = (e) => {
@@ -174,7 +218,7 @@ export const Quiz = ({
 
 
     return (
-        <>
+        <div id="quiz">
             <div className="solving-p-set border border-primary p-3 mt-3">
                 <div className="input-p">
                     <p>Look up p value for t-stat</p>
@@ -453,6 +497,7 @@ export const Quiz = ({
                                     </span>
                                     <button className=
                                         "btn btn-small btn-secondary mt-3"
+                                    id="proceed"
                                     onClick={onComplete}>
                                     Proceed To Next Hypothesis
                                     </button>
@@ -463,7 +508,7 @@ export const Quiz = ({
                 )}
 
             </div>
-        </>
+        </div>
     );
 };
 
