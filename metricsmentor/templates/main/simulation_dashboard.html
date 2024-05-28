@@ -10,10 +10,14 @@
 {% endblock %}
 
 {% block content %}
-<main id="maincontent" class="maincontent--simulation">
-<div class="main-app" id="react-root" data-course="{{ course.id }}"></div>
+<main id="maincontent">
+    <div class="row pt-3 px-0 mt-0 mx-0">
+        <div class="col-12">
+            Course: {{course.title}}
+            {% if course.info.termyear %}<div>Semester: {{ course.info.termyear }}</div>{% endif %}
+            <div><b>Your role:</b> {% if is_faculty %}Instructor{% else %}Student{% endif %}</div>
+        </div>
+    </div>
+    <div class="main-app" id="react-root" data-course="{{ course.id }}"></div>
 </main>
 {% endblock %}
-
-{# Clear the footer blocks for simulation. Need to address sim list page #}
-{% block footer%}{% endblock %}

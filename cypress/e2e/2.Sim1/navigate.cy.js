@@ -1,10 +1,4 @@
-// import { App } from '../../../media/js/src/app';
-
 describe('Navigate to Sim1 from login', () => {
-    // it('React App should be active at "/course"', () => {
-    //     cy.mount(<App />)
-    //     cy.get('a').should('have.class', 'active')
-    // });
     it('Navigate to Sim1 from login', () => {
         cy.login('faculty_one', 'test');
         cy.visit('/');
@@ -13,12 +7,11 @@ describe('Navigate to Sim1 from login', () => {
         cy.get('[data-cy="course-1"]')
             .should('contain', 'course 0');
         cy.get('[data-cy="course-1-link"]').click();
-        cy.get('[data-cy="enterSims"]').should('be.visible');
-        cy.get('[data-cy="enterSims"] > a').click();
         cy.get('[data-cy="sim-1"]').should('contain', 'Simulation 1');
         cy.title().should('contain', 'Simulation');
         cy.get('[data-cy="sim-1-link"]').should('be.visible');
-        cy.get('a[href="/course/1/simulations/1/"]').should('be.visible').click();
+        cy.get('a[href="/course/1/simulations/1/"]')
+            .should('be.visible').click();
         cy.get('span.h2-secondary').should('contain', 'Simulation 1');
         cy.get('[data-cy="navbar"]').should('contain', 'Faculty One');
 
