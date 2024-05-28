@@ -22,6 +22,7 @@ INSTALLED_APPS += [  # noqa
     'metricsmentor.main',
     'courseaffils',
     'lti_provider',
+    'contactus',
 ]
 
 THUMBNAIL_SUBDIR = "thumbs"
