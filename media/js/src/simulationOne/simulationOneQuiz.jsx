@@ -6,7 +6,7 @@ import PropTypes from 'prop-types';
 
 export const SimulationOneQuiz = ({
     appRvalue, tvalue, hypothesizedSlope, n, setIs2DCompleted,
-    is2DCompleted
+    is2DCompleted, submissionId
 }) => {
     const [selectedOption, setSelectedOption] = useState(null);
     const [completedChoices, setCompletedChoices] = useState([]);
@@ -97,6 +97,7 @@ export const SimulationOneQuiz = ({
                     onComplete={handleChoiceCompletion}
                     n={parseInt(n)}
                     completedChoices={completedChoices}
+                    submissionId={submissionId}
                 />
             )}
             {allChoicesCompleted && (
@@ -128,4 +129,5 @@ SimulationOneQuiz.propTypes = {
     n: PropTypes.any.isRequired,
     setIs2DCompleted: PropTypes.func.isRequired,
     is2DCompleted: PropTypes.bool.isRequired,
+    submissionId: PropTypes.number.isRequired
 };

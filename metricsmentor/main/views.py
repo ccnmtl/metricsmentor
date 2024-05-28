@@ -19,7 +19,7 @@ from django.views.generic.detail import DetailView
 from lti_provider.models import LTICourseContext
 from metricsmentor.main.utils import send_template_email
 from metricsmentor.mixins import LoggedInCourseMixin
-from metricsmentor.main.models import Graph
+from metricsmentor.main.models import Graph, Answer, QuizSubmission
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 from django.utils.decorators import method_decorator
@@ -302,10 +302,49 @@ class SaveSim1GraphView(LoggedInCourseMixin, View):
         course_pk = self.kwargs.get('pk')
         course = Course.objects.get(pk=course_pk)
 
-        graph = Graph.objects.create(user=user, simulation=1,
-                                     data=graph_data, course=course)
+        graph = Graph.objects.create(
+            user=user,
+            simulation=1,
+            data=graph_data,
+            course=course
+        )
+
+        quiz_submission = QuizSubmission.objects.create(
+            graph=graph,
+            data={}
+        )
 
         print(f'Graph data saved successfully: {graph}')
+        print(f'Quiz submission created successfully: {quiz_submission}')
 
-        return JsonResponse({'message': 'Graph data saved successfully'},
-                            status=201)
+        return JsonResponse({
+            'message': 'Graph data and quiz submission saved successfully',
+            'graph_id': graph.id,
+            'submission_id': quiz_submission.id
+        }, status=201)
+
+
+@csrf_exempt
+def save_answer(request):
+    if request.method == 'POST':
+        data = json.loads(request.body)
+        submission_id = data.get('submission_id')
+        question_number = data.get('question_number')
+        question_type = data.get('question_type')
+        selected_option = data.get('selected_option')
+        is_correct = data.get('is_correct')
+        additional_data = data.get('additional_data', {})
+
+        submission = QuizSubmission.objects.get(id=submission_id)
+        answer = Answer.objects.create(
+            quiz_submission=submission,
+            question_number=question_number,
+            question_type=question_type,
+            selected_option=selected_option,
+            is_correct=is_correct,
+            data=additional_data
+        )
+
+        return JsonResponse({'status': 'success', 'answer_id': answer.id})
+
+    return JsonResponse({'status': 'fail'}, status=400)

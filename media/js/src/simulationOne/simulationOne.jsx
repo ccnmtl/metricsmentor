@@ -29,6 +29,7 @@ export const SimulationOne = () => {
     const [stderrs, setStderrs] = useState([]);
     const [is2DCompleted, setIs2DCompleted] = useState(false);
     const [showNullHypothesis, setShowNullHypothesis] = useState(false);
+    const [submissionId, setSubmissionId] = useState(null);
 
 
     const saveGraphData = async() => {
@@ -38,16 +39,32 @@ export const SimulationOne = () => {
         };
 
         return authedFetch(
-            `/course/${coursePk}/api/save-sim1-graph/`, 'POST', {data})
-            .then(function(response) {
+            `/course/${coursePk}/api/save-sim1-graph/`, 'POST', { data })
+            .then(response => {
                 if (response.status === 201) {
-                    setStartQuiz(true);
                     return response.json();
                 } else {
                     throw 'Error  ' +
-                `(${response.status}) ${response.statusText}`;
+                    `(${response.status}) ${response.statusText}`;
                 }
+            })
+            .then(data => {
+                setStartQuiz(true);
+                setSubmissionId(data.submission_id);
+                return data;
+            })
+            .catch(error => {
+                console.error('Error saving graph data:', error);
+                throw error;
             });
+    };
+
+    const handleSaveGraph = async() => {
+        try {
+            await saveGraphData();
+        } catch (error) {
+            alert('Failed to save graph and submission.');
+        }
     };
 
     const handleNChange = (e) => {
@@ -205,7 +222,8 @@ export const SimulationOne = () => {
                                 <div className=
                                     "d-flex justify-content-center my-3">
                                     <button className="btn btn-primary"
-                                        onClick={saveGraphData}>
+                                        disabled={startQuiz}
+                                        onClick={handleSaveGraph}>
                                     Save Graph Data
                                     </button>
                                 </div>
@@ -219,6 +237,7 @@ export const SimulationOne = () => {
                                 n={N}
                                 appRvalue={appRvalue}
                                 is2DCompleted={is2DCompleted}
+                                submissionId={submissionId}
                                 setIs2DCompleted={setIs2DCompleted} />
                         )}
                     </>

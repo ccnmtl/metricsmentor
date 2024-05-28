@@ -2,10 +2,11 @@ import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { Katex } from '../katexComponent';
 import axios from 'axios';
+import { saveAnswer } from '../utils';
 
 export const Quiz = ({
     appRvalue, tvalue, pvalue, alpha, hypothesisTest, hypothesis,
-    nullHypothesis, n, onComplete, completedChoices
+    nullHypothesis, n, onComplete, completedChoices, submissionId
 }) => {
 
     const [criticalValues, setCriticalValues] = useState(null);
@@ -75,6 +76,7 @@ export const Quiz = ({
         }
     }, [hypothesisTest2validate]);
 
+
     // P-Value Logic
     const handleUserPvalueChange = (e) => {
         // Allow number and decimal point
@@ -95,8 +97,24 @@ export const Quiz = ({
         setUserPvalue(value);
     };
 
-    const handleNextPvalueButtonClick = () => {
-        validatePvalue(userPvalue);
+    const validatePvalue = (value) => {
+        const isValid = parseFloat(value) === pvalue;
+        setIsPvalueCorrect(isValid);
+        return isValid;
+    };
+
+    const handleNextPvalueButtonClick = async() => {
+        const isCorrect = validatePvalue(userPvalue);
+        const additionalData = {
+            userPvalue: userPvalue,
+            pvalue: pvalue,
+            alpha: alpha,
+            hypothesis: hypothesis,
+            nullHypothesis: nullHypothesis
+        };
+
+        await saveAnswer(submissionId, 1, 'numerical',
+            userPvalue, isCorrect, additionalData);
     };
 
     const handlePvalueComparisonChange = (event) => {
@@ -104,26 +122,27 @@ export const Quiz = ({
         setPvalueComparison(newValue);
     };
 
-    const handleNextPvalueComparison = () => {
-        validatePvalueComparison(pvalueComparison);
-    };
-
     const validatePvalueComparison = (value) => {
-        setIsPvalCompareCorrect(
-            value === (pvalue < alpha ? 'lessThan' : 'greaterThan')
-        );
+        const isValid = value === (pvalue < alpha ? 'lessThan' : 'greaterThan');
+        setIsPvalCompareCorrect(isValid);
+        return isValid;
     };
 
-    const validatePvalue = (value) => {
-        setIsPvalueCorrect(parseFloat(value) === pvalue);
+    const handleNextPvalueComparison = async() => {
+        const isCorrect = validatePvalueComparison(pvalueComparison);
+        const additionalData = {
+            comparison: pvalueComparison,
+            pvalue: pvalue,
+            alpha: alpha,
+            hypothesis: hypothesis,
+            nullHypothesis: nullHypothesis};
+
+        await saveAnswer(submissionId, 2, 'radio', pvalueComparison,
+            isCorrect, additionalData);
     };
 
     const handleNullHypothesisChoice1Change = (event) => {
         setNullHypothesisChoice1(event.target.value);
-    };
-
-    const handleNextNullHypothesisChoice1 = () => {
-        validateHypothesisTest1(nullHypothesisChoice1);
     };
 
     const validateHypothesisTest1 = (value) => {
@@ -132,6 +151,21 @@ export const Quiz = ({
                     (pvalue > alpha && value === 'failToReject');
 
         setHypothesisTest1validate((correctDecision));
+
+        return correctDecision;
+    };
+
+    const handleNextNullHypothesisChoice1 = async() => {
+        const isCorrect = validateHypothesisTest1(nullHypothesisChoice1);
+        const additionalData = {
+            decision: nullHypothesisChoice1,
+            pvalue: pvalue,
+            alpha: alpha,
+            hypothesis: hypothesis,
+            nullHypothesis: nullHypothesis};
+
+        await saveAnswer(submissionId, 3, 'radio',
+            nullHypothesisChoice1, isCorrect, additionalData);
     };
 
 
@@ -175,20 +209,27 @@ export const Quiz = ({
     };
 
     const validateCriticalValue = (value) => {
-        setIsCriticalValueCorrect(parseFloat(value) === criticalValue);
+        const isValid = parseFloat(value) === criticalValue;
+        setIsCriticalValueCorrect(isValid);
+        return isValid;
     };
 
-    const handleNextCriticalVal = () => {
-        validateCriticalValue(userCriticalValue);
+    const handleNextCriticalVal = async() => {
+        const isCorrect = validateCriticalValue(userCriticalValue);
+        const additionalData = {
+            userCriticalValue: userCriticalValue,
+            criticalValue: criticalValue,
+            alpha: alpha,
+            hypothesis: hypothesis,
+            nullHypothesis: nullHypothesis};
+
+        await saveAnswer(submissionId, 4, 'numerical',
+            userCriticalValue, isCorrect, additionalData);
     };
 
     const handleComparingCritical = (event) => {
         const newValue = event.target.value;
         setCompareCritical(newValue);
-    };
-
-    const handleNextCriticalValCompare = () => {
-        validateCriticalComparison(compareCritical);
     };
 
     const validateCriticalComparison = (value) => {
@@ -197,14 +238,26 @@ export const Quiz = ({
         (Math.abs(tvalue) <= criticalValue && value === 'lessThan');
 
         setIsCriticalCompareCorrect(correctComparison);
+
+        return correctComparison;
+    };
+
+    const handleNextCriticalValCompare = () => {
+        const isCorrect = validateCriticalComparison(compareCritical);
+        const additionalData = {
+            comparison: compareCritical,
+            tvalue: tvalue,
+            criticalValue: criticalValue,
+            alpha: alpha,
+            hypothesis: hypothesis,
+            nullHypothesis: nullHypothesis};
+
+        saveAnswer(submissionId, 5, 'radio',
+            compareCritical, isCorrect, additionalData);
     };
 
     const handleNullHypothesisChoice2Change = (event) => {
         setNullHypothesisChoice2(event.target.value);
-    };
-
-    const handleNextNullHypothesisChoice2 = () => {
-        validateHypothesisTest2(nullHypothesisChoice2);
     };
 
     const validateHypothesisTest2 = (value) => {
@@ -214,6 +267,21 @@ export const Quiz = ({
 
         setHypothesisTest2validate(correctDecision);
 
+        return correctDecision;
+    };
+
+    const handleNextNullHypothesisChoice2 = async() => {
+        const isCorrect = validateHypothesisTest2(nullHypothesisChoice2);
+        const additionalData = {
+            decision: nullHypothesisChoice2,
+            tvalue: tvalue,
+            criticalValue: criticalValue,
+            alpha: alpha,
+            hypothesis: hypothesis,
+            nullHypothesis: nullHypothesis};
+
+        await saveAnswer(submissionId, 6, 'radio',
+            nullHypothesisChoice2, isCorrect, additionalData);
     };
 
 
@@ -523,4 +591,5 @@ Quiz.propTypes = {
     n: PropTypes.number.isRequired,
     onComplete: PropTypes.func.isRequired,
     completedChoices: PropTypes.array.isRequired,
+    submissionId: PropTypes.number.isRequired
 };
