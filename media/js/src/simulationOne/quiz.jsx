@@ -4,6 +4,7 @@ import { Katex } from '../katexComponent';
 import axios from 'axios';
 import { saveAnswer } from '../utils';
 import { PvalueModal } from './modalPvalue';
+import { CriticalValueModal } from './modalCV';
 
 export const Quiz = ({
     appRvalue, tvalue, pvalue, alpha, hypothesisTest, hypothesis,
@@ -436,7 +437,16 @@ export const Quiz = ({
                     <div className="input-p">
                         <p>Look up critical value for t-stat</p>
 
-                        <p>Critical value from table for {alpha} :</p>
+                        <p>Critical value from table for {alpha} :
+                            <button className="btn btn-small btn-primary mt-3"
+                                data-bs-toggle="modal"
+                                data-bs-target="#criticalValModal">
+                                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" className="bi bi-table" viewBox="0 0 16 16">
+                                    <path d="M0 2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2zm15 2h-4v3h4zm0 4h-4v3h4zm0 4h-4v3h3a1 1 0 0 0 1-1zm-5 3v-3H6v3zm-5 0v-3H1v2a1 1 0 0 0 1 1zm-4-4h4V8H1zm0-4h4V4H1zm5-3v3h4V4zm4 4H6v3h4z"/> {/* eslint-disable-line max-len */}
+                                </svg>
+                            </button>
+                        </p>
+                        <CriticalValueModal />
                         <div>
                             <label htmlFor="criticalvalue">
                                 critical value = </label>
