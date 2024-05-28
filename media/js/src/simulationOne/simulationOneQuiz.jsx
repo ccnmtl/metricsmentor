@@ -54,48 +54,35 @@ export const SimulationOneQuiz = ({
                             dolor sit amet.
                         </p>
 
-
                         <ol className="listset-alpha listset-alpha-listnum">
-                            <li className="listset-alpha-card">
-                                <div className="listset-alpha-card__title">
-                                    <Katex tex={
-                                    // eslint-disable-next-line max-len
-                                        `\\Eta_1: {\\beta_1}{\\neq} ${hypothesizedSlope}`
-                                    } />
-                                </div>
-                                <button className="btn btn-sm btn-primary"
-                                    disabled={completedChoices.includes('A')}
-                                    onClick={() => setSelectedOption('A')}>
+                            {[
+                                ['A', '\\Eta_1: {\\beta_1}{\\neq} '],
+                                ['B', '\\Eta_1: {\\beta_1}{\\gt} '],
+                                ['C', '\\Eta_1: {\\beta_1}{\\lt} ']
+                            ].map((choice, key) => (
+                                <li key={key}
+                                    className={'listset-alpha-card' +
+                                        (selectedOption === choice[0] ?
+                                            ' hypothesis-selected' : '') +
+                                        (completedChoices.includes(choice[0]) ?
+                                            ' hypothesis-completed' : '')
+                                    }
+                                >
+                                    <div className="listset-alpha-card__title">
+                                        <Katex tex={
+                                            choice[1] + hypothesizedSlope} />
+                                    </div>
+                                    <button className="btn btn-sm btn-primary"
+                                        disabled={selectedOption !== null ||
+                                            completedChoices.includes(
+                                                choice[0])}
+                                        onClick={
+                                            () => setSelectedOption(choice[0])}
+                                    >
                                         Prove
-                                </button>
-                            </li>
-                            <li className="listset-alpha-card">
-                                <div className="listset-alpha-card__title">
-                                    <Katex tex={
-                                    // eslint-disable-next-line max-len
-                                        `\\Eta_1: {\\beta_1}{\\gt} ${hypothesizedSlope}`
-                                    } />
-                                </div>
-                                <button className="btn btn-sm btn-primary"
-                                // eslint-disable-next-line max-len
-                                    disabled={completedChoices.includes('B')}
-                                    onClick={() => setSelectedOption('B')}>
-                                        Prove
-                                </button>
-                            </li>
-                            <li className="listset-alpha-card">
-                                <div className="listset-alpha-card__title">
-                                    <Katex tex={
-                                    // eslint-disable-next-line max-len
-                                        `\\Eta_1: {\\beta_1}{\\lt} ${hypothesizedSlope}`
-                                    } />
-                                </div>
-                                <button className="btn btn-sm btn-primary"
-                                    disabled={completedChoices.includes('C')}
-                                    onClick={() => setSelectedOption('C')}>
-                                        Prove
-                                </button>
-                            </li>
+                                    </button>
+                                </li>
+                            ))}
                         </ol>
                     </div>
                 </div>
