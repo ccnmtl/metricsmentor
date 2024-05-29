@@ -71,6 +71,15 @@ export const SimulationOne = () => {
         setN(parseInt(e.target.value));
     };
 
+    const handleNBlur = (e) => {
+        const n = parseInt(e.target.value);
+        if (isNaN(n) || n < 50) {
+            setN(50);
+        } else if (n > 500) {
+            setN(500);
+        }
+    };
+
     const handleCorrelationChange = (e) => {
         setCorrelation(parseFloat(e.target.value));
     };
@@ -136,7 +145,9 @@ export const SimulationOne = () => {
                                     id="nSampleSize"
                                     className="form-control"
                                     disabled={startQuiz}
-                                    value={N} onChange={handleNChange} />
+                                    value={N}
+                                    onBlur={handleNBlur}
+                                    onChange={handleNChange} />
                             </div>
                             <div className="mt-4">
                                 <label htmlFor="correlation"

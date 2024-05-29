@@ -13,6 +13,9 @@ export const ScatterPlot = ({ N, correlation, seed, setAppRvalue,
     const [regressionLine, setRegressionLine] = useState(null);
 
     const generateData = () => {
+        if (N < 50 || N > 500) {
+            return [];
+        }
         const rng = seedrandom(seed);
 
         let generatedData = [];
@@ -50,6 +53,15 @@ export const ScatterPlot = ({ N, correlation, seed, setAppRvalue,
     // };
 
     const calculateRegression = async() => {
+        if (N < 50 || N > 500) {
+            return setRegressionLine({
+                type: 'surface',
+                mode: 'lines',
+                x: [],
+                y: [],
+                marker: { color: 'red' },
+            });
+        }
         const x_values = data.map(point => point.x);
         const y_values = data.map(point => point.y);
         const z_values = plotType === '3d'
