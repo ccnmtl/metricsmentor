@@ -10,6 +10,7 @@ export const SimulationOneQuiz = ({
 }) => {
     const [selectedOption, setSelectedOption] = useState(null);
     const [completedChoices, setCompletedChoices] = useState([]);
+    const [isSubmitted, setIsSubmitted] = useState(false);
 
     const allChoicesCompleted = ['A', 'B', 'C'].every(
         choice => completedChoices.includes(choice));
@@ -118,7 +119,14 @@ export const SimulationOneQuiz = ({
                     'hypothesis β1 = 0.'}
                     submissionId={submissionId}
                     questionNumber={7}
+                    isSubmitted={isSubmitted}
+                    setIsSubmitted={setIsSubmitted}
                 />
+            )}
+            {isSubmitted && (
+                <div>
+                    Congratulations on completing the 2D simulation!
+                </div>
             )}
         </>
     );
