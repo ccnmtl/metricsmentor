@@ -1,7 +1,9 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
+import { saveAnswer } from './utils';
 
-export const MultipleChoiceQuestion = ({ question, options, answer }) => {
+export const MultipleChoiceQuestion = ({
+    submissionId, questionNumber,question, options, answer }) => {
     const [selectedOption, setSelectedOption] = useState(null);
     const [isSubmitted, setIsSubmitted] = useState(false);
     const [isCorrect, setIsCorrect] = useState(null);
@@ -10,12 +12,19 @@ export const MultipleChoiceQuestion = ({ question, options, answer }) => {
         setSelectedOption(option);
     };
 
-    const handleSubmit = () => {
+    const handleSubmit = async() => {
         setIsSubmitted(true);
-        if (selectedOption === answer) {
-            setIsCorrect(true);
-        } else {
-            setIsCorrect(false);
+        const correct = selectedOption === answer;
+        setIsCorrect(correct);
+
+        const questionType = 'multiple-choice';
+
+        try {
+            await saveAnswer(submissionId, questionNumber, questionType,
+                selectedOption, correct, {});
+            console.log('Answer saved successfully');
+        } catch (error) {
+            console.error('Error saving answer:', error);
         }
     };
 
@@ -52,4 +61,6 @@ MultipleChoiceQuestion.propTypes = {
     question: PropTypes.string.isRequired,
     options: PropTypes.arrayOf(PropTypes.string).isRequired,
     answer: PropTypes.string.isRequired,
+    submissionId: PropTypes.number.isRequired,
+    questionNumber: PropTypes.number.isRequired
 };
