@@ -29,4 +29,17 @@ class QuizSubmission(models.Model):
     updated_at = models.DateTimeField(auto_now=True)
 
     def __str__(self):
-        return f"QuizSubmission - {self.user.username} - {self.graph}"
+        return "QuizSubmission - " + self.graph.user.username
+        + " - " + str(self.graph.simulation)
+
+
+class Answer(models.Model):
+    quiz_submission = models.ForeignKey(QuizSubmission,
+                                        on_delete=models.CASCADE)
+    question_number = models.IntegerField()
+    question_type = models.CharField(max_length=50)
+    selected_option = models.CharField(max_length=255)
+    is_correct = models.BooleanField(default=False)
+    data = models.JSONField()
+    created_at = models.DateTimeField(auto_now_add=True)
+    updated_at = models.DateTimeField(auto_now=True)
