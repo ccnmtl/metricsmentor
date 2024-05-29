@@ -116,6 +116,8 @@ export const SimulationOneQuiz = ({
                     answer={'The closer the correlation between Y and X1 is '
                     + 'to zero, the less likely it is to reject the null ' +
                     'hypothesis β1 = 0.'}
+                    submissionId={submissionId}
+                    questionNumber={7}
                 />
             )}
         </>
