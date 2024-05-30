@@ -24,7 +24,11 @@ My Courses | Metrics Mentor
             <tbody>
                 {% for course in courses %}
                 <tr>
-                    <th scope="row" data-cy="course-{{ forloop.counter }}"><a data-cy="course-{{ forloop.counter }}-link" href="{% url 'course-detail-view' course.pk %}">{{ course.title }}</a></th>
+                    <th scope="row" data-cy="course-{{ forloop.counter }}">
+                        <a data-cy="course-{{ forloop.counter }}-link"
+                           href="{% url 'simulation-dashboard-view' course.pk %}">
+                            {{ course.title }}</a>
+                    </th>
                     <td>{% if course.info.termyear %}{{ course.info.termyear }}{% else %} &ndash; {% endif %}</td>
                     <td>{{ course|course_faculty_string }}</td>
                 </tr>
