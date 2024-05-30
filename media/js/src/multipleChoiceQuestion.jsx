@@ -3,9 +3,9 @@ import PropTypes from 'prop-types';
 import { saveAnswer } from './utils';
 
 export const MultipleChoiceQuestion = ({
-    submissionId, questionNumber,question, options, answer }) => {
+    isSubmitted, setIsSubmitted, submissionId, questionNumber,
+    question, options, answer }) => {
     const [selectedOption, setSelectedOption] = useState(null);
-    const [isSubmitted, setIsSubmitted] = useState(false);
     const [isCorrect, setIsCorrect] = useState(null);
 
     const handleOptionSelect = (option) => {
@@ -62,5 +62,7 @@ MultipleChoiceQuestion.propTypes = {
     options: PropTypes.arrayOf(PropTypes.string).isRequired,
     answer: PropTypes.string.isRequired,
     submissionId: PropTypes.number.isRequired,
-    questionNumber: PropTypes.number.isRequired
+    questionNumber: PropTypes.number.isRequired,
+    setIsSubmitted: PropTypes.func.isRequired,
+    isSubmitted: PropTypes.bool.isRequired,
 };
