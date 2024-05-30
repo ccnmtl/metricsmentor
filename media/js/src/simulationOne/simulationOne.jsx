@@ -235,7 +235,7 @@ export const SimulationOne = () => {
                                     <button className="btn btn-primary"
                                         disabled={startQuiz}
                                         onClick={handleSaveGraph}>
-                                    Save Graph Data
+                                    Save Graph and Continue
                                     </button>
                                 </div>
                             </>
