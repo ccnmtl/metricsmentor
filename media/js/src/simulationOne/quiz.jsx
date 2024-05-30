@@ -363,20 +363,20 @@ export const Quiz = ({
                             onClick={handleNextPvalueComparison}>
                             Next
                         </button>
+                        {isPvalCompareCorrect && (
+                            <div>
+                                <span style={{ color: 'green' }}>Correct</span>
+                            </div>
+                        )}
+
+                        {!isPvalCompareCorrect &&
+                        isPvalCompareCorrect !== null && (
+                            <div>
+                                <span style={{ color: 'red' }}>Incorrect</span>
+                            </div>
+                        )}
                     </div>//compare-p-to-alpha
                 )}
-                {isPvalCompareCorrect && (
-                    <div>
-                        <span style={{ color: 'green' }}>Correct</span>
-                    </div>
-                )}
-
-                {!isPvalCompareCorrect && isPvalCompareCorrect !== null && (
-                    <div>
-                        <span style={{ color: 'red' }}>Incorrect</span>
-                    </div>
-                )}
-
                 {isPvalCompareCorrect && (
                     <div className="p-val-concl border border-info p-3 mt-3">
                         <Katex tex={nullHypothesis} />
@@ -417,13 +417,13 @@ export const Quiz = ({
                         </button>
                         {hypothesisTest1validate && (
                             <div>
-                                {hypothesisTest1validate ? (
-                                    <span style={{ color: 'green' }}>
-                                        Correct</span>
-                                ) : (
-                                    <span style={{ color: 'red' }}>
-                                        Incorrect</span>
-                                )}
+                                <span style={{ color: 'green' }}>Correct</span>
+                            </div>
+                        )}
+                        {!hypothesisTest1validate &&
+                        hypothesisTest1validate !== null && (
+                            <div>
+                                <span style={{ color: 'red' }}>Incorrect</span>
                             </div>
                         )}
                     </div>
@@ -502,22 +502,19 @@ export const Quiz = ({
                             onClick={handleNextCriticalValCompare}>
                             Next
                         </button>
-                    </div>
-                    //compare-t-to-criticalvalue
+                        {isCriticalCompareCorrect && (
+                            <div>
+                                <span style={{ color: 'green' }}>Correct</span>
+                            </div>
+                        )}
+                        {!isCriticalCompareCorrect &&
+                        isCriticalCompareCorrect !== null && (
+                            <div>
+                                <span style={{ color: 'red' }}>Incorrect</span>
+                            </div>
+                        )}
+                    </div> //compare-t-to-criticalvalue
                 )}
-                {isCriticalCompareCorrect && (
-                    <div>
-                        <span style={{ color: 'green' }}>Correct</span>
-                    </div>
-                )}
-
-                {!isCriticalCompareCorrect && isCriticalCompareCorrect !== null
-                 && (
-                     <div>
-                         <span style={{ color: 'red' }}>Incorrect</span>
-                     </div>
-                 )}
-
                 {isCriticalCompareCorrect && (
                     <div className="p-val-concl border border-info p-3 mt-3">
                         <Katex tex={nullHypothesis} />
@@ -559,13 +556,9 @@ export const Quiz = ({
                         {hypothesisTest2validate && (
                             <>
                                 <div>
-                                    {hypothesisTest2validate ? (
-                                        <span style={{ color: 'green' }}>
-                                        Correct</span>
-                                    ) : (
-                                        <span style={{ color: 'red' }}>
-                                        Incorrect</span>
-                                    )}
+                                    <span style={{ color: 'green' }}>
+                                        Correct
+                                    </span>
                                 </div>
                                 <div>
                                     <span style={{ color: 'green' }}>
@@ -579,6 +572,12 @@ export const Quiz = ({
                                     </button>
                                 </div>
                             </>
+                        )}
+                        {!hypothesisTest2validate &&
+                        hypothesisTest2validate !== null && (
+                            <div>
+                                <span style={{ color: 'red' }}>Incorrect</span>
+                            </div>
                         )}
                     </div>
                 )}
