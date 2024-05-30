@@ -86,48 +86,28 @@ export const HypothesisTest = ({
                         <div>r: {appRvalue.toFixed(3)}</div>
                         <div>t: {tvalue}</div>
                         <p>Choose significance level, alpha:</p>
-                        <div>
-                            <div>
-                                <input
-                                    type="radio"
-                                    id="significance1"
-                                    name="significance"
-                                    value={0.01}
-                                    checked={alpha === 0.01}
-                                    onChange={handleAlphaChange}
-                                    disabled={alphaSelected}
-                                />
-                                <label htmlFor="significance1">1% (0.01)</label>
-                            </div>
-                            <div>
-                                <input
-                                    type="radio"
-                                    id="significance5"
-                                    name="significance"
-                                    value={0.05}
-                                    checked={alpha === 0.05}
-                                    onChange={handleAlphaChange}
-                                    disabled={alphaSelected}
-                                />
-                                <label htmlFor="significance5">5% (0.05)</label>
-                            </div>
-                            <div>
-                                <input
-                                    type="radio"
-                                    id="significance10"
-                                    name="significance"
-                                    value={0.10}
-                                    checked={alpha === 0.10}
-                                    onChange={handleAlphaChange}
-                                    disabled={alphaSelected}
-                                />
-                                <label
-                                    htmlFor="significance10">10% (0.10)</label>
-                            </div>
-                        </div>
+                        <ul className="list-inline">
+                            {[0.01, 0.05, 0.10].map((val, key) => (
+                                <li key={key} className="list-inline-item">
+                                    <input
+                                        type="radio"
+                                        id={`significance${val*100}`}
+                                        name="significance"
+                                        value={val}
+                                        checked={alpha === val}
+                                        onChange={handleAlphaChange}
+                                        disabled={alphaSelected}
+                                    />
+                                    <label htmlFor={`significance${val*100}`}
+                                        className="mx-2">
+                                        {`${val*100}% (${val.toFixed(2)})`}
+                                    </label>
+                                </li>
+                            ))}
+                        </ul>
                         <button className="btn btn-primary mt-3"
                             onClick={handleNextButtonClick}
-                            disabled={alphaSelected}>Next</button>
+                            disabled={!alpha || alphaSelected}>Next</button>
                         {alphaSelected && (
                             <Quiz
                                 hypothesisTest={hypothesisTest}
