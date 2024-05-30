@@ -50,8 +50,7 @@ export const SimulationOneQuiz = ({
                         <p>
                             The alternative hypothesis is claim believed to be
                             true. In this simulation, there are three
-                            alternative hypothesis. Choose one lorem ipsum
-                            dolor sit amet.
+                            alternative hypothesis. Choose one:
                         </p>
 
                         <ol className="listset-alpha listset-alpha-listnum">
