@@ -41,8 +41,9 @@ AUTHENTICATION_BACKENDS += [  # noqa
 
 SERVER_EMAIL = 'automated@mail.ctl.columbia.edu'
 CONTACT_US_EMAIL = 'ctl-metricsmentor@columbia.edu'
-EMAIL_BACKEND = 'django_smtp_ssl.SSLEmailBackend'
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_USE_TLS = True
+EMAIL_USE_SSL = False
 EMAIL_HOST = os.environ.get('EMAIL_HOST')
 EMAIL_PORT = os.environ.get('EMAIL_PORT')
 EMAIL_HOST_USER = os.environ.get('SES_USERNAME')
