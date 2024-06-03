@@ -20,7 +20,8 @@ export const Dashboard = () => {
                             <span className="h2-secondary d-block">
                                 Simulation 1
                             </span>
-                            <span className="h2-title d-block">
+                            <span className="h2-title d-block"
+                                data-cy="sim-1">
                                 {'Hypothesis Testing for Population Slope'}
                             </span>
                         </h2>
@@ -44,7 +45,8 @@ export const Dashboard = () => {
                             mx-lg-0
                             simulation-card">
                         <h2 className="h2-primary">
-                            <span className="h2-secondary d-block">
+                            <span className="h2-secondary d-block"
+                                data-cy="sim-2">
                                 Simulation 2</span>
                             <span className="h2-title d-block">
                                 {'Omitted Variable Bias'}
@@ -59,9 +61,9 @@ export const Dashboard = () => {
                             identify and address OVB in your econometric
                             analysis, ensuring the reliability and validity of
                             your findings.</p>
-                        <Link to={`/course/${courseId}/simulations/1/`}
+                        <Link to={`/course/${courseId}/simulations/2/`}
                             className="btn btn-primary my-3"
-                            data-cy="sim-1-link">
+                            data-cy="sim-2-link">
                             Begin &raquo;
                         </Link>
                     </div>
