@@ -1,0 +1,9 @@
+.simulation-card {
+    border: 0.0625rem solid $gray-md-300;
+    border-radius: $radius-md;
+    .h2-primary {
+        padding-bottom: 0.75rem;
+        margin-bottom: 1rem;
+        border-bottom: 0.0625rem dotted $gray-md-300;
+    }
+}

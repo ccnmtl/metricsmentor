@@ -44,3 +44,17 @@
     margin: auto;
     text-align: center;
 }
+
+.section-sim-dashboard {
+    min-height: calc(100vh - 20rem);
+    margin: auto;
+    text-align: center;
+    padding: 1rem 15px;
+    @extend .container;
+    @include media-breakpoint-up(sm) {
+        padding: 2rem 0;
+    }
+    @include media-breakpoint-up(lg) {
+        border-top: none;
+    }
+}
