@@ -251,9 +251,16 @@ def calculate_pvalue(request):
 
         # degrees of freedom
         df = n - 2
-        p_value_left = t.cdf(t_value, df)
-        p_value_right = 1 - t.cdf(t_value, df)
-        p_value_two_sided = 2 * t.cdf(-abs(t_value), df)
+
+        # Calculate p-values
+        if t_value > 0:
+            p_value_left = 1 - t.cdf(t_value, df)
+            p_value_right = 1 - t.cdf(t_value, df)
+            p_value_two_sided = 2 * (1 - t.cdf(abs(t_value), df))
+        else:
+            p_value_left = t.cdf(t_value, df)
+            p_value_right = t.cdf(t_value, df)
+            p_value_two_sided = 2 * t.cdf(-abs(t_value), df)
 
         return JsonResponse({
             'value_left': p_value_left,
