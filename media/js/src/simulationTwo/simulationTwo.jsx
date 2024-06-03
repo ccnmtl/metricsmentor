@@ -147,13 +147,13 @@ export const SimulationTwo = () => {
                     <div className="simulation__graph-summary fs-5">
                         <Katex tex={
                             // eslint-disable-next-line max-len
-                            `\\hat{y} = ${intercept.toFixed(2)} + ${slope.toFixed(3)}x;`
+                            `\\hat{y} = ${intercept.toFixed(3)} + ${slope.toFixed(3)}x;`
                         } />
                         <Katex tex={
                             `\\hat{\\beta_1} = ${slope.toFixed(3)};`
                         } />
                         <Katex tex={
-                            `corr(x,y) = ${appRvalue.toFixed(2)}`
+                            `corr(x,y) = ${appRvalue.toFixed(3)}`
                         } />
                     </div>
                 )}
@@ -161,7 +161,7 @@ export const SimulationTwo = () => {
                     <div className="simulation__graph-summary fs-5">
                         <Katex tex={
                             // eslint-disable-next-line max-len
-                            `\\hat{y} = ${intercept.toFixed(2)} + ${slopes[0].toFixed(3)}x_1 + ${slopes[1].toFixed(3)}x_2;`
+                            `\\hat{y} = ${intercept.toFixed(3)} + ${slopes[0].toFixed(3)}x_1 + ${slopes[1].toFixed(3)}x_2;`
                         } />
                         <Katex tex={
                             `\\hat{\\beta_1} = ${slopes[0].toFixed(3)};`
@@ -170,7 +170,7 @@ export const SimulationTwo = () => {
                             `\\hat{\\beta_2} = ${slopes[1].toFixed(3)};`
                         } />
                         <Katex tex={
-                            `corr(x_1,x_2) = ${appRvalue.toFixed(2)}`
+                            `corr(x_1,x_2) = ${appRvalue.toFixed(3)}`
                         } />
                     </div>
 

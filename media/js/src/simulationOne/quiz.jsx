@@ -81,6 +81,7 @@ export const Quiz = ({
 
     // P-Value Logic
     const handleUserPvalueChange = (e) => {
+        console.log('pvalue', pvalue);
         // Allow number and decimal point
         const value = e.target.value.replace(/[^\d.-]/g, '');
 
