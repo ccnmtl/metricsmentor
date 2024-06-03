@@ -325,7 +325,10 @@ export const Quiz = ({
                 )}
                 {!isPvalueCorrect && isPvalueCorrect !== null && (
                     <div>
-                        <span style={{ color: 'red' }}>Incorrect</span>
+                        <span style={{ color: 'red' }}>
+                            Incorrect, the correct p value is {pvalue}.
+                            Please type in the correct p value.
+                        </span>
                     </div>
                 )}
 
