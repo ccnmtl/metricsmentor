@@ -5,6 +5,8 @@ import axios from 'axios';
 import PropTypes from 'prop-types';
 import { saveAs } from 'file-saver';
 
+const isSuperUser = window.MetricsMentor.currentUser.is_superuser;
+
 export const ScatterPlot = ({ N, correlation, seed, setAppRvalue,
     setSlope, setIntercept, setStderror, plotType, slopes, setSlopes,
     stderrs, setStderrs
@@ -214,10 +216,12 @@ export const ScatterPlot = ({ N, correlation, seed, setAppRvalue,
                         'lasso2d', 'autoScale2d'],
                 }}
             />
-            <div className="text-end me-5">
-                <button className="btn btn-sm btn-secondary"
-                    onClick={exportCSV}>Export CSV</button>
-            </div>
+            {isSuperUser && (
+                <div className="text-end me-5">
+                    <button className="btn btn-sm btn-secondary"
+                        onClick={exportCSV}>Export CSV</button>
+                </div>
+            )}
         </>
     );
 };
