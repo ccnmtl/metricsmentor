@@ -17,11 +17,11 @@ export const Dashboard = () => {
                             mx-lg-0
                             simulation-card">
                         <h2 className="h2-primary">
-                            <span className="h2-secondary d-block">
+                            <span className="h2-secondary d-block"
+                                data-cy="sim-1">
                                 Simulation 1
                             </span>
-                            <span className="h2-title d-block"
-                                data-cy="sim-1">
+                            <span className="h2-title d-block">
                                 {'Hypothesis Testing for Population Slope'}
                             </span>
                         </h2>
