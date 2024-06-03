@@ -2,6 +2,8 @@ import React from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { Footer } from './footer';
 
+const isSuperUser = window.MetricsMentor.currentUser.is_superuser;
+
 export const Dashboard = () => {
 
     let { courseId } = useParams();
@@ -61,11 +63,18 @@ export const Dashboard = () => {
                             identify and address OVB in your econometric
                             analysis, ensuring the reliability and validity of
                             your findings.</p>
-                        <Link to={`/course/${courseId}/simulations/2/`}
-                            className="btn btn-primary my-3"
-                            data-cy="sim-2-link">
+                        {isSuperUser ? (
+                            <Link to={`/course/${courseId}/simulations/2/`}
+                                className="btn btn-primary my-3"
+                                data-cy="sim-2-link">
                             Begin &raquo;
-                        </Link>
+                            </Link>
+                        ) : (
+                            <button className="btn btn-primary my-3"
+                                disabled>
+                                Coming Soon
+                            </button>
+                        )}
                     </div>
                 </div>
             </section>

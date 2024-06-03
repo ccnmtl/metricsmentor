@@ -61,6 +61,10 @@
                 {% if not request.user.is_anonymous %}
                 currentUser: {
                     id: {{ request.user.id }},
+                    username: '{{ request.user.username }}',
+                    email: '{{ request.user.email }}',
+                    is_superuser: {{ request.user.is_superuser|yesno:"true,false" }},
+                    is_staff: {{ request.user.is_staff|yesno:"true,false" }},
                 },
                 {% endif %}
             }

@@ -9,6 +9,7 @@ import { NullHypothesisSection } from './nullHypothesisSection';
 
 
 // const CURRENT_USER = window.MetricsMentor.currentUser.id;
+const isSuperUser = window.MetricsMentor.currentUser.is_superuser;
 const simContainer = document.querySelector('#react-root');
 
 const coursePk =
@@ -265,17 +266,19 @@ export const SimulationOne = () => {
                             onClick={() => handlePlotTypeChange('2d')}
                             href="#">2D</a>
                         </li>
-                        <li className="nav-item">
-                            <a className={
-                                plotType === '3d'
-                                    ? 'active nav-link'
-                                    : (!is2DCompleted
-                                        ? 'nav-link disabled'
-                                        : 'nav-link')
-                            }
-                            onClick={() => handlePlotTypeChange('3d')}
-                            href="#">3D</a>
-                        </li>
+                        {isSuperUser && (
+                            <li className="nav-item">
+                                <a className={
+                                    plotType === '3d'
+                                        ? 'active nav-link'
+                                        : (!is2DCompleted
+                                            ? 'nav-link disabled'
+                                            : 'nav-link')
+                                }
+                                onClick={() => handlePlotTypeChange('3d')}
+                                href="#">3D</a>
+                            </li>
+                        )}
                     </ul>
                 </div>
                 <ScatterPlot

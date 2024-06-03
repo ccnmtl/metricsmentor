@@ -12,8 +12,7 @@
 {% block content %}
 <main id="maincontent" class="maincontent--simulation">
     <div class="main-app" id="react-root" data-course="{{ course.id }}"
-    data-semester="{{ course.info.termyear }}" data-coursetitle="{{ course.title }}"
-    data-is-faculty="{% if is_faculty %}true{% else %}false{% endif %}">
+    data-semester="{{ course.info.termyear }}" data-coursetitle="{{ course.title }}">
     </div>
 </main>
 {% endblock %}
