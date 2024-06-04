@@ -111,18 +111,6 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .simulation {
-    &__workspace {
-    }
-    &__graphspace {
-    }
-    &__step-container {
-    }
-    &__step-num {
-    }
-    &__step-toggle {
-    }
-    &__step-body {
-    }
     &__step-header {
         h2 {
             color: $gray-web-080;
@@ -150,7 +138,7 @@ h1, h2, h3, h4, h5, h6 {
             font-family: $font-family-sans-serif-secondary;
             font-size: 1.0625rem;
             line-height: 1.3;
-            font-weight: 400;
+            font-weight: 500;
         }
         .dev-only {
             color: $gray-md-400;

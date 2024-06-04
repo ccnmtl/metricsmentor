@@ -129,17 +129,21 @@ export const SimulationOne = () => {
                         </header>
                         <div className="simulation__step-content">
                             <p>
-                                Let&rsquo;s start by setting up the graph.
-                                You can set the sample
-                                size, <span className="katex">
+                                Let&rsquo;s start by setting up the parameters
+                                for your graph. To generate data, you can set
+                                the sample size, <span className="katex">
                                     <span className="mathnormal">n</span>
                                 </span>,
                                 and the estimated correlation
                                 coefficient, <span className="katex">
                                     <span className="mathnormal">
                                         corr(x,y)
-                                    </span>
-                                </span>, to generate the data.
+                                    </span></span>, between the independent
+                                and dependent variables <span className="katex">
+                                    <span className="mathnormal">x</span>
+                                </span> and <span className="katex">
+                                    <span className="mathnormal">y</span>
+                                </span>.
                             </p>
                             <div className="mt-4">
                                 <label htmlFor="nSampleSize"
@@ -150,7 +154,7 @@ export const SimulationOne = () => {
                                 </label>
                                 <input type="number" min="50" max="500"
                                     id="nSampleSize"
-                                    className="form-control"
+                                    className="form-control short-input"
                                     disabled={startQuiz}
                                     value={N}
                                     onBlur={handleNBlur}
@@ -198,9 +202,10 @@ export const SimulationOne = () => {
                                 <>
                                     <div className="mt-5 h2">
                                         Calculated correlation
-                                        coefficient: <span className="katex">
+                                        coefficient: <div className="hi-val">
+                                        <span className="katex">
                                             <span className="mathnormal">{appRvalue.toFixed(3)}</span>{/* eslint-disable-line max-len */}
-                                        </span>:
+                                        </span></div>
                                     </div>
                                 </>
                             )}

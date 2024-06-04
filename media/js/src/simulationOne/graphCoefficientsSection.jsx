@@ -25,10 +25,16 @@ export const GraphCoefficients = ({
                 {plotType === '2d' && (
                     <div className="simulation__step-content">
                         <p>
-                                      The graph generated with your sample size
-                                      and correlation coefficient produces the
-                                      following coefficients. Let&rsquo;s look
-                                      at them in detail.
+                            The graph generated with the parameters
+                            you&rsquo;ve defined produces the following
+                            coefficients. Observe how the linear regression
+                            coefficients change as you continue to
+                            adjust <span className="katex">
+                                    <span className="mathnormal">n</span>
+                                </span> and <span className="katex">
+                                    <span className="mathnormal">
+                                        corr(x,y)
+                                    </span></span>.
                         </p>
                         <h2 className="mt-4">Regression line equation:</h2>
                         <div className="ms-3 mb-3">
@@ -43,13 +49,6 @@ export const GraphCoefficients = ({
                                 `\\hat{y} = ${intercept.toFixed(3)} + ${slope.toFixed(3)}x`
                             } />
                         </div>
-                        <p>where <span className="katex">
-                            <span className="mathnormal">y</span>
-                        </span> is the dependent variable and
-                        <span className="katex"> <span className="mathnormal">x</span> {/* eslint-disable-line max-len */}
-                        </span> is the independent, or
-                                                      explanatory, variable.
-                        </p>
                         <h2 className="mt-4">Sample <span className="katex"><span className="mathnormal">y-intercept</span> {/* eslint-disable-line max-len */}
                         </span> coefficient:</h2>
                         <div className="ms-3">
@@ -96,13 +95,6 @@ export const GraphCoefficients = ({
                                 `\\hat{y} = ${intercept.toFixed(3)} + ${slopes[0].toFixed(3)}x_1 + ${slopes[1].toFixed(3)}x_2`
                             } />
                         </div>
-                        <p>where <span className="katex">
-                            <span className="mathnormal">y</span>
-                        </span> is the dependent variable and
-                        <span className="katex"> <span className="mathnormal">x</span> {/* eslint-disable-line max-len */}
-                        </span> is the independent, or
-                                    explanatory, variable.
-                        </p>
                         <h2 className="mt-4">Sample <span className="katex"><span className="mathnormal">y-intercept</span> {/* eslint-disable-line max-len */}
                         </span> coefficient:</h2>
                         <div className="ms-3">
