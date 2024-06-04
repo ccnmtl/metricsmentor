@@ -81,7 +81,7 @@ export const Quiz = ({
 
     // P-Value Logic
     const handleUserPvalueChange = (e) => {
-        console.log('pvalue', pvalue);
+
         // Allow number and decimal point
         const value = e.target.value.replace(/[^\d.-]/g, '');
 
@@ -439,12 +439,12 @@ export const Quiz = ({
                         <p>Look up critical value for t-stat</p>
 
                         <p>Critical value from table for {alpha} :
-                        <button
-                            className="btn btn-small btn-primary mt-3"
-                            data-bs-toggle="modal"
-                            data-bs-target="#criticalValModal">
+                            <button
+                                className="btn btn-small btn-primary mt-3"
+                                data-bs-toggle="modal"
+                                data-bs-target="#criticalValModal">
                             critical value Table
-                        </button>
+                            </button>
                         </p>
                         <CriticalValueModal />
                         <div>
