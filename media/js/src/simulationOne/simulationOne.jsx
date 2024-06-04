@@ -203,9 +203,9 @@ export const SimulationOne = () => {
                                     <div className="mt-5 h2">
                                         Calculated correlation
                                         coefficient: <div className="hi-val">
-                                        <span className="katex">
-                                            <span className="mathnormal">{appRvalue.toFixed(3)}</span>{/* eslint-disable-line max-len */}
-                                        </span></div>
+                                            <span className="katex">
+                                                <span className="mathnormal">{appRvalue.toFixed(3)}</span>{/* eslint-disable-line max-len */}
+                                            </span></div>
                                     </div>
                                 </>
                             )}

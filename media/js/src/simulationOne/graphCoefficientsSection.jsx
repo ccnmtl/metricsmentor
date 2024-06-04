@@ -30,11 +30,11 @@ export const GraphCoefficients = ({
                             coefficients. Observe how the linear regression
                             coefficients change as you continue to
                             adjust <span className="katex">
-                                    <span className="mathnormal">n</span>
-                                </span> and <span className="katex">
-                                    <span className="mathnormal">
+                                <span className="mathnormal">n</span>
+                            </span> and <span className="katex">
+                                <span className="mathnormal">
                                         corr(x,y)
-                                    </span></span>.
+                                </span></span>.
                         </p>
                         <h2 className="mt-4">Regression line equation:</h2>
                         <div className="ms-3 mb-3">
