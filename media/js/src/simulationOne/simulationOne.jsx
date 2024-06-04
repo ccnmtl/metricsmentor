@@ -242,12 +242,12 @@ export const SimulationOne = () => {
                                     handleNullHypothesis={handleNullHypothesis}
                                     startQuiz={startQuiz} />
 
-                                <div className=
-                                    "d-flex justify-content-center my-3">
+                                <div className="me-4
+                                    simulation__step-prompt">
                                     <button className="btn btn-primary"
                                         disabled={startQuiz}
                                         onClick={handleSaveGraph}>
-                                    Save Graph and Continue
+                                        Save graph and continue &raquo;
                                     </button>
                                 </div>
                             </>

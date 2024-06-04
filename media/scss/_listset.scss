@@ -113,6 +113,28 @@
     background-color: lightgray;
 }
 
-.hypothesis-completed {
-    background-color: #9FE5A2;
+
+.status-complete {
+    display: none;
+    width: 2rem;
+    height: 2rem;
+    margin-left: 0.75rem;
+    background-color: $teal-200;
+    border-radius: 50%;
+    color: $green-600;
+    font-family: "Gentium Plus", serif;
+    font-weight: 700;
+    line-height: 2rem;
+    font-size: 2rem;
+    text-align: center;
+    align-self: center;
 }
+
+.hypothesis-completed .status-complete {
+    display: inline-block !important;
+}
+
+.hypothesis-completed button {
+    display: none !important;
+}
+

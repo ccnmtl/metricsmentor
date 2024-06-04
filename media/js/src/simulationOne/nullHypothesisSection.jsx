@@ -23,16 +23,35 @@ export const NullHypothesisSection = ({
             <div className="simulation__step-body">
                 <header className="simulation__step-header">
                     <h2 className="h2-primary" id="null-hypothesis">
-                    Null hypothesis</h2>
+                    Defining null hypothesis</h2>
                 </header>
                 <div className="simulation__step-content">
+                    <p>In this exercise, the null
+                        hypothesis, <span className="katex">
+                            <span className="mathnormal">
+                                H<sub>0</sub>
+                            </span></span>,
+                        for the hypothesis testing is the population
+                        slope <span className="katex">
+                                <span className="mathnormal">
+                                    &beta;<sub>1</sub>
+                                </span></span>.
+                        Now set the baseline claim for <span className="katex">
+                            <span className="mathnormal">
+                                H<sub>0</sub>
+                            </span></span> and observe the outcome
+                            of <span className="katex">
+                            <span className="mathnormal">
+                                t
+                            </span></span>.
+                    </p>
                     <div className="row">
                         <label className="col-3">
                             <Katex tex={
                                 '{\\Eta_0} : {\\beta_1} ='
                             } />
                         </label>
-                        <input size="10" className="col-9 w-25"
+                        <input size="10" className="form-control short-input"
                             type="number" min="-5" max="5"
                             disabled={startQuiz}
                             value={hypothesizedSlope}
@@ -49,6 +68,10 @@ export const NullHypothesisSection = ({
                             } />
                         </div>
                     </div>
+                    <p className="mt-4">
+                        Save your graph and let&rsquo;s move on 
+                        to hypothesis testing.
+                    </p>
                 </div>
             </div>
         </div>

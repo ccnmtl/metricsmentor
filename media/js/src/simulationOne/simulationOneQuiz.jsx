@@ -49,9 +49,9 @@ export const SimulationOneQuiz = ({
                     </header>
                     <div className="simulation__step-content">
                         <p>
-                            The alternative hypothesis is claim believed to be
-                            true. In this simulation, there are three
-                            alternative hypothesis. Choose one:
+                            Consider the following three statements as
+                            alternative hypotheses. Choose one to conduct
+                            a test of hypothesis.
                         </p>
 
                         <ol className="listset-alpha listset-alpha-listnum">
@@ -81,6 +81,10 @@ export const SimulationOneQuiz = ({
                                     >
                                         Prove
                                     </button>
+                                    <div className="status-complete">
+                                        &#10003;
+                                    </div>
+
                                 </li>
                             ))}
                         </ol>
