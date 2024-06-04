@@ -1,5 +1,4 @@
 import React from 'react';
-import cvTable from '../../../img/critical-values-table.png';
 
 export const CriticalValueModal = () => {
 
@@ -11,21 +10,21 @@ export const CriticalValueModal = () => {
             aria-hidden="true"
             data-bs-backdrop="false">
             <div
-                className='modal-dialog modal-dialog-centered
-                    modal-custom modal-dialog-scrollable'>
-                <div className='modal-content modal-content-cvalue'>
-                    <div className='modal-header'>
-                        <h5 className='modal-title'
-                            id='criticalValModalLabel'>
-                            Critical Values for Commonly Used Significance Levels
+                className="modal-dialog modal-dialog-centered
+                    modal-custom modal-dialog-scrollable">
+                <div className="modal-content modal-content-cvalue">
+                    <div className="modal-header">
+                        <h5 className="modal-title"
+                            id="criticalValModalLabel">
+                            Critical Values for Commonly Used Significance Levels{/* eslint-disable-line max-len */}
                         </h5>
                         <button
-                            className='btn-close'
-                            data-bs-dismiss='modal'
-                            aria-label='Close'></button>
+                            className="btn-close"
+                            data-bs-dismiss="modal"
+                            aria-label="Close"></button>
                     </div>
-                    <div className='modal-body'>
-                        <div className='table-container'>
+                    <div className="modal-body">
+                        <div className="table-container">
                             <table className="table table-bordered table-hover">
                                 <thead>
                                     <tr>
@@ -64,9 +63,9 @@ export const CriticalValueModal = () => {
                             </table>
                         </div>
                     </div>
-                    <div className='modal-footer'>
-                        <button className='btn btn-secondary'
-                            data-bs-dismiss='modal'>
+                    <div className="modal-footer">
+                        <button className="btn btn-secondary"
+                            data-bs-dismiss="modal">
                             Close
                         </button>
                     </div>
