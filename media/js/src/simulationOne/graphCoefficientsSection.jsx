@@ -40,7 +40,7 @@ export const GraphCoefficients = ({
                         <div className="ms-3 mb-3">
                             <Katex tex={
                                 // eslint-disable-next-line max-len
-                                `\\hat{y} = ${intercept.toFixed(2)} + ${slope.toFixed(3)}x`
+                                `\\hat{y} = ${intercept.toFixed(3)} + ${slope.toFixed(3)}x`
                             } />
                         </div>
                         <p>where <span className="katex">
@@ -93,7 +93,7 @@ export const GraphCoefficients = ({
                         <div className="ms-3 mb-3">
                             <Katex tex={
                                 // eslint-disable-next-line max-len
-                                `\\hat{y} = ${intercept.toFixed(2)} + ${slopes[0].toFixed(3)}x_1 + ${slopes[1].toFixed(3)}x_2`
+                                `\\hat{y} = ${intercept.toFixed(3)} + ${slopes[0].toFixed(3)}x_1 + ${slopes[1].toFixed(3)}x_2`
                             } />
                         </div>
                         <p>where <span className="katex">
