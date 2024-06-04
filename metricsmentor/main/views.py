@@ -23,7 +23,7 @@ from metricsmentor.main.models import Graph, Answer, QuizSubmission
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 from django.utils.decorators import method_decorator
-from scipy.stats import linregress, t
+from scipy.stats import linregress, norm
 import numpy as np
 import statsmodels.api as sm
 import json
@@ -246,21 +246,17 @@ def calculate_multiple_regression(request):
 def calculate_pvalue(request):
     if request.method == 'POST':
         data = json.loads(request.body.decode('utf-8'))
-        n = data.get('n')
-        t_value = data.get('tvalue')
-
-        # degrees of freedom
-        df = n - 2
+        z_value = data.get('tvalue')
 
         # Calculate p-values
-        if t_value > 0:
-            p_value_left = 1 - t.cdf(t_value, df)
-            p_value_right = 1 - t.cdf(t_value, df)
-            p_value_two_sided = 2 * (1 - t.cdf(abs(t_value), df))
+        if z_value >= 0:
+            p_value_left = 1 - norm.cdf(z_value)
+            p_value_right = 1 - norm.cdf(z_value)
+            p_value_two_sided = 2 * (1 - norm.cdf(z_value))
         else:
-            p_value_left = t.cdf(t_value, df)
-            p_value_right = t.cdf(t_value, df)
-            p_value_two_sided = 2 * t.cdf(-abs(t_value), df)
+            p_value_left = norm.cdf(z_value)
+            p_value_right = norm.cdf(z_value)
+            p_value_two_sided = 2 * norm.cdf(abs(z_value))
 
         return JsonResponse({
             'value_left': p_value_left,
