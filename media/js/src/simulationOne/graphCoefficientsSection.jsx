@@ -20,7 +20,7 @@ export const GraphCoefficients = ({
             <div className="simulation__step-body">
                 <header className="simulation__step-header">
                     <h2 className="h2-primary">
-                                        Resulting Graph Coefficients</h2>
+                        Resulting Graph Coefficients</h2>
                 </header>
                 {plotType === '2d' && (
                     <div className="simulation__step-content">
@@ -70,11 +70,13 @@ export const GraphCoefficients = ({
                                 // eslint-disable-next-line max-len
                                 `{SE(\\hat{\\beta_1})} = ${stderror.toFixed(3)}`} />
                         </div>
-
-                        <button className="btn btn-primary mt-3"
-                            data-cy="nullNextButton"
-                            onClick={handleNextClick}> Next
-                        </button>
+                        <div className="simulation__step-prompt">
+                            <button className="btn btn-primary mt-3"
+                                data-cy="nullNextButton"
+                                onClick={handleNextClick}>
+                                    Continue &raquo;
+                            </button>
+                        </div>
                     </div>
                 )}
                 {(plotType === '3d' && slopes.length > 0) && (

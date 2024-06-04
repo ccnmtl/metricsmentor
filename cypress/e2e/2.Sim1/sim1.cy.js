@@ -30,7 +30,7 @@ describe('Graph Data', () => {
     it('Null Hypothesis', () => {
         cy.get('[data-cy="nullNextButton"]').click();
         cy.get('h2.h2-primary')
-            .should('contain', 'Null hypothesis');
+            .should('contain', 'Defining null hypothesis');
     });
 
 });
