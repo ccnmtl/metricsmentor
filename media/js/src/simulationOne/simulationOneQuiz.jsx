@@ -106,7 +106,7 @@ export const SimulationOneQuiz = ({
             )}
             {allChoicesCompleted && (
                 <MultipleChoiceQuestion
-                    question={'Which of the following is TRUE?'}
+                    question={'which of the following is TRUE?'}
                     options={['The closer the correlation between Y and X1 is '
                     + 'to one, the more likely it is to reject the null ' +
                     'hypothesis β1 = 0.', 'The closer the correlation ' +
@@ -127,7 +127,7 @@ export const SimulationOneQuiz = ({
                 />
             )}
             {isSubmitted && (
-                <div>
+                <div className="mt-3 mb-5 fs-5 fw-medium text-center">
                     Congratulations on completing the 2D simulation!
                 </div>
             )}

@@ -78,16 +78,39 @@ export const HypothesisTest = ({
                         <h2 className="h2-primary">Hypothesis test</h2>
                     </header>
                     <div className="simulation__step-content">
-                        <div>
-                            <Katex tex={nullHypothesis} />
+                        <p>
+                            Let&rsquo;s conduct a hypothesis test with the
+                            alternative hypothesis you chose:
+                        </p>
+                        <div className="hi-val">
+                            <div className="p-2">
+                                <Katex tex={nullHypothesis} />
+                            </div>
+                            <div className="p-2">
+                                <Katex tex={hypothesis} />
+                            </div>
+                            <div className="p-2">
+                                <Katex tex={
+                                    `corr(x,y) = ${appRvalue.toFixed(3)}`
+                                } />
+                            </div>
+                            <div className="p-2">
+                                <Katex tex={
+                                    `t = ${tvalue}`
+                                } />
+                            </div>
                         </div>
-                        <div><Katex tex={hypothesis} /></div>
-                        <div>r: {appRvalue.toFixed(3)}</div>
-                        <div>t: {tvalue}</div>
-                        <p>Choose significance level, alpha:</p>
-                        <ul className="list-inline">
+                        <p className="mt-3">
+                            First, choose the significance
+                            value, <span className="katex">
+                                <span className="mathnormal">&alpha;</span>
+                            </span>,
+                            for this exercise:
+                        </p>
+
+                        <ul className="choice-list">
                             {[0.01, 0.05, 0.10].map((val, key) => (
-                                <li key={key} className="list-inline-item">
+                                <li key={key}>
                                     <input
                                         type="radio"
                                         id={`significance${val*100}`}
@@ -104,9 +127,13 @@ export const HypothesisTest = ({
                                 </li>
                             ))}
                         </ul>
-                        <button className="btn btn-primary mt-3"
-                            onClick={handleNextButtonClick}
-                            disabled={!alpha || alphaSelected}>Next</button>
+                        <div className="simulation__step-prompt">
+                            <button className="btn btn-primary mb-3"
+                                onClick={handleNextButtonClick}
+                                disabled={!alpha || alphaSelected}>
+                                Continue &raquo;
+                            </button>
+                        </div>
                         {alphaSelected && (
                             <Quiz
                                 hypothesisTest={hypothesisTest}

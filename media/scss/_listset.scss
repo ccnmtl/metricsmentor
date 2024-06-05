@@ -138,3 +138,11 @@
     display: none !important;
 }
 
+.choice-list {
+    list-style: none;
+    margin: 0;
+    & li {
+        margin: 0;
+        padding: 0.25rem 0;
+    }
+}

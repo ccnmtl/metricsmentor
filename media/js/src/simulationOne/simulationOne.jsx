@@ -17,7 +17,7 @@ const coursePk =
 
 export const SimulationOne = () => {
     const [N, setN] = useState(50);
-    const [correlation, setCorrelation] = useState(0.5);
+    const [correlation, setCorrelation] = useState(0.3);
     const [seed, setSeed] = useState('seedString');
     const [slope, setSlope] = useState(null);
     const [intercept, setIntercept] = useState(null);
