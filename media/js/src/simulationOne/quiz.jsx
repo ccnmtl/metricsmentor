@@ -8,7 +8,8 @@ import { CriticalValueModal } from './modalCV';
 
 export const Quiz = ({
     appRvalue, tvalue, pvalue, alpha, hypothesisTest, hypothesis,
-    nullHypothesis, n, onComplete, completedChoices, submissionId
+    nullHypothesis, n, onComplete, completedChoices, submissionId,
+    setResults, selectedOption
 }) => {
 
     const [criticalValues, setCriticalValues] = useState(null);
@@ -171,6 +172,21 @@ export const Quiz = ({
             nullHypothesisChoice1, isCorrect, additionalData);
     };
 
+    const handleComplete = () => {
+        setResults(
+            selectedOption,
+            [
+                `alpha: ${alpha}`,
+                `critical: ${userCriticalValue}`,
+                `p: ${userPvalue}`,
+                `t: ${tvalue}`,
+                `Hypothesis 1: 
+                    ${nullHypothesisChoice1 ? 'Reject' : 'Fail to Reject'}`,
+                `Hypothesis 2: 
+                    ${nullHypothesisChoice2 ? 'Reject' : 'Fail to Reject'}`
+            ]);
+        onComplete();
+    };
 
     // Critical Value Logic
     const calculateCriticalValue = async() => {
@@ -710,7 +726,7 @@ export const Quiz = ({
                                     <button className=
                                         "btn btn-primary my-3"
                                     id="proceed"
-                                    onClick={onComplete}>
+                                    onClick={handleComplete}>
                                         Next hypothesis &raquo;
                                     </button>
                                 </div>
@@ -744,5 +760,7 @@ Quiz.propTypes = {
     n: PropTypes.number.isRequired,
     onComplete: PropTypes.func.isRequired,
     completedChoices: PropTypes.array.isRequired,
-    submissionId: PropTypes.number.isRequired
+    submissionId: PropTypes.number.isRequired,
+    setResults: PropTypes.func.isRequired,
+    selectedOption: PropTypes.string.isRequired
 };

@@ -11,13 +11,18 @@ export const SimulationOneQuiz = ({
     const [selectedOption, setSelectedOption] = useState(null);
     const [completedChoices, setCompletedChoices] = useState([]);
     const [isSubmitted, setIsSubmitted] = useState(false);
+    const [results, setResults] = useState({});
 
     const allChoicesCompleted = ['A', 'B', 'C'].every(
         choice => completedChoices.includes(choice));
 
     const handleChoiceCompletion = () => {
-        setCompletedChoices([...completedChoices, selectedOption]);
+        setCompletedChoices([...completedChoices, selectedOption[0]]);
         setSelectedOption(null);
+    };
+
+    const handleResults = (target, newResults) => {
+        setResults({...results, [target]: newResults});
     };
 
     const is2dCompleted = () => {
@@ -56,35 +61,49 @@ export const SimulationOneQuiz = ({
 
                         <ol className="listset-alpha listset-alpha-listnum">
                             {[
-                                ['A', '\\Eta_1: {\\beta_1}{\\neq} '],
-                                ['B', '\\Eta_1: {\\beta_1}{\\gt} '],
-                                ['C', '\\Eta_1: {\\beta_1}{\\lt} ']
+                                ['A', '\\Eta_1: {\\beta_1}{\\neq} ', {}],
+                                ['B', '\\Eta_1: {\\beta_1}{\\gt} ', {}],
+                                ['C', '\\Eta_1: {\\beta_1}{\\lt} ', {}]
                             ].map((choice, key) => (
-                                <li key={key}
-                                    className={'listset-alpha-card' +
-                                        (selectedOption === choice[0] ?
-                                            ' hypothesis-selected' : '') +
-                                        (completedChoices.includes(choice[0]) ?
-                                            ' hypothesis-completed' : '')
-                                    }
+                                <li key={key} className={'row' +
+                                    ((selectedOption &&
+                                        selectedOption[0] === choice[0]) ?
+                                        ' hypothesis-selected' : '') +
+                                    (completedChoices.includes(choice[0])
+                                        ? ' hypothesis-completed' : '')}
                                 >
-                                    <div className="listset-alpha-card__title">
-                                        <Katex tex={
-                                            choice[1] + hypothesizedSlope} />
+                                    <div className="listset-alpha-card col-6">
+                                        <div className={
+                                            'listset-alpha-card__title'}>
+                                            <Katex tex={choice[1] +
+                                                hypothesizedSlope} />
+                                        </div>
+                                        <button
+                                            className={'btn btn-sm btn-primary'
+                                                + ' my-auto'}
+                                            disabled={selectedOption !== null
+                                                || completedChoices.includes(
+                                                    choice[0])}
+                                            onClick={
+                                                () => setSelectedOption(
+                                                    [choice[0], choice[2]])}>
+                                            Prove
+                                        </button>
                                     </div>
-                                    <button className="btn btn-sm btn-primary"
-                                        disabled={selectedOption !== null ||
-                                            completedChoices.includes(
-                                                choice[0])}
-                                        onClick={
-                                            () => setSelectedOption(choice[0])}
-                                    >
-                                        Prove
-                                    </button>
                                     <div className="status-complete">
                                         &#10003;
                                     </div>
 
+                                    {results[choice[0]] && (
+                                        <div className={
+                                            'listset-alpha-card col-6 row'}>
+                                            {results[choice[0]]
+                                                .map((result, key) => (
+                                                    <Katex key={key}
+                                                        tex={result} />
+                                                ))}
+                                        </div>
+                                    )}
                                 </li>
                             ))}
                         </ol>
@@ -94,7 +113,7 @@ export const SimulationOneQuiz = ({
 
             {selectedOption && (
                 <HypothesisTest
-                    selectedOption={selectedOption}
+                    selectedOption={selectedOption[0]}
                     hypothesizedSlope={hypothesizedSlope}
                     appRvalue={appRvalue}
                     tvalue={parseFloat(tvalue)}
@@ -102,6 +121,7 @@ export const SimulationOneQuiz = ({
                     n={parseInt(n)}
                     completedChoices={completedChoices}
                     submissionId={submissionId}
+                    setResults={handleResults}
                 />
             )}
             {allChoicesCompleted && (
