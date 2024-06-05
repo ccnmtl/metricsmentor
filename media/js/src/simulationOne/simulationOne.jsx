@@ -105,7 +105,7 @@ export const SimulationOne = () => {
     if (slope !== null) {
 
         // eslint-disable-next-line max-len
-        tvalue = ((slope.toFixed(3) - hypothesizedSlope) / stderror.toFixed(3)).toFixed(3);
+        tvalue = parseFloat(((slope.toFixed(3) - hypothesizedSlope) / stderror.toFixed(3)).toFixed(2));
     }
 
     const tEquation =
