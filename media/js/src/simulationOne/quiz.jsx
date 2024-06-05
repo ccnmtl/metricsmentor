@@ -290,48 +290,84 @@ export const Quiz = ({
 
     return (
         <div id="quiz">
-            <div className="solving-p-set border border-primary p-3 mt-3">
+            <div className="solving-p-set mt-3">
                 <div className="input-p">
-                    <p>Look up p value for t-stat</p>
-                    p value from table:
+                    <p>
+                        One method for hypothesis testing is to compare
+                        the <span className="katex">
+                                <span className="mathnormal">
+                                    p-Value
+                                </span>
+                            </span> to <span className="katex">
+                                <span className="mathnormal">&alpha;</span>
+                            </span>.
+                        Using the table provided, look up the value that
+                        corresponds to <span className="katex">
+                                <span className="mathnormal">
+                                    t = {tvalue}
+                                </span>.
+                            </span>
+                    </p>
                     <button
-                        className="btn btn-small btn-primary mt-3"
+                        className="btn btn-sm btn-primary"
                         data-bs-toggle="modal"
                         data-bs-target="#pvalueModal">
-                        pValue Table
+                        p-Value table
                     </button>
+
                     <PvalueModal />
-                    <div>
-                        <label htmlFor="pValue">p = </label>
+
+                    <div className="mt-3 d-flex">
+                        <label className="align-self-center"
+                            htmlFor="pValue">p = </label>
                         <input
+                            className="align-self-center"
                             type="text"
                             id="pValue"
                             value={userPvalue}
                             disabled={isPvalueCorrect}
                             onChange={handleUserPvalueChange}
                         />
+                        <button
+                            className="btn
+                                btn-sm btn-primary
+                                mx-2
+                                align-self-center"
+                            disabled={isPvalueCorrect}
+                            onClick={handleNextPvalueButtonClick}>
+                            Continue &raquo;
+                        </button>
                     </div>
                 </div>{/*input-p*/}
-                <button
-                    className="btn btn-small btn-primary mt-3"
-                    disabled={isPvalueCorrect}
-                    onClick={handleNextPvalueButtonClick}>
-                    Next
-                </button>
                 {isPvalueCorrect && (
-                    <div>
-                        <span style={{ color: 'green' }}>Correct</span>
+                    <div className="mt-3">
+                        <span style={{ color: 'green' }}>
+                            That&rsquo;s correct!
+                        </span>
                     </div>
                 )}
                 {!isPvalueCorrect && isPvalueCorrect !== null && (
-                    <div>
-                        <span style={{ color: 'red' }}>Incorrect</span>
+                    <div className="mt-3">
+                        <span style={{ color: 'red' }}>
+                            The value is incorrect. Please try again.
+                        </span>
                     </div>
                 )}
 
                 {isPvalueCorrect && (
-                    <div className="p-to-alpha border border-warning p-3 mt-3">
-                                Comparing p values to &alpha;:
+                    <div className="p-to-alpha mt-3">
+                        <p>
+                            Knowing now that <span className="katex">
+                                    <span className="mathnormal">
+                                        p-Value = {pvalue}
+                                    </span>
+                                </span> and <span className="katex">
+                                    <span className="mathnormal">
+                                        &alpha; = {alpha}
+                                    </span>
+                                </span>,
+                            which of the following statements is true?
+                        </p>
                         <div>
                             <input
                                 type="radio"
@@ -343,7 +379,7 @@ export const Quiz = ({
                                 onChange={handlePvalueComparisonChange}
                             />
                             <label htmlFor="pGreaterThanAlpha">
-                        p &gt; alpha
+                        p-Value &gt; &alpha;
                             </label>
                         </div>
                         <div>
@@ -356,34 +392,60 @@ export const Quiz = ({
                                 checked={pvalueComparison === 'lessThan'}
                                 onChange={handlePvalueComparisonChange}
                             />
-                            <label htmlFor="pLessThanAlpha">p &lt; alpha
+                            <label htmlFor="pLessThanAlpha">
+                                p-Value &lt; &alpha;
                             </label>
                         </div>
                         <button
                             className="btn btn-small btn-primary mt-3"
                             disabled={isPvalCompareCorrect}
                             onClick={handleNextPvalueComparison}>
-                            Next
+                            Continue &raquo;
                         </button>
                         {isPvalCompareCorrect && (
-                            <div>
-                                <span style={{ color: 'green' }}>Correct</span>
+                            <div className="mt-3">
+                                <span style={{ color: 'green' }}>
+                                    That&rsquo;s correct!
+                                </span>
                             </div>
                         )}
 
                         {!isPvalCompareCorrect &&
                         isPvalCompareCorrect !== null && (
-                            <div>
-                                <span style={{ color: 'red' }}>Incorrect</span>
+                            <div className="mt-3">
+                                <span style={{ color: 'red' }}>
+                                    The comparison is incorrect. 
+                                    Please try again.
+                                </span>
                             </div>
                         )}
                     </div>//compare-p-to-alpha
                 )}
                 {isPvalCompareCorrect && (
-                    <div className="p-val-concl border border-info p-3 mt-3">
-                        <Katex tex={nullHypothesis} />
-                        <Katex tex={hypothesis} />
-                        <div>
+                    <div className="p-val-concl mt-3">
+                        <p>Let&rsquo;s look at the null and and
+                            alternate hypotheses once more:</p>
+                            <div className="hi-val">
+                            <div className="py-2">
+                                <Katex tex={nullHypothesis} />
+                            </div>
+                            <div className="py-2">
+                                <Katex tex={hypothesis} />
+                            </div>
+                        </div>
+                        <p className="mt-3">
+                            With <span className="katex">
+                                    <span className="mathnormal">
+                                        p-Value
+                                    </span>
+                                </span> and <span className="katex">
+                                    <span className="mathnormal">
+                                        &alpha;
+                                    </span>
+                                </span> comparison above,
+                            what is your conclusion?
+                        </p>
+                        <div className="mt-3">
                             <input
                                 type="radio"
                                 id="rejectHypothesis"
@@ -394,7 +456,7 @@ export const Quiz = ({
                                 onChange={handleNullHypothesisChoice1Change}
                             />
                             <label htmlFor="rejectHypothesis">
-                            Reject the Null Hypothesis</label>
+                            Reject the null hypothesis</label>
                         </div>
                         <div>
                             <input
@@ -409,7 +471,7 @@ export const Quiz = ({
                                 onChange={handleNullHypothesisChoice1Change}
                             />
                             <label htmlFor="failToRejectHypothesis">
-                            Fail to Reject the Null Hypothesis</label>
+                            Fail to reject the null hypothesis</label>
                         </div>
                         <button
                             className="btn btn-small btn-primary mt-3"
@@ -418,68 +480,113 @@ export const Quiz = ({
                             Next
                         </button>
                         {hypothesisTest1validate && (
-                            <div>
-                                <span style={{ color: 'green' }}>Correct</span>
+                            <div className="mt-3">
+                                <span style={{ color: 'green' }}>
+                                    That&rsquo;s the correct conclusion!
+                                </span>
                             </div>
                         )}
                         {!hypothesisTest1validate &&
                         hypothesisTest1validate !== null && (
-                            <div>
-                                <span style={{ color: 'red' }}>Incorrect</span>
+                            <div className="mt-3">
+                                <span style={{ color: 'red' }}>
+                                    The conclusion is incorrect.
+                                    Please try again.
+                                </span>
                             </div>
                         )}
                     </div>
                 )}
             </div> {/* solving-p-set */}
 
-
-            <div className="solving-p-set border border-primary p-3 mt-3">
+            {/* the following appears when empty */}  
+            <div className="solving-p-set mt-3">
                 {hypothesisTest1validate && (
-                    <div className="input-p">
-                        <p>Look up critical value for t-stat</p>
-
-                        <p>Critical value from table for {alpha} :
-                            <button
-                                className="btn btn-small btn-primary mt-3"
-                                data-bs-toggle="modal"
-                                data-bs-target="#criticalValModal">
-                            critical value Table
-                            </button>
+                    <div className="input-criticalvalue">
+                        <p>
+                            Another method for hypothesis testing is to
+                            compare <span className="katex">
+                                    <span className="mathnormal">
+                                        t
+                                    </span>
+                                </span> to the <span className="katex">
+                                    <span className="mathnormal">
+                                        critical value
+                                    </span>
+                                </span> at a certain significance
+                                level <span className="katex">
+                                    <span className="mathnormal">&alpha;</span>
+                                </span>.
+                            Using the table provided, look up the value that
+                            corresponds to <span className="katex">
+                                    <span className="mathnormal">
+                                        &alpha; = {alpha}
+                                    </span>.
+                                </span>
                         </p>
+                        <button
+                            className="btn btn-sm btn-primary"
+                            data-bs-toggle="modal"
+                            data-bs-target="#criticalValModal">
+                            Critical value table
+                        </button>
+
                         <CriticalValueModal />
-                        <div>
-                            <label htmlFor="criticalvalue">
+
+                        <div className="mt-3 d-flex">
+                            <label className="align-self-center"
+                                htmlFor="criticalvalue">
                                 critical value = </label>
                             <input
+                                className="align-self-center"
                                 type="text"
                                 id="criticalvalue"
                                 value={userCriticalValue}
                                 disabled={isCriticalValueCorrect}
                                 onChange={handleUserCriticalvalueChange}
                             />
+                            <button
+                                className="btn
+                                btn-sm btn-primary
+                                mx-2
+                                align-self-center"
+                                disabled={isCriticalValueCorrect}
+                                onClick={handleNextCriticalVal}>
+                                Continue &raquo;
+                            </button>
                         </div>
-                        <button
-                            className="btn btn-small btn-primary mt-3"
-                            disabled={isCriticalValueCorrect}
-                            onClick={handleNextCriticalVal}>
-                            Next
-                        </button>
                     </div>
                 )}{/*input-criticalvalue*/}
                 {isCriticalValueCorrect &&(
-                    <div>
-                        <span style={{ color: 'green' }}>Correct</span>
+                    <div className="mt-3">
+                        <span style={{ color: 'green' }}>
+                            That&rsquo;s correct!
+                        </span>
                     </div>
                 )}
 
                 {!isCriticalValueCorrect && isCriticalValueCorrect !== null && (
-                    <div>
-                        <span style={{ color: 'red' }}>Incorrect</span>
+                    <div className="mt-3">
+                        <span style={{ color: 'red' }}>
+                            That&rsquo;s incorrect.
+                            Please try again.
+                        </span>
                     </div>
                 )}
                 {isCriticalValueCorrect && (
-                    <div className="p-val-concl border border-info p-3 mt-3">
-                        <p>Comparing |t| value to critical value:</p>
+                    <div className="p-val-concl mt-3">
+                        <p>
+                            Knowing now that <span className="katex">
+                                    <span className="mathnormal">
+                                        t = {tvalue}
+                                    </span>
+                                </span> and <span className="katex">
+                                    <span className="mathnormal">
+                                        critical value = {criticalValue}
+                                    </span>
+                                </span>,
+                            which of the following statements is true?
+                        </p>
                         <div>
                             <input
                                 type="radio"
@@ -510,25 +617,50 @@ export const Quiz = ({
                             className="btn btn-small btn-primary mt-3"
                             disabled={isCriticalCompareCorrect}
                             onClick={handleNextCriticalValCompare}>
-                            Next
+                            Continue &raquo;
                         </button>
                         {isCriticalCompareCorrect && (
-                            <div>
-                                <span style={{ color: 'green' }}>Correct</span>
+                            <div className="mt-3">
+                                <span style={{ color: 'green' }}>
+                                    That&rsquo;s correct!
+                                </span>
                             </div>
                         )}
                         {!isCriticalCompareCorrect &&
                         isCriticalCompareCorrect !== null && (
-                            <div>
-                                <span style={{ color: 'red' }}>Incorrect</span>
+                            <div className="mt-3">
+                                <span style={{ color: 'red' }}>
+                                    The comparison is incorrect.
+                                    Please try again.
+                                </span>
                             </div>
                         )}
                     </div> //compare-t-to-criticalvalue
                 )}
                 {isCriticalCompareCorrect && (
-                    <div className="p-val-concl border border-info p-3 mt-3">
-                        <Katex tex={nullHypothesis} />
-                        <Katex tex={hypothesis} />
+                    <div className="p-val-concl mt-3">
+                        <p>Once again, the null and and
+                            alternate hypotheses are:</p>
+                            <div className="hi-val">
+                            <div className="py-2">
+                                <Katex tex={nullHypothesis} />
+                            </div>
+                            <div className="py-2">
+                                <Katex tex={hypothesis} />
+                            </div>
+                        </div>
+                        <p className="mt-3">
+                            With <span className="katex">
+                                    <span className="mathnormal">
+                                        t
+                                    </span>
+                                </span> and <span className="katex">
+                                    <span className="mathnormal">
+                                        critical value
+                                    </span>
+                                </span> comparison above,
+                            what is your conclusion?
+                        </p>
                         <div>
                             <input
                                 type="radio"
@@ -540,7 +672,7 @@ export const Quiz = ({
                                 onChange={handleNullHypothesisChoice2Change}
                             />
                             <label htmlFor="rejectHypothesis2">
-                            Reject the Null Hypothesis</label>
+                            Reject the null hypothesis</label>
                         </div>
                         <div>
                             <input
@@ -555,38 +687,41 @@ export const Quiz = ({
                                 onChange={handleNullHypothesisChoice2Change}
                             />
                             <label htmlFor="failToRejectHypothesis2">
-                            Fail to Reject the Null Hypothesis</label>
+                            Fail to reject the null hypothesis</label>
                         </div>
                         <button
                             className="btn btn-small btn-primary mt-3"
                             disabled={hypothesisTest2validate}
                             onClick={handleNextNullHypothesisChoice2}>
-                            Next
+                            Continue &raquo;
                         </button>
                         {hypothesisTest2validate && (
                             <>
-                                <div>
+                                <div className="mt-3">
                                     <span style={{ color: 'green' }}>
-                                        Correct
+                                        That is the correct conclusion!
                                     </span>
                                 </div>
-                                <div>
-                                    <span style={{ color: 'green' }}>
-                                    You have completed the hypothesis test
-                                    </span>
+                                <p className="mt-3">
+                                    You have completed this hypothesis test.
+                                </p>
+                                <div className="simulation__step-prompt">
                                     <button className=
-                                        "btn btn-small btn-secondary mt-3"
+                                        "btn btn-primary my-3"
                                     id="proceed"
                                     onClick={onComplete}>
-                                    Proceed To Next Hypothesis
-                                    </button>
+                                        Next hypothesis &raquo;
+                                    </button>                            
                                 </div>
                             </>
                         )}
                         {!hypothesisTest2validate &&
                         hypothesisTest2validate !== null && (
-                            <div>
-                                <span style={{ color: 'red' }}>Incorrect</span>
+                            <div className="mt-3">
+                                <span style={{ color: 'red' }}>
+                                    That&rsquo;s not the right conclusion.
+                                    Please try again.
+                                </span>
                             </div>
                         )}
                     </div>
