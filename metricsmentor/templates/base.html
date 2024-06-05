@@ -88,14 +88,6 @@
                     </a>
                     <ul class="nav col-auto top-bar__nav">
                         <li>
-                            <a href="https://forms.gle/uAYm71kSQijdaKGS7"
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                class="nav-link survey-form">
-                                Usability survey
-                            </a>
-                        </li>
-                        <li>
                             {% if request.user.is_authenticated %}
                             Hello, 
                             {% if request.user.last_name %}
@@ -104,6 +96,8 @@
                             {{ request.user.username }}
                             {% endif %}
                             (<a href="/accounts/logout/?next=/" title="Log Out">Sign out</a>)
+                            {% else %}
+                            Anon
                             {% endif %}    
                         </li>
                         {% if request.user.is_superuser %}
@@ -117,7 +111,7 @@
                 </nav>
             </header>
             {% endblock %}
-            <!--
+            
             <div class='viewport-test'>
                 <ul>
                     <li class="d-none d-xxl-block pe-3">Giant monitor xxl</li>
@@ -128,7 +122,6 @@
                     <li class="d-block d-sm-none pe-3">Tiny phone xs</li>
                 </ul>
             </div>
-            -->
         {% block pagetitle %}{% endblock %}
         {% block content %}{% endblock %}
 
