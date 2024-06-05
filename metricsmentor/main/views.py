@@ -250,13 +250,13 @@ def calculate_pvalue(request):
 
         # Calculate p-values
         if z_value >= 0:
-            p_value_left = 1 - norm.cdf(z_value)
-            p_value_right = 1 - norm.cdf(z_value)
-            p_value_two_sided = 2 * (1 - norm.cdf(z_value))
+            p_value_left = 1 - round(norm.cdf(z_value), 4)
+            p_value_right = 1 - round(norm.cdf(z_value), 4)
+            p_value_two_sided = 2 * (1 - round(norm.cdf(z_value), 4))
         else:
-            p_value_left = norm.cdf(z_value)
-            p_value_right = norm.cdf(z_value)
-            p_value_two_sided = 2 * norm.cdf(abs(z_value))
+            p_value_left = round(norm.cdf(z_value), 4)
+            p_value_right = round(norm.cdf(z_value), 4)
+            p_value_two_sided = 2 * round(norm.cdf(abs(z_value)), 4)
 
         return JsonResponse({
             'value_left': p_value_left,

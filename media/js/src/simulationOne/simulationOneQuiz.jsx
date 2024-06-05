@@ -97,7 +97,7 @@ export const SimulationOneQuiz = ({
                     selectedOption={selectedOption}
                     hypothesizedSlope={hypothesizedSlope}
                     appRvalue={appRvalue}
-                    tvalue={parseFloat(tvalue)}
+                    tvalue={tvalue}
                     onComplete={handleChoiceCompletion}
                     n={parseInt(n)}
                     completedChoices={completedChoices}
@@ -137,7 +137,7 @@ export const SimulationOneQuiz = ({
 
 SimulationOneQuiz.propTypes = {
     appRvalue: PropTypes.number.isRequired,
-    tvalue: PropTypes.string.isRequired,
+    tvalue: PropTypes.number.isRequired,
     hypothesizedSlope: PropTypes.any.isRequired,
     n: PropTypes.any.isRequired,
     setIs2DCompleted: PropTypes.func.isRequired,
