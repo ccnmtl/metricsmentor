@@ -61,6 +61,7 @@ export const MultipleChoiceQuestion = ({
                         </div>
                     ))}
                     <button
+                        className="btn btn-primary mt-3"
                         disabled={isCorrect}
                         onClick={handleSubmit}>Submit</button>
                     {isSubmitted && (
