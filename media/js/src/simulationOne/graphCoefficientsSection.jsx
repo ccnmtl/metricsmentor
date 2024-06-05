@@ -13,7 +13,7 @@ export const GraphCoefficients = ({
     return (
         <div className="simulation__step-container d-flex">
             <div className="simulation__step-num">
-                                &bull;
+                &bull;
             </div>
             <div className="simulation__step-toggle--down">
             </div>
@@ -29,12 +29,13 @@ export const GraphCoefficients = ({
                             you&rsquo;ve defined produces the following
                             coefficients. Observe how the linear regression
                             coefficients change as you continue to
-                            adjust <span className="katex">
-                                <span className="mathnormal">n</span>
-                            </span> and <span className="katex">
-                                <span className="mathnormal">
-                                        corr(x,y)
-                                </span></span>.
+                            adjust
+                            <div className="katex-inline">
+                                <Katex tex={`n`} />
+                            </div> and
+                            <div className="katex-inline">
+                                <Katex tex={`corr(x,y)`} />
+                            </div>.
                         </p>
                         <h2 className="mt-4">Regression line equation:</h2>
                         <div className="ms-3 mb-3">
@@ -49,22 +50,25 @@ export const GraphCoefficients = ({
                                 `\\hat{y} = ${intercept.toFixed(3)} + ${slope.toFixed(3)}x`
                             } />
                         </div>
-                        <h2 className="mt-4">Sample <span className="katex"><span className="mathnormal">y-intercept</span> {/* eslint-disable-line max-len */}
-                        </span> coefficient:</h2>
+                        <h2 className="mt-4">Sample
+                            <div className="katex-inline">
+                                <Katex tex={`y\\text{\\textendash}intercept`} />
+                            </div> coefficient:
+                        </h2>
                         <div className="ms-3">
                             <Katex tex={
                                 `\\hat{\\beta_0} = ${intercept.toFixed(3)}`
                             } />
                         </div>
-                        <h2 className="mt-4">Sample slope
-                                                      coefficient:</h2>
+                        <h2 className="mt-4">Sample slope coefficient:</h2>
                         <div className="ms-3">
                             <Katex tex={
                                 `\\hat{\\beta_1} = ${slope.toFixed(3)}`
                             } />
                         </div>
-                        <h2 className="mt-4">Standard error of
-                                                  the sample slope:</h2>
+                        <h2 className="mt-4">
+                            Standard error of the sample slope:
+                        </h2>
                         <div className="ms-3">
                             <Katex tex={
                                 // eslint-disable-next-line max-len
@@ -97,8 +101,11 @@ export const GraphCoefficients = ({
                                 `\\hat{y} = ${intercept.toFixed(3)} + ${slopes[0].toFixed(3)}x_1 + ${slopes[1].toFixed(3)}x_2`
                             } />
                         </div>
-                        <h2 className="mt-4">Sample <span className="katex"><span className="mathnormal">y-intercept</span> {/* eslint-disable-line max-len */}
-                        </span> coefficient:</h2>
+                        <h2 className="mt-4">Sample
+                            <div className="katex-inline">
+                                <Katex tex={`y\\text{\\textendash}intercept`} />
+                            </div> coefficient:
+                        </h2>
                         <div className="ms-3">
                             <Katex tex={
                                 `\\hat{\\beta_0} = ${intercept.toFixed(3)}`
