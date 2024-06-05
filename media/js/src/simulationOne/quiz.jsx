@@ -349,7 +349,8 @@ export const Quiz = ({
                 {!isPvalueCorrect && isPvalueCorrect !== null && (
                     <div className="mt-3">
                         <span style={{ color: 'red' }}>
-                            The value is incorrect. Please try again.
+                            The value is incorrect; it&rsquo;s {pvalue}.
+                            Please try again.
                         </span>
                     </div>
                 )}
