@@ -6,22 +6,15 @@
 {% endblock %}
 
 {% block content %}
-{% if not is_instructor and not is_administrator %}
-    <section class="section--hero">
-        <div class="hero-text" style="top: 2rem">
-            <h1>Metrics Mentor</h1>
-            <p>The Metrics Mentor dashboard is available to instructors only.</p>
-        </div>
-    </section>
-{% else %}
-    <section class="section--hero">
-        <div class="hero-text" style="top: 2rem">
-            <h1>Metrics Mentor</h1>
-            <p>Econometrics Simulations</p>
-            <a class="btn btn-secondary btn-lg" rel="noopener noreferrer" href="{{landing_url}}" target="_blank">Launch Metrics Mentor</a>
-        </div>
-    </section>
-{% endif %}
+
+<section class="section--hero">
+    <div class="hero-text" style="top: 2rem">
+        <h1>Metrics Mentor</h1>
+        <p>Econometrics Simulations</p>
+        <a class="btn btn-secondary btn-lg" rel="noopener noreferrer" href="{{landing_url}}" target="_blank">Launch Metrics Mentor</a>
+    </div>
+</section>
+
 {% endblock %}
 
 {% block footer %}

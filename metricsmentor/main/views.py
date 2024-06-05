@@ -47,6 +47,13 @@ class CoursesView(LoginRequiredMixin, TemplateView):
 class CourseDetailView(LoggedInCourseMixin, DetailView):
     model = Course
 
+    def get(self, request, *args, **kwargs):
+        self.object = self.get_object()
+
+        return HttpResponseRedirect(
+            reverse('simulation-dashboard-view',
+                    kwargs={'pk': self.object.id}))
+
     def get_context_data(self, **kwargs):
         is_faculty = self.object.is_true_faculty(self.request.user)
 
