@@ -1,0 +1,10 @@
+.katex-inline
+{   
+    display: inline;
+    &::before {
+        content: " ";
+      }
+    & > div {
+        display: inline;
+    }
+}
