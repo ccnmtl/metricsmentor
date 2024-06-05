@@ -28,22 +28,22 @@ export const NullHypothesisSection = ({
                 <div className="simulation__step-content">
                     <p>In this exercise, the null
                         hypothesis, <span className="katex">
-                            <span className="mathnormal">
+                        <span className="mathnormal">
                                 H<sub>0</sub>
-                            </span></span>,
+                        </span></span>,
                         for the hypothesis testing is the population
                         slope <span className="katex">
-                                <span className="mathnormal">
+                        <span className="mathnormal">
                                     &beta;<sub>1</sub>
-                                </span></span>.
+                        </span></span>.
                         Now set the baseline claim for <span className="katex">
-                            <span className="mathnormal">
+                        <span className="mathnormal">
                                 H<sub>0</sub>
-                            </span></span> and observe the outcome
+                        </span></span> and observe the outcome
                             of <span className="katex">
-                            <span className="mathnormal">
+                        <span className="mathnormal">
                                 t
-                            </span></span>.
+                        </span></span>.
                     </p>
                     <div className="row">
                         <label className="col-3">
@@ -69,7 +69,7 @@ export const NullHypothesisSection = ({
                         </div>
                     </div>
                     <p className="mt-4">
-                        Save your graph and let&rsquo;s move on 
+                        Save your graph and let&rsquo;s move on
                         to hypothesis testing.
                     </p>
                 </div>

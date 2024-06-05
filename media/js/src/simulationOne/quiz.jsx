@@ -295,18 +295,18 @@ export const Quiz = ({
                     <p>
                         One method for hypothesis testing is to compare
                         the <span className="katex">
-                                <span className="mathnormal">
+                            <span className="mathnormal">
                                     p-Value
-                                </span>
-                            </span> to <span className="katex">
-                                <span className="mathnormal">&alpha;</span>
-                            </span>.
+                            </span>
+                        </span> to <span className="katex">
+                            <span className="mathnormal">&alpha;</span>
+                        </span>.
                         Using the table provided, look up the value that
                         corresponds to <span className="katex">
-                                <span className="mathnormal">
+                            <span className="mathnormal">
                                     t = {tvalue}
-                                </span>.
-                            </span>
+                            </span>.
+                        </span>
                     </p>
                     <button
                         className="btn btn-sm btn-primary"
@@ -359,14 +359,14 @@ export const Quiz = ({
                     <div className="p-to-alpha mt-3">
                         <p>
                             Knowing now that <span className="katex">
-                                    <span className="mathnormal">
+                                <span className="mathnormal">
                                         p-Value = {pvalue}
-                                    </span>
-                                </span> and <span className="katex">
-                                    <span className="mathnormal">
+                                </span>
+                            </span> and <span className="katex">
+                                <span className="mathnormal">
                                         &alpha; = {alpha}
-                                    </span>
-                                </span>,
+                                </span>
+                            </span>,
                             which of the following statements is true?
                         </p>
                         <div>
@@ -415,7 +415,7 @@ export const Quiz = ({
                         isPvalCompareCorrect !== null && (
                             <div className="mt-3">
                                 <span style={{ color: 'red' }}>
-                                    The comparison is incorrect. 
+                                    The comparison is incorrect.
                                     Please try again.
                                 </span>
                             </div>
@@ -426,7 +426,7 @@ export const Quiz = ({
                     <div className="p-val-concl mt-3">
                         <p>Let&rsquo;s look at the null and and
                             alternate hypotheses once more:</p>
-                            <div className="hi-val">
+                        <div className="hi-val">
                             <div className="py-2">
                                 <Katex tex={nullHypothesis} />
                             </div>
@@ -436,14 +436,14 @@ export const Quiz = ({
                         </div>
                         <p className="mt-3">
                             With <span className="katex">
-                                    <span className="mathnormal">
+                                <span className="mathnormal">
                                         p-Value
-                                    </span>
-                                </span> and <span className="katex">
-                                    <span className="mathnormal">
+                                </span>
+                            </span> and <span className="katex">
+                                <span className="mathnormal">
                                         &alpha;
-                                    </span>
-                                </span> comparison above,
+                                </span>
+                            </span> comparison above,
                             what is your conclusion?
                         </p>
                         <div className="mt-3">
@@ -500,30 +500,30 @@ export const Quiz = ({
                 )}
             </div> {/* solving-p-set */}
 
-            {/* the following appears when empty */}  
+            {/* the following appears when empty */}
             <div className="solving-p-set mt-3">
                 {hypothesisTest1validate && (
                     <div className="input-criticalvalue">
                         <p>
                             Another method for hypothesis testing is to
                             compare <span className="katex">
-                                    <span className="mathnormal">
+                                <span className="mathnormal">
                                         t
-                                    </span>
-                                </span> to the <span className="katex">
-                                    <span className="mathnormal">
+                                </span>
+                            </span> to the <span className="katex">
+                                <span className="mathnormal">
                                         critical value
-                                    </span>
-                                </span> at a certain significance
+                                </span>
+                            </span> at a certain significance
                                 level <span className="katex">
-                                    <span className="mathnormal">&alpha;</span>
-                                </span>.
+                                <span className="mathnormal">&alpha;</span>
+                            </span>.
                             Using the table provided, look up the value that
                             corresponds to <span className="katex">
-                                    <span className="mathnormal">
+                                <span className="mathnormal">
                                         &alpha; = {alpha}
-                                    </span>.
-                                </span>
+                                </span>.
+                            </span>
                         </p>
                         <button
                             className="btn btn-sm btn-primary"
@@ -578,14 +578,14 @@ export const Quiz = ({
                     <div className="p-val-concl mt-3">
                         <p>
                             Knowing now that <span className="katex">
-                                    <span className="mathnormal">
+                                <span className="mathnormal">
                                         t = {tvalue}
-                                    </span>
-                                </span> and <span className="katex">
-                                    <span className="mathnormal">
+                                </span>
+                            </span> and <span className="katex">
+                                <span className="mathnormal">
                                         critical value = {criticalValue}
-                                    </span>
-                                </span>,
+                                </span>
+                            </span>,
                             which of the following statements is true?
                         </p>
                         <div>
@@ -642,7 +642,7 @@ export const Quiz = ({
                     <div className="p-val-concl mt-3">
                         <p>Once again, the null and and
                             alternate hypotheses are:</p>
-                            <div className="hi-val">
+                        <div className="hi-val">
                             <div className="py-2">
                                 <Katex tex={nullHypothesis} />
                             </div>
@@ -652,14 +652,14 @@ export const Quiz = ({
                         </div>
                         <p className="mt-3">
                             With <span className="katex">
-                                    <span className="mathnormal">
+                                <span className="mathnormal">
                                         t
-                                    </span>
-                                </span> and <span className="katex">
-                                    <span className="mathnormal">
+                                </span>
+                            </span> and <span className="katex">
+                                <span className="mathnormal">
                                         critical value
-                                    </span>
-                                </span> comparison above,
+                                </span>
+                            </span> comparison above,
                             what is your conclusion?
                         </p>
                         <div>
@@ -712,7 +712,7 @@ export const Quiz = ({
                                     id="proceed"
                                     onClick={onComplete}>
                                         Next hypothesis &raquo;
-                                    </button>                            
+                                    </button>
                                 </div>
                             </>
                         )}
