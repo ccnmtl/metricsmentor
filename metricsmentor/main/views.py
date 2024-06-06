@@ -263,7 +263,7 @@ def calculate_pvalue(request):
         else:
             p_value_left = round(norm.cdf(z_value), 4)
             p_value_right = round(norm.cdf(z_value), 4)
-            p_value_two_sided = 2 * round(norm.cdf(abs(z_value)), 4)
+            p_value_two_sided = 2 * round(norm.cdf(z_value), 4)
 
         return JsonResponse({
             'value_left': p_value_left,
