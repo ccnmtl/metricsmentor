@@ -264,12 +264,29 @@ export const Quiz = ({
     };
 
     const validateHypothesisTest2 = (value) => {
-        const correctDecision =
-        (Math.abs(tvalue) > criticalValue && value === 'reject') ||
+        let correctDecision;
+
+        switch (hypothesisTest) {
+        case 'value_two_sided':
+            correctDecision =
+            (Math.abs(tvalue) > criticalValue && value === 'reject') ||
                 (Math.abs(tvalue) <= criticalValue && value === 'failToReject');
+            break;
+        case 'value_left':
+            correctDecision =
+            (tvalue < criticalValue && value === 'reject') ||
+                (tvalue >= criticalValue && value === 'failToReject');
+            break;
+        case 'value_right':
+            correctDecision =
+            (tvalue > criticalValue && value === 'reject') ||
+                (tvalue <= criticalValue && value === 'failToReject');
+            break;
+        default:
+            correctDecision = false;
+        }
 
         setHypothesisTest2validate(correctDecision);
-
         return correctDecision;
     };
 
