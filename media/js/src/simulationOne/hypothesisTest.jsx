@@ -102,7 +102,7 @@ export const HypothesisTest = ({
                         </div>
                         <p className="mt-3">
                             First, choose the significance
-                            value, <span className="katex">
+                            level, <span className="katex">
                                 <span className="mathnormal">&alpha;</span>
                             </span>,
                             for this exercise:
