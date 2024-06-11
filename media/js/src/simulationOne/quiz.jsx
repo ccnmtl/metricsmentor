@@ -304,6 +304,12 @@ export const Quiz = ({
             nullHypothesisChoice2, isCorrect, additionalData);
     };
 
+    let absoluteTtext;
+    if (hypothesisTest === 'value_two_sided') {
+        absoluteTtext = '|t|';
+    } else {
+        absoluteTtext = 't';
+    }
 
     return (
         <div id="quiz">
@@ -616,7 +622,7 @@ export const Quiz = ({
                                 onChange={handleComparingCritical}
                             />
                             <label htmlFor="tGreaterThanCritical">
-                            |t| &gt; critical value</label>
+                                {absoluteTtext} &gt; critical value</label>
                         </div>
                         <div>
                             <input
@@ -629,7 +635,7 @@ export const Quiz = ({
                                 onChange={handleComparingCritical}
                             />
                             <label htmlFor="tLessThanCritical">
-                        |t| &lt; critical value</label>
+                                {absoluteTtext} &lt; critical value</label>
                         </div>
                         <button
                             className="btn btn-small btn-primary mt-3"
