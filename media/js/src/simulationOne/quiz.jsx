@@ -310,33 +310,29 @@ export const Quiz = ({
             <div className="solving-p-set mt-3">
                 <div className="input-p">
                     <p>
-                        One method for hypothesis testing is to compare
-                        the <span className="katex">
-                            <span className="mathnormal">
-                                    p-Value
-                            </span>
-                        </span> to <span className="katex">
-                            <span className="mathnormal">&alpha;</span>
-                        </span>.
+                        One method for hypothesis testing is to compare the
+                        <Katex tex={'p'} className="katex-inline" />-value to
+                        <Katex tex={'{\\alpha}'} className="katex-inline" />.
                         Using the table provided, look up the value that
-                        corresponds to <span className="katex">
-                            <span className="mathnormal">
-                                    t = {tvalue}
-                            </span>.
-                        </span>
+                        corresponds to
+                        <Katex tex={`t = ${tvalue}`}
+                            className="katex-inline"/>.
                     </p>
                     <button
                         className="btn btn-sm btn-primary"
                         data-bs-toggle="modal"
                         data-bs-target="#pvalueModal">
-                        p-Value table
+                        p-value table
                     </button>
 
                     <PvalueModal />
 
                     <div className="mt-3 d-flex">
                         <label className="align-self-center"
-                            htmlFor="pValue">p = </label>
+                            htmlFor="pValue">
+                            <Katex tex={'p'}
+                                className="katex-inline" />-value =
+                        </label>
                         <input
                             className="align-self-center"
                             type="text"
@@ -375,15 +371,10 @@ export const Quiz = ({
                 {isPvalueCorrect && (
                     <div className="p-to-alpha mt-3">
                         <p>
-                            Knowing now that <span className="katex">
-                                <span className="mathnormal">
-                                        p-Value = {pvalue}
-                                </span>
-                            </span> and <span className="katex">
-                                <span className="mathnormal">
-                                        &alpha; = {alpha}
-                                </span>
-                            </span>,
+                            Knowing now the
+                            <Katex tex={'p'} className="katex-inline" />-value
+                            and
+                            <Katex tex={'\\alpha'} className="katex-inline"/>,
                             which of the following statements is true?
                         </p>
                         <div>
@@ -397,7 +388,10 @@ export const Quiz = ({
                                 onChange={handlePvalueComparisonChange}
                             />
                             <label htmlFor="pGreaterThanAlpha">
-                        p-Value &gt; &alpha;
+                                <Katex tex={
+                                // eslint-disable-next-line max-len
+                                    'p\\text{\\textendash}value \\text{\\textgreater} \\alpha'
+                                } />
                             </label>
                         </div>
                         <div>
@@ -411,7 +405,10 @@ export const Quiz = ({
                                 onChange={handlePvalueComparisonChange}
                             />
                             <label htmlFor="pLessThanAlpha">
-                                p-Value &lt; &alpha;
+                                <Katex tex={
+                                // eslint-disable-next-line max-len
+                                    'p\\text{\\textendash}value \\text{\\textless} \\alpha'
+                                } />
                             </label>
                         </div>
                         <button
@@ -452,15 +449,11 @@ export const Quiz = ({
                             </div>
                         </div>
                         <p className="mt-3">
-                            With <span className="katex">
-                                <span className="mathnormal">
-                                        p-Value
-                                </span>
-                            </span> and <span className="katex">
-                                <span className="mathnormal">
-                                        &alpha;
-                                </span>
-                            </span> comparison above,
+                            With
+                            <Katex tex={'p'} className="katex-inline" />-value
+                            and
+                            <Katex tex={'\\alpha'}
+                                className="katex-inline"/> comparison above,
                             what is your conclusion?
                         </p>
                         <div className="mt-3">
@@ -523,24 +516,18 @@ export const Quiz = ({
                     <div className="input-criticalvalue">
                         <p>
                             Another method for hypothesis testing is to
-                            compare <span className="katex">
-                                <span className="mathnormal">
-                                        t
-                                </span>
-                            </span> to the <span className="katex">
-                                <span className="mathnormal">
-                                        critical value
-                                </span>
-                            </span> at a certain significance
-                                level <span className="katex">
-                                <span className="mathnormal">&alpha;</span>
-                            </span>.
+                            compare
+                            <Katex tex={'t'} className="katex-inline"/> to
+                            the
+                            <Katex tex={'critical~value'}
+                                className="katex-inline"/> at a
+                            certain significance value
+                            <Katex tex={'\\alpha'}
+                                className="katex-inline"/>.
                             Using the table provided, look up the value that
-                            corresponds to <span className="katex">
-                                <span className="mathnormal">
-                                        &alpha; = {alpha}
-                                </span>.
-                            </span>
+                            corresponds to
+                            <Katex tex={`\\bold{\\alpha = ${alpha}}`}
+                                className="katex-inline"/>.
                         </p>
                         <button
                             className="btn btn-sm btn-primary"
@@ -594,15 +581,11 @@ export const Quiz = ({
                 {isCriticalValueCorrect && (
                     <div className="p-val-concl mt-3">
                         <p>
-                            Knowing now that <span className="katex">
-                                <span className="mathnormal">
-                                        t = {tvalue}
-                                </span>
-                            </span> and <span className="katex">
-                                <span className="mathnormal">
-                                        critical value = {criticalValue}
-                                </span>
-                            </span>,
+                            Knowing now the
+                            <Katex tex={'t'} className="katex-inline"/> value
+                            and
+                            <Katex tex={'critical~value'}
+                                className="katex-inline"/>,
                             which of the following statements is true?
                         </p>
                         <div>
@@ -668,15 +651,11 @@ export const Quiz = ({
                             </div>
                         </div>
                         <p className="mt-3">
-                            With <span className="katex">
-                                <span className="mathnormal">
-                                        t
-                                </span>
-                            </span> and <span className="katex">
-                                <span className="mathnormal">
-                                        critical value
-                                </span>
-                            </span> comparison above,
+                            With
+                            <Katex tex={'t'} className="katex-inline"/> value
+                            and
+                            <Katex tex={'critical~value'}
+                                className="katex-inline"/> comparison above,
                             what is your conclusion?
                         </p>
                         <div>

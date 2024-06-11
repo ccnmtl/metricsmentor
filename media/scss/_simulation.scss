@@ -142,5 +142,8 @@
     background-color: $teal-200;
     display: inline-block;
     border-radius: 0.25rem;
+    &::before {
+        content: "" !important;
+    }
 }
 
