@@ -30,12 +30,9 @@ export const GraphCoefficients = ({
                             coefficients. Observe how the linear regression
                             coefficients change as you continue to
                             adjust
-                            <div className="katex-inline">
-                                <Katex tex={`n`} />
-                            </div> and
-                            <div className="katex-inline">
-                                <Katex tex={`corr(x,y)`} />
-                            </div>.
+                            <Katex tex={`n`} className="katex-inline" /> and
+                            <Katex tex={`corr(x,y)`}
+                                className="katex-inline" />.
                         </p>
                         <h2 className="mt-4">Regression line equation:</h2>
                         <div className="ms-3 mb-3">
@@ -51,9 +48,8 @@ export const GraphCoefficients = ({
                             } />
                         </div>
                         <h2 className="mt-4">Sample
-                            <div className="katex-inline">
-                                <Katex tex={`y\\text{\\textendash}intercept`} />
-                            </div> coefficient:
+                            <Katex tex={`y\\text{\\textendash}intercept`}
+                                 className="katex-inline"/> coefficient:
                         </h2>
                         <div className="ms-3">
                             <Katex tex={
@@ -102,9 +98,8 @@ export const GraphCoefficients = ({
                             } />
                         </div>
                         <h2 className="mt-4">Sample
-                            <div className="katex-inline">
-                                <Katex tex={`y\\text{\\textendash}intercept`} />
-                            </div> coefficient:
+                            <Katex tex={`y\\text{\\textendash}intercept`}
+                                 className="katex-inline"/> coefficient:
                         </h2>
                         <div className="ms-3">
                             <Katex tex={
