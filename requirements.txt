@@ -112,5 +112,5 @@ numpy==1.26.3
 statsmodels==0.14.1
 pandas==2.2.2
 pytz==2024.1
-packaging==24.0
+packaging==24.1
 patsy==0.5.6
