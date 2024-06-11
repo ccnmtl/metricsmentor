@@ -311,7 +311,7 @@ export const Quiz = ({
                 <div className="input-p">
                     <p>
                         One method for hypothesis testing is to compare the
-                        <Katex tex={`p`} className="katex-inline" />-value to
+                        <Katex tex={'p'} className="katex-inline" />-value to
                         <Katex tex={'{\\alpha}'} className="katex-inline" />.
                         Using the table provided, look up the value that
                         corresponds to
@@ -330,7 +330,7 @@ export const Quiz = ({
                     <div className="mt-3 d-flex">
                         <label className="align-self-center"
                             htmlFor="pValue">
-                            <Katex tex={`p`}
+                            <Katex tex={'p'}
                                 className="katex-inline" />-value =
                         </label>
                         <input
@@ -372,9 +372,9 @@ export const Quiz = ({
                     <div className="p-to-alpha mt-3">
                         <p>
                             Knowing now the
-                            <Katex tex={`p`} className="katex-inline" />-value
+                            <Katex tex={'p'} className="katex-inline" />-value
                             and
-                            <Katex tex={`\\alpha`} className="katex-inline"/>,
+                            <Katex tex={'\\alpha'} className="katex-inline"/>,
                             which of the following statements is true?
                         </p>
                         <div>
@@ -405,7 +405,7 @@ export const Quiz = ({
                                 onChange={handlePvalueComparisonChange}
                             />
                             <label htmlFor="pLessThanAlpha">
-                                 <Katex tex={
+                                <Katex tex={
                                 // eslint-disable-next-line max-len
                                     'p\\text{\\textendash}value \\text{\\textless} \\alpha'
                                 } />
@@ -450,9 +450,9 @@ export const Quiz = ({
                         </div>
                         <p className="mt-3">
                             With
-                            <Katex tex={`p`} className="katex-inline" />-value
+                            <Katex tex={'p'} className="katex-inline" />-value
                             and
-                            <Katex tex={`\\alpha`}
+                            <Katex tex={'\\alpha'}
                                 className="katex-inline"/> comparison above,
                             what is your conclusion?
                         </p>
@@ -517,12 +517,12 @@ export const Quiz = ({
                         <p>
                             Another method for hypothesis testing is to
                             compare
-                            <Katex tex={`t`} className="katex-inline"/> to
+                            <Katex tex={'t'} className="katex-inline"/> to
                             the
-                            <Katex tex={`critical~value`}
+                            <Katex tex={'critical~value'}
                                 className="katex-inline"/> at a
                             certain significance value
-                            <Katex tex={`\\alpha`}
+                            <Katex tex={'\\alpha'}
                                 className="katex-inline"/>.
                             Using the table provided, look up the value that
                             corresponds to
@@ -582,9 +582,9 @@ export const Quiz = ({
                     <div className="p-val-concl mt-3">
                         <p>
                             Knowing now the
-                            <Katex tex={`t`} className="katex-inline"/> value
+                            <Katex tex={'t'} className="katex-inline"/> value
                             and
-                            <Katex tex={`critical~value`}
+                            <Katex tex={'critical~value'}
                                 className="katex-inline"/>,
                             which of the following statements is true?
                         </p>
@@ -652,9 +652,9 @@ export const Quiz = ({
                         </div>
                         <p className="mt-3">
                             With
-                            <Katex tex={`t`} className="katex-inline"/> value
+                            <Katex tex={'t'} className="katex-inline"/> value
                             and
-                            <Katex tex={`critical~value`}
+                            <Katex tex={'critical~value'}
                                 className="katex-inline"/> comparison above,
                             what is your conclusion?
                         </p>

@@ -132,24 +132,24 @@ export const SimulationOne = () => {
                                 Let&rsquo;s start by setting up the parameters
                                 for your graph. To generate data, you can set
                                 the sample size,
-                                    <Katex tex={`n`}
-                                        className="katex-inline"/>,
+                                <Katex tex={'n'}
+                                    className="katex-inline"/>,
                                 and the estimated correlation
                                 coefficient,
-                                    <Katex tex={`corr(x,y)`}
-                                        className="katex-inline" />,
+                                <Katex tex={'corr(x,y)'}
+                                    className="katex-inline" />,
                                 between the independent and dependent variables
-                                    <Katex tex={`x`}
-                                        className="katex-inline" /> and
-                                    <Katex tex={`y`}
-                                        className="katex-inline" />.
+                                <Katex tex={'x'}
+                                    className="katex-inline" /> and
+                                <Katex tex={'y'}
+                                    className="katex-inline" />.
                             </p>
                             <div className="mt-4">
                                 <label htmlFor="nSampleSize"
                                     className="h2 form-label">
                                     Sample size,
-                                        <Katex tex={`n`}
-                                            className="katex-inline" />:
+                                    <Katex tex={'n'}
+                                        className="katex-inline" />:
                                 </label>
                                 <input type="number" min="50" max="500"
                                     id="nSampleSize"
@@ -163,8 +163,8 @@ export const SimulationOne = () => {
                                 <label htmlFor="correlation"
                                     className="h2 form-label">
                                     Estimated correlation coefficient,
-                                        <Katex tex={`corr(x,y)`}
-                                            className="katex-inline" />:
+                                    <Katex tex={'corr(x,y)'}
+                                        className="katex-inline" />:
                                 </label>
                                 <div className="slider-range__box">
                                     <div className="slider-range__input">

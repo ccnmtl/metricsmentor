@@ -28,14 +28,14 @@ export const NullHypothesisSection = ({
                 <div className="simulation__step-content">
                     <p>In this exercise, the null
                         hypothesis,
-                        <Katex tex={'{\\Eta_0}'} className="katex-inline" />,
+                    <Katex tex={'{\\Eta_0}'} className="katex-inline" />,
                         for the hypothesis testing is the population slope
-                        <Katex tex={'{\\beta_1}'} className="katex-inline" />.
+                    <Katex tex={'{\\beta_1}'} className="katex-inline" />.
                         Now set the baseline claim for
-                        <Katex tex={'{\\Eta_0}'}
-                            className="katex-inline" /> and observe the
+                    <Katex tex={'{\\Eta_0}'}
+                        className="katex-inline" /> and observe the
                         outcome of
-                        <Katex tex={`t`} className="katex-inline" />.
+                    <Katex tex={'t'} className="katex-inline" />.
                     </p>
                     <div className="row">
                         <label className="col-3">

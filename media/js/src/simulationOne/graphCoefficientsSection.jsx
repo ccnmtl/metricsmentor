@@ -30,8 +30,8 @@ export const GraphCoefficients = ({
                             coefficients. Observe how the linear regression
                             coefficients change as you continue to
                             adjust
-                            <Katex tex={`n`} className="katex-inline" /> and
-                            <Katex tex={`corr(x,y)`}
+                            <Katex tex={'n'} className="katex-inline" /> and
+                            <Katex tex={'corr(x,y)'}
                                 className="katex-inline" />.
                         </p>
                         <h2 className="mt-4">Regression line equation:</h2>
@@ -48,8 +48,8 @@ export const GraphCoefficients = ({
                             } />
                         </div>
                         <h2 className="mt-4">Sample
-                            <Katex tex={`y\\text{\\textendash}intercept`}
-                                 className="katex-inline"/> coefficient:
+                            <Katex tex={'y\\text{\\textendash}intercept'}
+                                className="katex-inline"/> coefficient:
                         </h2>
                         <div className="ms-3">
                             <Katex tex={
@@ -98,8 +98,8 @@ export const GraphCoefficients = ({
                             } />
                         </div>
                         <h2 className="mt-4">Sample
-                            <Katex tex={`y\\text{\\textendash}intercept`}
-                                 className="katex-inline"/> coefficient:
+                            <Katex tex={'y\\text{\\textendash}intercept'}
+                                className="katex-inline"/> coefficient:
                         </h2>
                         <div className="ms-3">
                             <Katex tex={
