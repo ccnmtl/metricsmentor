@@ -1,8 +1,7 @@
 import React from 'react';
 import { Katex } from '../katexComponent';
-import PropTypes from 'prop-types';
 
-export const STATIC_URL = MetricsMentor.staticUrl;
+export const STATIC_URL = window.MetricsMentor.staticUrl;
 
 export const PvalueModal = () => {
 
