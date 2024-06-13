@@ -9,7 +9,7 @@
 .modal-content {
     margin: 5rem auto auto auto;
     &-pvalue {
-        width: calc(100vw - 10rem);
+        width: 65rem;
         height: calc(100vh - 9rem) !important;
     }
     &-cvalue {
@@ -17,24 +17,37 @@
     }
 }
 
-.modal-body {
-    .table-container {
-        width: 100%;
-        height: 100%;
-        overflow: auto;
-        background-color: $gray-md-300;
-        border: 0.0625rem solid $gray-md-200;
-        border-collapse: collapse;
-      }
-    th.colheader {
+.table-container {
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: $gray-md-300;
+    border: 0.0625rem solid $gray-md-200;
+    border-collapse: collapse;
+    thead {
         position: sticky;
         top: 0;
+        background-color: $gray-md-300;
+        border: 0;
+    }
+    tr {
+        border-top: 0;
+        border-bottom: 0;
+    }
+    th.colheader {
         text-align: center;
         background-color: $gray-md-300;
-        border-color: $gray-md-400;
+        border-color: transparent;
         border-collapse: collapse;
     }
     th.rowheader {
         text-align: right;
+    }
+}
+
+.modal-graph {
+    margin: 1rem auto;
+    &--pvalue {
+        width: 35rem;
     }
 }
