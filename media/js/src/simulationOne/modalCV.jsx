@@ -1,4 +1,7 @@
 import React from 'react';
+import { Katex } from '../katexComponent';
+
+export const STATIC_URL = window.MetricsMentor.staticUrl;
 
 export const CriticalValueModal = () => {
 
@@ -24,43 +27,128 @@ export const CriticalValueModal = () => {
                             aria-label="Close"></button>
                     </div>
                     <div className="modal-body">
-                        <div className="table-container">
-                            <table className="table table-bordered table-hover">
-                                <thead>
-                                    <tr>
-                                        <th className="colheader">&nbsp;</th>
-                                        <th className="colheader">10%</th>
-                                        <th className="colheader">5%</th>
-                                        <th className="colheader">1%</th>
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        <th className="rowheader">
-                                            2-sided test (&ne;)
-                                            Reject if |t| &gt;</th>
-                                        <td>&#177;1.64</td>
-                                        <td>&#177;1.96</td>
-                                        <td>&#177;2.58</td>
-                                    </tr>
-                                    <tr>
-                                        <th className="rowheader">
-                                            1-sided test (&gt;)
-                                            Reject if t &gt; (right-sided)</th>
-                                        <td>1.28</td>
-                                        <td>1.64</td>
-                                        <td>2.33</td>
-                                    </tr>
-                                    <tr>
-                                        <th className="rowheader">
-                                            1-sided test (&lt;)
-                                            Reject if t &lt; (left-sided)</th>
-                                        <td>-1.28</td>
-                                        <td>-1.64</td>
-                                        <td>-2.33</td>
-                                    </tr>
-                                </tbody>
-                            </table>
+                        <div className="container-cvalue">
+                            <figure
+                                className="modal-graph modal-graph--cvalue
+                                flex-fill">
+                                <img src={
+                                    `${STATIC_URL}/img/cv-2tail-curve.svg`
+                                } alt="critical-value graph" />
+                            </figure>
+                            <div className="cvalue-text flex-fill">
+                                <h3>Two-tailed test (<Katex tex={'{\\neq}'}
+                                    className="katex-inline"/> )</h3>
+                                <table className="table table-bordered">
+                                    <thead>
+                                        <tr>
+                                            <th className="colheader">
+                                                <Katex tex={'\\alpha'}
+                                                    className="katex-inline" />:
+                                            </th>
+                                            <th className="colheader">10%</th>
+                                            <th className="colheader">5%</th>
+                                            <th className="colheader">1%</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <th className="rowheader
+                                            text-nowrap">
+                                                Reject if
+                                                <Katex tex={
+                                                    '\\lvert t \\rvert \\gt'
+                                                }
+                                                className="katex-inline"/>
+                                            </th>
+                                            <td>&#177;1.64</td>
+                                            <td>&#177;1.96</td>
+                                            <td>&#177;2.58</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <div className="container-cvalue">
+                            <figure
+                                className="modal-graph modal-graph--cvalue
+                                flex-fill">
+                                <img src={
+                                    `${STATIC_URL}/img/cv-1tail-right-curve.svg`
+                                } alt="critical-value graph" />
+                            </figure>
+                            <div className="cvalue-text flex-fill">
+                                <h3>One-tailed test, right side
+                                    (<Katex tex={'\\gt'}
+                                    className="katex-inline"/> )</h3>
+                                <table className="table table-bordered">
+                                    <thead>
+                                        <tr>
+                                            <th className="colheader">
+                                                <Katex tex={'\\alpha'}
+                                                    className="katex-inline" />:
+                                            </th>
+                                            <th className="colheader">10%</th>
+                                            <th className="colheader">5%</th>
+                                            <th className="colheader">1%</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <th className="rowheader
+                                            text-nowrap">
+                                                Reject if
+                                                <Katex
+                                                    tex={'t \\gt'}
+                                                    className="katex-inline"/>
+                                            </th>
+                                            <td>1.28</td>
+                                            <td>1.64</td>
+                                            <td>2.33</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <div className="container-cvalue">
+                            <figure
+                                className="modal-graph modal-graph--cvalue
+                                flex-fill">
+                                <img src={
+                                    `${STATIC_URL}/img/cv-1tail-left-curve.svg`
+                                } alt="critical-value graph" />
+                            </figure>
+                            <div className="cvalue-text flex-fill">
+                                <h3>One-tailed test, left side
+                                    (<Katex tex={'\\lt'}
+                                    className="katex-inline"/> )</h3>
+                                <table className="table table-bordered">
+                                    <thead>
+                                        <tr>
+                                            <th className="colheader">
+                                                <Katex tex={'\\alpha'}
+                                                    className="katex-inline" />:
+                                            </th>
+                                            <th className="colheader">10%</th>
+                                            <th className="colheader">5%</th>
+                                            <th className="colheader">1%</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <th className="rowheader
+                                            text-nowrap">
+                                                Reject if
+                                                <Katex
+                                                    tex={'t \\lt'}
+                                                    className="katex-inline"/>
+                                            </th>
+                                            <td>-1.28</td>
+                                            <td>-1.64</td>
+                                            <td>-2.33</td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
                         </div>
                     </div>
                     <div className="modal-footer">
