@@ -13,7 +13,8 @@
         height: calc(100vh - 9rem) !important;
     }
     &-cvalue {
-        width: 40rem;
+        width: 60rem;
+        height: calc(100vh - 9rem) !important;
     }
 }
 
@@ -49,5 +50,35 @@
     margin: 1rem auto;
     &--pvalue {
         width: 35rem;
+    }
+    &--cvalue {
+        width: 20rem;
+    }
+}
+
+.container-cvalue {
+    display: flex;
+    margin: 0.5rem 0;
+    border-bottom: 0.0625rem dotted $gray-md-400;
+    h3 {
+        font-size: 1.25rem;
+        font-weight: 600;
+    }
+    table {
+        margin-top: 1rem;
+        width: auto;
+    }
+    .rowheader {
+        padding-right: 1rem;
+    }
+    .colheader, td {
+        padding-right: 1rem;
+        padding-left: 1rem;
+        text-align: center;
+    }
+    .cvalue-text {
+        margin: 0;
+        padding: 0 0 0 1rem;
+        align-self: center;
     }
 }
