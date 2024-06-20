@@ -72,7 +72,7 @@ export const NullHypothesisSection = ({
                         </p>
                     </div>
                 )}
-                {plotType === '3d' && (
+                {plotType === '3d' && slopes.length > 0 && (
                     <div className="simulation__step-content">
                         <p>In this exercise, the null
                             hypothesis,

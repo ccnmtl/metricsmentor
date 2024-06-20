@@ -236,6 +236,8 @@ def calculate_multiple_regression(request):
 
             # Convert NumPy arrays to Python lists
             stderr_list = result.bse.tolist()
+            stderr_x1 = stderr_list[1]
+            stderr_x2 = stderr_list[2]
 
             return JsonResponse({
                 'slope_x1': result.params[1],
@@ -243,7 +245,7 @@ def calculate_multiple_regression(request):
                 'intercept': result.params[0],
                 'rvalue': np.sqrt(result.rsquared),
                 'pvalue': result.f_pvalue,
-                'stderr': stderr_list,
+                'stderr': [stderr_x1, stderr_x2],
             })
 
     return JsonResponse({'error': 'Invalid data or method.'}, status=400)

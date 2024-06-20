@@ -293,7 +293,7 @@ export const SimulationOne = () => {
                         </div>
                     </div>
                 </div> {/* div class=simulation__step-container */}
-                {slope !== null || slopes.length > 0 && (
+                {slope !== null && (
                     <>
                         <GraphCoefficients
                             intercept={intercept}
