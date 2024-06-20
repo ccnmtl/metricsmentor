@@ -5,10 +5,10 @@ const { defineConfig } = require('cypress');
 module.exports = defineConfig({
     component: {
         devServer: {
-          framework: 'react',
-          bundler: 'webpack',
+            framework: 'react',
+            bundler: 'webpack',
         },
-      },
+    },
     blockHosts: [
         '*googletagmanager.com',
         '*google-analytics.com',
