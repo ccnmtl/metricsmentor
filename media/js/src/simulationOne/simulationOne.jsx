@@ -17,7 +17,8 @@ const coursePk =
 
 export const SimulationOne = () => {
     const [N, setN] = useState(50);
-    const [correlation, setCorrelation] = useState(0.3);
+    const [yCorrelation, setYcorrelation] = useState(0.3);
+    const [xCorrelation, setXcorrelation] = useState(0.3);
     const [seed, setSeed] = useState('seedString');
     const [slope, setSlope] = useState(null);
     const [intercept, setIntercept] = useState(null);
@@ -35,9 +36,15 @@ export const SimulationOne = () => {
 
     const saveGraphData = async() => {
         const data = {
-            N, correlation, seed, slope, intercept, stderror, appRvalue,
+            N, yCorrelation, seed, slope, intercept, stderror, appRvalue,
             tvalue, hypothesizedSlope
         };
+
+        if (plotType === '3d') {
+            data.slopes = slopes;
+            data.stderrs = stderrs;
+            data.xCorrelation = xCorrelation;
+        }
 
         return authedFetch(
             `/course/${coursePk}/api/save-sim1-graph/`, 'POST', { data })
@@ -81,8 +88,12 @@ export const SimulationOne = () => {
         }
     };
 
-    const handleCorrelationChange = (e) => {
-        setCorrelation(parseFloat(e.target.value));
+    const handleYcorrelationChange = (e) => {
+        setYcorrelation(parseFloat(e.target.value));
+    };
+
+    const handleXcorrelationChange = (e) => {
+        setXcorrelation(parseFloat(e.target.value));
     };
 
     const handleSeedChange = (e) => {
@@ -168,15 +179,18 @@ export const SimulationOne = () => {
                                 </label>
                                 <div className="slider-range__box">
                                     <div className="slider-range__input">
-                                        <input type="range" step="0.01" min="-1"
-                                            max="1" value={correlation}
+                                        <input
+                                            type="range"
+                                            step="0.01"
+                                            min="-1"
+                                            max="1" value={yCorrelation}
                                             className="form-range"
                                             id="correlation"
                                             disabled={startQuiz}
                                             // eslint-disable-next-line max-len
-                                            onChange={handleCorrelationChange} />
+                                            onChange={handleYcorrelationChange} />
                                         <div className="scale-value">
-                                            <Katex tex={`${correlation}`} />
+                                            <Katex tex={`${yCorrelation}`} />
                                         </div>
                                     </div>
                                     <div className="slider-range__scale">
@@ -192,6 +206,46 @@ export const SimulationOne = () => {
                                     </div>
                                 </div>
                             </div>
+                            {plotType === '3d' && (
+                                <div className="mt-4">
+                                    <label htmlFor="correlation"
+                                        className="h2 form-label">
+                                        Estimated correlation coefficient,
+                                        <Katex tex={'corr(x_1,x_2)'}
+                                            className="katex-inline" />:
+                                    </label>
+                                    <div className="slider-range__box">
+                                        <div className="slider-range__input">
+                                            <input
+                                                type="range"
+                                                step="0.01"
+                                                min="-1"
+                                                max="1" value={xCorrelation}
+                                                className="form-range"
+                                                id="correlation"
+                                                // disabled={startQuiz}
+
+                                                onChange={
+                                                    handleXcorrelationChange} />
+                                            <div className="scale-value">
+                                                <Katex tex={`${xCorrelation}`}
+                                                />
+                                            </div>
+                                        </div>
+                                        <div className="slider-range__scale">
+                                            <div className="unit"></div>
+                                            <div className="unit"></div>
+                                            <div className="unit"></div>
+                                            <div className="unit"></div>
+                                            <div className="unit"></div>
+                                            <div className="unit"></div>
+                                            <div className="unit"></div>
+                                            <div className="unit"></div>
+                                            <div className="unit"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                            )}
                             {slope !== null && (
                                 <>
                                     <div className="mt-5 h2">
@@ -291,7 +345,8 @@ export const SimulationOne = () => {
                 </div>
                 <ScatterPlot
                     N={N}
-                    correlation={correlation}
+                    yCorrelation={yCorrelation}
+                    xCorrelation={xCorrelation}
                     seed={seed}
                     slope={slope}
                     slopes={slopes}

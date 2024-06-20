@@ -7,9 +7,9 @@ import { saveAs } from 'file-saver';
 
 const isSuperUser = window.MetricsMentor.currentUser.is_superuser;
 
-export const ScatterPlot = ({ N, correlation, seed, setAppRvalue,
+export const ScatterPlot = ({ N, yCorrelation, seed, setAppRvalue,
     setSlope, setIntercept, setStderror, plotType, slopes, setSlopes,
-    stderrs, setStderrs
+    stderrs, setStderrs, xCorrelation
 }) => {
     const [data, setData] = useState([]);
     const [regressionLine, setRegressionLine] = useState(null);
@@ -21,11 +21,11 @@ export const ScatterPlot = ({ N, correlation, seed, setAppRvalue,
         const rng = seedrandom(seed);
 
         let generatedData = [];
-        if (typeof correlation === 'number') {
+        if (typeof yCorrelation === 'number') {
             for (let i = 0; i < N; i++) {
                 const x = Math.round((rng() * 100 - 50) * 2);
-                const y = Math.round(correlation * x + Math.sqrt(
-                    1 - Math.pow(correlation, 2)) * (rng() * 100 - 50) * 2);
+                const y = Math.round(yCorrelation * x + Math.sqrt(
+                    1 - Math.pow(yCorrelation, 2)) * (rng() * 100 - 50) * 2);
                 generatedData.push({ x, y });
             }
         }
@@ -33,26 +33,13 @@ export const ScatterPlot = ({ N, correlation, seed, setAppRvalue,
         if (plotType === '3d') {
             generatedData = generatedData.map(point => ({
                 ...point,
-                z: Math.round(correlation * point.x + Math.sqrt(
-                    1 - Math.pow(correlation, 2)) * (rng() * 100 - 50) * 2)
+                z: Math.round(xCorrelation * point.x + Math.sqrt(
+                    1 - Math.pow(xCorrelation, 2)) * (rng() * 100 - 50) * 2)
             }));
         }
 
         return generatedData;
     };
-
-    // eslint-disable-next-line max-len
-    // const calculateRegressionPlane = (x_values, y_values, slope_x1, slope_x2, intercept) => {
-    //     const regressionPlane = [];
-    //     for (let i = 0; i < x_values.length; i++) {
-    //         for (let j = 0; j < y_values.length; j++) {
-    //             const z =
-    //              slope_x1 * x_values[i] + slope_x2 * y_values[j] + intercept;
-    //             regressionPlane.push(z);
-    //         }
-    //     }
-    //     return regressionPlane;
-    // };
 
     const calculateRegression = async() => {
         if (N < 50 || N > 500) {
@@ -156,7 +143,7 @@ export const ScatterPlot = ({ N, correlation, seed, setAppRvalue,
         if(N) {
             setData(generateData());
         }
-    }, [N, correlation, seed, plotType]);
+    }, [N, yCorrelation, xCorrelation, seed, plotType]);
 
     useEffect(() => {
         if(data.length > 0) {
@@ -228,7 +215,7 @@ export const ScatterPlot = ({ N, correlation, seed, setAppRvalue,
 
 ScatterPlot.propTypes = {
     N: PropTypes.number.isRequired,
-    correlation: PropTypes.number.isRequired,
+    yCorrelation: PropTypes.number.isRequired,
     seed: PropTypes.string.isRequired,
     appRvalue: PropTypes.number,
     setAppRvalue: PropTypes.func,
@@ -242,5 +229,6 @@ ScatterPlot.propTypes = {
     slopes: PropTypes.arrayOf(PropTypes.number),
     setSlopes: PropTypes.func,
     stderrs: PropTypes.arrayOf(PropTypes.number),
-    setStderrs: PropTypes.func
+    setStderrs: PropTypes.func,
+    xCorrelation: PropTypes.number,
 };
