@@ -3,8 +3,8 @@ import { Katex } from '../katexComponent';
 import PropTypes from 'prop-types';
 
 export const GraphCoefficients = ({
-    intercept, slope, stderror, appRvalue, plotType, slopes, stderrs,
-    onShowNullHypothesis
+    intercept, slope, stderror, plotType, slopes, stderrs,
+    onShowNullHypothesis, intercept3d
 }) => {
     const handleNextClick = () => {
         onShowNullHypothesis();
@@ -84,7 +84,9 @@ export const GraphCoefficients = ({
                         <p>
                         3D scatter plot Placeholder
                         </p>
-                        <h2 className="mt-4">Regression line equation:</h2>
+                        <h2 className="mt-4">
+                            Multiple Regression line equation:
+                        </h2>
                         <div className="ms-3 mb-3">
                             <Katex tex={
                                 // eslint-disable-next-line max-len
@@ -94,7 +96,7 @@ export const GraphCoefficients = ({
                         <div className="ms-3 mb-3">
                             <Katex tex={
                                 // eslint-disable-next-line max-len
-                                `\\hat{y} = ${intercept.toFixed(3)} + ${slopes[0].toFixed(3)}x_1 + ${slopes[1].toFixed(3)}x_2`
+                                `\\hat{y} = ${intercept3d.toFixed(3)} + ${slopes[0].toFixed(3)}x_1 + ${slopes[1].toFixed(3)}x_2`
                             } />
                         </div>
                         <h2 className="mt-4">Sample
@@ -103,7 +105,7 @@ export const GraphCoefficients = ({
                         </h2>
                         <div className="ms-3">
                             <Katex tex={
-                                `\\hat{\\beta_0} = ${intercept.toFixed(3)}`
+                                `\\hat{\\beta_0} = ${intercept3d.toFixed(3)}`
                             } />
                         </div>
                         <h2 className="mt-4">Sample slope
@@ -137,9 +139,9 @@ GraphCoefficients.propTypes = {
     intercept: PropTypes.number,
     slope: PropTypes.number,
     stderror: PropTypes.number,
-    appRvalue: PropTypes.number,
     plotType: PropTypes.string,
     slopes: PropTypes.array,
     stderrs: PropTypes.array,
-    onShowNullHypothesis: PropTypes.func
+    onShowNullHypothesis: PropTypes.func,
+    intercept3d: PropTypes.number
 };
