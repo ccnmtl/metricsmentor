@@ -22,8 +22,10 @@ export const SimulationOne = () => {
     const [seed, setSeed] = useState('seedString');
     const [slope, setSlope] = useState(null);
     const [intercept, setIntercept] = useState(null);
+    const [intercept3d, setIntercept3d] = useState(null);
     const [stderror, setStderror] = useState(null);
     const [appRvalue, setAppRvalue] = useState(null);
+    const [appRvalue3d, setAppRvalue3d] = useState(null);
     const [startQuiz, setStartQuiz] = useState(false);
     const [hypothesizedSlope, setHypothesizedSlope] = useState(0);
     const [plotType, setPlotType] = useState('2d');
@@ -44,6 +46,8 @@ export const SimulationOne = () => {
             data.slopes = slopes;
             data.stderrs = stderrs;
             data.xCorrelation = xCorrelation;
+            data.appRvalue3d = appRvalue3d;
+            data.intercept3d = intercept3d;
         }
 
         return authedFetch(
@@ -114,13 +118,15 @@ export const SimulationOne = () => {
 
     let tvalue;
     if (slope !== null) {
-
         // eslint-disable-next-line max-len
         tvalue = parseFloat(((slope.toFixed(3) - hypothesizedSlope) / stderror.toFixed(3)).toFixed(2));
     }
 
-    const tEquation =
-    't = \\cfrac{\\hat{\\beta}_1 - \\beta_1}{SE(\\hat{\\beta_1})}';
+    let tvalue3d;
+    if (slopes.length !== 0 && slopes[0]) {
+        // eslint-disable-next-line max-len
+        tvalue3d = parseFloat(((slopes[0].toFixed(3) - hypothesizedSlope) / stderrs[0].toFixed(3)).toFixed(2));
+    }
 
     return (
         <div className="simulation">
@@ -246,7 +252,7 @@ export const SimulationOne = () => {
                                     </div>
                                 </div>
                             )}
-                            {slope !== null && (
+                            {slope !== null && plotType === '2d' && (
                                 <>
                                     <div className="mt-5 h2">
                                         Calculated correlation
@@ -255,6 +261,22 @@ export const SimulationOne = () => {
                                             className="hi-val ms-2">
                                             <Katex
                                                 tex={`${appRvalue.toFixed(3)}`}
+                                                className="katex-inline" />
+                                        </div>
+                                    </div>
+                                </>
+                            )}
+                            {slopes.length > 0 && plotType === '3d' && (
+                                <>
+                                    <div className="mt-5 h2">
+                                Calculated correlation
+                                coefficient:
+                                        <div
+                                            className="hi-val ms-2">
+                                            <Katex
+                                                tex={
+                                                    `${appRvalue3d.toFixed(3)}`
+                                                }
                                                 className="katex-inline" />
                                         </div>
                                     </div>
@@ -275,20 +297,23 @@ export const SimulationOne = () => {
                     <>
                         <GraphCoefficients
                             intercept={intercept}
+                            intercept3d={intercept3d}
                             slope={slope}
                             stderror={stderror}
                             plotType={plotType}
-                            appRvalue={appRvalue}
                             slopes={slopes}
                             stderrs={stderrs}
                             onShowNullHypothesis={handleShowNullHypothesis} />
                         {showNullHypothesis && (
                             <>
                                 <NullHypothesisSection
+                                    plotType={plotType}
                                     slope={slope}
+                                    slopes={slopes}
                                     stderror={stderror}
+                                    stderrs={stderrs}
                                     tvalue={tvalue}
-                                    tEquation={tEquation}
+                                    tvalue3d={tvalue3d}
                                     hypothesizedSlope={hypothesizedSlope}
                                     handleNullHypothesis={handleNullHypothesis}
                                     startQuiz={startQuiz} />
@@ -305,11 +330,14 @@ export const SimulationOne = () => {
                         )}
                         {startQuiz && (
                             <SimulationOneQuiz
+                                plotType={plotType}
                                 coursePk={coursePk}
                                 tvalue={tvalue}
+                                tvalue3d={tvalue3d}
                                 hypothesizedSlope={hypothesizedSlope}
                                 n={N}
                                 appRvalue={appRvalue}
+                                appRvalue3d={appRvalue3d}
                                 is2DCompleted={is2DCompleted}
                                 submissionId={submissionId}
                                 setIs2DCompleted={setIs2DCompleted} />
@@ -357,9 +385,11 @@ export const SimulationOne = () => {
                     setStderrs={setStderrs}
                     setStderror={setStderror}
                     intercept={intercept}
+                    intercept3d={intercept3d}
                     setIntercept={setIntercept}
-                    appRvalue={appRvalue}
+                    setIntercept3d={setIntercept3d}
                     setAppRvalue={setAppRvalue}
+                    setAppRvalue3d={setAppRvalue3d}
                     plotType={plotType}
                 />
                 {(slope !== null) && (plotType === '2d') && (
@@ -380,7 +410,7 @@ export const SimulationOne = () => {
                     <div className="simulation__graph-summary fs-5">
                         <Katex tex={
                             // eslint-disable-next-line max-len
-                            `\\hat{y} = ${intercept.toFixed(3)} + ${slopes[0].toFixed(3)}x_1 + ${slopes[1].toFixed(3)}x_2;`
+                            `\\hat{y} = ${intercept3d.toFixed(3)} + ${slopes[0].toFixed(3)}x_1 + ${slopes[1].toFixed(3)}x_2;`
                         } />
                         <Katex tex={
                             `\\hat{\\beta_1} = ${slopes[0].toFixed(3)};`
@@ -389,10 +419,12 @@ export const SimulationOne = () => {
                             `\\hat{\\beta_2} = ${slopes[1].toFixed(3)};`
                         } />
                         <Katex tex={
-                            `corr(x_1,x_2) = ${appRvalue.toFixed(3)}`
+                            `corr(x_1,x_2) = ${appRvalue3d.toFixed(3)}`
+                        } />
+                        <Katex tex={
+                            `corr(x,y) = ${appRvalue.toFixed(3)}`
                         } />
                     </div>
-
                 )}
             </div> {/* div class=simulation__graphspace */}
         </div> // div class=simulation

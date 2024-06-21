@@ -8,8 +8,8 @@ import { saveAs } from 'file-saver';
 const isSuperUser = window.MetricsMentor.currentUser.is_superuser;
 
 export const ScatterPlot = ({ N, yCorrelation, seed, setAppRvalue,
-    setSlope, setIntercept, setStderror, plotType, slopes, setSlopes,
-    stderrs, setStderrs, xCorrelation
+    setSlope, setIntercept, setStderror, plotType, setSlopes,
+    setStderrs, xCorrelation, setAppRvalue3d, setIntercept3d
 }) => {
     const [data, setData] = useState([]);
     const [regressionLine, setRegressionLine] = useState(null);
@@ -68,10 +68,12 @@ export const ScatterPlot = ({ N, yCorrelation, seed, setAppRvalue,
                     y_values: z_values,
                 });
 
-                const { slope_x1, slope_x2, intercept, stderr } = response.data;
+                const { slope_x1, slope_x2, intercept,
+                    stderr, rvalue } = response.data;
                 setSlopes([slope_x1, slope_x2]);
-                setIntercept(intercept);
+                setIntercept3d(intercept);
                 setStderrs(stderr);
+                setAppRvalue3d(rvalue);
 
                 // Generate a grid of x and y values
                 const x_grid = [...new Set(x_values)].sort((a, b) => a - b);
@@ -217,7 +219,6 @@ ScatterPlot.propTypes = {
     N: PropTypes.number.isRequired,
     yCorrelation: PropTypes.number.isRequired,
     seed: PropTypes.string.isRequired,
-    appRvalue: PropTypes.number,
     setAppRvalue: PropTypes.func,
     setSlope: PropTypes.func,
     setIntercept: PropTypes.func,
@@ -231,4 +232,6 @@ ScatterPlot.propTypes = {
     stderrs: PropTypes.arrayOf(PropTypes.number),
     setStderrs: PropTypes.func,
     xCorrelation: PropTypes.number,
+    setAppRvalue3d: PropTypes.func,
+    setIntercept3d: PropTypes.func,
 };
