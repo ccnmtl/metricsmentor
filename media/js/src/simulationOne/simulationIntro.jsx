@@ -1,47 +1,107 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import { Katex } from '../katexComponent';
 
 export const SimIntro = ({plotType}) => {
     return (
-        <div className="simulation__step-container d-flex">
-            <div className="simulation__step-num">
-            &bull;
-            </div>
-            <div className="simulation__step-toggle--down">
-            </div>
-            <div className="simulation__step-body">
-                <header className="simulation__step-header">
-                    <h2 className="h2-primary">
-                        <span className="h2-secondary d-block">
-                        Simulation 1</span>
-                        <span className="h2-title d-block">
-                            {'Hypothesis Testing for Population Slope'}
-                        </span>
-                    </h2>
-                </header>
-                {plotType === '2d' && (
+        <>
+            <div className="simulation__step-container d-flex">
+                <div className="simulation__step-num">
+                &bull;
+                </div>
+                <div className="simulation__step-toggle--down">
+                </div>
+                <div className="simulation__step-body">
+                    <header className="simulation__step-header">
+                        <h2 className="h2-primary">
+                            <span className="h2-secondary d-block">
+                            Simulation 1</span>
+                            <span className="h2-title d-block">
+                                {'Hypothesis Testing for Population Slope'}
+                            </span>
+                        </h2>
+                    </header>
                     <div className="simulation__step-content">
                         <p>
-                            In this module, you will learn about
+                            In this simulation, you will learn about
                             hypothesis testing for the population slope
-                            in a simple linear regression model. You will
-                            be able to visualize the relationship between
-                            two variables and generate data to test the
-                            null hypothesis that the population slope is
+                            in a simple and multiple regression models.
+                            You will be able to visualize the relationship
+                            between two, or three variables, and generate
+                            data to test the null hypothesis that the
+                            population slope is
                             equal to a specified value.
                         </p>
                     </div>
-
-                )}
-                {plotType === '3d' && (
-                    <div className="simulation__step-content">
-                        <p>
-                            3D Placeholder
-                        </p>
-                    </div>
-                )}
+                </div>
             </div>
-        </div>
+            <div className="simulation__step-container d-flex">
+                <div className="simulation__step-num">
+                &bull;
+                </div>
+                <div className="simulation__step-toggle--down">
+                </div>
+                <div className="simulation__step-body">
+                    <header className="simulation__step-header">
+                        <h2 className="h2-primary">Learning goals</h2>
+                    </header>
+                    {plotType === '2d' && (
+                        <div className="simulation__step-content">
+                            <p>
+                                By selecting the sample size,
+                                <Katex tex={'n'} className="katex-inline"/>,
+                                and the correlation between the dependent
+                                variable
+                                <Katex tex={'y'} className="katex-inline"/>,
+                                and the independent variable, regressor
+                                <Katex tex={'x'} className="katex-inline"/>,
+                                you have the power to influence the outcomes of
+                                the hypotheses about the population parameters.
+                            </p>
+                            <p>
+                                Think about how the correlation coefficient
+                                <Katex tex={'corr(x,y)'}
+                                    className="katex-inline"/> (and/or the
+                                sample size) you choose can affect
+                                your decision about the null hypothesis.
+                            </p>
+                        </div>
+
+                    )}
+                    {plotType === '3d' && (
+                        <div className="simulation__step-content">
+                            <p>
+                                Let&rsquo;s move on from the simple variable
+                                regression (2D) to multiple regression (3D)
+                                section of this simulation.
+                            </p>
+                            <p>
+                                In this part, there are two independent
+                                variables (regressors),
+                                <Katex tex={'x_1'}
+                                    className="katex-inline"/> and
+                                <Katex tex={'x_2'}
+                                    className="katex-inline"/>.
+                                You&rsquo;ve already decided on
+                                <Katex tex={'corr(x_1,y)'}
+                                    className="katex-inline"/> in the preceding
+                                section. Here, you can select
+                                the degree of correlation between
+                                <Katex tex={'x_1'}
+                                    className="katex-inline"/> and
+                                <Katex tex={'x_2'}
+                                    className="katex-inline"/>.
+                            </p>
+                            <p>
+                                How does this correlation influence your
+                                decision about the null hypothesis you used
+                                previously?
+                            </p>
+                        </div>
+                    )}
+                </div>
+            </div>
+        </>
     );
 };
 
