@@ -145,10 +145,10 @@ export const SimulationTwoQuiz = ({
 };
 
 SimulationTwoQuiz.propTypes = {
-    appRvalue: PropTypes.number.isRequired,
-    tvalue: PropTypes.string.isRequired,
-    hypothesizedSlope: PropTypes.any.isRequired,
+    appRvalue: PropTypes.number,
+    tvalue: PropTypes.string,
+    hypothesizedSlope: PropTypes.any,
     // n: PropTypes.any.isRequired,
-    setIs2DCompleted: PropTypes.func.isRequired,
-    is2DCompleted: PropTypes.bool.isRequired,
+    setIs2DCompleted: PropTypes.func,
+    is2DCompleted: PropTypes.bool,
 };
