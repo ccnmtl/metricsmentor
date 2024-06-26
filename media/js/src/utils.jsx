@@ -1,4 +1,6 @@
 import axios from 'axios';
+import React from 'react';
+import { Katex } from './katexComponent';
 
 export const authedFetch = function(url, method, data) {
     const elt = document.getElementById('csrf-token');
@@ -31,4 +33,14 @@ export const saveAnswer = async(submissionId, questionNumber, questionType,
     } catch (error) {
         console.error('Error saving answer:', error);
     }
+};
+
+
+/**
+ * Standardized function for rendering inline LaTeX.
+ * @param {string} tex
+ * @returns React.JSX.Element
+ */
+export const inlineKatex = function(tex) {
+    return <Katex className="katex-inline" tex={tex}></Katex>;
 };

@@ -10,7 +10,7 @@ export const Katex = ({tex, displayMode = false, className = ''}) => {
         katex.render(tex, containerRef.current, { displayMode });
     });
 
-    return <div ref={containerRef} className={className} />;
+    return <span ref={containerRef} className={className} />;
 };
 
 
