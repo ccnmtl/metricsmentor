@@ -10,13 +10,14 @@ main {
     min-height: calc(100vh - 20rem);
     &.maincontent--simulation {
         position: absolute;
-        top: 3.125rem;
+        top: 3.25rem;
         bottom: 0;
         width: 100vw;
         padding-top: 0;
+        padding-bottom: 0;
         z-index: 2;
         @include media-breakpoint-up(sm) {
-            top: 3.9rem;
+            top: 3.25rem;
         }
     }
 }
