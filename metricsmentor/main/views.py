@@ -267,6 +267,11 @@ def calculate_pvalue(request):
             p_value_right = round(norm.cdf(z_value), 4)
             p_value_two_sided = 2 * round(norm.cdf(z_value), 4)
 
+        if z_value > 2.99 or z_value < -2.99:
+            p_value_left = 0
+            p_value_right = 0
+            p_value_two_sided = 0
+
         return JsonResponse({
             'value_left': p_value_left,
             'value_right': p_value_right,
