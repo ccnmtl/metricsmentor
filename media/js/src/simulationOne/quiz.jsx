@@ -208,17 +208,20 @@ export const Quiz = ({
             {/* {hypothesisTest1validate && (
                 <CriticalValueComponent />
             )} */}
-            <PvalueComponent
-                pvalue={pvalue}
-                hypothesisTest1validate={hypothesisTest1validate}
-                setHypothesisTest1validate={setHypothesisTest1validate}
-                tvalue={tvalue}
-                alpha={alpha}
-                hypothesis={hypothesis}
-                nullHypothesis={nullHypothesis}
-                submissionId={submissionId} />
+            {hypothesisTest === 'value_two_sided' && (
+                <PvalueComponent
+                    pvalue={pvalue}
+                    hypothesisTest1validate={hypothesisTest1validate}
+                    setHypothesisTest1validate={setHypothesisTest1validate}
+                    tvalue={tvalue}
+                    alpha={alpha}
+                    hypothesis={hypothesis}
+                    nullHypothesis={nullHypothesis}
+                    submissionId={submissionId} />
+            )}
             <div className="solving-p-set mt-3">
-                {hypothesisTest1validate && (
+                {hypothesisTest1validate ||
+                hypothesisTest !== 'value_two_sided' && (
                     <div className="input-criticalvalue">
                         <p>
                             Another method for hypothesis testing is to
