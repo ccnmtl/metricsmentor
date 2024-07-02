@@ -201,6 +201,8 @@ export const Quiz = ({
         absoluteTtext = 't';
     }
 
+    const isNotTwoSided = hypothesisTest !== 'value_two_sided';
+
     return (
         <div id="quiz">
             {/* the following appears when empty */}
@@ -219,9 +221,9 @@ export const Quiz = ({
                     nullHypothesis={nullHypothesis}
                     submissionId={submissionId} />
             )}
-            <div className="solving-p-set mt-3">
-                {hypothesisTest1validate ||
-                hypothesisTest !== 'value_two_sided' && (
+            {(hypothesisTest1validate || isNotTwoSided) && (
+                <div className="solving-p-set mt-3">
+
                     <div className="input-criticalvalue">
                         <p>
                             Another method for hypothesis testing is to
@@ -270,170 +272,174 @@ export const Quiz = ({
                             </button>
                         </div>
                     </div>
-                )}{/*input-criticalvalue*/}
-                {isCriticalValueCorrect &&(
-                    <div className="mt-3">
-                        <span style={{ color: 'green' }}>
+                    {/*input-criticalvalue*/}
+                    {isCriticalValueCorrect &&(
+                        <div className="mt-3">
+                            <span style={{ color: 'green' }}>
                             That&rsquo;s correct!
-                        </span>
-                    </div>
-                )}
+                            </span>
+                        </div>
+                    )}
 
-                {!isCriticalValueCorrect && isCriticalValueCorrect !== null && (
-                    <div className="mt-3">
-                        <span style={{ color: 'red' }}>
+                    {!isCriticalValueCorrect &&
+                    isCriticalValueCorrect !== null && (
+                        <div className="mt-3">
+                            <span style={{ color: 'red' }}>
                             That&rsquo;s incorrect.
                             Please try again.
-                        </span>
-                    </div>
-                )}
-                {isCriticalValueCorrect && (
-                    <div className="p-val-concl mt-3">
-                        <p>
+                            </span>
+                        </div>
+                    )}
+                    {isCriticalValueCorrect && (
+                        <div className="p-val-concl mt-3">
+                            <p>
                             Knowing now the
-                            <Katex tex={'t'} className="katex-inline"/> value
+                                <Katex tex={'t'}
+                                    className="katex-inline"/> value
                             and
-                            <Katex tex={'critical~value'}
-                                className="katex-inline"/>,
+                                <Katex tex={'critical~value'}
+                                    className="katex-inline"/>,
                             which of the following statements is true?
-                        </p>
-                        <div>
-                            <input
-                                type="radio"
-                                id="tGreaterThanCritical"
-                                name="criticalcomparison"
-                                value="greaterThan"
+                            </p>
+                            <div>
+                                <input
+                                    type="radio"
+                                    id="tGreaterThanCritical"
+                                    name="criticalcomparison"
+                                    value="greaterThan"
+                                    disabled={isCriticalCompareCorrect}
+                                    checked={compareCritical === 'greaterThan'}
+                                    onChange={handleComparingCritical}
+                                />
+                                <label htmlFor="tGreaterThanCritical">
+                                    {absoluteTtext} &gt; critical value</label>
+                            </div>
+                            <div>
+                                <input
+                                    type="radio"
+                                    id="tLessThanCritical"
+                                    name="criticalcomparison"
+                                    value="lessThan"
+                                    disabled={isCriticalCompareCorrect}
+                                    checked={compareCritical === 'lessThan'}
+                                    onChange={handleComparingCritical}
+                                />
+                                <label htmlFor="tLessThanCritical">
+                                    {absoluteTtext} &lt; critical value</label>
+                            </div>
+                            <button
+                                className="btn btn-small btn-primary mt-3"
                                 disabled={isCriticalCompareCorrect}
-                                checked={compareCritical === 'greaterThan'}
-                                onChange={handleComparingCritical}
-                            />
-                            <label htmlFor="tGreaterThanCritical">
-                                {absoluteTtext} &gt; critical value</label>
-                        </div>
-                        <div>
-                            <input
-                                type="radio"
-                                id="tLessThanCritical"
-                                name="criticalcomparison"
-                                value="lessThan"
-                                disabled={isCriticalCompareCorrect}
-                                checked={compareCritical === 'lessThan'}
-                                onChange={handleComparingCritical}
-                            />
-                            <label htmlFor="tLessThanCritical">
-                                {absoluteTtext} &lt; critical value</label>
-                        </div>
-                        <button
-                            className="btn btn-small btn-primary mt-3"
-                            disabled={isCriticalCompareCorrect}
-                            onClick={handleNextCriticalValCompare}>
+                                onClick={handleNextCriticalValCompare}>
                             Continue &raquo;
-                        </button>
-                        {isCriticalCompareCorrect && (
-                            <div className="mt-3">
-                                <span style={{ color: 'green' }}>
-                                    That&rsquo;s correct!
-                                </span>
-                            </div>
-                        )}
-                        {!isCriticalCompareCorrect &&
-                        isCriticalCompareCorrect !== null && (
-                            <div className="mt-3">
-                                <span style={{ color: 'red' }}>
-                                    The comparison is incorrect.
-                                    Please try again.
-                                </span>
-                            </div>
-                        )}
-                    </div> //compare-t-to-criticalvalue
-                )}
-                {isCriticalCompareCorrect && (
-                    <div className="p-val-concl mt-3">
-                        <p>Once again, the null and and
-                            alternate hypotheses are:</p>
-                        <div className="hi-val">
-                            <div className="py-2">
-                                <Katex tex={nullHypothesis} />
-                            </div>
-                            <div className="py-2">
-                                <Katex tex={hypothesis} />
-                            </div>
-                        </div>
-                        <p className="mt-3">
-                            With
-                            <Katex tex={'t'} className="katex-inline"/> value
-                            and
-                            <Katex tex={'critical~value'}
-                                className="katex-inline"/> comparison above,
-                            what is your conclusion?
-                        </p>
-                        <div>
-                            <input
-                                type="radio"
-                                id="rejectHypothesis2"
-                                name="decision2"
-                                value="reject"
-                                disabled={hypothesisTest2validate}
-                                checked={nullHypothesisChoice2 === 'reject'}
-                                onChange={handleNullHypothesisChoice2Change}
-                            />
-                            <label htmlFor="rejectHypothesis2">
-                            Reject the null hypothesis</label>
-                        </div>
-                        <div>
-                            <input
-                                type="radio"
-                                id="failToRejectHypothesis2"
-                                name="decision2"
-                                value="failToReject"
-                                disabled={hypothesisTest2validate}
-                                checked={
-                                    nullHypothesisChoice2 === 'failToReject'
-                                }
-                                onChange={handleNullHypothesisChoice2Change}
-                            />
-                            <label htmlFor="failToRejectHypothesis2">
-                            Fail to reject the null hypothesis</label>
-                        </div>
-                        <button
-                            className="btn btn-small btn-primary mt-3"
-                            disabled={hypothesisTest2validate}
-                            onClick={handleNextNullHypothesisChoice2}>
-                            Continue &raquo;
-                        </button>
-                        {hypothesisTest2validate && (
-                            <>
+                            </button>
+                            {isCriticalCompareCorrect && (
                                 <div className="mt-3">
                                     <span style={{ color: 'green' }}>
-                                        That is the correct conclusion!
+                                    That&rsquo;s correct!
                                     </span>
                                 </div>
-                                <p className="mt-3">
-                                    You have completed this hypothesis test.
-                                </p>
-                                <div className="simulation__step-prompt">
-                                    <button className=
-                                        "btn btn-primary my-3"
-                                    id="proceed"
-                                    onClick={onComplete}>
-                                        Next hypothesis &raquo;
-                                    </button>
+                            )}
+                            {!isCriticalCompareCorrect &&
+                        isCriticalCompareCorrect !== null && (
+                                <div className="mt-3">
+                                    <span style={{ color: 'red' }}>
+                                    The comparison is incorrect.
+                                    Please try again.
+                                    </span>
                                 </div>
-                            </>
-                        )}
-                        {!hypothesisTest2validate &&
+                            )}
+                        </div> //compare-t-to-criticalvalue
+                    )}
+                    {isCriticalCompareCorrect && (
+                        <div className="p-val-concl mt-3">
+                            <p>Once again, the null and and
+                            alternate hypotheses are:</p>
+                            <div className="hi-val">
+                                <div className="py-2">
+                                    <Katex tex={nullHypothesis} />
+                                </div>
+                                <div className="py-2">
+                                    <Katex tex={hypothesis} />
+                                </div>
+                            </div>
+                            <p className="mt-3">
+                            With
+                                <Katex tex={'t'}
+                                    className="katex-inline"/> value
+                            and
+                                <Katex tex={'critical~value'}
+                                    className="katex-inline"/> comparison above,
+                            what is your conclusion?
+                            </p>
+                            <div>
+                                <input
+                                    type="radio"
+                                    id="rejectHypothesis2"
+                                    name="decision2"
+                                    value="reject"
+                                    disabled={hypothesisTest2validate}
+                                    checked={nullHypothesisChoice2 === 'reject'}
+                                    onChange={handleNullHypothesisChoice2Change}
+                                />
+                                <label htmlFor="rejectHypothesis2">
+                            Reject the null hypothesis</label>
+                            </div>
+                            <div>
+                                <input
+                                    type="radio"
+                                    id="failToRejectHypothesis2"
+                                    name="decision2"
+                                    value="failToReject"
+                                    disabled={hypothesisTest2validate}
+                                    checked={
+                                        nullHypothesisChoice2 === 'failToReject'
+                                    }
+                                    onChange={handleNullHypothesisChoice2Change}
+                                />
+                                <label htmlFor="failToRejectHypothesis2">
+                            Fail to reject the null hypothesis</label>
+                            </div>
+                            <button
+                                className="btn btn-small btn-primary mt-3"
+                                disabled={hypothesisTest2validate}
+                                onClick={handleNextNullHypothesisChoice2}>
+                            Continue &raquo;
+                            </button>
+                            {hypothesisTest2validate && (
+                                <>
+                                    <div className="mt-3">
+                                        <span style={{ color: 'green' }}>
+                                        That is the correct conclusion!
+                                        </span>
+                                    </div>
+                                    <p className="mt-3">
+                                    You have completed this hypothesis test.
+                                    </p>
+                                    <div className="simulation__step-prompt">
+                                        <button className=
+                                            "btn btn-primary my-3"
+                                        id="proceed"
+                                        onClick={onComplete}>
+                                        Next hypothesis &raquo;
+                                        </button>
+                                    </div>
+                                </>
+                            )}
+                            {!hypothesisTest2validate &&
                         hypothesisTest2validate !== null && (
-                            <div className="mt-3">
-                                <span style={{ color: 'red' }}>
+                                <div className="mt-3">
+                                    <span style={{ color: 'red' }}>
                                     That&rsquo;s not the right conclusion.
                                     Please try again.
-                                </span>
-                            </div>
-                        )}
-                    </div>
-                )}
+                                    </span>
+                                </div>
+                            )}
+                        </div>
+                    )}
 
-            </div>
+                </div>
+            )}
         </div>
     );
 };
