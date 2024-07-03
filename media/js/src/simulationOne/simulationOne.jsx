@@ -6,6 +6,8 @@ import { SimulationOneQuiz } from './simulationOneQuiz';
 import { SimIntro } from './simulationIntro';
 import { GraphCoefficients } from './graphCoefficientsSection';
 import { NullHypothesisSection } from './nullHypothesisSection';
+import { PvalueModal } from './modalPvalue';
+import { CriticalValueModal } from './modalCV';
 
 
 // const CURRENT_USER = window.MetricsMentor.currentUser.id;
@@ -427,6 +429,11 @@ export const SimulationOne = () => {
                     </div>
                 )}
             </div> {/* div class=simulation__graphspace */}
+
+            <PvalueModal />
+
+            <CriticalValueModal />
+
         </div> // div class=simulation
     );
 };

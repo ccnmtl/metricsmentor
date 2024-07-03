@@ -4,7 +4,7 @@ import { Katex } from '../katexComponent';
 import axios from 'axios';
 import { saveAnswer } from '../utils';
 import { PvalueComponent } from './pvalueComponent.jsx';
-import { CriticalValueModal } from './modalCV';
+
 
 export const Quiz = ({
     appRvalue, tvalue, pvalue, alpha, hypothesisTest, hypothesis,
@@ -246,8 +246,6 @@ export const Quiz = ({
                             data-bs-target="#criticalValModal">
                             Critical value table
                         </button>
-
-                        <CriticalValueModal />
 
                         <div className="mt-3 d-flex">
                             <label className="align-self-center"
