@@ -23,14 +23,13 @@ export const SimIntro = ({plotType}) => {
                     </header>
                     <div className="simulation__step-content">
                         <p>
-                            In this simulation, you will learn about
+                            In this simulation, you&rsquo;ll learn about
                             hypothesis testing for the population slope
                             in a simple and multiple regression models.
-                            You will be able to visualize the relationship
+                            You&rsquo;ll be able to visualize the relationship
                             between two, or three variables, and generate
                             data to test the null hypothesis that the
-                            population slope is
-                            equal to a specified value.
+                            population slope is equal to a specified value.
                         </p>
                     </div>
                 </div>
@@ -55,7 +54,7 @@ export const SimIntro = ({plotType}) => {
                                 <Katex tex={'y'} className="katex-inline"/>,
                                 and the independent variable, regressor
                                 <Katex tex={'x'} className="katex-inline"/>,
-                                you have the power to influence the outcomes of
+                                you can influence the outcomes of
                                 the hypotheses about the population parameters.
                             </p>
                             <p>

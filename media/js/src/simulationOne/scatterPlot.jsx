@@ -196,7 +196,7 @@ export const ScatterPlot = ({ N, yCorrelation, seed, setAppRvalue,
                     ...(plotType === '2d' ? { dragmode: 'pan' } : {}),
                 }}
                 useResizeHandler={true}
-                style={{ height: '88%' }}
+                style={{ height: '80%' }}
                 config={{
                     scrollZoom: true,
                     displayModeBar: true,
@@ -205,12 +205,12 @@ export const ScatterPlot = ({ N, yCorrelation, seed, setAppRvalue,
                         'lasso2d', 'autoScale2d'],
                 }}
             />
-            {isSuperUser && (
+            {/* {isSuperUser && (
                 <div className="text-end me-5">
                     <button className="btn btn-sm btn-secondary"
                         onClick={exportCSV}>Export CSV</button>
                 </div>
-            )}
+            )} */}
         </>
     );
 };
