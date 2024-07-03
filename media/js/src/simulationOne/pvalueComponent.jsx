@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from 'react';
 import { Katex } from '../katexComponent';
-import { PvalueModal } from './modalPvalue';
 import { saveAnswer } from '../utils';
 import PropTypes from 'prop-types';
 
@@ -143,8 +142,6 @@ export const PvalueComponent = ({
                     data-bs-target="#pvalueModal">
                 p-value table
                 </button>
-
-                <PvalueModal />
 
                 <div className="mt-3 d-flex">
                     <label className="align-self-center"
