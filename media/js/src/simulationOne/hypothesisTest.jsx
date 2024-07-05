@@ -6,9 +6,11 @@ import axios from 'axios';
 
 export const HypothesisTest = ({
     selectedOption, appRvalue, tvalue, hypothesizedSlope, n, onComplete,
-    completedChoices, submissionId
+    completedChoices, submissionId, tvalue3d, plotType, on3dComplete,
+    completedChoices3d
 }) => {
     const [pvalues, setPvalues] = useState(null);
+    const [pvalues3d, setPvalues3d] = useState(null);
     const [alpha, setAlpha] = useState(null);
     const [alphaSelected, setAlphaSelected] = useState(false);
     let hypothesis;
@@ -59,10 +61,32 @@ export const HypothesisTest = ({
         pvalue = pvalues[hypothesisTest].toFixed(4);
     }
 
+    const calculatePvalue3d = async() => {
+        try {
+            const response = await axios.post('/calculate_pvalue/',
+                {n, tvalue: tvalue3d});
+
+            setPvalues3d(response.data);
+
+        } catch (error) {
+            console.error('Error calculating pvalue:', error);
+        }
+    };
+    let pvalue3d;
+    if (pvalues3d) {
+        pvalue3d = pvalues3d[hypothesisTest].toFixed(4);
+    }
+
     useEffect(() => {
         calculatePvalue();
         document.getElementById('hypothesis-test')
             .scrollIntoView({ behavior: 'smooth'});
+
+        if (plotType === '3d') {
+            calculatePvalue3d();
+            document.getElementById('hypothesis-test')
+                .scrollIntoView({ behavior: 'smooth'});
+        }
     }, []);
 
     return (
@@ -138,7 +162,9 @@ export const HypothesisTest = ({
                                 hypothesisTest={hypothesisTest}
                                 appRvalue={appRvalue}
                                 tvalue={tvalue}
+                                tvalue3d={tvalue3d}
                                 pvalue={parseFloat(pvalue)}
+                                pvalue3d={parseFloat(pvalue3d)}
                                 alpha={alpha}
                                 hypothesis={hypothesis}
                                 nullHypothesis={nullHypothesis}
@@ -146,6 +172,7 @@ export const HypothesisTest = ({
                                 onComplete={onComplete}
                                 completedChoices={completedChoices}
                                 submissionId={submissionId}
+                                plotType={plotType}
                             />
                         )}
                     </div>
@@ -164,5 +191,9 @@ HypothesisTest.propTypes = {
     n: PropTypes.number.isRequired,
     onComplete: PropTypes.func.isRequired,
     completedChoices: PropTypes.array.isRequired,
-    submissionId: PropTypes.number.isRequired
+    submissionId: PropTypes.number.isRequired,
+    tvalue3d: PropTypes.number,
+    plotType: PropTypes.string,
+    on3dComplete: PropTypes.func,
+    completedChoices3d: PropTypes.array
 };

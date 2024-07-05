@@ -6,7 +6,8 @@ import PropTypes from 'prop-types';
 
 export const PvalueComponent = ({
     pvalue, tvalue, submissionId, hypothesis, nullHypothesis,
-    alpha, hypothesisTest1validate, setHypothesisTest1validate
+    alpha, hypothesisTest1validate, setHypothesisTest1validate,
+    pvalue3d, tvalue3d
 }) => {
 
     const [userPvalue, setUserPvalue] = useState('');
@@ -336,5 +337,8 @@ PvalueComponent.propTypes = {
     nullHypothesis: PropTypes.string,
     submissionId: PropTypes.number,
     hypothesisTest1validate: PropTypes.bool,
-    setHypothesisTest1validate: PropTypes.func
+    setHypothesisTest1validate: PropTypes.func,
+    pvalue3d: PropTypes.number,
+    tvalue3d: PropTypes.number,
+    plotType: PropTypes.string
 };

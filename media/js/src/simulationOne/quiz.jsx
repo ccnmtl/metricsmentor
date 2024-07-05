@@ -8,7 +8,8 @@ import { PvalueComponent } from './pvalueComponent.jsx';
 
 export const Quiz = ({
     appRvalue, tvalue, pvalue, alpha, hypothesisTest, hypothesis,
-    nullHypothesis, n, onComplete, completedChoices, submissionId
+    nullHypothesis, n, onComplete, completedChoices, submissionId,
+    tvalue3d, plotType, pvalue3d
 }) => {
 
     const [criticalValues, setCriticalValues] = useState(null);
@@ -184,7 +185,7 @@ export const Quiz = ({
         const isCorrect = validateHypothesisTest2(nullHypothesisChoice2);
         const additionalData = {
             decision: nullHypothesisChoice2,
-            tvalue: tvalue,
+            tvalue: plotType === '3d' ? tvalue3d : tvalue,
             criticalValue: criticalValue,
             alpha: alpha,
             hypothesis: hypothesis,
@@ -213,12 +214,15 @@ export const Quiz = ({
             {hypothesisTest === 'value_two_sided' && (
                 <PvalueComponent
                     pvalue={pvalue}
+                    pvalue3d={pvalue3d}
                     hypothesisTest1validate={hypothesisTest1validate}
                     setHypothesisTest1validate={setHypothesisTest1validate}
                     tvalue={tvalue}
+                    tvalue3d={tvalue3d}
                     alpha={alpha}
                     hypothesis={hypothesis}
                     nullHypothesis={nullHypothesis}
+                    plotType={plotType}
                     submissionId={submissionId} />
             )}
             {(hypothesisTest1validate || isNotTwoSided) && (
@@ -453,5 +457,8 @@ Quiz.propTypes = {
     n: PropTypes.number.isRequired,
     onComplete: PropTypes.func.isRequired,
     completedChoices: PropTypes.array.isRequired,
-    submissionId: PropTypes.number.isRequired
+    submissionId: PropTypes.number.isRequired,
+    tvalue3d: PropTypes.number,
+    plotType: PropTypes.string,
+    pvalue3d: PropTypes.number
 };

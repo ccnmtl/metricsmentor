@@ -6,29 +6,52 @@ import PropTypes from 'prop-types';
 
 export const SimulationOneQuiz = ({
     appRvalue, tvalue, hypothesizedSlope, n, setIs2DCompleted,
-    is2DCompleted, submissionId
+    is2DCompleted, submissionId, handlePlotTypeChange, plotType,
+    tvalue3d, setStartQuiz, setIs3DCompleted
 }) => {
     const [selectedOption, setSelectedOption] = useState(null);
     const [completedChoices, setCompletedChoices] = useState([]);
+    const [completedChoices3d, setCompletedChoices3d] = useState([]);
+    const [selectedOption3d, setSelectedOption3d] = useState(null);
     const [isSubmitted, setIsSubmitted] = useState(false);
 
     const allChoicesCompleted = ['A', 'B', 'C'].every(
         choice => completedChoices.includes(choice));
+
+    const allChoices3dCompleted = ['A', 'B', 'C'].every(
+        choice => completedChoices3d.includes(choice));
 
     const handleChoiceCompletion = () => {
         setCompletedChoices([...completedChoices, selectedOption]);
         setSelectedOption(null);
     };
 
+    const handleChoiceCompletion3d = () => {
+        setCompletedChoices3d([...completedChoices3d, selectedOption3d]);
+        setSelectedOption3d(null);
+    };
+
     const is2dCompleted = () => {
-        if (allChoicesCompleted) {
+        if (allChoicesCompleted && isSubmitted) {
             setIs2DCompleted(true);
+            setStartQuiz(false);
+        }
+    };
+
+    const is3dCompleted = () => {
+        if (allChoices3dCompleted && isSubmitted) {
+            setIs2DCompleted(true);
+            setStartQuiz(false);
         }
     };
 
     useEffect(() => {
         is2dCompleted();
-    },[completedChoices, allChoicesCompleted]);
+    },[completedChoices, allChoicesCompleted, isSubmitted]);
+
+    useEffect(() => {
+        is3dCompleted();
+    },[completedChoices3d, allChoices3dCompleted, isSubmitted]);
 
     useEffect(() => {
         document.getElementById('quiz-1')
@@ -53,41 +76,86 @@ export const SimulationOneQuiz = ({
                             alternative hypotheses. Choose one to conduct
                             a test of hypothesis.
                         </p>
-
-                        <ol className="listset-alpha listset-alpha-listnum">
-                            {[
-                                ['A', '\\Eta_1: {\\beta_1}{\\neq} '],
-                                ['B', '\\Eta_1: {\\beta_1}{\\gt} '],
-                                ['C', '\\Eta_1: {\\beta_1}{\\lt} ']
-                            ].map((choice, key) => (
-                                <li key={key}
-                                    className={'listset-alpha-card' +
-                                        (selectedOption === choice[0] ?
-                                            ' hypothesis-selected' : '') +
-                                        (completedChoices.includes(choice[0]) ?
-                                            ' hypothesis-completed' : '')
-                                    }
-                                >
-                                    <div className="listset-alpha-card__title">
-                                        <Katex tex={
-                                            choice[1] + hypothesizedSlope} />
-                                    </div>
-                                    <button className="btn btn-sm btn-primary"
+                        {plotType === '2d' && (
+                            <ol className="listset-alpha listset-alpha-listnum">
+                                {[
+                                    ['A', '\\Eta_1: {\\beta_1}{\\neq} '],
+                                    ['B', '\\Eta_1: {\\beta_1}{\\gt} '],
+                                    ['C', '\\Eta_1: {\\beta_1}{\\lt} ']
+                                ].map((choice, key) => (
+                                    <li key={key}
+                                        className={'listset-alpha-card' +
+                                            (selectedOption === choice[0] ?
+                                                ' hypothesis-selected' : '') +
+                                            // eslint-disable-next-line max-len
+                                            (completedChoices.includes(choice[0]) ?
+                                                ' hypothesis-completed' : '')
+                                        }
+                                    >
+                                        <div className=
+                                            "listset-alpha-card__title">
+                                            <Katex tex={
+                                                choice[1] + hypothesizedSlope
+                                            } />
+                                        </div>
+                                        <button className="btn btn-sm
+                                            btn-primary"
                                         disabled={selectedOption !== null ||
                                             completedChoices.includes(
                                                 choice[0])}
-                                        onClick={
-                                            () => setSelectedOption(choice[0])}
-                                    >
-                                        Prove
-                                    </button>
-                                    <div className="status-complete">
-                                        &#10003;
-                                    </div>
+                                        onClick={() =>
+                                            setSelectedOption(choice[0])}
+                                        >
+                                            Prove
+                                        </button>
+                                        <div className="status-complete">
+                                                                &#10003;
+                                        </div>
 
-                                </li>
-                            ))}
-                        </ol>
+                                    </li>
+                                ))}
+                            </ol>
+                        )}
+                        {plotType === '3d' && (
+                            <ol className="listset-alpha listset-alpha-listnum">
+                                {[
+                                    ['A', '\\Eta_1: {\\beta_1}{\\neq} '],
+                                    ['B', '\\Eta_1: {\\beta_1}{\\gt} '],
+                                    ['C', '\\Eta_1: {\\beta_1}{\\lt} ']
+                                ].map((choice, key) => (
+                                    <li key={key}
+                                        className={'listset-alpha-card' +
+                                            (selectedOption3d === choice[0] ?
+                                                ' hypothesis-selected' : '') +
+                                            // eslint-disable-next-line max-len
+                                            (completedChoices3d.includes(choice[0]) ?
+                                                ' hypothesis-completed' : '')
+                                        }
+                                    >
+                                        <div className=
+                                            "listset-alpha-card__title">
+                                            <Katex tex={
+                                                choice[1] + hypothesizedSlope
+                                            } />
+                                        </div>
+                                        <button className="btn btn-sm
+                                            btn-primary"
+                                        disabled={selectedOption3d !== null ||
+                                            completedChoices3d.includes(
+                                                choice[0])}
+                                        onClick={() =>
+                                            setSelectedOption3d(choice[0])}
+                                        >
+                                            Prove
+                                        </button>
+                                        <div className="status-complete">
+                                                                &#10003;
+                                        </div>
+
+                                    </li>
+                                ))}
+                            </ol>
+                        )}
                     </div>
                 </div>
             </div>
@@ -98,10 +166,13 @@ export const SimulationOneQuiz = ({
                     hypothesizedSlope={hypothesizedSlope}
                     appRvalue={appRvalue}
                     tvalue={tvalue}
+                    tvalue3d={tvalue3d}
                     onComplete={handleChoiceCompletion}
+                    on3dComplete={handleChoiceCompletion3d}
                     n={parseInt(n)}
                     completedChoices={completedChoices}
                     submissionId={submissionId}
+                    plotType={plotType}
                 />
             )}
             {allChoicesCompleted && (
@@ -127,9 +198,15 @@ export const SimulationOneQuiz = ({
                 />
             )}
             {isSubmitted && (
-                <div className="mt-3 mb-5 fs-5 fw-medium text-center">
+                <>
+                    <div className="mt-3 mb-5 fs-5 fw-medium text-center">
                     Congratulations on completing the 2D simulation!
-                </div>
+                    </div>
+                    <div className="btn btn-secondary text-center"
+                        onClick={() => handlePlotTypeChange('3d')}>
+                    You can now proceed to the next step.
+                    </div>
+                </>
             )}
         </>
     );
@@ -142,5 +219,10 @@ SimulationOneQuiz.propTypes = {
     n: PropTypes.any.isRequired,
     setIs2DCompleted: PropTypes.func.isRequired,
     is2DCompleted: PropTypes.bool.isRequired,
-    submissionId: PropTypes.number.isRequired
+    submissionId: PropTypes.number.isRequired,
+    handlePlotTypeChange: PropTypes.func,
+    plotType: PropTypes.string,
+    tvalue3d: PropTypes.number,
+    setStartQuiz: PropTypes.func.isRequired,
+    setIs3DCompleted: PropTypes.func.isRequired
 };

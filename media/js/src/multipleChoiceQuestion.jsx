@@ -19,13 +19,9 @@ export const MultipleChoiceQuestion = ({
 
         const questionType = 'multiple-choice';
 
-        try {
-            await saveAnswer(submissionId, questionNumber, questionType,
-                selectedOption, correct, {});
-            console.log('Answer saved successfully');
-        } catch (error) {
-            console.error('Error saving answer:', error);
-        }
+        await saveAnswer(submissionId, questionNumber, questionType,
+            selectedOption, correct, {});
+
     };
 
     return (<>

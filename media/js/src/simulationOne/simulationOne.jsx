@@ -11,7 +11,7 @@ import { CriticalValueModal } from './modalCV';
 
 
 // const CURRENT_USER = window.MetricsMentor.currentUser.id;
-const isSuperUser = window.MetricsMentor.currentUser.is_superuser;
+// const isSuperUser = window.MetricsMentor.currentUser.is_superuser;
 const simContainer = document.querySelector('#react-root');
 
 const coursePk =
@@ -34,6 +34,7 @@ export const SimulationOne = () => {
     const [slopes, setSlopes] = useState([]);
     const [stderrs, setStderrs] = useState([]);
     const [is2DCompleted, setIs2DCompleted] = useState(false);
+    const [is3DCompleted, setIs3DCompleted] = useState(false);
     const [showNullHypothesis, setShowNullHypothesis] = useState(false);
     const [submissionId, setSubmissionId] = useState(null);
 
@@ -112,6 +113,8 @@ export const SimulationOne = () => {
 
     const handlePlotTypeChange = (type) => {
         setPlotType(type);
+        document.getElementById('learningGoal')
+            .scrollIntoView({ behavior: 'smooth'});
     };
 
     const handleShowNullHypothesis = () => {
@@ -173,7 +176,7 @@ export const SimulationOne = () => {
                                 <input type="number" min="50" max="500"
                                     id="nSampleSize"
                                     className="form-control short-input"
-                                    disabled={startQuiz}
+                                    disabled={startQuiz || is2DCompleted}
                                     value={N}
                                     onBlur={handleNBlur}
                                     onChange={handleNChange} />
@@ -194,9 +197,10 @@ export const SimulationOne = () => {
                                             max="1" value={yCorrelation}
                                             className="form-range"
                                             id="correlation"
-                                            disabled={startQuiz}
-                                            // eslint-disable-next-line max-len
-                                            onChange={handleYcorrelationChange} />
+                                            disabled={
+                                                startQuiz || is2DCompleted}
+                                            onChange={
+                                                handleYcorrelationChange} />
                                         <div className="scale-value">
                                             <Katex tex={`${yCorrelation}`} />
                                         </div>
@@ -231,7 +235,7 @@ export const SimulationOne = () => {
                                                 max="1" value={xCorrelation}
                                                 className="form-range"
                                                 id="correlation"
-                                                // disabled={startQuiz}
+                                                disabled={startQuiz}
 
                                                 onChange={
                                                     handleXcorrelationChange} />
@@ -347,8 +351,12 @@ export const SimulationOne = () => {
                                 appRvalue={appRvalue}
                                 appRvalue3d={appRvalue3d}
                                 is2DCompleted={is2DCompleted}
+                                is3DCompleted={is3DCompleted}
                                 submissionId={submissionId}
-                                setIs2DCompleted={setIs2DCompleted} />
+                                setIs2DCompleted={setIs2DCompleted}
+                                setIs3DCompleted={setIs3DCompleted}
+                                setStartQuiz={setStartQuiz}
+                                handlePlotTypeChange={handlePlotTypeChange} />
                         )}
                     </>
                 )}
@@ -364,19 +372,19 @@ export const SimulationOne = () => {
                             onClick={() => handlePlotTypeChange('2d')}
                             href="#">2D</a>
                         </li>
-                        {isSuperUser && (
-                            <li className="nav-item">
-                                <a className={
-                                    plotType === '3d'
-                                        ? 'active nav-link'
-                                        : (!is2DCompleted
-                                            ? 'nav-link disabled'
-                                            : 'nav-link')
-                                }
-                                onClick={() => handlePlotTypeChange('3d')}
-                                href="#">3D</a>
-                            </li>
-                        )}
+
+                        <li className="nav-item">
+                            <a className={
+                                plotType === '3d'
+                                    ? 'active nav-link'
+                                    : (!is2DCompleted
+                                        ? 'nav-link disabled'
+                                        : 'nav-link')
+                            }
+                            onClick={() => handlePlotTypeChange('3d')}
+                            href="#">3D</a>
+                        </li>
+
                     </ul>
                 </div>
                 <ScatterPlot
@@ -384,16 +392,10 @@ export const SimulationOne = () => {
                     yCorrelation={yCorrelation}
                     xCorrelation={xCorrelation}
                     seed={seed}
-                    slope={slope}
-                    slopes={slopes}
                     setSlopes={setSlopes}
                     setSlope={setSlope}
-                    stderror={stderror}
-                    stderrs={stderrs}
                     setStderrs={setStderrs}
                     setStderror={setStderror}
-                    intercept={intercept}
-                    intercept3d={intercept3d}
                     setIntercept={setIntercept}
                     setIntercept3d={setIntercept3d}
                     setAppRvalue={setAppRvalue}
