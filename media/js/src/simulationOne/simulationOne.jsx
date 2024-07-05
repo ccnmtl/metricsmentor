@@ -8,6 +8,7 @@ import { GraphCoefficients } from './graphCoefficientsSection';
 import { NullHypothesisSection } from './nullHypothesisSection';
 import { PvalueModal } from './modalPvalue';
 import { CriticalValueModal } from './modalCV';
+import { GlossaryModal } from './modalGlossary';
 
 
 // const CURRENT_USER = window.MetricsMentor.currentUser.id;
@@ -439,6 +440,8 @@ export const SimulationOne = () => {
             <PvalueModal />
 
             <CriticalValueModal />
+
+            <GlossaryModal />
 
         </div> // div class=simulation
     );
