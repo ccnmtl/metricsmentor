@@ -66,10 +66,6 @@ export const NullHypothesisSection = ({
                                 } />
                             </div>
                         </div>
-                        <p className="mt-4">
-                        Save your graph and let&rsquo;s move on
-                        to hypothesis testing.
-                        </p>
                     </div>
                 )}
                 {plotType === '3d' && slopes.length > 0 && (
@@ -109,10 +105,6 @@ export const NullHypothesisSection = ({
                                 } />
                             </div>
                         </div>
-                        <p className="mt-4">
-                            Save your graph and let&rsquo;s move on
-                            to hypothesis testing.
-                        </p>
                     </div>
                 )}
 
