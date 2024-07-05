@@ -76,9 +76,6 @@ PYLTI_CONFIG = {
 
 COURSEAFFILS_COURSESTRING_MAPPER = CourseStringMapper
 
-SESSION_COOKIE_SECURE = False
-CSRF_COOKIE_SECURE = False
-
 
 if 'integrationserver' in sys.argv:
     SESSION_COOKIE_SECURE = False
