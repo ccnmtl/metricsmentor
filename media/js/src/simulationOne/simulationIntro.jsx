@@ -34,6 +34,16 @@ export const SimIntro = ({plotType}) => {
                             data to test the null hypothesis that the
                             population slope is equal to a specified value.
                         </p>
+                        <p>
+                            The following glossary will help you to review
+                            the key terms used in this simulation.
+                        </p>
+                        <button
+                            className="btn btn-sm btn-primary"
+                            data-bs-toggle="modal"
+                            data-bs-target="#glossaryModal">
+                        Glossary
+                        </button>
                     </div>
                 </div>
             </div>
