@@ -257,8 +257,9 @@ export const SimulationOne = () => {
                             {slope !== null && plotType === '2d' && (
                                 <>
                                     <div className="mt-5 h2">
-                                        Calculated correlation
-                                        coefficient:
+                                        Calculated
+                                        <Katex tex={'corr(x,y)'}
+                                            className="katex-inline" />:
                                         <div
                                             className="hi-val ms-2">
                                             <Katex
@@ -271,8 +272,8 @@ export const SimulationOne = () => {
                             {slopes.length > 0 && plotType === '3d' && (
                                 <>
                                     <div className="mt-5 h2">
-                                Calculated correlation
-                                coefficient:
+                                    Calculated <Katex tex={'corr(x,y)'}
+                                            className="katex-inline" />:
                                         <div
                                             className="hi-val ms-2">
                                             <Katex
@@ -322,6 +323,11 @@ export const SimulationOne = () => {
 
                                 <div className="me-4
                                     simulation__step-prompt">
+                                    <p className="mt-4">
+                                        Save your graph and let&rsquo;s move on
+                                        to hypothesis testing.
+                                    </p>
+
                                     <button className="btn btn-primary"
                                         disabled={startQuiz}
                                         onClick={handleSaveGraph}>
@@ -395,7 +401,7 @@ export const SimulationOne = () => {
                     plotType={plotType}
                 />
                 {(slope !== null) && (plotType === '2d') && (
-                    <div className="simulation__graph-summary fs-5">
+                    <div className="simulation__graph-summary">
                         <Katex tex={
                             // eslint-disable-next-line max-len
                             `\\hat{y} = ${intercept.toFixed(3)} + ${slope.toFixed(3)}x;`
@@ -409,7 +415,7 @@ export const SimulationOne = () => {
                     </div>
                 )}
                 {(slopes.length > 0) && (plotType === '3d') && (
-                    <div className="simulation__graph-summary fs-5">
+                    <div className="simulation__graph-summary">
                         <Katex tex={
                             // eslint-disable-next-line max-len
                             `\\hat{y} = ${intercept3d.toFixed(3)} + ${slopes[0].toFixed(3)}x_1 + ${slopes[1].toFixed(3)}x_2;`

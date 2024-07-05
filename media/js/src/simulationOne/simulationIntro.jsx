@@ -2,6 +2,9 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Katex } from '../katexComponent';
 
+export const STATIC_URL = window.MetricsMentor.staticUrl;
+
+
 export const SimIntro = ({plotType}) => {
     return (
         <>
@@ -25,7 +28,7 @@ export const SimIntro = ({plotType}) => {
                         <p>
                             In this simulation, you&rsquo;ll learn about
                             hypothesis testing for the population slope
-                            in a simple and multiple regression models.
+                            in simple and multiple regression models.
                             You&rsquo;ll be able to visualize the relationship
                             between two, or three variables, and generate
                             data to test the null hypothesis that the
@@ -35,8 +38,10 @@ export const SimIntro = ({plotType}) => {
                 </div>
             </div>
             <div className="simulation__step-container d-flex">
-                <div className="simulation__step-num">
-                &bull;
+                <div className="simulation__step-num tip-on">
+                    <img src={`${STATIC_URL}/img/icon-lightbulb-regular.svg`}
+                        className="simulation__step-icon"
+                        alt="Lightbulb icon: Learning goals" />
                 </div>
                 <div className="simulation__step-toggle--down">
                 </div>

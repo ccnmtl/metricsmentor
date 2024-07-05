@@ -25,9 +25,7 @@ export const GraphCoefficients = ({
                 {plotType === '2d' && (
                     <div className="simulation__step-content">
                         <p>
-                            The graph generated with the parameters
-                            you&rsquo;ve defined produces the following
-                            coefficients. Observe how the linear regression
+                            Observe how the linear regression
                             coefficients change as you continue to
                             adjust
                             <Katex tex={'n'} className="katex-inline" /> and
@@ -45,15 +43,6 @@ export const GraphCoefficients = ({
                             <Katex tex={
                                 // eslint-disable-next-line max-len
                                 `\\hat{y} = ${intercept.toFixed(3)} + ${slope.toFixed(3)}x`
-                            } />
-                        </div>
-                        <h2 className="mt-4">Sample
-                            <Katex tex={'y\\text{\\textendash}intercept'}
-                                className="katex-inline"/> coefficient:
-                        </h2>
-                        <div className="ms-3">
-                            <Katex tex={
-                                `\\hat{\\beta_0} = ${intercept.toFixed(3)}`
                             } />
                         </div>
                         <h2 className="mt-4">Sample slope coefficient:</h2>
@@ -97,15 +86,6 @@ export const GraphCoefficients = ({
                             <Katex tex={
                                 // eslint-disable-next-line max-len
                                 `\\hat{y} = ${intercept3d.toFixed(3)} + ${slopes[0].toFixed(3)}x_1 + ${slopes[1].toFixed(3)}x_2`
-                            } />
-                        </div>
-                        <h2 className="mt-4">Sample
-                            <Katex tex={'y\\text{\\textendash}intercept'}
-                                className="katex-inline"/> coefficient:
-                        </h2>
-                        <div className="ms-3">
-                            <Katex tex={
-                                `\\hat{\\beta_0} = ${intercept3d.toFixed(3)}`
                             } />
                         </div>
                         <h2 className="mt-4">Sample slope
