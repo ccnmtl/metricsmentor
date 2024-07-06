@@ -7,7 +7,7 @@ import PropTypes from 'prop-types';
 export const PvalueComponent = ({
     pvalue, tvalue, submissionId, hypothesis, nullHypothesis,
     alpha, hypothesisTest1validate, setHypothesisTest1validate,
-    pvalue3d, tvalue3d
+    pvalue3d, tvalue3d, plotType
 }) => {
 
     const [userPvalue, setUserPvalue] = useState('');
@@ -55,23 +55,42 @@ export const PvalueComponent = ({
     };
 
     const validatePvalue = (value) => {
-        const isValid = parseFloat(value) === pvalue;
-        setIsPvalueCorrect(isValid);
-        return isValid;
+        if (plotType === '2d') {
+            const isValid = parseFloat(value) === pvalue;
+            setIsPvalueCorrect(isValid);
+            return isValid;
+        } else {
+            const isValid = parseFloat(value) === pvalue3d;
+            setIsPvalueCorrect(isValid);
+            return isValid;
+        }
     };
 
     const handleNextPvalueButtonClick = async() => {
         const isCorrect = validatePvalue(userPvalue);
-        const additionalData = {
-            userPvalue: userPvalue,
-            pvalue: pvalue,
-            alpha: alpha,
-            hypothesis: hypothesis,
-            nullHypothesis: nullHypothesis
-        };
+        if (plotType === '2d') {
+            const additionalData = {
+                userPvalue: userPvalue,
+                pvalue: pvalue,
+                alpha: alpha,
+                hypothesis: hypothesis,
+                nullHypothesis: nullHypothesis
+            };
 
-        await saveAnswer(submissionId, 1, 'numerical',
-            userPvalue, isCorrect, additionalData);
+            await saveAnswer(submissionId, 1, 'numerical',
+                userPvalue, isCorrect, additionalData);
+        } else {
+            const additionalData = {
+                userPvalue: userPvalue,
+                pvalue: pvalue3d,
+                alpha: alpha,
+                hypothesis: hypothesis,
+                nullHypothesis: nullHypothesis
+            };
+
+            await saveAnswer(submissionId, 8, 'numerical',
+                userPvalue, isCorrect, additionalData);
+        }
     };
 
     const handlePvalueComparisonChange = (event) => {
@@ -80,22 +99,44 @@ export const PvalueComponent = ({
     };
 
     const validatePvalueComparison = (value) => {
-        const isValid = value === (pvalue < alpha ? 'lessThan' : 'greaterThan');
-        setIsPvalCompareCorrect(isValid);
-        return isValid;
+        if (plotType === '2d') {
+
+            const isValid =
+             value === (pvalue < alpha ? 'lessThan' : 'greaterThan');
+            setIsPvalCompareCorrect(isValid);
+            return isValid;
+        } else {
+            const isValid =
+             value === (pvalue3d < alpha ? 'lessThan' : 'greaterThan');
+            setIsPvalCompareCorrect(isValid);
+            return isValid;
+        }
     };
 
     const handleNextPvalueComparison = async() => {
-        const isCorrect = validatePvalueComparison(pvalueComparison);
-        const additionalData = {
-            comparison: pvalueComparison,
-            pvalue: pvalue,
-            alpha: alpha,
-            hypothesis: hypothesis,
-            nullHypothesis: nullHypothesis};
+        if (plotType === '2d') {
+            const isCorrect = validatePvalueComparison(pvalueComparison);
+            const additionalData = {
+                comparison: pvalueComparison,
+                pvalue: pvalue,
+                alpha: alpha,
+                hypothesis: hypothesis,
+                nullHypothesis: nullHypothesis};
 
-        await saveAnswer(submissionId, 2, 'radio', pvalueComparison,
-            isCorrect, additionalData);
+            await saveAnswer(submissionId, 2, 'radio', pvalueComparison,
+                isCorrect, additionalData);
+        } else {
+            const isCorrect = validatePvalueComparison(pvalueComparison);
+            const additionalData = {
+                comparison: pvalueComparison,
+                pvalue: pvalue3d,
+                alpha: alpha,
+                hypothesis: hypothesis,
+                nullHypothesis: nullHypothesis};
+
+            await saveAnswer(submissionId, 9, 'radio', pvalueComparison,
+                isCorrect, additionalData);
+        }
     };
 
     const handleNullHypothesisChoice1Change = (event) => {
@@ -103,27 +144,53 @@ export const PvalueComponent = ({
     };
 
     const validateHypothesisTest1 = (value) => {
-        const correctDecision =
+        if (plotType === '2d') {
+            const correctDecision =
         (pvalue < alpha && value === 'reject') ||
                     (pvalue > alpha && value === 'failToReject');
 
-        setHypothesisTest1validate((correctDecision));
+            setHypothesisTest1validate((correctDecision));
+            return correctDecision;
 
-        return correctDecision;
+        } else {
+            const correctDecision =
+            (pvalue3d < alpha && value === 'reject') ||
+                        (pvalue3d > alpha && value === 'failToReject');
+
+            setHypothesisTest1validate((correctDecision));
+            return correctDecision;
+
+        }
     };
 
     const handleNextNullHypothesisChoice1 = async() => {
-        const isCorrect = validateHypothesisTest1(nullHypothesisChoice1);
-        const additionalData = {
-            decision: nullHypothesisChoice1,
-            pvalue: pvalue,
-            alpha: alpha,
-            hypothesis: hypothesis,
-            nullHypothesis: nullHypothesis};
+        if (plotType === '2d') {
+            const isCorrect = validateHypothesisTest1(nullHypothesisChoice1);
+            const additionalData = {
+                decision: nullHypothesisChoice1,
+                pvalue: pvalue,
+                alpha: alpha,
+                hypothesis: hypothesis,
+                nullHypothesis: nullHypothesis};
 
-        await saveAnswer(submissionId, 3, 'radio',
-            nullHypothesisChoice1, isCorrect, additionalData);
+            await saveAnswer(submissionId, 3, 'radio',
+                nullHypothesisChoice1, isCorrect, additionalData);
+        } else {
+            const isCorrect = validateHypothesisTest1(nullHypothesisChoice1);
+            const additionalData = {
+                decision: nullHypothesisChoice1,
+                pvalue: pvalue3d,
+                alpha: alpha,
+                hypothesis: hypothesis,
+                nullHypothesis: nullHypothesis};
+
+            await saveAnswer(submissionId, 10, 'radio',
+                nullHypothesisChoice1, isCorrect, additionalData);
+        }
     };
+
+    const displayP = plotType === '2d' ? pvalue : pvalue3d;
+    const displayT = plotType === '2d' ? tvalue : tvalue3d;
 
     return (
         <div className="solving-p-set mt-3">
@@ -134,7 +201,7 @@ export const PvalueComponent = ({
                     <Katex tex={'{\\alpha}'} className="katex-inline" />.
                 Using the table provided, look up the value that
                 corresponds to
-                    <Katex tex={`t = ${tvalue}`}
+                    <Katex tex={`t = ${displayT}`}
                         className="katex-inline"/>.
                 </p>
                 <button
@@ -179,7 +246,7 @@ export const PvalueComponent = ({
             {!isPvalueCorrect && isPvalueCorrect !== null && (
                 <div className="mt-3">
                     <span style={{ color: 'red' }}>
-                    The value is incorrect; it&rsquo;s {pvalue}.
+                    The value is incorrect; it&rsquo;s {displayP}.
                     Please try again.
                     </span>
                 </div>

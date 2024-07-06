@@ -5,14 +5,14 @@ import { MultipleChoiceQuestion } from '../multipleChoiceQuestion';
 import PropTypes from 'prop-types';
 
 export const SimulationOneQuiz = ({
-    appRvalue, tvalue, hypothesizedSlope, n, setIs2DCompleted,
+    appRvalue, appRvalue3d, tvalue, hypothesizedSlope, n, setIs2DCompleted,
     is2DCompleted, submissionId, handlePlotTypeChange, plotType,
     tvalue3d, setStartQuiz, setIs3DCompleted
 }) => {
     const [selectedOption, setSelectedOption] = useState(null);
+    const [selectedOption3d, setSelectedOption3d] = useState(null);
     const [completedChoices, setCompletedChoices] = useState([]);
     const [completedChoices3d, setCompletedChoices3d] = useState([]);
-    const [selectedOption3d, setSelectedOption3d] = useState(null);
     const [isSubmitted, setIsSubmitted] = useState(false);
 
     const allChoicesCompleted = ['A', 'B', 'C'].every(
@@ -34,7 +34,8 @@ export const SimulationOneQuiz = ({
     const is2dCompleted = () => {
         if (allChoicesCompleted && isSubmitted) {
             setIs2DCompleted(true);
-            setStartQuiz(false);
+            // setStartQuiz(false);
+            setSelectedOption(null);
         }
     };
 
@@ -160,22 +161,25 @@ export const SimulationOneQuiz = ({
                 </div>
             </div>
 
-            {selectedOption && (
+            {(selectedOption || selectedOption3d) && (
                 <HypothesisTest
                     selectedOption={selectedOption}
+                    selectedOption3d={selectedOption3d}
                     hypothesizedSlope={hypothesizedSlope}
                     appRvalue={appRvalue}
+                    appRvalue3d={appRvalue3d}
                     tvalue={tvalue}
                     tvalue3d={tvalue3d}
                     onComplete={handleChoiceCompletion}
                     on3dComplete={handleChoiceCompletion3d}
                     n={parseInt(n)}
                     completedChoices={completedChoices}
+                    completedChoices3d={completedChoices3d}
                     submissionId={submissionId}
                     plotType={plotType}
                 />
             )}
-            {allChoicesCompleted && (
+            {(allChoicesCompleted && plotType === '2d') && (
                 <MultipleChoiceQuestion
                     question={'which of the following is TRUE?'}
                     options={['The closer the correlation between Y and X1 is '
@@ -197,7 +201,21 @@ export const SimulationOneQuiz = ({
                     setIsSubmitted={setIsSubmitted}
                 />
             )}
-            {isSubmitted && (
+            {(allChoices3dCompleted && plotType === '3d') && (
+                <MultipleChoiceQuestion
+                    question={'As we add X2 to the regression,'}
+                    options={['The slope of X1(b1) changed.',
+                        'The standard error of the slope X1(B1) changed ',
+                        'The intercept of the regression line changed.',
+                        'All of the above.']}
+                    answer={'All of the above'}
+                    submissionId={submissionId}
+                    questionNumber={14}
+                    isSubmitted={isSubmitted}
+                    setIsSubmitted={setIsSubmitted}
+                />
+            )}
+            {(isSubmitted && plotType === '2d') && (
                 <>
                     <div className="mt-3 mb-5 fs-5 fw-medium text-center">
                     Congratulations on completing the 2D simulation!
@@ -205,6 +223,17 @@ export const SimulationOneQuiz = ({
                     <div className="btn btn-secondary text-center"
                         onClick={() => handlePlotTypeChange('3d')}>
                     You can now proceed to the next step.
+                    </div>
+                </>
+            )}
+            {(isSubmitted && plotType === '3d') && (
+                <>
+                    <div className="mt-3 mb-5 fs-5 fw-medium text-center">
+                Congratulations on completing the 3D simulation!
+                    </div>
+                    <div className="btn btn-secondary text-center"
+                        href="#">
+                You can now proceed to the next simulation.
                     </div>
                 </>
             )}
@@ -221,8 +250,9 @@ SimulationOneQuiz.propTypes = {
     is2DCompleted: PropTypes.bool.isRequired,
     submissionId: PropTypes.number.isRequired,
     handlePlotTypeChange: PropTypes.func,
-    plotType: PropTypes.string,
-    tvalue3d: PropTypes.number,
+    plotType: PropTypes.string.isRequired,
+    tvalue3d: PropTypes.number.isRequired,
     setStartQuiz: PropTypes.func.isRequired,
-    setIs3DCompleted: PropTypes.func.isRequired
+    setIs3DCompleted: PropTypes.func.isRequired,
+    appRvalue3d: PropTypes.number.isRequired
 };

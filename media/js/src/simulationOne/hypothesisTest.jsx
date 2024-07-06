@@ -7,7 +7,7 @@ import axios from 'axios';
 export const HypothesisTest = ({
     selectedOption, appRvalue, tvalue, hypothesizedSlope, n, onComplete,
     completedChoices, submissionId, tvalue3d, plotType, on3dComplete,
-    completedChoices3d
+    completedChoices3d, selectedOption3d, appRvalue3d
 }) => {
     const [pvalues, setPvalues] = useState(null);
     const [pvalues3d, setPvalues3d] = useState(null);
@@ -18,7 +18,7 @@ export const HypothesisTest = ({
 
     const nullHypothesis = `\\Eta_0: {\\beta_1} = ${hypothesizedSlope}`;
 
-    switch (selectedOption) {
+    switch (selectedOption || selectedOption3d) {
     case 'A':
         hypothesis = `\\Eta_1: {\\beta_1}{\\neq } ${hypothesizedSlope}`;
         hypothesisTest = 'value_two_sided';
@@ -78,15 +78,15 @@ export const HypothesisTest = ({
     }
 
     useEffect(() => {
-        calculatePvalue();
-        document.getElementById('hypothesis-test')
-            .scrollIntoView({ behavior: 'smooth'});
 
         if (plotType === '3d') {
             calculatePvalue3d();
-            document.getElementById('hypothesis-test')
-                .scrollIntoView({ behavior: 'smooth'});
+        } else {
+            calculatePvalue();
         }
+
+        document.getElementById('hypothesis-test')
+            .scrollIntoView({ behavior: 'smooth'});
     }, []);
 
     return (
@@ -106,24 +106,47 @@ export const HypothesisTest = ({
                             Let&rsquo;s conduct a hypothesis test with the
                             alternative hypothesis you chose:
                         </p>
-                        <div className="hi-val">
-                            <div className="p-2">
-                                <Katex tex={nullHypothesis} />
+                        {plotType === '2d' && (
+                            <div className="hi-val">
+                                <div className="p-2">
+                                    <Katex tex={nullHypothesis} />
+                                </div>
+                                <div className="p-2">
+                                    <Katex tex={hypothesis} />
+                                </div>
+                                <div className="p-2">
+                                    <Katex tex={
+                                        `corr(x,y) = ${appRvalue.toFixed(3)}`
+                                    } />
+                                </div>
+                                <div className="p-2">
+                                    <Katex tex={
+                                        `t = ${tvalue}`
+                                    } />
+                                </div>
                             </div>
-                            <div className="p-2">
-                                <Katex tex={hypothesis} />
+                        )}
+                        {plotType === '3d' && (
+                            <div className="hi-val">
+                                <div className="p-2">
+                                    <Katex tex={nullHypothesis} />
+                                </div>
+                                <div className="p-2">
+                                    <Katex tex={hypothesis} />
+                                </div>
+                                <div className="p-2">
+                                    <Katex tex={
+                                        `corr(x,y) = ${appRvalue3d.toFixed(3)}`
+                                    } />
+                                </div>
+                                <div className="p-2">
+                                    <Katex tex={
+                                        `t = ${tvalue3d}`
+                                    } />
+                                </div>
                             </div>
-                            <div className="p-2">
-                                <Katex tex={
-                                    `corr(x,y) = ${appRvalue.toFixed(3)}`
-                                } />
-                            </div>
-                            <div className="p-2">
-                                <Katex tex={
-                                    `t = ${tvalue}`
-                                } />
-                            </div>
-                        </div>
+                        )}
+
                         <p className="mt-3">
                             First, choose the significance
                             level,
@@ -160,7 +183,6 @@ export const HypothesisTest = ({
                         {alphaSelected && (
                             <Quiz
                                 hypothesisTest={hypothesisTest}
-                                appRvalue={appRvalue}
                                 tvalue={tvalue}
                                 tvalue3d={tvalue3d}
                                 pvalue={parseFloat(pvalue)}
@@ -170,7 +192,9 @@ export const HypothesisTest = ({
                                 nullHypothesis={nullHypothesis}
                                 n={n}
                                 onComplete={onComplete}
+                                on3dComplete={on3dComplete}
                                 completedChoices={completedChoices}
+                                completedChoices3d={completedChoices3d}
                                 submissionId={submissionId}
                                 plotType={plotType}
                             />
@@ -184,16 +208,18 @@ export const HypothesisTest = ({
 
 HypothesisTest.propTypes = {
     selectedOption: PropTypes.string.isRequired,
+    selectedOption3d: PropTypes.string.isRequired,
     appRvalue: PropTypes.number.isRequired,
+    appRvalue3d: PropTypes.number,
     tvalue: PropTypes.number.isRequired,
+    tvalue3d: PropTypes.number.isRequired,
     coursePK: PropTypes.number,
     hypothesizedSlope: PropTypes.any.isRequired,
     n: PropTypes.number.isRequired,
     onComplete: PropTypes.func.isRequired,
+    on3dComplete: PropTypes.func.isRequired,
     completedChoices: PropTypes.array.isRequired,
+    completedChoices3d: PropTypes.array,
     submissionId: PropTypes.number.isRequired,
-    tvalue3d: PropTypes.number,
     plotType: PropTypes.string,
-    on3dComplete: PropTypes.func,
-    completedChoices3d: PropTypes.array
 };

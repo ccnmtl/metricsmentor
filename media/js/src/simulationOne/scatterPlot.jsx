@@ -142,13 +142,13 @@ export const ScatterPlot = ({ N, yCorrelation, seed, setAppRvalue,
     // };
 
     useEffect(() => {
-        if(N) {
+        if (N) {
             setData(generateData());
         }
     }, [N, yCorrelation, xCorrelation, seed, plotType]);
 
     useEffect(() => {
-        if(data.length > 0) {
+        if (data.length > 0) {
             calculateRegression();
         }
     }, [data, plotType]);
