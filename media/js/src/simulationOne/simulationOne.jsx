@@ -12,7 +12,7 @@ import { GlossaryModal } from './modalGlossary';
 
 
 // const CURRENT_USER = window.MetricsMentor.currentUser.id;
-const isSuperUser = window.MetricsMentor.currentUser.is_superuser;
+// const isSuperUser = window.MetricsMentor.currentUser.is_superuser;
 const simContainer = document.querySelector('#react-root');
 
 const coursePk =
@@ -30,28 +30,28 @@ export const SimulationOne = () => {
     const [appRvalue, setAppRvalue] = useState(null);
     const [appRvalue3d, setAppRvalue3d] = useState(null);
     const [startQuiz, setStartQuiz] = useState(false);
+    const [startQuiz2, setStartQuiz2] = useState(false);
     const [hypothesizedSlope, setHypothesizedSlope] = useState(0);
     const [plotType, setPlotType] = useState('2d');
     const [slopes, setSlopes] = useState([]);
     const [stderrs, setStderrs] = useState([]);
     const [is2DCompleted, setIs2DCompleted] = useState(false);
+    const [is3DCompleted, setIs3DCompleted] = useState(false);
     const [showNullHypothesis, setShowNullHypothesis] = useState(false);
     const [submissionId, setSubmissionId] = useState(null);
+    const [completedChoices, setCompletedChoices] = useState([]);
+    const [completedChoices3d, setCompletedChoices3d] = useState([]);
 
 
     const saveGraphData = async() => {
-        const data = {
+        const data = plotType === '2d' ? {
             N, yCorrelation, seed, slope, intercept, stderror, appRvalue,
             tvalue, hypothesizedSlope
+        } : {
+            N, yCorrelation, seed, slope, intercept, stderror, appRvalue,
+            tvalue, hypothesizedSlope, slopes, stderrs, xCorrelation,
+            appRvalue3d, intercept3d
         };
-
-        if (plotType === '3d') {
-            data.slopes = slopes;
-            data.stderrs = stderrs;
-            data.xCorrelation = xCorrelation;
-            data.appRvalue3d = appRvalue3d;
-            data.intercept3d = intercept3d;
-        }
 
         return authedFetch(
             `/course/${coursePk}/api/save-sim1-graph/`, 'POST', { data })
@@ -64,7 +64,11 @@ export const SimulationOne = () => {
                 }
             })
             .then(data => {
-                setStartQuiz(true);
+                if (plotType === '2d') {
+                    setStartQuiz(true);
+                } else {
+                    setStartQuiz2(true);
+                }
                 setSubmissionId(data.submission_id);
                 return data;
             })
@@ -113,6 +117,8 @@ export const SimulationOne = () => {
 
     const handlePlotTypeChange = (type) => {
         setPlotType(type);
+        document.getElementById('learningGoal')
+            .scrollIntoView({ behavior: 'smooth'});
     };
 
     const handleShowNullHypothesis = () => {
@@ -174,7 +180,7 @@ export const SimulationOne = () => {
                                 <input type="number" min="50" max="500"
                                     id="nSampleSize"
                                     className="form-control short-input"
-                                    disabled={startQuiz}
+                                    disabled={startQuiz || is2DCompleted}
                                     value={N}
                                     onBlur={handleNBlur}
                                     onChange={handleNChange} />
@@ -195,9 +201,10 @@ export const SimulationOne = () => {
                                             max="1" value={yCorrelation}
                                             className="form-range"
                                             id="correlation"
-                                            disabled={startQuiz}
-                                            // eslint-disable-next-line max-len
-                                            onChange={handleYcorrelationChange} />
+                                            disabled={
+                                                startQuiz || is2DCompleted}
+                                            onChange={
+                                                handleYcorrelationChange} />
                                         <div className="scale-value">
                                             <Katex tex={`${yCorrelation}`} />
                                         </div>
@@ -232,7 +239,7 @@ export const SimulationOne = () => {
                                                 max="1" value={xCorrelation}
                                                 className="form-range"
                                                 id="correlation"
-                                                // disabled={startQuiz}
+                                                disabled={startQuiz2}
 
                                                 onChange={
                                                     handleXcorrelationChange} />
@@ -320,7 +327,8 @@ export const SimulationOne = () => {
                                     tvalue3d={tvalue3d}
                                     hypothesizedSlope={hypothesizedSlope}
                                     handleNullHypothesis={handleNullHypothesis}
-                                    startQuiz={startQuiz} />
+                                    startQuiz={startQuiz}
+                                    startQuiz2={startQuiz2} />
 
                                 <div className="me-4
                                     simulation__step-prompt">
@@ -328,28 +336,52 @@ export const SimulationOne = () => {
                                         Save your graph and let&rsquo;s move on
                                         to hypothesis testing.
                                     </p>
-
-                                    <button className="btn btn-primary"
-                                        disabled={startQuiz}
-                                        onClick={handleSaveGraph}>
-                                        Save graph and continue &raquo;
-                                    </button>
+                                    {plotType === '2d' && (
+                                        <button className="btn btn-primary"
+                                            disabled={startQuiz}
+                                            onClick={handleSaveGraph}>
+                                            Save graph and continue &raquo;
+                                        </button>
+                                    )}
+                                    {plotType === '3d' && (
+                                        <button className="btn btn-primary"
+                                            disabled={startQuiz2}
+                                            onClick={handleSaveGraph}>
+                                            Save graph and continue &raquo;
+                                        </button>
+                                    )}
                                 </div>
                             </>
                         )}
-                        {startQuiz && (
+                        {(startQuiz && plotType === '2d') && (
                             <SimulationOneQuiz
                                 plotType={plotType}
                                 coursePk={coursePk}
                                 tvalue={tvalue}
-                                tvalue3d={tvalue3d}
                                 hypothesizedSlope={hypothesizedSlope}
                                 n={N}
                                 appRvalue={appRvalue}
-                                appRvalue3d={appRvalue3d}
-                                is2DCompleted={is2DCompleted}
+                                isCompleted={is2DCompleted}
                                 submissionId={submissionId}
-                                setIs2DCompleted={setIs2DCompleted} />
+                                completedChoices={completedChoices}
+                                setCompletedChoices={setCompletedChoices}
+                                setIsCompleted={setIs2DCompleted}
+                                handlePlotTypeChange={handlePlotTypeChange} />
+                        )}
+                        {(startQuiz2 && plotType === '3d') && (
+                            <SimulationOneQuiz
+                                plotType={plotType}
+                                coursePk={coursePk}
+                                tvalue={tvalue3d}
+                                hypothesizedSlope={hypothesizedSlope}
+                                n={N}
+                                appRvalue={appRvalue3d}
+                                isCompleted={is3DCompleted}
+                                submissionId={submissionId}
+                                completedChoices={completedChoices3d}
+                                setCompletedChoices={setCompletedChoices3d}
+                                setIsCompleted={setIs3DCompleted}
+                                handlePlotTypeChange={handlePlotTypeChange} />
                         )}
                     </>
                 )}
@@ -365,19 +397,19 @@ export const SimulationOne = () => {
                             onClick={() => handlePlotTypeChange('2d')}
                             href="#">2D</a>
                         </li>
-                        {isSuperUser && (
-                            <li className="nav-item">
-                                <a className={
-                                    plotType === '3d'
-                                        ? 'active nav-link'
-                                        : (!is2DCompleted
-                                            ? 'nav-link disabled'
-                                            : 'nav-link')
-                                }
-                                onClick={() => handlePlotTypeChange('3d')}
-                                href="#">3D</a>
-                            </li>
-                        )}
+
+                        <li className="nav-item">
+                            <a className={
+                                plotType === '3d'
+                                    ? 'active nav-link'
+                                    : (!is2DCompleted
+                                        ? 'nav-link disabled'
+                                        : 'nav-link')
+                            }
+                            onClick={() => handlePlotTypeChange('3d')}
+                            href="#">3D</a>
+                        </li>
+
                     </ul>
                 </div>
                 <ScatterPlot
@@ -385,16 +417,10 @@ export const SimulationOne = () => {
                     yCorrelation={yCorrelation}
                     xCorrelation={xCorrelation}
                     seed={seed}
-                    slope={slope}
-                    slopes={slopes}
                     setSlopes={setSlopes}
                     setSlope={setSlope}
-                    stderror={stderror}
-                    stderrs={stderrs}
                     setStderrs={setStderrs}
                     setStderror={setStderror}
-                    intercept={intercept}
-                    intercept3d={intercept3d}
                     setIntercept={setIntercept}
                     setIntercept3d={setIntercept3d}
                     setAppRvalue={setAppRvalue}

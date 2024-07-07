@@ -3,9 +3,9 @@ import Plot from 'react-plotly.js';
 import seedrandom from 'seedrandom';
 import axios from 'axios';
 import PropTypes from 'prop-types';
-import { saveAs } from 'file-saver';
+// import { saveAs } from 'file-saver';
 
-const isSuperUser = window.MetricsMentor.currentUser.is_superuser;
+// const isSuperUser = window.MetricsMentor.currentUser.is_superuser;
 
 export const ScatterPlot = ({ N, yCorrelation, seed, setAppRvalue,
     setSlope, setIntercept, setStderror, plotType, setSlopes,
@@ -122,33 +122,33 @@ export const ScatterPlot = ({ N, yCorrelation, seed, setAppRvalue,
         }
     };
 
-    const exportCSV = () => {
-        let headers = ['x', 'y'];
-        if (plotType === '3d') {
-            headers.push('z');
-        }
+    // const exportCSV = () => {
+    //     let headers = ['x', 'y'];
+    //     if (plotType === '3d') {
+    //         headers.push('z');
+    //     }
 
-        const dataRows = data.map(point => {
-            let row = [point.x, point.y];
-            if (plotType === '3d') {
-                row.push(point.z);
-            }
-            return row.join(',');
-        });
+    //     const dataRows = data.map(point => {
+    //         let row = [point.x, point.y];
+    //         if (plotType === '3d') {
+    //             row.push(point.z);
+    //         }
+    //         return row.join(',');
+    //     });
 
-        const csv = [headers.join(','), ...dataRows].join('\n');
-        const blob = new Blob([csv], { type: 'text/csv;charset=utf-8' });
-        saveAs(blob, 'scatterplot_data.csv');
-    };
+    //     const csv = [headers.join(','), ...dataRows].join('\n');
+    //     const blob = new Blob([csv], { type: 'text/csv;charset=utf-8' });
+    //     saveAs(blob, 'scatterplot_data.csv');
+    // };
 
     useEffect(() => {
-        if(N) {
+        if (N) {
             setData(generateData());
         }
     }, [N, yCorrelation, xCorrelation, seed, plotType]);
 
     useEffect(() => {
-        if(data.length > 0) {
+        if (data.length > 0) {
             calculateRegression();
         }
     }, [data, plotType]);
@@ -223,13 +223,8 @@ ScatterPlot.propTypes = {
     setSlope: PropTypes.func,
     setIntercept: PropTypes.func,
     setStderror: PropTypes.func,
-    slope: PropTypes.number,
-    stderror: PropTypes.number,
-    intercept: PropTypes.number,
     plotType: PropTypes.oneOf(['2d', '3d']).isRequired,
-    slopes: PropTypes.arrayOf(PropTypes.number),
     setSlopes: PropTypes.func,
-    stderrs: PropTypes.arrayOf(PropTypes.number),
     setStderrs: PropTypes.func,
     xCorrelation: PropTypes.number,
     setAppRvalue3d: PropTypes.func,

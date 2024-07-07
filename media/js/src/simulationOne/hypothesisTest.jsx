@@ -6,7 +6,7 @@ import axios from 'axios';
 
 export const HypothesisTest = ({
     selectedOption, appRvalue, tvalue, hypothesizedSlope, n, onComplete,
-    completedChoices, submissionId
+    completedChoices, submissionId, plotType
 }) => {
     const [pvalues, setPvalues] = useState(null);
     const [alpha, setAlpha] = useState(null);
@@ -136,7 +136,6 @@ export const HypothesisTest = ({
                         {alphaSelected && (
                             <Quiz
                                 hypothesisTest={hypothesisTest}
-                                appRvalue={appRvalue}
                                 tvalue={tvalue}
                                 pvalue={parseFloat(pvalue)}
                                 alpha={alpha}
@@ -146,6 +145,7 @@ export const HypothesisTest = ({
                                 onComplete={onComplete}
                                 completedChoices={completedChoices}
                                 submissionId={submissionId}
+                                plotType={plotType}
                             />
                         )}
                     </div>
@@ -156,7 +156,7 @@ export const HypothesisTest = ({
 };
 
 HypothesisTest.propTypes = {
-    selectedOption: PropTypes.string.isRequired,
+    selectedOption: PropTypes.string,
     appRvalue: PropTypes.number.isRequired,
     tvalue: PropTypes.number.isRequired,
     coursePK: PropTypes.number,
@@ -164,5 +164,6 @@ HypothesisTest.propTypes = {
     n: PropTypes.number.isRequired,
     onComplete: PropTypes.func.isRequired,
     completedChoices: PropTypes.array.isRequired,
-    submissionId: PropTypes.number.isRequired
+    submissionId: PropTypes.number.isRequired,
+    plotType: PropTypes.string,
 };

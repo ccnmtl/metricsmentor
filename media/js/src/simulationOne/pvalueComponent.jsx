@@ -6,7 +6,8 @@ import PropTypes from 'prop-types';
 
 export const PvalueComponent = ({
     pvalue, tvalue, submissionId, hypothesis, nullHypothesis,
-    alpha, hypothesisTest1validate, setHypothesisTest1validate
+    alpha, hypothesisTest1validate, setHypothesisTest1validate,
+    plotType
 }) => {
 
     const [userPvalue, setUserPvalue] = useState('');
@@ -34,7 +35,6 @@ export const PvalueComponent = ({
 
     // P-Value Logic
     const handleUserPvalueChange = (e) => {
-
         // Allow number and decimal point
         const value = e.target.value.replace(/[^\d.-]/g, '');
 
@@ -61,6 +61,7 @@ export const PvalueComponent = ({
 
     const handleNextPvalueButtonClick = async() => {
         const isCorrect = validatePvalue(userPvalue);
+
         const additionalData = {
             userPvalue: userPvalue,
             pvalue: pvalue,
@@ -68,8 +69,8 @@ export const PvalueComponent = ({
             hypothesis: hypothesis,
             nullHypothesis: nullHypothesis
         };
-
-        await saveAnswer(submissionId, 1, 'numerical',
+        const questNumber = plotType === '2d' ? 1 : 8;
+        await saveAnswer(submissionId, questNumber, 'numerical',
             userPvalue, isCorrect, additionalData);
     };
 
@@ -86,14 +87,15 @@ export const PvalueComponent = ({
 
     const handleNextPvalueComparison = async() => {
         const isCorrect = validatePvalueComparison(pvalueComparison);
+
         const additionalData = {
             comparison: pvalueComparison,
             pvalue: pvalue,
             alpha: alpha,
             hypothesis: hypothesis,
             nullHypothesis: nullHypothesis};
-
-        await saveAnswer(submissionId, 2, 'radio', pvalueComparison,
+        const questNumber = plotType === '2d' ? 2 : 9;
+        await saveAnswer(submissionId, questNumber, 'radio', pvalueComparison,
             isCorrect, additionalData);
     };
 
@@ -107,20 +109,20 @@ export const PvalueComponent = ({
                     (pvalue > alpha && value === 'failToReject');
 
         setHypothesisTest1validate((correctDecision));
-
         return correctDecision;
     };
 
     const handleNextNullHypothesisChoice1 = async() => {
         const isCorrect = validateHypothesisTest1(nullHypothesisChoice1);
+
         const additionalData = {
             decision: nullHypothesisChoice1,
             pvalue: pvalue,
             alpha: alpha,
             hypothesis: hypothesis,
             nullHypothesis: nullHypothesis};
-
-        await saveAnswer(submissionId, 3, 'radio',
+        const questNumber = plotType === '2d' ? 3 : 10;
+        await saveAnswer(submissionId, questNumber, 'radio',
             nullHypothesisChoice1, isCorrect, additionalData);
     };
 
@@ -336,5 +338,6 @@ PvalueComponent.propTypes = {
     nullHypothesis: PropTypes.string,
     submissionId: PropTypes.number,
     hypothesisTest1validate: PropTypes.bool,
-    setHypothesisTest1validate: PropTypes.func
+    setHypothesisTest1validate: PropTypes.func,
+    plotType: PropTypes.string
 };

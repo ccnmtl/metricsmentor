@@ -19,13 +19,9 @@ export const MultipleChoiceQuestion = ({
 
         const questionType = 'multiple-choice';
 
-        try {
-            await saveAnswer(submissionId, questionNumber, questionType,
-                selectedOption, correct, {});
-            console.log('Answer saved successfully');
-        } catch (error) {
-            console.error('Error saving answer:', error);
-        }
+        await saveAnswer(submissionId, questionNumber, questionType,
+            selectedOption, correct, {});
+
     };
 
     return (<>
@@ -41,9 +37,7 @@ export const MultipleChoiceQuestion = ({
                 </header>
                 <div className="simulation__step-content">
                     <p>
-                        You have conpleted all the hypothesis tests in this
-                        section. Based on what you&rsquo;ve learned from this
-                        exercise, which of the following is true?
+                        {question}
                     </p>
                     {options.map((option, index) => (
                         <div key={index} className="form-check">
@@ -62,7 +56,7 @@ export const MultipleChoiceQuestion = ({
                     ))}
                     <button
                         className="btn btn-primary mt-3"
-                        disabled={isCorrect}
+                        disabled={isSubmitted}
                         onClick={handleSubmit}>Submit</button>
                     {isSubmitted && (
                         <p className="mt-3">

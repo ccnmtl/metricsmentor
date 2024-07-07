@@ -5,11 +5,11 @@ import { MultipleChoiceQuestion } from '../multipleChoiceQuestion';
 import PropTypes from 'prop-types';
 
 export const SimulationOneQuiz = ({
-    appRvalue, tvalue, hypothesizedSlope, n, setIs2DCompleted,
-    is2DCompleted, submissionId
+    appRvalue, tvalue, hypothesizedSlope, n, setIsCompleted,
+    isCompleted, submissionId, handlePlotTypeChange, plotType,
+    completedChoices, setCompletedChoices
 }) => {
     const [selectedOption, setSelectedOption] = useState(null);
-    const [completedChoices, setCompletedChoices] = useState([]);
     const [isSubmitted, setIsSubmitted] = useState(false);
 
     const allChoicesCompleted = ['A', 'B', 'C'].every(
@@ -20,20 +20,31 @@ export const SimulationOneQuiz = ({
         setSelectedOption(null);
     };
 
-    const is2dCompleted = () => {
-        if (allChoicesCompleted) {
-            setIs2DCompleted(true);
+    const isCompletedfunc = () => {
+        if (allChoicesCompleted && isSubmitted) {
+            setIsCompleted(true);
+            setSelectedOption(null);
         }
     };
 
     useEffect(() => {
-        is2dCompleted();
-    },[completedChoices, allChoicesCompleted]);
+        isCompletedfunc();
+    },[completedChoices, allChoicesCompleted, isSubmitted]);
 
     useEffect(() => {
         document.getElementById('quiz-1')
             .scrollIntoView({ behavior: 'smooth'});
     }, []);
+
+    useEffect(() => {
+        if (isSubmitted && plotType === '2d') {
+            document.getElementById('completed2d')
+                .scrollIntoView({ behavior: 'smooth'});
+        } else if (isSubmitted && plotType === '3d') {
+            document.getElementById('completed3d')
+                .scrollIntoView({ behavior: 'smooth'});
+        }
+    }, [isSubmitted]);
 
     return (
         <>
@@ -53,7 +64,6 @@ export const SimulationOneQuiz = ({
                             alternative hypotheses. Choose one to conduct
                             a test of hypothesis.
                         </p>
-
                         <ol className="listset-alpha listset-alpha-listnum">
                             {[
                                 ['A', '\\Eta_1: {\\beta_1}{\\neq} '],
@@ -62,22 +72,27 @@ export const SimulationOneQuiz = ({
                             ].map((choice, key) => (
                                 <li key={key}
                                     className={'listset-alpha-card' +
-                                        (selectedOption === choice[0] ?
-                                            ' hypothesis-selected' : '') +
-                                        (completedChoices.includes(choice[0]) ?
-                                            ' hypothesis-completed' : '')
+                                            (selectedOption === choice[0] ?
+                                                ' hypothesis-selected' : '') +
+                                            // eslint-disable-next-line max-len
+                                            (completedChoices.includes(choice[0]) ?
+                                                ' hypothesis-completed' : '')
                                     }
                                 >
-                                    <div className="listset-alpha-card__title">
+                                    <div className=
+                                        "listset-alpha-card__title">
                                         <Katex tex={
-                                            choice[1] + hypothesizedSlope} />
+                                            choice[1] + hypothesizedSlope
+                                        } />
                                     </div>
-                                    <button className="btn btn-sm btn-primary"
+                                    <button
+                                        className="btn btn-sm
+                                            btn-primary"
                                         disabled={selectedOption !== null ||
                                             completedChoices.includes(
                                                 choice[0])}
-                                        onClick={
-                                            () => setSelectedOption(choice[0])}
+                                        onClick={() =>
+                                            setSelectedOption(choice[0])}
                                     >
                                         Prove
                                     </button>
@@ -102,11 +117,14 @@ export const SimulationOneQuiz = ({
                     n={parseInt(n)}
                     completedChoices={completedChoices}
                     submissionId={submissionId}
+                    plotType={plotType}
                 />
             )}
-            {allChoicesCompleted && (
+            {(allChoicesCompleted && plotType === '2d') && (
                 <MultipleChoiceQuestion
-                    question={'which of the following is TRUE?'}
+                    question={'You have completed all the hypothesis tests'
+                        + ' in this section. Based on what you&rsquo;ve learned'
+                        +' from this exercise, which of the following is true?'}
                     options={['The closer the correlation between Y and X1 is '
                     + 'to one, the more likely it is to reject the null ' +
                     'hypothesis β1 = 0.', 'The closer the correlation ' +
@@ -126,10 +144,43 @@ export const SimulationOneQuiz = ({
                     setIsSubmitted={setIsSubmitted}
                 />
             )}
-            {isSubmitted && (
-                <div className="mt-3 mb-5 fs-5 fw-medium text-center">
+            {(allChoicesCompleted && plotType === '3d') && (
+                <MultipleChoiceQuestion
+                    question={'As we add X2 to the regression,'}
+                    options={['The slope of X1(b1) changed.',
+                        'The standard error of the slope X1(B1) changed ',
+                        'The intercept of the regression line changed.',
+                        'All of the above.']}
+                    answer={'All of the above'}
+                    submissionId={submissionId}
+                    questionNumber={14}
+                    isSubmitted={isSubmitted}
+                    setIsSubmitted={setIsSubmitted}
+                />
+            )}
+            {(isSubmitted && plotType === '2d') && (
+                <>
+                    <div className="mt-3 mb-5 fs-5 fw-medium text-center"
+                        id="completed2d">
                     Congratulations on completing the 2D simulation!
-                </div>
+                    </div>
+                    <div className="btn btn-secondary text-center"
+                        onClick={() => handlePlotTypeChange('3d')}>
+                    You can now proceed to the next step.
+                    </div>
+                </>
+            )}
+            {(isSubmitted && plotType === '3d') && (
+                <>
+                    <div className="mt-3 mb-5 fs-5 fw-medium text-center"
+                        id="completed3d">
+                Congratulations on completing Simulation 1!
+                    </div>
+                    <div className="btn btn-secondary text-center"
+                        href="#">
+                You can now proceed to the next simulation.
+                    </div>
+                </>
             )}
         </>
     );
@@ -140,7 +191,11 @@ SimulationOneQuiz.propTypes = {
     tvalue: PropTypes.number.isRequired,
     hypothesizedSlope: PropTypes.any.isRequired,
     n: PropTypes.any.isRequired,
-    setIs2DCompleted: PropTypes.func.isRequired,
-    is2DCompleted: PropTypes.bool.isRequired,
-    submissionId: PropTypes.number.isRequired
+    setIsCompleted: PropTypes.func.isRequired,
+    isCompleted: PropTypes.bool.isRequired,
+    submissionId: PropTypes.number.isRequired,
+    handlePlotTypeChange: PropTypes.func,
+    plotType: PropTypes.string.isRequired,
+    completedChoices: PropTypes.array,
+    setCompletedChoices: PropTypes.func,
 };

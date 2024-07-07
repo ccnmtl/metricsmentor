@@ -7,8 +7,9 @@ import { PvalueComponent } from './pvalueComponent.jsx';
 
 
 export const Quiz = ({
-    appRvalue, tvalue, pvalue, alpha, hypothesisTest, hypothesis,
-    nullHypothesis, n, onComplete, completedChoices, submissionId
+    tvalue, pvalue, alpha, hypothesisTest, hypothesis,
+    nullHypothesis, n, onComplete, completedChoices, submissionId,
+    plotType,
 }) => {
 
     const [criticalValues, setCriticalValues] = useState(null);
@@ -64,7 +65,6 @@ export const Quiz = ({
 
     // Critical Value Logic
     const calculateCriticalValue = async() => {
-
         try {
             const response = await axios.post('/calculate_critical/',
                 {n, alpha});
@@ -109,6 +109,7 @@ export const Quiz = ({
 
     const handleNextCriticalVal = async() => {
         const isCorrect = validateCriticalValue(userCriticalValue);
+
         const additionalData = {
             userCriticalValue: userCriticalValue,
             criticalValue: criticalValue,
@@ -116,7 +117,8 @@ export const Quiz = ({
             hypothesis: hypothesis,
             nullHypothesis: nullHypothesis};
 
-        await saveAnswer(submissionId, 4, 'numerical',
+        const questNumber = plotType === '2d' ? 4 : 11;
+        await saveAnswer(submissionId, questNumber, 'numerical',
             userCriticalValue, isCorrect, additionalData);
     };
 
@@ -137,6 +139,7 @@ export const Quiz = ({
 
     const handleNextCriticalValCompare = () => {
         const isCorrect = validateCriticalComparison(compareCritical);
+
         const additionalData = {
             comparison: compareCritical,
             tvalue: tvalue,
@@ -145,7 +148,8 @@ export const Quiz = ({
             hypothesis: hypothesis,
             nullHypothesis: nullHypothesis};
 
-        saveAnswer(submissionId, 5, 'radio',
+        const questNumber = plotType === '2d' ? 5 : 12;
+        saveAnswer(submissionId, questNumber, 'radio',
             compareCritical, isCorrect, additionalData);
     };
 
@@ -182,6 +186,7 @@ export const Quiz = ({
 
     const handleNextNullHypothesisChoice2 = async() => {
         const isCorrect = validateHypothesisTest2(nullHypothesisChoice2);
+
         const additionalData = {
             decision: nullHypothesisChoice2,
             tvalue: tvalue,
@@ -189,8 +194,8 @@ export const Quiz = ({
             alpha: alpha,
             hypothesis: hypothesis,
             nullHypothesis: nullHypothesis};
-
-        await saveAnswer(submissionId, 6, 'radio',
+        const questNumber = plotType === '2d' ? 6 : 13;
+        await saveAnswer(submissionId, questNumber, 'radio',
             nullHypothesisChoice2, isCorrect, additionalData);
     };
 
@@ -219,6 +224,7 @@ export const Quiz = ({
                     alpha={alpha}
                     hypothesis={hypothesis}
                     nullHypothesis={nullHypothesis}
+                    plotType={plotType}
                     submissionId={submissionId} />
             )}
             {(hypothesisTest1validate || isNotTwoSided) && (
@@ -443,7 +449,6 @@ export const Quiz = ({
 };
 
 Quiz.propTypes = {
-    appRvalue: PropTypes.number.isRequired,
     tvalue: PropTypes.number.isRequired,
     pvalue: PropTypes.number.isRequired,
     alpha: PropTypes.number.isRequired,
@@ -453,5 +458,6 @@ Quiz.propTypes = {
     n: PropTypes.number.isRequired,
     onComplete: PropTypes.func.isRequired,
     completedChoices: PropTypes.array.isRequired,
-    submissionId: PropTypes.number.isRequired
+    submissionId: PropTypes.number.isRequired,
+    plotType: PropTypes.string,
 };

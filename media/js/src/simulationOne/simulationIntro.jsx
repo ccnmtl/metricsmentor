@@ -57,7 +57,8 @@ export const SimIntro = ({plotType}) => {
                 </div>
                 <div className="simulation__step-body">
                     <header className="simulation__step-header">
-                        <h2 className="h2-primary">Learning goals</h2>
+                        <h2 className="h2-primary" id="learningGoal">
+                            Learning goals</h2>
                     </header>
                     {plotType === '2d' && (
                         <div className="simulation__step-content">

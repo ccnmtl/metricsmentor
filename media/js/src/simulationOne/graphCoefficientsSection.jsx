@@ -36,20 +36,17 @@ export const GraphCoefficients = ({
                         <div className="ms-3 mb-3">
                             <Katex tex={
                                 // eslint-disable-next-line max-len
-                                '\\hat{y} = \\hat{\\beta_0} + \\hat{\\beta_1}x'
-                            } />
+                                '\\hat{y} = \\hat{\\beta_0} + \\hat{\\beta_1}x'} />
                         </div>
                         <div className="ms-3 mb-3">
                             <Katex tex={
                                 // eslint-disable-next-line max-len
-                                `\\hat{y} = ${intercept.toFixed(3)} + ${slope.toFixed(3)}x`
-                            } />
+                                `\\hat{y} = ${intercept.toFixed(3)} + ${slope.toFixed(3)}x`} />
                         </div>
                         <h2 className="mt-4">Sample slope coefficient:</h2>
                         <div className="ms-3">
                             <Katex tex={
-                                `\\hat{\\beta_1} = ${slope.toFixed(3)}`
-                            } />
+                                `\\hat{\\beta_1} = ${slope.toFixed(3)}`} />
                         </div>
                         <h2 className="mt-4">
                             Standard error of the sample slope:
@@ -88,26 +85,28 @@ export const GraphCoefficients = ({
                                 `\\hat{y} = ${intercept3d.toFixed(3)} + ${slopes[0].toFixed(3)}x_1 + ${slopes[1].toFixed(3)}x_2`
                             } />
                         </div>
-                        <h2 className="mt-4">Sample slope
-                                    coefficients:</h2>
+                        <h2 className="mt-4">Sample slope coefficients:</h2>
                         <div className="ms-3">
                             <Katex tex={
-                                `\\hat{\\beta_1} = ${slopes[0].toFixed(3)}`
-                            } />
+                                `\\hat{\\beta_1} = ${slopes[0].toFixed(3)}`} />
                             <Katex tex={
-                                `\\hat{\\beta_2} = ${slopes[1].toFixed(3)}`
-                            } />
+                                `\\hat{\\beta_2} = ${slopes[1].toFixed(3)}`} />
                         </div>
-                        <h2 className="mt-4">Standard error of
-                                the sample slope:</h2>
+                        <h2 className="mt-4">
+                            Standard error of the sample slope:
+                        </h2>
                         <div className="ms-3">
                             <Katex tex={
                                 // eslint-disable-next-line max-len
                                 `{SE(\\hat{\\beta_1})} = ${stderrs[0].toFixed(3)}`} />
                         </div>
-                        <button className="btn btn-primary mt-3"
-                            onClick={handleNextClick}> Next
-                        </button>
+                        <div className="simulation__step-prompt">
+                            <button className="btn btn-primary mt-3"
+                                data-cy="nullNextButton"
+                                onClick={handleNextClick}>
+                                    Continue &raquo;
+                            </button>
+                        </div>
                     </div>
                 )}
             </div>
