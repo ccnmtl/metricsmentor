@@ -207,12 +207,12 @@ export const HypothesisTest = ({
 };
 
 HypothesisTest.propTypes = {
-    selectedOption: PropTypes.string.isRequired,
-    selectedOption3d: PropTypes.string.isRequired,
+    selectedOption: PropTypes.string,
+    selectedOption3d: PropTypes.string,
     appRvalue: PropTypes.number.isRequired,
     appRvalue3d: PropTypes.number,
     tvalue: PropTypes.number.isRequired,
-    tvalue3d: PropTypes.number.isRequired,
+    tvalue3d: PropTypes.number,
     coursePK: PropTypes.number,
     hypothesizedSlope: PropTypes.any.isRequired,
     n: PropTypes.number.isRequired,

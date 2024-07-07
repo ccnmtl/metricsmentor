@@ -37,9 +37,7 @@ export const MultipleChoiceQuestion = ({
                 </header>
                 <div className="simulation__step-content">
                     <p>
-                        You have conpleted all the hypothesis tests in this
-                        section. Based on what you&rsquo;ve learned from this
-                        exercise, which of the following is true?
+                        {question}
                     </p>
                     {options.map((option, index) => (
                         <div key={index} className="form-check">

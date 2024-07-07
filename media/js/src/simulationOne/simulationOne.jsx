@@ -29,6 +29,7 @@ export const SimulationOne = () => {
     const [appRvalue, setAppRvalue] = useState(null);
     const [appRvalue3d, setAppRvalue3d] = useState(null);
     const [startQuiz, setStartQuiz] = useState(false);
+    const [startQuiz2, setStartQuiz2] = useState(false);
     const [hypothesizedSlope, setHypothesizedSlope] = useState(0);
     const [plotType, setPlotType] = useState('2d');
     const [slopes, setSlopes] = useState([]);
@@ -37,6 +38,8 @@ export const SimulationOne = () => {
     const [is3DCompleted, setIs3DCompleted] = useState(false);
     const [showNullHypothesis, setShowNullHypothesis] = useState(false);
     const [submissionId, setSubmissionId] = useState(null);
+    const [completedChoices, setCompletedChoices] = useState([]);
+    const [completedChoices3d, setCompletedChoices3d] = useState([]);
 
 
     const saveGraphData = async() => {
@@ -44,14 +47,6 @@ export const SimulationOne = () => {
             N, yCorrelation, seed, slope, intercept, stderror, appRvalue,
             tvalue, hypothesizedSlope
         };
-
-        if (plotType === '3d') {
-            data.slopes = slopes;
-            data.stderrs = stderrs;
-            data.xCorrelation = xCorrelation;
-            data.appRvalue3d = appRvalue3d;
-            data.intercept3d = intercept3d;
-        }
 
         return authedFetch(
             `/course/${coursePk}/api/save-sim1-graph/`, 'POST', { data })
@@ -74,9 +69,41 @@ export const SimulationOne = () => {
             });
     };
 
+    const saveGraph3dData = async() => {
+        const data = {
+            N, yCorrelation, seed, slope, intercept, stderror, appRvalue,
+            tvalue, hypothesizedSlope, slopes, stderrs, xCorrelation,
+            appRvalue3d, intercept3d
+        };
+        return authedFetch(
+            `/course/${coursePk}/api/save-sim1-graph/`, 'POST', { data })
+            .then(response => {
+                if (response.status === 201) {
+                    return response.json();
+                } else {
+                    throw 'Error  ' +
+                    `(${response.status}) ${response.statusText}`;
+                }
+            })
+            .then(data => {
+                setStartQuiz2(true);
+                setSubmissionId(data.submission_id);
+                return data;
+            })
+            .catch(error => {
+                console.error('Error saving graph data:', error);
+                throw error;
+            });
+    };
+
+
     const handleSaveGraph = async() => {
         try {
-            await saveGraphData();
+            if (plotType === '2d') {
+                await saveGraphData();
+            } else {
+                await saveGraph3dData();
+            }
         } catch (error) {
             alert('Failed to save graph and submission.');
         }
@@ -235,7 +262,7 @@ export const SimulationOne = () => {
                                                 max="1" value={xCorrelation}
                                                 className="form-range"
                                                 id="correlation"
-                                                disabled={startQuiz}
+                                                disabled={startQuiz2}
 
                                                 onChange={
                                                     handleXcorrelationChange} />
@@ -323,7 +350,8 @@ export const SimulationOne = () => {
                                     tvalue3d={tvalue3d}
                                     hypothesizedSlope={hypothesizedSlope}
                                     handleNullHypothesis={handleNullHypothesis}
-                                    startQuiz={startQuiz} />
+                                    startQuiz={startQuiz}
+                                    startQuiz2={startQuiz2} />
 
                                 <div className="me-4
                                     simulation__step-prompt">
@@ -331,16 +359,24 @@ export const SimulationOne = () => {
                                         Save your graph and let&rsquo;s move on
                                         to hypothesis testing.
                                     </p>
-
-                                    <button className="btn btn-primary"
-                                        disabled={startQuiz}
-                                        onClick={handleSaveGraph}>
-                                        Save graph and continue &raquo;
-                                    </button>
+                                    {plotType === '2d' && (
+                                        <button className="btn btn-primary"
+                                            disabled={startQuiz}
+                                            onClick={handleSaveGraph}>
+                                            Save graph and continue &raquo;
+                                        </button>
+                                    )}
+                                    {plotType === '3d' && (
+                                        <button className="btn btn-primary"
+                                            disabled={startQuiz2}
+                                            onClick={handleSaveGraph}>
+                                            Save graph and continue &raquo;
+                                        </button>
+                                    )}
                                 </div>
                             </>
                         )}
-                        {startQuiz && (
+                        {(startQuiz && plotType === '2d') && (
                             <SimulationOneQuiz
                                 plotType={plotType}
                                 coursePk={coursePk}
@@ -353,9 +389,33 @@ export const SimulationOne = () => {
                                 is2DCompleted={is2DCompleted}
                                 is3DCompleted={is3DCompleted}
                                 submissionId={submissionId}
+                                completedChoices={completedChoices}
+                                setCompletedChoices={setCompletedChoices}
+                                completedChoices3d={completedChoices3d}
+                                setCompletedChoices3d={setCompletedChoices3d}
                                 setIs2DCompleted={setIs2DCompleted}
                                 setIs3DCompleted={setIs3DCompleted}
-                                setStartQuiz={setStartQuiz}
+                                handlePlotTypeChange={handlePlotTypeChange} />
+                        )}
+                        {(startQuiz2 && plotType === '3d') && (
+                            <SimulationOneQuiz
+                                plotType={plotType}
+                                coursePk={coursePk}
+                                tvalue={tvalue}
+                                tvalue3d={tvalue3d}
+                                hypothesizedSlope={hypothesizedSlope}
+                                n={N}
+                                appRvalue={appRvalue}
+                                appRvalue3d={appRvalue3d}
+                                is2DCompleted={is2DCompleted}
+                                is3DCompleted={is3DCompleted}
+                                submissionId={submissionId}
+                                completedChoices={completedChoices}
+                                setCompletedChoices={setCompletedChoices}
+                                completedChoices3d={completedChoices3d}
+                                setCompletedChoices3d={setCompletedChoices3d}
+                                setIs2DCompleted={setIs2DCompleted}
+                                setIs3DCompleted={setIs3DCompleted}
                                 handlePlotTypeChange={handlePlotTypeChange} />
                         )}
                     </>

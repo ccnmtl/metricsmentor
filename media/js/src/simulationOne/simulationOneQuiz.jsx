@@ -7,13 +7,13 @@ import PropTypes from 'prop-types';
 export const SimulationOneQuiz = ({
     appRvalue, appRvalue3d, tvalue, hypothesizedSlope, n, setIs2DCompleted,
     is2DCompleted, submissionId, handlePlotTypeChange, plotType,
-    tvalue3d, setStartQuiz, setIs3DCompleted
+    tvalue3d, setIs3DCompleted, completedChoices, setCompletedChoices,
+    completedChoices3d, setCompletedChoices3d
 }) => {
     const [selectedOption, setSelectedOption] = useState(null);
     const [selectedOption3d, setSelectedOption3d] = useState(null);
-    const [completedChoices, setCompletedChoices] = useState([]);
-    const [completedChoices3d, setCompletedChoices3d] = useState([]);
     const [isSubmitted, setIsSubmitted] = useState(false);
+    const [isSubmitted3d, setIsSubmitted3d] = useState(false);
 
     const allChoicesCompleted = ['A', 'B', 'C'].every(
         choice => completedChoices.includes(choice));
@@ -22,8 +22,13 @@ export const SimulationOneQuiz = ({
         choice => completedChoices3d.includes(choice));
 
     const handleChoiceCompletion = () => {
-        setCompletedChoices([...completedChoices, selectedOption]);
-        setSelectedOption(null);
+        if (plotType === '2d') {
+            setCompletedChoices([...completedChoices, selectedOption]);
+            setSelectedOption(null);
+        } else {
+            setCompletedChoices3d([...completedChoices3d, selectedOption3d]);
+            setSelectedOption3d(null);
+        }
     };
 
     const handleChoiceCompletion3d = () => {
@@ -34,7 +39,6 @@ export const SimulationOneQuiz = ({
     const is2dCompleted = () => {
         if (allChoicesCompleted && isSubmitted) {
             setIs2DCompleted(true);
-            // setStartQuiz(false);
             setSelectedOption(null);
         }
     };
@@ -42,7 +46,6 @@ export const SimulationOneQuiz = ({
     const is3dCompleted = () => {
         if (allChoices3dCompleted && isSubmitted) {
             setIs2DCompleted(true);
-            setStartQuiz(false);
         }
     };
 
@@ -58,6 +61,20 @@ export const SimulationOneQuiz = ({
         document.getElementById('quiz-1')
             .scrollIntoView({ behavior: 'smooth'});
     }, []);
+
+    useEffect(() => {
+        if (isSubmitted3d) {
+            document.getElementById('completed3d')
+                .scrollIntoView({ behavior: 'smooth'});
+        }
+    }, [isSubmitted3d]);
+
+    useEffect(() => {
+        if (isSubmitted) {
+            document.getElementById('completed2d')
+                .scrollIntoView({ behavior: 'smooth'});
+        }
+    }, [isSubmitted]);
 
     return (
         <>
@@ -181,7 +198,9 @@ export const SimulationOneQuiz = ({
             )}
             {(allChoicesCompleted && plotType === '2d') && (
                 <MultipleChoiceQuestion
-                    question={'which of the following is TRUE?'}
+                    question={'You have completed all the hypothesis tests'
+                        + ' in this section. Based on what you&rsquo;ve learned'
+                        +' from this exercise, which of the following is true?'}
                     options={['The closer the correlation between Y and X1 is '
                     + 'to one, the more likely it is to reject the null ' +
                     'hypothesis β1 = 0.', 'The closer the correlation ' +
@@ -211,13 +230,14 @@ export const SimulationOneQuiz = ({
                     answer={'All of the above'}
                     submissionId={submissionId}
                     questionNumber={14}
-                    isSubmitted={isSubmitted}
-                    setIsSubmitted={setIsSubmitted}
+                    isSubmitted={isSubmitted3d}
+                    setIsSubmitted={setIsSubmitted3d}
                 />
             )}
             {(isSubmitted && plotType === '2d') && (
                 <>
-                    <div className="mt-3 mb-5 fs-5 fw-medium text-center">
+                    <div className="mt-3 mb-5 fs-5 fw-medium text-center"
+                        id="completed2d">
                     Congratulations on completing the 2D simulation!
                     </div>
                     <div className="btn btn-secondary text-center"
@@ -226,10 +246,11 @@ export const SimulationOneQuiz = ({
                     </div>
                 </>
             )}
-            {(isSubmitted && plotType === '3d') && (
+            {(isSubmitted3d && plotType === '3d') && (
                 <>
-                    <div className="mt-3 mb-5 fs-5 fw-medium text-center">
-                Congratulations on completing the 3D simulation!
+                    <div className="mt-3 mb-5 fs-5 fw-medium text-center"
+                        id="completed3d">
+                Congratulations on completing Simulation 1!
                     </div>
                     <div className="btn btn-secondary text-center"
                         href="#">
@@ -251,8 +272,11 @@ SimulationOneQuiz.propTypes = {
     submissionId: PropTypes.number.isRequired,
     handlePlotTypeChange: PropTypes.func,
     plotType: PropTypes.string.isRequired,
-    tvalue3d: PropTypes.number.isRequired,
-    setStartQuiz: PropTypes.func.isRequired,
+    tvalue3d: PropTypes.number,
     setIs3DCompleted: PropTypes.func.isRequired,
-    appRvalue3d: PropTypes.number.isRequired
+    appRvalue3d: PropTypes.number,
+    completedChoices: PropTypes.array,
+    setCompletedChoices: PropTypes.func,
+    completedChoices3d: PropTypes.array,
+    setCompletedChoices3d: PropTypes.func
 };

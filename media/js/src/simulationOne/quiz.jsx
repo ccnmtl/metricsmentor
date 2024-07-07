@@ -499,7 +499,7 @@ export const Quiz = ({
 };
 
 Quiz.propTypes = {
-    appRvalue: PropTypes.number.isRequired,
+    appRvalue: PropTypes.number,
     tvalue: PropTypes.number.isRequired,
     tvalue3d: PropTypes.number,
     pvalue: PropTypes.number.isRequired,
