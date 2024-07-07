@@ -141,6 +141,9 @@
     &__step-content {
         background-color: $gray-100;
         padding: 0.325rem 0.85rem 0.325rem 0.325rem;
+        input[type="radio"] {
+            margin-right: 0.5rem;
+        }
     }
     &__step-prompt {
         margin-top: 1rem;
