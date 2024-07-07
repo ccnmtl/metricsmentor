@@ -5,57 +5,31 @@ import { MultipleChoiceQuestion } from '../multipleChoiceQuestion';
 import PropTypes from 'prop-types';
 
 export const SimulationOneQuiz = ({
-    appRvalue, appRvalue3d, tvalue, hypothesizedSlope, n, setIs2DCompleted,
-    is2DCompleted, submissionId, handlePlotTypeChange, plotType,
-    tvalue3d, setIs3DCompleted, completedChoices, setCompletedChoices,
-    completedChoices3d, setCompletedChoices3d
+    appRvalue, tvalue, hypothesizedSlope, n, setIsCompleted,
+    isCompleted, submissionId, handlePlotTypeChange, plotType,
+    completedChoices, setCompletedChoices
 }) => {
     const [selectedOption, setSelectedOption] = useState(null);
-    const [selectedOption3d, setSelectedOption3d] = useState(null);
     const [isSubmitted, setIsSubmitted] = useState(false);
-    const [isSubmitted3d, setIsSubmitted3d] = useState(false);
 
     const allChoicesCompleted = ['A', 'B', 'C'].every(
         choice => completedChoices.includes(choice));
 
-    const allChoices3dCompleted = ['A', 'B', 'C'].every(
-        choice => completedChoices3d.includes(choice));
-
     const handleChoiceCompletion = () => {
-        if (plotType === '2d') {
-            setCompletedChoices([...completedChoices, selectedOption]);
-            setSelectedOption(null);
-        } else {
-            setCompletedChoices3d([...completedChoices3d, selectedOption3d]);
-            setSelectedOption3d(null);
-        }
+        setCompletedChoices([...completedChoices, selectedOption]);
+        setSelectedOption(null);
     };
 
-    const handleChoiceCompletion3d = () => {
-        setCompletedChoices3d([...completedChoices3d, selectedOption3d]);
-        setSelectedOption3d(null);
-    };
-
-    const is2dCompleted = () => {
+    const isCompletedfunc = () => {
         if (allChoicesCompleted && isSubmitted) {
-            setIs2DCompleted(true);
+            setIsCompleted(true);
             setSelectedOption(null);
         }
     };
 
-    const is3dCompleted = () => {
-        if (allChoices3dCompleted && isSubmitted) {
-            setIs2DCompleted(true);
-        }
-    };
-
     useEffect(() => {
-        is2dCompleted();
+        isCompletedfunc();
     },[completedChoices, allChoicesCompleted, isSubmitted]);
-
-    useEffect(() => {
-        is3dCompleted();
-    },[completedChoices3d, allChoices3dCompleted, isSubmitted]);
 
     useEffect(() => {
         document.getElementById('quiz-1')
@@ -63,15 +37,11 @@ export const SimulationOneQuiz = ({
     }, []);
 
     useEffect(() => {
-        if (isSubmitted3d) {
-            document.getElementById('completed3d')
-                .scrollIntoView({ behavior: 'smooth'});
-        }
-    }, [isSubmitted3d]);
-
-    useEffect(() => {
-        if (isSubmitted) {
+        if (isSubmitted && plotType === '2d') {
             document.getElementById('completed2d')
+                .scrollIntoView({ behavior: 'smooth'});
+        } else if (isSubmitted && plotType === '3d') {
+            document.getElementById('completed3d')
                 .scrollIntoView({ behavior: 'smooth'});
         }
     }, [isSubmitted]);
@@ -94,104 +64,58 @@ export const SimulationOneQuiz = ({
                             alternative hypotheses. Choose one to conduct
                             a test of hypothesis.
                         </p>
-                        {plotType === '2d' && (
-                            <ol className="listset-alpha listset-alpha-listnum">
-                                {[
-                                    ['A', '\\Eta_1: {\\beta_1}{\\neq} '],
-                                    ['B', '\\Eta_1: {\\beta_1}{\\gt} '],
-                                    ['C', '\\Eta_1: {\\beta_1}{\\lt} ']
-                                ].map((choice, key) => (
-                                    <li key={key}
-                                        className={'listset-alpha-card' +
+                        <ol className="listset-alpha listset-alpha-listnum">
+                            {[
+                                ['A', '\\Eta_1: {\\beta_1}{\\neq} '],
+                                ['B', '\\Eta_1: {\\beta_1}{\\gt} '],
+                                ['C', '\\Eta_1: {\\beta_1}{\\lt} ']
+                            ].map((choice, key) => (
+                                <li key={key}
+                                    className={'listset-alpha-card' +
                                             (selectedOption === choice[0] ?
                                                 ' hypothesis-selected' : '') +
                                             // eslint-disable-next-line max-len
                                             (completedChoices.includes(choice[0]) ?
                                                 ' hypothesis-completed' : '')
-                                        }
-                                    >
-                                        <div className=
-                                            "listset-alpha-card__title">
-                                            <Katex tex={
-                                                choice[1] + hypothesizedSlope
-                                            } />
-                                        </div>
-                                        <button className="btn btn-sm
+                                    }
+                                >
+                                    <div className=
+                                        "listset-alpha-card__title">
+                                        <Katex tex={
+                                            choice[1] + hypothesizedSlope
+                                        } />
+                                    </div>
+                                    <button
+                                        className="btn btn-sm
                                             btn-primary"
                                         disabled={selectedOption !== null ||
                                             completedChoices.includes(
                                                 choice[0])}
                                         onClick={() =>
                                             setSelectedOption(choice[0])}
-                                        >
-                                            Prove
-                                        </button>
-                                        <div className="status-complete">
-                                                                &#10003;
-                                        </div>
-
-                                    </li>
-                                ))}
-                            </ol>
-                        )}
-                        {plotType === '3d' && (
-                            <ol className="listset-alpha listset-alpha-listnum">
-                                {[
-                                    ['A', '\\Eta_1: {\\beta_1}{\\neq} '],
-                                    ['B', '\\Eta_1: {\\beta_1}{\\gt} '],
-                                    ['C', '\\Eta_1: {\\beta_1}{\\lt} ']
-                                ].map((choice, key) => (
-                                    <li key={key}
-                                        className={'listset-alpha-card' +
-                                            (selectedOption3d === choice[0] ?
-                                                ' hypothesis-selected' : '') +
-                                            // eslint-disable-next-line max-len
-                                            (completedChoices3d.includes(choice[0]) ?
-                                                ' hypothesis-completed' : '')
-                                        }
                                     >
-                                        <div className=
-                                            "listset-alpha-card__title">
-                                            <Katex tex={
-                                                choice[1] + hypothesizedSlope
-                                            } />
-                                        </div>
-                                        <button className="btn btn-sm
-                                            btn-primary"
-                                        disabled={selectedOption3d !== null ||
-                                            completedChoices3d.includes(
-                                                choice[0])}
-                                        onClick={() =>
-                                            setSelectedOption3d(choice[0])}
-                                        >
-                                            Prove
-                                        </button>
-                                        <div className="status-complete">
-                                                                &#10003;
-                                        </div>
+                                        Prove
+                                    </button>
+                                    <div className="status-complete">
+                                        &#10003;
+                                    </div>
 
-                                    </li>
-                                ))}
-                            </ol>
-                        )}
+                                </li>
+                            ))}
+                        </ol>
                     </div>
                 </div>
             </div>
 
-            {(selectedOption || selectedOption3d) && (
+            {selectedOption && (
                 <HypothesisTest
                     selectedOption={selectedOption}
-                    selectedOption3d={selectedOption3d}
                     hypothesizedSlope={hypothesizedSlope}
                     appRvalue={appRvalue}
-                    appRvalue3d={appRvalue3d}
                     tvalue={tvalue}
-                    tvalue3d={tvalue3d}
                     onComplete={handleChoiceCompletion}
-                    on3dComplete={handleChoiceCompletion3d}
                     n={parseInt(n)}
                     completedChoices={completedChoices}
-                    completedChoices3d={completedChoices3d}
                     submissionId={submissionId}
                     plotType={plotType}
                 />
@@ -220,7 +144,7 @@ export const SimulationOneQuiz = ({
                     setIsSubmitted={setIsSubmitted}
                 />
             )}
-            {(allChoices3dCompleted && plotType === '3d') && (
+            {(allChoicesCompleted && plotType === '3d') && (
                 <MultipleChoiceQuestion
                     question={'As we add X2 to the regression,'}
                     options={['The slope of X1(b1) changed.',
@@ -230,8 +154,8 @@ export const SimulationOneQuiz = ({
                     answer={'All of the above'}
                     submissionId={submissionId}
                     questionNumber={14}
-                    isSubmitted={isSubmitted3d}
-                    setIsSubmitted={setIsSubmitted3d}
+                    isSubmitted={isSubmitted}
+                    setIsSubmitted={setIsSubmitted}
                 />
             )}
             {(isSubmitted && plotType === '2d') && (
@@ -246,7 +170,7 @@ export const SimulationOneQuiz = ({
                     </div>
                 </>
             )}
-            {(isSubmitted3d && plotType === '3d') && (
+            {(isSubmitted && plotType === '3d') && (
                 <>
                     <div className="mt-3 mb-5 fs-5 fw-medium text-center"
                         id="completed3d">
@@ -267,16 +191,11 @@ SimulationOneQuiz.propTypes = {
     tvalue: PropTypes.number.isRequired,
     hypothesizedSlope: PropTypes.any.isRequired,
     n: PropTypes.any.isRequired,
-    setIs2DCompleted: PropTypes.func.isRequired,
-    is2DCompleted: PropTypes.bool.isRequired,
+    setIsCompleted: PropTypes.func.isRequired,
+    isCompleted: PropTypes.bool.isRequired,
     submissionId: PropTypes.number.isRequired,
     handlePlotTypeChange: PropTypes.func,
     plotType: PropTypes.string.isRequired,
-    tvalue3d: PropTypes.number,
-    setIs3DCompleted: PropTypes.func.isRequired,
-    appRvalue3d: PropTypes.number,
     completedChoices: PropTypes.array,
     setCompletedChoices: PropTypes.func,
-    completedChoices3d: PropTypes.array,
-    setCompletedChoices3d: PropTypes.func
 };

@@ -43,38 +43,15 @@ export const SimulationOne = () => {
 
 
     const saveGraphData = async() => {
-        const data = {
+        const data = plotType === '2d' ? {
             N, yCorrelation, seed, slope, intercept, stderror, appRvalue,
             tvalue, hypothesizedSlope
-        };
-
-        return authedFetch(
-            `/course/${coursePk}/api/save-sim1-graph/`, 'POST', { data })
-            .then(response => {
-                if (response.status === 201) {
-                    return response.json();
-                } else {
-                    throw 'Error  ' +
-                    `(${response.status}) ${response.statusText}`;
-                }
-            })
-            .then(data => {
-                setStartQuiz(true);
-                setSubmissionId(data.submission_id);
-                return data;
-            })
-            .catch(error => {
-                console.error('Error saving graph data:', error);
-                throw error;
-            });
-    };
-
-    const saveGraph3dData = async() => {
-        const data = {
+        } : {
             N, yCorrelation, seed, slope, intercept, stderror, appRvalue,
             tvalue, hypothesizedSlope, slopes, stderrs, xCorrelation,
             appRvalue3d, intercept3d
         };
+
         return authedFetch(
             `/course/${coursePk}/api/save-sim1-graph/`, 'POST', { data })
             .then(response => {
@@ -86,7 +63,11 @@ export const SimulationOne = () => {
                 }
             })
             .then(data => {
-                setStartQuiz2(true);
+                if (plotType === '2d') {
+                    setStartQuiz(true);
+                } else {
+                    setStartQuiz2(true);
+                }
                 setSubmissionId(data.submission_id);
                 return data;
             })
@@ -96,14 +77,9 @@ export const SimulationOne = () => {
             });
     };
 
-
     const handleSaveGraph = async() => {
         try {
-            if (plotType === '2d') {
-                await saveGraphData();
-            } else {
-                await saveGraph3dData();
-            }
+            await saveGraphData();
         } catch (error) {
             alert('Failed to save graph and submission.');
         }
@@ -381,41 +357,29 @@ export const SimulationOne = () => {
                                 plotType={plotType}
                                 coursePk={coursePk}
                                 tvalue={tvalue}
-                                tvalue3d={tvalue3d}
                                 hypothesizedSlope={hypothesizedSlope}
                                 n={N}
                                 appRvalue={appRvalue}
-                                appRvalue3d={appRvalue3d}
-                                is2DCompleted={is2DCompleted}
-                                is3DCompleted={is3DCompleted}
+                                isCompleted={is2DCompleted}
                                 submissionId={submissionId}
                                 completedChoices={completedChoices}
                                 setCompletedChoices={setCompletedChoices}
-                                completedChoices3d={completedChoices3d}
-                                setCompletedChoices3d={setCompletedChoices3d}
-                                setIs2DCompleted={setIs2DCompleted}
-                                setIs3DCompleted={setIs3DCompleted}
+                                setIsCompleted={setIs2DCompleted}
                                 handlePlotTypeChange={handlePlotTypeChange} />
                         )}
                         {(startQuiz2 && plotType === '3d') && (
                             <SimulationOneQuiz
                                 plotType={plotType}
                                 coursePk={coursePk}
-                                tvalue={tvalue}
-                                tvalue3d={tvalue3d}
+                                tvalue={tvalue3d}
                                 hypothesizedSlope={hypothesizedSlope}
                                 n={N}
-                                appRvalue={appRvalue}
-                                appRvalue3d={appRvalue3d}
-                                is2DCompleted={is2DCompleted}
-                                is3DCompleted={is3DCompleted}
+                                appRvalue={appRvalue3d}
+                                isCompleted={is3DCompleted}
                                 submissionId={submissionId}
-                                completedChoices={completedChoices}
-                                setCompletedChoices={setCompletedChoices}
-                                completedChoices3d={completedChoices3d}
-                                setCompletedChoices3d={setCompletedChoices3d}
-                                setIs2DCompleted={setIs2DCompleted}
-                                setIs3DCompleted={setIs3DCompleted}
+                                completedChoices={completedChoices3d}
+                                setCompletedChoices={setCompletedChoices3d}
+                                setIsCompleted={setIs3DCompleted}
                                 handlePlotTypeChange={handlePlotTypeChange} />
                         )}
                     </>

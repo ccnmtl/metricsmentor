@@ -7,9 +7,9 @@ import { PvalueComponent } from './pvalueComponent.jsx';
 
 
 export const Quiz = ({
-    tvalue, tvalue3d, pvalue, pvalue3d, alpha, hypothesisTest, hypothesis,
-    nullHypothesis, n, onComplete, on3dComplete, completedChoices, submissionId,
-    plotType, completedChoices3d
+    tvalue, pvalue, alpha, hypothesisTest, hypothesis,
+    nullHypothesis, n, onComplete, completedChoices, submissionId,
+    plotType,
 }) => {
 
     const [criticalValues, setCriticalValues] = useState(null);
@@ -65,7 +65,6 @@ export const Quiz = ({
 
     // Critical Value Logic
     const calculateCriticalValue = async() => {
-
         try {
             const response = await axios.post('/calculate_critical/',
                 {n, alpha});
@@ -110,28 +109,17 @@ export const Quiz = ({
 
     const handleNextCriticalVal = async() => {
         const isCorrect = validateCriticalValue(userCriticalValue);
-        if (plotType === '2d') {
-            const additionalData = {
-                userCriticalValue: userCriticalValue,
-                criticalValue: criticalValue,
-                alpha: alpha,
-                hypothesis: hypothesis,
-                nullHypothesis: nullHypothesis};
 
-            await saveAnswer(submissionId, 4, 'numerical',
-                userCriticalValue, isCorrect, additionalData);
-        } else {
-            const additionalData = {
-                userCriticalValue: userCriticalValue,
-                criticalValue: criticalValue,
-                alpha: alpha,
-                hypothesis: hypothesis,
-                nullHypothesis: nullHypothesis,
-                plotType: '3d'};
+        const additionalData = {
+            userCriticalValue: userCriticalValue,
+            criticalValue: criticalValue,
+            alpha: alpha,
+            hypothesis: hypothesis,
+            nullHypothesis: nullHypothesis};
 
-            await saveAnswer(submissionId, 11, 'numerical',
-                userCriticalValue, isCorrect, additionalData);
-        }
+        const questNumber = plotType === '2d' ? 4 : 11;
+        await saveAnswer(submissionId, questNumber, 'numerical',
+            userCriticalValue, isCorrect, additionalData);
     };
 
     const handleComparingCritical = (event) => {
@@ -140,51 +128,29 @@ export const Quiz = ({
     };
 
     const validateCriticalComparison = (value) => {
-        if (plotType === '2d') {
-            const correctComparison =
+        const correctComparison =
         (Math.abs(tvalue) > criticalValue && value === 'greaterThan') ||
         (Math.abs(tvalue) <= criticalValue && value === 'lessThan');
 
-            setIsCriticalCompareCorrect(correctComparison);
+        setIsCriticalCompareCorrect(correctComparison);
 
-            return correctComparison;
-        } else {
-            const correctComparison =
-            (Math.abs(tvalue3d) > criticalValue && value === 'greaterThan') ||
-            (Math.abs(tvalue3d) <= criticalValue && value === 'lessThan');
-
-            setIsCriticalCompareCorrect(correctComparison);
-
-            return correctComparison;
-        }
+        return correctComparison;
     };
 
     const handleNextCriticalValCompare = () => {
-        if (plotType === '2d') {
-            const isCorrect = validateCriticalComparison(compareCritical);
-            const additionalData = {
-                comparison: compareCritical,
-                tvalue: tvalue,
-                criticalValue: criticalValue,
-                alpha: alpha,
-                hypothesis: hypothesis,
-                nullHypothesis: nullHypothesis};
+        const isCorrect = validateCriticalComparison(compareCritical);
 
-            saveAnswer(submissionId, 5, 'radio',
-                compareCritical, isCorrect, additionalData);
-        } else {
-            const isCorrect = validateCriticalComparison(compareCritical);
-            const additionalData = {
-                comparison: compareCritical,
-                tvalue: tvalue3d,
-                criticalValue: criticalValue,
-                alpha: alpha,
-                hypothesis: hypothesis,
-                nullHypothesis: nullHypothesis};
+        const additionalData = {
+            comparison: compareCritical,
+            tvalue: tvalue,
+            criticalValue: criticalValue,
+            alpha: alpha,
+            hypothesis: hypothesis,
+            nullHypothesis: nullHypothesis};
 
-            saveAnswer(submissionId, 12, 'radio',
-                compareCritical, isCorrect, additionalData);
-        }
+        const questNumber = plotType === '2d' ? 5 : 12;
+        saveAnswer(submissionId, questNumber, 'radio',
+            compareCritical, isCorrect, additionalData);
     };
 
     const handleNullHypothesisChoice2Change = (event) => {
@@ -193,23 +159,22 @@ export const Quiz = ({
 
     const validateHypothesisTest2 = (value) => {
         let correctDecision;
-        let tValue = plotType === '3d' ? tvalue3d : tvalue;
 
         switch (hypothesisTest) {
         case 'value_two_sided':
             correctDecision =
-            (Math.abs(tValue) > criticalValue && value === 'reject') ||
-                (Math.abs(tValue) <= criticalValue && value === 'failToReject');
+            (Math.abs(tvalue) > criticalValue && value === 'reject') ||
+                (Math.abs(tvalue) <= criticalValue && value === 'failToReject');
             break;
         case 'value_left':
             correctDecision =
-            (tValue < criticalValue && value === 'reject') ||
-                (tValue >= criticalValue && value === 'failToReject');
+            (tvalue < criticalValue && value === 'reject') ||
+                (tvalue >= criticalValue && value === 'failToReject');
             break;
         case 'value_right':
             correctDecision =
-            (tValue > criticalValue && value === 'reject') ||
-                (tValue <= criticalValue && value === 'failToReject');
+            (tvalue > criticalValue && value === 'reject') ||
+                (tvalue <= criticalValue && value === 'failToReject');
             break;
         default:
             correctDecision = false;
@@ -220,31 +185,18 @@ export const Quiz = ({
     };
 
     const handleNextNullHypothesisChoice2 = async() => {
-        if (plotType === '2d') {
-            const isCorrect = validateHypothesisTest2(nullHypothesisChoice2);
-            const additionalData = {
-                decision: nullHypothesisChoice2,
-                tvalue: tvalue,
-                criticalValue: criticalValue,
-                alpha: alpha,
-                hypothesis: hypothesis,
-                nullHypothesis: nullHypothesis};
+        const isCorrect = validateHypothesisTest2(nullHypothesisChoice2);
 
-            await saveAnswer(submissionId, 6, 'radio',
-                nullHypothesisChoice2, isCorrect, additionalData);
-        } else {
-            const isCorrect = validateHypothesisTest2(nullHypothesisChoice2);
-            const additionalData = {
-                decision: nullHypothesisChoice2,
-                tvalue: tvalue3d,
-                criticalValue: criticalValue,
-                alpha: alpha,
-                hypothesis: hypothesis,
-                nullHypothesis: nullHypothesis};
-
-            await saveAnswer(submissionId, 13, 'radio',
-                nullHypothesisChoice2, isCorrect, additionalData);
-        }
+        const additionalData = {
+            decision: nullHypothesisChoice2,
+            tvalue: tvalue,
+            criticalValue: criticalValue,
+            alpha: alpha,
+            hypothesis: hypothesis,
+            nullHypothesis: nullHypothesis};
+        const questNumber = plotType === '2d' ? 6 : 13;
+        await saveAnswer(submissionId, questNumber, 'radio',
+            nullHypothesisChoice2, isCorrect, additionalData);
     };
 
     let absoluteTtext;
@@ -266,11 +218,9 @@ export const Quiz = ({
             {hypothesisTest === 'value_two_sided' && (
                 <PvalueComponent
                     pvalue={pvalue}
-                    pvalue3d={pvalue3d}
                     hypothesisTest1validate={hypothesisTest1validate}
                     setHypothesisTest1validate={setHypothesisTest1validate}
                     tvalue={tvalue}
-                    tvalue3d={tvalue3d}
                     alpha={alpha}
                     hypothesis={hypothesis}
                     nullHypothesis={nullHypothesis}
@@ -499,20 +449,15 @@ export const Quiz = ({
 };
 
 Quiz.propTypes = {
-    appRvalue: PropTypes.number,
     tvalue: PropTypes.number.isRequired,
-    tvalue3d: PropTypes.number,
     pvalue: PropTypes.number.isRequired,
-    pvalue3d: PropTypes.number,
     alpha: PropTypes.number.isRequired,
     hypothesisTest: PropTypes.string.isRequired,
     hypothesis: PropTypes.string.isRequired,
     nullHypothesis: PropTypes.string.isRequired,
     n: PropTypes.number.isRequired,
     onComplete: PropTypes.func.isRequired,
-    on3dComplete: PropTypes.func.isRequired,
     completedChoices: PropTypes.array.isRequired,
-    completedChoices3d: PropTypes.array,
     submissionId: PropTypes.number.isRequired,
     plotType: PropTypes.string,
 };
