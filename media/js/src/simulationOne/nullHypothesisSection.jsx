@@ -52,8 +52,7 @@ export const NullHypothesisSection = ({
                             <input size="10"
                                 className="form-control short-input"
                                 type="number" min="-5" max="5"
-                                // disabled={startQuiz}
-                                disabled={true}
+                                disabled={startQuiz}
                                 value={hypothesizedSlope}
                                 onChange={handleNullHypothesis} />
                         </div>
@@ -93,8 +92,7 @@ export const NullHypothesisSection = ({
                             <input size="10"
                                 className="form-control short-input"
                                 type="number" min="-5" max="5"
-                                // disabled={startQuiz}
-                                disabled={true}
+                                disabled={startQuiz}
                                 value={hypothesizedSlope}
                                 onChange={handleNullHypothesis} />
                         </div>
