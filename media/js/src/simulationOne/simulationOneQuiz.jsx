@@ -126,9 +126,9 @@ export const SimulationOneQuiz = ({
                         + ' in this section. Based on what you&rsquo;ve learned'
                         +' from this exercise, which of the following is true?'}
                     options={['The closer the correlation between Y and X1 is '
-                    + 'to one, the more likely it is to reject the null ' +
+                    + 'to one, the less likely it is to reject the null ' +
                     'hypothesis β1 = 0.', 'The closer the correlation ' +
-                    'between Y and X1 is to negative one, the more likely '
+                    'between Y and X1 is to negative one, the less likely '
                     + 'it is to reject the null hypothesis β1 = 0.', 'The '
                     + 'closer the correlation between Y and X1 is to zero, '
                     + 'the more likely it is to reject the null hypothesis '
@@ -151,7 +151,7 @@ export const SimulationOneQuiz = ({
                         'The standard error of the slope X1(B1) changed ',
                         'The intercept of the regression line changed.',
                         'All of the above.']}
-                    answer={'All of the above'}
+                    answer={'All of the above.'}
                     submissionId={submissionId}
                     questionNumber={14}
                     isSubmitted={isSubmitted}
