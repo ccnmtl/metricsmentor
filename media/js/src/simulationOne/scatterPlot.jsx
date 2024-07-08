@@ -179,22 +179,54 @@ export const ScatterPlot = ({ N, yCorrelation, seed, setAppRvalue,
                 layout={{
                     title: 'Single Variable Linear Regression',
                     showlegend: false,
-                    xaxis: {
-                        title: 'X Axis',
-                        dtick: 25,
-                        range: [Math.min(...data.map(point => point.y)),
-                            Math.max(...data.map(point => point.y))]
-                    },
-                    yaxis: {
-                        title: 'Y Axis',
-                        scaleanchor: 'x',
-                        scaleratio: 1,
-                        dtick: 25,
-                        range: [Math.min(...data.map(point => point.y)) - 10,
+                    ...(plotType === '3d' ? {
+                        scene: {
+                            xaxis: {
+                                title: 'X1',
+                                dtick: 25,
+                                range: [Math.min(...data.map(
+                                    point => point.x)),
+                                Math.max(...data.map(
+                                    point => point.x))]
+                            },
+                            yaxis: {
+                                title: 'Y',
+                                dtick: 25,
+                                range: [Math.min(...data.map(
+                                    point => point.y)) - 10,
+                                Math.max(...data.map(
+                                    point => point.y)) + 10]
+                            },
+                            zaxis: {
+                                title: 'X2',
+                                dtick: 25,
+                                range: [Math.min(...data.map(
+                                    point => point.z)),
+                                Math.max(...data.map(
+                                    point => point.z))]
+                            }
+                        }
+                    } : {
+                        xaxis: {
+                            title: 'X Axis',
+                            dtick: 25,
+                            range: [Math.min(...data.map(
+                                point => point.x)),
+                            Math.max(...data.map(point => point.x))]
+                        },
+                        yaxis: {
+                            title: 'Y Axis',
+                            scaleanchor: 'x',
+                            scaleratio: 1,
+                            dtick: 25,
+                            range: [Math.min(...data.map(
+                                point => point.y)) - 10,
                             Math.max(...data.map(point => point.y)) + 10]
-                    },
+                        }
+                    }),
                     ...(plotType === '2d' ? { dragmode: 'pan' } : {}),
                 }}
+
                 useResizeHandler={true}
                 style={{ height: '80%' }}
                 config={{
