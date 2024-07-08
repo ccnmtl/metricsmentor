@@ -128,12 +128,29 @@ export const Quiz = ({
     };
 
     const validateCriticalComparison = (value) => {
-        const correctComparison =
-        (Math.abs(tvalue) > criticalValue && value === 'greaterThan') ||
-        (Math.abs(tvalue) <= criticalValue && value === 'lessThan');
+        let correctComparison;
+
+        switch (hypothesisTest) {
+        case 'value_two_sided':
+            correctComparison =
+            (Math.abs(tvalue) > criticalValue && value === 'greaterThan') ||
+                (Math.abs(tvalue) <= criticalValue && value === 'lessThan');
+            break;
+        case 'value_left':
+            correctComparison =
+            (tvalue < criticalValue && value === 'greaterThan') ||
+                (tvalue >= criticalValue && value === 'lessThan');
+            break;
+        case 'value_right':
+            correctComparison =
+            (tvalue > criticalValue && value === 'greaterThan') ||
+                (tvalue <= criticalValue && value === 'lessThan');
+            break;
+        default:
+            correctComparison = false;
+        }
 
         setIsCriticalCompareCorrect(correctComparison);
-
         return correctComparison;
     };
 
