@@ -35,7 +35,7 @@ export const SimIntro = ({plotType}) => {
                             population slope is equal to a specified value.
                         </p>
                         <p>
-                            The following glossary will help you to review
+                            The following glossary will help you review
                             the key terms used in this simulation.
                         </p>
                         <button

@@ -42,8 +42,9 @@ export const NullHypothesisSection = ({
                         outcome of
                         <Katex tex={'t'} className="katex-inline" />.
                         </p>
-                        <div className="row">
-                            <label className="col-3">
+                        <div className="d-flex">
+                            <label
+                                className="me-2 form-label align-self-center">
                                 <Katex tex={
                                     '{\\Eta_0} : {\\beta_1} ='
                                 } />
@@ -81,8 +82,9 @@ export const NullHypothesisSection = ({
                         outcome of
                         <Katex tex={'t'} className="katex-inline" />.
                         </p>
-                        <div className="row">
-                            <label className="col-3">
+                        <div className="d-flex">
+                            <label
+                                className="me-2 form-label align-self-center">
                                 <Katex tex={
                                     '{\\Eta_0} : {\\beta_1} ='
                                 } />

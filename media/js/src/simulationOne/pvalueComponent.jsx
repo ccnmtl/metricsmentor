@@ -135,8 +135,10 @@ export const PvalueComponent = ({
                     <Katex tex={'{\\alpha}'} className="katex-inline" />.
                 Using the table provided, look up the value that
                 corresponds to
-                    <Katex tex={`t = ${tvalue}`}
-                        className="katex-inline"/>.
+                    <div className="hi-val">
+                        <Katex tex={`t = ${tvalue}`}
+                            className="katex-inline"/>.
+                    </div>
                 </p>
                 <button
                     className="btn btn-sm btn-primary"
