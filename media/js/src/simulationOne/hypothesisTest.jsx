@@ -83,13 +83,13 @@ export const HypothesisTest = ({
                             alternative hypothesis you chose:
                         </p>
                         <div className="hi-val">
-                            <div className="p-2">
+                            <div className="p-2 border-bottom border-white">
                                 <Katex tex={nullHypothesis} />
                             </div>
-                            <div className="p-2">
+                            <div className="p-2 border-bottom border-white">
                                 <Katex tex={hypothesis} />
                             </div>
-                            <div className="p-2">
+                            <div className="p-2 border-bottom border-white">
                                 <Katex tex={
                                     `corr(x,y) = ${appRvalue.toFixed(3)}`
                                 } />

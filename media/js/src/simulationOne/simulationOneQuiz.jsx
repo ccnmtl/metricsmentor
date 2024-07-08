@@ -160,13 +160,15 @@ export const SimulationOneQuiz = ({
             )}
             {(isSubmitted && plotType === '2d') && (
                 <>
-                    <div className="mt-3 mb-5 fs-5 fw-medium text-center"
+                    <div className="mt-3 mb fs-5 fw-medium text-center"
                         id="completed2d">
                     Congratulations on completing the 2D simulation!
                     </div>
-                    <div className="btn btn-secondary text-center"
-                        onClick={() => handlePlotTypeChange('3d')}>
-                    You can now proceed to the next step.
+                    <div className="simulation__step-prompt">
+                        <div className="btn btn-primary"
+                            onClick={() => handlePlotTypeChange('3d')}>
+                            Continue &raquo;
+                        </div>
                     </div>
                 </>
             )}
@@ -174,11 +176,8 @@ export const SimulationOneQuiz = ({
                 <>
                     <div className="mt-3 mb-5 fs-5 fw-medium text-center"
                         id="completed3d">
-                Congratulations on completing Simulation 1!
-                    </div>
-                    <div className="btn btn-secondary text-center"
-                        href="#">
-                You can now proceed to the next simulation.
+                        Congratulations on<br />completing Simulation 1!<br />
+                        &#127881; &#127881; &#127881;
                     </div>
                 </>
             )}

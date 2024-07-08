@@ -297,12 +297,13 @@ export const Quiz = ({
                     {isCriticalValueCorrect && (
                         <div className="p-val-concl mt-3">
                             <p>
-                            Knowing now the
-                                <Katex tex={'t'}
-                                    className="katex-inline"/> value
-                            and
+                            Knowing the
                                 <Katex tex={'critical~value'}
-                                    className="katex-inline"/>,
+                                    className="katex-inline"/> and
+                                <div className="ms-1 hi-val">
+                                    <Katex tex={`t = ${tvalue}`}
+                                        className="katex-inline"/>
+                                </div>,
                             which of the following statements is true?
                             </p>
                             <div>

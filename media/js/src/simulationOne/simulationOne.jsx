@@ -163,16 +163,13 @@ export const SimulationOne = () => {
                                 and the estimated correlation
                                 coefficient,
                                 <Katex tex={'corr(x,y)'}
-                                    className="katex-inline" />,
-                                between the independent and dependent variables
-                                <Katex tex={'x'}
-                                    className="katex-inline" /> and
-                                <Katex tex={'y'}
                                     className="katex-inline" />.
                             </p>
-                            <div className="mt-4">
+                            <div className="mt-4 d-flex">
                                 <label htmlFor="nSampleSize"
-                                    className="h2 form-label">
+                                    className="h2 me-2
+                                        form-label
+                                        align-self-center">
                                     Sample size,
                                     <Katex tex={'n'}
                                         className="katex-inline" />:
@@ -330,9 +327,8 @@ export const SimulationOne = () => {
                                     startQuiz={startQuiz}
                                     startQuiz2={startQuiz2} />
 
-                                <div className="me-4
-                                    simulation__step-prompt">
-                                    <p className="mt-4">
+                                <div className="simulation__step-prompt">
+                                    <p>
                                         Save your graph and let&rsquo;s move on
                                         to hypothesis testing.
                                     </p>

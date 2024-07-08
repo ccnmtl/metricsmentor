@@ -148,9 +148,13 @@
     &__step-prompt {
         margin-top: 1rem;
         margin-bottom: 1rem;
-        padding-right: 2rem;
+        padding: 0.325rem 0.85rem 0.325rem 0.325rem;
         text-align: right;
         display: block;
+        p {
+            margin-left: 2.35rem;
+            text-align: left;
+        }
     }
 }
 
