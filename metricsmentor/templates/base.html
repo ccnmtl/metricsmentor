@@ -87,16 +87,14 @@
                         <span class="visually-hidden">Go to main page for</span><span>Metrics Mentor</span>
                     </a>
                     <ul class="nav col-auto top-bar__nav">
-                        <!--
-                            <li>
-                                <a href="https://forms.gle/uAYm71kSQijdaKGS7"
-                                    target="_blank"
-                                    rel="noopener noreferrer"
-                                    class="nav-link survey-form">
-                                    Usability survey
-                                </a>
-                            </li>
-                        -->
+                        <li>
+                            <a href="https://forms.gle/2eAvK9KCZ2Fpc8d89"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                class="nav-link survey-form">
+                                Usability survey
+                            </a>
+                        </li>
                         <li>
                             {% if request.user.is_authenticated %}
                             Hello, 
@@ -119,7 +117,7 @@
                 </nav>
             </header>
             {% endblock %}
-
+<!-- 
             <div class='viewport-test'>
                 <ul>
                     <li class="d-none d-xxl-block pe-3">Giant monitor xxl</li>
@@ -130,7 +128,7 @@
                     <li class="d-block d-sm-none pe-3">Tiny phone xs</li>
                 </ul>
             </div>
-
+ -->
         {% block pagetitle %}{% endblock %}
         {% block content %}{% endblock %}
 
