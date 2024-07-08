@@ -94,7 +94,7 @@ export const SimulationOneQuiz = ({
                                         onClick={() =>
                                             setSelectedOption(choice[0])}
                                     >
-                                        Prove
+                                        Check
                                     </button>
                                     <div className="status-complete">
                                         &#10003;
