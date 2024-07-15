@@ -21,11 +21,7 @@ const formulaText = function(content={title: '', body: []}, i) {
 };
 // If this get's implemented into other Simulations, rewrite as a JSX component
 
-export const Variables2 = (
-    // {
-    //     intercept, slope, stderror, appRvalue, plotType, slopes, stderrs
-    // }
-) => {
+export const Variables2 = () => {
     return (<>
         <p>
             Instructions for this step. Here M2 displays the dataset plot
@@ -66,9 +62,6 @@ export const Variables2 = (
 Variables2.propTypes = {
     intercept: PropTypes.number,
     slope: PropTypes.number,
-    stderror: PropTypes.number,
-    appRvalue: PropTypes.number,
     plotType: PropTypes.string,
-    slopes: PropTypes.array,
-    stderrs: PropTypes.array
+    slopes: PropTypes.array
 };
