@@ -20,15 +20,13 @@ export const ScatterPlot2 = ({controls, data, labelIndex, param}) => {
         setSelectedAltLines(altLines);
     }, [controls]);
 
-    const linedata = function(y, color) {
-        return {
-            type: 'scatter',
-            mode: 'lines',
-            x: param.xRange,
-            y: y,
-            marker: { color },
-        };
-    };
+    const linedata = (y, color) => ({
+        type: 'scatter',
+        mode: 'lines',
+        x: param.xRange,
+        y: y,
+        marker: { color },
+    });
 
     return (
         <>

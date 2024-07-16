@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { ScatterPlot2 } from './scatterPlot2';
 // import { SimulationTwoQuiz } from './simulationTwoQuiz';
-import { Variables2 } from './Variables2';
-import { ControlVariable } from './ControlVariable';
+import { Variables } from './variables';
+import { ControlVariable } from './controlVariable';
 // import { NullHypothesisSection2 } from './nullHypothesisSection2';
 import DATASETS from '../../../../json/datasets.json';
-import { Step } from '../Step';
+import { Step } from '../step';
 
 
 // const CURRENT_USER = window.MetricsMentor.currentUser.id;
@@ -72,12 +72,10 @@ export const SimulationTwo = () => {
     const [controls, setControls] = useState(
         {consump: false, black: false, size: false});
 
-    const handleChoice = function(e) {
-        setChoice(e.target.value);
-    };
+    const handleChoice = (e) => { setChoice(e.target.value); };
     // const [control, setControl] = useState([]);
 
-    const handleControls = function(e) {
+    const handleControls = (e) => {
         setControls({...controls, [e.target.name]: e.target.checked});
     };
 
@@ -115,7 +113,7 @@ export const SimulationTwo = () => {
                     },
                     {
                         title: 'Variables of Interest',
-                        body: <Variables2 />
+                        body: <Variables />
                     },
                     {
                         title: 'Control Variables',
