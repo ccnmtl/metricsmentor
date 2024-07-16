@@ -4,26 +4,12 @@ import { inlineKatex } from '../utils';
 
 const CONTROL_OPTIONS = {
     income: ['consump', 'black', 'size'],
-    gpa4: ['ACT', 'skipped', 'bgfriend'],
+    gpa4: ['ACT', 'campus', 'skipped', 'bgfriend'],
 };
 
-const LABEL_CONVERSION = {
-    'ACT': 'ACT Score',
-    'bgfriend': 'Significant Other',
-    'black': 'Black',
-    'campus': 'Lives On Campus',
-    'colGPA': 'College GPA',
-    'consump': 'Consumption',
-    'educ': 'Years Of Education',
-    'GPA4': 'GPA4',
-    'hsGPA': 'High School GPA',
-    'income': 'Income',
-    'size': 'Family Size',
-    'skipped': 'Classes Skipped Weekly',
-};
 
 export const ControlVariable = ({
-    choice, handleChoice, handleControls, COLUMNS
+    choice, controls, handleChoice, handleControls, columns, labelIndex
 }) => {
     return (
         <div className="row">
@@ -42,12 +28,12 @@ export const ControlVariable = ({
                 </select>
             </div>
             <ul>
-                {Object.entries(COLUMNS[choice]).slice(0,2)
+                {Object.entries(columns[choice]).slice(0,2)
                     .map((dType, i) => (
                         <li key={i} className="form-check">
                             <em>
                                 {inlineKatex(`${dType[0]}: ${
-                                    LABEL_CONVERSION[dType[1]]}`)}
+                                    labelIndex[dType[1]]}`)}
                             </em>
                         </li>
                     ))}
@@ -59,7 +45,7 @@ export const ControlVariable = ({
                             className="form-check-label">
                             <em>
                                 {inlineKatex(`x_${i+2}: ${
-                                    LABEL_CONVERSION[dType]
+                                    labelIndex[dType]
                                 }`)}
                             </em>
                         </label>
@@ -70,6 +56,7 @@ export const ControlVariable = ({
                             name={dType}
                             value={dType}
                             onChange={handleControls}
+                            checked={controls[dType] == true}
                         >
                         </input>
                     </li>
@@ -81,7 +68,9 @@ export const ControlVariable = ({
 
 ControlVariable.propTypes = {
     choice: PropTypes.string.isRequired,
+    columns: PropTypes.object.isRequired,
+    controls: PropTypes.object.isRequired,
     handleChoice: PropTypes.func.isRequired,
     handleControls: PropTypes.func.isRequired,
-    COLUMNS: PropTypes.object.isRequired
+    labelIndex: PropTypes.object.isRequired,
 };

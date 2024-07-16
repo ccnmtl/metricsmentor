@@ -1,65 +1,34 @@
 import React, { useState, useEffect } from 'react';
 import Plot from 'react-plotly.js';
-import axios from 'axios';
 import PropTypes from 'prop-types';
-import { saveAs } from 'file-saver';
 
-// const LINE_COLOR = ['black', 'red', 'blue', 'green', 'purple', 'orange'];
 
-export const ScatterPlot2 = ({ setAppRvalue,
-    setSlope, setIntercept, setStderror, data, controls, x1, y
-}) => {
-    const [regressionLine, setRegressionLine] = useState(null);
+export const ScatterPlot2 = ({controls, data, labelIndex, param}) => {
 
-    const y_values = data[y];
-    const x_values = data[x1];
+    const x1_values = data[param.x_1];
+    const y_values = data[param.y];
 
-    const calculateRegression = async() => {
-        try {
-            const response = await axios.post('/calc_regression/', {
-                y_values,
-                x_values,
-            });
-            const { slope, intercept, stderr, rvalue } = response.data;
-
-            setSlope(slope);
-            setIntercept(intercept);
-            setStderror(stderr);
-            setAppRvalue(rvalue);
-
-            // Calculate regression line for 2D plot
-            const xMin = Math.min(...x_values);
-            const xMax = Math.max(...x_values);
-            setRegressionLine({
-                type: 'scatter',
-                mode: 'lines',
-                x: [xMin, xMax],
-                y: [slope * xMin + intercept, slope * xMax + intercept],
-                marker: { color: 'black' },
-            });
-
-        } catch (error) {
-            console.error('Error calculating regression:', error);
-        }
-    };
-
-    const exportCSV = () => {
-        let headers = ['x', 'y'];
-        const dataRows = data.map(point => {
-            let row = [point[x1], point[y]];
-            return row.join(',');
-        });
-
-        const csv = [headers.join(','), ...dataRows].join('\n');
-        const blob = new Blob([csv], { type: 'text/csv;charset=utf-8' });
-        saveAs(blob, 'ScatterPlot2_data.csv');
-    };
+    const [selectedAltLines, setSelectedAltLines] = useState([]);
 
     useEffect(() => {
-        if(y_values.length > 0) {
-            calculateRegression();
-        }
-    }, [controls, data]);
+        const altLines = [];
+        Object.entries(controls).forEach(([key, value]) => {
+            if (value) {
+                altLines.push(param.lines[key]);
+            }
+        });
+        setSelectedAltLines(altLines);
+    }, [controls]);
+
+    const linedata = function(y, color) {
+        return {
+            type: 'scatter',
+            mode: 'lines',
+            x: param.xRange,
+            y: y,
+            marker: { color },
+        };
+    };
 
     return (
         <>
@@ -68,7 +37,7 @@ export const ScatterPlot2 = ({ setAppRvalue,
                     {
                         type: 'scatter',
                         mode: 'markers',
-                        x: x_values,
+                        x: x1_values,
                         y: y_values,
                         marker: {
                             color: 'teal',
@@ -79,14 +48,16 @@ export const ScatterPlot2 = ({ setAppRvalue,
                             },
                         },
                     },
-                    regressionLine,
+                    linedata(param.lines[param.x_1].y, 'black'),
+                    ...selectedAltLines.map((line) =>
+                        linedata(line.y, line.color)),
                 ]}
                 layout={{
-                    title: 'Single Variable Linear Regression',
+                    title: 'Omitted Variable Bias',
                     showlegend: false,
-                    xaxis: { title: 'X Axis', minallowed: 0},
+                    xaxis: { title: labelIndex[param.x_1], minallowed: 0},
                     yaxis: {
-                        title: 'Y Axis',
+                        title: labelIndex[param.y],
                         scaleratio: 1,
                         minallowed: 0,
                     },
@@ -102,25 +73,13 @@ export const ScatterPlot2 = ({ setAppRvalue,
                         'lasso2d', 'autoScale2d'],
                 }}
             />
-            <div className="text-end me-5">
-                <button className="btn btn-sm btn-secondary"
-                    onClick={exportCSV}>Export CSV</button>
-            </div>
         </>
     );
 };
 
 ScatterPlot2.propTypes = {
-    appRvalue: PropTypes.number,
-    controls: PropTypes.object,
+    controls: PropTypes.object.isRequired,
     data: PropTypes.object.isRequired,
-    setAppRvalue: PropTypes.func,
-    setSlope: PropTypes.func,
-    setIntercept: PropTypes.func,
-    setStderror: PropTypes.func,
-    slope: PropTypes.number,
-    stderror: PropTypes.number,
-    intercept: PropTypes.number,
-    x1: PropTypes.string.isRequired,
-    y: PropTypes.string.isRequired,
+    labelIndex: PropTypes.object.isRequired,
+    param: PropTypes.object.isRequired,
 };
