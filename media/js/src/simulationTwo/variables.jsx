@@ -1,27 +1,10 @@
 import React from 'react';
-import { Katex } from '../katexComponent';
 import PropTypes from 'prop-types';
-import { inlineKatex } from '../utils';
+import { inlineKatex, formulaText } from '../utils';
 
-/**
- * Formatted output for the formula text.
- * @param {{title:any, body:any[]}} content
- * @returns React.JSX.Element
- */
-const formulaText = function(content={title: '', body: []}, i) {
-    return (
-        <li className={'list-group'} key={i}>
-            <h2 className="mt-4">{content.title}:</h2>
-            {content.body.map((eq, i) => (
-                <Katex key={i} className={'ms-3' + (i==0 ? '' : ' mt-3')}
-                    tex={eq} />
-            ))}
-        </li>
-    );
-};
 // If this get's implemented into other Simulations, rewrite as a JSX component
 
-export const Variables2 = () => {
+export const Variables = () => {
     return (<>
         <p>
             Instructions for this step. Here M2 displays the dataset plot
@@ -59,7 +42,7 @@ export const Variables2 = () => {
     </>);
 };
 
-Variables2.propTypes = {
+Variables.propTypes = {
     intercept: PropTypes.number,
     slope: PropTypes.number,
     plotType: PropTypes.string,

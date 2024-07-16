@@ -2,7 +2,7 @@ import axios from 'axios';
 import React from 'react';
 import { Katex } from './katexComponent';
 
-export const authedFetch = function(url, method, data) {
+export const authedFetch = (url, method, data) => {
     const elt = document.getElementById('csrf-token');
     const token = elt ? elt.getAttribute('content') : '';
     return fetch(url, {
@@ -41,6 +41,21 @@ export const saveAnswer = async(submissionId, questionNumber, questionType,
  * @param {string} tex
  * @returns React.JSX.Element
  */
-export const inlineKatex = function(tex) {
-    return <Katex className="katex-inline" tex={tex}></Katex>;
-};
+export const inlineKatex = (tex) =>
+    <Katex className="katex-inline" tex={tex} />;
+
+
+/**
+ * Formatted output for the formula text.
+ * @param {{title:any, body:any[]}} content
+ * @returns React.JSX.Element
+ */
+export const formulaText = (content = { title: '', body: [] }, i) => (
+    <li className={'list-group'} key={i}>
+        <h2 className="mt-4">{content.title}:</h2>
+        {content.body.map((eq, i) => (
+            <Katex key={i} className={'ms-3' + (i === 0 ? '' : ' mt-3')}
+                tex={eq} />
+        ))}
+    </li>
+);
