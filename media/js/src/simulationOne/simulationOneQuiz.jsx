@@ -123,7 +123,7 @@ export const SimulationOneQuiz = ({
             {(allChoicesCompleted && plotType === '2d') && (
                 <MultipleChoiceQuestion
                     question={'You have completed all the hypothesis tests'
-                        + ' in this section. Based on what you&rsquo;ve learned'
+                        + ' in this section. Based on what you have learned'
                         +' from this exercise, which of the following is true?'}
                     options={['The closer the correlation between Y and X1 is '
                     + 'to one, the less likely it is to reject the null ' +
@@ -134,7 +134,7 @@ export const SimulationOneQuiz = ({
                     + 'the more likely it is to reject the null hypothesis '
                     +'β1 = 0.', 'The closer the correlation between Y and X1'
                     + ' is to zero, the less likely it is to reject the null '
-                    + 'hypothesis β1 = 0.', 'None of the above']}
+                    + 'hypothesis β1 = 0.', 'None of the options']}
                     answer={'The closer the correlation between Y and X1 is '
                     + 'to zero, the less likely it is to reject the null ' +
                     'hypothesis β1 = 0.'}
