@@ -5,14 +5,12 @@ WORKDIR /src
 COPY requirements.txt .
 
 RUN apt-get update && \
-    apt-get install -y \
-    nodejs npm && \
+    apt-get install -y curl && \
+    curl -L https://raw.githubusercontent.com/tj/n/master/bin/n -o n && \
+    bash n 20.15.1 && \
     apt-get clean
 
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
-
-RUN curl -fsSL https://deb.nodesource.com/setup_current.x | bash - && \
-    apt-get install -y nodejs
 
 RUN pip install --no-cache-dir --upgrade pip && \
     pip install --no-cache-dir --no-deps -r requirements.txt
