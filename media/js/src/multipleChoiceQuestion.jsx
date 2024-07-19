@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { saveAnswer } from './utils';
 
@@ -7,6 +7,15 @@ export const MultipleChoiceQuestion = ({
     question, options, answer }) => {
     const [selectedOption, setSelectedOption] = useState(null);
     const [isCorrect, setIsCorrect] = useState(null);
+    const [shuffledOptions, setShuffledOptions] = useState([]);
+
+    const shuffleArray = (array) => {
+        for (let i = array.length - 1; i > 0; i--) {
+            const j = Math.floor(Math.random() * (i + 1));
+            [array[i], array[j]] = [array[j], array[i]];
+        }
+        return array;
+    };
 
     const handleOptionSelect = (option) => {
         setSelectedOption(option);
@@ -24,6 +33,10 @@ export const MultipleChoiceQuestion = ({
 
     };
 
+    useEffect(() => {
+        setShuffledOptions(shuffleArray([...options]));
+    }, [options]);
+
     return (<>
         <div className="simulation__step-container d-flex">
             <div className="simulation__step-num">
@@ -39,7 +52,7 @@ export const MultipleChoiceQuestion = ({
                     <p>
                         {question}
                     </p>
-                    {options.map((option, index) => (
+                    {shuffledOptions.map((option, index) => (
                         <div key={index} className="form-check">
                             <input
                                 className="form-check-input"
