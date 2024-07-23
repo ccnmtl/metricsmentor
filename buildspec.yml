@@ -4,6 +4,7 @@ env:
   parameter-store:
     GITHUB_PERSONAL_ACCESS_TOKEN: /clouddefense/git_private_token
     CLOUD_DEFENSE_API: /clouddefense/personal_api_key
+    CLOUD_DEFENSE_VERSION_DOWNLOAD_URL: /clouddefense/cli_release_version_url
 phases:
   pre_build:
     commands:
@@ -18,25 +19,26 @@ phases:
       - IMAGE_TAG=prod_${COMMIT_HASH:=latest}
       - GITHUB_REPO_URL="https://${GITHUB_PERSONAL_ACCESS_TOKEN}@${CODEBUILD_SOURCE_REPO_URL#https://}"
       - echo Install cloud defense cli
-      - curl https://raw.githubusercontent.com/CloudDefenseAI/cd/master/latest/cd-latest-linux-x64.tar.gz > /tmp/cd-latest-linux-x64.tar.gz
+      - curl -L -o /tmp/cd-latest-linux-x64.tar.gz $CLOUD_DEFENSE_VERSION_DOWNLOAD_URL
       - sudo tar -C /usr/local/bin -xzf /tmp/cd-latest-linux-x64.tar.gz
+      - sudo cp /usr/local/bin/cd-latest-linux-x64 /usr/local/bin/cdefense
       - chmod +x /usr/local/bin/cdefense
       - echo end of pre_build phase
   build:
     commands:
       - echo Build started on `date`
       - echo $COMMIT_HASH
-      # - echo Start cloud defense vulnerability scan on codebase
-      # - |
-      #   set +e  # Disable immediate exit on error
-      #   cdefense online --api-key=$CLOUD_DEFENSE_API --tag=$COMMIT_HASH --repository-url=$GITHUB_REPO_URL
-      #   exit_code=$?
-      #   set -e  # Re-enable immediate exit on error
-      #   if [ $exit_code -eq 1 ]; then
-      #     echo "Ignore exit code 1"
-      #   else
-      #     exit $exit_code
-      #   fi
+      - echo Start cloud defense vulnerability scan on codebase
+      - |
+        set +e  # Disable immediate exit on error
+        cdefense online --api-key=$CLOUD_DEFENSE_API --tag=$COMMIT_HASH --repository-url=$GITHUB_REPO_URL --type=GITHUB
+        exit_code=$?
+        set -e  # Re-enable immediate exit on error
+        if [ $exit_code -eq 1 ]; then
+          echo "Ignore exit code 1"
+        else
+          exit $exit_code
+        fi
       - echo Building the Docker image...
       - docker build --no-cache -t $REPOSITORY_URI:latest .
       - docker tag $REPOSITORY_URI:latest $REPOSITORY_URI:$IMAGE_TAG
