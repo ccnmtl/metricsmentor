@@ -3,8 +3,8 @@ version: 0.2
 env:
   parameter-store:
     GITHUB_PERSONAL_ACCESS_TOKEN: /clouddefense/git_private_token
-    # CLOUD_DEFENSE_API: /clouddefense/personal_api_key
-    # CLOUD_DEFENSE_VERSION_DOWNLOAD_URL: /clouddefense/cli_release_version_url
+    CLOUD_DEFENSE_API: /clouddefense/personal_api_key
+    CLOUD_DEFENSE_VERSION_DOWNLOAD_URL: /clouddefense/cli_release_version_url
 phases:
   pre_build:
     commands:
@@ -18,10 +18,10 @@ phases:
       - COMMIT_HASH=$(git ls-remote ${CODEBUILD_SOURCE_REPO_URL} refs/heads/main | cut -c 1-7)
       - IMAGE_TAG=prod_${COMMIT_HASH:=latest}
       - GITHUB_REPO_URL="https://${GITHUB_PERSONAL_ACCESS_TOKEN}@${CODEBUILD_SOURCE_REPO_URL#https://}"
-      # - echo Install cloud defense cli
-      # - curl -L -o /tmp/cd-latest-linux-x64.tar.gz $CLOUD_DEFENSE_VERSION_DOWNLOAD_URL
+      - echo Install cloud defense cli
+      - curl -L -o /tmp/cd-latest-linux-x64.tar.gz $CLOUD_DEFENSE_VERSION_DOWNLOAD_URL
       - sudo tar -C /usr/local/bin -xzf /tmp/cd-latest-linux-x64.tar.gz
-      # - sudo cp /usr/local/bin/cd-latest-linux-x64 /usr/local/bin/cdefense
+      - sudo cp /usr/local/bin/cd-latest-linux-x64 /usr/local/bin/cdefense
       - chmod +x /usr/local/bin/cdefense
       - echo end of pre_build phase
   build:
