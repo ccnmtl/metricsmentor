@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
+import axios from 'axios';
 import { PvalueComponent } from './pvalueComponent.jsx';
 import { CriticalValue } from './criticalValue.jsx';
 
@@ -13,6 +14,26 @@ export const Quiz = ({
     const [hypothesisTest1validate, setHypothesisTest1validate] = useState(null);
     // eslint-disable-next-line max-len
     const [hypothesisTest2validate, setHypothesisTest2validate] = useState(null);
+    const [criticalValues, setCriticalValues] = useState(null);
+
+    useEffect(() => {
+        calculateCriticalValue();
+        document.getElementById('quiz')
+            .scrollIntoView({ behavior: 'smooth'});
+    }, []);
+
+    // Critical Value Logic
+    const calculateCriticalValue = async() => {
+        try {
+            const response = await axios.post('/calculate_critical/',
+                {n, alpha});
+
+            setCriticalValues(response.data);
+
+        } catch (error) {
+            console.error('Error calculating critical value:', error);
+        }
+    };
 
     useEffect(() => {
         if (hypothesisTest1validate) {
@@ -40,6 +61,7 @@ export const Quiz = ({
             {(hypothesisTest1validate || isNotTwoSided) && (
                 <CriticalValue
                     tvalue={tvalue}
+                    criticalValues={criticalValues}
                     alpha={alpha}
                     hypothesisTest={hypothesisTest}
                     hypothesis={hypothesis}

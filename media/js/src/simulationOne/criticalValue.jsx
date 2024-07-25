@@ -1,15 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { Katex } from '../katexComponent';
-import axios from 'axios';
 import { saveAnswer } from '../utils';
 
 export const CriticalValue = ({
     hypothesisTest2validate, tvalue, n, alpha, hypothesisTest, hypothesis,
     nullHypothesis, onComplete, submissionId, plotType,
-    setHypothesisTest2validate
+    setHypothesisTest2validate, criticalValues
 }) => {
-    const [criticalValues, setCriticalValues] = useState(null);
     const [nullHypothesisChoice2, setNullHypothesisChoice2] = useState(null);
     const [userCriticalValue, setUserCriticalValue] = useState('');
     const [compareCritical, setCompareCritical] = useState(null);
@@ -17,46 +15,6 @@ export const CriticalValue = ({
     const [isCriticalCompareCorrect, setIsCriticalCompareCorrect] = useState(null);
     const [isCriticalValueCorrect, setIsCriticalValueCorrect] = useState(null);
 
-
-    useEffect(() => {
-        if (isCriticalValueCorrect) {
-            document.getElementById('tGreaterThanCritical')
-                .scrollIntoView({ behavior: 'smooth'});
-        }
-    }, [isCriticalValueCorrect]);
-
-    useEffect(() => {
-        if (isCriticalCompareCorrect) {
-            document.getElementById('rejectHypothesis2')
-                .scrollIntoView({ behavior: 'smooth'});
-        }
-    }, [isCriticalCompareCorrect]);
-
-    useEffect(() => {
-        if (hypothesisTest2validate) {
-            document.getElementById('proceed')
-                .scrollIntoView({ behavior: 'smooth'});
-        }
-    }, [hypothesisTest2validate]);
-
-    useEffect(() => {
-        calculateCriticalValue();
-        document.getElementById('quiz')
-            .scrollIntoView({ behavior: 'smooth'});
-    }, []);
-
-    // Critical Value Logic
-    const calculateCriticalValue = async() => {
-        try {
-            const response = await axios.post('/calculate_critical/',
-                {n, alpha});
-
-            setCriticalValues(response.data);
-
-        } catch (error) {
-            console.error('Error calculating critical value:', error);
-        }
-    };
 
     let criticalValue;
     if (criticalValues) {
@@ -120,8 +78,8 @@ export const CriticalValue = ({
             break;
         case 'value_left':
             correctComparison =
-            (tvalue < criticalValue && value === 'greaterThan') ||
-                (tvalue >= criticalValue && value === 'lessThan');
+            (tvalue < criticalValue && value === 'lessThan') ||
+                (tvalue >= criticalValue && value === 'greaterThan');
             break;
         case 'value_right':
             correctComparison =
@@ -203,6 +161,27 @@ export const CriticalValue = ({
     } else {
         absoluteTtext = 't';
     }
+
+    useEffect(() => {
+        if (isCriticalValueCorrect) {
+            document.getElementById('tGreaterThanCritical')
+                .scrollIntoView({ behavior: 'smooth'});
+        }
+    }, [isCriticalValueCorrect]);
+
+    useEffect(() => {
+        if (isCriticalCompareCorrect) {
+            document.getElementById('rejectHypothesis2')
+                .scrollIntoView({ behavior: 'smooth'});
+        }
+    }, [isCriticalCompareCorrect]);
+
+    useEffect(() => {
+        if (hypothesisTest2validate) {
+            document.getElementById('proceed')
+                .scrollIntoView({ behavior: 'smooth'});
+        }
+    }, [hypothesisTest2validate]);
 
     return (
         <div className="solving-p-set mt-3">
@@ -425,7 +404,7 @@ export const CriticalValue = ({
 };
 
 CriticalValue.propTypes = {
-    hypothesisTest2validate: PropTypes.bool.isRequired,
+    hypothesisTest2validate: PropTypes.bool,
     tvalue: PropTypes.number.isRequired,
     n: PropTypes.number.isRequired,
     alpha: PropTypes.number.isRequired,
@@ -435,5 +414,6 @@ CriticalValue.propTypes = {
     onComplete: PropTypes.func.isRequired,
     submissionId: PropTypes.number.isRequired,
     plotType: PropTypes.string.isRequired,
-    setHypothesisTest2validate: PropTypes.func.isRequired
+    setHypothesisTest2validate: PropTypes.func.isRequired,
+    criticalValues: PropTypes.object
 };
