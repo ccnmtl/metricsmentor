@@ -1,15 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { inlineKatex } from '../utils';
-
-const CONTROL_OPTIONS = {
-    income: ['consump', 'black', 'size'],
-    gpa4: ['ACT', 'campus', 'skipped', 'bgfriend'],
-};
+import { dataAttr } from '../dataAttr';
 
 
 export const ControlVariable = ({
-    choice, controls, handleChoice, handleControls, columns, labelIndex
+    choice, controls, handleChoice, handleControls, labelIndex
 }) => {
     return (
         <div className="row">
@@ -25,10 +21,11 @@ export const ControlVariable = ({
                 >
                     <option value="income">Income</option>
                     <option value="gpa4">GPA4</option>
+                    <option value="affairs_sim2">Affairs</option>
                 </select>
             </div>
             <ul>
-                {Object.entries(columns[choice]).slice(0,2)
+                {Object.entries(dataAttr[choice]).slice(0,2)
                     .map((dType, i) => (
                         <li key={i} className="form-check">
                             <em>
@@ -37,7 +34,7 @@ export const ControlVariable = ({
                             </em>
                         </li>
                     ))}
-                {CONTROL_OPTIONS[choice].map((dType, i) => (
+                {dataAttr[choice].option.map((dType, i) => (
                     <li key={i}
                         className={'form-check'}
                     >
@@ -68,7 +65,6 @@ export const ControlVariable = ({
 
 ControlVariable.propTypes = {
     choice: PropTypes.string.isRequired,
-    columns: PropTypes.object.isRequired,
     controls: PropTypes.object.isRequired,
     handleChoice: PropTypes.func.isRequired,
     handleControls: PropTypes.func.isRequired,

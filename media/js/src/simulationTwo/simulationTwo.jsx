@@ -6,6 +6,7 @@ import { ControlVariable } from './controlVariable';
 // import { NullHypothesisSection2 } from './nullHypothesisSection2';
 import DATASETS from '../../../../json/datasets.json';
 import { Step } from '../step';
+import { dataAttr } from '../dataAttr';
 
 
 // const CURRENT_USER = window.MetricsMentor.currentUser.id;
@@ -14,54 +15,25 @@ import { Step } from '../step';
 // const coursePk =
 //     simContainer ? Number(simContainer.dataset.course) : '';
 
-const columns = {
-    income: {
-        y: 'income', x_1: 'educ', x_2: 'consump', x_3: 'black', x_4: 'size',
-        options: ['consump', 'black', 'size'],
-        lines: {
-            black:
-                {color: 'blue', y: [931.2819294938943, 16105.090326003485]},
-            consump:
-                {color: 'red', y: [307.9616560408456, 6723.381312785317]},
-            educ:
-                {color: 'black', y: [2827.804820432055, 16193.34064843028]},
-            size:
-                {color: 'green',y: [3735.9177652365797, 17889.108551354886]},
-        },
-        xRange: [2, 20]
-    },
-    gpa4: {
-        y: 'colGPA', x_1: 'hsGPA', x_2: 'ACT', x_3: 'campus', x_4: 'skipped',
-        x_5: 'bgfriend', options: ['ACT', 'campus', 'skipped', 'bgfriend'],
-        lines: {
-            ACT:
-                {color: 'red', y: [2.3972443183537147, 3.100151224430009]},
-            bgfriend:
-                {color: 'purple', y: [2.727648343333585, 3.3087673416319827]},
-            campus:
-                {color: 'blue', y: [2.41133950344707, 3.358445517219434]},
-            hsGPA:
-                {color: 'black', y: [2.573276613014987, 3.3451718437568054]},
-            skipped:
-                {color: 'green', y: [2.494452496563956, 3.4143822923166107]},
-        },
-        xRange: [2.4, 4]
-    },
-};
-
 const labelIndex = {
-    'ACT': 'ACT Score',
-    'bgfriend': 'Significant Other',
-    'black': 'Black',
-    'campus': 'Lives On Campus',
-    'colGPA': 'College GPA',
-    'consump': 'Consumption',
-    'educ': 'Years Of Education',
-    'GPA4': 'GPA4',
-    'hsGPA': 'High School GPA',
-    'income': 'Income',
-    'size': 'Family Size',
-    'skipped': 'Classes Skipped Weekly',
+    ACT: 'ACT Score',
+    affairs_sim2: 'Affairs',
+    bgfriend: 'Significant Other',
+    black: 'Black',
+    campus: 'Lives On Campus',
+    colGPA: 'College GPA',
+    consump: 'Consumption',
+    educ: 'Years Of Education',
+    GPA4: 'GPA4',
+    hsGPA: 'High School GPA',
+    income: 'Income',
+    kids: 'Number Of Kids',
+    naffairs: 'Number Of Affairs',
+    ratemarr: 'Rating Of Marriage',
+    relig: 'Degree Of Religiosity',
+    size: 'Family Size',
+    skipped: 'Classes Skipped Weekly',
+    yrsmarr: 'Years Married',
 };
 
 export const SimulationTwo = () => {
@@ -73,7 +45,6 @@ export const SimulationTwo = () => {
         {consump: false, black: false, size: false});
 
     const handleChoice = (e) => { setChoice(e.target.value); };
-    // const [control, setControl] = useState([]);
 
     const handleControls = (e) => {
         setControls({...controls, [e.target.name]: e.target.checked});
@@ -118,7 +89,7 @@ export const SimulationTwo = () => {
                     {
                         title: 'Control Variables',
                         body: <ControlVariable {...{controls, handleControls,
-                            choice, handleChoice, columns, labelIndex}}/>
+                            choice, handleChoice, labelIndex}}/>
                     },
                 ].map((step, i) =>
                     <Step key={i} header={step.header} title={step.title}>
@@ -129,7 +100,7 @@ export const SimulationTwo = () => {
             <div className="simulation__graphspace">
                 <ScatterPlot2
                     {...{controls, data, labelIndex}}
-                    param={columns[choice]}
+                    param={dataAttr[choice]}
                 />
             </div> {/* div class=simulation__graphspace */}
         </div> // div class=simulation
