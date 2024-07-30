@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Plot from 'react-plotly.js';
 import PropTypes from 'prop-types';
+// import axios from 'axios';
 
 
 export const ScatterPlot2 = ({controls, data, labelIndex, param}) => {
@@ -9,6 +10,29 @@ export const ScatterPlot2 = ({controls, data, labelIndex, param}) => {
     const y_values = data[param.y];
 
     const [selectedAltLines, setSelectedAltLines] = useState([]);
+
+    // // Use to extract the regression data for new data sets
+    // const minMax = function(arr) {
+    //     return arr.reduce(function(p, v) {
+    //         return ([p[0] < v ? p[0] : v, v < p[1] ? p[1] : v]);
+    //     }, [Infinity, -Infinity]);
+    // };
+
+    // useEffect(() => {
+    //     for (let col of param.option) {
+    //         axios.post('/calc_multi_regression/', {
+    //             x1_values: x1_values,
+    //             x2_values: data[col],
+    //             y_values: y_values,
+    //         }).then((response) => {
+    //             const d = response.data;
+    //             const xRange = minMax(x1_values);
+    //             console.log(col, d, 'yRange:',
+    //                 [xRange[0] * d.slope_x1 + d.intercept,
+    //                     xRange[1] * d.slope_x1 + d.intercept]);
+    //         });
+    //     }
+    // }, [data]);
 
     useEffect(() => {
         const altLines = [];
