@@ -43,7 +43,8 @@ export const SimulationOne = () => {
     const [completedChoices3d, setCompletedChoices3d] = useState([]);
 
 
-    const saveGraphData = async() => {
+    const createSubmission = async() => {
+        // Define the data to be saved based on the plot type
         const data = plotType === '2d' ? {
             N, yCorrelation, seed, slope, intercept, stderror, appRvalue,
             tvalue, hypothesizedSlope
@@ -53,14 +54,19 @@ export const SimulationOne = () => {
             appRvalue3d, intercept3d
         };
 
-        return authedFetch(
-            `/course/${coursePk}/api/save-sim1-graph/`, 'POST', { data })
+        const payload = {
+            simulation: 1,
+            data: data
+        };
+
+        const url = `/course/${coursePk}/api/create-sub/`;
+
+        return authedFetch(url, 'POST', payload)
             .then(response => {
                 if (response.status === 201) {
                     return response.json();
                 } else {
-                    throw 'Error  ' +
-                    `(${response.status}) ${response.statusText}`;
+                    throw `Error (${response.status}) ${response.statusText}`;
                 }
             })
             .then(data => {
@@ -78,9 +84,9 @@ export const SimulationOne = () => {
             });
     };
 
-    const handleSaveGraph = async() => {
+    const handleCreateSub = async() => {
         try {
-            await saveGraphData();
+            await createSubmission();
         } catch (error) {
             alert('Failed to save graph and submission.');
         }
@@ -329,21 +335,21 @@ export const SimulationOne = () => {
 
                                 <div className="simulation__step-prompt">
                                     <p>
-                                        Save your graph and let&rsquo;s move on
+                                        Let&rsquo;s move on
                                         to hypothesis testing.
                                     </p>
                                     {plotType === '2d' && (
                                         <button className="btn btn-primary"
                                             disabled={startQuiz}
-                                            onClick={handleSaveGraph}>
-                                            Save graph and continue &raquo;
+                                            onClick={handleCreateSub}>
+                                            Continue &raquo;
                                         </button>
                                     )}
                                     {plotType === '3d' && (
                                         <button className="btn btn-primary"
                                             disabled={startQuiz2}
-                                            onClick={handleSaveGraph}>
-                                            Save graph and continue &raquo;
+                                            onClick={handleCreateSub}>
+                                            Continue &raquo;
                                         </button>
                                     )}
                                 </div>
