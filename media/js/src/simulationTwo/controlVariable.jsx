@@ -22,6 +22,7 @@ export const ControlVariable = ({
                     <option value="income">Income</option>
                     <option value="gpa4">GPA4</option>
                     <option value="affairs_sim2">Affairs</option>
+                    <option value="campus_sim2">Campus Crime Rates</option>
                 </select>
             </div>
             <ul>
@@ -41,7 +42,7 @@ export const ControlVariable = ({
                         <label htmlFor={`x${i+2}`}
                             className="form-check-label">
                             <em>
-                                {inlineKatex(`x_${i+2}: ${
+                                {inlineKatex(`x_1, x_${i+2}: ${
                                     labelIndex[dType]
                                 }`)}
                             </em>
