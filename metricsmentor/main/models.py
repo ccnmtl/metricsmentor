@@ -13,24 +13,13 @@ SIMULATIONS = [
 ]
 
 
-class Graph(models.Model):
+class QuizSubmission(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     course = models.ForeignKey(Course, on_delete=models.CASCADE)
     simulation = models.IntegerField(choices=SIMULATIONS)
     data = models.JSONField()
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
-
-
-class QuizSubmission(models.Model):
-    graph = models.ForeignKey(Graph, on_delete=models.CASCADE)
-    data = models.JSONField()
-    created_at = models.DateTimeField(auto_now_add=True)
-    updated_at = models.DateTimeField(auto_now=True)
-
-    def __str__(self):
-        return "QuizSubmission - " + self.graph.user.username
-        + " - " + str(self.graph.simulation)
 
 
 class Answer(models.Model):

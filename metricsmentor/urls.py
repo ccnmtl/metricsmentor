@@ -49,11 +49,11 @@ urlpatterns = [
          name='calculate_pvalue'),
     path('calculate_critical/', views.calculate_critical_value,
          name='calculate_critical_value'),
-    re_path(r'^course/(?P<pk>\d+)/api/save-sim1-graph/$',
-            views.SaveSim1GraphView.as_view(),
-            name='save_sim1_graph'),
+    re_path(r'^course/(?P<pk>\d+)/api/create-sub/$',
+            views.CreateSubmission.as_view(),
+            name='create_submission'),
     re_path('^contact/', include('contactus.urls')),
-    path('save_answer/', views.save_answer, name='save_answer'),
+    path('save_answer/', views.SaveAnswer.as_view(), name='save_answer'),
 
 ]
 

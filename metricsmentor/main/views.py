@@ -19,7 +19,7 @@ from django.views.generic.detail import DetailView
 from lti_provider.models import LTICourseContext
 from metricsmentor.main.utils import send_template_email
 from metricsmentor.mixins import LoggedInCourseMixin
-from metricsmentor.main.models import Graph, Answer, QuizSubmission
+from metricsmentor.main.models import Answer, QuizSubmission
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 from django.utils.decorators import method_decorator
@@ -309,41 +309,38 @@ def handler404(request):
 
 
 @method_decorator(csrf_exempt, name='dispatch')
-class SaveSim1GraphView(LoggedInCourseMixin, View):
+class CreateSubmission(LoggedInCourseMixin, View):
 
     def post(self, request, *args, **kwargs):
-
         json_data = json.loads(request.body)
         graph_data = json_data.get('data')
         user = request.user
         course_pk = self.kwargs.get('pk')
         course = Course.objects.get(pk=course_pk)
+        simulation = json_data.get('simulation')
 
-        graph = Graph.objects.create(
+        quiz_submission = QuizSubmission.objects.create(
             user=user,
-            simulation=1,
+            simulation=simulation,
             data=graph_data,
             course=course
         )
 
-        quiz_submission = QuizSubmission.objects.create(
-            graph=graph,
-            data={}
-        )
-
-        print(f'Graph data saved successfully: {graph}')
         print(f'Quiz submission created successfully: {quiz_submission}')
 
         return JsonResponse({
             'message': 'Graph data and quiz submission saved successfully',
-            'graph_id': graph.id,
             'submission_id': quiz_submission.id
         }, status=201)
 
 
-@csrf_exempt
-def save_answer(request):
-    if request.method == 'POST':
+class SaveAnswer(LoggedInCourseMixin, View):
+
+    @method_decorator(csrf_exempt)
+    def dispatch(self, *args, **kwargs):
+        return super().dispatch(*args, **kwargs)
+
+    def post(self, request, *args, **kwargs):
         data = json.loads(request.body)
         submission_id = data.get('submission_id')
         question_number = data.get('question_number')
@@ -352,7 +349,13 @@ def save_answer(request):
         is_correct = data.get('is_correct')
         additional_data = data.get('additional_data', {})
 
-        submission = QuizSubmission.objects.get(id=submission_id)
+        try:
+            submission = QuizSubmission.objects.get(id=submission_id)
+        except QuizSubmission.DoesNotExist:
+            return JsonResponse({'status': 'fail',
+                                 'message': 'Submission not found'},
+                                status=404)
+
         answer = Answer.objects.create(
             quiz_submission=submission,
             question_number=question_number,
@@ -363,5 +366,3 @@ def save_answer(request):
         )
 
         return JsonResponse({'status': 'success', 'answer_id': answer.id})
-
-    return JsonResponse({'status': 'fail'}, status=400)
