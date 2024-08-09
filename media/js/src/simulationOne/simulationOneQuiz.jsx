@@ -7,23 +7,23 @@ import PropTypes from 'prop-types';
 export const SimulationOneQuiz = ({
     appRvalue, tvalue, hypothesizedSlope, n, setIsCompleted,
     isCompleted, submissionId, handlePlotTypeChange, plotType,
-    completedChoices, setCompletedChoices
+    completedChoices, setCompletedChoices, selectedAltHypothesis,
+    setSelectedAltHypothesis
 }) => {
-    const [selectedOption, setSelectedOption] = useState(null);
     const [isSubmitted, setIsSubmitted] = useState(false);
 
     const allChoicesCompleted = ['A', 'B', 'C'].every(
         choice => completedChoices.includes(choice));
 
     const handleChoiceCompletion = () => {
-        setCompletedChoices([...completedChoices, selectedOption]);
-        setSelectedOption(null);
+        setCompletedChoices([...completedChoices, selectedAltHypothesis]);
+        setSelectedAltHypothesis(null);
     };
 
     const isCompletedfunc = () => {
         if (allChoicesCompleted && isSubmitted) {
             setIsCompleted(true);
-            setSelectedOption(null);
+            setSelectedAltHypothesis(null);
         }
     };
 
@@ -72,7 +72,8 @@ export const SimulationOneQuiz = ({
                             ].map((choice, key) => (
                                 <li key={key}
                                     className={'listset-alpha-card' +
-                                            (selectedOption === choice[0] ?
+                                            // eslint-disable-next-line max-len
+                                            (selectedAltHypothesis === choice[0] ?
                                                 ' hypothesis-selected' : '') +
                                             // eslint-disable-next-line max-len
                                             (completedChoices.includes(choice[0]) ?
@@ -88,11 +89,12 @@ export const SimulationOneQuiz = ({
                                     <button
                                         className="btn btn-sm
                                             btn-primary"
-                                        disabled={selectedOption !== null ||
+                                        disabled={
+                                            selectedAltHypothesis !== null ||
                                             completedChoices.includes(
                                                 choice[0])}
                                         onClick={() =>
-                                            setSelectedOption(choice[0])}
+                                            setSelectedAltHypothesis(choice[0])}
                                     >
                                         Check
                                     </button>
@@ -107,9 +109,9 @@ export const SimulationOneQuiz = ({
                 </div>
             </div>
 
-            {selectedOption && (
+            {selectedAltHypothesis && (
                 <HypothesisTest
-                    selectedOption={selectedOption}
+                    selectedAltHypothesis={selectedAltHypothesis}
                     hypothesizedSlope={hypothesizedSlope}
                     appRvalue={appRvalue}
                     tvalue={tvalue}
@@ -197,4 +199,6 @@ SimulationOneQuiz.propTypes = {
     plotType: PropTypes.string.isRequired,
     completedChoices: PropTypes.array,
     setCompletedChoices: PropTypes.func,
+    selectedAltHypothesis: PropTypes.string,
+    setSelectedAltHypothesis: PropTypes.func
 };

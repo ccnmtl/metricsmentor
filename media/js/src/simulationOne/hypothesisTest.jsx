@@ -5,7 +5,7 @@ import { Quiz } from './quiz';
 import axios from 'axios';
 
 export const HypothesisTest = ({
-    selectedOption, appRvalue, tvalue, hypothesizedSlope, n, onComplete,
+    selectedAltHypothesis, appRvalue, tvalue, hypothesizedSlope, n, onComplete,
     completedChoices, submissionId, plotType
 }) => {
     const [pvalues, setPvalues] = useState(null);
@@ -16,7 +16,7 @@ export const HypothesisTest = ({
 
     const nullHypothesis = `\\Eta_0: {\\beta_1} = ${hypothesizedSlope}`;
 
-    switch (selectedOption) {
+    switch (selectedAltHypothesis) {
     case 'A':
         hypothesis = `\\Eta_1: {\\beta_1}{\\neq } ${hypothesizedSlope}`;
         hypothesisTest = 'value_two_sided';
@@ -156,7 +156,7 @@ export const HypothesisTest = ({
 };
 
 HypothesisTest.propTypes = {
-    selectedOption: PropTypes.string,
+    selectedAltHypothesis: PropTypes.string,
     appRvalue: PropTypes.number.isRequired,
     tvalue: PropTypes.number.isRequired,
     coursePK: PropTypes.number,

@@ -41,6 +41,7 @@ export const SimulationOne = () => {
     const [submissionId, setSubmissionId] = useState(null);
     const [completedChoices, setCompletedChoices] = useState([]);
     const [completedChoices3d, setCompletedChoices3d] = useState([]);
+    const [selectedAltHypothesis, setSelectedAltHypothesis] = useState(null);
 
 
     const createSubmission = async() => {
@@ -183,7 +184,8 @@ export const SimulationOne = () => {
                                 <input type="number" min="50" max="500"
                                     id="nSampleSize"
                                     className="form-control short-input"
-                                    disabled={startQuiz || is2DCompleted}
+                                    disabled={
+                                        is2DCompleted || selectedAltHypothesis}
                                     value={N}
                                     onBlur={handleNBlur}
                                     onChange={handleNChange} />
@@ -204,8 +206,8 @@ export const SimulationOne = () => {
                                             max="1" value={yCorrelation}
                                             className="form-range"
                                             id="correlation"
-                                            disabled={
-                                                startQuiz || is2DCompleted}
+                                            // eslint-disable-next-line max-len
+                                            disabled={is2DCompleted || selectedAltHypothesis}
                                             onChange={
                                                 handleYcorrelationChange} />
                                         <div className="scale-value">
@@ -299,7 +301,8 @@ export const SimulationOne = () => {
                             <div className="mt-3">
                                 <label className="dev-only"> Seed ID:
                                     <input type="text"
-                                        value={seed} disabled={startQuiz}
+                                        value={seed}
+                                        // disabled={startQuiz}
                                         className="ms-1 mt-2 dev-only" size="10"
                                         onChange={handleSeedChange} />
                                 </label>
@@ -340,14 +343,14 @@ export const SimulationOne = () => {
                                     </p>
                                     {plotType === '2d' && (
                                         <button className="btn btn-primary"
-                                            disabled={startQuiz}
+                                            // disabled={startQuiz}
                                             onClick={handleCreateSub}>
                                             Continue &raquo;
                                         </button>
                                     )}
                                     {plotType === '3d' && (
                                         <button className="btn btn-primary"
-                                            disabled={startQuiz2}
+                                            // disabled={startQuiz2}
                                             onClick={handleCreateSub}>
                                             Continue &raquo;
                                         </button>
@@ -368,6 +371,9 @@ export const SimulationOne = () => {
                                 completedChoices={completedChoices}
                                 setCompletedChoices={setCompletedChoices}
                                 setIsCompleted={setIs2DCompleted}
+                                selectedAltHypothesis={selectedAltHypothesis}
+                                // eslint-disable-next-line max-len
+                                setSelectedAltHypothesis={setSelectedAltHypothesis}
                                 handlePlotTypeChange={handlePlotTypeChange} />
                         )}
                         {(startQuiz2 && plotType === '3d') && (
@@ -383,6 +389,9 @@ export const SimulationOne = () => {
                                 completedChoices={completedChoices3d}
                                 setCompletedChoices={setCompletedChoices3d}
                                 setIsCompleted={setIs3DCompleted}
+                                selectedAltHypothesis={selectedAltHypothesis}
+                                // eslint-disable-next-line max-len
+                                setSelectedAltHypothesis={setSelectedAltHypothesis}
                                 handlePlotTypeChange={handlePlotTypeChange} />
                         )}
                     </>
