@@ -7,7 +7,7 @@ import PropTypes from 'prop-types';
 export const PvalueComponent = ({
     pvalue, tvalue, submissionId, hypothesis, nullHypothesis,
     alpha, hypothesisTest1validate, setHypothesisTest1validate,
-    plotType
+    plotType, isRedoActive
 }) => {
 
     const [userPvalue, setUserPvalue] = useState('');
@@ -31,6 +31,16 @@ export const PvalueComponent = ({
                 .scrollIntoView({ behavior: 'smooth'});
         }
     }, [isPvalCompareCorrect]);
+
+    useEffect(() => {
+        if (isRedoActive) {
+            setUserPvalue('');
+            setIsPvalueCorrect(null);
+            setIsPvalCompareCorrect(null);
+            setPvalueComparison(null);
+            setNullHypothesisChoice1(null);
+        }
+    }, [isRedoActive]);
 
 
     // P-Value Logic
@@ -341,5 +351,6 @@ PvalueComponent.propTypes = {
     submissionId: PropTypes.number,
     hypothesisTest1validate: PropTypes.bool,
     setHypothesisTest1validate: PropTypes.func,
-    plotType: PropTypes.string
+    plotType: PropTypes.string,
+    isRedoActive: PropTypes.bool
 };

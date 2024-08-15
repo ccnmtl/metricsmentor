@@ -8,7 +8,7 @@ import { CriticalValue } from './criticalValue.jsx';
 export const Quiz = ({
     tvalue, pvalue, alpha, hypothesisTest, hypothesis,
     nullHypothesis, n, onComplete, completedChoices, submissionId,
-    plotType,
+    plotType, isRedoActive, setIsRedo
 }) => {
     // eslint-disable-next-line max-len
     const [hypothesisTest1validate, setHypothesisTest1validate] = useState(null);
@@ -56,6 +56,7 @@ export const Quiz = ({
                     hypothesis={hypothesis}
                     nullHypothesis={nullHypothesis}
                     plotType={plotType}
+                    isRedoActive={isRedoActive}
                     submissionId={submissionId} />
             )}
             {(hypothesisTest1validate || isNotTwoSided) && (
@@ -66,6 +67,8 @@ export const Quiz = ({
                     hypothesisTest={hypothesisTest}
                     hypothesis={hypothesis}
                     nullHypothesis={nullHypothesis}
+                    isRedoActive={isRedoActive}
+                    setIsRedo={setIsRedo}
                     n={n}
                     hypothesisTest2validate={hypothesisTest2validate}
                     setHypothesisTest2validate={setHypothesisTest2validate}
@@ -89,4 +92,6 @@ Quiz.propTypes = {
     completedChoices: PropTypes.array.isRequired,
     submissionId: PropTypes.number.isRequired,
     plotType: PropTypes.string,
+    isRedoActive: PropTypes.bool,
+    setIsRedo: PropTypes.func
 };
