@@ -14,7 +14,6 @@ import { GlossaryModal } from './modalGlossary';
 // const CURRENT_USER = window.MetricsMentor.currentUser.id;
 // const isSuperUser = window.MetricsMentor.currentUser.is_superuser;
 const simContainer = document.querySelector('#react-root');
-
 const coursePk =
     simContainer ? Number(simContainer.dataset.course) : '';
 
@@ -442,13 +441,7 @@ export const SimulationOne = () => {
                     <div className="simulation__graph-summary">
                         <Katex tex={
                             // eslint-disable-next-line max-len
-                            `\\hat{y} = ${intercept.toFixed(3)} + ${slope.toFixed(3)}x; `
-                        } />
-                        <Katex tex={
-                            `\\hat{\\beta_1} = ${slope.toFixed(3)}; `
-                        } />
-                        <Katex tex={
-                            `corr(x,y) = ${appRvalue.toFixed(3)}`
+                            `\\hat{y} = ${intercept.toFixed(3)} + ${slope.toFixed(3)}x;\\; \\hat{\\beta_1} = ${slope.toFixed(3)};\\; corr(x,y) = ${appRvalue.toFixed(3)}`
                         } />
                     </div>
                 )}
@@ -456,19 +449,9 @@ export const SimulationOne = () => {
                     <div className="simulation__graph-summary">
                         <Katex tex={
                             // eslint-disable-next-line max-len
-                            `\\hat{y} = ${intercept3d.toFixed(3)} + ${slopes[0].toFixed(3)}x_1 + ${slopes[1].toFixed(3)}x_2; `
-                        } />
-                        <Katex tex={
-                            `\\hat{\\beta_1} = ${slopes[0].toFixed(3)}; `
-                        } />
-                        <Katex tex={
-                            `\\hat{\\beta_2} = ${slopes[1].toFixed(3)}; `
-                        } />
-                        <Katex tex={
-                            `corr(x_1,x_2) = ${appRvalue3d.toFixed(3)} `
-                        } />
-                        <Katex tex={
-                            `corr(x,y) = ${appRvalue.toFixed(3)}`
+                            `\\hat{y} = ${intercept3d.toFixed(3)} + ${slopes[0].toFixed(3)}x_1 + ${slopes[1].toFixed(3)}x_2;\\; ` +
+                            // eslint-disable-next-line max-len
+                            `\\hat{\\beta_1} = ${slopes[0].toFixed(3)};\\; \\hat{\\beta_2} = ${slopes[1].toFixed(3)};\\; corr(x_1,x_2) = ${appRvalue3d.toFixed(3)}\\; corr(x,y) = ${appRvalue.toFixed(3)}`
                         } />
                     </div>
                 )}
