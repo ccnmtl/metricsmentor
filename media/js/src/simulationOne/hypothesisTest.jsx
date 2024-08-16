@@ -6,11 +6,12 @@ import axios from 'axios';
 
 export const HypothesisTest = ({
     selectedAltHypothesis, appRvalue, tvalue, hypothesizedSlope, n, onComplete,
-    completedChoices, submissionId, plotType
+    completedChoices, submissionId, plotType, setSelectedAltHypothesis
 }) => {
     const [pvalues, setPvalues] = useState(null);
     const [alpha, setAlpha] = useState(null);
     const [alphaSelected, setAlphaSelected] = useState(false);
+    const [isRedoActive, setIsRedo] = useState(false);
     let hypothesis;
     let hypothesisTest;
 
@@ -64,6 +65,13 @@ export const HypothesisTest = ({
         document.getElementById('hypothesis-test')
             .scrollIntoView({ behavior: 'smooth'});
     }, []);
+
+    useEffect(() => {
+        if (isRedoActive) {
+            setSelectedAltHypothesis(null);
+            setIsRedo(false);
+        }
+    }, [isRedoActive]);
 
     return (
         <>
@@ -136,6 +144,8 @@ export const HypothesisTest = ({
                         {alphaSelected && (
                             <Quiz
                                 hypothesisTest={hypothesisTest}
+                                isRedoActive={isRedoActive}
+                                setIsRedo={setIsRedo}
                                 tvalue={tvalue}
                                 pvalue={parseFloat(pvalue)}
                                 alpha={alpha}
@@ -157,6 +167,7 @@ export const HypothesisTest = ({
 
 HypothesisTest.propTypes = {
     selectedAltHypothesis: PropTypes.string,
+    setSelectedAltHypothesis: PropTypes,
     appRvalue: PropTypes.number.isRequired,
     tvalue: PropTypes.number.isRequired,
     coursePK: PropTypes.number,

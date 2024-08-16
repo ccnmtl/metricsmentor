@@ -104,6 +104,7 @@ export const SimulationOneQuiz = ({
             {selectedAltHypothesis && (
                 <HypothesisTest
                     selectedAltHypothesis={selectedAltHypothesis}
+                    setSelectedAltHypothesis={setSelectedAltHypothesis}
                     hypothesizedSlope={hypothesizedSlope}
                     appRvalue={appRvalue}
                     tvalue={tvalue}

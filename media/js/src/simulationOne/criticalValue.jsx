@@ -6,7 +6,7 @@ import { saveAnswer } from '../utils';
 export const CriticalValue = ({
     hypothesisTest2validate, tvalue, n, alpha, hypothesisTest, hypothesis,
     nullHypothesis, onComplete, submissionId, plotType,
-    setHypothesisTest2validate, criticalValues
+    setHypothesisTest2validate, criticalValues, isRedoActive, setIsRedo
 }) => {
     const [nullHypothesisChoice2, setNullHypothesisChoice2] = useState(null);
     const [userCriticalValue, setUserCriticalValue] = useState('');
@@ -66,6 +66,21 @@ export const CriticalValue = ({
         const newValue = event.target.value;
         setCompareCritical(newValue);
     };
+
+    const handleRedo = (e) => {
+        e.preventDefault();
+        setIsRedo(true);
+    };
+
+    useEffect(() => {
+        if (isRedoActive) {
+            setIsCriticalValueCorrect(null);
+            setIsCriticalCompareCorrect(null);
+            setNullHypothesisChoice2(null);
+            setUserCriticalValue('');
+            setCompareCritical(null);
+        }
+    }, [isRedoActive]);
 
     const validateCriticalComparison = (value) => {
         let correctComparison;
@@ -376,6 +391,11 @@ export const CriticalValue = ({
                             </div>
                             <p className="mt-3">
                                     You have completed this hypothesis test.
+                                    &nbsp;
+                                <a href="#" className="btn btn-sm btn-primary"
+                                    onClick={handleRedo}>
+                                    Do Case again?
+                                </a>
                             </p>
                             <div className="simulation__step-prompt">
                                 <button className=
@@ -415,5 +435,7 @@ CriticalValue.propTypes = {
     submissionId: PropTypes.number.isRequired,
     plotType: PropTypes.string.isRequired,
     setHypothesisTest2validate: PropTypes.func.isRequired,
-    criticalValues: PropTypes.object
+    criticalValues: PropTypes.object,
+    isRedoActive: PropTypes.bool,
+    setIsRedo: PropTypes.func
 };
