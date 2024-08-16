@@ -167,7 +167,7 @@ export const HypothesisTest = ({
 
 HypothesisTest.propTypes = {
     selectedAltHypothesis: PropTypes.string,
-    setSelectedAltHypothesis: PropTypes,
+    setSelectedAltHypothesis: PropTypes.func,
     appRvalue: PropTypes.number.isRequired,
     tvalue: PropTypes.number.isRequired,
     coursePK: PropTypes.number,
