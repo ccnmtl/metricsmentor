@@ -12,16 +12,13 @@ export const SimulationOneQuiz = ({
 }) => {
     const [isSubmitted, setIsSubmitted] = useState(false);
 
-    const allChoicesCompleted = ['A', 'B', 'C'].every(
-        choice => completedChoices.includes(choice));
-
     const handleChoiceCompletion = () => {
         setCompletedChoices([...completedChoices, selectedAltHypothesis]);
         setSelectedAltHypothesis(null);
     };
 
     const isCompletedfunc = () => {
-        if (allChoicesCompleted && isSubmitted) {
+        if (completedChoices.includes('C') && isSubmitted) {
             setIsCompleted(true);
             setSelectedAltHypothesis(null);
         }
@@ -29,7 +26,7 @@ export const SimulationOneQuiz = ({
 
     useEffect(() => {
         isCompletedfunc();
-    },[completedChoices, allChoicesCompleted, isSubmitted]);
+    }, [completedChoices, isSubmitted]);
 
     useEffect(() => {
         document.getElementById('quiz-1')
@@ -46,6 +43,32 @@ export const SimulationOneQuiz = ({
         }
     }, [isSubmitted]);
 
+    const renderChoice = (choiceKey, formula) => (
+        <li
+            className={`listset-alpha-card
+                ${selectedAltHypothesis === choiceKey ?
+            ' hypothesis-selected' : ''}
+                    ${completedChoices.includes(choiceKey) ?
+            ' hypothesis-completed' : ''}`}
+        >
+            <div className="listset-alpha-card__title">
+                <Katex tex={formula + hypothesizedSlope} />
+            </div>
+            {!completedChoices.includes(choiceKey) && (
+                <button
+                    className="btn btn-sm btn-primary"
+                    disabled={selectedAltHypothesis !== null}
+                    onClick={() => setSelectedAltHypothesis(choiceKey)}
+                >
+                    Check
+                </button>
+            )}
+            {completedChoices.includes(choiceKey) && (
+                <div className="status-complete">&#10003;</div>
+            )}
+        </li>
+    );
+
     return (
         <>
             <div className="simulation__step-container d-flex">
@@ -56,54 +79,23 @@ export const SimulationOneQuiz = ({
                 <div className="simulation__step-body">
                     <header className="simulation__step-header">
                         <h2 className="h2-primary" id="quiz-1">
-                            Alternative hypothesis</h2>
+                            Alternative hypothesis
+                        </h2>
                     </header>
                     <div className="simulation__step-content">
                         <p>
                             Consider the following three statements as
-                            alternative hypotheses. Choose one to conduct
-                            a test of hypothesis.
+                            alternative hypotheses. Complete each
+                            hypothesis test in order.
                         </p>
                         <ol className="listset-alpha listset-alpha-listnum">
-                            {[
-                                ['A', '\\Eta_1: {\\beta_1}{\\neq} '],
-                                ['B', '\\Eta_1: {\\beta_1}{\\gt} '],
-                                ['C', '\\Eta_1: {\\beta_1}{\\lt} ']
-                            ].map((choice, key) => (
-                                <li key={key}
-                                    className={'listset-alpha-card' +
-                                            // eslint-disable-next-line max-len
-                                            (selectedAltHypothesis === choice[0] ?
-                                                ' hypothesis-selected' : '') +
-                                            // eslint-disable-next-line max-len
-                                            (completedChoices.includes(choice[0]) ?
-                                                ' hypothesis-completed' : '')
-                                    }
-                                >
-                                    <div className=
-                                        "listset-alpha-card__title">
-                                        <Katex tex={
-                                            choice[1] + hypothesizedSlope
-                                        } />
-                                    </div>
-                                    <button
-                                        className="btn btn-sm
-                                            btn-primary"
-                                        disabled={
-                                            selectedAltHypothesis !== null ||
-                                            completedChoices.includes(
-                                                choice[0])}
-                                        onClick={() =>
-                                            setSelectedAltHypothesis(choice[0])}
-                                    >
-                                        Check
-                                    </button>
-                                    <div className="status-complete">
-                                        &#10003;
-                                    </div>
+                            {/* Choice A default display */}
+                            {renderChoice('A', '\\Eta_1: {\\beta_1}{\\neq} ')}
 
-                                </li>
-                            ))}
+                            {completedChoices.includes('A') &&
+                                renderChoice('B', '\\Eta_1: {\\beta_1}{\\gt} ')}
+                            {completedChoices.includes('B') &&
+                                renderChoice('C', '\\Eta_1: {\\beta_1}{\\lt} ')}
                         </ol>
                     </div>
                 </div>
@@ -122,31 +114,31 @@ export const SimulationOneQuiz = ({
                     plotType={plotType}
                 />
             )}
-            {(allChoicesCompleted && plotType === '2d') && (
+            {completedChoices.includes('C') && plotType === '2d' && (
                 <MultipleChoiceQuestion
                     question={'You have completed all the hypothesis tests'
-                        + ' in this section. Based on what you have learned'
-                        +' from this exercise, which of the following is true?'}
+                    + ' in this section. Based on what you have learned'
+                    +' from this exercise, which of the following is true?'}
                     options={['The closer the correlation between Y and X1 is '
-                    + 'to one, the less likely it is to reject the null ' +
-                    'hypothesis β1 = 0.', 'The closer the correlation ' +
-                    'between Y and X1 is to negative one, the less likely '
-                    + 'it is to reject the null hypothesis β1 = 0.', 'The '
-                    + 'closer the correlation between Y and X1 is to zero, '
-                    + 'the more likely it is to reject the null hypothesis '
-                    +'β1 = 0.', 'The closer the correlation between Y and X1'
-                    + ' is to zero, the less likely it is to reject the null '
-                    + 'hypothesis β1 = 0.', 'None of the options']}
+                + 'to one, the less likely it is to reject the null ' +
+                'hypothesis β1 = 0.', 'The closer the correlation ' +
+                'between Y and X1 is to negative one, the less likely '
+                + 'it is to reject the null hypothesis β1 = 0.', 'The '
+                + 'closer the correlation between Y and X1 is to zero, '
+                + 'the more likely it is to reject the null hypothesis '
+                +'β1 = 0.', 'The closer the correlation between Y and X1'
+                + ' is to zero, the less likely it is to reject the null '
+                + 'hypothesis β1 = 0.', 'None of the options']}
                     answer={'The closer the correlation between Y and X1 is '
-                    + 'to zero, the less likely it is to reject the null ' +
-                    'hypothesis β1 = 0.'}
+                + 'to zero, the less likely it is to reject the null ' +
+                'hypothesis β1 = 0.'}
                     submissionId={submissionId}
                     questionNumber={7}
                     isSubmitted={isSubmitted}
                     setIsSubmitted={setIsSubmitted}
                 />
             )}
-            {(allChoicesCompleted && plotType === '3d') && (
+            {completedChoices.includes('C') && plotType === '3d' && (
                 <MultipleChoiceQuestion
                     question={'As we add X2 to the regression,'}
                     options={['The slope of X1(b1) changed.',
