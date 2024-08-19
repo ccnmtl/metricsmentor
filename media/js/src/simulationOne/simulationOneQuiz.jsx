@@ -117,40 +117,82 @@ export const SimulationOneQuiz = ({
             )}
             {completedChoices.includes('C') && plotType === '2d' && (
                 <MultipleChoiceQuestion
-                    question={'You have completed all the hypothesis tests'
-                    + ' in this section. Based on what you have learned'
-                    +' from this exercise, which of the following is true?'}
-                    options={['The closer the correlation between Y and X1 is '
-                + 'to one, the less likely it is to reject the null ' +
-                'hypothesis β1 = 0.', 'The closer the correlation ' +
-                'between Y and X1 is to negative one, the less likely '
-                + 'it is to reject the null hypothesis β1 = 0.', 'The '
-                + 'closer the correlation between Y and X1 is to zero, '
-                + 'the more likely it is to reject the null hypothesis '
-                +'β1 = 0.', 'The closer the correlation between Y and X1'
-                + ' is to zero, the less likely it is to reject the null '
-                + 'hypothesis β1 = 0.', 'None of the options']}
-                    answer={'The closer the correlation between Y and X1 is '
-                + 'to zero, the less likely it is to reject the null ' +
-                'hypothesis β1 = 0.'}
+                    question={
+                        <span>
+                            You have completed all the hypothesis tests in this
+                            section. Based on what you have learned from this
+                            exercise, which of the following is true?
+                        </span>
+                    }
+                    header={'Takeaway'}
+                    options={[
+                        <span key="option1">
+                            The closer the correlation between Y and X1 is to
+                            one, the less likely it is to reject the null
+                            hypothesis β1 = 0.
+                        </span>,
+                        <span key="option2">
+                                The closer the correlation between Y and X1 is
+                                 to negative one, the less likely it is to
+                                 reject the null hypothesis β1 = 0.
+                        </span>,
+                        <span key="option3">
+                            The closer the correlation between Y and X1 is to
+                            zero, the more likely it is to reject the null
+                            hypothesis β1 = 0.
+                        </span>,
+                        <span key="option4">
+                            The closer the correlation between Y and X1 is to
+                            zero, the less likely it is to reject the null
+                            hypothesis β1 = 0.
+                        </span>,
+                        <span key="option5">None of the options</span>
+                    ]}
+                    answer={
+                        <span>
+                            The closer the correlation between Y and X1 is to
+                            zero, the less likely it is to reject the null
+                            hypothesis β1 = 0.
+                        </span>
+                    }
                     submissionId={submissionId}
                     questionNumber={7}
                     isSubmitted={isSubmitted}
                     setIsSubmitted={setIsSubmitted}
+                    questionStyle={{}}
+                    optionStyle={{}}
+                    answerStyle={{}}
                 />
             )}
             {completedChoices.includes('C') && plotType === '3d' && (
                 <MultipleChoiceQuestion
-                    question={'As we add X2 to the regression,'}
-                    options={['The slope of X1(b1) changed.',
-                        'The standard error of the slope X1(B1) changed ',
-                        'The intercept of the regression line changed.',
-                        'All of the above.']}
-                    answer={'All of the above.'}
+                    // eslint-disable-next-line max-len
+                    question={<span style={{ fontWeight: 'bold' }}>As we add X2 to the regression,</span>}
+                    header={'Takeaway'}
+                    options={[
+                        // eslint-disable-next-line react/jsx-key
+                        <span key="2doption1">
+                            The slope of <em>X1(b1)</em> changed.
+                        </span>,
+                        <span key="2doption2">
+                            The standard error of the slope <em>X1(b1)</em>
+                             changed.
+                        </span>,
+                        <span key="2doption3">
+                            The intercept of the regression line changed.
+                        </span>,
+                        <span key="2doption4">
+                            <strong>All of the above.</strong>
+                        </span>
+                    ]}
+                    answer={<span><strong>All of the above.</strong></span>}
                     submissionId={submissionId}
                     questionNumber={14}
                     isSubmitted={isSubmitted}
                     setIsSubmitted={setIsSubmitted}
+                    questionStyle={{}}
+                    optionStyle={{}}
+                    answerStyle={{}}
                 />
             )}
             {(isSubmitted && plotType === '2d') && (

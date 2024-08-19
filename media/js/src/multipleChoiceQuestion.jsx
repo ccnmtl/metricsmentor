@@ -4,7 +4,8 @@ import { saveAnswer } from './utils';
 
 export const MultipleChoiceQuestion = ({
     isSubmitted, setIsSubmitted, submissionId, questionNumber,
-    question, options, answer }) => {
+    question, options, answer, header, questionStyle, optionStyle,
+    answerStyle }) => {
     const [selectedOption, setSelectedOption] = useState(null);
     const [isCorrect, setIsCorrect] = useState(null);
     const [shuffledOptions, setShuffledOptions] = useState([]);
@@ -17,25 +18,43 @@ export const MultipleChoiceQuestion = ({
         return array;
     };
 
+    // Utility function to extract plain text from JSX or strings
+    const extractTextContent = (element) => {
+        if (typeof element === 'string') return element;
+
+        // Recursively extract text content from React elements
+        return React.Children.toArray(element)
+            .map(child => {
+                if (typeof child === 'string')
+                    return child;
+                if (React.isValidElement(child))
+                    return extractTextContent(child.props.children);
+                return '';
+            })
+            .join('');
+    };
+
     const handleOptionSelect = (option) => {
         setSelectedOption(option);
     };
 
     const handleSubmit = async() => {
         setIsSubmitted(true);
-        const correct = selectedOption === answer;
+        // eslint-disable-next-line max-len
+        const correct = extractTextContent(selectedOption) === extractTextContent(answer);
         setIsCorrect(correct);
 
         const questionType = 'multiple-choice';
+        const textOption = extractTextContent(selectedOption);
 
         await saveAnswer(submissionId, questionNumber, questionType,
-            selectedOption, correct, {});
+            textOption, correct, {});
 
     };
 
     useEffect(() => {
         setShuffledOptions(shuffleArray([...options]));
-    }, [options]);
+    }, []);
 
     return (<>
         <div className="simulation__step-container d-flex">
@@ -46,25 +65,27 @@ export const MultipleChoiceQuestion = ({
             </div>
             <div className="simulation__step-body">
                 <header className="simulation__step-header">
-                    <h2 className="h2-primary">Takeaway</h2>
+                    <h2 className="h2-primary">{header}</h2>
                 </header>
                 <div className="simulation__step-content">
-                    <p>
+                    <p style={questionStyle}>
                         {question}
                     </p>
                     {shuffledOptions.map((option, index) => (
                         <div key={index} className="form-check">
                             <input
                                 className="form-check-input"
-                                type='radio'
+                                type="radio"
                                 id={`option-${index}`}
-                                name='options'
+                                name="options"
                                 value={option}
                                 checked={selectedOption === option}
                                 onChange={() => handleOptionSelect(option)}
                             />
                             <label className="form-check-label"
-                                htmlFor={`option-${index}`}>{option}</label>
+                                htmlFor={`option-${index}`} style={optionStyle}>
+                                {option}
+                            </label>
                         </div>
                     ))}
                     <button
@@ -72,9 +93,9 @@ export const MultipleChoiceQuestion = ({
                         disabled={isSubmitted}
                         onClick={handleSubmit}>Submit</button>
                     {isSubmitted && (
-                        <p className="mt-3">
+                        <p className="mt-3" style={answerStyle}>
                             {isCorrect ? 'Correct! ' : 'Incorrect! '}
-                            The answer is {answer}.
+                            The answer is {answer}
                         </p>
                     )}
                 </div>
@@ -84,11 +105,16 @@ export const MultipleChoiceQuestion = ({
 };
 
 MultipleChoiceQuestion.propTypes = {
-    question: PropTypes.string.isRequired,
-    options: PropTypes.arrayOf(PropTypes.string).isRequired,
-    answer: PropTypes.string.isRequired,
+    question: PropTypes.object.isRequired,
+    options: PropTypes.array.isRequired,
+    answer: PropTypes.object.isRequired,
     submissionId: PropTypes.number.isRequired,
     questionNumber: PropTypes.number.isRequired,
     setIsSubmitted: PropTypes.func.isRequired,
     isSubmitted: PropTypes.bool.isRequired,
+    header: PropTypes.string,
+    questionStyle: PropTypes.object,
+    optionStyle: PropTypes.object,
+    answerStyle: PropTypes.object
+
 };
