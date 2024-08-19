@@ -54,6 +54,11 @@ export const SimulationTwo = () => {
         setControls({...controls, [e.target.name]: e.target.checked});
     };
 
+    const handleStartOver = () => {
+        setControls({});
+        setChoice('income');
+    };
+
     useEffect(() => {
         setData(DATASETS[choice]);
     }, [choice]);
@@ -106,6 +111,12 @@ export const SimulationTwo = () => {
                     {...{controls, data, labelIndex}}
                     param={dataAttr[choice]}
                 />
+                <button className="btn btn-warning m-2"
+                    onClick={handleStartOver}
+                    style={{position: 'absolute', top: '0px'}}
+                >
+                    Start Over
+                </button>
             </div> {/* div class=simulation__graphspace */}
         </div> // div class=simulation
     );
