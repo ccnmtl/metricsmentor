@@ -182,7 +182,7 @@ export const SimulationOneQuiz = ({
                             The intercept of the regression line changed.
                         </span>,
                         <span key="2doption4">
-                            <strong>All of the above.</strong>
+                            <strong>All choices are correct.</strong>
                         </span>
                     ]}
                     answer={<span><strong>All of the above.</strong></span>}
