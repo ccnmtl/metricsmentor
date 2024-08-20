@@ -6,12 +6,18 @@ import PropTypes from 'prop-types';
 
 export const ScatterPlot2 = ({controls, data, labelIndex, param}) => {
 
-    const x1_values = data[param.x_1];
-    const y_values = data[param.y];
+    let x1_values = [];
+    let y_values = [];
+    if (data) {
+        x1_values = data[param.x_1];
+        y_values = data[param.y];
+    }
 
     const [selectedAltLines, setSelectedAltLines] = useState([]);
 
-    // // DEV CODE: Use to extract the regression data for new data sets
+    // /**
+    //  * !!DEV CODE!!: Use to extract the regression data for new data sets
+    //  */
     // const minMax = function(arr) {
     //     return arr.reduce(function(p, v) {
     //         return ([p[0] < v ? p[0] : v, v < p[1] ? p[1] : v]);
@@ -57,14 +63,27 @@ export const ScatterPlot2 = ({controls, data, labelIndex, param}) => {
 
     const linedata = (y, color) => ({
         type: 'scatter',
+        marker: { color },
         mode: 'lines',
         x: param.xRange,
         y: y,
-        marker: { color },
     });
 
-    return (
-        <>
+    const labelPos = (range) => {
+        return range[1] + (range[1] - range[0]) * 0.02;
+    };
+
+    const lineLabel = (line) => ({
+        mode: 'text',
+        text: [`x1 & ${line.label}`],
+        textfont: { color: 'black' },
+        textposition: 'top center',
+        x: [labelPos(param.xRange)],
+        y: [line.y[1]],
+    });
+
+    if (data) {
+        return (
             <Plot
                 data={[
                     {
@@ -81,9 +100,19 @@ export const ScatterPlot2 = ({controls, data, labelIndex, param}) => {
                             },
                         },
                     },
+                    {
+                        mode: 'text',
+                        text: ['x1'],
+                        textfont: { color: 'black' },
+                        textposition: 'top center',
+                        x: [labelPos(param.xRange)],
+                        y: [param.lines[param.x_1].y[1]],
+                    },
                     linedata(param.lines[param.x_1].y, 'black'),
                     ...selectedAltLines.map((line) =>
                         linedata(line.y, line.color)),
+                    ...selectedAltLines.map((line) =>
+                        lineLabel(line, line.color)),
                 ]}
                 layout={{
                     title: 'Omitted Variable Bias',
@@ -106,13 +135,39 @@ export const ScatterPlot2 = ({controls, data, labelIndex, param}) => {
                         'lasso2d', 'autoScale2d'],
                 }}
             />
-        </>
-    );
+        );
+    } else {
+        return (
+            <Plot
+                data={[{
+                    x: [1],
+                    y: [1],
+                    mode: 'text',
+                    text: ['Choose a dataset to begin'],
+                }]}
+                layout={{
+                    title: 'Omitted Variable Bias',
+                    showlegend: false,
+                    xaxis: { showticklabels: false },
+                    yaxis: { showticklabels: false },
+                }}
+                useResizeHandler={true}
+                style={{ height: '88%' }}
+                config={{
+                    scrollZoom: true,
+                    displayModeBar: true,
+                    modeBarButtonsToRemove: [
+                        'toImage', 'resetCameraLastSave3d', 'select2d',
+                        'lasso2d', 'autoScale2d'],
+                }}
+            />
+        );
+    }
 };
 
 ScatterPlot2.propTypes = {
     controls: PropTypes.object.isRequired,
-    data: PropTypes.object.isRequired,
+    data: PropTypes.object,
     labelIndex: PropTypes.object.isRequired,
-    param: PropTypes.object.isRequired,
+    param: PropTypes.object,
 };

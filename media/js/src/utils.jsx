@@ -52,7 +52,7 @@ export const inlineKatex = (tex) =>
  */
 export const formulaText = (content = { title: '', body: [] }, i) => (
     <li className={'list-group'} key={i}>
-        <h2 className="mt-4">{content.title}:</h2>
+        {content.title && <h2 className="mt-4">{content.title}:</h2>}
         {content.body.map((eq, i) => (
             <Katex key={i} className={'ms-3' + (i === 0 ? '' : ' mt-3')}
                 tex={eq} />
