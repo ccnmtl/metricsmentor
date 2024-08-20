@@ -1,12 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { ScatterPlot2 } from './scatterPlot2';
-// import { SimulationTwoQuiz } from './simulationTwoQuiz';
 import { Variables } from './variables';
 import { ControlVariable } from './controlVariable';
-// import { NullHypothesisSection2 } from './nullHypothesisSection2';
 import DATASETS from '../../../../json/datasets.json';
 import { Step } from '../step';
-import { dataAttr } from '../dataAttr';
+import { dataAttr, labelIndex } from '../dataAttr';
+import { LearningGoals } from './learningGoals';
+import { MultipleChoiceQuestion2 } from '../multipleChoiceQuestion2';
 
 
 // const CURRENT_USER = window.MetricsMentor.currentUser.id;
@@ -15,38 +15,25 @@ import { dataAttr } from '../dataAttr';
 // const coursePk =
 //     simContainer ? Number(simContainer.dataset.course) : '';
 
-const labelIndex = {
-    ACT: 'ACT Score',
-    affairs_sim2: 'Affairs',
-    bgfriend: 'Significant Other',
-    black: 'Black',
-    campus: 'Lives On Campus',
-    colGPA: 'College GPA',
-    consump: 'Consumption',
-    crime: 'Total Campus Crimes',
-    educ: 'Years Of Education',
-    enroll: 'Total Enrollment',
-    GPA4: 'GPA4',
-    hsGPA: 'High School GPA',
-    income: 'Income',
-    kids: 'Has Kids',
-    naffairs: 'Number Of Affairs',
-    police: 'Police Employed On Campus',
-    priv: 'Private School',
-    ratemarr: 'Rating Of Marriage',
-    relig: 'Degree Of Religiosity',
-    size: 'Family Size',
-    skipped: 'Classes Skipped Weekly',
-    yrsmarr: 'Years Married',
-};
-
 export const SimulationTwo = () => {
     // const [startQuiz, setStartQuiz] = useState(false);
     // const [hypothesizedSlope, setHypothesizedSlope] = useState(0);
-    const [choice, setChoice] = useState('income');
-    const [data, setData] = useState(DATASETS[choice]);
+    const [choice, setChoice] = useState();
+    const [data, setData] = useState();
     const [controls, setControls] = useState(
         {consump: false, black: false, size: false});
+    const [isSubmitted, setIsSubmitted] = useState(false);
+    const [isCorrect, setIsCorrect] = useState({});
+    const [isComplete, setIsComplete] = useState(
+        Object.keys(DATASETS).reduce((acc, key) => {
+            acc[key] = false;
+            return acc;
+        }, {})
+    );
+    // ===== CHECK SIM 1 FOR IMPLEMENTATION =====
+    const submissionId = 1;
+    const questionNumber = 1;
+    // ==========================================
 
     const handleChoice = (e) => { setChoice(e.target.value); };
 
@@ -67,6 +54,74 @@ export const SimulationTwo = () => {
         setControls({});
     }, [data]);
 
+    /**
+     * If the user has completed the first question for the current dataset,
+     * show the second with a general question.
+     * @returns {JSX.Element} The question component to render.
+     */
+    const getQuestions = () => {
+        // If the user has completed the first question
+        // for the current dataset, show the second with a
+        // general question.
+        if (Object.values(isComplete)
+            .reduce((acc, val) => acc + val, 0) === 1)
+        {
+            return <MultipleChoiceQuestion2
+                {...{choice, isSubmitted, setIsSubmitted,
+                    submissionId, questionNumber, isCorrect,
+                    setIsCorrect, handleContinue}}
+                questionNumber={3}
+                takeaways={{[choice]: takeaways[choice],
+                    'general': takeaways.general}}
+            />;
+        } else {
+            return <MultipleChoiceQuestion2
+                {...{choice, isSubmitted, setIsSubmitted,
+                    submissionId, questionNumber, isCorrect,
+                    setIsCorrect, handleContinue}}
+                questionNumber={1}
+                takeaways={{[choice]: takeaways[choice]}}
+            />;
+        }
+    };
+
+    const handleContinue = () => {
+        setIsComplete({...isComplete, [choice]: true});
+        setData(null);
+        setIsSubmitted(false);
+    };
+
+    const takeaways = {
+        general: {
+            prompt: ['This is the generic question.'],
+            options: ['Wrong answer', 'Nope', 'Not this one',
+                'The right answer'],
+            answer: 'The right answer'
+        },
+        income: {
+            prompt: ['This is the dataset specific question for income.'],
+            options: ['income', 'gpa4', 'affairs_sim2', 'campus_sim2'],
+            answer: 'income'
+        },
+        gpa4: {
+            prompt: ['This is the dataset specific question for GPA4.'],
+            options: ['income', 'gpa4', 'affairs_sim2', 'campus_sim2'],
+            answer: 'gpa4'
+        },
+        affairs_sim2: {
+            prompt: ['This is the dataset specific question for ' +
+                'affairs_sim2.'],
+            options: ['income', 'gpa4', 'affairs_sim2', 'campus_sim2'],
+            answer: 'affairs_sim2'
+        },
+        campus_sim2: {
+            prompt: ['This is the dataset specific question for ' +
+                'campus_sim2.'],
+            options: ['income', 'gpa4', 'affairs_sim2', 'campus_sim2'],
+            answer: 'campus_sim2'
+        }
+    };
+
     return (
         <div className="simulation">
             <div className="simulation__workspace">
@@ -86,25 +141,46 @@ export const SimulationTwo = () => {
                     },
                     {
                         title: 'Learning Goals',
-                        body: <p>Learning goals to orient students&apos;
-                            expectations, shape their focus. TBD, etc, etc,
-                            etc, fill in the rest of the text.
-                        </p>
-                    },
-                    {
-                        title: 'Variables of Interest',
-                        body: <Variables />
-                    },
-                    {
-                        title: 'Control Variables',
-                        body: <ControlVariable {...{controls, handleControls,
-                            choice, handleChoice, labelIndex}}/>
+                        body: <LearningGoals id="learning-goals" {...{choice,
+                            handleChoice, isComplete}} />
                     },
                 ].map((step, i) =>
                     <Step key={i} header={step.header} title={step.title}>
                         {step.body}
                     </Step>)
                 }
+                {data && <>
+                    {[
+                        {
+                            title: 'Variables of Interest',
+                            body: <Variables params={dataAttr[choice]} />
+                        },
+                        {
+                            title: 'Control Variables',
+                            body: <ControlVariable data={dataAttr[choice]}
+                                {...{controls, handleControls}}/>
+                        },
+                    ].map((step, i) =>
+                        <Step key={i} header={step.header} title={step.title}>
+                            {step.body}
+                        </Step>)
+                    }
+                    <div className="simulation__step-container d-flex">
+                        <div className="simulation__step-num">
+                            &bull;
+                        </div>
+                        <div className="simulation__step-toggle--down">
+                        </div>
+                        <div className="simulation__step-body">
+                            <header className="simulation__step-header">
+                                <h2 className="h2-primary">
+                                    Takeaway Questions
+                                </h2>
+                            </header>
+                            {getQuestions()}
+                        </div>
+                    </div> {/* div class=simulation__step-container */}
+                </>}
             </div> {/* div class=simulation__workspace */}
             <div className="simulation__graphspace">
                 <ScatterPlot2
@@ -117,6 +193,11 @@ export const SimulationTwo = () => {
                 >
                     Start Over
                 </button>
+                <div className='row'>
+                    <p className='col-auto mx-auto'>
+                        Dataset source and information
+                    </p>
+                </div>
             </div> {/* div class=simulation__graphspace */}
         </div> // div class=simulation
     );
