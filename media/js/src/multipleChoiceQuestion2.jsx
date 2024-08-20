@@ -10,7 +10,6 @@ export const MultipleChoiceQuestion2 = ({
     const handleOptionSelect = (topic, option) => {
         setSelected({...selected, [topic]: option});
     };
-    console.log('takeaways', takeaways);
 
     const handleSubmit = () => {
         setIsSubmitted(true);
