@@ -103,9 +103,9 @@ export const ControlVariable = ({
                                         title: 'Correlation coefficients',
                                         body: [
                                             `corr(y, x_2) = 
-                                                ${selectData.rvalue}`,
+                                                ${selectData.corr_y}`,
                                             `corr(x_1, x_2) = 
-                                                ${selectData.rvalue} ???`,
+                                                ${selectData.corr_x1}`,
                                         ],
                                     }
                                 ].map((content, i) => formulaText(content, i))}

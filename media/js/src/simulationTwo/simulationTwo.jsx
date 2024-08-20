@@ -4,7 +4,7 @@ import { Variables } from './variables';
 import { ControlVariable } from './controlVariable';
 import DATASETS from '../../../../json/datasets.json';
 import { Step } from '../step';
-import { dataAttr, labelIndex } from '../dataAttr';
+import { dataAttr, labelIndex, takeaways2 } from '../dataAttr';
 import { LearningGoals } from './learningGoals';
 import { MultipleChoiceQuestion2 } from '../multipleChoiceQuestion2';
 
@@ -71,8 +71,8 @@ export const SimulationTwo = () => {
                     submissionId, questionNumber, isCorrect,
                     setIsCorrect, handleContinue}}
                 questionNumber={3}
-                takeaways={{[choice]: takeaways[choice],
-                    'general': takeaways.general}}
+                takeaways={{[choice]: takeaways2[choice],
+                    'general': takeaways2.general}}
             />;
         } else {
             return <MultipleChoiceQuestion2
@@ -80,7 +80,7 @@ export const SimulationTwo = () => {
                     submissionId, questionNumber, isCorrect,
                     setIsCorrect, handleContinue}}
                 questionNumber={1}
-                takeaways={{[choice]: takeaways[choice]}}
+                takeaways={{[choice]: takeaways2[choice]}}
             />;
         }
     };
@@ -89,37 +89,6 @@ export const SimulationTwo = () => {
         setIsComplete({...isComplete, [choice]: true});
         setData(null);
         setIsSubmitted(false);
-    };
-
-    const takeaways = {
-        general: {
-            prompt: ['This is the generic question.'],
-            options: ['Wrong answer', 'Nope', 'Not this one',
-                'The right answer'],
-            answer: 'The right answer'
-        },
-        income: {
-            prompt: ['This is the dataset specific question for income.'],
-            options: ['income', 'gpa4', 'affairs_sim2', 'campus_sim2'],
-            answer: 'income'
-        },
-        gpa4: {
-            prompt: ['This is the dataset specific question for GPA4.'],
-            options: ['income', 'gpa4', 'affairs_sim2', 'campus_sim2'],
-            answer: 'gpa4'
-        },
-        affairs_sim2: {
-            prompt: ['This is the dataset specific question for ' +
-                'affairs_sim2.'],
-            options: ['income', 'gpa4', 'affairs_sim2', 'campus_sim2'],
-            answer: 'affairs_sim2'
-        },
-        campus_sim2: {
-            prompt: ['This is the dataset specific question for ' +
-                'campus_sim2.'],
-            options: ['income', 'gpa4', 'affairs_sim2', 'campus_sim2'],
-            answer: 'campus_sim2'
-        }
     };
 
     return (

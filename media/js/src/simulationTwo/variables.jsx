@@ -38,7 +38,7 @@ export const Variables = ({params}) => {
                 {
                     title: <>Correlation coefficient, {
                         inlineKatex('corr(y,x_1)')}</>,
-                    body: [`corr(y,x_1)=${vars.rvalue}`]
+                    body: [`corr(y,x_1)=${vars.corr_y}`]
                 }
             ].map((content, i) => formulaText(content, i))}
         </ul>
