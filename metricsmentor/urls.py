@@ -54,6 +54,10 @@ urlpatterns = [
             name='create_submission'),
     re_path('^contact/', include('contactus.urls')),
     path('save_answer/', views.SaveAnswer.as_view(), name='save_answer'),
+    re_path(r'^course/(?P<pk>\d+)/get_quiz/$', views.GetQuizView.as_view(),
+            name='get_quiz'),
+    path('delete_quiz/', views.DeleteQuizSubmissionView.as_view(),
+         name='delete_quiz'),
 
 ]
 

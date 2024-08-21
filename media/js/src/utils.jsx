@@ -18,6 +18,16 @@ export const authedFetch = (url, method, data) => {
     });
 };
 
+/**
+ * Function to save an answer.
+ * @param {number} submissionId - The ID of the submission.
+ * @param {number} questionNumber - The number of the question.
+ * @param {string} questionType - The type of the question.
+ * @param {string} selectedOption - The selected option.
+ * @param {boolean} isCorrect - Whether the answer is correct.
+ * @param {object} additionalData - Any additional data.
+ * @returns {Promise<object>} - The response data.
+ */
 export const saveAnswer = async(submissionId, questionNumber, questionType,
     selectedOption, isCorrect, additionalData) => {
     try {
@@ -32,6 +42,26 @@ export const saveAnswer = async(submissionId, questionNumber, questionType,
         return response.data;
     } catch (error) {
         console.error('Error saving answer:', error);
+    }
+};
+
+/**
+ * Function to retrieve answers for a quiz submission
+ * @param {number} submissionId - The ID of the submission.
+ * @param {number} courseId - The course id.
+ * @returns {Promise<object>} - The response data.
+ */
+export const fetchQuizData = async(courseId, simulationId) => {
+    try {
+        const response = await axios.get(`/course/${courseId}/get_quiz/`, {
+            params: {
+                simulation_id: simulationId,
+            },
+        });
+        return response.data;
+    } catch (err) {
+        console.error('Error fetching quiz data:', err);
+        return {};
     }
 };
 

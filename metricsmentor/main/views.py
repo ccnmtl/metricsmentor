@@ -9,7 +9,7 @@ from django.contrib.auth.mixins import (
     LoginRequiredMixin
 )
 from django.contrib.auth.models import Group
-from django.shortcuts import render
+from django.shortcuts import render, get_object_or_404
 from django.http import (
     HttpResponseRedirect
 )
@@ -336,10 +336,6 @@ class CreateSubmission(LoggedInCourseMixin, View):
 
 class SaveAnswer(LoggedInCourseMixin, View):
 
-    @method_decorator(csrf_exempt)
-    def dispatch(self, *args, **kwargs):
-        return super().dispatch(*args, **kwargs)
-
     def post(self, request, *args, **kwargs):
         data = json.loads(request.body)
         submission_id = data.get('submission_id')
@@ -366,3 +362,73 @@ class SaveAnswer(LoggedInCourseMixin, View):
         )
 
         return JsonResponse({'status': 'success', 'answer_id': answer.id})
+
+
+class GetQuizView(LoginRequiredMixin, View):
+
+    def get(self, request, *args, **kwargs):
+        user = request.user
+        course_id = self.kwargs.get('pk')
+        simulation_id = request.GET.get('simulation_id')
+        course = get_object_or_404(Course, id=course_id)
+
+        # Fetch the latest active quiz submission
+        latest_submission = QuizSubmission.objects.filter(
+            user=user,
+            course=course,
+            simulation=simulation_id,
+            active=True
+        ).order_by('-created_at').first()
+
+        if not latest_submission:
+            return JsonResponse({'error': 'No active quiz submission found'},
+                                status=404)
+
+        # Filter answers by active=True for the latest submission
+        answers = Answer.objects.filter(
+            quiz_submission=latest_submission,
+            active=True
+        )
+
+        answers_data = [
+            {
+                'question_number': answer.question_number,
+                'question_type': answer.question_type,
+                'selected_option': answer.selected_option,
+                'is_correct': answer.is_correct,
+                'data': answer.data,
+                'created_at': answer.created_at.isoformat(),
+                'updated_at': answer.updated_at.isoformat(),
+            }
+            for answer in answers
+        ]
+
+        return JsonResponse({'answers': answers_data})
+
+
+class DeleteQuizSubmissionView(LoginRequiredMixin, View):
+
+    def post(self, request, *args, **kwargs):
+        data = json.loads(request.body)
+        submission_id = data.get('submission_id')
+
+        try:
+            quiz_submission = QuizSubmission.objects.get(id=submission_id)
+        except QuizSubmission.DoesNotExist:
+            return JsonResponse({
+                'status': 'error',
+                'message': 'Quiz submission not found'
+            }, status=404)
+
+        # Mark the quiz submission as inactive
+        quiz_submission.active = False
+        quiz_submission.save()
+
+        # Mark all answers under this submission as inactive
+        Answer.objects.filter(quiz_submission=quiz_submission).update(
+            active=False)
+
+        return JsonResponse({
+            'status': 'success',
+            'message': 'Quiz submission and answers deleted.'
+        })
