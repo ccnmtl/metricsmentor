@@ -212,6 +212,7 @@ export const labelIndex = {
 
 export const takeaways2 = {
     general: {
+        q_id: 1,
         prompt: <>Which of the following causes a higher change in the
             slope of the variable of interest {inlineKatex('x_1')}?</>,
         options: [
@@ -241,6 +242,7 @@ export const takeaways2 = {
             interest ({inlineKatex('x_1')}).</>
     },
     income: {
+        q_id: 2,
         prompt: 'Which one of the control variables causes the highest ' +
             'bias in the slope of the variable of interest when omitted? ' +
             'Why?',
@@ -268,6 +270,7 @@ export const takeaways2 = {
             the variable of interest ({inlineKatex('x_1')}).</>,
     },
     gpa4: {
+        q_id: 3,
         prompt: 'Which one of the control variables causes the highest ' +
             'bias in the slope of the variable of interest when omitted? ' +
             'Why?',
@@ -297,6 +300,7 @@ export const takeaways2 = {
             the variable of interest ({inlineKatex('x_1')}).</>,
     },
     affairs_sim2: {
+        q_id: 4,
         prompt: 'Which one of the control variables causes the highest ' +
             'bias in the slope of the variable of interest when omitted? ' +
             'Why?',
@@ -326,6 +330,7 @@ export const takeaways2 = {
             the variable of interest ({inlineKatex('x_1')}).</>,
     },
     campus_sim2: {
+        q_id: 5,
         prompt: 'Which one of the control variables causes the highest ' +
             'bias in the slope of the variable of interest when omitted? ' +
             'Why?',

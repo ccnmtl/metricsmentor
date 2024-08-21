@@ -7,7 +7,11 @@ import { Step } from '../step';
 import { dataAttr, labelIndex, takeaways2 } from '../dataAttr';
 import { LearningGoals } from './learningGoals';
 import { MultipleChoiceQuestion2 } from '../multipleChoiceQuestion2';
+import { authedFetch } from '../utils';
 
+const simContainer = document.querySelector('#react-root');
+const coursePk =
+    simContainer ? Number(simContainer.dataset.course) : '';
 
 export const SimulationTwo = () => {
     const freshComplete = () => Object.keys(DATASETS).reduce((acc, key) => {
@@ -20,10 +24,37 @@ export const SimulationTwo = () => {
     const [controls, setControls] = useState({});
     const [isSubmitted, setIsSubmitted] = useState(false);
     const [isComplete, setIsComplete] = useState(freshComplete());
-    // ===== CHECK SIM 1 FOR IMPLEMENTATION =====
-    const submissionId = 1;
-    const questionNumber = 1;
-    // ==========================================
+    const [submissionId, setSubmissionId] = useState();
+
+    const createSubmission = async(followUp=()=>true) => {
+        // Define the data to be saved based on the plot type
+        const data = {};
+
+        const payload = {
+            simulation: 2,
+            data: data
+        };
+
+        const url = `/course/${coursePk}/api/create-sub/`;
+
+        authedFetch(url, 'POST', payload)
+            .then(response => {
+                if (response.status === 201) {
+                    return response.json();
+                } else {
+                    throw `Error (${response.status}) ${response.statusText}`;
+                }
+            })
+            .then(data => {
+                console.log('Submission created:', data);
+                setSubmissionId(data.submission_id);
+                followUp();
+            })
+            .catch(error => {
+                console.error('Error saving graph data:', error);
+                throw error;
+            });
+    };
 
     const handleChoice = (e) => { setChoice(e.target.value); };
 
@@ -31,6 +62,9 @@ export const SimulationTwo = () => {
         setControls({...controls, [e.target.name]: e.target.checked});
     };
 
+    /**
+     * Reset the simulation to the beginning.
+     */
     const handleStartOver = () => {
         setData();
         setControls({});
@@ -61,19 +95,17 @@ export const SimulationTwo = () => {
         if (checkComplete() === 1)
         {
             return <MultipleChoiceQuestion2
-                {...{choice, isSubmitted, setIsSubmitted, submissionId,
-                    questionNumber, handleContinue, checkComplete,
-                    handleStartOver}}
-                questionNumber={3}
+                {...{choice, isSubmitted, setIsSubmitted, handleStartOver,
+                    handleContinue, checkComplete, submissionId,
+                    createSubmission, coursePk}}
                 takeaways={{[choice]: takeaways2[choice],
                     'general': takeaways2.general}}
             />;
         } else {
             return <MultipleChoiceQuestion2
-                {...{choice, isSubmitted, setIsSubmitted, submissionId,
-                    questionNumber, handleContinue, checkComplete,
-                    handleStartOver}}
-                questionNumber={1}
+                {...{choice, isSubmitted, setIsSubmitted, handleStartOver,
+                    handleContinue, checkComplete, submissionId,
+                    createSubmission, coursePk}}
                 takeaways={{[choice]: takeaways2[choice]}}
             />;
         }

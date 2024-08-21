@@ -2,46 +2,50 @@ import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { saveAnswer } from './utils';
 
-const simContainer = document.querySelector('#react-root');
-const coursePk =
-    simContainer ? Number(simContainer.dataset.course) : '';
 
-export const MultipleChoiceQuestion2 = ({ isSubmitted, setIsSubmitted,
-    submissionId, questionNumber, takeaways, handleContinue, checkComplete,
-    handleStartOver }) => {
+export const MultipleChoiceQuestion2 = ({isSubmitted, setIsSubmitted, takeaways,
+    handleContinue, checkComplete, handleStartOver, submissionId,
+    createSubmission, coursePk }) => {
 
     const [selected, setSelected] = useState({});
-    const [isCorrect, setIsCorrect] = useState({});
+    const [results, setResults] = useState({});
     const [nextStep, setNextStep] = useState(false);
 
     const handleOptionSelect = (topic, option) => {
         setSelected({...selected, [topic]: option});
     };
 
-    const checkCorrect = () => {
-        const result = Object.values(isCorrect);
-        const checkResult = result.length > 0 && !result.includes(false);
-        return checkResult;
+    const asyncSave = async function() {
+        for (let topic in results) {
+            await saveAnswer(
+                submissionId, takeaways[topic].q_id, 'multiple-choice',
+                selected[topic], results[topic], {});
+        }
     };
 
-    const handleSubmit = () => {
+    const handleSubmit = async() => {
         setIsSubmitted(true);
         const correct = {};
         for (let topic in takeaways) {
             correct[topic] = $(`input[name="${topic}-options"]:checked`)
                 .val() === takeaways[topic].answer;
         }
-        setIsCorrect({...isCorrect, ...correct});
+        setResults({...results, ...correct});
+        if (!submissionId) {
+            createSubmission(() => asyncSave());
+        } else {
+            asyncSave();
+        }
     };
 
     const feedback = function(topic, feedback_bad, feedback_good) {
-        if (isCorrect[topic] === true) {
+        if (results[topic] === true) {
             return (
                 <div className="form-check text-success mt-2 mb-4" role="alert">
                     {feedback_good}
                 </div>
             );
-        } else if (isCorrect[topic] === false) {
+        } else if (results[topic] === false) {
             return (
                 <div className="form-check text-danger mt-2 mb-4" role="alert">
                     {feedback_bad}
@@ -50,20 +54,12 @@ export const MultipleChoiceQuestion2 = ({ isSubmitted, setIsSubmitted,
         }
     };
 
-    useEffect(() => {
-        if (isCorrect) {
-            setNextStep(checkCorrect());
-            const asyncSave = async function(selected, correct) {
-                await saveAnswer(
-                    submissionId, questionNumber, 'multiple-choice',
-                    selected, correct, {});};
-            for (let topic in isCorrect) {
-                asyncSave(selected[topic], isCorrect[topic]);
-            }
-        }
-    }, [isCorrect]);
-
     const isDone = isSubmitted && nextStep && checkComplete() > 0;
+
+    useEffect(() => {
+        const result = Object.values(results);
+        setNextStep(result.length > 0 && !result.includes(false));
+    }, [results]);
 
     return (
         <div className="simulation__step-content container"
@@ -135,11 +131,12 @@ export const MultipleChoiceQuestion2 = ({ isSubmitted, setIsSubmitted,
 MultipleChoiceQuestion2.propTypes = {
     choice: PropTypes.string.isRequired,
     takeaways: PropTypes.object.isRequired,
-    submissionId: PropTypes.number.isRequired,
-    questionNumber: PropTypes.number.isRequired,
     setIsSubmitted: PropTypes.func.isRequired,
     isSubmitted: PropTypes.bool.isRequired,
     handleContinue: PropTypes.func.isRequired,
     checkComplete: PropTypes.func.isRequired,
     handleStartOver: PropTypes.func.isRequired,
+    createSubmission: PropTypes.func.isRequired,
+    submissionId: PropTypes.number,
+    coursePk: PropTypes.number.isRequired,
 };
