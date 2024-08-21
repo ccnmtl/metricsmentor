@@ -2,13 +2,26 @@ import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import { saveAnswer } from './utils';
 
-export const MultipleChoiceQuestion2 = ({
-    isSubmitted, setIsSubmitted, submissionId, questionNumber,
-    takeaways, isCorrect, setIsCorrect, choice, handleContinue }) => {
+const simContainer = document.querySelector('#react-root');
+const coursePk =
+    simContainer ? Number(simContainer.dataset.course) : '';
+
+export const MultipleChoiceQuestion2 = ({ isSubmitted, setIsSubmitted,
+    submissionId, questionNumber, takeaways, handleContinue, checkComplete,
+    handleStartOver }) => {
 
     const [selected, setSelected] = useState({});
+    const [isCorrect, setIsCorrect] = useState({});
+    const [nextStep, setNextStep] = useState(false);
+
     const handleOptionSelect = (topic, option) => {
         setSelected({...selected, [topic]: option});
+    };
+
+    const checkCorrect = () => {
+        const result = Object.values(isCorrect);
+        const checkResult = result.length > 0 && !result.includes(false);
+        return checkResult;
     };
 
     const handleSubmit = () => {
@@ -24,13 +37,13 @@ export const MultipleChoiceQuestion2 = ({
     const feedback = function(topic, feedback_bad, feedback_good) {
         if (isCorrect[topic] === true) {
             return (
-                <div className="alert alert-success mt-2" role="alert">
+                <div className="form-check text-success mt-2 mb-4" role="alert">
                     {feedback_good}
                 </div>
             );
         } else if (isCorrect[topic] === false) {
             return (
-                <div className="alert alert-danger mt-2" role="alert">
+                <div className="form-check text-danger mt-2 mb-4" role="alert">
                     {feedback_bad}
                 </div>
             );
@@ -39,6 +52,7 @@ export const MultipleChoiceQuestion2 = ({
 
     useEffect(() => {
         if (isCorrect) {
+            setNextStep(checkCorrect());
             const asyncSave = async function(selected, correct) {
                 await saveAnswer(
                     submissionId, questionNumber, 'multiple-choice',
@@ -48,6 +62,8 @@ export const MultipleChoiceQuestion2 = ({
             }
         }
     }, [isCorrect]);
+
+    const isDone = isSubmitted && nextStep && checkComplete() > 0;
 
     return (
         <div className="simulation__step-content container"
@@ -83,16 +99,34 @@ export const MultipleChoiceQuestion2 = ({
                     </div>
                 ))
             }
-            <button className="btn btn-secondary me-4"
-                type='submit' onClick={handleSubmit}
-            >
-                {'Submit >>'}
-            </button>
-            {isCorrect && isCorrect[choice] &&
-                <button className="btn btn-primary"
+            {!nextStep &&
+                <button className="btn btn-secondary me-2"
+                    type='submit' onClick={handleSubmit}
+                >
+                    {'Submit >>'}
+                </button>
+            }
+            {isDone &&
+                <a className="btn btn-secondary me-2" role="button"
+                    href={`/course/${coursePk}/`}
+                >
+                    {'I\'m Done! >>'}
+                </a>
+            }
+            {nextStep &&
+                <button className="btn btn-secondary me-2"
                     type='submit' onClick={handleContinue}
                 >
-                    {'Continue'}
+                    {checkComplete() < 1 ?
+                        'Continue >>' : 'Try another dataset >>'}
+                </button>
+            }
+            {(isDone || checkComplete() > 1) &&
+
+                <button className="btn btn-secondary"
+                    onClick={handleStartOver}
+                >
+                    Start Over
                 </button>
             }
         </div>);
@@ -105,7 +139,7 @@ MultipleChoiceQuestion2.propTypes = {
     questionNumber: PropTypes.number.isRequired,
     setIsSubmitted: PropTypes.func.isRequired,
     isSubmitted: PropTypes.bool.isRequired,
-    isCorrect: PropTypes.object.isRequired,
-    setIsCorrect: PropTypes.func.isRequired,
-    handleContinue: PropTypes.func.isRequired
+    handleContinue: PropTypes.func.isRequired,
+    checkComplete: PropTypes.func.isRequired,
+    handleStartOver: PropTypes.func.isRequired,
 };

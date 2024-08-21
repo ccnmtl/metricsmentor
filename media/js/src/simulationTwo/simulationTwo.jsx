@@ -9,12 +9,6 @@ import { LearningGoals } from './learningGoals';
 import { MultipleChoiceQuestion2 } from '../multipleChoiceQuestion2';
 
 
-// const CURRENT_USER = window.MetricsMentor.currentUser.id;
-// const simContainer = document.querySelector('#react-root');
-
-// const coursePk =
-//     simContainer ? Number(simContainer.dataset.course) : '';
-
 export const SimulationTwo = () => {
     const freshComplete = () => Object.keys(DATASETS).reduce((acc, key) => {
         acc[key] = false;
@@ -25,7 +19,6 @@ export const SimulationTwo = () => {
     const [data, setData] = useState();
     const [controls, setControls] = useState({});
     const [isSubmitted, setIsSubmitted] = useState(false);
-    const [isCorrect, setIsCorrect] = useState({});
     const [isComplete, setIsComplete] = useState(freshComplete());
     // ===== CHECK SIM 1 FOR IMPLEMENTATION =====
     const submissionId = 1;
@@ -53,6 +46,9 @@ export const SimulationTwo = () => {
         setControls({});
     }, [data]);
 
+    const checkComplete = () => Object.values(isComplete)
+        .reduce((acc, val) => acc + val, 0);
+
     /**
      * If the user has completed the first question for the current dataset,
      * show the second with a general question.
@@ -62,22 +58,21 @@ export const SimulationTwo = () => {
         // If the user has completed the first question
         // for the current dataset, show the second with a
         // general question.
-        if (Object.values(isComplete)
-            .reduce((acc, val) => acc + val, 0) === 1)
+        if (checkComplete() === 1)
         {
             return <MultipleChoiceQuestion2
-                {...{choice, isSubmitted, setIsSubmitted,
-                    submissionId, questionNumber, isCorrect,
-                    setIsCorrect, handleContinue}}
+                {...{choice, isSubmitted, setIsSubmitted, submissionId,
+                    questionNumber, handleContinue, checkComplete,
+                    handleStartOver}}
                 questionNumber={3}
                 takeaways={{[choice]: takeaways2[choice],
                     'general': takeaways2.general}}
             />;
         } else {
             return <MultipleChoiceQuestion2
-                {...{choice, isSubmitted, setIsSubmitted,
-                    submissionId, questionNumber, isCorrect,
-                    setIsCorrect, handleContinue}}
+                {...{choice, isSubmitted, setIsSubmitted, submissionId,
+                    questionNumber, handleContinue, checkComplete,
+                    handleStartOver}}
                 questionNumber={1}
                 takeaways={{[choice]: takeaways2[choice]}}
             />;
@@ -155,16 +150,12 @@ export const SimulationTwo = () => {
                     {...{controls, data, labelIndex}}
                     param={dataAttr[choice]}
                 />
-                <button className="btn btn-warning m-2"
-                    onClick={handleStartOver}
-                    style={{position: 'absolute', top: '0px'}}
-                >
-                    Start Over
-                </button>
-                <div className='row'>
-                    <p className='col-auto mx-auto'>
-                        Dataset source and information
-                    </p>
+                <div className='container'>
+                    <div className='row'>
+                        <p className='col-auto mx-auto'>
+                            Dataset source and information
+                        </p>
+                    </div>
                 </div>
             </div> {/* div class=simulation__graphspace */}
         </div> // div class=simulation
