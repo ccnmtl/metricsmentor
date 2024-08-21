@@ -21,17 +21,17 @@ export const MultipleChoiceQuestion2 = ({
         setIsCorrect({...isCorrect, ...correct});
     };
 
-    const feedback = function(topic, answer) {
+    const feedback = function(topic, feedback_bad, feedback_good) {
         if (isCorrect[topic] === true) {
             return (
                 <div className="alert alert-success mt-2" role="alert">
-                    Correct! The answer is {answer}.
+                    {feedback_good}
                 </div>
             );
         } else if (isCorrect[topic] === false) {
             return (
                 <div className="alert alert-danger mt-2" role="alert">
-                    Incorrect. The answer is {answer}.
+                    {feedback_bad}
                 </div>
             );
         }
@@ -53,35 +53,34 @@ export const MultipleChoiceQuestion2 = ({
         <div className="simulation__step-content container"
         >
             {Object.entries(takeaways)
-                .map(([topic, {prompt, options, answer}], i) => (<div key={i}>
-                    <p>{prompt.map((text, index) => {
-                        if (index % 2 === 0) {
-                            return <span key={index}>{text}</span>;
-                        } else {
-                            return <strong key={index}>{text}</strong>;
-                        }})}
-                    </p>
-                    {options.map((option, index) => (
-                        <div key={index} className="form-check mb-2">
-                            <input
-                                className="form-check-input"
-                                type='radio'
-                                id={`${topic}-option-${index}`}
-                                name={`${topic}-options`}
-                                value={option}
-                                checked={selected[topic] === option}
-                                onChange={() => handleOptionSelect(
-                                    topic, option)}
-                            />
-                            <label className="form-check-label"
-                                htmlFor={`${topic}-option-${index}`}
-                            >
-                                {option}
-                            </label>
-                        </div>
-                    ))}
-                    {isSubmitted && feedback(topic, answer)}
-                </div>
+                .map(([topic, {prompt, options, answer, feedback_bad,
+                    feedback_good}], i) => (
+                    <div key={i}>
+                        <p>
+                            {prompt}
+                        </p>
+                        {options.map((option, index) => (
+                            <div key={index} className="form-check mb-2">
+                                <input
+                                    className="form-check-input"
+                                    type='radio'
+                                    id={`${topic}-option-${index}`}
+                                    name={`${topic}-options`}
+                                    value={option}
+                                    checked={selected[topic] === option}
+                                    onChange={() => handleOptionSelect(
+                                        topic, option)}
+                                />
+                                <label className="form-check-label"
+                                    htmlFor={`${topic}-option-${index}`}
+                                >
+                                    {option}
+                                </label>
+                            </div>
+                        ))}
+                        {isSubmitted && feedback(topic, feedback_bad,
+                            feedback_good)}
+                    </div>
                 ))
             }
             <button className="btn btn-secondary me-4"
