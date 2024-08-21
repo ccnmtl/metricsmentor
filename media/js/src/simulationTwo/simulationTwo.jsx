@@ -16,20 +16,17 @@ import { MultipleChoiceQuestion2 } from '../multipleChoiceQuestion2';
 //     simContainer ? Number(simContainer.dataset.course) : '';
 
 export const SimulationTwo = () => {
-    // const [startQuiz, setStartQuiz] = useState(false);
-    // const [hypothesizedSlope, setHypothesizedSlope] = useState(0);
+    const freshComplete = () => Object.keys(DATASETS).reduce((acc, key) => {
+        acc[key] = false;
+        return acc;
+    }, {});
+
     const [choice, setChoice] = useState();
     const [data, setData] = useState();
-    const [controls, setControls] = useState(
-        {consump: false, black: false, size: false});
+    const [controls, setControls] = useState({});
     const [isSubmitted, setIsSubmitted] = useState(false);
     const [isCorrect, setIsCorrect] = useState({});
-    const [isComplete, setIsComplete] = useState(
-        Object.keys(DATASETS).reduce((acc, key) => {
-            acc[key] = false;
-            return acc;
-        }, {})
-    );
+    const [isComplete, setIsComplete] = useState(freshComplete());
     // ===== CHECK SIM 1 FOR IMPLEMENTATION =====
     const submissionId = 1;
     const questionNumber = 1;
@@ -42,8 +39,10 @@ export const SimulationTwo = () => {
     };
 
     const handleStartOver = () => {
+        setData();
         setControls({});
-        setChoice('income');
+        setChoice();
+        setIsComplete(freshComplete());
     };
 
     useEffect(() => {

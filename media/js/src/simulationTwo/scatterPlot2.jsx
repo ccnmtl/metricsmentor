@@ -53,11 +53,13 @@ export const ScatterPlot2 = ({controls, data, labelIndex, param}) => {
 
     useEffect(() => {
         const altLines = [];
-        Object.entries(controls).forEach(([key, value]) => {
-            if (value) {
-                altLines.push(param.lines[key]);
-            }
-        });
+        if (controls) {
+            Object.entries(controls).forEach(([key, value]) => {
+                if (value) {
+                    altLines.push(param.lines[key]);
+                }
+            });
+        }
         setSelectedAltLines(altLines);
     }, [controls]);
 
