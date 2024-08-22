@@ -203,3 +203,60 @@ class DeleteQuizSubmissionViewTest(CourseTestMixin, TestCase):
         response_data = json.loads(response.content)
         self.assertEqual(response_data['status'], 'error')
         self.assertEqual(response_data['message'], 'Quiz submission not found')
+
+
+class DeleteAnswerViewTest(CourseTestMixin, TestCase):
+    def test_delete_answer(self):
+        self.setup_course()
+        self.client.force_login(self.superuser)
+
+        quiz_submission = QuizSubmission.objects.create(
+            user=self.superuser,
+            simulation=1,
+            data={'dummy': 'data'},
+            course=self.registrar_course,
+            active=True
+        )
+
+        answer = Answer.objects.create(
+            quiz_submission=quiz_submission,
+            question_number=1,
+            question_type='multiple_choice',
+            selected_option='A',
+            is_correct=True,
+            data={'example_key': 'example_value'},
+            active=True
+        )
+
+        url = reverse('delete_answer')
+        response = self.client.post(
+            url,
+            data=json.dumps({'answer_id': answer.id}),
+            content_type='application/json'
+        )
+
+        self.assertEqual(response.status_code, 200)
+        response_data = json.loads(response.content)
+        self.assertEqual(response_data['status'], 'success')
+        self.assertEqual(response_data['message'],
+                         'Answer deleted successfully')
+
+        answer.refresh_from_db()
+        self.assertFalse(answer.active)
+
+    def test_delete_answer_not_found(self):
+        self.setup_course()
+        self.client.force_login(self.superuser)
+
+        url = reverse('delete_answer')
+        response = self.client.post(
+            url,
+            data=json.dumps({'answer_id': 999}),  # Non-existent ID
+            content_type='application/json'
+        )
+
+        self.assertEqual(response.status_code, 404)
+        response_data = json.loads(response.content)
+        self.assertEqual(response_data['status'], 'error')
+        self.assertEqual(response_data['message'],
+                         'Answer not found or already inactive')

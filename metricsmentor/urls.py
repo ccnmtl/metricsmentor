@@ -58,6 +58,8 @@ urlpatterns = [
             name='get_quiz'),
     path('delete_quiz/', views.DeleteQuizSubmissionView.as_view(),
          name='delete_quiz'),
+    path('delete_answer/', views.DeleteAnswerView.as_view(),
+         name='delete_answer'),
 
 ]
 

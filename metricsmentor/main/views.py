@@ -323,7 +323,8 @@ class CreateSubmission(LoggedInCourseMixin, View):
             user=user,
             simulation=simulation,
             data=graph_data,
-            course=course
+            course=course,
+            active=True
         )
 
         print(f'Quiz submission created successfully: {quiz_submission}')
@@ -358,7 +359,8 @@ class SaveAnswer(LoggedInCourseMixin, View):
             question_type=question_type,
             selected_option=selected_option,
             is_correct=is_correct,
-            data=additional_data
+            data=additional_data,
+            active=True
         )
 
         return JsonResponse({'status': 'success', 'answer_id': answer.id})
@@ -431,4 +433,27 @@ class DeleteQuizSubmissionView(LoginRequiredMixin, View):
         return JsonResponse({
             'status': 'success',
             'message': 'Quiz submission and answers deleted.'
+        })
+
+
+class DeleteAnswerView(LoginRequiredMixin, View):
+
+    def post(self, request, *args, **kwargs):
+        data = json.loads(request.body)
+        answer_id = data.get('answer_id')
+
+        try:
+            answer = Answer.objects.get(id=answer_id, active=True)
+        except Answer.DoesNotExist:
+            return JsonResponse({
+                'status': 'error',
+                'message': 'Answer not found or already inactive'
+            }, status=404)
+
+        answer.active = False
+        answer.save()
+
+        return JsonResponse({
+            'status': 'success',
+            'message': 'Answer deleted successfully'
         })
