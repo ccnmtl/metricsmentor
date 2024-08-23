@@ -383,8 +383,10 @@ class GetQuizView(LoginRequiredMixin, View):
         ).order_by('-created_at').first()
 
         if not latest_submission:
-            return JsonResponse({'error': 'No active quiz submission found'},
-                                status=404)
+            return JsonResponse({
+                'answers': [],
+                'submission_id': None
+            })
 
         # Filter answers by active=True for the latest submission
         answers = Answer.objects.filter(
@@ -405,7 +407,10 @@ class GetQuizView(LoginRequiredMixin, View):
             for answer in answers
         ]
 
-        return JsonResponse({'answers': answers_data})
+        return JsonResponse({
+            'answers': answers_data,
+            'submission_id': latest_submission.pk
+        })
 
 
 class DeleteQuizSubmissionView(LoginRequiredMixin, View):
@@ -440,20 +445,34 @@ class DeleteAnswerView(LoginRequiredMixin, View):
 
     def post(self, request, *args, **kwargs):
         data = json.loads(request.body)
-        answer_id = data.get('answer_id')
+        submission_id = data.get('submission_id')
+        question_number = data.get('question_number')
 
         try:
-            answer = Answer.objects.get(id=answer_id, active=True)
+            quiz_submission = QuizSubmission.objects.get(id=submission_id)
+        except QuizSubmission.DoesNotExist:
+            return JsonResponse({
+                'status': 'error',
+                'message': 'Quiz submission not found'
+            }, status=404)
+
+        try:
+            answer = Answer.objects.get(
+                quiz_submission=quiz_submission,
+                question_number=question_number,
+                active=True
+            )
         except Answer.DoesNotExist:
             return JsonResponse({
                 'status': 'error',
-                'message': 'Answer not found or already inactive'
+                'message': 'Answer for question not found'
             }, status=404)
 
+        # Mark the answer as inactive
         answer.active = False
         answer.save()
 
         return JsonResponse({
             'status': 'success',
-            'message': 'Answer deleted successfully'
+            'message': 'Answer for question deleted'
         })
