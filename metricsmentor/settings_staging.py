@@ -1,9 +1,7 @@
-import sys
-from metricsmentor.settings_shared import *  # noqa: F403
-from ctlsettings.staging import common
 from django.conf import settings
-import sentry_sdk
-from sentry_sdk.integrations.django import DjangoIntegration
+from ctlsettings.staging import common, init_sentry
+from metricsmentor.settings_shared import *  # noqa: F403
+
 
 locals().update(
     common(
@@ -22,11 +20,6 @@ try:
 except ImportError:
     pass
 
-if ('migrate' not in sys.argv) and \
-   ('collectstatic' not in sys.argv) and \
-   hasattr(settings, 'SENTRY_DSN'):
-    sentry_sdk.init(
-        dsn=SENTRY_DSN,  # noqa: F405
-        integrations=[DjangoIntegration()],
-        debug=True,
-    )
+
+if hasattr(settings, 'SENTRY_DSN'):
+    init_sentry(SENTRY_DSN)  # noqa: F405
