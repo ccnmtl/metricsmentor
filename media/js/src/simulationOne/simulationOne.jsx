@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { ScatterPlot } from './scatterPlot';
 import { Katex } from '../katexComponent';
-import { authedFetch } from '../utils';
+import { authedFetch, fetchQuizData } from '../utils';
 import { SimulationOneQuiz } from './simulationOneQuiz';
 import { SimIntro } from './simulationIntro';
 import { GraphCoefficients } from './graphCoefficientsSection';
@@ -86,7 +86,9 @@ export const SimulationOne = () => {
 
     const handleCreateSub = async() => {
         try {
-            await createSubmission();
+            if(!submissionId) {
+                await createSubmission();
+            }
         } catch (error) {
             alert('Failed to save graph and submission.');
         }
@@ -142,6 +144,20 @@ export const SimulationOne = () => {
         // eslint-disable-next-line max-len
         tvalue3d = parseFloat(((slopes[0].toFixed(3) - hypothesizedSlope) / stderrs[0].toFixed(3)).toFixed(2));
     }
+
+    useEffect(() => {
+        fetchQuizData(coursePk, 1)
+            .then(data => {
+                if (data.submission_id) {
+                    if (plotType === '2d') {
+                        setStartQuiz(true);
+                    } else {
+                        setStartQuiz2(true);
+                    }
+                    setSubmissionId(data.submission_id);
+                }
+            });
+    }, []);
 
     return (
         <div className="simulation">

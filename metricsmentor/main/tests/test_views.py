@@ -140,10 +140,10 @@ class GetQuizViewTest(CourseTestMixin, TestCase):
         # No active submission should return a 404 response
         url = reverse('get_quiz', kwargs={'pk': self.registrar_course.pk})
         response = self.client.get(url, {'simulation_id': 1})
-        self.assertEqual(response.status_code, 404)
+        self.assertEqual(response.status_code, 200)
         response_data = json.loads(response.content)
-        self.assertEqual(response_data['error'],
-                         'No active quiz submission found')
+        self.assertEqual(response_data['answers'], [])
+        self.assertEqual(response_data['submission_id'], None)
 
 
 class DeleteQuizSubmissionViewTest(CourseTestMixin, TestCase):
@@ -206,57 +206,58 @@ class DeleteQuizSubmissionViewTest(CourseTestMixin, TestCase):
 
 
 class DeleteAnswerViewTest(CourseTestMixin, TestCase):
-    def test_delete_answer(self):
+    def setUp(self):
         self.setup_course()
         self.client.force_login(self.superuser)
-
-        quiz_submission = QuizSubmission.objects.create(
+        self.quiz_submission = QuizSubmission.objects.create(
             user=self.superuser,
             simulation=1,
             data={'dummy': 'data'},
-            course=self.registrar_course,
-            active=True
+            course=self.registrar_course
         )
-
-        answer = Answer.objects.create(
-            quiz_submission=quiz_submission,
+        self.answer = Answer.objects.create(
+            quiz_submission=self.quiz_submission,
             question_number=1,
             question_type='multiple_choice',
             selected_option='A',
             is_correct=True,
-            data={'example_key': 'example_value'},
-            active=True
+            data={'example_key': 'example_value'}
         )
 
-        url = reverse('delete_answer')
+        self.url = reverse('delete_answer')
+
+    def test_delete_answer_success(self):
+        self.assertTrue(self.answer.active)
+        request_data = {
+            'submission_id': self.quiz_submission.id,
+            'question_number': self.answer.question_number,
+        }
         response = self.client.post(
-            url,
-            data=json.dumps({'answer_id': answer.id}),
+            self.url,
+            data=json.dumps(request_data),
             content_type='application/json'
         )
-
         self.assertEqual(response.status_code, 200)
+        self.answer.refresh_from_db()
+        self.assertFalse(self.answer.active)
+
         response_data = json.loads(response.content)
         self.assertEqual(response_data['status'], 'success')
         self.assertEqual(response_data['message'],
-                         'Answer deleted successfully')
-
-        answer.refresh_from_db()
-        self.assertFalse(answer.active)
+                         'Answer for question 1 deleted')
 
     def test_delete_answer_not_found(self):
-        self.setup_course()
-        self.client.force_login(self.superuser)
-
-        url = reverse('delete_answer')
+        request_data = {
+            'submission_id': self.quiz_submission.id,
+            'question_number': 999,
+        }
         response = self.client.post(
-            url,
-            data=json.dumps({'answer_id': 999}),  # Non-existent ID
+            self.url,
+            data=json.dumps(request_data),
             content_type='application/json'
         )
-
         self.assertEqual(response.status_code, 404)
         response_data = json.loads(response.content)
         self.assertEqual(response_data['status'], 'error')
         self.assertEqual(response_data['message'],
-                         'Answer not found or already inactive')
+                         'Answer for question 999 not found')

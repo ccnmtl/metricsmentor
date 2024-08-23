@@ -65,6 +65,42 @@ export const fetchQuizData = async(courseId, simulationId) => {
     }
 };
 
+/**
+ * Function to delete an answer by question number.
+ * @param {number} submissionId - The ID of the submission.
+ * @param {number} questionNumber - The number of the question.
+ * @returns {Promise<object>} - The response data.
+ */
+export const deleteAnswer = async(submissionId, questionNumber) => {
+    try {
+        const response = await axios.post('/delete_answer/', {
+            submission_id: submissionId,
+            question_number: questionNumber,
+        });
+        return response.data;
+    } catch (error) {
+        console.error('Error deleting answer:', error);
+    }
+};
+
+/**
+ * Function to delete a quiz submission by marking it and
+ * its answers as inactive.
+ * @param {number} submissionId - The ID of the quiz submission.
+ * @returns {Promise<object>} - The response data.
+ */
+export const deleteQuiz = async(submissionId) => {
+    try {
+        const response = await axios.post('/delete_quiz/', {
+            submission_id: submissionId,
+        });
+        return response.data;
+    } catch (error) {
+        console.error('Error deleting quiz submission:', error);
+        return { status: 'error', message: 'Failed to delete quiz submission' };
+    }
+};
+
 
 /**
  * Standardized function for rendering inline LaTeX.
