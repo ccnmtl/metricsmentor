@@ -140,10 +140,10 @@ class GetQuizViewTest(CourseTestMixin, TestCase):
         # No active submission should return a 404 response
         url = reverse('get_quiz', kwargs={'pk': self.registrar_course.pk})
         response = self.client.get(url, {'simulation_id': 1})
-        self.assertEqual(response.status_code, 404)
+        self.assertEqual(response.status_code, 200)
         response_data = json.loads(response.content)
-        self.assertEqual(response_data['error'],
-                         'No active quiz submission found')
+        self.assertEqual(response_data['answers'], [])
+        self.assertEqual(response_data['submission_id'], None)
 
 
 class DeleteQuizSubmissionViewTest(CourseTestMixin, TestCase):
@@ -206,11 +206,11 @@ class DeleteQuizSubmissionViewTest(CourseTestMixin, TestCase):
 
 
 class DeleteAnswerViewTest(CourseTestMixin, TestCase):
-    def test_delete_answer(self):
+    def setUp(self):
         self.setup_course()
         self.client.force_login(self.superuser)
 
-        quiz_submission = QuizSubmission.objects.create(
+        self.quiz_submission = QuizSubmission.objects.create(
             user=self.superuser,
             simulation=1,
             data={'dummy': 'data'},
@@ -218,8 +218,8 @@ class DeleteAnswerViewTest(CourseTestMixin, TestCase):
             active=True
         )
 
-        answer = Answer.objects.create(
-            quiz_submission=quiz_submission,
+        self.answer = Answer.objects.create(
+            quiz_submission=self.quiz_submission,
             question_number=1,
             question_type='multiple_choice',
             selected_option='A',
@@ -228,10 +228,14 @@ class DeleteAnswerViewTest(CourseTestMixin, TestCase):
             active=True
         )
 
+    def test_delete_answer(self):
         url = reverse('delete_answer')
         response = self.client.post(
             url,
-            data=json.dumps({'answer_id': answer.id}),
+            data=json.dumps({
+                'submission_id': self.quiz_submission.id,
+                'question_number': 1
+            }),
             content_type='application/json'
         )
 
@@ -239,19 +243,18 @@ class DeleteAnswerViewTest(CourseTestMixin, TestCase):
         response_data = json.loads(response.content)
         self.assertEqual(response_data['status'], 'success')
         self.assertEqual(response_data['message'],
-                         'Answer deleted successfully')
-
-        answer.refresh_from_db()
-        self.assertFalse(answer.active)
+                         'Answer for question deleted')
+        self.answer.refresh_from_db()
+        self.assertFalse(self.answer.active)
 
     def test_delete_answer_not_found(self):
-        self.setup_course()
-        self.client.force_login(self.superuser)
-
         url = reverse('delete_answer')
         response = self.client.post(
             url,
-            data=json.dumps({'answer_id': 999}),  # Non-existent ID
+            data=json.dumps({
+                'submission_id': self.quiz_submission.id,
+                'question_number': 999
+            }),
             content_type='application/json'
         )
 
@@ -259,4 +262,20 @@ class DeleteAnswerViewTest(CourseTestMixin, TestCase):
         response_data = json.loads(response.content)
         self.assertEqual(response_data['status'], 'error')
         self.assertEqual(response_data['message'],
-                         'Answer not found or already inactive')
+                         'Answer for question not found')
+
+    def test_delete_submission_not_found(self):
+        url = reverse('delete_answer')
+        response = self.client.post(
+            url,
+            data=json.dumps({
+                'submission_id': 999,
+                'question_number': 1
+            }),
+            content_type='application/json'
+        )
+
+        self.assertEqual(response.status_code, 404)
+        response_data = json.loads(response.content)
+        self.assertEqual(response_data['status'], 'error')
+        self.assertEqual(response_data['message'], 'Quiz submission not found')
