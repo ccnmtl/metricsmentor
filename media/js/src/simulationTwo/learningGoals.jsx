@@ -18,11 +18,15 @@ export const LearningGoals = ({
             <div>
                 Let&apos;s choose a dataset to begin:
                 {[
-                    ['income', 'Brief description of the income dataset'],
-                    ['gpa4', 'Brief description of the gpa4 dataset'],
-                    ['affairs_sim2', 'Brief description of the affairs ' +
-                        'dataset'],
-                    ['campus_sim2', 'Brief description of the crime dataset']
+                    ['income', 'The relationship between annual income and ' +
+                        'years of education of the household head.'],
+                    ['gpa4', 'The relationship between college and high ' +
+                        'school GPAs.'],
+                    ['affairs_sim2', 'The relationship between the ' +
+                        'frequency of extramarital affairs and marriage ' +
+                        'satisfaction ratings.'],
+                    ['campus_sim2', 'The relationship between campus crime ' +
+                        'rates and total student enrollment.']
                 ].map((dType, i) => (
                     <span className="form-check" key={i}>
                         <input
