@@ -9,17 +9,14 @@ export const Variables = ({params}) => {
     const vars = params.lines[params.x_1];
     return (<>
         <p>
-            Narrative for context with this first mandatory dataset. Here M2
-            displays the dataset plot of {inlineKatex('y')} and
-            {inlineKatex('x_1')} only (single variable regression). Some
-            explanation, and narrative on what’s goes on <strong> in this step
-            </strong> here. Example, &quot;we&apos;re looking at the
-            relationship between income and years of education.&quot;
-            <br />
-            Indicate here what the names for {inlineKatex('y')} and
-            {inlineKatex('x_1')} are.
-        </p>
-        <p>
+            <span className="text-danger fw-semibold">Evan: This paragraph is
+            dependent on the dataset chosen.</span>
+            In the &ldquo;Income&rdquo; dataset, our goal is to examine the
+            relationship between the dependent variable, annual income
+            ({inlineKatex('y')}), and the key variable of interest, which is
+            the years of education of the household head
+            ({inlineKatex('x_1')}). Here is the simple regression analysis
+            for these variables:
         </p>
         <ul className="list-group">
             {[

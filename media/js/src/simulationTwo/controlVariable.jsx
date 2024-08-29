@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { formulaText, inlineKatex } from '../utils';
 import { labelIndex } from '../dataAttr';
+import { Katex } from '../katexComponent';
 
 
 export const ControlVariable = ({
@@ -11,21 +12,35 @@ export const ControlVariable = ({
     return (
         <div className="row">
             <p>
-                Instructions for this step. <br />
-                Guide user with a narrative, lead them to what they need
-                to pay attention to when turning on/off each variable.
-                explanation on the generic regression line, intro to OVB. <br />
-                This instruction needs to include the effect of the
-                covariants:
+                In regression analysis, when a relevant control variable is
+                omitted, the effect of this missing variable gets absorbed
+                into the error term {inlineKatex('u')}.
             </p>
-            <p className="mb-4">
-                {formulaText({ body: [
-                    '\\hat{\\beta_1} \\xrightarrow{\\rho} \\beta_1 + ' +
-                        '[the\\ bias\\ ratio]',
-                    'y = \\beta_0 + \\beta_1x_1 + \\beta_2x_2 + u',
-                    '\\hat{y} = \\hat{\\beta_0} + \\hat{\\beta_1}x_1 + ' +
-                        '\\hat{\\beta_2}x_i',]
-                })}
+            <div className="ms-3 mb-3">
+                <Katex tex={'y = \\beta_0 + \\beta_1x_1 + u'} />
+            </div>
+            <p>
+                This is known as the omitted variable bias (OVB). If the
+                omitted variable is correlated with both the dependent
+                variable {inlineKatex('y')}, and the independent variable of
+                interest {inlineKatex('x_1')}, it introduces bias into the
+                estimated sample slope {inlineKatex('\\hat{\\beta_1}')}.
+            </p>
+            <p>
+                In a simple linear regression, the effect of OVB on
+                {inlineKatex('\\hat{\\beta_1}')} is as follows:
+            </p>
+            <div className="ms-3 mb-3">
+                <Katex tex={
+                    // eslint-disable-next-line max-len
+                    '\\hat{\\beta_1} \\xrightarrow{p} \\beta_1 + [bias]'} />
+            </div>
+            <p>
+                <span className="text-danger fw-semibold">Evan: This paragraph
+                is dependent on the dataset chosen.</span>
+                In this case, OVB can lead to inaccurate estimates of the
+                relationships between {inlineKatex('Income')} and
+                {inlineKatex('YearsOfEducation')}.
             </p>
             {/* <div className="col-12 mb-2">
                 <label htmlFor="data-choice">
@@ -44,8 +59,13 @@ export const ControlVariable = ({
                 </select>
             </div> */}
             <h2 className="mb-4">
-                Choose one control variable on plot (need better header):
+                Control variables for this dataset:
             </h2>
+            <p>
+                <span className="text-danger fw-semibold">Evan: This paragraph
+                is dependent on the dataset chosen.</span> Instructions for
+                Income dataset control variables TBD.
+            </p>
             <ul>
                 {Object.entries(data).slice(0,2)
                     .map((dType, i) => (
@@ -110,8 +130,17 @@ export const ControlVariable = ({
                                     }
                                 ].map((content, i) => formulaText(content, i))}
                             </ul>
-                            {controls[dType] === true && (
-                                <p className='my-4'>
+                            {controls[dType] === true && (<>
+                                <p className="mt-3">
+                                    <span className="text-danger fw-semibold">
+                                    Evan: Make placehoder paragraph that is
+                                    dependent on the dataset chosen.</span>
+                                    Instructions for Income dataset control
+                                    variables TBD.
+                                </p>
+                                <p>
+                                    This paragraph is generic, not dependent
+                                    on dataset.
                                     Text to guide user with a narrative, lead
                                     them to what they need to pay attention to
                                     with what they see. <br />
@@ -130,7 +159,7 @@ export const ControlVariable = ({
                                     and old regression lines, and shift in
                                     {inlineKatex('\\hat{\\beta_1}')}.
                                 </p>
-                            )}
+                            </>)}
                             <hr style={{borderTop: 'dotted 3px'}}/>
                         </li>);
                 })}
