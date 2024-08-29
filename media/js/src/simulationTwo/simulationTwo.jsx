@@ -4,10 +4,11 @@ import { Variables } from './variables';
 import { ControlVariable } from './controlVariable';
 import DATASETS from '../../../../json/datasets.json';
 import { Step } from '../step';
-import { dataAttr, labelIndex, takeaways2 } from '../dataAttr';
 import { LearningGoals } from './learningGoals';
 import { MultipleChoiceQuestion2 } from '../multipleChoiceQuestion2';
 import { authedFetch } from '../utils';
+import { dataAttr, labelIndex, takeaways2, sim2TextVariable as varText,
+    sim2TextControl as controlText } from '../dataAttr';
 
 const simContainer = document.querySelector('#react-root');
 const coursePk =
@@ -148,12 +149,15 @@ export const SimulationTwo = () => {
                     {[
                         {
                             title: 'Variables of Interest',
-                            body: <Variables params={dataAttr[choice]} />
+                            body: <Variables params={{
+                                ...dataAttr[choice],
+                                varText: varText[choice]}} />
                         },
                         {
                             title: 'Control Variables',
                             body: <ControlVariable data={dataAttr[choice]}
-                                {...{controls, handleControls}}/>
+                                {...{controls, handleControls,
+                                    controlText: controlText[choice]}}/>
                         },
                     ].map((step, i) =>
                         <Step key={i} header={step.header} title={step.title}>

@@ -6,7 +6,7 @@ import { Katex } from '../katexComponent';
 
 
 export const ControlVariable = ({
-    controls, data, handleControls
+    controls, data, handleControls, controlText
 }) => {
     // const baseData = data.lines[data.y];
     return (
@@ -36,11 +36,7 @@ export const ControlVariable = ({
                     '\\hat{\\beta_1} \\xrightarrow{p} \\beta_1 + [bias]'} />
             </div>
             <p>
-                <span className="text-danger fw-semibold">Evan: This paragraph
-                is dependent on the dataset chosen.</span>
-                In this case, OVB can lead to inaccurate estimates of the
-                relationships between {inlineKatex('Income')} and
-                {inlineKatex('YearsOfEducation')}.
+                {controlText.intro}
             </p>
             {/* <div className="col-12 mb-2">
                 <label htmlFor="data-choice">
@@ -62,9 +58,7 @@ export const ControlVariable = ({
                 Control variables for this dataset:
             </h2>
             <p>
-                <span className="text-danger fw-semibold">Evan: This paragraph
-                is dependent on the dataset chosen.</span> Instructions for
-                Income dataset control variables TBD.
+                {controlText.general_inst}
             </p>
             <ul>
                 {Object.entries(data).slice(0,2)
@@ -132,11 +126,7 @@ export const ControlVariable = ({
                             </ul>
                             {controls[dType] === true && (<>
                                 <p className="mt-3">
-                                    <span className="text-danger fw-semibold">
-                                    Evan: Make placehoder paragraph that is
-                                    dependent on the dataset chosen.</span>
-                                    Instructions for Income dataset control
-                                    variables TBD.
+                                    {controlText.control_inst[dType]}
                                 </p>
                                 <p>
                                     This paragraph is generic, not dependent
@@ -172,4 +162,5 @@ ControlVariable.propTypes = {
     controls: PropTypes.object.isRequired,
     data: PropTypes.object.isRequired,
     handleControls: PropTypes.func.isRequired,
+    controlText: PropTypes.object.isRequired,
 };

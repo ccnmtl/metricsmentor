@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { inlineKatex, formulaText } from '../utils';
-import { labelIndex as label} from '../dataAttr';
+import { labelIndex as label } from '../dataAttr';
 
 // If this get's implemented into other Simulations, rewrite as a JSX component
 
@@ -9,14 +9,7 @@ export const Variables = ({params}) => {
     const vars = params.lines[params.x_1];
     return (<>
         <p>
-            <span className="text-danger fw-semibold">Evan: This paragraph is
-            dependent on the dataset chosen.</span>
-            In the &ldquo;Income&rdquo; dataset, our goal is to examine the
-            relationship between the dependent variable, annual income
-            ({inlineKatex('y')}), and the key variable of interest, which is
-            the years of education of the household head
-            ({inlineKatex('x_1')}). Here is the simple regression analysis
-            for these variables:
+            {params.varText}
         </p>
         <ul className="list-group">
             {[
