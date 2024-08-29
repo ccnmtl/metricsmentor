@@ -9,14 +9,15 @@ export const LearningGoals = ({
     return (
         <div>
             <p>
-                Learning goals to orient students&apos; expectations, shape
-                their focus. TBD. lorem ipsum dolor sit amet, consectetur
-                adipiscing elit. Etiam dictum tristique faucibus. Class aptent
-                taciti sociosqu ad litora torquent per conubia nostra, per
-                inceptos himenaeos.
+                <span className="text-danger fw-semibold">For Seyhan: Need
+                text of the learning objectives for this OVB module.</span> The
+                purpose of the learning goals is to orient students&rsquo;
+                expectations, shape their focus in this simulation.
+            </p>
+            <p>
+                Let&rsquo;s choose a dataset for this analysis:
             </p>
             <div>
-                Let&apos;s choose a dataset to begin:
                 {[
                     ['income', 'The relationship between annual income and ' +
                         'years of education of the household head.'],
