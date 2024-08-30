@@ -359,7 +359,6 @@ export const takeaways2 = {
     }
 };
 
-// !!! ZARINA, TODO: Update the text for each dataset !!!
 export const sim2TextVariable = {
     income: <>In the &ldquo;Income&rdquo; dataset, our goal is to examine the
         relationship between the dependent variable, annual income
@@ -371,24 +370,24 @@ export const sim2TextVariable = {
         ({inlineKatex('y')}), and the key variable of interest,
         high school GPA ({inlineKatex('x_1')}). Here is the simple regression
         analysis for these variables:</>,
-    affairs_sim2: <>In the &ldquo;Affairs&rdquo; dataset, our goal is to examine
-        the relationship between the dependent variable, number of affairs
-        ({inlineKatex('y')}), and the key variable of interest, which is the
-        rating of the marriage ({inlineKatex('x_1')}). Here is the simple
+    affairs_sim2: <>In the &ldquo;Affairs&rdquo; dataset, our goal is to
+        examine the relationship between the dependent variable, number of
+        extramarital affairs ({inlineKatex('y')}), and the key variable of
+        interest, which is the marriage satisfaction ratings
+        ({inlineKatex('x_1')}). Here is the simple
         regression analysis for these variables:</>,
     campus_sim2: <>In the &ldquo;Campus Crime Rates&rdquo; dataset, our goal is
         to examine the relationship between the dependent variable, total campus
         crime ({inlineKatex('y')}), and the key variable of interest, which is
-        total enrollment ({inlineKatex('x_1')}). Here is the simple regression
-        analysis for these variables:</>,
+        total student enrollment ({inlineKatex('x_1')}). Here is the simple
+        regression analysis for these variables:</>,
 };
 
-// !!! ZARINA, TODO: Update the text for each dataset !!!
 export const sim2TextControl = {
     income: {
         intro: <>In this case, OVB can lead to inaccurate estimates of the
-            relationships between {inlineKatex('Income')}
-            and {inlineKatex('YearsOfEducation')}.</>,
+            relationships between {inlineKatex('\\text{Income}')} and
+        {inlineKatex('\\text{Years Of Education}')}.</>,
         general_inst: <>Instructions for the Income dataset control variables
             TBD.</>,
         control_inst: {
@@ -402,8 +401,8 @@ export const sim2TextControl = {
     },
     gpa4: {
         intro: <>In this case, OVB can lead to inaccurate estimates of the
-            relationships between {inlineKatex('College GPA')}
-            and {inlineKatex('High School GPA')}.</>,
+            relationships between {inlineKatex('\\text{College GPA}')} and
+        {inlineKatex('\\text{High School GPA}')}.</>,
         general_inst: <>Instructions for the GPA4 dataset control variables
             TBD.</>,
         control_inst: {
@@ -419,8 +418,9 @@ export const sim2TextControl = {
     },
     affairs_sim2: {
         intro: <>In this case, OVB can lead to inaccurate estimates of the
-            relationships between {inlineKatex('Number Of Affairs')}
-            and {inlineKatex('Rating Of Marriage')}.</>,
+            relationships between
+        {inlineKatex('\\text{Number Of Affairs}')} and
+        {inlineKatex('\\text{Rating Of Marriage}')}.</>,
         general_inst: <>Instructions for the Affairs dataset control variables
             TBD.</>,
         control_inst: {
@@ -434,8 +434,9 @@ export const sim2TextControl = {
     },
     campus_sim2: {
         intro: <>In this case, OVB can lead to inaccurate estimates of the
-            relationships between {inlineKatex('Total Campus Crimes')}
-            and {inlineKatex('Total Enrollment')}.</>,
+            relationships between
+        {inlineKatex('\\text{Total Campus Crimes}')} and
+        {inlineKatex('\\text{Total Enrollment}')}.</>,
         general_inst: <>Instructions for the Campus Crime Rates dataset control
             variables TBD.</>,
         control_inst: {

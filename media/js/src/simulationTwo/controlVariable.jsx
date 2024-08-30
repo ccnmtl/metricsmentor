@@ -38,22 +38,6 @@ export const ControlVariable = ({
             <p>
                 {controlText.intro}
             </p>
-            {/* <div className="col-12 mb-2">
-                <label htmlFor="data-choice">
-                    <em>Choose a dataset</em>
-                </label>
-                <select
-                    className="form-select"
-                    name="data-choice"
-                    value={choice}
-                    onChange={handleChoice}
-                >
-                    <option value="income">Income</option>
-                    <option value="gpa4">GPA4</option>
-                    <option value="affairs_sim2">Affairs</option>
-                    <option value="campus_sim2">Campus Crime Rates</option>
-                </select>
-            </div> */}
             <h2 className="mb-4">
                 Control variables for this dataset:
             </h2>
@@ -89,41 +73,39 @@ export const ControlVariable = ({
                                 checked={controls[dType] === true}
                             >
                             </input>
-                            <ul className="list-group">
-                                {controls[dType] === true && [
-                                    {
-                                        title: 'Regression line equation',
-                                        body: [`\\widehat{${labelIndex[data.y]}
-                                            _i} = ${selectData.intercept} +
-                                            ${selectData.slope_x1 +
-                                                labelIndex[data.x_1]}_i +
-                                            ${selectData.slope_x2 +
-                                                labelIndex[data.x_2]}_i`],
-                                    },
-                                    {
-                                        title: <>Original sample slope
-                                            coefficient
-                                            for {inlineKatex('x_1')}</>,
-                                        body: [`\\hat{\\beta_1} =
-                                            ${data.lines[data.x_1].slope}`],
-                                    },
-                                    {
-                                        title: <>New sample slope coefficient
-                                            for {inlineKatex('x_1')}</>,
-                                        body: [`\\hat{\\beta_1} =
-                                            ${selectData.slope_x1}`],
-                                    },
-                                    {
-                                        title: 'Correlation coefficients',
-                                        body: [
-                                            `corr(y, x_2) = 
-                                                ${selectData.corr_y}`,
-                                            `corr(x_1, x_2) = 
-                                                ${selectData.corr_x1}`,
-                                        ],
-                                    }
-                                ].map((content, i) => formulaText(content, i))}
-                            </ul>
+                            {controls[dType] === true && [
+                                {
+                                    title: 'Regression line equation hello',
+                                    body: [`\\widehat{${labelIndex[data.y]}
+                                        _i} = ${selectData.intercept} +
+                                        ${selectData.slope_x1 +
+                                            labelIndex[data.x_1]}_i +
+                                        ${selectData.slope_x2 +
+                                            labelIndex[data.x_2]}_i`],
+                                },
+                                {
+                                    title: <>Original sample slope
+                                        coefficient
+                                        for {inlineKatex('x_1')}</>,
+                                    body: [`\\hat{\\beta_1} =
+                                        ${data.lines[data.x_1].slope}`],
+                                },
+                                {
+                                    title: <>New sample slope coefficient
+                                        for {inlineKatex('x_1')}</>,
+                                    body: [`\\hat{\\beta_1} =
+                                        ${selectData.slope_x1}`],
+                                },
+                                {
+                                    title: 'Correlation coefficients',
+                                    body: [
+                                        `corr(y, x_2) = 
+                                            ${selectData.corr_y}`,
+                                        `corr(x_1, x_2) = 
+                                            ${selectData.corr_x1}`,
+                                    ],
+                                }
+                            ].map((content, i) => formulaText(content, i))}
                             {controls[dType] === true && (<>
                                 <p className="mt-3">
                                     {controlText.control_inst[dType]}

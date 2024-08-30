@@ -11,27 +11,25 @@ export const Variables = ({params}) => {
         <p>
             {params.varText}
         </p>
-        <ul className="list-group">
-            {[
-                {
-                    title: 'Regression line equation',
-                    body: [
-                        '\\hat{y_i} = \\hat{\\beta_0} + \\hat{\\beta_1}x',
-                        `\\widehat{${label[params.y]}_i} = ${vars.intercept} +
-                            ${vars.slope + label[params.x_1]}`,
-                    ]
-                },
-                {
-                    title: 'Sample slope coefficient',
-                    body: [`\\hat{\\beta_1} = ${vars.slope}`]
-                },
-                {
-                    title: <>Correlation coefficient, {
-                        inlineKatex('corr(y,x_1)')}</>,
-                    body: [`corr(y,x_1)=${vars.corr_y}`]
-                }
-            ].map((content, i) => formulaText(content, i))}
-        </ul>
+        {[
+            {
+                title: 'Regression line equation',
+                body: [
+                    '\\hat{y_i} = \\hat{\\beta_0} + \\hat{\\beta_1}x',
+                    `\\widehat{${label[params.y]}_i} = ${vars.intercept} +
+                        ${vars.slope + label[params.x_1]}`,
+                ]
+            },
+            {
+                title: 'Sample slope coefficient',
+                body: [`\\hat{\\beta_1} = ${vars.slope}`]
+            },
+            {
+                title: <>Correlation coefficient, {
+                    inlineKatex('corr(y,x_1)')}</>,
+                body: [`corr(y,x_1)=${vars.corr_y}`]
+            }
+        ].map((content, i) => formulaText(content, i))}
     </>);
 };
 

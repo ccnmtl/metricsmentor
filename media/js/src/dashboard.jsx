@@ -54,15 +54,15 @@ export const Dashboard = () => {
                                 {'Omitted Variable Bias'}
                             </span>
                         </h2>
-                        <p>In this module, the first endogeneity
-                            problem we will tackle in regression analysis is
-                            omitted variable bias (OVB). Failing to account
-                            for some variables can bias your sample slope of
-                            the variable of interest. Through interactive
-                            exercises and examples, you will learn how to
-                            identify and address OVB in your econometric
-                            analysis, ensuring the reliability and validity of
-                            your findings.</p>
+                        <p>In this module, we will address the first
+                            endogeneity problem in regression analysis:
+                            omitted variable bias (OVB). Overlooking certain
+                            variables can lead to biased estimates of the
+                            sample slope of the variable of interest. Through
+                            interactive exercises and examples, you&rsquo;ll
+                            learn how to detect and correct for OVB in your
+                            econometric analysis, ensuring that your findings
+                            are both reliable and valid.</p>
 
                         <Link to={`/course/${courseId}/simulations/2/`}
                             className="btn btn-primary my-3"
