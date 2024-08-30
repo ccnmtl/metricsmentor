@@ -358,3 +358,91 @@ export const takeaways2 = {
             the variable of interest ({inlineKatex('x_1')}).</>,
     }
 };
+
+// !!! ZARINA, TODO: Update the text for each dataset !!!
+export const sim2TextVariable = {
+    income: <>In the &ldquo;Income&rdquo; dataset, our goal is to examine the
+        relationship between the dependent variable, annual income
+        ({inlineKatex('y')}), and the key variable of interest, which is the
+        years of education of the household head ({inlineKatex('x_1')}). Here
+        is the simple regression analysis for these variables:</>,
+    gpa4: <>In the &ldquo;GPA 4&rdquo; dataset, our goal is to examine the
+        relationship between the dependent variable, college GPA
+        ({inlineKatex('y')}), and the key variable of interest,
+        high school GPA ({inlineKatex('x_1')}). Here is the simple regression
+        analysis for these variables:</>,
+    affairs_sim2: <>In the &ldquo;Affairs&rdquo; dataset, our goal is to examine
+        the relationship between the dependent variable, number of affairs
+        ({inlineKatex('y')}), and the key variable of interest, which is the
+        rating of the marriage ({inlineKatex('x_1')}). Here is the simple
+        regression analysis for these variables:</>,
+    campus_sim2: <>In the &ldquo;Campus Crime Rates&rdquo; dataset, our goal is
+        to examine the relationship between the dependent variable, total campus
+        crime ({inlineKatex('y')}), and the key variable of interest, which is
+        total enrollment ({inlineKatex('x_1')}). Here is the simple regression
+        analysis for these variables:</>,
+};
+
+// !!! ZARINA, TODO: Update the text for each dataset !!!
+export const sim2TextControl = {
+    income: {
+        intro: <>In this case, OVB can lead to inaccurate estimates of the
+            relationships between {inlineKatex('Income')}
+            and {inlineKatex('YearsOfEducation')}.</>,
+        general_inst: <>Instructions for the Income dataset control variables
+            TBD.</>,
+        control_inst: {
+            consump: <>Instructions for the Consumption data from the Income
+                dataset.</>,
+            black: <>Instructions for the Black data from the Income
+                dataset.</>,
+            size: <>Instructions for the Size data from the Income
+                dataset.</>,
+        }
+    },
+    gpa4: {
+        intro: <>In this case, OVB can lead to inaccurate estimates of the
+            relationships between {inlineKatex('College GPA')}
+            and {inlineKatex('High School GPA')}.</>,
+        general_inst: <>Instructions for the GPA4 dataset control variables
+            TBD.</>,
+        control_inst: {
+            ACT: <>Instructions for the ACT Score data from the GPA4
+                dataset.</>,
+            campus: <>Instructions for the Lives On Campus data from the GPA4,
+                dataset.</>,
+            skipped: <>Instructions for the Classes Skipped Weekly data
+                from the GPA4 dataset.</>,
+            bgfriend: <>Instructions for the Significant Other data from the
+                GPA4 dataset.</>
+        }
+    },
+    affairs_sim2: {
+        intro: <>In this case, OVB can lead to inaccurate estimates of the
+            relationships between {inlineKatex('Number Of Affairs')}
+            and {inlineKatex('Rating Of Marriage')}.</>,
+        general_inst: <>Instructions for the Affairs dataset control variables
+            TBD.</>,
+        control_inst: {
+            yrsmarr: <>Instructions for the Years Married data from the GPA4
+                dataset.</>,
+            kids: <>Instructions for the Has Kids data from the GPA4,
+                dataset.</>,
+            relig: <>Instructions for the Degree of Religiosity data from the
+                GPA4 dataset.</>
+        }
+    },
+    campus_sim2: {
+        intro: <>In this case, OVB can lead to inaccurate estimates of the
+            relationships between {inlineKatex('Total Campus Crimes')}
+            and {inlineKatex('Total Enrollment')}.</>,
+        general_inst: <>Instructions for the Campus Crime Rates dataset control
+            variables TBD.</>,
+        control_inst: {
+            police: <>Instructions for the Police Employed On Campus data from
+                the GPA4 dataset.</>,
+            campus: <>Instructions for the Private School data from the GPA4,
+                dataset.</>
+        }
+    },
+};
