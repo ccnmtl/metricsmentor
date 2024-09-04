@@ -41,6 +41,7 @@ export const SimulationOne = () => {
     const [completedChoices, setCompletedChoices] = useState([]);
     const [completedChoices3d, setCompletedChoices3d] = useState([]);
     const [selectedAltHypothesis, setSelectedAltHypothesis] = useState(null);
+    const [alphaSelected, setAlphaSelected] = useState(false);
 
 
     const createSubmission = async() => {
@@ -206,7 +207,7 @@ export const SimulationOne = () => {
                                     id="nSampleSize"
                                     className="form-control short-input"
                                     disabled={
-                                        is2DCompleted || selectedAltHypothesis}
+                                        is2DCompleted || alphaSelected}
                                     value={N}
                                     onBlur={handleNBlur}
                                     onChange={handleNChange} />
@@ -228,7 +229,7 @@ export const SimulationOne = () => {
                                             className="form-range"
                                             id="correlation"
                                             // eslint-disable-next-line max-len
-                                            disabled={is2DCompleted || selectedAltHypothesis}
+                                            disabled={is2DCompleted || alphaSelected}
                                             onChange={
                                                 handleYcorrelationChange} />
                                         <div className="scale-value">
@@ -323,7 +324,7 @@ export const SimulationOne = () => {
                                 <label className="dev-only"> Seed ID:
                                     <input type="text"
                                         value={seed}
-                                        // disabled={startQuiz}
+                                        disabled={alphaSelected}
                                         className="ms-1 mt-2 dev-only" size="10"
                                         onChange={handleSeedChange} />
                                 </label>
@@ -355,7 +356,8 @@ export const SimulationOne = () => {
                                     hypothesizedSlope={hypothesizedSlope}
                                     handleNullHypothesis={handleNullHypothesis}
                                     startQuiz={startQuiz}
-                                    startQuiz2={startQuiz2} />
+                                    startQuiz2={startQuiz2}
+                                    alphaSelected={alphaSelected} />
 
                                 <div className="simulation__step-prompt">
                                     <p>
@@ -395,7 +397,9 @@ export const SimulationOne = () => {
                                 selectedAltHypothesis={selectedAltHypothesis}
                                 // eslint-disable-next-line max-len
                                 setSelectedAltHypothesis={setSelectedAltHypothesis}
-                                handlePlotTypeChange={handlePlotTypeChange} />
+                                handlePlotTypeChange={handlePlotTypeChange}
+                                alphaSelected={alphaSelected}
+                                setAlphaSelected={setAlphaSelected} />
                         )}
                         {(startQuiz2 && plotType === '3d') && (
                             <SimulationOneQuiz
@@ -413,7 +417,9 @@ export const SimulationOne = () => {
                                 selectedAltHypothesis={selectedAltHypothesis}
                                 // eslint-disable-next-line max-len
                                 setSelectedAltHypothesis={setSelectedAltHypothesis}
-                                handlePlotTypeChange={handlePlotTypeChange} />
+                                handlePlotTypeChange={handlePlotTypeChange}
+                                alphaSelected={alphaSelected}
+                                setAlphaSelected={setAlphaSelected} />
                         )}
                     </>
                 )}

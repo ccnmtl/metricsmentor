@@ -7,11 +7,11 @@ import axios from 'axios';
 export const HypothesisTest = ({
     selectedAltHypothesis, appRvalue, tvalue, hypothesizedSlope, n,
     completedChoices, submissionId, plotType, setSelectedAltHypothesis,
-    setIsHypothesisCompleted, isRedo, setIsRedo
+    setIsHypothesisCompleted, isRedo, setIsRedo, alphaSelected,
+    setAlphaSelected
 }) => {
     const [pvalues, setPvalues] = useState(null);
     const [alpha, setAlpha] = useState(null);
-    const [alphaSelected, setAlphaSelected] = useState(false);
 
     let hypothesis;
     let hypothesisTest;
@@ -173,5 +173,7 @@ HypothesisTest.propTypes = {
     plotType: PropTypes.string,
     setIsHypothesisCompleted: PropTypes.func,
     isRedo: PropTypes.bool,
-    setIsRedo: PropTypes.func
+    setIsRedo: PropTypes.func,
+    alphaSelected: PropTypes.bool,
+    setAlphaSelected: PropTypes.func
 };
