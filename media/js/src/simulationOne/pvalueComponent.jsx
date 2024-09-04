@@ -7,7 +7,7 @@ import PropTypes from 'prop-types';
 export const PvalueComponent = ({
     pvalue, tvalue, submissionId, hypothesis, nullHypothesis,
     alpha, hypothesisTest1validate, setHypothesisTest1validate,
-    plotType, isRedoActive
+    plotType, isRedo
 }) => {
 
     const [userPvalue, setUserPvalue] = useState('');
@@ -33,14 +33,14 @@ export const PvalueComponent = ({
     }, [isPvalCompareCorrect]);
 
     useEffect(() => {
-        if (isRedoActive) {
+        if (isRedo) {
             setUserPvalue('');
             setIsPvalueCorrect(null);
             setIsPvalCompareCorrect(null);
             setPvalueComparison(null);
             setNullHypothesisChoice1(null);
         }
-    }, [isRedoActive]);
+    }, [isRedo]);
 
 
     // P-Value Logic
@@ -139,7 +139,7 @@ export const PvalueComponent = ({
     return (
         <div className="solving-p-set mt-3">
             <div className="input-p">
-                <p>
+                <div>
                 One method for hypothesis testing is to compare the
                     <Katex tex={'p'} className="katex-inline" />-value to
                     <Katex tex={'{\\alpha}'} className="katex-inline" />.
@@ -149,7 +149,7 @@ export const PvalueComponent = ({
                         <Katex tex={`t = ${tvalue}`}
                             className="katex-inline"/>.
                     </div>
-                </p>
+                </div>
                 <button
                     className="btn btn-sm btn-primary"
                     data-bs-toggle="modal"
@@ -161,7 +161,7 @@ export const PvalueComponent = ({
                     <label className="align-self-center"
                         htmlFor="pValue">
                         <Katex tex={'p'}
-                            className="katex-inline" />-value =
+                            className="katex-inline" />-value =&nbsp;
                     </label>
                     <input
                         className="align-self-center"
@@ -318,7 +318,7 @@ export const PvalueComponent = ({
                         className="btn btn-small btn-primary mt-3"
                         disabled={hypothesisTest1validate}
                         onClick={handleNextNullHypothesisChoice1}>
-                    Next
+                    Continue &raquo;
                     </button>
                     {hypothesisTest1validate && (
                         <div className="mt-3">
@@ -352,5 +352,5 @@ PvalueComponent.propTypes = {
     hypothesisTest1validate: PropTypes.bool,
     setHypothesisTest1validate: PropTypes.func,
     plotType: PropTypes.string,
-    isRedoActive: PropTypes.bool
+    isRedo: PropTypes.bool
 };

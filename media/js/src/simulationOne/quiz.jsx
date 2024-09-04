@@ -7,20 +7,14 @@ import { CriticalValue } from './criticalValue.jsx';
 
 export const Quiz = ({
     tvalue, pvalue, alpha, hypothesisTest, hypothesis,
-    nullHypothesis, n, onComplete, completedChoices, submissionId,
-    plotType, isRedoActive, setIsRedo
+    nullHypothesis, n, completedChoices, submissionId,
+    plotType, isRedo, setIsRedo, setIsHypothesisCompleted
 }) => {
     // eslint-disable-next-line max-len
     const [hypothesisTest1validate, setHypothesisTest1validate] = useState(null);
     // eslint-disable-next-line max-len
     const [hypothesisTest2validate, setHypothesisTest2validate] = useState(null);
     const [criticalValues, setCriticalValues] = useState(null);
-
-    useEffect(() => {
-        calculateCriticalValue();
-        document.getElementById('quiz')
-            .scrollIntoView({ behavior: 'smooth'});
-    }, []);
 
     // Critical Value Logic
     const calculateCriticalValue = async() => {
@@ -35,6 +29,17 @@ export const Quiz = ({
         }
     };
 
+    const handleRedo = (e) => {
+        e.preventDefault();
+        setIsRedo(true);
+    };
+
+    const handleOnComplete = () => {
+        setIsHypothesisCompleted(true);
+    };
+
+    const isNotTwoSided = hypothesisTest !== 'value_two_sided';
+
     useEffect(() => {
         if (hypothesisTest1validate) {
             document.getElementById('criticalvalue')
@@ -42,7 +47,11 @@ export const Quiz = ({
         }
     }, [hypothesisTest1validate]);
 
-    const isNotTwoSided = hypothesisTest !== 'value_two_sided';
+    useEffect(() => {
+        calculateCriticalValue();
+        document.getElementById('quiz')
+            .scrollIntoView({ behavior: 'smooth'});
+    }, []);
 
     return (
         <div id="quiz">
@@ -56,7 +65,7 @@ export const Quiz = ({
                     hypothesis={hypothesis}
                     nullHypothesis={nullHypothesis}
                     plotType={plotType}
-                    isRedoActive={isRedoActive}
+                    isRedo={isRedo}
                     submissionId={submissionId} />
             )}
             {(hypothesisTest1validate || isNotTwoSided) && (
@@ -67,14 +76,31 @@ export const Quiz = ({
                     hypothesisTest={hypothesisTest}
                     hypothesis={hypothesis}
                     nullHypothesis={nullHypothesis}
-                    isRedoActive={isRedoActive}
-                    setIsRedo={setIsRedo}
+                    isRedo={isRedo}
                     n={n}
                     hypothesisTest2validate={hypothesisTest2validate}
                     setHypothesisTest2validate={setHypothesisTest2validate}
-                    onComplete={onComplete}
                     submissionId={submissionId}
                     plotType={plotType} />
+            )}
+            {hypothesisTest2validate && (
+                <>
+                    <p className="mt-3">
+                        You have completed this hypothesis test.
+                        &nbsp;
+                        <a href="#" className="btn btn-sm btn-primary"
+                            onClick={handleRedo}>
+                                Do Case again?
+                        </a>
+                    </p>
+                    <div className="simulation__step-prompt">
+                        <button className= "btn btn-primary my-3"
+                            id="proceed"
+                            onClick={handleOnComplete}>
+                            Continue &raquo;
+                        </button>
+                    </div>
+                </>
             )}
         </div>
     );
@@ -88,10 +114,10 @@ Quiz.propTypes = {
     hypothesis: PropTypes.string.isRequired,
     nullHypothesis: PropTypes.string.isRequired,
     n: PropTypes.number.isRequired,
-    onComplete: PropTypes.func.isRequired,
     completedChoices: PropTypes.array.isRequired,
     submissionId: PropTypes.number.isRequired,
     plotType: PropTypes.string,
-    isRedoActive: PropTypes.bool,
-    setIsRedo: PropTypes.func
+    isRedo: PropTypes.bool,
+    setIsRedo: PropTypes.func,
+    setIsHypothesisCompleted: PropTypes.func,
 };

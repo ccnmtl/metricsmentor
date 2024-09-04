@@ -5,10 +5,11 @@ import { saveAnswer } from './utils';
 export const MultipleChoiceQuestion = ({
     isSubmitted, setIsSubmitted, submissionId, questionNumber,
     question, options, answer, header, questionStyle, optionStyle,
-    answerStyle }) => {
+    answerStyle, correctFeedback, incorrectFeedback, idkey }) => {
     const [selectedOption, setSelectedOption] = useState(null);
     const [isCorrect, setIsCorrect] = useState(null);
     const [shuffledOptions, setShuffledOptions] = useState([]);
+    const [isAnswered, setIsAnswered] = useState(false);
 
     const shuffleArray = (array) => {
         for (let i = array.length - 1; i > 0; i--) {
@@ -39,17 +40,17 @@ export const MultipleChoiceQuestion = ({
     };
 
     const handleSubmit = async() => {
-        setIsSubmitted(true);
+        setIsAnswered(true);
         // eslint-disable-next-line max-len
         const correct = extractTextContent(selectedOption) === extractTextContent(answer);
         setIsCorrect(correct);
-
-        const questionType = 'multiple-choice';
+        const questionType = header;
         const textOption = extractTextContent(selectedOption);
 
         await saveAnswer(submissionId, questionNumber, questionType,
             textOption, correct, {});
 
+        setIsSubmitted(correct);
     };
 
     useEffect(() => {
@@ -76,26 +77,27 @@ export const MultipleChoiceQuestion = ({
                             <input
                                 className="form-check-input"
                                 type="radio"
-                                id={`option-${index}`}
-                                name="options"
+                                id={`option-${index}-${idkey}`}
+                                name={`options-${idkey}-${index}`}
                                 value={option}
                                 checked={selectedOption === option}
                                 onChange={() => handleOptionSelect(option)}
+                                disabled={isAnswered}
                             />
                             <label className="form-check-label"
-                                htmlFor={`option-${index}`} style={optionStyle}>
+                                htmlFor={`option-${index}-${idkey}`}
+                                style={optionStyle}>
                                 {option}
                             </label>
                         </div>
                     ))}
                     <button
                         className="btn btn-primary mt-3"
-                        disabled={isSubmitted}
+                        disabled={isAnswered}
                         onClick={handleSubmit}>Submit</button>
-                    {isSubmitted && (
+                    {isAnswered && (
                         <p className="mt-3" style={answerStyle}>
-                            {isCorrect ? 'Correct! ' : 'Incorrect! '}
-                            The answer is {answer}
+                            {isCorrect ? correctFeedback : incorrectFeedback}
                         </p>
                     )}
                 </div>
@@ -115,6 +117,8 @@ MultipleChoiceQuestion.propTypes = {
     header: PropTypes.string,
     questionStyle: PropTypes.object,
     optionStyle: PropTypes.object,
-    answerStyle: PropTypes.object
-
+    answerStyle: PropTypes.object,
+    correctFeedback: PropTypes.object,
+    incorrectFeedback: PropTypes.object,
+    idkey: PropTypes.string
 };

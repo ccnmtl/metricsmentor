@@ -5,8 +5,8 @@ import { saveAnswer } from '../utils';
 
 export const CriticalValue = ({
     hypothesisTest2validate, tvalue, n, alpha, hypothesisTest, hypothesis,
-    nullHypothesis, onComplete, submissionId, plotType,
-    setHypothesisTest2validate, criticalValues, isRedoActive, setIsRedo
+    nullHypothesis, submissionId, plotType,
+    setHypothesisTest2validate, criticalValues, isRedo,
 }) => {
     const [nullHypothesisChoice2, setNullHypothesisChoice2] = useState(null);
     const [userCriticalValue, setUserCriticalValue] = useState('');
@@ -67,20 +67,15 @@ export const CriticalValue = ({
         setCompareCritical(newValue);
     };
 
-    const handleRedo = (e) => {
-        e.preventDefault();
-        setIsRedo(true);
-    };
-
     useEffect(() => {
-        if (isRedoActive) {
+        if (isRedo) {
             setIsCriticalValueCorrect(null);
             setIsCriticalCompareCorrect(null);
             setNullHypothesisChoice2(null);
             setUserCriticalValue('');
             setCompareCritical(null);
         }
-    }, [isRedoActive]);
+    }, [isRedo]);
 
     const validateCriticalComparison = (value) => {
         let correctComparison;
@@ -227,7 +222,7 @@ export const CriticalValue = ({
                 <div className="mt-3 d-flex">
                     <label className="align-self-center"
                         htmlFor="criticalvalue">
-                                critical value = </label>
+                                critical value =&nbsp;</label>
                     <input
                         className="align-self-center"
                         type="text"
@@ -267,7 +262,7 @@ export const CriticalValue = ({
             )}
             {isCriticalValueCorrect && (
                 <div className="p-val-concl mt-3">
-                    <p>
+                    <div>
                             Knowing the
                         <Katex tex={'critical~value'}
                             className="katex-inline"/> and
@@ -276,7 +271,7 @@ export const CriticalValue = ({
                                 className="katex-inline"/>
                         </div>,
                             which of the following statements is true?
-                    </p>
+                    </div>
                     <div>
                         <input
                             type="radio"
@@ -383,29 +378,11 @@ export const CriticalValue = ({
                             Continue &raquo;
                     </button>
                     {hypothesisTest2validate && (
-                        <>
-                            <div className="mt-3">
-                                <span style={{ color: 'green' }}>
+                        <div className="mt-3">
+                            <span style={{ color: 'green' }}>
                                         That is the correct conclusion!
-                                </span>
-                            </div>
-                            <p className="mt-3">
-                                    You have completed this hypothesis test.
-                                    &nbsp;
-                                <a href="#" className="btn btn-sm btn-primary"
-                                    onClick={handleRedo}>
-                                    Do Case again?
-                                </a>
-                            </p>
-                            <div className="simulation__step-prompt">
-                                <button className=
-                                    "btn btn-primary my-3"
-                                id="proceed"
-                                onClick={onComplete}>
-                                        Next hypothesis &raquo;
-                                </button>
-                            </div>
-                        </>
+                            </span>
+                        </div>
                     )}
                     {!hypothesisTest2validate &&
                         hypothesisTest2validate !== null && (
@@ -431,11 +408,9 @@ CriticalValue.propTypes = {
     hypothesisTest: PropTypes.string.isRequired,
     hypothesis: PropTypes.string.isRequired,
     nullHypothesis: PropTypes.string.isRequired,
-    onComplete: PropTypes.func.isRequired,
     submissionId: PropTypes.number.isRequired,
     plotType: PropTypes.string.isRequired,
     setHypothesisTest2validate: PropTypes.func.isRequired,
     criticalValues: PropTypes.object,
-    isRedoActive: PropTypes.bool,
-    setIsRedo: PropTypes.func
+    isRedo: PropTypes.bool
 };

@@ -88,6 +88,12 @@ export const SimulationOne = () => {
         try {
             if(!submissionId) {
                 await createSubmission();
+            } else {
+                if (plotType === '2d') {
+                    setStartQuiz(true);
+                } else {
+                    setStartQuiz2(true);
+                }
             }
         } catch (error) {
             alert('Failed to save graph and submission.');
