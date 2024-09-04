@@ -5,13 +5,14 @@ import { Quiz } from './quiz';
 import axios from 'axios';
 
 export const HypothesisTest = ({
-    selectedAltHypothesis, appRvalue, tvalue, hypothesizedSlope, n, onComplete,
-    completedChoices, submissionId, plotType, setSelectedAltHypothesis
+    selectedAltHypothesis, appRvalue, tvalue, hypothesizedSlope, n,
+    completedChoices, submissionId, plotType, setSelectedAltHypothesis,
+    setIsHypothesisCompleted, isRedo, setIsRedo, alphaSelected,
+    setAlphaSelected
 }) => {
     const [pvalues, setPvalues] = useState(null);
     const [alpha, setAlpha] = useState(null);
-    const [alphaSelected, setAlphaSelected] = useState(false);
-    const [isRedoActive, setIsRedo] = useState(false);
+
     let hypothesis;
     let hypothesisTest;
 
@@ -65,13 +66,6 @@ export const HypothesisTest = ({
         document.getElementById('hypothesis-test')
             .scrollIntoView({ behavior: 'smooth'});
     }, []);
-
-    useEffect(() => {
-        if (isRedoActive) {
-            setSelectedAltHypothesis(null);
-            setIsRedo(false);
-        }
-    }, [isRedoActive]);
 
     return (
         <>
@@ -144,7 +138,7 @@ export const HypothesisTest = ({
                         {alphaSelected && (
                             <Quiz
                                 hypothesisTest={hypothesisTest}
-                                isRedoActive={isRedoActive}
+                                isRedo={isRedo}
                                 setIsRedo={setIsRedo}
                                 tvalue={tvalue}
                                 pvalue={parseFloat(pvalue)}
@@ -152,10 +146,11 @@ export const HypothesisTest = ({
                                 hypothesis={hypothesis}
                                 nullHypothesis={nullHypothesis}
                                 n={n}
-                                onComplete={onComplete}
                                 completedChoices={completedChoices}
                                 submissionId={submissionId}
                                 plotType={plotType}
+                                // eslint-disable-next-line max-len
+                                setIsHypothesisCompleted={setIsHypothesisCompleted}
                             />
                         )}
                     </div>
@@ -173,8 +168,12 @@ HypothesisTest.propTypes = {
     coursePK: PropTypes.number,
     hypothesizedSlope: PropTypes.any.isRequired,
     n: PropTypes.number.isRequired,
-    onComplete: PropTypes.func.isRequired,
     completedChoices: PropTypes.array.isRequired,
     submissionId: PropTypes.number.isRequired,
     plotType: PropTypes.string,
+    setIsHypothesisCompleted: PropTypes.func,
+    isRedo: PropTypes.bool,
+    setIsRedo: PropTypes.func,
+    alphaSelected: PropTypes.bool,
+    setAlphaSelected: PropTypes.func
 };
