@@ -71,7 +71,7 @@ export const GlossaryModal = () => {
                                     <td>
                                         <Katex tex={'y'} />
                                     </td>
-                                    <td>The dependant variable</td>
+                                    <td>The dependent variable</td>
                                 </tr>
                                 <tr>
                                     <td>
@@ -79,7 +79,7 @@ export const GlossaryModal = () => {
                                     </td>
                                     <td>
                                         The independent variable
-                                        (regressor) where
+                                        (regressor) where&nbsp;&nbsp;
                                         <Katex tex={'i \\begin{cases} =1 &\\text{variable of interest} \\\\ {\\neq} 1 &\\text{all other regressors} \\end{cases}'} />{/* eslint-disable-line max-len */}
                                     </td>
                                 </tr>
