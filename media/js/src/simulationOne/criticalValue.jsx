@@ -169,7 +169,7 @@ export const CriticalValue = ({
     let plusMinus;
     if (hypothesisTest === 'value_two_sided') {
         absoluteTtext = '|t|';
-        plusMinus = '±';
+        plusMinus = ' ±';
     } else {
         absoluteTtext = 't';
         plusMinus = '';
