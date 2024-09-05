@@ -8,7 +8,7 @@ export const SimulationOneQuiz = ({
     appRvalue, tvalue, hypothesizedSlope, n, setIsCompleted,
     isCompleted, submissionId, handlePlotTypeChange, plotType,
     completedChoices, setCompletedChoices, selectedAltHypothesis,
-    setSelectedAltHypothesis, alphaSelected, setAlphaSelected
+    setSelectedAltHypothesis
 }) => {
     const [isSubmitted, setIsSubmitted] = useState(false);
     const [isTakeawayCorrect, setIsTakeawayCorrect] = useState({
@@ -257,8 +257,6 @@ export const SimulationOneQuiz = ({
                     setIsHypothesisCompleted={setIsHypothesisCompleted}
                     isRedo={isRedo}
                     setIsRedo={setIsRedo}
-                    alphaSelected={alphaSelected}
-                    setAlphaSelected={setAlphaSelected}
                 />
             )}
             {isHypothesisCompleted && selectedAltHypothesis === 'A'
@@ -548,7 +546,5 @@ SimulationOneQuiz.propTypes = {
     completedChoices: PropTypes.array,
     setCompletedChoices: PropTypes.func,
     selectedAltHypothesis: PropTypes.string,
-    setSelectedAltHypothesis: PropTypes.func,
-    alphaSelected: PropTypes.bool,
-    setAlphaSelected: PropTypes.func,
+    setSelectedAltHypothesis: PropTypes.func
 };
