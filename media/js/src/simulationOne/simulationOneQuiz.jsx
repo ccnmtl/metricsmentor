@@ -196,6 +196,13 @@ export const SimulationOneQuiz = ({
     }, [isRedo]);
 
     useEffect(() => {
+        if (showRedoButton) {
+            document.getElementById('redo-button')
+                .scrollIntoView({ behavior: 'smooth'});
+        }
+    }, [showRedoButton]);
+
+    useEffect(() => {
         if (isHypothesisCompleted && selectedAltHypothesis === 'B') {
             setCompletedChoices([...completedChoices, 'B']);
             setSelectedAltHypothesis(null);
