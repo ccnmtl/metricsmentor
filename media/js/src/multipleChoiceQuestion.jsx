@@ -51,10 +51,15 @@ export const MultipleChoiceQuestion = ({
             textOption, correct, {});
 
         setIsSubmitted(correct);
+
+        document.getElementById('feedback').scrollIntoView(
+            { behavior: 'smooth'});
     };
 
     useEffect(() => {
         setShuffledOptions(shuffleArray([...options]));
+        document.getElementById(`multiple-${idkey}`).scrollIntoView(
+            { behavior: 'smooth'});
     }, []);
 
     return (<>
@@ -93,10 +98,11 @@ export const MultipleChoiceQuestion = ({
                     ))}
                     <button
                         className="btn btn-primary mt-3"
+                        id={`multiple-${idkey}`}
                         disabled={isAnswered}
                         onClick={handleSubmit}>Submit</button>
                     {isAnswered && (
-                        <p className="mt-3" style={answerStyle}>
+                        <p className="mt-3" style={answerStyle} id="feedback">
                             {isCorrect ? correctFeedback : incorrectFeedback}
                         </p>
                     )}

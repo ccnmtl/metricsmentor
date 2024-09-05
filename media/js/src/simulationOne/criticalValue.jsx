@@ -42,7 +42,12 @@ export const CriticalValue = ({
     };
 
     const validateCriticalValue = (value) => {
-        const isValid = parseFloat(value) === criticalValue;
+        let comparisonValue = value;
+        if (hypothesisTest === 'value_two_sided') {
+            comparisonValue = Math.abs(parseFloat(value));
+        }
+
+        const isValid = parseFloat(comparisonValue) === criticalValue;
         setIsCriticalValueCorrect(isValid);
         return isValid;
     };
@@ -167,12 +172,15 @@ export const CriticalValue = ({
 
     let absoluteTtext;
     let plusMinus;
+    let textMethod;
     if (hypothesisTest === 'value_two_sided') {
         absoluteTtext = '|t|';
-        plusMinus = '±';
+        plusMinus = ' ±';
+        textMethod = 'Another';
     } else {
         absoluteTtext = 't';
         plusMinus = '';
+        textMethod = 'A';
     }
 
     useEffect(() => {
@@ -201,7 +209,7 @@ export const CriticalValue = ({
 
             <div className="input-criticalvalue">
                 <p>
-                            Another method for hypothesis testing is to
+                    {textMethod} method for hypothesis testing is to
                             compare
                     <Katex tex={'t'} className="katex-inline"/> to
                             the
