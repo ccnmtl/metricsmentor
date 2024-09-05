@@ -166,10 +166,13 @@ export const CriticalValue = ({
     };
 
     let absoluteTtext;
+    let plusMinus;
     if (hypothesisTest === 'value_two_sided') {
         absoluteTtext = '|t|';
+        plusMinus = '±';
     } else {
         absoluteTtext = 't';
+        plusMinus = '';
     }
 
     useEffect(() => {
@@ -222,7 +225,8 @@ export const CriticalValue = ({
                 <div className="mt-3 d-flex">
                     <label className="align-self-center"
                         htmlFor="criticalvalue">
-                                critical value =&nbsp;</label>
+                                critical value =&nbsp;{plusMinus}&nbsp;
+                    </label>
                     <input
                         className="align-self-center"
                         type="text"
