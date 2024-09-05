@@ -21,22 +21,24 @@ export const ControlVariable = ({
             </div>
             <p>
                 This is known as the omitted variable bias (OVB). If the
-                omitted variable is correlated with both the dependent
-                variable {inlineKatex('y')}, and the independent variable of
-                interest {inlineKatex('x_1')}, it introduces bias into the
-                estimated sample slope {inlineKatex('\\hat{\\beta_1}')}.
-            </p>
-            <p>
+                omitted variable {inlineKatex('x_i')} is correlated with both
+                the dependent variable {inlineKatex('y')}, and the independent
+                variable of interest {inlineKatex('x_1')}, it introduces bias
+                into the estimated sample
+                slope {inlineKatex('\\hat{\\beta_1}')}.
                 In a simple linear regression, the effect of OVB on
                 {inlineKatex('\\hat{\\beta_1}')} is as follows:
             </p>
-            <div className="ms-3 mb-3">
+            <p className="ms-3 mb-3">
                 <Katex tex={
                     // eslint-disable-next-line max-len
                     '\\hat{\\beta_1} \\xrightarrow{p} \\beta_1 + [bias]'} />
-            </div>
+            </p>
             <p>
-                {controlText.intro}
+                The correlations between the included and omitted variables,
+                specifically {inlineKatex('corr(y,x_i)')} and
+                {inlineKatex('corr(x_1,x_i)')},
+                contribute to the {inlineKatex('[bias]')}.
             </p>
             <h2 className="mb-4">
                 Control variables for this dataset:
@@ -44,19 +46,23 @@ export const ControlVariable = ({
             <p>
                 {controlText.general_inst}
             </p>
-            <ul>
+            <p>
+                Select any variable to add to the regression model.
+            </p>
+            <div className="OG-C-VARS">
                 {Object.entries(data).slice(0,2)
                     .map((dType, i) => (
-                        <li key={i} className="form-check mb-3">
+                        <div key={i} className="mb-3 OG-VAR">
                             {inlineKatex(`${dType[0]}
                                 \\text{ (${labelIndex[dType[1]]})}`)}
-                        </li>
+                            <hr style={{borderTop: 'dotted 2px'}}/>
+                        </div>
                     ))}
                 {data.option.map((dType, i) => {
                     const selectData = data.lines[dType];
                     return (
-                        <li key={i}
-                            className={'form-check'}
+                        <div key={i}
+                            className={'form-check C-VAR'}
                         >
                             <label htmlFor={`x${i+2}`}
                                 className="form-check-label">
@@ -73,9 +79,14 @@ export const ControlVariable = ({
                                 checked={controls[dType] === true}
                             >
                             </input>
+                            {controls[dType] === true && (<>
+                                <p className="mt-3">
+                                    {controlText.control_inst[dType]}
+                                </p>
+                            </>)}
                             {controls[dType] === true && [
                                 {
-                                    title: 'Regression line equation hello',
+                                    title: 'Regression line equation',
                                     body: [`\\widehat{${labelIndex[data.y]}
                                         _i} = ${selectData.intercept} +
                                         ${selectData.slope_x1 +
@@ -106,36 +117,28 @@ export const ControlVariable = ({
                                     ],
                                 }
                             ].map((content, i) => formulaText(content, i))}
-                            {controls[dType] === true && (<>
-                                <p className="mt-3">
-                                    {controlText.control_inst[dType]}
-                                </p>
-                                <p>
-                                    This paragraph is generic, not dependent
-                                    on dataset.
-                                    Text to guide user with a narrative, lead
-                                    them to what they need to pay attention to
-                                    with what they see. <br />
-                                    <strong>
-                                        What student needs to notice
-                                    </strong>:
-                                    See, {inlineKatex('\\hat{\\beta_1}')} what
-                                    happens to it as the new control variable is
-                                    added <br />
-                                    <strong>
-                                        What student needs to notice
-                                    </strong>:
-                                    See {inlineKatex('corr(y, x_2)')} and
-                                    {inlineKatex('corr(x_1, x_2)')}, make
-                                    connection to the visual display of the new
-                                    and old regression lines, and shift in
-                                    {inlineKatex('\\hat{\\beta_1}')}.
-                                </p>
-                            </>)}
-                            <hr style={{borderTop: 'dotted 3px'}}/>
-                        </li>);
+                            <hr style={{borderTop: 'dotted 2px'}}/>
+                        </div>);
                 })}
-            </ul>
+            </div>
+            <p className="mt-3">
+                The extent of bias in {inlineKatex('\\hat{\\beta_1}')} depends
+                on
+            </p>
+            <ol>
+                <li>the strength of the correlation between the dependent
+                    variable and the omitted variable,
+                {inlineKatex('corr(y, x_i)')},
+                </li>
+                <li>the strength of the correlation between the key variable
+                    of interest and the omitted variable,
+                {inlineKatex('corr(x_1, x_i)')},
+                </li>
+            </ol>
+            <p>
+                Let&rsquo;s review what you&rsquo;ve learned here in the next
+                section.
+            </p>
         </div>
     );
 };

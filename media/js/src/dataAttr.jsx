@@ -388,32 +388,57 @@ export const sim2TextControl = {
         intro: <>In this case, OVB can lead to inaccurate estimates of the
             relationships between {inlineKatex('\\text{Income}')} and
         {inlineKatex('\\text{Years Of Education}')}.</>,
-        general_inst: <>Instructions for the Income dataset control variables
-            TBD.</>,
+        general_inst: <>These are control variables whose omission could lead
+            to OVB and distort the estimates of the
+            relationships between {inlineKatex('\\text{Income}')} and
+        {inlineKatex('\\text{Years Of Education}')}.</>,
         control_inst: {
-            consump: <>Instructions for the Consumption data from the Income
-                dataset.</>,
-            black: <>Instructions for the Black data from the Income
-                dataset.</>,
-            size: <>Instructions for the Size data from the Income
-                dataset.</>,
+            consump: <>When {inlineKatex('\\text{Consumption}')}
+                ({inlineKatex('x_2')}) is included, notice the changes in
+                {inlineKatex('\\hat{\\beta_1}')}, the correlation coefficients
+                {inlineKatex('corr(y, x_2)')} and
+                {inlineKatex('corr(x_1, x_2)')}.</>,
+            black: <>When {inlineKatex('\\text{Black}')}
+                ({inlineKatex('x_3')}) is included, notice the changes in
+                {inlineKatex('\\hat{\\beta_1}')}, the correlation coefficients
+                {inlineKatex('corr(y, x_3)')} and
+                {inlineKatex('corr(x_1, x_3)')}.</>,
+            size: <>When {inlineKatex('\\text{Family Size}')}
+            ({inlineKatex('x_4')}) is included, notice the changes in
+                {inlineKatex('\\hat{\\beta_1}')}, the correlation coefficients
+                {inlineKatex('corr(y, x_4)')} and
+                {inlineKatex('corr(x_1, x_4)')}.</>,
         }
     },
     gpa4: {
         intro: <>In this case, OVB can lead to inaccurate estimates of the
             relationships between {inlineKatex('\\text{College GPA}')} and
         {inlineKatex('\\text{High School GPA}')}.</>,
-        general_inst: <>Instructions for the GPA4 dataset control variables
-            TBD.</>,
+        general_inst: <>These are control variables whose omission could lead
+            to OVB and distort the estimates of the
+            relationships between {inlineKatex('\\text{College GPA}')} and
+        {inlineKatex('\\text{High School GPA}')}.</>,
         control_inst: {
-            ACT: <>Instructions for the ACT Score data from the GPA4
-                dataset.</>,
-            campus: <>Instructions for the Lives On Campus data from the GPA4,
-                dataset.</>,
-            skipped: <>Instructions for the Classes Skipped Weekly data
-                from the GPA4 dataset.</>,
-            bgfriend: <>Instructions for the Significant Other data from the
-                GPA4 dataset.</>
+            ACT: <>When {inlineKatex('\\text{ACT Score}')}
+                ({inlineKatex('x_2')}) is included, notice the changes in
+                {inlineKatex('\\hat{\\beta_1}')}, the correlation coefficients
+                {inlineKatex('corr(y, x_2)')} and
+                {inlineKatex('corr(x_1, x_2)')}.</>,
+            campus: <>When {inlineKatex('\\text{Lives On Campus}')}
+                ({inlineKatex('x_3')}) is included, notice the changes in
+                {inlineKatex('\\hat{\\beta_1}')}, the correlation coefficients
+                {inlineKatex('corr(y, x_3)')} and
+                {inlineKatex('corr(x_1, x_3)')}.</>,
+            skipped: <>When {inlineKatex('\\text{Classes Skipped Weekly}')}
+                ({inlineKatex('x_4')}) is included, notice the changes in
+                {inlineKatex('\\hat{\\beta_1}')}, the correlation coefficients
+                {inlineKatex('corr(y, x_4)')} and
+                {inlineKatex('corr(x_1, x_4)')}.</>,
+            bgfriend: <>When {inlineKatex('\\text{Significant Other}')}
+                ({inlineKatex('x_5')}) is included, notice the changes in
+                {inlineKatex('\\hat{\\beta_1}')}, the correlation coefficients
+                {inlineKatex('corr(y, x_5)')} and
+                {inlineKatex('corr(x_1, x_5)')}.</>
         }
     },
     affairs_sim2: {
@@ -421,15 +446,26 @@ export const sim2TextControl = {
             relationships between
         {inlineKatex('\\text{Number Of Affairs}')} and
         {inlineKatex('\\text{Rating Of Marriage}')}.</>,
-        general_inst: <>Instructions for the Affairs dataset control variables
-            TBD.</>,
+        general_inst: <>These are control variables whose omission could lead
+            to OVB and distort the estimates of the
+            relationships between {inlineKatex('\\text{Number Of Affairs}')} and
+        {inlineKatex('\\text{Rating Of Marriage}')}.</>,
         control_inst: {
-            yrsmarr: <>Instructions for the Years Married data from the GPA4
-                dataset.</>,
-            kids: <>Instructions for the Has Kids data from the GPA4,
-                dataset.</>,
-            relig: <>Instructions for the Degree of Religiosity data from the
-                GPA4 dataset.</>
+            yrsmarr: <>When {inlineKatex('\\text{Years Married}')}
+                ({inlineKatex('x_2')}) is included, notice the changes in
+                {inlineKatex('\\hat{\\beta_1}')}, the correlation coefficients
+                {inlineKatex('corr(y, x_2)')} and
+                {inlineKatex('corr(x_1, x_2)')}.</>,
+            kids: <>When {inlineKatex('\\text{Has Kids}')}
+                ({inlineKatex('x_3')}) is included, notice the changes in
+                {inlineKatex('\\hat{\\beta_1}')}, the correlation coefficients
+                {inlineKatex('corr(y, x_3)')} and
+                {inlineKatex('corr(x_1, x_3)')}.</>,
+            relig: <>When {inlineKatex('\\text{Degree Of Religiosity}')}
+            ({inlineKatex('x_4')}) is included, notice the changes in
+                {inlineKatex('\\hat{\\beta_1}')}, the correlation coefficients
+                {inlineKatex('corr(y, x_4)')} and
+                {inlineKatex('corr(x_1, x_4)')}.</>
         }
     },
     campus_sim2: {
@@ -437,13 +473,22 @@ export const sim2TextControl = {
             relationships between
         {inlineKatex('\\text{Total Campus Crimes}')} and
         {inlineKatex('\\text{Total Enrollment}')}.</>,
-        general_inst: <>Instructions for the Campus Crime Rates dataset control
-            variables TBD.</>,
+        general_inst: <>These are control variables whose omission could lead
+            to OVB and distort the estimates of the
+            relationships between
+        {inlineKatex('\\text{Total Campus Crimes}')} and
+        {inlineKatex('\\text{Total Enrollment}')}.</>,
         control_inst: {
-            police: <>Instructions for the Police Employed On Campus data from
-                the GPA4 dataset.</>,
-            campus: <>Instructions for the Private School data from the GPA4,
-                dataset.</>
+            police: <>When {inlineKatex('\\text{Police Employed On Campus}')}
+                ({inlineKatex('x_2')}) is included, notice the changes in
+                {inlineKatex('\\hat{\\beta_1}')}, the correlation coefficients
+                {inlineKatex('corr(y, x_2)')} and
+                {inlineKatex('corr(x_1, x_2)')}.</>,
+            campus: <>When {inlineKatex('\\text{Private School}')}
+                ({inlineKatex('x_3')}) is included, notice the changes in
+                {inlineKatex('\\hat{\\beta_1}')}, the correlation coefficients
+                {inlineKatex('corr(y, x_3)')} and
+                {inlineKatex('corr(x_1, x_3)')}.</>
         }
     },
 };
