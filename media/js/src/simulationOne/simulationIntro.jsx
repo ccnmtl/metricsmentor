@@ -86,7 +86,7 @@ export const SimIntro = ({plotType}) => {
                     {plotType === '3d' && (
                         <div className="simulation__step-content">
                             <p>
-                                Let&rsquo;s move on from the simple variable
+                                Let&rsquo;s move on from the simple
                                 regression (2D) to multiple regression (3D)
                                 section of this simulation.
                             </p>

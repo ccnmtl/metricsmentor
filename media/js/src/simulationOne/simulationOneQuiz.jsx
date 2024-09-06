@@ -274,45 +274,44 @@ export const SimulationOneQuiz = ({
                         exercise, which of the following is true?
                     </span>,
                     [<span key="option1">
-                        The closer the correlation between Y and X1 is
-                        to one, the <b>less likely</b> it is to reject
-                        the null hypothesis β1 = 0.
+                        The closer the correlation between y and x<sub>1</sub>
+                        &nbsp;is to one, the <b>less likely</b> it is to reject
+                        the null hypothesis β<sub>1</sub> = 0.
                     </span>,
                     <span key="option2">
-                        The closer the correlation between Y and X1 is
-                        to negative one, the <b>less likely</b> it is to
-                        reject the null hypothesis β1 = 0.
+                        The closer the correlation between y and x<sub>1</sub>
+                        &nbsp;is to negative one, the <b>less likely</b>&nbsp;
+                        it is to reject the null hypothesis β<sub>1</sub> = 0.
                     </span>,
                     <span key="option3">
-                        The closer the correlation between Y and X1 is
-                        to zero, the <b>more likely</b> it is to reject
-                        the null hypothesis β1 = 0.
+                        The closer the correlation between y and x<sub>1</sub>
+                        &nbsp;is to zero, the <b>more likely</b> it is to reject
+                        the null hypothesis β<sub>1</sub> = 0.
                     </span>,
                     <span key="option4">
-                        The closer the correlation between Y and X1 is
-                        to zero, the <b>less likely</b> it is to reject
-                        the null hypothesis β1 = 0.
+                        The closer the correlation between y and x<sub>1</sub>
+                        &nbsp;is to zero, the <b>less likely</b> it is to reject
+                        the null hypothesis β<sub>1</sub> = 0.
                     </span>,
                     <span key="option5">
                         None of these are correct
                     </span>],
 
                     <span>
-                        The closer the correlation between Y and X1 is
-                        to zero, the less likely it is to reject the
-                        null hypothesis β1 = 0.
+                        The closer the correlation between y and x<sub>1</sub>
+                        &nbsp;is to zero, the less likely it is to reject the
+                        null hypothesis β<sub>1</sub> = 0.
                     </span>,
                     <span>
                         Excellent! You have correctly identified that a
                         higher correlation between the dependent
-                        variable y and the independent variable x1
+                        variable y and the independent variable x<sub>1</sub>
                         would mean a non-zero slope.
                     </span>,
                     <span>
-                        Incorrect. Remember a higher
-                        correlation between the dependent variable y
-                        and the independent variable x1 would mean a
-                        non-zero slope.
+                        Incorrect. Remember a higher correlation between the
+                        dependent variable y and the independent variable
+                        x<sub>1</sub> would mean a non-zero slope.
                     </span>,
                     7)
             )}
@@ -322,17 +321,19 @@ export const SimulationOneQuiz = ({
                 && isHypothesisCompleted && plotType === '3d' && (
                 renderTakeawayQuestion('A',
                     <span>
-                            As we add x2 to the regression,
+                            As we add x<sub>2</sub> to the regression,
                     </span>,
                     [<span key="option1">
-                            The slope of x1, B1, changed.
-                    </span>,
-                    <span key="option2">
-                            The standard error of the slope of x1, SE(B11),
+                            The slope of x<sub>1</sub>, B&#770;<sub>1</sub>,
                             changed.
                     </span>,
+                    <span key="option2">
+                            The standard error of the slope of x<sub>1</sub>,
+                            SE(B&#770;<sub>1</sub>), changed.
+                    </span>,
                     <span key="option3">
-                            The intercept of the regression line, B0, changed.
+                            The intercept of the regression line,
+                            B&#770;<sub>0</sub>, changed.
                     </span>,
                     <span key="option4">
                             All Choices Are Correct
