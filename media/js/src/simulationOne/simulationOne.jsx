@@ -41,6 +41,7 @@ export const SimulationOne = () => {
     const [completedChoices, setCompletedChoices] = useState([]);
     const [completedChoices3d, setCompletedChoices3d] = useState([]);
     const [selectedAltHypothesis, setSelectedAltHypothesis] = useState(null);
+    const [isNInvalid, setIsNInvalid] = useState(false);
 
 
     const createSubmission = async() => {
@@ -102,7 +103,9 @@ export const SimulationOne = () => {
     };
 
     const handleNChange = (e) => {
-        setN(parseInt(e.target.value));
+        const n = parseInt(e.target.value);
+        setN(n);
+        setIsNInvalid(n < 50 || n > 500);
     };
 
     const handleNBlur = (e) => {
@@ -112,6 +115,7 @@ export const SimulationOne = () => {
         } else if (n > 500) {
             setN(500);
         }
+        setIsNInvalid(n < 50 || n > 500);
     };
 
     const handleYcorrelationChange = (e) => {
@@ -212,6 +216,11 @@ export const SimulationOne = () => {
                                     onBlur={handleNBlur}
                                     onChange={handleNChange} />
                             </div>
+                            {isNInvalid && (
+                                <div className="text-danger mt-2">
+                                For practical purposes n is between 50 and 500
+                                </div>
+                            )}
                             <div className="mt-4">
                                 <label htmlFor="correlation"
                                     className="h2 form-label">
