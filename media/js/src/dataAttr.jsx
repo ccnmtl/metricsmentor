@@ -196,7 +196,7 @@ export const labelIndex = {
     crime: 'Total Campus Crimes',
     educ: 'Years Of Education',
     enroll: 'Total Enrollment',
-    gpa4: 'GPA4',
+    gpa4: 'GPA',
     hsGPA: 'High School GPA',
     income: 'Income',
     kids: 'Has Kids',
@@ -365,7 +365,7 @@ export const sim2TextVariable = {
         ({inlineKatex('y')}), and the key variable of interest, which is the
         years of education of the household head ({inlineKatex('x_1')}). Here
         is the simple regression analysis for these variables:</>,
-    gpa4: <>In the &ldquo;GPA 4&rdquo; dataset, our goal is to examine the
+    gpa4: <>In the &ldquo;GPA&rdquo; dataset, our goal is to examine the
         relationship between the dependent variable, college GPA
         ({inlineKatex('y')}), and the key variable of interest,
         high school GPA ({inlineKatex('x_1')}). Here is the simple regression
