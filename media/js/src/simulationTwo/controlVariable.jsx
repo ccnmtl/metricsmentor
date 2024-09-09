@@ -92,7 +92,7 @@ export const ControlVariable = ({
                                         ${selectData.slope_x1 +
                                             labelIndex[data.x_1]}_i +
                                         ${selectData.slope_x2 +
-                                            labelIndex[data.x_2]}_i`],
+                                            labelIndex[dType]}_i`],
                                 },
                                 {
                                     title: <>Original sample slope
