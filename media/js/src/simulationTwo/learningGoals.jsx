@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { labelIndex } from '../dataAttr';
+import { inlineKatex } from '../utils';
 
 
 export const LearningGoals = ({
@@ -9,10 +10,15 @@ export const LearningGoals = ({
     return (
         <div>
             <p>
-                <span className="text-danger fw-semibold">For Seyhan: Need
-                text of the learning objectives for this OVB module.</span> The
-                purpose of the learning goals is to orient students&rsquo;
-                expectations, shape their focus in this simulation.
+                In applied research, the goal is to ensure that the estimated
+                slope for the variable of interest ({inlineKatex('x_1')}) is
+                an unbiased estimate of the population slope. If it is biased,
+                the estimate is unreliable, indicating that
+                {inlineKatex('x_1')} is endogenous. One cause of this
+                endogeneity is omitting relevant variables from the regression
+                equation, leaving them hidden in the error term. We will
+                examine four datasets to explore how different omitted
+                variables contribute to OVB to varying degrees.
             </p>
             <p>
                 Let&rsquo;s choose a dataset for this analysis:
