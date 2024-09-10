@@ -207,7 +207,7 @@ export const CriticalValue = ({
     return (
         <div className="solving-p-set mt-3">
 
-            <div className="input-criticalvalue">
+            <div className="input-criticalvalue mb-3">
                 <p>
                     {textMethod} method for hypothesis testing is to
                             compare
@@ -253,27 +253,27 @@ export const CriticalValue = ({
                                 Continue &raquo;
                     </button>
                 </div>
-            </div>
-            {/*input-criticalvalue*/}
-            {isCriticalValueCorrect &&(
-                <div className="mt-3">
-                    <span style={{ color: 'green' }}>
+                {isCriticalValueCorrect &&(
+                    <div className="mt-3">
+                        <span style={{ color: 'green' }}>
                             That&rsquo;s correct!
-                    </span>
-                </div>
-            )}
+                        </span>
+                    </div>
+                )}
 
-            {!isCriticalValueCorrect &&
+                {!isCriticalValueCorrect &&
                     isCriticalValueCorrect !== null && (
-                <div className="mt-3">
-                    <span style={{ color: 'red' }}>
+                    <div className="mt-3">
+                        <span style={{ color: 'red' }}>
                             That&rsquo;s incorrect.
                             Please try again.
-                    </span>
-                </div>
-            )}
+                        </span>
+                    </div>
+                )}
+            </div>
+            {/*input-criticalvalue*/}
             {isCriticalValueCorrect && (
-                <div className="p-val-concl mt-3">
+                <div className="p-val-concl mt-3 mb-3">
                     <div>
                             Knowing the
                         <Katex tex={'critical~value'}
@@ -335,7 +335,7 @@ export const CriticalValue = ({
                 </div> //compare-t-to-criticalvalue
             )}
             {isCriticalCompareCorrect && (
-                <div className="p-val-concl mt-3">
+                <div className="p-val-concl mt-3 mb-3">
                     <p>Once again, the null and and
                             alternate hypotheses are:</p>
                     <div className="hi-val">
