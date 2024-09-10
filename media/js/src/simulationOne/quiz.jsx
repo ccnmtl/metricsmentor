@@ -83,24 +83,26 @@ export const Quiz = ({
                     submissionId={submissionId}
                     plotType={plotType} />
             )}
+            {hypothesisTest2validate && !isRedo && (
+                <p className="mt-3">
+                    You have completed this hypothesis test.
+                    &nbsp;
+                    <a href="#" className="btn btn-sm btn-primary"
+                        onClick={handleRedo}>
+                        Do Case again?
+                    </a>
+                </p>
+            )}
             {hypothesisTest2validate && (
-                <>
-                    <p className="mt-3">
-                        You have completed this hypothesis test.
-                        &nbsp;
-                        <a href="#" className="btn btn-sm btn-primary"
-                            onClick={handleRedo}>
-                                Do Case again?
-                        </a>
-                    </p>
-                    <div className="simulation__step-prompt">
-                        <button className= "btn btn-primary my-3"
-                            id="proceed"
-                            onClick={handleOnComplete}>
+
+                <div className="simulation__step-prompt">
+                    <button className= "btn btn-primary my-3"
+                        id="proceed"
+                        onClick={handleOnComplete}>
                             Continue &raquo;
-                        </button>
-                    </div>
-                </>
+                    </button>
+                </div>
+
             )}
         </div>
     );

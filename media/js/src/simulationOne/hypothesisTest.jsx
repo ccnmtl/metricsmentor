@@ -65,6 +65,9 @@ export const HypothesisTest = ({
         calculatePvalue();
         document.getElementById('hypothesis-test')
             .scrollIntoView({ behavior: 'smooth'});
+        if (isRedo) {
+            setAlphaSelected(false);
+        }
     }, []);
 
     return (

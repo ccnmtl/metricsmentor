@@ -29,9 +29,11 @@ export const SimulationOneQuiz = ({
                 ...isTakeawayCorrect,
                 [choiceKey]: true,
             });
+
             if (choiceKey === 'A' && !isQualifierCorrect && plotType !== '3d') {
                 // User needs to answer the qualifier question
                 setIsSubmitted(false);
+                setCompletedChoices([...completedChoices, choiceKey]);
             } else {
                 setCompletedChoices([...completedChoices, choiceKey]);
                 setSelectedAltHypothesis(null);
@@ -74,9 +76,8 @@ export const SimulationOneQuiz = ({
     };
 
     const handleContinueToB = () => {
-        setSelectedAltHypothesis('B');
         setShowContinueToB(false);
-        setIsHypothesisCompleted(false);
+        setSelectedAltHypothesis(null);
     };
 
     const handleQualifierSubmit = (correct) => {
@@ -97,17 +98,17 @@ export const SimulationOneQuiz = ({
         }
     };
 
-    const isCompletedfunc = () => {
-        if (isTakeawayCorrect.C && isSubmitted) {
-            setIsCompleted(true);
-            // setSelectedAltHypothesis(null);
-        }
-    };
-
     const handleRedo = () => {
         setIsRedo(true);
         setShowRedoButton(false);
         setIsHypothesisCompleted(false);
+    };
+
+    const isCompletedfunc = () => {
+        if (isTakeawayCorrect.C && isSubmitted) {
+            setIsCompleted(true);
+            setSelectedAltHypothesis(null);
+        }
     };
 
     const renderChoice = (choiceKey, formula) => (
@@ -313,7 +314,8 @@ export const SimulationOneQuiz = ({
                         dependent variable y and the independent variable
                         x<sub>1</sub> would mean a non-zero slope.
                     </span>,
-                    7)
+                    7
+                )
             )}
             {/* Takeaway Questions */}
             {(selectedAltHypothesis === 'A' || isTakeawayCorrect.A)
@@ -507,7 +509,8 @@ export const SimulationOneQuiz = ({
                 </>
             )}
 
-            {(isQualifierCorrect && isTakeawayCorrect.A) && (
+            {(isQualifierCorrect && isTakeawayCorrect.A)
+            && selectedAltHypothesis === 'A' && (
                 <>
                     <div className="mt-3 mb fs-5 fw-medium text-center"
                         id="completed2d">
@@ -516,7 +519,7 @@ export const SimulationOneQuiz = ({
                     </div>
                     <div className="simulation__step-prompt">
                         <div className="btn btn-primary"
-                            onClick={() => setSelectedAltHypothesis('B')}>
+                            onClick={handleContinueToB}>
                             Continue to B &raquo;
                         </div>
                     </div>

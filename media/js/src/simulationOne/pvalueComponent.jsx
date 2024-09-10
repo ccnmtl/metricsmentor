@@ -138,7 +138,7 @@ export const PvalueComponent = ({
 
     return (
         <div className="solving-p-set mt-3">
-            <div className="input-p">
+            <div className="input-p mb-3">
                 <div>
                 One method for hypothesis testing is to compare the
                     <Katex tex={'p'} className="katex-inline" />-value to
@@ -181,25 +181,25 @@ export const PvalueComponent = ({
                     Continue &raquo;
                     </button>
                 </div>
-            </div>{/*input-p*/}
-            {isPvalueCorrect && (
-                <div className="mt-3">
-                    <span style={{ color: 'green' }}>
+                {isPvalueCorrect && (
+                    <div className="mt-3">
+                        <span style={{ color: 'green' }}>
                     That&rsquo;s correct!
-                    </span>
-                </div>
-            )}
-            {!isPvalueCorrect && isPvalueCorrect !== null && (
-                <div className="mt-3">
-                    <span style={{ color: 'red' }}>
+                        </span>
+                    </div>
+                )}
+                {!isPvalueCorrect && isPvalueCorrect !== null && (
+                    <div className="mt-3">
+                        <span style={{ color: 'red' }}>
                     The value is incorrect; it&rsquo;s {pvalue}.
                     Please try again.
-                    </span>
-                </div>
-            )}
+                        </span>
+                    </div>
+                )}
+            </div>{/*input-p*/}
 
             {isPvalueCorrect && (
-                <div className="p-to-alpha mt-3">
+                <div className="p-to-alpha mt-3 mb-3">
                     <p>
                     Knowing now the
                         <Katex tex={'p'} className="katex-inline" />-value
@@ -256,7 +256,7 @@ export const PvalueComponent = ({
                     )}
 
                     {!isPvalCompareCorrect &&
-                isPvalCompareCorrect !== null && (
+                    isPvalCompareCorrect !== null && (
                         <div className="mt-3">
                             <span style={{ color: 'red' }}>
                             The comparison is incorrect.
@@ -267,7 +267,7 @@ export const PvalueComponent = ({
                 </div>//compare-p-to-alpha
             )}
             {isPvalCompareCorrect && (
-                <div className="p-val-concl mt-3">
+                <div className="p-val-concl mt-3 mb-3">
                     <p>Let&rsquo;s look at the null and and
                     alternate hypotheses once more:</p>
                     <div className="hi-val">
@@ -328,7 +328,7 @@ export const PvalueComponent = ({
                         </div>
                     )}
                     {!hypothesisTest1validate &&
-                hypothesisTest1validate !== null && (
+                        hypothesisTest1validate !== null && (
                         <div className="mt-3">
                             <span style={{ color: 'red' }}>
                             The conclusion is incorrect.

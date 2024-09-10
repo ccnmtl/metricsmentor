@@ -51,9 +51,6 @@ export const MultipleChoiceQuestion = ({
             textOption, correct, {});
 
         setIsSubmitted(correct);
-
-        document.getElementById('feedback').scrollIntoView(
-            { behavior: 'smooth'});
     };
 
     useEffect(() => {
@@ -61,6 +58,13 @@ export const MultipleChoiceQuestion = ({
         document.getElementById(`multiple-${idkey}`).scrollIntoView(
             { behavior: 'smooth'});
     }, []);
+
+    useEffect(() => {
+        if (isAnswered) {
+            document.getElementById('feedback')
+                .scrollIntoView({ behavior: 'smooth'});
+        }
+    }, [isAnswered]);
 
     return (<>
         <div className="simulation__step-container d-flex">
@@ -99,7 +103,7 @@ export const MultipleChoiceQuestion = ({
                     <button
                         className="btn btn-primary mt-3"
                         id={`multiple-${idkey}`}
-                        disabled={isAnswered}
+                        disabled={isAnswered || !selectedOption}
                         onClick={handleSubmit}>Submit</button>
                     {isAnswered && (
                         <p className="mt-3" style={answerStyle} id="feedback">
