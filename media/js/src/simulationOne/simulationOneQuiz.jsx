@@ -3,12 +3,13 @@ import { Katex } from '../katexComponent';
 import { HypothesisTest } from './hypothesisTest';
 import { MultipleChoiceQuestion } from '../multipleChoiceQuestion';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 
 export const SimulationOneQuiz = ({
     appRvalue, tvalue, hypothesizedSlope, n, setIsCompleted,
     isCompleted, submissionId, handlePlotTypeChange, plotType,
     completedChoices, setCompletedChoices, selectedAltHypothesis,
-    setSelectedAltHypothesis
+    setSelectedAltHypothesis, coursePk
 }) => {
     const [isSubmitted, setIsSubmitted] = useState(false);
     const [isTakeawayCorrect, setIsTakeawayCorrect] = useState({
@@ -320,6 +321,9 @@ export const SimulationOneQuiz = ({
             {/* Takeaway Questions */}
             {(selectedAltHypothesis === 'A' || isTakeawayCorrect.A)
                 && !completedChoices.includes('B')
+                && selectedAltHypothesis !== null
+                && selectedAltHypothesis !== 'B'
+                && selectedAltHypothesis !== 'C'
                 && isHypothesisCompleted && plotType === '3d' && (
                 renderTakeawayQuestion('A',
                     <span>
@@ -361,12 +365,27 @@ export const SimulationOneQuiz = ({
             )}
 
             {showContinueToB && (
-                <div className="simulation__step-prompt mt-3 text-center">
-                    <div className="btn btn-primary"
-                        onClick={handleContinueToB}>
-            Continue to Case B &raquo;
+                <>
+                    <div className="simulation__step-prompt mt-3 text-center
+                    mb-3">
+                    Awesome! You&apos;ve successfully completed Simulation One.
+                    Want to keep practicing? You can move on to Case B and
+                    Case C, or head back to the Dashboard whenever you&apos;re
+                    ready.
                     </div>
-                </div>
+                    <div style={{ display: 'flex',
+                        justifyContent: 'center', gap: '10px' }}>
+                        <div className="btn btn-secondary"
+                            onClick={handleContinueToB}>
+                                Continue to Case B &raquo;
+                        </div>
+                        <Link to={`/course/${coursePk}/simulations/`}
+                            className="btn btn-primary"
+                            data-cy="sim-1-link-quiz1">
+                            Back to Dashboard
+                        </Link>
+                    </div>
+                </>
             )}
 
             {/* Qualifier Question for Choice A */}
@@ -517,13 +536,13 @@ export const SimulationOneQuiz = ({
                     Congratulations! You can do case B if you want or move on
                     to the 3D simulation.
                     </div>
-                    <div className="simulation__step-prompt">
-                        <div className="btn btn-primary"
+                    <div className="simulation__step-prompt-container"
+                        style={{ display: 'flex',
+                            justifyContent: 'center', gap: '10px' }}>
+                        <div className="btn btn-warning"
                             onClick={handleContinueToB}>
                             Continue to B &raquo;
                         </div>
-                    </div>
-                    <div className="simulation__step-prompt">
                         <div className="btn btn-primary"
                             onClick={() => handlePlotTypeChange('3d')}>
                             Continue to 3D &raquo;
@@ -533,10 +552,18 @@ export const SimulationOneQuiz = ({
             )}
             {(plotType === '3d' && completedChoices.includes('C')) && (
                 <>
-                    <div className="mt-3 mb-5 fs-5 fw-medium text-center"
+                    <div className="mt-3 mb-3 fs-5 fw-medium text-center"
                         id="completed3d">
                         Congratulations on<br />completing Simulation 1!<br />
                         &#127881; &#127881; &#127881;
+                    </div>
+                    <div style={{ display: 'flex',
+                        justifyContent: 'center', gap: '10px' }}>
+                        <Link to={`/course/${coursePk}/simulations`}
+                            className="btn btn-primary"
+                            data-cy="sim-1-link-quiz2">
+                            Back to Dashboard
+                        </Link>
                     </div>
                 </>
             )}
@@ -557,5 +584,6 @@ SimulationOneQuiz.propTypes = {
     completedChoices: PropTypes.array,
     setCompletedChoices: PropTypes.func,
     selectedAltHypothesis: PropTypes.string,
-    setSelectedAltHypothesis: PropTypes.func
+    setSelectedAltHypothesis: PropTypes.func,
+    coursePk: PropTypes.number.isRequired,
 };
