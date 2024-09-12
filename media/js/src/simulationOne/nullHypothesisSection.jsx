@@ -5,14 +5,22 @@ import PropTypes from 'prop-types';
 
 export const NullHypothesisSection = ({
     slope, stderror, tvalue, hypothesizedSlope,
-    handleNullHypothesis, startQuiz, plotType, slopes, stderrs,
-    tvalue3d, startQuiz2
+    startQuiz, plotType, slopes, stderrs, tvalue3d, startQuiz2,
+    setHypothesizedSlope
 }) => {
+
+    const handleNullHypothesis = (e) => {
+        setHypothesizedSlope(parseFloat(e.target.value));
+    };
 
     useEffect(() => {
         document.getElementById('null-hypothesis')
-            .scrollIntoView({ behavior: 'smooth'});
-    }, []);
+            .scrollIntoView({ behavior: 'smooth' });
+
+        if (plotType === '3d') {
+            setHypothesizedSlope(0);
+        }
+    }, [plotType, setHypothesizedSlope]);
 
     const tEquation =
     't = \\cfrac{\\hat{\\beta}_1 - \\beta_1}{SE(\\hat{\\beta_1})}';
@@ -127,5 +135,6 @@ NullHypothesisSection.propTypes = {
     plotType: PropTypes.string,
     slopes: PropTypes.array,
     stderrs: PropTypes.array,
-    startQuiz2: PropTypes.bool
+    startQuiz2: PropTypes.bool,
+    setHypothesizedSlope: PropTypes.func
 };

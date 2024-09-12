@@ -264,6 +264,7 @@ export const SimulationOneQuiz = ({
                     submissionId={submissionId}
                     plotType={plotType}
                     setIsHypothesisCompleted={setIsHypothesisCompleted}
+                    isHypothesisCompleted={isHypothesisCompleted}
                     isRedo={isRedo}
                     setIsRedo={setIsRedo}
                 />
@@ -451,7 +452,10 @@ export const SimulationOneQuiz = ({
                         (the alternative hypothesis has
                         &quot;&#60;&quot; sign in this case) hence
                         no need to divide the significance level by
-                        two. Let&apos;s continue to choice B above!
+                        two.
+                        <div className="fw-bold">
+                            Let&apos;s continue to choice B above!
+                        </div>
                     </span>,
                     14)
             )}

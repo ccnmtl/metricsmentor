@@ -130,10 +130,6 @@ export const SimulationOne = () => {
         setSeed(e.target.value);
     };
 
-    const handleNullHypothesis = (e) => {
-        setHypothesizedSlope(parseFloat(e.target.value));
-    };
-
     const handlePlotTypeChange = (type) => {
         setPlotType(type);
         document.getElementById('learningGoal')
@@ -363,7 +359,7 @@ export const SimulationOne = () => {
                                     tvalue={tvalue}
                                     tvalue3d={tvalue3d}
                                     hypothesizedSlope={hypothesizedSlope}
-                                    handleNullHypothesis={handleNullHypothesis}
+                                    setHypothesizedSlope={setHypothesizedSlope}
                                     startQuiz={startQuiz}
                                     startQuiz2={startQuiz2} />
 
