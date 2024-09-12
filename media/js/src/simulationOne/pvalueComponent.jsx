@@ -7,7 +7,7 @@ import PropTypes from 'prop-types';
 export const PvalueComponent = ({
     pvalue, tvalue, submissionId, hypothesis, nullHypothesis,
     alpha, hypothesisTest1validate, setHypothesisTest1validate,
-    plotType, isRedo
+    plotType, isRedo, hypothesisTest
 }) => {
 
     const [userPvalue, setUserPvalue] = useState('');
@@ -149,6 +149,14 @@ export const PvalueComponent = ({
                         <Katex tex={`t = ${tvalue}`}
                             className="katex-inline"/>.
                     </div>
+                    {hypothesisTest === 'value_two_sided' && (
+                        <div>
+                            Note that this is a&nbsp;
+                            <span className="fw-bold">
+                                two-sided test
+                            </span> and the value must be multiplied by two.
+                        </div>
+                    )}
                 </div>
                 <button
                     className="btn btn-sm btn-primary"
@@ -191,8 +199,14 @@ export const PvalueComponent = ({
                 {!isPvalueCorrect && isPvalueCorrect !== null && (
                     <div className="mt-3">
                         <span style={{ color: 'red' }}>
-                    The value is incorrect; it&rsquo;s {pvalue}.
-                    Please try again.
+                            The value is incorrect; it&rsquo;s {pvalue}.
+                            {hypothesisTest === 'value_two_sided' && (
+                                <span>
+                                &nbsp;Note that this is a two-sided test and the
+                                value must be multiplied by two.&nbsp;
+                                </span>
+                            )}
+                            Please try again.
                         </span>
                     </div>
                 )}
@@ -352,5 +366,6 @@ PvalueComponent.propTypes = {
     hypothesisTest1validate: PropTypes.bool,
     setHypothesisTest1validate: PropTypes.func,
     plotType: PropTypes.string,
-    isRedo: PropTypes.bool
+    isRedo: PropTypes.bool,
+    hypothesisTest: PropTypes.string
 };

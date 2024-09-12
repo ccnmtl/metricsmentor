@@ -62,6 +62,7 @@ export const Quiz = ({
                     setHypothesisTest1validate={setHypothesisTest1validate}
                     tvalue={tvalue}
                     alpha={alpha}
+                    hypothesisTest={hypothesisTest}
                     hypothesis={hypothesis}
                     nullHypothesis={nullHypothesis}
                     plotType={plotType}
