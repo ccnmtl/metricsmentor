@@ -78,9 +78,9 @@ export const MultipleChoiceQuestion = ({
                     <h2 className="h2-primary">{header}</h2>
                 </header>
                 <div className="simulation__step-content">
-                    <p style={questionStyle}>
+                    <div style={questionStyle}>
                         {question}
-                    </p>
+                    </div>
                     {shuffledOptions.map((option, index) => (
                         <div key={index} className="form-check">
                             <input
@@ -106,9 +106,9 @@ export const MultipleChoiceQuestion = ({
                         disabled={isAnswered || !selectedOption}
                         onClick={handleSubmit}>Submit</button>
                     {isAnswered && (
-                        <p className="mt-3" style={answerStyle} id="feedback">
+                        <div className="mt-3" style={answerStyle} id="feedback">
                             {isCorrect ? correctFeedback : incorrectFeedback}
-                        </p>
+                        </div>
                     )}
                 </div>
             </div>
