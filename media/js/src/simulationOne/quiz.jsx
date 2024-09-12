@@ -88,10 +88,12 @@ export const Quiz = ({
                 <p className="mt-3">
                     You have completed this hypothesis test.
                     &nbsp;
-                    <a href="#" className="btn btn-sm btn-primary"
+                    <button className= "btn btn-primary"
+                        id="redo"
+                        disabled={isHypothesisCompleted}
                         onClick={handleRedo}>
                         Do Case again?
-                    </a>
+                    </button>
                 </p>
             )}
             {hypothesisTest2validate && (
