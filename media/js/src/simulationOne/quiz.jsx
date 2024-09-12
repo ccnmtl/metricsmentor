@@ -8,7 +8,7 @@ import { CriticalValue } from './criticalValue.jsx';
 export const Quiz = ({
     tvalue, pvalue, alpha, hypothesisTest, hypothesis,
     nullHypothesis, n, completedChoices, submissionId,
-    plotType, isRedo, setIsRedo, setIsHypothesisCompleted
+    plotType, isRedo, setIsRedo, setIsHypothesisCompleted, isHypothesisCompleted
 }) => {
     // eslint-disable-next-line max-len
     const [hypothesisTest1validate, setHypothesisTest1validate] = useState(null);
@@ -98,6 +98,7 @@ export const Quiz = ({
                 <div className="simulation__step-prompt">
                     <button className= "btn btn-primary my-3"
                         id="proceed"
+                        disabled={isHypothesisCompleted}
                         onClick={handleOnComplete}>
                             Continue &raquo;
                     </button>
@@ -122,4 +123,5 @@ Quiz.propTypes = {
     isRedo: PropTypes.bool,
     setIsRedo: PropTypes.func,
     setIsHypothesisCompleted: PropTypes.func,
+    isHypothesisCompleted: PropTypes.bool,
 };

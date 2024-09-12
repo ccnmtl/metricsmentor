@@ -7,7 +7,7 @@ import axios from 'axios';
 export const HypothesisTest = ({
     selectedAltHypothesis, appRvalue, tvalue, hypothesizedSlope, n,
     completedChoices, submissionId, plotType, setSelectedAltHypothesis,
-    setIsHypothesisCompleted, isRedo, setIsRedo
+    setIsHypothesisCompleted, isRedo, setIsRedo, isHypothesisCompleted
 }) => {
     const [pvalues, setPvalues] = useState(null);
     const [alpha, setAlpha] = useState(null);
@@ -154,6 +154,7 @@ export const HypothesisTest = ({
                                 plotType={plotType}
                                 // eslint-disable-next-line max-len
                                 setIsHypothesisCompleted={setIsHypothesisCompleted}
+                                isHypothesisCompleted={isHypothesisCompleted}
                             />
                         )}
                     </div>
@@ -176,5 +177,6 @@ HypothesisTest.propTypes = {
     plotType: PropTypes.string,
     setIsHypothesisCompleted: PropTypes.func,
     isRedo: PropTypes.bool,
-    setIsRedo: PropTypes.func
+    setIsRedo: PropTypes.func,
+    isHypothesisCompleted: PropTypes.bool
 };
