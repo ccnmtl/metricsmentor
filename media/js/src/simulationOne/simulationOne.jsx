@@ -21,6 +21,7 @@ export const SimulationOne = () => {
     const [N, setN] = useState(50);
     const [yCorrelation, setYcorrelation] = useState(0.3);
     const [xCorrelation, setXcorrelation] = useState(0.3);
+    // eslint-disable-next-line no-unused-vars
     const [seed, setSeed] = useState('seedString');
     const [slope, setSlope] = useState(null);
     const [intercept, setIntercept] = useState(null);
@@ -126,9 +127,9 @@ export const SimulationOne = () => {
         setXcorrelation(parseFloat(e.target.value));
     };
 
-    const handleSeedChange = (e) => {
-        setSeed(e.target.value);
-    };
+    // const handleSeedChange = (e) => {
+    //     setSeed(e.target.value);
+    // };
 
     const handleNullHypothesis = (e) => {
         setHypothesizedSlope(parseFloat(e.target.value));
@@ -329,7 +330,7 @@ export const SimulationOne = () => {
                                     </div>
                                 </>
                             )}
-                            <div className="mt-3">
+                            {/* <div className="mt-3">
                                 <label className="dev-only"> Seed ID:
                                     <input type="text"
                                         value={seed}
@@ -337,7 +338,7 @@ export const SimulationOne = () => {
                                         className="ms-1 mt-2 dev-only" size="10"
                                         onChange={handleSeedChange} />
                                 </label>
-                            </div>
+                            </div> */}
                         </div>
                     </div>
                 </div> {/* div class=simulation__step-container */}
