@@ -216,7 +216,7 @@ export const ScatterPlot = ({ N, yCorrelation, seed, setAppRvalue,
                             dtick: 25,
                         }
                     }),
-                    ...(plotType === '2d' ? { dragmode: 'pan' } : {}),
+                    ...(plotType === '2d' ? { dragmode: false } : {}),
                 }}
 
                 useResizeHandler={true}
