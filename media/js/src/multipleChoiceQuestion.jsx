@@ -78,7 +78,7 @@ export const MultipleChoiceQuestion = ({
                     <h2 className="h2-primary">{header}</h2>
                 </header>
                 <div className="simulation__step-content">
-                    <div style={questionStyle}>
+                    <div className="mb-2" style={questionStyle}>
                         {question}
                     </div>
                     {shuffledOptions.map((option, index) => (

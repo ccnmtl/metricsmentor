@@ -47,7 +47,6 @@ export const SimulationTwo = () => {
                 }
             })
             .then(data => {
-                console.log('Submission created:', data);
                 setSubmissionId(data.submission_id);
                 followUp();
             })

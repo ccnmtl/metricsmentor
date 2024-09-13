@@ -58,14 +58,16 @@ export const SimulationOne = () => {
 
         const payload = {
             simulation: 1,
-            data: data
+            data: data,
+            submission_id: submissionId
         };
 
         const url = `/course/${coursePk}/api/create-sub/`;
+        const method = submissionId ? 'PUT' : 'POST';
 
-        return authedFetch(url, 'POST', payload)
+        return authedFetch(url, method, payload)
             .then(response => {
-                if (response.status === 201) {
+                if (response.status === 201 || response.status === 200) {
                     return response.json();
                 } else {
                     throw `Error (${response.status}) ${response.statusText}`;
@@ -81,7 +83,7 @@ export const SimulationOne = () => {
                 return data;
             })
             .catch(error => {
-                console.error('Error saving graph data:', error);
+                console.error('Error creating submission', error);
                 throw error;
             });
     };
@@ -133,6 +135,7 @@ export const SimulationOne = () => {
 
     const handlePlotTypeChange = (type) => {
         setPlotType(type);
+        setSelectedAltHypothesis(null);
         document.getElementById('learningGoal')
             .scrollIntoView({ behavior: 'smooth'});
     };
@@ -218,43 +221,45 @@ export const SimulationOne = () => {
                                 For practical purposes n is between 50 and 500
                                 </div>
                             )}
-                            <div className="mt-4">
-                                <label htmlFor="correlation"
-                                    className="h2 form-label">
+                            {plotType === '2d' && (
+                                <div className="mt-4">
+                                    <label htmlFor="correlation"
+                                        className="h2 form-label">
                                     Estimated correlation coefficient,
-                                    <Katex tex={'corr(x,y)'}
-                                        className="katex-inline" />:
-                                </label>
-                                <div className="slider-range__box">
-                                    <div className="slider-range__input">
-                                        <input
-                                            type="range"
-                                            step="0.01"
-                                            min="-1"
-                                            max="1" value={yCorrelation}
-                                            className="form-range"
-                                            id="correlation"
-                                            // eslint-disable-next-line max-len
-                                            disabled={is2DCompleted || selectedAltHypothesis}
-                                            onChange={
-                                                handleYcorrelationChange} />
-                                        <div className="scale-value">
-                                            <Katex tex={`${yCorrelation}`} />
+                                        <Katex tex={'corr(x,y)'}
+                                            className="katex-inline" />:
+                                    </label>
+                                    <div className="slider-range__box">
+                                        <div className="slider-range__input">
+                                            <input
+                                                type="range"
+                                                step="0.01"
+                                                min="-1"
+                                                max="1" value={yCorrelation}
+                                                className="form-range"
+                                                id="correlation"
+                                                disabled={selectedAltHypothesis}
+                                                onChange={
+                                                    handleYcorrelationChange} />
+                                            <div className="scale-value">
+                                                <Katex tex={
+                                                    `${yCorrelation}`} />
+                                            </div>
+                                        </div>
+                                        <div className="slider-range__scale">
+                                            <div className="unit"></div>
+                                            <div className="unit"></div>
+                                            <div className="unit"></div>
+                                            <div className="unit"></div>
+                                            <div className="unit"></div>
+                                            <div className="unit"></div>
+                                            <div className="unit"></div>
+                                            <div className="unit"></div>
+                                            <div className="unit"></div>
                                         </div>
                                     </div>
-                                    <div className="slider-range__scale">
-                                        <div className="unit"></div>
-                                        <div className="unit"></div>
-                                        <div className="unit"></div>
-                                        <div className="unit"></div>
-                                        <div className="unit"></div>
-                                        <div className="unit"></div>
-                                        <div className="unit"></div>
-                                        <div className="unit"></div>
-                                        <div className="unit"></div>
-                                    </div>
                                 </div>
-                            </div>
+                            )}
                             {plotType === '3d' && (
                                 <div className="mt-4">
                                     <label htmlFor="correlation"
@@ -295,21 +300,6 @@ export const SimulationOne = () => {
                                     </div>
                                 </div>
                             )}
-                            {slope !== null && plotType === '2d' && (
-                                <>
-                                    <div className="mt-5 h2">
-                                        Calculated
-                                        <Katex tex={'corr(x,y)'}
-                                            className="katex-inline" />:
-                                        <div
-                                            className="hi-val ms-2">
-                                            <Katex
-                                                tex={`${appRvalue.toFixed(3)}`}
-                                                className="katex-inline" />
-                                        </div>
-                                    </div>
-                                </>
-                            )}
                             {slopes.length > 0 && plotType === '3d' && (
                                 <>
                                     <div className="mt-5 h2">
@@ -321,6 +311,21 @@ export const SimulationOne = () => {
                                                 tex={
                                                     `${appRvalue3d.toFixed(3)}`
                                                 }
+                                                className="katex-inline" />
+                                        </div>
+                                    </div>
+                                </>
+                            )}
+                            {slope !== null && (
+                                <>
+                                    <div className="mt-5 h2">
+                                        Calculated
+                                        <Katex tex={'corr(x,y)'}
+                                            className="katex-inline" />:
+                                        <div
+                                            className="hi-val ms-2">
+                                            <Katex
+                                                tex={`${appRvalue.toFixed(3)}`}
                                                 className="katex-inline" />
                                         </div>
                                     </div>
