@@ -311,6 +311,11 @@ def handler404(request):
 @method_decorator(csrf_exempt, name='dispatch')
 class CreateSubmission(LoggedInCourseMixin, View):
 
+    def dispatch(self, request, *args, **kwargs):
+        if request.method == 'PUT':
+            return self.put(request, *args, **kwargs)
+        return super().dispatch(request, *args, **kwargs)
+
     def post(self, request, *args, **kwargs):
         json_data = json.loads(request.body)
         graph_data = json_data.get('data')
@@ -330,9 +335,32 @@ class CreateSubmission(LoggedInCourseMixin, View):
         print(f'Quiz submission created successfully: {quiz_submission}')
 
         return JsonResponse({
-            'message': 'Graph data and quiz submission saved successfully',
+            'message': 'Quiz submission saved successfully',
             'submission_id': quiz_submission.id
         }, status=201)
+
+    def put(self, request, *args, **kwargs):
+        json_data = json.loads(request.body)
+        graph_data = json_data.get('data')
+        submission_id = json_data.get('submission_id')
+        simulation = json_data.get('simulation')
+
+        try:
+            quiz_submission = QuizSubmission.objects.get(id=submission_id)
+            quiz_submission.data = graph_data
+            quiz_submission.simulation = simulation
+            quiz_submission.save()
+
+            print(f'Quiz submission updated successfully: {quiz_submission}')
+
+            return JsonResponse({
+                'message': 'Quiz submission updated successfully',
+                'submission_id': quiz_submission.id
+            }, status=200)
+        except QuizSubmission.DoesNotExist:
+            return JsonResponse({'status': 'fail',
+                                 'message': 'Submission not found'},
+                                status=404)
 
 
 class SaveAnswer(LoggedInCourseMixin, View):

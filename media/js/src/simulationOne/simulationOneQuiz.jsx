@@ -85,6 +85,7 @@ export const SimulationOneQuiz = ({
         if (correct) {
             setIsQualifierCorrect(true);
             setIsSubmitted(true); // Allow progress to 3D part
+            setIsCompleted(true);
         } else {
             setIsQualifierCorrect(false);
             setIsSubmitted(false); // Force the user to Choice B
