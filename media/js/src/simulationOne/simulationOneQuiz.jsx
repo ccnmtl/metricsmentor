@@ -499,10 +499,13 @@ export const SimulationOneQuiz = ({
                         would be smaller.
                     </span>,
                     <span>
-                        Excellent!
+                        Excellent! You have correctly identified the correct
+                        answer.
                     </span>,
                     <span>
-                        Incorrect.
+                        That&apos;s not the right answer. The alternative
+                        hypothesis must be &quot;greater than&quot; the same
+                        value, and the critical value would be smaller.
                     </span>,
                     15)
             )}

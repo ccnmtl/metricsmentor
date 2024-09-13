@@ -87,15 +87,7 @@
                         <span class="visually-hidden">Go to main page for</span><span>Metrics Mentor</span>
                     </a>
                     <ul class="nav col-auto top-bar__nav">
-                        <li>
-                            <a href="https://forms.gle/2eAvK9KCZ2Fpc8d89"
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                class="nav-link survey-form">
-                                Usability survey
-                            </a>
-                        </li>
-                        <li>
+                        <li class="nav-link">
                             {% if request.user.is_authenticated %}
                             Hello, 
                             {% if request.user.last_name %}

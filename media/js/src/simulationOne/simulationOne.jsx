@@ -313,7 +313,7 @@ export const SimulationOne = () => {
                             {slopes.length > 0 && plotType === '3d' && (
                                 <>
                                     <div className="mt-5 h2">
-                                    Calculated <Katex tex={'corr(x,y)'}
+                                    Calculated <Katex tex={'corr(x_1,x_2)'}
                                             className="katex-inline" />:
                                         <div
                                             className="hi-val ms-2">

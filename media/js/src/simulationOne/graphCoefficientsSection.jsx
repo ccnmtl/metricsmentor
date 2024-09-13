@@ -68,7 +68,10 @@ export const GraphCoefficients = ({
                 {(plotType === '3d' && slopes.length > 0) && (
                     <div className="simulation__step-content">
                         <p>
-                        3D scatter plot Placeholder
+                        Observe how the regression coefficients, and the plane
+                        on the graph change as you continue to adjust
+                            <Katex tex={'corr(x_1,x_2).'}
+                                className="katex-inline" />
                         </p>
                         <h2 className="mt-4">
                             Multiple Regression line equation:
