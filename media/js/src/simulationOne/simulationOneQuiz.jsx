@@ -455,11 +455,20 @@ export const SimulationOneQuiz = ({
                         no need to divide the significance level by
                         two.
                         <div className="fw-bold">
-                            Let&apos;s continue to choice B above!
+                            Let&apos;s scroll up and continue with choice B!
                         </div>
                     </span>,
                     14)
             )}
+
+            {/* {// WORK IN PROGRESS
+                (!isQualifierCorrect && showQualifier)
+            && selectedAltHypothesis === 'A' && (
+                    <div className="btn btn-secondary"
+                        onClick={handleContinueToB}>
+                    Continue to Case B &raquo;
+                    </div>
+                )} */}
 
             {(selectedAltHypothesis === 'C'|| completedChoices.includes('C'))
             && plotType === '2d'
@@ -547,7 +556,7 @@ export const SimulationOneQuiz = ({
                     <div className="simulation__step-prompt-container"
                         style={{ display: 'flex',
                             justifyContent: 'center', gap: '10px' }}>
-                        <div className="btn btn-warning"
+                        <div className="btn btn-secondary"
                             onClick={handleContinueToB}>
                             Continue to B &raquo;
                         </div>
