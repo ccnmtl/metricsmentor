@@ -177,7 +177,9 @@ export const ScatterPlot = ({ N, yCorrelation, seed, setAppRvalue,
                     regressionLine,
                 ]}
                 layout={{
-                    title: 'Single Variable Linear Regression',
+                    title: plotType === '2d'
+                        ? 'Single Variable Linear Regression'
+                        : 'Multi Variable Regression',
                     showlegend: false,
                     ...(plotType === '3d' ? {
                         scene: {
