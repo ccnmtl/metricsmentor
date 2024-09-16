@@ -85,7 +85,7 @@ export const GlossaryModal = () => {
                                 </tr>
                                 <tr>
                                     <td>
-                                        <Katex tex={'corr(x,y)'} />
+                                        <Katex tex={'\\text{corr}(x,y)'} />
                                     </td>
                                     <td>Correlation between variables
                                         <Katex tex={'x'}

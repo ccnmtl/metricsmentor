@@ -29,7 +29,7 @@ export const GraphCoefficients = ({
                             coefficients change as you continue to
                             adjust
                             <Katex tex={'n'} className="katex-inline" /> and
-                            <Katex tex={'corr(x,y)'}
+                            <Katex tex={'\\text{corr}(x,y)'}
                                 className="katex-inline" />.
                         </p>
                         <h2 className="mt-4">Regression line equation:</h2>
@@ -70,7 +70,7 @@ export const GraphCoefficients = ({
                         <p>
                         Observe how the regression coefficients, and the plane
                         on the graph change as you continue to adjust
-                            <Katex tex={'corr(x_1,x_2).'}
+                            <Katex tex={'\\text{corr}(x_1,x_2).'}
                                 className="katex-inline" />
                         </p>
                         <h2 className="mt-4">

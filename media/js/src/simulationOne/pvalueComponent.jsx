@@ -154,7 +154,8 @@ export const PvalueComponent = ({
                             Note that this is a&nbsp;
                             <span className="fw-bold">
                                 two-sided test
-                            </span> and the value must be multiplied by two.
+                            </span> and the table value must be multiplied by
+                            two.
                         </div>
                     )}
                 </div>
@@ -203,7 +204,7 @@ export const PvalueComponent = ({
                             {hypothesisTest === 'value_two_sided' && (
                                 <span>
                                 &nbsp;Note that this is a two-sided test and the
-                                value must be multiplied by two.&nbsp;
+                                table value must be multiplied by two.&nbsp;
                                 </span>
                             )}
                             Please try again.

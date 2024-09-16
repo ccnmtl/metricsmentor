@@ -36,8 +36,8 @@ export const ControlVariable = ({
             </p>
             <p>
                 The correlations between the included and omitted variables,
-                specifically {inlineKatex('corr(y,x_i)')} and
-                {inlineKatex('corr(x_1,x_i)')},
+                specifically {inlineKatex('\\text{corr}(y,x_i)')} and
+                {inlineKatex('\\text{corr}(x_1,x_i)')},
                 contribute to the {inlineKatex('[bias]')}.
             </p>
             <h2 className="mb-4">
@@ -110,9 +110,9 @@ export const ControlVariable = ({
                                 {
                                     title: 'Correlation coefficients',
                                     body: [
-                                        `corr(y, x_2) = 
+                                        `\\text{corr}(y, x_2) = 
                                             ${selectData.corr_y}`,
-                                        `corr(x_1, x_2) = 
+                                        `\\text{corr}(x_1, x_2) = 
                                             ${selectData.corr_x1}`,
                                     ],
                                 }
@@ -128,11 +128,11 @@ export const ControlVariable = ({
             <ol>
                 <li>the strength of the correlation between the dependent
                     variable and the omitted variable,
-                {inlineKatex('corr(y, x_i)')},
+                {inlineKatex('\\text{corr}(y, x_i)')},
                 </li>
                 <li>the strength of the correlation between the key variable
                     of interest and the omitted variable,
-                {inlineKatex('corr(x_1, x_i)')},
+                {inlineKatex('\\text{corr}(x_1, x_i)')},
                 </li>
             </ol>
             <p>

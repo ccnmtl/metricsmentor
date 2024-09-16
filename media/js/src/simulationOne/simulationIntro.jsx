@@ -99,7 +99,7 @@ export const SimIntro = ({plotType}) => {
                                 <Katex tex={'x_2'}
                                     className="katex-inline"/>.
                                 You&rsquo;ve already decided on
-                                <Katex tex={'corr(x_1,y)'}
+                                <Katex tex={'\\text{corr}(x_1,y)'}
                                     className="katex-inline"/> in the preceding
                                 section. Here, you can select
                                 the degree of correlation between

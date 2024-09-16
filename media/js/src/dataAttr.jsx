@@ -393,21 +393,21 @@ export const sim2TextControl = {
             relationships between {inlineKatex('\\text{Income}')} and
         {inlineKatex('\\text{Years Of Education}')}.</>,
         control_inst: {
-            consump: <>When {inlineKatex('\\text{Consumption}')}
-                ({inlineKatex('x_2')}) is included, notice the changes in
+            consump: <>When {inlineKatex('\\text{Consumption}')} (
+                {inlineKatex('x_2')}) is included, notice the changes in
                 {inlineKatex('\\hat{\\beta_1}')}, the correlation coefficients
-                {inlineKatex('corr(y, x_2)')} and
-                {inlineKatex('corr(x_1, x_2)')}.</>,
-            black: <>When {inlineKatex('\\text{Black}')}
-                ({inlineKatex('x_3')}) is included, notice the changes in
+                {inlineKatex('\\text{corr}(y, x_2)')} and
+                {inlineKatex('\\text{corr}(x_1, x_2)')}.</>,
+            black: <>When {inlineKatex('\\text{Black}')} (
+                {inlineKatex('x_3')}) is included, notice the changes in
                 {inlineKatex('\\hat{\\beta_1}')}, the correlation coefficients
-                {inlineKatex('corr(y, x_3)')} and
-                {inlineKatex('corr(x_1, x_3)')}.</>,
-            size: <>When {inlineKatex('\\text{Family Size}')}
-            ({inlineKatex('x_4')}) is included, notice the changes in
+                {inlineKatex('\\text{corr}(y, x_3)')} and
+                {inlineKatex('\\text{corr}(x_1, x_3)')}.</>,
+            size: <>When {inlineKatex('\\text{Family Size}')} (
+                {inlineKatex('x_4')}) is included, notice the changes in
                 {inlineKatex('\\hat{\\beta_1}')}, the correlation coefficients
-                {inlineKatex('corr(y, x_4)')} and
-                {inlineKatex('corr(x_1, x_4)')}.</>,
+                {inlineKatex('\\text{corr}(y, x_4)')} and
+                {inlineKatex('\\text{corr}(x_1, x_4)')}.</>,
         }
     },
     gpa4: {
@@ -419,26 +419,26 @@ export const sim2TextControl = {
             relationships between {inlineKatex('\\text{College GPA}')} and
         {inlineKatex('\\text{High School GPA}')}.</>,
         control_inst: {
-            ACT: <>When {inlineKatex('\\text{ACT Score}')}
-                ({inlineKatex('x_2')}) is included, notice the changes in
+            ACT: <>When {inlineKatex('\\text{ACT Score}')} (
+                {inlineKatex('x_2')}) is included, notice the changes in
                 {inlineKatex('\\hat{\\beta_1}')}, the correlation coefficients
-                {inlineKatex('corr(y, x_2)')} and
-                {inlineKatex('corr(x_1, x_2)')}.</>,
-            campus: <>When {inlineKatex('\\text{Lives On Campus}')}
-                ({inlineKatex('x_3')}) is included, notice the changes in
+                {inlineKatex('\\text{corr}(y, x_2)')} and
+                {inlineKatex('\\text{corr}(x_1, x_2)')}.</>,
+            campus: <>When {inlineKatex('\\text{Lives On Campus}')} (
+                {inlineKatex('x_3')}) is included, notice the changes in
                 {inlineKatex('\\hat{\\beta_1}')}, the correlation coefficients
-                {inlineKatex('corr(y, x_3)')} and
-                {inlineKatex('corr(x_1, x_3)')}.</>,
-            skipped: <>When {inlineKatex('\\text{Classes Skipped Weekly}')}
-                ({inlineKatex('x_4')}) is included, notice the changes in
+                {inlineKatex('\\text{corr}(y, x_3)')} and
+                {inlineKatex('\\text{corr}(x_1, x_3)')}.</>,
+            skipped: <>When {inlineKatex('\\text{Classes Skipped Weekly}')} (
+                {inlineKatex('x_4')}) is included, notice the changes in
                 {inlineKatex('\\hat{\\beta_1}')}, the correlation coefficients
-                {inlineKatex('corr(y, x_4)')} and
-                {inlineKatex('corr(x_1, x_4)')}.</>,
-            bgfriend: <>When {inlineKatex('\\text{Significant Other}')}
-                ({inlineKatex('x_5')}) is included, notice the changes in
+                {inlineKatex('\\text{corr}(y, x_4)')} and
+                {inlineKatex('\\text{corr}(x_1, x_4)')}.</>,
+            bgfriend: <>When {inlineKatex('\\text{Significant Other}')} (
+                {inlineKatex('x_5')}) is included, notice the changes in
                 {inlineKatex('\\hat{\\beta_1}')}, the correlation coefficients
-                {inlineKatex('corr(y, x_5)')} and
-                {inlineKatex('corr(x_1, x_5)')}.</>
+                {inlineKatex('\\text{corr}(y, x_5)')} and
+                {inlineKatex('\\text{corr}(x_1, x_5)')}.</>
         }
     },
     affairs_sim2: {
@@ -451,21 +451,21 @@ export const sim2TextControl = {
             relationships between {inlineKatex('\\text{Number Of Affairs}')} and
         {inlineKatex('\\text{Rating Of Marriage}')}.</>,
         control_inst: {
-            yrsmarr: <>When {inlineKatex('\\text{Years Married}')}
-                ({inlineKatex('x_2')}) is included, notice the changes in
+            yrsmarr: <>When {inlineKatex('\\text{Years Married}')} (
+                {inlineKatex('x_2')}) is included, notice the changes in
                 {inlineKatex('\\hat{\\beta_1}')}, the correlation coefficients
-                {inlineKatex('corr(y, x_2)')} and
-                {inlineKatex('corr(x_1, x_2)')}.</>,
-            kids: <>When {inlineKatex('\\text{Has Kids}')}
-                ({inlineKatex('x_3')}) is included, notice the changes in
+                {inlineKatex('\\text{corr}(y, x_2)')} and
+                {inlineKatex('\\text{corr}(x_1, x_2)')}.</>,
+            kids: <>When {inlineKatex('\\text{Has Kids}')} (
+                {inlineKatex('x_3')}) is included, notice the changes in
                 {inlineKatex('\\hat{\\beta_1}')}, the correlation coefficients
-                {inlineKatex('corr(y, x_3)')} and
-                {inlineKatex('corr(x_1, x_3)')}.</>,
-            relig: <>When {inlineKatex('\\text{Degree Of Religiosity}')}
-            ({inlineKatex('x_4')}) is included, notice the changes in
+                {inlineKatex('\\text{corr}(y, x_3)')} and
+                {inlineKatex('\\text{corr}(x_1, x_3)')}.</>,
+            relig: <>When {inlineKatex('\\text{Degree Of Religiosity}')} (
+                {inlineKatex('x_4')}) is included, notice the changes in
                 {inlineKatex('\\hat{\\beta_1}')}, the correlation coefficients
-                {inlineKatex('corr(y, x_4)')} and
-                {inlineKatex('corr(x_1, x_4)')}.</>
+                {inlineKatex('\\text{corr}(y, x_4)')} and
+                {inlineKatex('\\text{corr}(x_1, x_4)')}.</>
         }
     },
     campus_sim2: {
@@ -479,16 +479,16 @@ export const sim2TextControl = {
         {inlineKatex('\\text{Total Campus Crimes}')} and
         {inlineKatex('\\text{Total Enrollment}')}.</>,
         control_inst: {
-            police: <>When {inlineKatex('\\text{Police Employed On Campus}')}
-                ({inlineKatex('x_2')}) is included, notice the changes in
+            police: <>When {inlineKatex('\\text{Police Employed On Campus}')} (
+                {inlineKatex('x_2')}) is included, notice the changes in
                 {inlineKatex('\\hat{\\beta_1}')}, the correlation coefficients
-                {inlineKatex('corr(y, x_2)')} and
-                {inlineKatex('corr(x_1, x_2)')}.</>,
-            campus: <>When {inlineKatex('\\text{Private School}')}
-                ({inlineKatex('x_3')}) is included, notice the changes in
+                {inlineKatex('\\text{corr}(y, x_2)')} and
+                {inlineKatex('\\text{corr}(x_1, x_2)')}.</>,
+            campus: <>When {inlineKatex('\\text{Private School}')} (
+                {inlineKatex('x_3')}) is included, notice the changes in
                 {inlineKatex('\\hat{\\beta_1}')}, the correlation coefficients
-                {inlineKatex('corr(y, x_3)')} and
-                {inlineKatex('corr(x_1, x_3)')}.</>
+                {inlineKatex('\\text{corr}(y, x_3)')} and
+                {inlineKatex('\\text{corr}(x_1, x_3)')}.</>
         }
     },
 };
