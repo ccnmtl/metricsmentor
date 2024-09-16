@@ -405,32 +405,36 @@ export const SimulationOneQuiz = ({
                     </span>,
                     [<span key="option1">
                         The alternative hypothesis must be
-                        &quot;greater than&quot; the same value,
+                        <span className='fw-bold'> greater than </span>
+                        the same value,
                         and the critical value would be larger in
                         absolute value.
                     </span>,
                     <span key="option2">
                         The alternative hypothesis must be
-                        &quot;greater than&quot; the same value,
+                        <span className='fw-bold'> greater than </span>
+                        the same value,
                         and the critical value would be smaller in
                         absolute value.
                     </span>,
                     <span key="option3">
                         The alternative hypothesis must be
-                        &quot;less than&quot; the same value, and
+                        <span className='fw-bold'> less than </span>
+                        the same value, and
                         the critical value would be larger in
                         absolute value.
                     </span>,
                     <span key="option4">
                         The alternative hypothesis must be
-                        &quot;less than&quot; the same value, and
+                        <span className='fw-bold'> less than </span>
+                        the same value, and
                         the critical value would be smaller in
                         absolute value.
                     </span>,
                     ],
                     <span key="option4">
                         The alternative hypothesis must be
-                        &quot;less than&quot; the same value, and
+                        less than the same value, and
                         the critical value would be smaller
                         in absolute value.
                     </span>,
