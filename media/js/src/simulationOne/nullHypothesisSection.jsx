@@ -49,6 +49,7 @@ export const NullHypothesisSection = ({
                             className="katex-inline" /> and observe the
                         outcome of
                         <Katex tex={'t'} className="katex-inline" />.
+                        Try zero in your first attempt.
                         </p>
                         <div className="d-flex">
                             <label
