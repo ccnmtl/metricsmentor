@@ -450,15 +450,16 @@ export const SimulationOne = () => {
                 )}
             </div> {/* div class=simulation__workspace */}
             <div className="simulation__graphspace">
-                <div className="simulation__tab">
-                    <ul className="nav nav-tabs">
+                {/* Navigation tabs for selecting 2D or 3D plot types */}
+                <div className="simulation__typetab">
+                    <ul className="nav nav-underline">
                         <li className="nav-item">
                             <a className={
                                 plotType === '2d'
                                     ? 'active nav-link'
                                     : 'nav-link'}
                             onClick={() => handlePlotTypeChange('2d')}
-                            href="#">2D</a>
+                            href="#">Single variable</a>
                         </li>
 
                         <li className="nav-item">
@@ -470,7 +471,7 @@ export const SimulationOne = () => {
                                         : 'nav-link')
                             }
                             onClick={() => handlePlotTypeChange('3d')}
-                            href="#">3D</a>
+                            href="#">Multi variable</a>
                         </li>
 
                     </ul>

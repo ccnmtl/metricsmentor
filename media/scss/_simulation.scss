@@ -19,7 +19,7 @@
         background-color: $gray-100;
         @include media-breakpoint-up(lg) {
             height: 100%;
-            width: 25rem;
+            width: 27rem;
             top: 0;
             border: 0;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.3);
@@ -49,7 +49,7 @@
         @include media-breakpoint-up(lg) {
             right: 0;
             height: 100%;
-            width: calc(100vw - 25rem);
+            width: calc(100vw - 27rem);
         }
         @include media-breakpoint-up(xl) {
             right: 0;
@@ -60,6 +60,15 @@
             right: 0;
             height: 100%;
             width: calc(100vw - 40rem);
+        }
+    }
+    &__typetab {
+        margin : 0.25rem 0.5rem;
+        .nav-link {
+            padding: 0.25rem 0.5rem;
+        }
+        .active {
+            background-color: $teal-200;
         }
     }
     &__graph-summary {
