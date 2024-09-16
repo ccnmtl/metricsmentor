@@ -96,7 +96,8 @@ export const HypothesisTest = ({
                             </div>
                             <div className="p-2 border-bottom border-white">
                                 <Katex tex={
-                                    `corr(x,y) = ${appRvalue.toFixed(3)}`
+                                // eslint-disable-next-line max-len
+                                    `\\text{corr}(x,y) = ${appRvalue.toFixed(3)}`
                                 } />
                             </div>
                             <div className="p-2">

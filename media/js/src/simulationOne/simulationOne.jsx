@@ -187,17 +187,34 @@ export const SimulationOne = () => {
                             <h2 className="h2-primary">Graph seeding</h2>
                         </header>
                         <div className="simulation__step-content">
-                            <p>
-                                Let&rsquo;s start by setting up the parameters
-                                for your graph. To generate data, you can set
-                                the sample size,
-                                <Katex tex={'n'}
-                                    className="katex-inline"/>,
-                                and the estimated correlation
-                                coefficient,
-                                <Katex tex={'corr(x,y)'}
-                                    className="katex-inline" />.
-                            </p>
+                            {plotType === '2d' && (
+                                <p>
+                                    Let&rsquo;s start by setting up your graph.
+                                    First define the parameters for generating
+                                    random data points. Specify the sample
+                                    size <Katex tex={'n'}
+                                        className="katex-inline"/> and
+                                    the estimated correlation coefficient
+                                    <Katex tex={'\\text{corr}(x,y)'}
+                                        className="katex-inline" />.
+                                </p>
+                            )}
+                            {plotType === '3d' && (
+                                <p>
+                                    Let&rsquo;s introduce another variable to
+                                    your graph, <Katex tex={'x_2'}
+                                        className="katex-inline"/>.
+                                    Sample size <Katex tex={'n'}
+                                        className="katex-inline"/> and
+                                    <Katex tex={'\\text{corr}(x_1,y)'}
+                                        className="katex-inline" /> are set
+                                    in the previous section. Here, you
+                                    can specify the estimated correlation
+                                    coefficient <Katex
+                                        tex={'\\text{corr}(x_1,x_2)'}
+                                        className="katex-inline" />.
+                                </p>
+                            )}
                             <div className="mt-4 d-flex">
                                 <label htmlFor="nSampleSize"
                                     className="h2 me-2
@@ -226,7 +243,7 @@ export const SimulationOne = () => {
                                     <label htmlFor="correlation"
                                         className="h2 form-label">
                                     Estimated correlation coefficient,
-                                        <Katex tex={'corr(x,y)'}
+                                        <Katex tex={'\\text{corr}(x,y)'}
                                             className="katex-inline" />:
                                     </label>
                                     <div className="slider-range__box">
@@ -265,7 +282,7 @@ export const SimulationOne = () => {
                                     <label htmlFor="correlation"
                                         className="h2 form-label">
                                         Estimated correlation coefficient,
-                                        <Katex tex={'corr(x_1,x_2)'}
+                                        <Katex tex={'\\text{corr}(x_1,x_2)'}
                                             className="katex-inline" />:
                                     </label>
                                     <div className="slider-range__box">
@@ -303,7 +320,8 @@ export const SimulationOne = () => {
                             {slopes.length > 0 && plotType === '3d' && (
                                 <>
                                     <div className="mt-5 h2">
-                                    Calculated <Katex tex={'corr(x_1,x_2)'}
+                                    Calculated <Katex
+                                            tex={'\\text{corr}(x_1,x_2)'}
                                             className="katex-inline" />:
                                         <div
                                             className="hi-val ms-2">
@@ -320,7 +338,8 @@ export const SimulationOne = () => {
                                 <>
                                     <div className="mt-5 h2">
                                         Calculated
-                                        <Katex tex={'corr(x,y)'}
+                                        <Katex
+                                            tex={'\\text{corr}(x,y)'}
                                             className="katex-inline" />:
                                         <div
                                             className="hi-val ms-2">
@@ -475,7 +494,7 @@ export const SimulationOne = () => {
                     <div className="simulation__graph-summary">
                         <Katex tex={
                             // eslint-disable-next-line max-len
-                            `\\hat{y} = ${intercept.toFixed(3)} + ${slope.toFixed(3)}x;\\; \\hat{\\beta_1} = ${slope.toFixed(3)};\\; corr(x,y) = ${appRvalue.toFixed(3)}`
+                            `\\hat{y} = ${intercept.toFixed(3)} + ${slope.toFixed(3)}x;\\; \\hat{\\beta_1} = ${slope.toFixed(3)};\\; \\text{corr}(x,y) = ${appRvalue.toFixed(3)}`
                         } />
                     </div>
                 )}
@@ -485,7 +504,7 @@ export const SimulationOne = () => {
                             // eslint-disable-next-line max-len
                             `\\hat{y} = ${intercept3d.toFixed(3)} + ${slopes[0].toFixed(3)}x_1 + ${slopes[1].toFixed(3)}x_2;\\; ` +
                             // eslint-disable-next-line max-len
-                            `\\hat{\\beta_1} = ${slopes[0].toFixed(3)};\\; \\hat{\\beta_2} = ${slopes[1].toFixed(3)};\\; corr(x_1,x_2) = ${appRvalue3d.toFixed(3)}\\; corr(x,y) = ${appRvalue.toFixed(3)}`
+                            `\\hat{\\beta_1} = ${slopes[0].toFixed(3)};\\; \\hat{\\beta_2} = ${slopes[1].toFixed(3)};\\; \\text{corr}(x_1,x_2) = ${appRvalue3d.toFixed(3)}\\; \\text{corr}(x,y) = ${appRvalue.toFixed(3)}`
                         } />
                     </div>
                 )}
