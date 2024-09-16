@@ -63,22 +63,23 @@ export const SimIntro = ({plotType}) => {
                     {plotType === '2d' && (
                         <div className="simulation__step-content">
                             <p>
-                                By selecting the sample size,
-                                <Katex tex={'n'} className="katex-inline"/>,
-                                and the correlation between the dependent
-                                variable
-                                <Katex tex={'y'} className="katex-inline"/>,
-                                and the independent variable, regressor
-                                <Katex tex={'x'} className="katex-inline"/>,
-                                you can influence the outcomes of
-                                the hypotheses about the population parameters.
+                                The sample size <Katex tex={'n'}
+                                    className="katex-inline"/> and the
+                                correlation between the dependent variable
+                                <Katex tex={'y'}
+                                    className="katex-inline"/> and the
+                                independent variable <Katex tex={'x'}
+                                    className="katex-inline"/> can
+                                significantly influence the outcomes of your
+                                hypothesis tests about the population
+                                parameters.
                             </p>
                             <p>
-                                Think about how the correlation coefficient
-                                <Katex tex={'corr(x,y)'}
-                                    className="katex-inline"/> (and/or the
-                                sample size) you choose can affect
-                                your decision about the null hypothesis.
+                                Consider how the choice of the correlation
+                                coefficient <Katex tex={'\\text{corr}(x,y)'}
+                                    className="katex-inline"/> and/or the
+                                sample size can influence your decision
+                                regarding the null hypothesis.
                             </p>
                         </div>
 
