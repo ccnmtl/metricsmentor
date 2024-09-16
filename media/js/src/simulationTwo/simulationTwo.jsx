@@ -124,7 +124,7 @@ export const SimulationTwo = () => {
                     {
                         header: 'Simulation 2',
                         title: 'Omitted Variable Bias',
-                        body: <p>In this module, we will address the first
+                        body: <p>This simulation will address the first
                             endogeneity problem in regression analysis:
                             omitted variable bias (OVB). Overlooking certain
                             variables can lead to biased estimates of the
