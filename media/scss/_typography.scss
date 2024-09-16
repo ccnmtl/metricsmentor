@@ -156,6 +156,15 @@ h1, h2, h3, h4, h5, h6 {
             color: $gray-md-400;
         }
     }
+    &__typetab {
+        .nav-link {
+            font-family: $font-family-sans-serif-secondary;
+            font-size: 1rem;
+        }
+        .active {
+            font-weight: 500 !important;
+        }
+    }
 }
 
 .slider-range__input {
