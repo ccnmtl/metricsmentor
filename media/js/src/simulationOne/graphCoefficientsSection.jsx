@@ -20,7 +20,7 @@ export const GraphCoefficients = ({
             <div className="simulation__step-body">
                 <header className="simulation__step-header">
                     <h2 className="h2-primary">
-                        Resulting Graph Coefficients</h2>
+                        Resulting graph coefficients</h2>
                 </header>
                 {plotType === '2d' && (
                     <div className="simulation__step-content">
