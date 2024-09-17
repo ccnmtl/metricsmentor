@@ -387,20 +387,22 @@ export const SimulationOne = () => {
                                     startQuiz={startQuiz}
                                     startQuiz2={startQuiz2} />
 
-                                <div className="simulation__step-prompt">
+                                <div className="simulation__step-prompt-orphan">
                                     <p>
                                         Let&rsquo;s move on
                                         to hypothesis testing.
                                     </p>
                                     {plotType === '2d' && (
-                                        <button className="btn btn-primary"
+                                        <button
+                                            className="btn btn-sm btn-success"
                                             // disabled={startQuiz}
                                             onClick={handleCreateSub}>
                                             Continue &raquo;
                                         </button>
                                     )}
                                     {plotType === '3d' && (
-                                        <button className="btn btn-primary"
+                                        <button
+                                            className="btn btn-sm btn-success"
                                             // disabled={startQuiz2}
                                             onClick={handleCreateSub}>
                                             Continue &raquo;
