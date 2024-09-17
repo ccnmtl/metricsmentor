@@ -32,32 +32,38 @@ export const GraphCoefficients = ({
                             <Katex tex={'\\text{corr}(x,y)'}
                                 className="katex-inline" />.
                         </p>
-                        <h2 className="mt-4">Regression line equation:</h2>
-                        <div className="ms-3 mb-3">
-                            <Katex tex={
-                                // eslint-disable-next-line max-len
-                                '\\hat{y} = \\hat{\\beta_0} + \\hat{\\beta_1}x'} />
+                        <h2>Regression line equation:</h2>
+                        <div className="sub-content">
+                            <div className="katex-block">
+                                <Katex tex={
+                                    // eslint-disable-next-line max-len
+                                    '\\hat{y} = \\hat{\\beta_0} + \\hat{\\beta_1}x'} />
+                            </div>
+                            <div className="katex-block">
+                                <Katex tex={
+                                    // eslint-disable-next-line max-len
+                                    `\\hat{y} = ${intercept.toFixed(3)} + ${slope.toFixed(3)}x`} />
+                            </div>
                         </div>
-                        <div className="ms-3 mb-3">
-                            <Katex tex={
-                                // eslint-disable-next-line max-len
-                                `\\hat{y} = ${intercept.toFixed(3)} + ${slope.toFixed(3)}x`} />
+                        <h2>Sample slope coefficient:</h2>
+                        <div className="sub-content">
+                            <div className="katex-block">
+                                <Katex tex={
+                                    `\\hat{\\beta_1} = ${slope.toFixed(3)}`} />
+                            </div>
                         </div>
-                        <h2 className="mt-4">Sample slope coefficient:</h2>
-                        <div className="ms-3">
-                            <Katex tex={
-                                `\\hat{\\beta_1} = ${slope.toFixed(3)}`} />
-                        </div>
-                        <h2 className="mt-4">
+                        <h2>
                             Standard error of the sample slope:
                         </h2>
-                        <div className="ms-3">
-                            <Katex tex={
-                                // eslint-disable-next-line max-len
-                                `{SE(\\hat{\\beta_1})} = ${stderror.toFixed(3)}`} />
+                        <div className="sub-content">
+                            <div className="katex-block">
+                                <Katex tex={
+                                    // eslint-disable-next-line max-len
+                                    `{SE(\\hat{\\beta_1})} = ${stderror.toFixed(3)}`} />
+                            </div>
                         </div>
                         <div className="simulation__step-prompt">
-                            <button className="btn btn-primary mt-3"
+                            <button className="btn btn-sm btn-success"
                                 data-cy="nullNextButton"
                                 onClick={handleNextClick}>
                                     Continue &raquo;
@@ -73,38 +79,48 @@ export const GraphCoefficients = ({
                             <Katex tex={'\\text{corr}(x_1,x_2).'}
                                 className="katex-inline" />
                         </p>
-                        <h2 className="mt-4">
+                        <h2>
                             Multiple Regression line equation:
                         </h2>
-                        <div className="ms-3 mb-3">
-                            <Katex tex={
-                                // eslint-disable-next-line max-len
-                                '\\hat{y} = \\hat{\\beta_0} + \\hat{\\beta_1}x_1 + \\hat{\\beta_2}x_2'
-                            } />
+                        <div className="sub-content">
+                            <div className="katex-block">
+                                <Katex tex={
+                                    // eslint-disable-next-line max-len
+                                    '\\hat{y} = \\hat{\\beta_0} + \\hat{\\beta_1}x_1 + \\hat{\\beta_2}x_2'
+                                } />
+                            </div>
+                            <div className="katex-block">
+                                <Katex tex={
+                                    // eslint-disable-next-line max-len
+                                    `\\hat{y} = ${intercept3d.toFixed(3)} + ${slopes[0].toFixed(3)}x_1 + ${slopes[1].toFixed(3)}x_2`
+                                } />
+                            </div>
                         </div>
-                        <div className="ms-3 mb-3">
-                            <Katex tex={
-                                // eslint-disable-next-line max-len
-                                `\\hat{y} = ${intercept3d.toFixed(3)} + ${slopes[0].toFixed(3)}x_1 + ${slopes[1].toFixed(3)}x_2`
-                            } />
+                        <h2>Sample slope coefficients:</h2>
+                        <div className="sub-content">
+                            <div className="katex-block">
+                                <Katex tex={
+                                    // eslint-disable-next-line max-len
+                                    `\\hat{\\beta_1} = ${slopes[0].toFixed(3)}`} />
+                            </div>
+                            <div className="katex-block">
+                                <Katex tex={
+                                    // eslint-disable-next-line max-len
+                                    `\\hat{\\beta_2} = ${slopes[1].toFixed(3)}`} />
+                            </div>
                         </div>
-                        <h2 className="mt-4">Sample slope coefficients:</h2>
-                        <div className="ms-3">
-                            <Katex tex={
-                                `\\hat{\\beta_1} = ${slopes[0].toFixed(3)}`} />
-                            <Katex tex={
-                                `\\hat{\\beta_2} = ${slopes[1].toFixed(3)}`} />
-                        </div>
-                        <h2 className="mt-4">
+                        <h2>
                             Standard error of the sample slope:
                         </h2>
-                        <div className="ms-3">
-                            <Katex tex={
-                                // eslint-disable-next-line max-len
-                                `{SE(\\hat{\\beta_1})} = ${stderrs[0].toFixed(3)}`} />
+                        <div className="sub-content">
+                            <div className="katex-block">
+                                <Katex tex={
+                                    // eslint-disable-next-line max-len
+                                    `{SE(\\hat{\\beta_1})} = ${stderrs[0].toFixed(3)}`} />
+                            </div>
                         </div>
                         <div className="simulation__step-prompt">
-                            <button className="btn btn-primary mt-3"
+                            <button className="btn btn-sm btn-success"
                                 data-cy="nullNextButton"
                                 onClick={handleNextClick}>
                                     Continue &raquo;

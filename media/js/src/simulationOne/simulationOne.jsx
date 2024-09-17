@@ -242,8 +242,7 @@ export const SimulationOne = () => {
                                 <div className="mt-4">
                                     <label htmlFor="correlation"
                                         className="h2 form-label">
-                                    Estimated correlation coefficient,
-                                        <Katex tex={'\\text{corr}(x,y)'}
+                                    Estimated <Katex tex={'\\text{corr}(x,y)'}
                                             className="katex-inline" />:
                                     </label>
                                     <div className="slider-range__box">
@@ -281,8 +280,8 @@ export const SimulationOne = () => {
                                 <div className="mt-4">
                                     <label htmlFor="correlation"
                                         className="h2 form-label">
-                                        Estimated correlation coefficient,
-                                        <Katex tex={'\\text{corr}(x_1,x_2)'}
+                                        Estimated <Katex
+                                            tex={'\\text{corr}(x_1,x_2)'}
                                             className="katex-inline" />:
                                     </label>
                                     <div className="slider-range__box">
