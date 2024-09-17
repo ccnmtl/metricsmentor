@@ -25,7 +25,7 @@ describe('Graph Data', () => {
     });
     it('Graph Coefficients', () => {
         cy.get('h2.h2-primary')
-            .should('contain', 'Graph Coefficients');
+            .should('contain', 'Resulting graph coefficients');
     });
     it('Null Hypothesis', () => {
         cy.get('[data-cy="nullNextButton"]').click();

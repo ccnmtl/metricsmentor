@@ -132,16 +132,16 @@
     }
     &__step-body {
         flex-grow: 1;
-        padding-bottom: 1rem;
+        padding-bottom: 2rem;
         margin: 0;
         background-color: $gray-100;
-        border-bottom: 0.0625rem solid $gray-md-400;
     }
     &__step-header {
         background-color: $gray-200;
         padding: 0.325rem 0.325rem 0.325rem 0.4rem;
         margin-bottom: 0.5rem;
         height: auto;
+        border-top: 0.0625rem solid $gray-md-400;
         h2 {
             padding: 0;
             margin: 0;
@@ -153,15 +153,32 @@
         input[type="radio"] {
             margin-right: 0.5rem;
         }
+        h2 {
+            margin-top: 1.5rem;
+        }
+        .h2 {
+            margin-top: 0;
+        }
+        .sub-content {
+            margin: 0.5rem 0 0.5rem 1rem;
+        }
     }
     &__step-prompt {
-        margin-top: 1rem;
+        /*margin-top: 1rem;
         margin-bottom: 1rem;
-        padding: 0.325rem 0.85rem 0.325rem 0.325rem;
+        padding: 0.325rem 0.85rem 0.325rem 0.325rem;*/
         text-align: right;
         display: block;
         p {
             margin-left: 2.35rem;
+            text-align: left;
+        }
+    }
+    &__step-prompt-orphan {
+        margin: 0.5rem 0.85rem 2rem 2.85rem;
+        text-align: right;
+        display: block;
+        p {
             text-align: left;
         }
     }
