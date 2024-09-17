@@ -69,10 +69,12 @@ class SimulationDashboardView(LoginRequiredMixin, TemplateView):
     def get_context_data(self, **kwargs):
         course_id = self.kwargs.get('pk', None)
         course = Course.objects.get(pk=course_id)
+        is_faculty = course.is_true_faculty(self.request.user)
 
         return {
             'user': self.request.user,
             'course': course,
+            'is_faculty': is_faculty
         }
 
 
