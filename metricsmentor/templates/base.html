@@ -186,9 +186,9 @@
 
         {% if request.user.is_impersonate %}
             <div class="alert alert-danger alert-dismissible" role="alert" style="position: fixed; left: 0px; top: 75px">
-                <button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close" aria-hidden="true">&times;</button>
                 You are impersonating.<br />
-                <a class="btn" href="{% url 'impersonate-stop' %}" title="Stop impersonate">stop</a>
+                <a class="btn btn-link" href="{% url 'impersonate-stop' %}" title="Stop impersonate">Stop</a>
             </div>
         {% endif %}
     </body>
