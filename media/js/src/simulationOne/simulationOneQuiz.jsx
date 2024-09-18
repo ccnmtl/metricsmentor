@@ -126,7 +126,7 @@ export const SimulationOneQuiz = ({
             </div>
             {!completedChoices.includes(choiceKey) && (
                 <button
-                    className="btn btn-sm btn-primary"
+                    className="btn btn-sm btn-success"
                     disabled={selectedAltHypothesis !== null}
                     onClick={() => handleSelectAltHypothesis(choiceKey)}
                 >
@@ -233,9 +233,10 @@ export const SimulationOneQuiz = ({
                     </header>
                     <div className="simulation__step-content">
                         <p>
-                            Consider the following three statements as
-                            alternative hypotheses. Complete each
-                            hypothesis test in order.
+                            Review the following statement as
+                            alternative hypotheses <Katex tex={'\\Eta_1'}
+                                className="katex-inline"/>. Perform a
+                                hypothesis test against the null hypothesis.
                         </p>
                         <ol className="listset-alpha listset-alpha-listnum">
                             {/* Choice A default display */}

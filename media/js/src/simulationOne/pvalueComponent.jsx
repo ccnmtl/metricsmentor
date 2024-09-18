@@ -136,172 +136,171 @@ export const PvalueComponent = ({
             nullHypothesisChoice1, isCorrect, additionalData);
     };
 
-    return (
-        <div className="solving-p-set mt-3">
-            <div className="input-p mb-3">
-                <div>
-                One method for hypothesis testing is to compare the
-                    <Katex tex={'p'} className="katex-inline" />-value to
-                    <Katex tex={'{\\alpha}'} className="katex-inline" />.
-                Using the table provided, look up the value that
-                corresponds to
-                    <div className="hi-val">
-                        <Katex tex={`t = ${tvalue}`}
-                            className="katex-inline"/>.
-                    </div>
-                    {hypothesisTest === 'value_two_sided' && (
-                        <div>
-                            Note that this is a&nbsp;
-                            <span className="fw-bold">
-                                two-sided test
-                            </span> and the table value must be multiplied by
-                            two.
-                        </div>
-                    )}
-                </div>
-                <button
-                    className="btn btn-sm btn-primary"
-                    data-bs-toggle="modal"
-                    data-bs-target="#pvalueModal">
-                p-value table
-                </button>
-
-                <div className="mt-3 d-flex">
-                    <label className="align-self-center"
-                        htmlFor="pValue">
-                        <Katex tex={'p'}
-                            className="katex-inline" />-value =&nbsp;
-                    </label>
-                    <input
-                        className="align-self-center"
-                        type="text"
-                        id="pValue"
-                        value={userPvalue}
-                        disabled={isPvalueCorrect}
-                        onChange={handleUserPvalueChange}
-                    />
+    return (<>
+        <div className="input-p mt-5">
+            <p>One method for hypothesis testing is to compare the <Katex
+                tex={'p'} className="katex-inline" />-value to <Katex
+                tex={'{\\alpha}'} className="katex-inline" />.
+            Refer to the <Katex tex={'p'} className="katex-inline" />-value
+            table and find the value
+            for <span className="hi-val px-1"><Katex tex={`t = ${tvalue}`}
+                className="katex-inline"/></span>.
+            </p>
+            <button
+                className="btn btn-sm btn-primary mb-3"
+                data-bs-toggle="modal"
+                data-bs-target="#pvalueModal">
+                <Katex tex={'p'} className="katex-inline" />-value table
+            </button>
+            {hypothesisTest === 'value_two_sided' && (
+                <p>
+                    This is a <strong>two-sided test</strong>, so you need to
+                    multiply the table value by two.
+                </p>
+            )}
+            <div className="sub-content d-flex">
+                <label className="align-self-center text-nowrap"
+                    htmlFor="pValue">
+                    <Katex tex={'p'}
+                        className="katex-inline" />-value =&nbsp;
+                </label>
+                <input
+                    className="align-self-center form-control short-input"
+                    type="text"
+                    id="pValue"
+                    value={userPvalue}
+                    disabled={isPvalueCorrect}
+                    onChange={handleUserPvalueChange}
+                />
+                <div className="flex-grow-1 align-self-center">
                     <button
-                        className="btn
-                        btn-sm btn-primary
-                        mx-2
+                        className="btn btn-sm btn-success
+                        mx-2 text-nowrap
                         align-self-center"
                         disabled={isPvalueCorrect}
                         onClick={handleNextPvalueButtonClick}>
                     Continue &raquo;
                     </button>
                 </div>
-                {isPvalueCorrect && (
-                    <div className="mt-3">
-                        <span style={{ color: 'green' }}>
-                    That&rsquo;s correct!
-                        </span>
-                    </div>
-                )}
-                {!isPvalueCorrect && isPvalueCorrect !== null && (
-                    <div className="mt-3">
-                        <span style={{ color: 'red' }}>
-                            The value is incorrect; it&rsquo;s {pvalue}.
-                            {hypothesisTest === 'value_two_sided' && (
-                                <span>
-                                &nbsp;Note that this is a two-sided test and the
-                                table value must be multiplied by two.&nbsp;
-                                </span>
-                            )}
-                            Please try again.
-                        </span>
-                    </div>
-                )}
-            </div>{/*input-p*/}
-
+            </div> {/* \end of sub-content for p-value input */}
             {isPvalueCorrect && (
-                <div className="p-to-alpha mt-3 mb-3">
-                    <p>
-                    Knowing now the
-                        <Katex tex={'p'} className="katex-inline" />-value
-                    and
-                        <Katex tex={'\\alpha'} className="katex-inline"/>,
-                    which of the following statements is true?
-                    </p>
+                <div className="answer-correct-container">
+                    <div className="answer-correct">&#10003;</div>
+                    <div>That&rsquo;s correct!</div>
+                </div>
+            )}
+            {!isPvalueCorrect && isPvalueCorrect !== null && (
+                <div className="answer-incorrect-container">
+                    <div className="answer-incorrect flex-shrink-0
+                        align-self-start">!</div>
                     <div>
-                        <input
-                            type="radio"
-                            id="pGreaterThanAlpha"
-                            name="comparison"
-                            value="greaterThan"
-                            disabled={isPvalCompareCorrect}
-                            checked={pvalueComparison === 'greaterThan'}
-                            onChange={handlePvalueComparisonChange}
-                        />
-                        <label htmlFor="pGreaterThanAlpha">
-                            <Katex tex={
-                                // eslint-disable-next-line max-len
-                                'p\\text{\\textendash}value \\text{\\textgreater} \\alpha'
-                            } />
-                        </label>
-                    </div>
-                    <div>
-                        <input
-                            type="radio"
-                            id="pLessThanAlpha"
-                            name="comparison"
-                            value="lessThan"
-                            disabled={isPvalCompareCorrect}
-                            checked={pvalueComparison === 'lessThan'}
-                            onChange={handlePvalueComparisonChange}
-                        />
-                        <label htmlFor="pLessThanAlpha">
-                            <Katex tex={
-                                // eslint-disable-next-line max-len
-                                'p\\text{\\textendash}value \\text{\\textless} \\alpha'
-                            } />
-                        </label>
-                    </div>
-                    <button
-                        className="btn btn-small btn-primary mt-3"
-                        disabled={isPvalCompareCorrect}
-                        onClick={handleNextPvalueComparison}>
-                    Continue &raquo;
-                    </button>
-                    {isPvalCompareCorrect && (
-                        <div className="mt-3">
-                            <span style={{ color: 'green' }}>
-                            That&rsquo;s correct!
+                        The value is incorrect; it&rsquo;s {pvalue}.
+                        {hypothesisTest === 'value_two_sided' && (
+                            <span>
+                            &nbsp;Note that this is a two-sided test and the
+                            table value must be multiplied by two.&nbsp;
                             </span>
-                        </div>
-                    )}
+                        )}
+                        Please try again.
+                    </div>
+                </div>
+            )}
+        </div>{/*input-p*/}
+        {isPvalueCorrect && (
+            <div className="p-to-alpha mt-5 mb-3">
+                <p>Knowing now the <Katex tex={'p'} className="katex-inline" />
+                -value and <span className="hi-val px-1">
+                        <Katex tex={`{\\alpha=${alpha}}`}
+                            className="katex-inline"/></span>,
+                which of the following statements is true?</p>
+                <div className="d-flex">
+                    <ul className="choice-list align-self-center text-nowrap">
+                        <li>
+                            <input
+                                type="radio"
+                                id="pGreaterThanAlpha"
+                                name="comparison"
+                                value="greaterThan"
+                                disabled={isPvalCompareCorrect}
+                                checked={pvalueComparison === 'greaterThan'}
+                                onChange={handlePvalueComparisonChange}
+                            />
+                            <label htmlFor="pGreaterThanAlpha" className="mx-1">
+                                <Katex tex={
+                                    // eslint-disable-next-line max-len
+                                    'p\\text{\\textendash}value \\text{\\textgreater} \\alpha'
+                                } />
+                            </label>
+                        </li>
+                        <li>
+                            <input
+                                type="radio"
+                                id="pLessThanAlpha"
+                                name="comparison"
+                                value="lessThan"
+                                disabled={isPvalCompareCorrect}
+                                checked={pvalueComparison === 'lessThan'}
+                                onChange={handlePvalueComparisonChange}
+                            />
+                            <label htmlFor="pLessThanAlpha" className="mx-1">
+                                <Katex tex={
+                                    // eslint-disable-next-line max-len
+                                    'p\\text{\\textendash}value \\text{\\textless} \\alpha'
+                                } />
+                            </label>
+                        </li>
+                    </ul>
+                    <div className="flex-grow-1 align-self-center ms-5">
+                        <button
+                            className="btn btn-sm btn-success"
+                            disabled={isPvalCompareCorrect}
+                            onClick={handleNextPvalueComparison}>
+                        Continue &raquo;
+                        </button>
+                    </div>
+                </div> {/* \end of sub-content for p-alpha compare radio */}
 
-                    {!isPvalCompareCorrect &&
-                    isPvalCompareCorrect !== null && (
-                        <div className="mt-3">
-                            <span style={{ color: 'red' }}>
+                {isPvalCompareCorrect && (
+                    <div className="answer-correct-container">
+                        <div className="answer-correct">&#10003;</div>
+                        <div>That&rsquo;s correct!</div>
+                    </div>
+                )}
+
+                {!isPvalCompareCorrect &&
+                isPvalCompareCorrect !== null && (
+                    <div className="answer-incorrect-container">
+                        <div className="answer-incorrect flex-shrink-0
+                            align-self-start">!</div>
+                        <div>
                             The comparison is incorrect.
                             Please try again.
-                            </span>
-                        </div>
-                    )}
-                </div>//compare-p-to-alpha
-            )}
-            {isPvalCompareCorrect && (
-                <div className="p-val-concl mt-3 mb-3">
-                    <p>Let&rsquo;s look at the null and and
-                    alternate hypotheses once more:</p>
-                    <div className="hi-val">
-                        <div className="py-2">
-                            <Katex tex={nullHypothesis} />
-                        </div>
-                        <div className="py-2">
-                            <Katex tex={hypothesis} />
                         </div>
                     </div>
-                    <p className="mt-3">
-                    With
-                        <Katex tex={'p'} className="katex-inline" />-value
-                    and
-                        <Katex tex={'\\alpha'}
-                            className="katex-inline"/> comparison above,
-                    what is your conclusion?
-                    </p>
-                    <div className="mt-3">
+                )}
+            </div>//compare-p-to-alpha
+        )}
+        {isPvalCompareCorrect && (
+            <div className="p-val-concl mt-5 mb-3">
+                <p className="mb-1">Let&rsquo;s look at the null and and
+                alternate hypotheses once more:</p>
+                <div className="sub-content hi-val">
+                    <div className="katex-block border-bottom
+                            border-white">
+                        <Katex tex={nullHypothesis} />
+                    </div>
+                    <div className="katex-block">
+                        <Katex tex={hypothesis} />
+                    </div>
+                </div>
+                <p className="mt-3">
+                    Based on your comparison of the <Katex tex={'p'}
+                        className="katex-inline" />-value
+                    and <Katex tex={'\\alpha'}
+                        className="katex-inline"/>, what is your conclusion?
+                </p>
+                <ul className="choice-list">
+                    <li>
                         <input
                             type="radio"
                             id="rejectHypothesis"
@@ -311,10 +310,10 @@ export const PvalueComponent = ({
                             checked={nullHypothesisChoice1 === 'reject'}
                             onChange={handleNullHypothesisChoice1Change}
                         />
-                        <label htmlFor="rejectHypothesis">
-                    Reject the null hypothesis</label>
-                    </div>
-                    <div>
+                        <label htmlFor="rejectHypothesis" className="mx-1">
+                            Reject the null hypothesis</label>
+                    </li>
+                    <li>
                         <input
                             type="radio"
                             id="failToRejectHypothesis"
@@ -326,35 +325,42 @@ export const PvalueComponent = ({
                             }
                             onChange={handleNullHypothesisChoice1Change}
                         />
-                        <label htmlFor="failToRejectHypothesis">
-                    Fail to reject the null hypothesis</label>
-                    </div>
+                        <label htmlFor="failToRejectHypothesis"
+                            className="mx-1">
+                            Fail to reject the null hypothesis
+                        </label>
+                    </li>
+                </ul>
+                <div className="simulation__step-prompt">
                     <button
-                        className="btn btn-small btn-primary mt-3"
+                        className="btn btn-sm btn-success"
                         disabled={hypothesisTest1validate}
                         onClick={handleNextNullHypothesisChoice1}>
                     Continue &raquo;
                     </button>
-                    {hypothesisTest1validate && (
-                        <div className="mt-3">
-                            <span style={{ color: 'green' }}>
-                            That&rsquo;s the correct conclusion!
-                            </span>
-                        </div>
-                    )}
-                    {!hypothesisTest1validate &&
-                        hypothesisTest1validate !== null && (
-                        <div className="mt-3">
-                            <span style={{ color: 'red' }}>
+                </div>
+                {/* \end of conclusion radio */}
+
+                {hypothesisTest1validate && (
+                    <div className="answer-correct-container">
+                        <div className="answer-correct">&#10003;</div>
+                        <div>That&rsquo;s the correct conclusion!</div>
+                    </div>
+                )}
+                {!hypothesisTest1validate &&
+                    hypothesisTest1validate !== null && (
+                    <div className="answer-incorrect-container">
+                        <div className="answer-incorrect flex-shrink-0
+                            align-self-start">!</div>
+                        <div>
                             The conclusion is incorrect.
                             Please try again.
-                            </span>
                         </div>
-                    )}
-                </div>
-            )}
-        </div>
-    );
+                    </div>
+                )}
+            </div>
+        )}
+    </>);
 };
 
 PvalueComponent.propTypes = {
