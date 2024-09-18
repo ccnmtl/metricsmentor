@@ -13,14 +13,14 @@
     &-listnum li::before {
         content: counter(listNum-counter, upper-alpha) ".";
         display: block;
-        width: 3.25rem;
+        width: 1.5rem;
         font-weight: 600;
         line-height: 1.25;
         margin-right: 0.5rem;
         flex-grow: 0;
         flex-shrink: 0;
         overflow: hidden;
-        padding: 0.75rem 0 0.75rem 0.75rem;
+        align-self: center;
     }
 }
 
@@ -129,6 +129,63 @@
     text-align: center;
     align-self: center;
 }
+.answer-correct-container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    align-self: center;
+    margin-top: 0.5rem;
+    margin-bottom: 0.5rem;
+    margin-left: 0;
+    color: $green-600;
+    font-size: 0.875rem;
+}
+
+.answer-correct {
+    display: inline-block;
+    margin-right: 0.5rem;
+    width: 1.25rem;
+    height: 1.25rem;
+    margin-left: 0.75rem;
+    background-color: $teal-200;
+    border-radius: 50%;
+    color: $green-600;
+    font-family: "Gentium Plus", serif;
+    font-weight: 700;
+    line-height: 1.25rem;
+    font-size: 1.25rem;
+    text-align: center;
+    align-self: center;
+}
+
+.answer-incorrect-container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    align-self: center;
+    margin-top: 0.5rem;
+    margin-bottom: 0.5rem;
+    margin-left: 0;
+    color: $red;
+    font-size: 0.875rem;
+}
+
+.answer-incorrect {
+    display: inline-block;
+    margin-right: 0.5rem;
+    width: 1.25rem;
+    height: 1.25rem;
+    margin-left: 0.75rem;
+    background-color: $red-100;
+    border-radius: 50%;
+    color: $red;
+    font-family: "Gentium Plus", serif;
+    font-weight: 700;
+    line-height: 1.25rem;
+    font-size: 2rem;
+    text-align: center;
+    align-self: center;
+}
 
 .hypothesis-completed .status-complete {
     display: inline-block !important;
@@ -140,9 +197,10 @@
 
 .choice-list {
     list-style: none;
-    margin: 0;
+    margin: 0.5rem 0 0.5rem 1rem;
+    padding: 0;
     & li {
         margin: 0;
-        padding: 0.25rem 0;
+        padding: 0.125rem 0;
     }
 }

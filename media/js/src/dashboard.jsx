@@ -37,7 +37,7 @@ export const Dashboard = ({ isSuperUser, isFaculty}) => {
                             population slope is equal to a specified value.
                         </p>
                         <Link to={`/course/${courseId}/simulations/1/`}
-                            className="btn btn-primary my-3"
+                            className="btn btn-success my-3"
                             data-cy="sim-1-link">
                             Begin &raquo;
                         </Link>

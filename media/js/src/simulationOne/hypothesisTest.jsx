@@ -83,24 +83,27 @@ export const HypothesisTest = ({
                         <h2 className="h2-primary">Hypothesis test</h2>
                     </header>
                     <div className="simulation__step-content">
-                        <p>
+                        <p className="mb-1">
                             Let&rsquo;s conduct a hypothesis test with the
                             alternative hypothesis you chose:
                         </p>
-                        <div className="hi-val">
-                            <div className="p-2 border-bottom border-white">
+                        <div className="sub-content hi-val">
+                            <div className="katex-block border-bottom
+                                border-white">
                                 <Katex tex={nullHypothesis} />
                             </div>
-                            <div className="p-2 border-bottom border-white">
+                            <div className="katex-block border-bottom
+                                border-white">
                                 <Katex tex={hypothesis} />
                             </div>
-                            <div className="p-2 border-bottom border-white">
+                            <div className="katex-block border-bottom
+                                border-white">
                                 <Katex tex={
                                 // eslint-disable-next-line max-len
                                     `\\text{corr}(x,y) = ${appRvalue.toFixed(3)}`
                                 } />
                             </div>
-                            <div className="p-2">
+                            <div className="katex-block">
                                 <Katex tex={
                                     `t = ${tvalue}`
                                 } />
@@ -110,9 +113,10 @@ export const HypothesisTest = ({
                             First, choose the significance
                             level,
                             <Katex tex={'{\\alpha}'}
-                                className="katex-inline" />, for this exercise:
+                                className="katex-inline" />, which is
+                            the probability of rejecting <Katex tex={'\\Eta_0'}
+                                className="katex-inline" /> when it is true.
                         </p>
-
                         <ul className="choice-list">
                             {[0.01, 0.05, 0.10].map((val, key) => (
                                 <li key={key}>
@@ -126,14 +130,14 @@ export const HypothesisTest = ({
                                         disabled={alphaSelected}
                                     />
                                     <label htmlFor={`significance${val*100}`}
-                                        className="mx-2">
+                                        className="mx-1">
                                         {`${val*100}% (${val.toFixed(2)})`}
                                     </label>
                                 </li>
                             ))}
                         </ul>
                         <div className="simulation__step-prompt">
-                            <button className="btn btn-primary mb-3"
+                            <button className="btn btn-sm btn-success"
                                 onClick={handleNextButtonClick}
                                 disabled={!alpha || alphaSelected}>
                                 Continue &raquo;
