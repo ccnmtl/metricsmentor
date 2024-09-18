@@ -174,11 +174,13 @@ export const CriticalValue = ({
     let plusMinus;
     let textMethod;
     if (hypothesisTest === 'value_two_sided') {
-        absoluteTtext = '|t|';
-        plusMinus = ' ±';
+        absoluteTtext = (
+            <Katex tex={'\\left| t \\right|'} className="katex-inline"/>
+        );
+        plusMinus = <Katex tex={'\\pm'} className="katex-inline" />;
         textMethod = 'Another';
     } else {
-        absoluteTtext = 't';
+        absoluteTtext = <Katex tex={'t'} className="katex-inline"/>;
         plusMinus = '';
         textMethod = 'A';
     }
@@ -204,158 +206,163 @@ export const CriticalValue = ({
         }
     }, [hypothesisTest2validate]);
 
-    return (
-        <div className="solving-p-set mt-3">
+    return (<>
+        <div className="input-criticalvalue mt-5">
+            <p>
+                {textMethod} method for hypothesis testing is to
+                compare <Katex tex={'t'} className="katex-inline"/> to
+                the <Katex tex={'critical~value'}
+                    className="katex-inline"/> for a given significance
+                level <Katex tex={'\\alpha'} className="katex-inline"/>.
+                Using the table provided, look up the value that
+                corresponds to <span className="hi-val px-1">
+                    <Katex tex={`{\\alpha = ${alpha}}`}
+                        className="katex-inline"/></span>.
+            </p>
+            <button
+                className="btn btn-sm btn-primary mb-3"
+                data-bs-toggle="modal"
+                data-bs-target="#criticalValModal">
+                Critical value table
+            </button>
 
-            <div className="input-criticalvalue mb-3">
-                <p>
-                    {textMethod} method for hypothesis testing is to
-                            compare
-                    <Katex tex={'t'} className="katex-inline"/> to
-                            the
+            <div className="sub-content d-flex">
+                <label className="align-self-center text-nowrap"
+                    htmlFor="criticalvalue">
                     <Katex tex={'critical~value'}
-                        className="katex-inline"/> at a
-                            certain significance value
-                    <Katex tex={'\\alpha'}
-                        className="katex-inline"/>.
-                            Using the table provided, look up the value that
-                            corresponds to
-                    <Katex tex={`\\bold{\\alpha = ${alpha}}`}
-                        className="katex-inline"/>.
-                </p>
-                <button
-                    className="btn btn-sm btn-primary"
-                    data-bs-toggle="modal"
-                    data-bs-target="#criticalValModal">
-                            Critical value table
-                </button>
-
-                <div className="mt-3 d-flex">
-                    <label className="align-self-center"
-                        htmlFor="criticalvalue">
-                                critical value =&nbsp;{plusMinus}&nbsp;
-                    </label>
-                    <input
-                        className="align-self-center"
-                        type="text"
-                        id="criticalvalue"
-                        value={userCriticalValue}
-                        disabled={isCriticalValueCorrect}
-                        onChange={handleUserCriticalvalueChange}
-                    />
+                        className="katex-inline" /> =&nbsp;{plusMinus}
+                </label>
+                <input
+                    className="align-self-center form-control short-input"
+                    type="text"
+                    id="criticalvalue"
+                    value={userCriticalValue}
+                    disabled={isCriticalValueCorrect}
+                    onChange={handleUserCriticalvalueChange}
+                />
+                <div className="flex-grow-1 align-self-center">
                     <button
-                        className="btn
-                                btn-sm btn-primary
-                                mx-2
-                                align-self-center"
+                        className="btn btn-sm btn-success
+                        mx-2 text-nowrap
+                        align-self-center"
                         disabled={isCriticalValueCorrect}
                         onClick={handleNextCriticalVal}>
-                                Continue &raquo;
-                    </button>
-                </div>
-                {isCriticalValueCorrect &&(
-                    <div className="mt-3">
-                        <span style={{ color: 'green' }}>
-                            That&rsquo;s correct!
-                        </span>
-                    </div>
-                )}
-
-                {!isCriticalValueCorrect &&
-                    isCriticalValueCorrect !== null && (
-                    <div className="mt-3">
-                        <span style={{ color: 'red' }}>
-                            That&rsquo;s incorrect.
-                            Please try again.
-                        </span>
-                    </div>
-                )}
-            </div>
-            {/*input-criticalvalue*/}
-            {isCriticalValueCorrect && (
-                <div className="p-val-concl mt-3 mb-3">
-                    <div>
-                            Knowing the
-                        <Katex tex={'critical~value'}
-                            className="katex-inline"/> and
-                        <div className="ms-1 hi-val">
-                            <Katex tex={`t = ${tvalue}`}
-                                className="katex-inline"/>
-                        </div>,
-                            which of the following statements is true?
-                    </div>
-                    <div>
-                        <input
-                            type="radio"
-                            id="tGreaterThanCritical"
-                            name="criticalcomparison"
-                            value="greaterThan"
-                            disabled={isCriticalCompareCorrect}
-                            checked={compareCritical === 'greaterThan'}
-                            onChange={handleComparingCritical}
-                        />
-                        <label htmlFor="tGreaterThanCritical">
-                            {absoluteTtext} &gt; critical value</label>
-                    </div>
-                    <div>
-                        <input
-                            type="radio"
-                            id="tLessThanCritical"
-                            name="criticalcomparison"
-                            value="lessThan"
-                            disabled={isCriticalCompareCorrect}
-                            checked={compareCritical === 'lessThan'}
-                            onChange={handleComparingCritical}
-                        />
-                        <label htmlFor="tLessThanCritical">
-                            {absoluteTtext} &lt; critical value</label>
-                    </div>
-                    <button
-                        className="btn btn-small btn-primary mt-3"
-                        disabled={isCriticalCompareCorrect}
-                        onClick={handleNextCriticalValCompare}>
                             Continue &raquo;
                     </button>
-                    {isCriticalCompareCorrect && (
-                        <div className="mt-3">
-                            <span style={{ color: 'green' }}>
-                                    That&rsquo;s correct!
-                            </span>
-                        </div>
-                    )}
-                    {!isCriticalCompareCorrect &&
-                        isCriticalCompareCorrect !== null && (
-                        <div className="mt-3">
-                            <span style={{ color: 'red' }}>
-                                    The comparison is incorrect.
-                                    Please try again.
-                            </span>
-                        </div>
-                    )}
-                </div> //compare-t-to-criticalvalue
+                </div>
+            </div> {/* \end of sub-content for cv-value input */}
+
+            {isCriticalValueCorrect && (
+                <div className="answer-correct-container">
+                    <div className="answer-correct">&#10003;</div>
+                    <div>That&rsquo;s correct!</div>
+                </div>
             )}
-            {isCriticalCompareCorrect && (
-                <div className="p-val-concl mt-3 mb-3">
-                    <p>Once again, the null and and
-                            alternate hypotheses are:</p>
-                    <div className="hi-val">
-                        <div className="py-2">
-                            <Katex tex={nullHypothesis} />
-                        </div>
-                        <div className="py-2">
-                            <Katex tex={hypothesis} />
+
+            {!isCriticalValueCorrect &&
+                isCriticalValueCorrect !== null && (
+                <div className="answer-incorrect-container">
+                    <div className="answer-incorrect flex-shrink-0
+                        align-self-start">!</div>
+                    <div>
+                        The value is incorrect.
+                        Please try again.
+                    </div>
+                </div>
+            )}
+        </div>
+        {/*input-criticalvalue*/}
+        {isCriticalValueCorrect && (
+            <div className="p-val-concl mt-5 mb-3">
+                <p className="mb-0">Knowing the <Katex tex={'critical~value'}
+                    className="katex-inline"/> and <span
+                    className="hi-val px-1"> <Katex tex={`t = ${tvalue}`}
+                        className="katex-inline"/></span>,
+                    which of the following statements is true?</p>
+                <div className="d-flex">
+                    <ul className="choice-list align-self-center text-nowrap">
+                        <li>
+                            <input
+                                type="radio"
+                                id="tGreaterThanCritical"
+                                name="criticalcomparison"
+                                value="greaterThan"
+                                disabled={isCriticalCompareCorrect}
+                                checked={compareCritical === 'greaterThan'}
+                                onChange={handleComparingCritical}
+                            />
+                            <label htmlFor="tGreaterThanCritical"
+                                className="mx-1">
+                                {absoluteTtext} <Katex
+                                    tex={'\\text{\\textgreater} critical~value'}
+                                    className="katex-inline"/></label>
+                        </li>
+                        <li>
+                            <input
+                                type="radio"
+                                id="tLessThanCritical"
+                                name="criticalcomparison"
+                                value="lessThan"
+                                disabled={isCriticalCompareCorrect}
+                                checked={compareCritical === 'lessThan'}
+                                onChange={handleComparingCritical}
+                            />
+                            <label htmlFor="tLessThanCritical" className="mx-1">
+                                {absoluteTtext} <Katex
+                                    tex={'\\text{\\textless} critical~value'}
+                                    className="katex-inline"/></label>
+                        </li>
+                    </ul>
+                    <div className="flex-grow-1 align-self-center ms-5">
+                        <button
+                            className="btn btn-sm btn-success"
+                            disabled={isCriticalCompareCorrect}
+                            onClick={handleNextCriticalValCompare}>
+                                Continue &raquo;
+                        </button>
+                    </div>
+                </div> {/* \end for cv-alpha compare radio */}
+
+                {isCriticalCompareCorrect && (
+                    <div className="answer-correct-container">
+                        <div className="answer-correct">&#10003;</div>
+                        <div>That&rsquo;s correct!</div>
+                    </div>
+                )}
+                {!isCriticalCompareCorrect &&
+                    isCriticalCompareCorrect !== null && (
+                    <div className="answer-incorrect-container">
+                        <div className="answer-incorrect flex-shrink-0
+                            align-self-start">!</div>
+                        <div>
+                            The comparison is incorrect.
+                            Please try again.
                         </div>
                     </div>
-                    <p className="mt-3">
-                            With
-                        <Katex tex={'t'}
-                            className="katex-inline"/> value
-                            and
-                        <Katex tex={'critical~value'}
-                            className="katex-inline"/> comparison above,
-                            what is your conclusion?
-                    </p>
-                    <div>
+                )}
+            </div> //compare-t-to-criticalvalue
+        )}
+        {isCriticalCompareCorrect && (
+            <div className="p-val-concl mt-5 mb-3">
+                <p className="mb-1">Once again, the null and and
+                        alternate hypotheses are:</p>
+                <div className="sub-content hi-val">
+                    <div className="katex-block border-bottom
+                            border-white">
+                        <Katex tex={nullHypothesis} />
+                    </div>
+                    <div className="katex-block">
+                        <Katex tex={hypothesis} />
+                    </div>
+                </div>
+                <p className="mt-3">
+                    Based on your comparison of the <Katex tex={'t'}
+                        className="katex-inline"/> value
+                    and <Katex tex={'critical~value'}
+                        className="katex-inline"/>, what is your conclusion?
+                </p>
+                <ul className="choice-list">
+                    <li>
                         <input
                             type="radio"
                             id="rejectHypothesis2"
@@ -365,10 +372,10 @@ export const CriticalValue = ({
                             checked={nullHypothesisChoice2 === 'reject'}
                             onChange={handleNullHypothesisChoice2Change}
                         />
-                        <label htmlFor="rejectHypothesis2">
+                        <label htmlFor="rejectHypothesis2" className="mx-1">
                             Reject the null hypothesis</label>
-                    </div>
-                    <div>
+                    </li>
+                    <li>
                         <input
                             type="radio"
                             id="failToRejectHypothesis2"
@@ -380,36 +387,39 @@ export const CriticalValue = ({
                             }
                             onChange={handleNullHypothesisChoice2Change}
                         />
-                        <label htmlFor="failToRejectHypothesis2">
+                        <label htmlFor="failToRejectHypothesis2"
+                            className="mx-1">
                             Fail to reject the null hypothesis</label>
-                    </div>
+                    </li>
+                </ul>
+                <div className="simulation__step-prompt">
                     <button
-                        className="btn btn-small btn-primary mt-3"
+                        className="btn btn-sm btn-success"
                         disabled={hypothesisTest2validate}
                         onClick={handleNextNullHypothesisChoice2}>
                             Continue &raquo;
                     </button>
-                    {hypothesisTest2validate && (
-                        <div className="mt-3">
-                            <span style={{ color: 'green' }}>
-                                        That is the correct conclusion!
-                            </span>
-                        </div>
-                    )}
-                    {!hypothesisTest2validate &&
-                        hypothesisTest2validate !== null && (
-                        <div className="mt-3">
-                            <span style={{ color: 'red' }}>
-                                    That&rsquo;s not the right conclusion.
-                                    Please try again.
-                            </span>
-                        </div>
-                    )}
                 </div>
-            )}
-
-        </div>
-    );
+                {hypothesisTest2validate && (
+                    <div className="answer-correct-container">
+                        <div className="answer-correct">&#10003;</div>
+                        <div>That&rsquo;s the correct conclusion!</div>
+                    </div>
+                )}
+                {!hypothesisTest2validate &&
+                    hypothesisTest2validate !== null && (
+                    <div className="answer-incorrect-container">
+                        <div className="answer-incorrect flex-shrink-0
+                            align-self-start">!</div>
+                        <div>
+                            The conclusion is incorrect.
+                            Please try again.
+                        </div>
+                    </div>
+                )}
+            </div>
+        )}
+    </>);
 };
 
 CriticalValue.propTypes = {
