@@ -101,7 +101,7 @@ export const MultipleChoiceQuestion = ({
                         </div>
                     ))}
                     <button
-                        className="btn btn-primary mt-3"
+                        className="btn btn-sm btn-success mt-3"
                         id={`multiple-${idkey}`}
                         disabled={isAnswered || !selectedOption}
                         onClick={handleSubmit}>Submit</button>
