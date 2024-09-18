@@ -84,29 +84,32 @@ export const Quiz = ({
                     submissionId={submissionId}
                     plotType={plotType} />
             )}
-            {hypothesisTest2validate && !isRedo && (
-                <p className="mt-3">
-                    You have completed this hypothesis test.
-                    &nbsp;
-                    <button className= "btn btn-primary"
-                        id="redo"
-                        disabled={isHypothesisCompleted}
-                        onClick={handleRedo}>
-                        Do Case again?
-                    </button>
-                </p>
-            )}
             {hypothesisTest2validate && (
-
-                <div className="simulation__step-prompt">
-                    <button className= "btn btn-primary my-3"
-                        id="proceed"
-                        disabled={isHypothesisCompleted}
-                        onClick={handleOnComplete}>
-                            Continue &raquo;
-                    </button>
+                <div className="simulation__step-sim-complete">
+                    <p className="mt-3">
+                        You have completed this hypothesis test.
+                    </p>
+                    <div className="row text-right">
+                        <div className="col-6 text-center">
+                            {!isRedo && (
+                                <button className= "btn btn-sm btn-success"
+                                    id="redo"
+                                    disabled={isHypothesisCompleted}
+                                    onClick={handleRedo}>
+                                    Try this again?
+                                </button>
+                            )}
+                        </div>
+                        <div className="col-6 text-left">
+                            <button className= "btn btn-sm btn-success"
+                                id="proceed"
+                                disabled={isHypothesisCompleted}
+                                onClick={handleOnComplete}>
+                                    Let&rsquo; move on &raquo;
+                            </button>
+                        </div>
+                    </div>
                 </div>
-
             )}
         </div>
     );
