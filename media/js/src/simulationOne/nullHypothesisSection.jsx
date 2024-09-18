@@ -6,7 +6,7 @@ import PropTypes from 'prop-types';
 export const NullHypothesisSection = ({
     slope, stderror, tvalue, hypothesizedSlope,
     startQuiz, plotType, slopes, stderrs, tvalue3d, startQuiz2,
-    setHypothesizedSlope
+    setHypothesizedSlope, selectedAltHypothesis
 }) => {
 
     const handleNullHypothesis = (e) => {
@@ -65,7 +65,7 @@ export const NullHypothesisSection = ({
                                 <input size="10"
                                     className="form-control short-input"
                                     type="number" min="-5" max="5"
-                                    // disabled={startQuiz}
+                                    disabled={selectedAltHypothesis}
                                     value={hypothesizedSlope}
                                     onChange={handleNullHypothesis} />
                             </div>
@@ -142,5 +142,6 @@ NullHypothesisSection.propTypes = {
     slopes: PropTypes.array,
     stderrs: PropTypes.array,
     startQuiz2: PropTypes.bool,
-    setHypothesizedSlope: PropTypes.func
+    setHypothesizedSlope: PropTypes.func,
+    selectedAltHypothesis: PropTypes.string
 };
