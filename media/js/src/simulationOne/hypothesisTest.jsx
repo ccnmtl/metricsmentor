@@ -105,7 +105,8 @@ export const HypothesisTest = ({
                             </div>
                             <div className="katex-block">
                                 <Katex tex={
-                                    `t = ${tvalue}`
+                                    `t = ${tvalue === 100 ?
+                                        'Infinity' : tvalue}`
                                 } />
                             </div>
                         </div>

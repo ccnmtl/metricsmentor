@@ -75,7 +75,7 @@ export const NullHypothesisSection = ({
                             <div className="katex-block mt-3">
                                 <Katex tex={
                                 // eslint-disable-next-line max-len
-                                    `t = \\cfrac{${slope.toFixed(3)} - ${hypothesizedSlope}}{${stderror.toFixed(3)}} = ${tvalue}`
+                                    `t = \\cfrac{${slope.toFixed(3)} - ${hypothesizedSlope}}{${stderror.toFixed(3)}} = ${tvalue === 100 ? 'Infinity' : tvalue}`
                                 } />
                             </div>
                         </div>

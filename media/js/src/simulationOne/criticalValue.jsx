@@ -276,9 +276,9 @@ export const CriticalValue = ({
             <div className="p-val-concl mt-5 mb-3">
                 <p className="mb-0">Knowing the <Katex tex={'critical~value'}
                     className="katex-inline"/> and <span
-                    className="hi-val px-1"> <Katex tex={`t = ${tvalue}`}
-                        className="katex-inline"/></span>,
-                    which of the following statements is true?</p>
+                    className="hi-val px-1"> <Katex tex={`t = ${tvalue === 100 ?
+                        'Infinity' : tvalue}`} className="katex-inline"/>
+                </span>, which of the following statements is true?</p>
                 <div className="d-flex">
                     <ul className="choice-list align-self-center text-nowrap">
                         <li>

@@ -143,8 +143,9 @@ export const PvalueComponent = ({
                 tex={'{\\alpha}'} className="katex-inline" />.
             Refer to the <Katex tex={'p'} className="katex-inline" />-value
             table and find the value
-            for <span className="hi-val px-1"><Katex tex={`t = ${tvalue}`}
-                className="katex-inline"/></span>.
+            for <span className="hi-val px-1">
+                <Katex tex={`t = ${tvalue === 100 ?'Infinity' : tvalue}`}
+                    className="katex-inline"/></span>.
             </p>
             <button
                 className="btn btn-sm btn-primary mb-3"

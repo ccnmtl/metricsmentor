@@ -145,15 +145,21 @@ export const SimulationOne = () => {
     };
 
     let tvalue;
-    if (slope !== null) {
+    if (stderror === 0) {
+        tvalue = 100;
+    } else if (slope !== null) {
         // eslint-disable-next-line max-len
         tvalue = parseFloat(((slope.toFixed(3) - hypothesizedSlope) / stderror.toFixed(3)).toFixed(2));
     }
 
     let tvalue3d;
     if (slopes.length !== 0 && slopes[0]) {
-        // eslint-disable-next-line max-len
-        tvalue3d = parseFloat(((slopes[0].toFixed(3) - hypothesizedSlope) / stderrs[0].toFixed(3)).toFixed(2));
+        if (stderror === 0) {
+            tvalue = 100;
+        } else {
+            // eslint-disable-next-line max-len
+            tvalue3d = parseFloat(((slopes[0].toFixed(3) - hypothesizedSlope) / stderrs[0].toFixed(3)).toFixed(2));
+        }
     }
 
     // useEffect(() => {
