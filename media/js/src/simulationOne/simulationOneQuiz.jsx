@@ -23,6 +23,7 @@ export const SimulationOneQuiz = ({
     const [isRedo, setIsRedo] = useState(false);
     const [showRedoButton, setShowRedoButton] = useState(false);
     const [showContinueToB, setShowContinueToB] = useState(false);
+    const [hideTakeaway3d, setHideTakeaway3d] = useState(false);
 
     const handleTakeawaySubmit = (choiceKey, correct) => {
         if (correct) {
@@ -80,6 +81,7 @@ export const SimulationOneQuiz = ({
     const handleContinueToB = () => {
         setShowContinueToB(false);
         setSelectedAltHypothesis(null);
+        setHideTakeaway3d(true);
     };
 
     const handleQualifierSubmit = (correct) => {
@@ -324,10 +326,7 @@ export const SimulationOneQuiz = ({
             )}
             {/* Takeaway Questions */}
             {(selectedAltHypothesis === 'A' || isTakeawayCorrect.A)
-                && !completedChoices.includes('B')
-                && selectedAltHypothesis !== null
-                && selectedAltHypothesis !== 'B'
-                && selectedAltHypothesis !== 'C'
+                && !hideTakeaway3d
                 && isHypothesisCompleted && plotType === '3d' && (
                 renderTakeawayQuestion('A',
                     <span>
