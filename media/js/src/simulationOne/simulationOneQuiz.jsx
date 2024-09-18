@@ -234,8 +234,8 @@ export const SimulationOneQuiz = ({
                     <div className="simulation__step-content">
                         <p>
                             Review the following statement as
-                            alternative hypotheses <Katex tex={'\\Eta_1'}
-                                className="katex-inline"/>. Perform a
+                            alternative hypotheses <Katex tex={'\\Eta_1.'}
+                                className="katex-inline"/> Perform a
                                 hypothesis test against the null hypothesis.
                         </p>
                         <ol className="listset-alpha listset-alpha-listnum">
