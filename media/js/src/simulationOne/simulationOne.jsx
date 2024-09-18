@@ -384,6 +384,8 @@ export const SimulationOne = () => {
                                     tvalue3d={tvalue3d}
                                     hypothesizedSlope={hypothesizedSlope}
                                     setHypothesizedSlope={setHypothesizedSlope}
+                                    // eslint-disable-next-line max-len
+                                    selectedAltHypothesis={selectedAltHypothesis}
                                     startQuiz={startQuiz}
                                     startQuiz2={startQuiz2} />
 
