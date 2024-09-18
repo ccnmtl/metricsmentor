@@ -383,7 +383,7 @@ export const SimulationOneQuiz = ({
                                 Continue to Case B &raquo;
                         </div>
                         <Link to={`/course/${coursePk}/simulations/`}
-                            className="btn btn-primary"
+                            className="btn btn-success"
                             data-cy="sim-1-link-quiz1">
                             Back to Dashboard
                         </Link>
@@ -542,7 +542,7 @@ export const SimulationOneQuiz = ({
                     You have completed the 2D simulation! Move on to the 3D
                     </div>
                     <div className="simulation__step-prompt">
-                        <div className="btn btn-primary"
+                        <div className="btn btn-sm btn-success"
                             onClick={() => handlePlotTypeChange('3d')}>
                             Continue &raquo;
                         </div>
@@ -565,7 +565,7 @@ export const SimulationOneQuiz = ({
                             onClick={handleContinueToB}>
                             Continue to B &raquo;
                         </div>
-                        <div className="btn btn-primary"
+                        <div className="btn btn-success"
                             onClick={() => handlePlotTypeChange('3d')}>
                             Continue to 3D &raquo;
                         </div>
@@ -582,7 +582,7 @@ export const SimulationOneQuiz = ({
                     <div style={{ display: 'flex',
                         justifyContent: 'center', gap: '10px' }}>
                         <Link to={`/course/${coursePk}/simulations`}
-                            className="btn btn-primary"
+                            className="btn btn-success"
                             data-cy="sim-1-link-quiz2">
                             Back to Dashboard
                         </Link>

@@ -16,19 +16,19 @@ export const HypothesisTest = ({
     let hypothesis;
     let hypothesisTest;
 
-    const nullHypothesis = `\\Eta_0: {\\beta_1} = ${hypothesizedSlope}`;
+    const nullHypothesis = `\\Eta_0: {\\beta_1}=${hypothesizedSlope}`;
 
     switch (selectedAltHypothesis) {
     case 'A':
-        hypothesis = `\\Eta_1: {\\beta_1}{\\neq } ${hypothesizedSlope}`;
+        hypothesis = `\\Eta_1: {\\beta_1}~{\\neq}~${hypothesizedSlope}`;
         hypothesisTest = 'value_two_sided';
         break;
     case 'B':
-        hypothesis = `\\Eta_1: {\\beta_1}{\\gt} ${hypothesizedSlope}`;
+        hypothesis = `\\Eta_1: {\\beta_1}~{\\gt}~${hypothesizedSlope}`;
         hypothesisTest = 'value_right';
         break;
     case 'C':
-        hypothesis =  `\\Eta_1: {\\beta_1}{\\lt} ${hypothesizedSlope}`;
+        hypothesis =  `\\Eta_1: {\\beta_1}~{\\lt}~${hypothesizedSlope}`;
         hypothesisTest = 'value_left';
         break;
     default:
