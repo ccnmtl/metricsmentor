@@ -70,7 +70,7 @@ export const Dashboard = ({ isSuperUser, isFaculty}) => {
                             </p>
 
                             <Link to={`/course/${courseId}/simulations/2/`}
-                                className="btn btn-primary my-3"
+                                className="btn btn-success my-3"
                                 data-cy="sim-2-link">
                             Begin &raquo;
                             </Link>

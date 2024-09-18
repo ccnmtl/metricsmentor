@@ -208,11 +208,13 @@ export const PvalueComponent = ({
         </div>{/*input-p*/}
         {isPvalueCorrect && (
             <div className="p-to-alpha mt-5 mb-3">
-                <p>Knowing now the <Katex tex={'p'} className="katex-inline" />
-                -value and <span className="hi-val px-1">
+                <p className="mb-0">
+                    Knowing now the <Katex tex={'p'} className="katex-inline" />
+                    -value and <span className="hi-val px-1">
                         <Katex tex={`{\\alpha=${alpha}}`}
                             className="katex-inline"/></span>,
-                which of the following statements is true?</p>
+                    which of the following statements is true?
+                </p>
                 <div className="d-flex">
                     <ul className="choice-list align-self-center text-nowrap">
                         <li>
