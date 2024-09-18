@@ -35,6 +35,7 @@ export const SimulationOneQuiz = ({
                 // User needs to answer the qualifier question
                 setIsSubmitted(false);
                 setCompletedChoices([...completedChoices, choiceKey]);
+                setShowQualifier(true);
             } else {
                 setCompletedChoices([...completedChoices, choiceKey]);
                 setSelectedAltHypothesis(null);
@@ -392,7 +393,7 @@ export const SimulationOneQuiz = ({
             )}
 
             {/* Qualifier Question for Choice A */}
-            {isTakeawayCorrect.A && !isQualifierCorrect && plotType !== '3d'
+            {isTakeawayCorrect.A && plotType !== '3d'
                 && showQualifier && (
                 renderQualifierQuestion(
                     <span>
