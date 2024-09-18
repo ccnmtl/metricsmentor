@@ -397,9 +397,9 @@ export const SimulationOneQuiz = ({
                 renderQualifierQuestion(
                     <span>
                         If we change the null hypothesis to be
-                        &quot;at least&quot; a value like zero,
-                        then the alternative hypothesis should
-                        change to which one of the following? And
+                        <span className='fw-bold'> at least </span>
+                        a value like zero, then the alternative hypothesis
+                        should change to which one of the following? And
                         how will that affect the critical value of
                         your test given the same significance level
                         as in two sided test
@@ -480,7 +480,8 @@ export const SimulationOneQuiz = ({
             && isHypothesisCompleted && (
                 renderTakeawayQuestion('C',
                     <span>
-                        If we change the null hypothesis to be “at most” a
+                        If we change the null hypothesis to be
+                        <span className='fw-bold'> at most</span> a
                         value like zero, then the alternative hypothesis should
                         change to which one of the following? And how will that
                         affect the critical value of your test given the same
@@ -488,29 +489,34 @@ export const SimulationOneQuiz = ({
                     </span>,
                     [
                         <span key="option1">
-                            The alternative hypothesis must be &quot;greater
-                            than&quot; the same value, and the critical value
+                            The alternative hypothesis must be
+                            <span className='fw-bold'> greater
+                            than</span> the same value, and the critical value
                             would be larger.
                         </span>,
                         <span key="option2">
-                            The alternative hypothesis must be &quot;greater
-                            than&quot; the same value, and the critical value
+                            The alternative hypothesis must be
+                            <span className='fw-bold'> greater
+                            than</span> the same value, and the critical value
                             would be smaller.
                         </span>,
                         <span key="option3">
-                            The alternative hypothesis must be &quot;less
-                            than&quot; the same value, and the critical value
+                            The alternative hypothesis must be
+                            <span className='fw-bold'> less
+                            than</span> the same value, and the critical value
                             would be larger.
                         </span>,
                         <span key="option4">
-                            The alternative hypothesis must be &quot;less
-                            than&quot; the same value, and the critical value
+                            The alternative hypothesis must be
+                            <span className='fw-bold'> less
+                            than</span> the same value, and the critical value
                             would be smaller.
                         </span>,
                     ],
                     <span>
-                        The alternative hypothesis must be &quot;greater
-                        than&quot; the same value, and the critical value
+                        The alternative hypothesis must be
+                        <span className='fw-bold'> greater
+                        than</span> the same value, and the critical value
                         would be smaller.
                     </span>,
                     <span>
@@ -519,7 +525,8 @@ export const SimulationOneQuiz = ({
                     </span>,
                     <span>
                         That&apos;s not the right answer. The alternative
-                        hypothesis must be &quot;greater than&quot; the same
+                        hypothesis must be
+                        <span className='fw-bold'> greater than</span> the same
                         value, and the critical value would be smaller.
                     </span>,
                     15)

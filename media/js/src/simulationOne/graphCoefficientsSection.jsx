@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 
 export const GraphCoefficients = ({
     intercept, slope, stderror, plotType, slopes, stderrs,
-    onShowNullHypothesis, intercept3d
+    onShowNullHypothesis, intercept3d, showNullHypothesis
 }) => {
     const handleNextClick = () => {
         onShowNullHypothesis();
@@ -65,6 +65,7 @@ export const GraphCoefficients = ({
                         <div className="simulation__step-prompt">
                             <button className="btn btn-sm btn-success"
                                 data-cy="nullNextButton"
+                                disabled={showNullHypothesis}
                                 onClick={handleNextClick}>
                                     Continue &raquo;
                             </button>
@@ -122,6 +123,7 @@ export const GraphCoefficients = ({
                         <div className="simulation__step-prompt">
                             <button className="btn btn-sm btn-success"
                                 data-cy="nullNextButton"
+                                disabled={showNullHypothesis}
                                 onClick={handleNextClick}>
                                     Continue &raquo;
                             </button>
@@ -141,5 +143,6 @@ GraphCoefficients.propTypes = {
     slopes: PropTypes.array,
     stderrs: PropTypes.array,
     onShowNullHypothesis: PropTypes.func,
-    intercept3d: PropTypes.number
+    intercept3d: PropTypes.number,
+    showNullHypothesis: PropTypes.bool,
 };
