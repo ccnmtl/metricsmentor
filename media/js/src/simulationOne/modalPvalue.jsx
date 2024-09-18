@@ -61,6 +61,20 @@ export const PvalueModal = () => {
                                 </thead>
                                 <tbody>
                                     <tr>
+                                        <th className="rowheader">
+                                            &lt;&nbsp;&nbsp;-2.9</th>
+                                        <td>0.0000</td>
+                                        <td>0.0000</td>
+                                        <td>0.0000</td>
+                                        <td>0.0000</td>
+                                        <td>0.0000</td>
+                                        <td>0.0000</td>
+                                        <td>0.0000</td>
+                                        <td>0.0000</td>
+                                        <td>0.0000</td>
+                                        <td>0.0000</td>
+                                    </tr>
+                                    <tr>
                                         <th className="rowheader">-2.9</th>
                                         <td>0.0019</td>
                                         <td>0.0018</td>
