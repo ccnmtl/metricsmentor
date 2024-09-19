@@ -45,13 +45,21 @@ export const HypothesisTest = ({
     };
 
     const calculatePvalue = async() => {
-
         try {
-            const response = await axios.post('/calculate_pvalue/',
-                {n, tvalue});
+            // Convert tvalue to a string if it is Infinity or -Infinity
+            let tvalueString = tvalue;
+            if (tvalue === Infinity) {
+                tvalueString = 'Infinity';
+            } else if (tvalue === -Infinity) {
+                tvalueString = '-Infinity';
+            }
+
+            const response = await axios.post('/calculate_pvalue/', {
+                n,
+                tvalue: tvalueString
+            });
 
             setPvalues(response.data);
-
         } catch (error) {
             console.error('Error calculating pvalue:', error);
         }
