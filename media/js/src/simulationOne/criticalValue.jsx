@@ -242,6 +242,7 @@ export const CriticalValue = ({
                     value={userCriticalValue}
                     disabled={isCriticalValueCorrect}
                     onChange={handleUserCriticalvalueChange}
+                    autoComplete="off"
                 />
                 <div className="flex-grow-1 align-self-center">
                     <button

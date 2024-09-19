@@ -174,6 +174,7 @@ export const PvalueComponent = ({
                     value={userPvalue}
                     disabled={isPvalueCorrect}
                     onChange={handleUserPvalueChange}
+                    autoComplete="off"
                 />
                 <div className="flex-grow-1 align-self-center">
                     <button
