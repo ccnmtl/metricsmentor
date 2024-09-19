@@ -87,7 +87,7 @@ export const Quiz = ({
             {hypothesisTest2validate && (
                 <div className="simulation__step-sim-complete">
                     <p className="mt-3">
-                        You have completed this hypothesis test.
+                        You&rsquo;ve completed this hypothesis test.
                     </p>
                     <div className="row text-right">
                         <div className="col-6 text-center">
@@ -96,7 +96,7 @@ export const Quiz = ({
                                     id="redo"
                                     disabled={isHypothesisCompleted}
                                     onClick={handleRedo}>
-                                    Try this again?
+                                    &laquo; Try this again?
                                 </button>
                             )}
                         </div>
@@ -105,7 +105,7 @@ export const Quiz = ({
                                 id="proceed"
                                 disabled={isHypothesisCompleted}
                                 onClick={handleOnComplete}>
-                                    Let&rsquo; move on &raquo;
+                                    Let&rsquo;s move on &raquo;
                             </button>
                         </div>
                     </div>
