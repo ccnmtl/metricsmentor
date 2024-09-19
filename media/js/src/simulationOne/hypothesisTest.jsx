@@ -109,10 +109,12 @@ export const HypothesisTest = ({
                                 } />
                             </div>
                         </div>
-                        <p className="mt-3">
+                        <h2>Set the significance
+                            level <Katex tex={'({\\alpha})'}
+                            className="katex-inline" />:</h2>
+                        <p>
                             First, choose the significance
-                            level,
-                            <Katex tex={'{\\alpha}'}
+                            level, <Katex tex={'{\\alpha}'}
                                 className="katex-inline" />, which is
                             the probability of rejecting <Katex tex={'\\Eta_0'}
                                 className="katex-inline" /> when it is true.

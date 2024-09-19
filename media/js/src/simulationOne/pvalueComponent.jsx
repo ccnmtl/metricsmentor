@@ -138,6 +138,9 @@ export const PvalueComponent = ({
 
     return (<>
         <div className="input-p mt-5">
+            <h2 className="mt-0">
+                Obtain <Katex tex={'p'} className="katex-inline" />-value:
+            </h2>
             <p>One method for hypothesis testing is to compare the <Katex
                 tex={'p'} className="katex-inline" />-value to <Katex
                 tex={'{\\alpha}'} className="katex-inline" />.
@@ -284,6 +287,9 @@ export const PvalueComponent = ({
         )}
         {isPvalCompareCorrect && (
             <div className="p-val-concl mt-5 mb-3">
+                <h2 className="mt-0">
+                    Conclusion:
+                </h2>
                 <p className="mb-1">Let&rsquo;s look at the null and and
                 alternate hypotheses once more:</p>
                 <div className="sub-content hi-val">
@@ -343,12 +349,17 @@ export const PvalueComponent = ({
                 </div>
                 {/* \end of conclusion radio */}
 
-                {hypothesisTest1validate && (
+                {hypothesisTest1validate && (<>
                     <div className="answer-correct-container">
                         <div className="answer-correct">&#10003;</div>
                         <div>That&rsquo;s the correct conclusion!</div>
                     </div>
-                )}
+                    <p className="mt-3">
+                        Notice how <Katex tex={'\\text{corr}(x,y)'}
+                            className="katex-inline"/> affects your decision
+                        regarding the null hypothesis.
+                    </p>
+                </>)}
                 {!hypothesisTest1validate &&
                     hypothesisTest1validate !== null && (
                     <div className="answer-incorrect-container">

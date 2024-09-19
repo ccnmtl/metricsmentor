@@ -208,6 +208,9 @@ export const CriticalValue = ({
 
     return (<>
         <div className="input-criticalvalue mt-5">
+            <h2 className="mt-0">
+                Find <Katex tex={'critical~value'} className="katex-inline"/>:
+            </h2>
             <p>
                 {textMethod} method for hypothesis testing is to
                 compare <Katex tex={'t'} className="katex-inline"/> to
@@ -344,7 +347,10 @@ export const CriticalValue = ({
         )}
         {isCriticalCompareCorrect && (
             <div className="p-val-concl mt-5 mb-3">
-                <p className="mb-1">Once again, the null and and
+                <h2 className="mt-0">
+                    Conclusion:
+                </h2>
+                <p className="mb-1">Once again, the null and
                         alternate hypotheses are:</p>
                 <div className="sub-content hi-val">
                     <div className="katex-block border-bottom
@@ -400,12 +406,17 @@ export const CriticalValue = ({
                             Continue &raquo;
                     </button>
                 </div>
-                {hypothesisTest2validate && (
+                {hypothesisTest2validate && (<>
                     <div className="answer-correct-container">
                         <div className="answer-correct">&#10003;</div>
                         <div>That&rsquo;s the correct conclusion!</div>
                     </div>
-                )}
+                    <p className="mt-3">
+                        Notice how <Katex tex={'\\text{corr}(x,y)'}
+                            className="katex-inline"/> affects your decision
+                        regarding the null hypothesis.
+                    </p>
+                </>)}
                 {!hypothesisTest2validate &&
                     hypothesisTest2validate !== null && (
                     <div className="answer-incorrect-container">

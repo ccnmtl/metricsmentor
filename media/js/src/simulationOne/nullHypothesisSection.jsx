@@ -50,7 +50,7 @@ export const NullHypothesisSection = ({
                             className="katex-inline" /> and observe the
                         outcome of the test statistic
                         <Katex tex={'t'} className="katex-inline" />.</p>
-                        <p><em>For your first attempt, set <Katex tex={
+                        <p><em>For your first try, set <Katex tex={
                             '{\\beta_1}=0'} className="katex-inline" />.</em>
                         </p>
                         <div className="sub-content">
