@@ -283,23 +283,24 @@ export const SimulationOneQuiz = ({
                     </span>,
                     [<span key="option1">
                         The closer the correlation between y and x<sub>1</sub>
-                        &nbsp;is to one, the <b>less likely</b> it is to reject
-                        the null hypothesis β<sub>1</sub> = 0.
+                        &nbsp;is to one, the <strong>less likely </strong>
+                        it is to reject the null hypothesis β<sub>1</sub> = 0.
                     </span>,
                     <span key="option2">
                         The closer the correlation between y and x<sub>1</sub>
-                        &nbsp;is to negative one, the <b>less likely</b>&nbsp;
+                        &nbsp;is to negative one, the <strong>less likely
+                        </strong>&nbsp;
                         it is to reject the null hypothesis β<sub>1</sub> = 0.
                     </span>,
                     <span key="option3">
                         The closer the correlation between y and x<sub>1</sub>
-                        &nbsp;is to zero, the <b>more likely</b> it is to reject
-                        the null hypothesis β<sub>1</sub> = 0.
+                        &nbsp;is to zero, the <strong>more likely </strong>
+                        it is to reject the null hypothesis β<sub>1</sub> = 0.
                     </span>,
                     <span key="option4">
                         The closer the correlation between y and x<sub>1</sub>
-                        &nbsp;is to zero, the <b>less likely</b> it is to reject
-                        the null hypothesis β<sub>1</sub> = 0.
+                        &nbsp;is to zero, the <strong>less likely </strong>
+                        it is to reject the null hypothesis β<sub>1</sub> = 0.
                     </span>,
                     <span key="option5">
                         None of these are correct
@@ -397,37 +398,37 @@ export const SimulationOneQuiz = ({
                 renderQualifierQuestion(
                     <span>
                         If we change the null hypothesis to be
-                        &quot;at least&quot; a value like zero,
-                        then the alternative hypothesis should
-                        change to which one of the following? And
+                        <strong> at least </strong>
+                        a value like zero, then the alternative hypothesis
+                        should change to which one of the following? And
                         how will that affect the critical value of
                         your test given the same significance level
                         as in two sided test
                     </span>,
                     [<span key="option1">
                         The alternative hypothesis must be
-                        <span className='fw-bold'> greater than </span>
+                        <strong> greater than </strong>
                         the same value,
                         and the critical value would be larger in
                         absolute value.
                     </span>,
                     <span key="option2">
                         The alternative hypothesis must be
-                        <span className='fw-bold'> greater than </span>
+                        <strong> greater than </strong>
                         the same value,
                         and the critical value would be smaller in
                         absolute value.
                     </span>,
                     <span key="option3">
                         The alternative hypothesis must be
-                        <span className='fw-bold'> less than </span>
+                        <strong> less than </strong>
                         the same value, and
                         the critical value would be larger in
                         absolute value.
                     </span>,
                     <span key="option4">
                         The alternative hypothesis must be
-                        <span className='fw-bold'> less than </span>
+                        <strong> less than </strong>
                         the same value, and
                         the critical value would be smaller in
                         absolute value.
@@ -480,7 +481,8 @@ export const SimulationOneQuiz = ({
             && isHypothesisCompleted && (
                 renderTakeawayQuestion('C',
                     <span>
-                        If we change the null hypothesis to be “at most” a
+                        If we change the null hypothesis to be
+                        <strong> at most</strong> a
                         value like zero, then the alternative hypothesis should
                         change to which one of the following? And how will that
                         affect the critical value of your test given the same
@@ -488,29 +490,30 @@ export const SimulationOneQuiz = ({
                     </span>,
                     [
                         <span key="option1">
-                            The alternative hypothesis must be &quot;greater
-                            than&quot; the same value, and the critical value
-                            would be larger.
+                            The alternative hypothesis must be
+                            <strong> greater than</strong> the same value, and
+                            the critical value would be larger.
                         </span>,
                         <span key="option2">
-                            The alternative hypothesis must be &quot;greater
-                            than&quot; the same value, and the critical value
-                            would be smaller.
+                            The alternative hypothesis must be
+                            <strong> greater than</strong> the same value, and
+                            the critical value would be smaller.
                         </span>,
                         <span key="option3">
-                            The alternative hypothesis must be &quot;less
-                            than&quot; the same value, and the critical value
-                            would be larger.
+                            The alternative hypothesis must be
+                            <strong> less than</strong> the same value, and
+                            the critical value would be larger.
                         </span>,
                         <span key="option4">
-                            The alternative hypothesis must be &quot;less
-                            than&quot; the same value, and the critical value
-                            would be smaller.
+                            The alternative hypothesis must be
+                            <strong> less than</strong> the same value, and
+                            the critical value would be smaller.
                         </span>,
                     ],
                     <span>
-                        The alternative hypothesis must be &quot;greater
-                        than&quot; the same value, and the critical value
+                        The alternative hypothesis must be
+                        <strong> greater
+                        than</strong> the same value, and the critical value
                         would be smaller.
                     </span>,
                     <span>
@@ -519,7 +522,8 @@ export const SimulationOneQuiz = ({
                     </span>,
                     <span>
                         That&apos;s not the right answer. The alternative
-                        hypothesis must be &quot;greater than&quot; the same
+                        hypothesis must be
+                        <strong> greater than</strong> the same
                         value, and the critical value would be smaller.
                     </span>,
                     15)

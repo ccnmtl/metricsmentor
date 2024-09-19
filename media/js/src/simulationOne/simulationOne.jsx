@@ -136,6 +136,7 @@ export const SimulationOne = () => {
     const handlePlotTypeChange = (type) => {
         setPlotType(type);
         setSelectedAltHypothesis(null);
+        setShowNullHypothesis(false);
         document.getElementById('learningGoal')
             .scrollIntoView({ behavior: 'smooth'});
     };
@@ -293,7 +294,7 @@ export const SimulationOne = () => {
                                                 max="1" value={xCorrelation}
                                                 className="form-range"
                                                 id="correlation"
-                                                disabled={startQuiz2}
+                                                disabled={selectedAltHypothesis}
 
                                                 onChange={
                                                     handleXcorrelationChange} />
@@ -371,6 +372,7 @@ export const SimulationOne = () => {
                             plotType={plotType}
                             slopes={slopes}
                             stderrs={stderrs}
+                            showNullHypothesis={showNullHypothesis}
                             onShowNullHypothesis={handleShowNullHypothesis} />
                         {showNullHypothesis && (
                             <>
@@ -397,7 +399,7 @@ export const SimulationOne = () => {
                                     {plotType === '2d' && (
                                         <button
                                             className="btn btn-sm btn-success"
-                                            // disabled={startQuiz}
+                                            disabled={startQuiz}
                                             onClick={handleCreateSub}>
                                             Continue &raquo;
                                         </button>
@@ -405,7 +407,7 @@ export const SimulationOne = () => {
                                     {plotType === '3d' && (
                                         <button
                                             className="btn btn-sm btn-success"
-                                            // disabled={startQuiz2}
+                                            disabled={startQuiz2}
                                             onClick={handleCreateSub}>
                                             Continue &raquo;
                                         </button>
