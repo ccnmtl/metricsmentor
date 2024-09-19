@@ -259,6 +259,11 @@ def calculate_pvalue(request):
         data = json.loads(request.body.decode('utf-8'))
         z_value = data.get('tvalue')
 
+        if z_value == "Infinity":
+            z_value = float('inf')
+        elif z_value == "-Infinity":
+            z_value = float('-inf')
+
         # Calculate p-values
         if z_value >= 0:
             p_value_left = 1 - round(norm.cdf(z_value), 4)
