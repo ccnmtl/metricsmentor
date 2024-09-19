@@ -78,28 +78,30 @@ export const MultipleChoiceQuestion = ({
                     <h2 className="h2-primary">{header}</h2>
                 </header>
                 <div className="simulation__step-content">
-                    <div className="mb-2" style={questionStyle}>
+                    <p className="mb-2" style={questionStyle}>
                         {question}
+                    </p>
+                    <div className="choice-list">
+                        {shuffledOptions.map((option, index) => (
+                            <div key={index} className="form-check">
+                                <input
+                                    className="form-check-input"
+                                    type="radio"
+                                    id={`option-${index}-${idkey}`}
+                                    name={`options-${idkey}-${index}`}
+                                    value={option}
+                                    checked={selectedOption === option}
+                                    onChange={() => handleOptionSelect(option)}
+                                    disabled={isAnswered}
+                                />
+                                <label className="form-check-label"
+                                    htmlFor={`option-${index}-${idkey}`}
+                                    style={optionStyle}>
+                                    {option}
+                                </label>
+                            </div>
+                        ))}
                     </div>
-                    {shuffledOptions.map((option, index) => (
-                        <div key={index} className="form-check">
-                            <input
-                                className="form-check-input"
-                                type="radio"
-                                id={`option-${index}-${idkey}`}
-                                name={`options-${idkey}-${index}`}
-                                value={option}
-                                checked={selectedOption === option}
-                                onChange={() => handleOptionSelect(option)}
-                                disabled={isAnswered}
-                            />
-                            <label className="form-check-label"
-                                htmlFor={`option-${index}-${idkey}`}
-                                style={optionStyle}>
-                                {option}
-                            </label>
-                        </div>
-                    ))}
                     <button
                         className="btn btn-sm btn-success mt-3"
                         id={`multiple-${idkey}`}
