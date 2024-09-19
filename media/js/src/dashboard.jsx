@@ -12,22 +12,23 @@ export const Dashboard = ({ isSuperUser, isFaculty}) => {
         <>
             <section className="section-sim-dashboard">
                 <div className="row">
-                    <div
-                        className="col-lg-5
+                    {(isSuperUser || isFaculty) && (
+                        <div
+                            className="col-lg-5
                             p-4 mx-0
                             mx-lg-3 my-3
                             mx-lg-0
                             simulation-card">
-                        <h2 className="h2-primary">
-                            <span className="h2-secondary d-block"
-                                data-cy="sim-1">
+                            <h2 className="h2-primary">
+                                <span className="h2-secondary d-block"
+                                    data-cy="sim-1">
                                 Simulation 1
-                            </span>
-                            <span className="h2-title d-block">
-                                {'Hypothesis Testing for Population Slope'}
-                            </span>
-                        </h2>
-                        <p>
+                                </span>
+                                <span className="h2-title d-block">
+                                    {'Hypothesis Testing for Population Slope'}
+                                </span>
+                            </h2>
+                            <p>
                             In this simulation, you&rsquo;ll learn about
                             hypothesis testing for the population slope
                             in simple and multiple regression models.
@@ -35,13 +36,14 @@ export const Dashboard = ({ isSuperUser, isFaculty}) => {
                             between two, or three variables, and generate
                             data to test the null hypothesis that the
                             population slope is equal to a specified value.
-                        </p>
-                        <Link to={`/course/${courseId}/simulations/1/`}
-                            className="btn btn-success my-3"
-                            data-cy="sim-1-link">
+                            </p>
+                            <Link to={`/course/${courseId}/simulations/1/`}
+                                className="btn btn-success my-3"
+                                data-cy="sim-1-link">
                             Begin &raquo;
-                        </Link>
-                    </div>
+                            </Link>
+                        </div>
+                    )}
                     {(isSuperUser || isFaculty) && (
                         <div
                             className="col-lg-5
