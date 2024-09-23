@@ -392,7 +392,7 @@ export const Quiz2 = ({
                                     )}
                                 </div>
                                 <button className=
-                                    "btn btn-small btn-secondary mt-3"
+                                    "btn btn-sm btn-success"
                                 onClick={onComplete}>
                                     Next
                                 </button>

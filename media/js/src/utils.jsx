@@ -119,11 +119,12 @@ export const inlineKatex = (tex) =>
 export const formulaText = (content = { title: '', body: [] }, i) => (
     <>
         {content.title && <h2>{content.title}:</h2>}
-        {content.body.map((eq, i) => (
-            <div className="ms-3 mb-3" key={i}>
-                <Katex key={i} className={'ms-3' + (i === 0 ? '' : ' mt-3')}
-                    tex={eq} />
-            </div>
-        ))}
+        <div className="sub-content">
+            {content.body.map((eq, i) => (
+                <div className="katex-block" key={i}>
+                    <Katex key={i} tex={eq} />
+                </div>
+            ))}
+        </div>
     </>
 );
