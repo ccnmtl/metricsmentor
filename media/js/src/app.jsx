@@ -1,14 +1,25 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Route, Routes  } from 'react-router-dom';
 import { Dashboard } from './dashboard';
 import { SimulationOne } from './simulationOne/simulationOne';
 import { SimulationTwo } from './simulationTwo/simulationTwo';
 
 const isSuperUser = window.MetricsMentor.currentUser.is_superuser;
-const appContainer = document.querySelector('#rect-root');
-const isFaculty = appContainer ? appContainer.dataset.isFaculty : null;
 
 export const App = () => {
+    const [isFaculty, setIsFaculty] = useState(null);
+
+    useEffect(() => {
+        const appContainer = document.querySelector('#react-root');
+        const facultyStatus = appContainer ?
+            appContainer.dataset.isFaculty === 'True' : false;
+        setIsFaculty(facultyStatus);
+    }, []);
+
+    if (isFaculty === null) {
+        return <div>Loading...</div>;
+    }
+
     return (
         <Router>
             <Routes>
