@@ -129,6 +129,11 @@
     text-align: center;
     align-self: center;
 }
+
+.dataset-opt .status-complete {
+    display: inline-block;
+}
+
 .answer-correct-container {
     display: flex;
     flex-direction: row;
