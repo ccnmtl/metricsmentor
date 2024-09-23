@@ -10,16 +10,16 @@ export const ControlVariable = ({
 }) => {
     // const baseData = data.lines[data.y];
     return (
-        <div className="row">
+        <>
             <p>
                 In regression analysis, when a relevant control variable is
                 omitted, the effect of this missing variable gets absorbed
                 into the error term {inlineKatex('u')}.
             </p>
-            <div className="ms-3 mb-3">
+            <div className="sub-content">
                 <Katex tex={'y = \\beta_0 + \\beta_1x_1 + u'} />
             </div>
-            <p>
+            <p className="mt-3">
                 This is known as the omitted variable bias (OVB). If the
                 omitted variable {inlineKatex('x_i')} is correlated with both
                 the dependent variable {inlineKatex('y')}, and the independent
@@ -29,40 +29,42 @@ export const ControlVariable = ({
                 In a simple linear regression, the effect of OVB on
                 {inlineKatex('\\hat{\\beta_1}')} is as follows:
             </p>
-            <p className="ms-3 mb-3">
+            <div className="sub-content">
                 <Katex tex={
                     // eslint-disable-next-line max-len
                     '\\hat{\\beta_1} \\xrightarrow{p} \\beta_1 + [bias]'} />
-            </p>
-            <p>
+            </div>
+            <p className="mt-3">
                 The correlations between the included and omitted variables,
                 specifically {inlineKatex('\\text{corr}(y,x_i)')} and
                 {inlineKatex('\\text{corr}(x_1,x_i)')},
                 contribute to the {inlineKatex('[bias]')}.
             </p>
-            <h2 className="mb-4">
+            <h2>
                 Control variables for this dataset:
             </h2>
             <p>
                 {controlText.general_inst}
             </p>
-            <p>
+            <p className="mb-4">
                 Select any variable to add to the regression model.
             </p>
-            <div className="OG-C-VARS">
+            {/* container for all variables */}
+            <div className="choice-list ms-0">
+                {/* original variables y and x1 below */}
                 {Object.entries(data).slice(0,2)
                     .map((dType, i) => (
-                        <div key={i} className="mb-3 OG-VAR">
+                        <div key={i} className="dataset-variable-item ps-4">
                             {inlineKatex(`${dType[0]}
                                 \\text{ (${labelIndex[dType[1]]})}`)}
-                            <hr style={{borderTop: 'dotted 2px'}}/>
                         </div>
                     ))}
+                {/* control variables below */}
                 {data.option.map((dType, i) => {
                     const selectData = data.lines[dType];
                     return (
                         <div key={i}
-                            className={'form-check C-VAR'}
+                            className={'form-check dataset-variable-item'}
                         >
                             <label htmlFor={`x${i+2}`}
                                 className="form-check-label">
@@ -117,7 +119,6 @@ export const ControlVariable = ({
                                     ],
                                 }
                             ].map((content, i) => formulaText(content, i))}
-                            <hr style={{borderTop: 'dotted 2px'}}/>
                         </div>);
                 })}
             </div>
@@ -125,21 +126,21 @@ export const ControlVariable = ({
                 The extent of bias in {inlineKatex('\\hat{\\beta_1}')} depends
                 on
             </p>
-            <ol>
-                <li>the strength of the correlation between the dependent
-                    variable and the omitted variable,
-                {inlineKatex('\\text{corr}(y, x_i)')},
+            <ul>
+                <li className="mb-2">the strength of the correlation between
+                    the dependent variable and the omitted
+                    variable, {inlineKatex('\\text{corr}(y, x_i)')},
                 </li>
-                <li>the strength of the correlation between the key variable
-                    of interest and the omitted variable,
-                {inlineKatex('\\text{corr}(x_1, x_i)')},
+                <li className="mb-2">the strength of the correlation between
+                    the key variable of interest and the omitted
+                    variable, {inlineKatex('\\text{corr}(x_1, x_i)')},
                 </li>
-            </ol>
+            </ul>
             <p>
                 Let&rsquo;s review what you&rsquo;ve learned here in the next
                 section.
             </p>
-        </div>
+        </>
     );
 };
 
