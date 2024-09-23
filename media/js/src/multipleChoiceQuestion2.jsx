@@ -99,14 +99,14 @@ export const MultipleChoiceQuestion2 = ({isSubmitted, setIsSubmitted, takeaways,
                 <button className="btn btn-secondary me-2"
                     type='submit' onClick={handleSubmit}
                 >
-                    {'Submit >>'}
+                    Submit &raquo;
                 </button>
             }
             {isDone &&
                 <a className="btn btn-secondary me-2" role="button"
                     href={`/course/${coursePk}/`}
                 >
-                    {'I\'m Done! >>'}
+                    I&rsquo;m Done! &raquo;
                 </a>
             }
             {nextStep &&
@@ -114,7 +114,7 @@ export const MultipleChoiceQuestion2 = ({isSubmitted, setIsSubmitted, takeaways,
                     type='submit' onClick={handleContinue}
                 >
                     {checkComplete() < 1 ?
-                        'Continue >>' : 'Try another dataset >>'}
+                        'Continue »' : 'Try another dataset »'}
                 </button>
             }
             {(isDone || checkComplete() > 1) &&
