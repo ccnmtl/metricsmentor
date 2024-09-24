@@ -187,6 +187,7 @@ export const SimulationTwo = () => {
                 />
                 <div className='container'>
                     <div className='row'>
+                        {/* p block is dependent on dataset topic */}
                         <p className='col-auto mx-auto'>
                             Dataset source and information
                         </p>

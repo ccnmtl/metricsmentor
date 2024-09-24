@@ -68,28 +68,30 @@ export const MultipleChoiceQuestion2 = ({isSubmitted, setIsSubmitted, takeaways,
                 .map(([topic, {prompt, options, answer, feedback_bad,
                     feedback_good}], i) => (
                     <div key={i}>
-                        <p>
+                        <p className="mb-3">
                             {prompt}
                         </p>
-                        {options.map((option, index) => (
-                            <div key={index} className="form-check mb-2">
-                                <input
-                                    className="form-check-input"
-                                    type='radio'
-                                    id={`${topic}-option-${index}`}
-                                    name={`${topic}-options`}
-                                    value={option}
-                                    checked={selected[topic] === option}
-                                    onChange={() => handleOptionSelect(
-                                        topic, option)}
-                                />
-                                <label className="form-check-label"
-                                    htmlFor={`${topic}-option-${index}`}
-                                >
-                                    {option}
-                                </label>
-                            </div>
-                        ))}
+                        <div className="choice-list ms-0">
+                            {options.map((option, index) => (
+                                <div key={index} className="form-check mb-2">
+                                    <input
+                                        className="form-check-input"
+                                        type='radio'
+                                        id={`${topic}-option-${index}`}
+                                        name={`${topic}-options`}
+                                        value={option}
+                                        checked={selected[topic] === option}
+                                        onChange={() => handleOptionSelect(
+                                            topic, option)}
+                                    />
+                                    <label className="form-check-label"
+                                        htmlFor={`${topic}-option-${index}`}
+                                    >
+                                        {option}
+                                    </label>
+                                </div>
+                            ))}
+                        </div>
                         {isSubmitted && feedback(topic, feedback_bad,
                             feedback_good)}
                     </div>
