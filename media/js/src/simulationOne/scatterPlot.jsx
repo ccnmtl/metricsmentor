@@ -210,7 +210,7 @@ export const ScatterPlot = ({ N, yCorrelation, seed, setAppRvalue,
                         }
                     } : {
                         xaxis: {
-                            title: 'Independant Variable X',
+                            title: 'Independent Variable X',
                             dtick: 25,
                         },
                         yaxis: {
