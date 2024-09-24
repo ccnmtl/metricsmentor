@@ -8,7 +8,8 @@ import { LearningGoals } from './learningGoals';
 import { MultipleChoiceQuestion2 } from '../multipleChoiceQuestion2';
 import { authedFetch } from '../utils';
 import { dataAttr, labelIndex, takeaways2, sim2TextVariable as varText,
-    sim2TextControl as controlText } from '../dataAttr';
+    sim2TextControl as controlText, sim2Information as info
+} from '../dataAttr';
 
 const simContainer = document.querySelector('#react-root');
 const coursePk =
@@ -185,14 +186,9 @@ export const SimulationTwo = () => {
                     {...{controls, data, labelIndex}}
                     param={dataAttr[choice]}
                 />
-                <div className='container'>
-                    <div className='row'>
-                        {/* p block is dependent on dataset topic */}
-                        <p className='col-auto mx-auto'>
-                            Dataset source and information
-                        </p>
-                    </div>
-                </div>
+                {choice && <div className="container text-center">
+                    <p className="mx-auto px-5">{info[choice]}</p>
+                </div>}
             </div> {/* div class=simulation__graphspace */}
         </div> // div class=simulation
     );
