@@ -73,7 +73,7 @@ export const MultipleChoiceQuestion2 = ({isSubmitted, setIsSubmitted, takeaways,
                         </p>
                         <div className="choice-list ms-0">
                             {options.map((option, index) => (
-                                <div key={index} className="form-check mb-2">
+                                <div key={index} className="form-check">
                                     <input
                                         className="form-check-input"
                                         type='radio'
