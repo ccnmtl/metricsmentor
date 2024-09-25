@@ -248,16 +248,14 @@ export const takeaways2 = {
             'Why?',
         options: [
             '(a) Size, because it is negatively correlated with Income.',
-            <>(b) ({inlineKatex('Consumption')}), because it is highly
-                correlated with ({inlineKatex('Income')}) and
-                somewhat correlated with ({inlineKatex('Education')}).</>,
+            '(b) Consumption, because it is highly correlated with ' +
+                'Income and somewhat correlated with Education.',
             '(c) Black, because it is somewhat correlated with both ' +
                 'Income and Education.',
             '(d) Income, because it is the dependent variable.',
             '(e) Education, because it is the variable of interest.'],
-        answer: <>(b) ({inlineKatex('Consumption')}), because it is highly
-                    correlated with ({inlineKatex('Income')}) and
-                    somewhat correlated with ({inlineKatex('Education')}).</>,
+        answer: '(b) Consumption, because it is highly correlated with ' +
+            'Income and somewhat correlated with Education.',
         feedback_bad: <>Let&apos;s try again! Remember an omitted variable (OV)
             causes bias in the slope of the variable of interest
             ({inlineKatex('x_1')}), and the degree of this bias depends on (1)
