@@ -270,7 +270,7 @@ export const takeaways2 = {
             is {inlineKatex('\\text{Income}')}, and
             (2) whether the OV is also correlated with the variable of
             interest {inlineKatex('\\text{Years Of Education}')}.</>,
-        feedback_good: <>Great job! You&rsquo;ve correctly
+        feedback_good: <>Good job! You&rsquo;ve correctly
             selected {inlineKatex('\\text{Consumption}')} as the omitted
             variable in this analysis. It causes bias in the
             slope of the variable of interest {inlineKatex('x_1')}, which
@@ -331,10 +331,10 @@ export const takeaways2 = {
             'bias in the slope of the variable of interest when omitted? ' +
             'Why?',
         options: [
-            '(a) HasKids, because it is negatively correlated with Rating ' +
+            '(a) Has Kids, because it is negatively correlated with Rating ' +
                 'of Marriage.',
-            '(b) Religion, because it is highly correlated with Rating of ' +
-                'Marriage.',
+            '(b) Degree Of Religiosity, because it is highly correlated ' +
+                'with Rating of Marriage.',
             '(c) Years Married, because it is negatively correlated with ' +
                 'Rating of Marriage.',
             '(d) Years Married, because it has the highest correlation with ' +
@@ -342,18 +342,30 @@ export const takeaways2 = {
             '(e) Number Of Affairs because it is the variable of interest.'],
         answer: '(d) Years Married, because it has the highest correlation ' +
             'with Number Of Affairs and with Rating Of Marriage.',
-        feedback_bad: <>Let&rsquo;s try again! Remember an omitted variable (OV)
-            causes bias in the slope of the variable of interest
-            ({inlineKatex('x_1')}), and the degree of this bias depends on (1)
-            whether OV is “hiding” in the error (meaning that it is correlated
-            with {inlineKatex('y')}) and (2) whether the OV is correlated with
-            the variable of interest ({inlineKatex('x_1')}).</>,
-        feedback_good: <>Excellent! You&rsquo;ve correctly identified an omitted
-            variable (OV) causes bias in the slope of the variable of interest
-            ({inlineKatex('x_1')}), and the degree of this bias depends on (1)
-            whether OV is “hiding” in the error (meaning that it is correlated
-            with {inlineKatex('y')}) and (2) whether the OV is correlated with
-            the variable of interest ({inlineKatex('x_1')}).</>,
+        feedback_bad: <>That&rsquo;s not it&mdash;let&rsquo;s give it
+            another shot!
+            Remember that an omitted variable introduces bias in the
+            slope of the variable of interest {inlineKatex('x_1')}, which
+            is {inlineKatex('\\text{Rating Of Marriage}')}.
+            The degree of this bias depends on two factors:
+            (1) whether the OV is &ldquo;hidden&rdquo; in the error term,
+            meaning it&rsquo;s correlated with the dependent
+            variable {inlineKatex('y')}, which
+            is {inlineKatex('\\text{Number Of Affairs}')}, and
+            (2) whether the OV is also correlated with the variable of
+            interest {inlineKatex('\\text{Rating Of Marriage}')}.</>,
+        feedback_good: <>That&rsquo;s
+            right, {inlineKatex('\\text{Years Married}')} is the omitted
+            variable in this analysis. It causes bias in the
+            slope of the variable of interest {inlineKatex('x_1')}, which
+            is {inlineKatex('\\text{Rating Of Marriage}')}.
+            The degree of this bias hinges on two factors:
+            (1) whether the OV is &ldquo;hidden&rdquo; in the error term,
+            meaning it&rsquo;s correlated with the dependent
+            variable {inlineKatex('y')}, which
+            is {inlineKatex('\\text{Number Of Affairs}')}, and
+            (2) whether the OV is also correlated with the variable of
+            interest {inlineKatex('\\text{Rating Of Marriage}')}.</>,
     },
     campus_sim2: {
         q_id: 5,
