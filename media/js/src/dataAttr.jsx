@@ -312,9 +312,9 @@ export const takeaways2 = {
             is {inlineKatex('\\text{College GPA}')}, and
             (2) whether the OV is also correlated with the variable of
             interest {inlineKatex('\\text{High School GPA}')}.</>,
-        feedback_good: <>Excellent! You&rsquo;ve
-            identified {inlineKatex('\\text{ACT Score}')} as the omitted
-            variable in this analysis. It causes bias in the
+        feedback_good: <>Great job
+            identifying {inlineKatex('\\text{ACT Score}')} as the omitted
+            variable in this analysis! It causes bias in the
             slope of the variable of interest {inlineKatex('x_1')}, which
             is {inlineKatex('\\text{High School GPA}')}.
             The degree of this bias depends on two factors:
