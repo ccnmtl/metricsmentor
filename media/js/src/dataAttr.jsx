@@ -252,25 +252,36 @@ export const takeaways2 = {
         options: [
             '(a) Size, because it is negatively correlated with Income.',
             '(b) Consumption, because it is highly correlated with ' +
-                'Income and somewhat correlated with Education.',
+                'Income and somewhat correlated with Years Of Education.',
             '(c) Black, because it is somewhat correlated with both ' +
-                'Income and Education.',
+                'Income and Years Of Education.',
             '(d) Income, because it is the dependent variable.',
-            '(e) Education, because it is the variable of interest.'],
+            '(e) Years Of Education, because it is the variable of interest.'],
         answer: '(b) Consumption, because it is highly correlated with ' +
-            'Income and somewhat correlated with Education.',
-        feedback_bad: <>Let&rsquo;s try again! Remember an omitted variable (OV)
-            causes bias in the slope of the variable of interest
-            ({inlineKatex('x_1')}), and the degree of this bias depends on (1)
-            whether OV is “hiding” in the error (meaning that it is correlated
-            with {inlineKatex('y')}) and (2) whether the OV is correlated with
-            the variable of interest ({inlineKatex('x_1')}).</>,
-        feedback_good: <>Excellent! You&rsquo;ve correctly identified an omitted
-            variable (OV) causes bias in the slope of the variable of interest
-            ({inlineKatex('x_1')}), and the degree of this bias depends on (1)
-            whether OV is “hiding” in the error (meaning that it is correlated
-            with {inlineKatex('y')}) and (2) whether the OV is correlated with
-            the variable of interest ({inlineKatex('x_1')}).</>,
+            'Income and somewhat correlated with Years Of Education.',
+        feedback_bad: <>This answer isn&rsquo;t right, but let&rsquo;s try
+            again! Recall that an omitted variable introduces bias in the
+            slope of the variable of interest {inlineKatex('x_1')}, which
+            is {inlineKatex('\\text{Years Of Education}')}.
+            The degree of this bias depends on two factors:
+            (1) whether the OV is &ldquo;hidden&rdquo; in the error term,
+            meaning it&rsquo;s correlated with the dependent
+            variable {inlineKatex('y')}, which
+            is {inlineKatex('\\text{Income}')}, and
+            (2) whether the OV is also correlated with the variable of
+            interest {inlineKatex('\\text{Years Of Education}')}.</>,
+        feedback_good: <>Great job! You&rsquo;ve correctly
+            selected {inlineKatex('\\text{Consumption}')} as the omitted
+            variable in this analysis. It causes bias in the
+            slope of the variable of interest {inlineKatex('x_1')}, which
+            is {inlineKatex('\\text{Years Of Education}')}.
+            The degree of this bias depends on two factors:
+            (1) whether the OV is &ldquo;hidden&rdquo; in the error term,
+            meaning it&rsquo;s correlated with the dependent
+            variable {inlineKatex('y')}, which
+            is {inlineKatex('\\text{Income}')}, and
+            (2) whether the OV is also correlated with the variable of
+            interest {inlineKatex('\\text{Years Of Education}')}.</>,
     },
     gpa4: {
         q_id: 3,
