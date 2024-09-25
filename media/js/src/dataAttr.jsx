@@ -492,3 +492,16 @@ export const sim2TextControl = {
         }
     },
 };
+
+export const sim2Information = {
+    income: <><b>Source: </b> Hill, Carter R., <i>Principles of
+        Econometrics,</i> 5<sup>th</sup> ed. Wiley Publishing 2018.</>,
+    gpa4: <><b>Source: </b> Wooldridge, J.M., <i>Introductory to
+        Econometrics,</i> South-Western Cengage Learning 5<sup>th</sup> ed.
+        2012.</>,
+    affairs_sim2: <><b>Source: </b> R.C. Fair, &ldquo;A Theory of Extramarital
+        Affairs,&rdquo; <i>Journal of Political Economy</i> 1997.</>,
+    campus_sim2: <><b>Source: </b> These data were collected by Daniel Martin,
+        a former undergraduate at MSU, for a final project. The data are
+        sourced from the FBI Uniform Crime Reports for the year 1992.</>,
+};
