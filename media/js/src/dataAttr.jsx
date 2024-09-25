@@ -373,27 +373,40 @@ export const takeaways2 = {
             'bias in the slope of the variable of interest when omitted? ' +
             'Why?',
         options: [
-            '(a) Police, because it is highly correlated with Crime and ' +
-                'Total Enrollment.',
-            '(b) Private, because it is negatively correlated with Crime.',
-            '(c) Police, because it is not highly correlated with Crime and ' +
-                'Enrollment.',
-            '(d) Crime, because it is the variable of interest.',
-            '(e) Crime, because it is the dependent variable.'],
-        answer: '(a) Police, because it is highly correlated with Crime and ' +
-            'Total Enrollment.',
-        feedback_bad: <>Let&rsquo;s try again! Remember an omitted variable (OV)
-            causes bias in the slope of the variable of interest
-            ({inlineKatex('x_1')}), and the degree of this bias depends on (1)
-            whether OV is “hiding” in the error (meaning that it is correlated
-            with {inlineKatex('y')}) and (2) whether the OV is correlated with
-            the variable of interest ({inlineKatex('x_1')}).</>,
-        feedback_good: <>Excellent! You&rsquo;ve correctly identified an omitted
-            variable (OV) causes bias in the slope of the variable of interest
-            ({inlineKatex('x_1')}), and the degree of this bias depends on (1)
-            whether OV is “hiding” in the error (meaning that it is correlated
-            with {inlineKatex('y')}) and (2) whether the OV is correlated with
-            the variable of interest ({inlineKatex('x_1')}).</>,
+            '(a) Police Employed, because it is highly correlated ' +
+                'with Total Campus Crime and Total Enrollment.',
+            '(b) Private School, because it is negatively correlated with ' +
+                'Total Campus Crime.',
+            '(c) Police Employed, because it is not highly correlated with ' +
+                'Total Campus Crime and Total Enrollment.',
+            '(d) Total Campus Crime, because it is the variable of interest.',
+            '(e) Total Campus Crime, because it is the dependent variable.'],
+        answer: '(a) Police Employed, because it is highly correlated ' +
+            'with Total Campus Crime and Total Enrollment.',
+        feedback_bad: <>This one&rsquo;s incorrect. Let&rsquo;s give it
+            another try.
+            Note that an omitted variable introduces bias in the
+            slope of the variable of interest {inlineKatex('x_1')}, which
+            is {inlineKatex('\\text{Total Enrollment}')}.
+            The degree of this bias depends on two factors:
+            (1) whether the OV is &ldquo;hidden&rdquo; in the error term,
+            meaning it&rsquo;s correlated with the dependent
+            variable {inlineKatex('y')}, which
+            is {inlineKatex('\\text{Total Campus Crimes}')}, and
+            (2) whether the OV is also correlated with the variable of
+            interest {inlineKatex('\\text{Total Enrollment}')}.</>,
+        feedback_good: <>Nicely done, you&rsquo;ve correctly
+            identified {inlineKatex('\\text{Police Employed On Campus}')} as
+            the omitted variable in this analysis! It causes bias in the
+            slope of the variable of interest {inlineKatex('x_1')}, which
+            is {inlineKatex('\\text{Total Enrollment}')}.
+            The degree of this bias depends on two factors:
+            (1) whether the OV is &ldquo;hidden&rdquo; in the error term,
+            meaning it&rsquo;s correlated with the dependent
+            variable {inlineKatex('y')}, which
+            is {inlineKatex('\\text{Total Campus Crimes}')}, and
+            (2) whether the OV is also correlated with the variable of
+            interest {inlineKatex('\\text{Total Enrollment}')}.</>,
     }
 };
 
