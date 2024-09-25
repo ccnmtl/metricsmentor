@@ -114,6 +114,7 @@ export const SimulationTwo = () => {
 
     const handleContinue = () => {
         setIsComplete({...isComplete, [choice]: true});
+        setChoice(null);
         setData(null);
         setIsSubmitted(false);
     };
