@@ -290,28 +290,40 @@ export const takeaways2 = {
             'Why?',
         options: [
             '(a) Classes Skipped Weekly, because it is negatively correlated ' +
-                'with College ACT.',
+                'with ACT Score.',
             '(b) Lives On Campus, because it is a binary variable.',
-            '(c) ACT, because it has the highest correlation with College ' +
-                'GPA and High School GPA.',
+            '(c) ACT Score, because it has the highest correlation with ' +
+                'College GPA and High School GPA.',
             '(d) Significant Other, because it has the lowest correlation ' +
                 'with College GPA and High School GPA.',
             '(e) Classes Skipped Weekly, because it has some correlation ' +
                 'with College GPA and low correlation with High School GPA.'],
-        answer: '(c) ACT, because it has the highest correlation with ' +
+        answer: '(c) ACT Score, because it has the highest correlation with ' +
             'College GPA and High School GPA.',
-        feedback_bad: <>Let&rsquo;s try again! Remember an omitted variable (OV)
-            causes bias in the slope of the variable of interest
-            ({inlineKatex('x_1')}), and the degree of this bias depends on (1)
-            whether OV is “hiding” in the error (meaning that it is correlated
-            with {inlineKatex('y')}) and (2) whether the OV is correlated with
-            the variable of interest ({inlineKatex('x_1')}).</>,
-        feedback_good: <>Excellent! You&rsquo;ve correctly identified an omitted
-            variable (OV) causes bias in the slope of the variable of interest
-            ({inlineKatex('x_1')}), and the degree of this bias depends on (1)
-            whether OV is “hiding” in the error (meaning that it is correlated
-            with {inlineKatex('y')}) and (2) whether the OV is correlated with
-            the variable of interest ({inlineKatex('x_1')}).</>,
+        feedback_bad: <>This one&rsquo;s off, but don&rsquo;t
+            worry&mdash;let&rsquo;s choose again!
+            Remember that an omitted variable introduces bias in the
+            slope of the variable of interest {inlineKatex('x_1')}, which
+            is {inlineKatex('\\text{High School GPA}')}.
+            The degree of this bias depends on two factors:
+            (1) whether the OV is &ldquo;hidden&rdquo; in the error term,
+            meaning it&rsquo;s correlated with the dependent
+            variable {inlineKatex('y')}, which
+            is {inlineKatex('\\text{College GPA}')}, and
+            (2) whether the OV is also correlated with the variable of
+            interest {inlineKatex('\\text{High School GPA}')}.</>,
+        feedback_good: <>Excellent! You&rsquo;ve
+            identified {inlineKatex('\\text{ACT Score}')} as the omitted
+            variable in this analysis. It causes bias in the
+            slope of the variable of interest {inlineKatex('x_1')}, which
+            is {inlineKatex('\\text{High School GPA}')}.
+            The degree of this bias depends on two factors:
+            (1) whether the OV is &ldquo;hidden&rdquo; in the error term,
+            meaning it&rsquo;s correlated with the dependent
+            variable {inlineKatex('y')}, which
+            is {inlineKatex('\\text{College GPA}')}, and
+            (2) whether the OV is also correlated with the variable of
+            interest {inlineKatex('\\text{High School GPA}')}.</>,
     },
     affairs_sim2: {
         q_id: 4,
