@@ -101,7 +101,6 @@ export const deleteQuiz = async(submissionId) => {
     }
 };
 
-
 /**
  * Standardized function for rendering inline LaTeX.
  * @param {string} tex
@@ -109,7 +108,6 @@ export const deleteQuiz = async(submissionId) => {
  */
 export const inlineKatex = (tex) =>
     <Katex className="katex-inline" tex={tex} />;
-
 
 /**
  * Formatted output for the formula text.
@@ -128,3 +126,22 @@ export const formulaText = (content = { title: '', body: [] }, i) => (
         </div>
     </>
 );
+
+/**
+ * Utility function to extract plain text from JSX or strings.
+ * @param {React.ReactNode} element - The JSX element or string.
+ * @returns {string} - The extracted plain text content.
+ */
+export const extractTextContent = (element) => {
+    if (typeof element === 'string') return element;
+
+    return React.Children.toArray(element)
+        .map(child => {
+            if (typeof child === 'string')
+                return child;
+            if (React.isValidElement(child))
+                return extractTextContent(child.props.children);
+            return '';
+        })
+        .join('');
+};
