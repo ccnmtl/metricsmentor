@@ -5,7 +5,7 @@ import { inlineKatex } from '../utils';
 
 
 export const LearningGoals = ({
-    choice, handleChoice, isComplete
+    choice, handleChoice, isComplete, checkComplete
 }) => {
     return (
         <div>
@@ -20,6 +20,11 @@ export const LearningGoals = ({
                 examine four datasets to explore how different omitted
                 variables contribute to OVB to varying degrees.
             </p>
+            <p className="text-center"><strong className=
+                {`${checkComplete() > 1 ? ' text-success' : ''}`}
+            >
+                {Math.min(checkComplete(), 2)}/2 required datasets completed.
+            </strong></p>
             <p>
                 Let&rsquo;s choose a dataset for this analysis:
             </p>
@@ -68,6 +73,7 @@ export const LearningGoals = ({
 
 LearningGoals.propTypes = {
     choice: PropTypes.string,
+    checkComplete: PropTypes.func.isRequired,
     handleChoice: PropTypes.func.isRequired,
     isComplete: PropTypes.object.isRequired,
 };

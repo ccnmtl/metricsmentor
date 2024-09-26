@@ -5,21 +5,23 @@ import { saveAnswer } from './utils';
 
 export const MultipleChoiceQuestion2 = ({isSubmitted, setIsSubmitted, takeaways,
     handleContinue, checkComplete, handleStartOver, submissionId,
-    createSubmission, coursePk }) => {
+    createSubmission, coursePk, nextStep, setNextStep }) => {
 
     const [selected, setSelected] = useState({});
     const [results, setResults] = useState({});
-    const [nextStep, setNextStep] = useState(false);
 
     const handleOptionSelect = (topic, option) => {
         setSelected({...selected, [topic]: option});
     };
 
     const asyncSave = async function() {
-        for (let topic in results) {
-            await saveAnswer(
-                submissionId, takeaways[topic].q_id, 'multiple-choice',
-                selected[topic], results[topic], {});
+        if (Object.values(results).length > 0) {
+            for (let topic in results) {
+                console.log('Saving', topic, selected[topic], results[topic]);
+                await saveAnswer(
+                    submissionId, takeaways[topic].q_id, 'multiple-choice',
+                    selected[topic], results[topic], {});
+            }
         }
     };
 
@@ -30,7 +32,7 @@ export const MultipleChoiceQuestion2 = ({isSubmitted, setIsSubmitted, takeaways,
             correct[topic] = $(`input[name="${topic}-options"]:checked`)
                 .val() === takeaways[topic].answer;
         }
-        setResults({...results, ...correct});
+        setResults({...correct});
         if (!submissionId) {
             createSubmission(() => asyncSave());
         } else {
@@ -54,16 +56,18 @@ export const MultipleChoiceQuestion2 = ({isSubmitted, setIsSubmitted, takeaways,
         }
     };
 
-    const isDone = isSubmitted && nextStep && checkComplete() > 0;
+    const isDone = isSubmitted && nextStep && ((checkComplete() > 0 &&
+        Object.values(results).length > 1) || checkComplete() > 1);
 
     useEffect(() => {
         const result = Object.values(results);
         setNextStep(result.length > 0 && !result.includes(false));
+        console.log('Complete', checkComplete());
+        console.log('Results', results);
     }, [results]);
 
     return (
-        <div className="simulation__step-content container"
-        >
+        <>
             {Object.entries(takeaways)
                 .map(([topic, {prompt, options, answer, feedback_bad,
                     feedback_good}], i) => (
@@ -104,30 +108,31 @@ export const MultipleChoiceQuestion2 = ({isSubmitted, setIsSubmitted, takeaways,
                     Submit &raquo;
                 </button>
             }
-            {isDone &&
-                <a className="btn btn-sm btn-success mt-3" role="button"
-                    href={`/course/${coursePk}/`}
-                >
-                    I&rsquo;m Done! &raquo;
-                </a>
-            }
-            {nextStep &&
-                <button className="btn btn-sm btn-success mt-3"
-                    type='submit' onClick={handleContinue}
-                >
-                    {checkComplete() < 1 ?
-                        'Continue »' : 'Try another dataset »'}
-                </button>
-            }
-            {(isDone || checkComplete() > 1) &&
-
-                <button className="btn btn-sm btn-success mt-3"
-                    onClick={handleStartOver}
-                >
-                    Start Over
-                </button>
-            }
-        </div>);
+            {isSubmitted && <>
+                {isDone &&
+                    <a className="btn btn-sm btn-success mt-3" role="button"
+                        href={`/course/${coursePk}/`}
+                    >
+                        I&rsquo;m Done! &raquo;
+                    </a>
+                }
+                {nextStep &&
+                    <button className="btn btn-sm btn-success mt-3"
+                        type='submit' onClick={handleContinue}
+                    >
+                        {isDone ?
+                            'Try another dataset »' : 'Continue »'}
+                    </button>
+                }
+                {isDone &&
+                    <button className="btn btn-sm btn-success mt-3"
+                        onClick={handleStartOver}
+                    >
+                        Start Over
+                    </button>
+                }
+            </>}
+        </>);
 };
 
 MultipleChoiceQuestion2.propTypes = {
@@ -141,4 +146,6 @@ MultipleChoiceQuestion2.propTypes = {
     createSubmission: PropTypes.func.isRequired,
     submissionId: PropTypes.number,
     coursePk: PropTypes.number.isRequired,
+    nextStep: PropTypes.bool.isRequired,
+    setNextStep: PropTypes.func.isRequired,
 };

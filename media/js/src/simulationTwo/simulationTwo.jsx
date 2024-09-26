@@ -27,6 +27,7 @@ export const SimulationTwo = () => {
     const [isSubmitted, setIsSubmitted] = useState(false);
     const [isComplete, setIsComplete] = useState(freshComplete());
     const [submissionId, setSubmissionId] = useState();
+    const [nextStep, setNextStep] = useState(false);
 
     const createSubmission = async(followUp=()=>true) => {
         // Define the data to be saved based on the plot type
@@ -57,7 +58,11 @@ export const SimulationTwo = () => {
             });
     };
 
-    const handleChoice = (e) => { setChoice(e.target.value); };
+    const handleChoice = (e) => {
+        setIsSubmitted(false);
+        setNextStep(false);
+        setChoice(e.target.value);
+    };
 
     const handleControls = (e) => {
         setControls({...controls, [e.target.name]: e.target.checked});
@@ -93,12 +98,12 @@ export const SimulationTwo = () => {
         // If the user has completed the first question
         // for the current dataset, show the second with a
         // general question.
-        if (checkComplete() === 1)
+        if (checkComplete() === 1 && !isComplete[choice])
         {
             return <MultipleChoiceQuestion2
                 {...{choice, isSubmitted, setIsSubmitted, handleStartOver,
                     handleContinue, checkComplete, submissionId,
-                    createSubmission, coursePk}}
+                    createSubmission, coursePk, nextStep, setNextStep}}
                 takeaways={{[choice]: takeaways2[choice],
                     'general': takeaways2.general}}
             />;
@@ -106,7 +111,7 @@ export const SimulationTwo = () => {
             return <MultipleChoiceQuestion2
                 {...{choice, isSubmitted, setIsSubmitted, handleStartOver,
                     handleContinue, checkComplete, submissionId,
-                    createSubmission, coursePk}}
+                    createSubmission, coursePk, nextStep, setNextStep}}
                 takeaways={{[choice]: takeaways2[choice]}}
             />;
         }
@@ -139,7 +144,7 @@ export const SimulationTwo = () => {
                     {
                         title: 'Learning Goals',
                         body: <LearningGoals id="learning-goals" {...{choice,
-                            handleChoice, isComplete}} />
+                            checkComplete, handleChoice, isComplete}} />
                     },
                 ].map((step, i) =>
                     <Step key={i} header={step.header} title={step.title}>
@@ -177,6 +182,16 @@ export const SimulationTwo = () => {
                                     Takeaway Questions
                                 </h2>
                             </header>
+                            {isComplete[choice] &&
+                            <div className="simulation__step-content container">
+                                <p className="text-center text-success">
+                                    You have already completed this question.
+                                    You may answer it again, but you need to
+                                    correctly answer the takeaways in two
+                                    different datasets to complete the
+                                    simulation.
+                                </p>
+                            </div>}
                             {getQuestions()}
                         </div>
                     </div> {/* div class=simulation__step-container */}
