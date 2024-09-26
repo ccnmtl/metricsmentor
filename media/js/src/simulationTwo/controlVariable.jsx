@@ -67,7 +67,11 @@ export const ControlVariable = ({
                             className={'form-check dataset-variable-item'}
                         >
                             <label htmlFor={`x${i+2}`}
-                                className="form-check-label">
+                                className={`form-check-label ${
+                                    controls[dType] === true
+                                        ? 'text-primary'
+                                        : ''
+                                }`}>
                                 {inlineKatex(`x_1\\ and\\ x_${i+2} 
                                     \\text{ (${labelIndex[dType]}})`)}
                             </label>
