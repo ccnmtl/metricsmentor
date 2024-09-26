@@ -186,26 +186,14 @@ export const ScatterPlot = ({ N, yCorrelation, seed, setAppRvalue,
                             xaxis: {
                                 title: 'X1',
                                 dtick: 25,
-                                range: [Math.min(...data.map(
-                                    point => point.x)),
-                                Math.max(...data.map(
-                                    point => point.x))]
                             },
                             yaxis: {
                                 title: 'Y',
                                 dtick: 25,
-                                range: [Math.min(...data.map(
-                                    point => point.y)) - 10,
-                                Math.max(...data.map(
-                                    point => point.y)) + 10]
                             },
                             zaxis: {
                                 title: 'X2',
                                 dtick: 25,
-                                range: [Math.min(...data.map(
-                                    point => point.z)),
-                                Math.max(...data.map(
-                                    point => point.z))]
                             }
                         }
                     } : {
