@@ -127,8 +127,8 @@ export const ControlVariable = ({
                 })}
             </div>
             <p className="mt-3">
-                The extent of bias in {inlineKatex('\\hat{\\beta_1}')} depends
-                on
+                The extent of bias in {inlineKatex('\\hat{\\beta_1}')}
+                depends on
             </p>
             <ul>
                 <li className="mb-2">the strength of the correlation between
