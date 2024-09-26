@@ -44,21 +44,22 @@ export const Dashboard = ({ isSuperUser, isFaculty}) => {
                             </Link>
                         </div>
                     )}
-                    <div
-                        className="col-lg-5
+                    {(isSuperUser || isFaculty) && (
+                        <div
+                            className="col-lg-5
                             p-4 mx-0
                             mx-lg-3 my-3
                             mx-lg-0
                             simulation-card">
-                        <h2 className="h2-primary">
-                            <span className="h2-secondary d-block"
-                                data-cy="sim-2">
+                            <h2 className="h2-primary">
+                                <span className="h2-secondary d-block"
+                                    data-cy="sim-2">
                                 Simulation 2</span>
-                            <span className="h2-title d-block">
-                                {'Omitted Variable Bias'}
-                            </span>
-                        </h2>
-                        <p>
+                                <span className="h2-title d-block">
+                                    {'Omitted Variable Bias'}
+                                </span>
+                            </h2>
+                            <p>
                             This simulation will address the first
                             endogeneity problem in regression analysis:
                             omitted variable bias (OVB). Overlooking certain
@@ -68,14 +69,15 @@ export const Dashboard = ({ isSuperUser, isFaculty}) => {
                             learn how to detect and correct for OVB in your
                             econometric analysis, ensuring that your findings
                             are both reliable and valid.
-                        </p>
+                            </p>
 
-                        <Link to={`/course/${courseId}/simulations/2/`}
-                            className="btn btn-success my-3"
-                            data-cy="sim-2-link">
+                            <Link to={`/course/${courseId}/simulations/2/`}
+                                className="btn btn-success my-3"
+                                data-cy="sim-2-link">
                             Begin &raquo;
-                        </Link>
-                    </div>
+                            </Link>
+                        </div>
+                    )}
                 </div>
             </section>
             <Footer />
