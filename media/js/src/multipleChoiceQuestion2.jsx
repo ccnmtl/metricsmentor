@@ -43,13 +43,13 @@ export const MultipleChoiceQuestion2 = ({isSubmitted, setIsSubmitted, takeaways,
     const feedback = function(topic, feedback_bad, feedback_good) {
         if (results[topic] === true) {
             return (
-                <div className="form-check text-success mt-2 mb-4" role="alert">
+                <div className="form-check text-success mt-3 mb-3" role="alert">
                     {feedback_good}
                 </div>
             );
         } else if (results[topic] === false) {
             return (
-                <div className="form-check text-danger mt-2 mb-4" role="alert">
+                <div className="form-check text-danger mt-3 mb-3" role="alert">
                     {feedback_bad}
                 </div>
             );
@@ -72,7 +72,7 @@ export const MultipleChoiceQuestion2 = ({isSubmitted, setIsSubmitted, takeaways,
                 .map(([topic, {prompt, options, answer, feedback_bad,
                     feedback_good}], i) => (
                     <div key={i}>
-                        <p className="mb-3">
+                        <p className={`mb-3 ${i > 0 ? 'mt-5' : ''}`}>
                             {prompt}
                         </p>
                         <div className="choice-list ms-0">
@@ -109,15 +109,8 @@ export const MultipleChoiceQuestion2 = ({isSubmitted, setIsSubmitted, takeaways,
                 </button>
             }
             {isSubmitted && <>
-                {isDone &&
-                    <a className="btn btn-sm btn-success mt-3" role="button"
-                        href={`/course/${coursePk}/`}
-                    >
-                        I&rsquo;m Done! &raquo;
-                    </a>
-                }
                 {nextStep &&
-                    <button className="btn btn-sm btn-success mt-3"
+                    <button className="btn btn-sm btn-success me-3"
                         type='submit' onClick={handleContinue}
                     >
                         {isDone ?
@@ -125,7 +118,14 @@ export const MultipleChoiceQuestion2 = ({isSubmitted, setIsSubmitted, takeaways,
                     </button>
                 }
                 {isDone &&
-                    <button className="btn btn-sm btn-success mt-3"
+                    <a className="btn btn-sm btn-success me-3" role="button"
+                        href={`/course/${coursePk}/`}
+                    >
+                        I&rsquo;m Done! &raquo;
+                    </a>
+                }
+                {isDone &&
+                    <button className="btn btn-sm btn-warning"
                         onClick={handleStartOver}
                     >
                         Start Over
