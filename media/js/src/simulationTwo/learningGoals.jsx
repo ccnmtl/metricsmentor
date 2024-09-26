@@ -20,11 +20,12 @@ export const LearningGoals = ({
                 examine four datasets to explore how different omitted
                 variables contribute to OVB to varying degrees.
             </p>
-            <p className="text-center"><strong className=
+            <p>Be sure to explore at least <strong>two</strong> datasets for
+                this simulation. You&rsquo;ve completed <strong className=
                 {`${checkComplete() > 1 ? ' text-success' : ''}`}
             >
-                {Math.min(checkComplete(), 2)}/2 required datasets completed.
-            </strong></p>
+                {Math.min(checkComplete(), 2)} of 2</strong>.
+            </p>
             <p>
                 Let&rsquo;s choose a dataset for this analysis:
             </p>

@@ -182,17 +182,17 @@ export const SimulationTwo = () => {
                                     Takeaway Questions
                                 </h2>
                             </header>
-                            {isComplete[choice] &&
-                            <div className="simulation__step-content container">
-                                <p className="text-center text-success">
-                                    You have already completed this question.
-                                    You may answer it again, but you need to
-                                    correctly answer the takeaways in two
-                                    different datasets to complete the
-                                    simulation.
-                                </p>
-                            </div>}
-                            {getQuestions()}
+                            <div className="simulation__step-content">
+                                {isComplete[choice] &&
+                                    <p className="text-success">
+                                        You&rsquo;ve analyzed this dataset.
+                                        You can revisit it, but
+                                        focus on a dataset that you
+                                        haven&rsquo;t examined.
+                                    </p>
+                                }
+                                {getQuestions()}
+                            </div>
                         </div>
                     </div> {/* div class=simulation__step-container */}
                 </>}
