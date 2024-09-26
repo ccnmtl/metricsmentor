@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
-import { saveAnswer } from './utils';
+import { saveAnswer, extractTextContent } from './utils';
 
 export const MultipleChoiceQuestion = ({
     isSubmitted, setIsSubmitted, submissionId, questionNumber,
@@ -17,22 +17,6 @@ export const MultipleChoiceQuestion = ({
             [array[i], array[j]] = [array[j], array[i]];
         }
         return array;
-    };
-
-    // Utility function to extract plain text from JSX or strings
-    const extractTextContent = (element) => {
-        if (typeof element === 'string') return element;
-
-        // Recursively extract text content from React elements
-        return React.Children.toArray(element)
-            .map(child => {
-                if (typeof child === 'string')
-                    return child;
-                if (React.isValidElement(child))
-                    return extractTextContent(child.props.children);
-                return '';
-            })
-            .join('');
     };
 
     const handleOptionSelect = (option) => {
