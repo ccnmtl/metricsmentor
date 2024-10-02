@@ -125,12 +125,12 @@ export const ScatterPlot2 = ({controls, data, labelIndex, param}) => {
                         scaleratio: 1,
                         minallowed: 0,
                     },
-                    dragmode: 'pan',
+                    dragmode: false,
                 }}
                 useResizeHandler={true}
                 style={{ height: '88%' }}
                 config={{
-                    scrollZoom: true,
+                    scrollZoom: false,
                     displayModeBar: true,
                     modeBarButtonsToRemove: [
                         'toImage', 'resetCameraLastSave3d', 'select2d',
