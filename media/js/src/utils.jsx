@@ -115,7 +115,7 @@ export const inlineKatex = (tex) =>
  * @returns React.JSX.Element
  */
 export const formulaText = (content = { title: '', body: [] }, i) => (
-    <>
+    <div key={i}>
         {content.title && <h2>{content.title}:</h2>}
         <div className="sub-content">
             {content.body.map((eq, i) => (
@@ -124,7 +124,7 @@ export const formulaText = (content = { title: '', body: [] }, i) => (
                 </div>
             ))}
         </div>
-    </>
+    </div>
 );
 
 /**
