@@ -17,7 +17,6 @@ export const MultipleChoiceQuestion2 = ({isSubmitted, setIsSubmitted, takeaways,
     const asyncSave = async function() {
         if (Object.values(results).length > 0) {
             for (let topic in results) {
-                console.log('Saving', topic, selected[topic], results[topic]);
                 await saveAnswer(
                     submissionId, takeaways[topic].q_id, 'multiple-choice',
                     selected[topic], results[topic], {});
@@ -62,8 +61,6 @@ export const MultipleChoiceQuestion2 = ({isSubmitted, setIsSubmitted, takeaways,
     useEffect(() => {
         const result = Object.values(results);
         setNextStep(result.length > 0 && !result.includes(false));
-        console.log('Complete', checkComplete());
-        console.log('Results', results);
     }, [results]);
 
     return (
