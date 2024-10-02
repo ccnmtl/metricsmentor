@@ -1,8 +1,8 @@
 from django.test import TestCase
 from django.urls import reverse
-import json
 from metricsmentor.main.tests.factories import CourseTestMixin
 from metricsmentor.main.models import QuizSubmission, Answer
+import json
 
 
 class BasicTest(TestCase):
@@ -14,6 +14,80 @@ class BasicTest(TestCase):
         response = self.client.get("/smoketest/")
         self.assertEqual(response.status_code, 200)
         self.assertContains(response, 'PASS')
+
+
+class CourseDetailViewTest(CourseTestMixin, TestCase):
+    def test_get_course_detail_view(self):
+        self.setup_course()
+        self.client.force_login(self.superuser)
+        response = self.client.get(reverse('course-detail-view',
+                                           kwargs={'pk':
+                                                   self.registrar_course.pk}))
+        self.assertEqual(response.status_code, 302)
+        self.assertRedirects(response,
+                             reverse('simulation-dashboard-view',
+                                     kwargs={'pk':
+                                             self.registrar_course.pk}))
+
+
+class SimulationDashboardViewTest(CourseTestMixin, TestCase):
+    def test_get_simulation_dashboard_view(self):
+        self.setup_course()
+        self.client.force_login(self.superuser)
+        response = self.client.get(reverse('simulation-dashboard-view',
+                                           kwargs={'pk':
+                                                   self.registrar_course.pk}))
+        self.assertEqual(response.status_code, 200)
+        self.assertIn('course', response.context)
+        self.assertIn('user', response.context)
+        self.assertIn('is_faculty', response.context)
+
+
+class CalculateRegressionTest(TestCase):
+    def test_post_calculate_regression(self):
+        data = {
+            'x_values': [1, 2, 3],
+            'y_values': [2, 4, 6]
+        }
+        response = self.client.post(reverse('calculate_regression'),
+                                    data=json.dumps(data),
+                                    content_type='application/json')
+        self.assertEqual(response.status_code, 200)
+
+
+class CalculateMultipleRegressionTest(TestCase):
+    def test_post_calculate_multiple_regression(self):
+        data = {
+            'x1_values': [1, 2, 3],
+            'x2_values': [2, 3, 4],
+            'y_values': [3, 5, 7]
+        }
+        response = self.client.post(reverse('calculate_multiple_regression'),
+                                    data=json.dumps(data),
+                                    content_type='application/json')
+        self.assertEqual(response.status_code, 200)
+
+
+class CalculatePValueTest(TestCase):
+    def test_post_calculate_pvalue(self):
+        data = {
+            'tvalue': 2.5
+        }
+        response = self.client.post(reverse('calculate_pvalue'),
+                                    data=json.dumps(data),
+                                    content_type='application/json')
+        self.assertEqual(response.status_code, 200)
+
+
+class CalculateCriticalValueTest(TestCase):
+    def test_post_calculate_critical_value(self):
+        data = {
+            'alpha': 0.05
+        }
+        response = self.client.post(reverse('calculate_critical_value'),
+                                    data=json.dumps(data),
+                                    content_type='application/json')
+        self.assertEqual(response.status_code, 200)
 
 
 class CreateSubmissionViewTest(CourseTestMixin, TestCase):
