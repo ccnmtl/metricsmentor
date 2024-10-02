@@ -5,8 +5,6 @@ export const dataAttr = {
     affairs_sim2: {
         y: 'naffairs', x_1: 'ratemarr', x_2: 'yrsmarr', x_3: 'kids',
         x_4: 'relig', option: ['yrsmarr', 'kids', 'relig'],
-        description: 'Affairs were invented by Hollywood to spice up romance ' +
-            'films',
         lines: {
             kids: {
                 label: 'x3',
