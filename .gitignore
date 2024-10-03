@@ -67,3 +67,4 @@ docker-compose-local.yml
 
 # Local development
 local_dev
+launch.json
