@@ -3,9 +3,7 @@ import Plot from 'react-plotly.js';
 import seedrandom from 'seedrandom';
 import axios from 'axios';
 import PropTypes from 'prop-types';
-// import { saveAs } from 'file-saver';
 
-// const isSuperUser = window.MetricsMentor.currentUser.is_superuser;
 
 export const ScatterPlot = ({ N, yCorrelation, seed, setAppRvalue,
     setSlope, setIntercept, setStderror, plotType, setSlopes,
@@ -122,25 +120,6 @@ export const ScatterPlot = ({ N, yCorrelation, seed, setAppRvalue,
         }
     };
 
-    // const exportCSV = () => {
-    //     let headers = ['x', 'y'];
-    //     if (plotType === '3d') {
-    //         headers.push('z');
-    //     }
-
-    //     const dataRows = data.map(point => {
-    //         let row = [point.x, point.y];
-    //         if (plotType === '3d') {
-    //             row.push(point.z);
-    //         }
-    //         return row.join(',');
-    //     });
-
-    //     const csv = [headers.join(','), ...dataRows].join('\n');
-    //     const blob = new Blob([csv], { type: 'text/csv;charset=utf-8' });
-    //     saveAs(blob, 'scatterplot_data.csv');
-    // };
-
     useEffect(() => {
         if (N) {
             setData(generateData());
@@ -219,12 +198,6 @@ export const ScatterPlot = ({ N, yCorrelation, seed, setAppRvalue,
                         'lasso2d', 'autoScale2d'],
                 }}
             />
-            {/* {isSuperUser && (
-                <div className="text-end me-5">
-                    <button className="btn btn-sm btn-secondary"
-                        onClick={exportCSV}>Export CSV</button>
-                </div>
-            )} */}
         </>
     );
 };

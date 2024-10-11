@@ -11,8 +11,6 @@ import { CriticalValueModal } from './modalCV';
 import { GlossaryModal } from './modalGlossary';
 
 
-// const CURRENT_USER = window.MetricsMentor.currentUser.id;
-// const isSuperUser = window.MetricsMentor.currentUser.is_superuser;
 const simContainer = document.querySelector('#react-root');
 const coursePk =
     simContainer ? Number(simContainer.dataset.course) : '';
