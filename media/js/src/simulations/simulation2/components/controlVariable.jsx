@@ -1,8 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { formulaText, inlineKatex } from '../utils';
+import { formulaText, inlineKatex } from '../../../utils/utils';
 import { labelIndex } from '../dataAttr';
-import { Katex } from '../katexComponent';
+import { Katex } from '../../../utils/katexComponent';
 
 
 export const ControlVariable = ({

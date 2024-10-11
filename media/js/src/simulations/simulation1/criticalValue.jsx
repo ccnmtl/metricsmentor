@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
-import { Katex } from '../katexComponent';
-import { saveAnswer } from '../utils';
+import { Katex } from '../../utils/katexComponent';
+import { saveAnswer } from '../../utils/utils';
 
 export const CriticalValue = ({
     hypothesisTest2validate, tvalue, n, alpha, hypothesisTest, hypothesis,

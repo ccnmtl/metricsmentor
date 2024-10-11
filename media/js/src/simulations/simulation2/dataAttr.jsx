@@ -1,5 +1,5 @@
 import React from 'react';
-import { inlineKatex } from './utils';
+import { inlineKatex } from '../../utils/utils';
 
 export const dataAttr = {
     affairs_sim2: {

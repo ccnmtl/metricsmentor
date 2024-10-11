@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
-import { Katex } from '../katexComponent';
-import { saveAnswer } from '../utils';
+import { Katex } from '../../utils/katexComponent';
+import { saveAnswer } from '../../utils/utils';
 import PropTypes from 'prop-types';
 
 

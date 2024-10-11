@@ -1,5 +1,5 @@
 import React from 'react';
-import { Katex } from '../katexComponent';
+import { Katex } from '../../utils/katexComponent';
 import PropTypes from 'prop-types';
 
 export const GraphCoefficients = ({

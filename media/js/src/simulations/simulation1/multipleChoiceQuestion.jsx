@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
-import { saveAnswer, extractTextContent } from './utils';
+import { saveAnswer, extractTextContent } from './../../utils/utils';
 
 export const MultipleChoiceQuestion = ({
     isSubmitted, setIsSubmitted, submissionId, questionNumber,

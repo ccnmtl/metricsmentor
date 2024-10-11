@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Route, Routes  } from 'react-router-dom';
-import { Dashboard } from './dashboard';
-import { SimulationOne } from './simulationOne/simulationOne';
-import { SimulationTwo } from './simulationTwo/simulationTwo';
+import { Dashboard } from './containers/dashboard';
+import { SimulationOne} from './simulations/simulation1/simulationOne';
+import { 
+    SimulationTwo 
+} from './simulations/simulation2/components/simulationTwo';
 
 const isSuperUser = window.MetricsMentor.currentUser.is_superuser;
 
