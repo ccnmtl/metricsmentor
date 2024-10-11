@@ -78,6 +78,7 @@ COURSEAFFILS_COURSESTRING_MAPPER = CourseStringMapper
 
 
 if 'integrationserver' in sys.argv:
+    ENVIRONMENT = 'testing'
     SESSION_COOKIE_SECURE = False
     CSRF_COOKIE_SECURE = False
     PASSWORD_HASHERS = (
