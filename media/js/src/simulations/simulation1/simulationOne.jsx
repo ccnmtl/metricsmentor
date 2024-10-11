@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { ScatterPlot } from './scatterPlot';
-import { Katex } from '../katexComponent';
-import { authedFetch } from '../utils';
+import { Katex } from '../../utils/katexComponent';
+import { authedFetch } from '../../utils/utils';
 import { SimulationOneQuiz } from './simulationOneQuiz';
 import { SimIntro } from './simulationIntro';
 import { GraphCoefficients } from './graphCoefficientsSection';

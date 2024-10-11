@@ -1,6 +1,7 @@
 
 import { dataAttr, labelIndex, takeaways2, sim2TextVariable as varText,
-    sim2TextControl as controlText, sim2Information as info } from './dataAttr';
+    sim2TextControl as controlText,
+    sim2Information as info } from '../dataAttr';
 
 describe('Simulation 2 Object types', () => {
     test('dataAttr object is defined', () => {

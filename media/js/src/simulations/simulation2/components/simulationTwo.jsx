@@ -2,11 +2,11 @@ import React, { useState, useEffect } from 'react';
 import { ScatterPlot2 } from './scatterPlot2';
 import { Variables } from './variables';
 import { ControlVariable } from './controlVariable';
-import DATASETS from '../../../../json/datasets.json';
-import { Step } from '../step';
+import DATASETS from '../datasets.json';
+import { Step } from '../../../step.jsx';
 import { LearningGoals } from './learningGoals';
-import { MultipleChoiceQuestion2 } from '../multipleChoiceQuestion2';
-import { authedFetch } from '../utils';
+import { MultipleChoiceQuestion2 } from './multipleChoiceQuestion2';
+import { authedFetch } from '../../../utils/utils.jsx';
 import { dataAttr, labelIndex, takeaways2, sim2TextVariable as varText,
     sim2TextControl as controlText, sim2Information as info
 } from '../dataAttr';

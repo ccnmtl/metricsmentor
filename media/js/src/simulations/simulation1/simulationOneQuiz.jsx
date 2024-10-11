@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import { Katex } from '../katexComponent';
+import { Katex } from '../../utils/katexComponent';
 import { HypothesisTest } from './hypothesisTest';
-import { MultipleChoiceQuestion } from '../multipleChoiceQuestion';
+import { MultipleChoiceQuestion } from './multipleChoiceQuestion';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 

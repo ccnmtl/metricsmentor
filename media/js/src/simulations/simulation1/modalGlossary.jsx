@@ -1,5 +1,5 @@
 import React from 'react';
-import { Katex } from '../katexComponent';
+import { Katex } from '../../utils/katexComponent';
 
 export const STATIC_URL = window.MetricsMentor.staticUrl;
 

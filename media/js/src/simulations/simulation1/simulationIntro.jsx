@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { Katex } from '../katexComponent';
+import { Katex } from '../../utils/katexComponent';
+import { GlossaryModal } from './modalGlossary';
 
 export const STATIC_URL = window.MetricsMentor.staticUrl;
 
@@ -38,12 +39,7 @@ export const SimIntro = ({plotType}) => {
                             This glossary will help you review
                             the key terms used here.
                         </p>
-                        <button
-                            className="btn btn-sm btn-primary"
-                            data-bs-toggle="modal"
-                            data-bs-target="#glossaryModal">
-                        Glossary
-                        </button>
+                        <GlossaryModal />
                     </div>
                 </div>
             </div>
