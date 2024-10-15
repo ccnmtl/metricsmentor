@@ -21,7 +21,6 @@
 //     it('Graph Seeding', () => {
 //         cy.get('h2.h2-primary')
 //             .should('contain', 'Graph seeding');
-//         // cy.get('label input[value="seedString"]').should('exist');
 //     });
 //     it('Graph Coefficients', () => {
 //         cy.get('h2.h2-primary')

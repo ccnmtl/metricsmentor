@@ -100,7 +100,6 @@ class CreateSubmissionViewTest(CourseTestMixin, TestCase):
             'hypothesizedSlope': 0,
             'intercept': 40.09861273560345,
             'N': 50,
-            'seed': 'seedString',
             'slope': 0.5562578330177294,
             'stderror': 0.11224933685759263,
             'tvalue': '4.956'
