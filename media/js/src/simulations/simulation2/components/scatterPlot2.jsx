@@ -3,13 +3,13 @@ import Plot from 'react-plotly.js';
 import PropTypes from 'prop-types';
 
 
-export const ScatterPlot2 = ({controls, data, labelIndex, param}) => {
+export const ScatterPlot2 = ({controls, data, labelIndex, param, index}) => {
 
     let x1_values = [];
     let y_values = [];
     if (data) {
-        x1_values = data[param.x_1];
-        y_values = data[param.y];
+        x1_values = data[index.x_1];
+        y_values = data[index.y];
     }
 
     const [selectedAltLines, setSelectedAltLines] = useState([]);
@@ -19,7 +19,7 @@ export const ScatterPlot2 = ({controls, data, labelIndex, param}) => {
         if (controls) {
             Object.entries(controls).forEach(([key, value]) => {
                 if (value) {
-                    altLines.push(param.lines[key]);
+                    altLines.push(param[key]);
                 }
             });
         }
@@ -71,9 +71,9 @@ export const ScatterPlot2 = ({controls, data, labelIndex, param}) => {
                         textfont: { color: 'black' },
                         textposition: 'top center',
                         x: [labelPos(param.xRange)],
-                        y: [param.lines[param.x_1].y[1]],
+                        y: [param[index.x_1].y[1]],
                     },
-                    linedata(param.lines[param.x_1].y, 'black'),
+                    linedata(param[index.x_1].y, 'black'),
                     ...selectedAltLines.map((line) =>
                         linedata(line.y, line.color)),
                     ...selectedAltLines.map((line) =>
@@ -82,9 +82,9 @@ export const ScatterPlot2 = ({controls, data, labelIndex, param}) => {
                 layout={{
                     title: 'Omitted Variable Bias',
                     showlegend: false,
-                    xaxis: { title: labelIndex[param.x_1], minallowed: 0},
+                    xaxis: { title: labelIndex[index.x_1], minallowed: 0},
                     yaxis: {
-                        title: labelIndex[param.y],
+                        title: labelIndex[index.y],
                         scaleratio: 1,
                         minallowed: 0,
                     },
@@ -135,4 +135,5 @@ ScatterPlot2.propTypes = {
     data: PropTypes.object,
     labelIndex: PropTypes.object.isRequired,
     param: PropTypes.object,
+    index: PropTypes.object.isRequired,
 };

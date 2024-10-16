@@ -6,7 +6,7 @@ import { labelIndex as label } from '../dataAttr';
 // If this get's implemented into other Simulations, rewrite as a JSX component
 
 export const Variables = ({params}) => {
-    const vars = params.lines[params.x_1];
+    const vars = params[params['x_1']];
     return (<>
         <p>
             {params.varText}
