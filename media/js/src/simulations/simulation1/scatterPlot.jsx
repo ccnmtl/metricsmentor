@@ -1,11 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import Plot from 'react-plotly.js';
-import seedrandom from 'seedrandom';
 import axios from 'axios';
 import PropTypes from 'prop-types';
 
 
-export const ScatterPlot = ({ N, yCorrelation, seed, setAppRvalue,
+export const ScatterPlot = ({ N, yCorrelation, setAppRvalue,
     setSlope, setIntercept, setStderror, plotType, setSlopes,
     setStderrs, xCorrelation, setAppRvalue3d, setIntercept3d
 }) => {
@@ -16,14 +15,14 @@ export const ScatterPlot = ({ N, yCorrelation, seed, setAppRvalue,
         if (N < 50 || N > 500) {
             return [];
         }
-        const rng = seedrandom(seed);
 
         let generatedData = [];
         if (typeof yCorrelation === 'number') {
             for (let i = 0; i < N; i++) {
-                const x = Math.round((rng() * 100 - 50) * 2);
+                const x = Math.round((Math.random() * 100 - 50) * 2);
                 const y = Math.round(yCorrelation * x + Math.sqrt(
-                    1 - Math.pow(yCorrelation, 2)) * (rng() * 100 - 50) * 2);
+                    1 - Math.pow(yCorrelation, 2)) *
+                    (Math.random() * 100 - 50) * 2);
                 generatedData.push({ x, y });
             }
         }
@@ -32,7 +31,8 @@ export const ScatterPlot = ({ N, yCorrelation, seed, setAppRvalue,
             generatedData = generatedData.map(point => ({
                 ...point,
                 z: Math.round(xCorrelation * point.x + Math.sqrt(
-                    1 - Math.pow(xCorrelation, 2)) * (rng() * 100 - 50) * 2)
+                    1 - Math.pow(xCorrelation, 2)) *
+                    (Math.random() * 100 - 50) * 2)
             }));
         }
 
@@ -124,7 +124,7 @@ export const ScatterPlot = ({ N, yCorrelation, seed, setAppRvalue,
         if (N) {
             setData(generateData());
         }
-    }, [N, yCorrelation, xCorrelation, seed, plotType]);
+    }, [N, yCorrelation, xCorrelation, plotType]);
 
     useEffect(() => {
         if (data.length > 0) {
@@ -205,7 +205,6 @@ export const ScatterPlot = ({ N, yCorrelation, seed, setAppRvalue,
 ScatterPlot.propTypes = {
     N: PropTypes.number.isRequired,
     yCorrelation: PropTypes.number.isRequired,
-    seed: PropTypes.string.isRequired,
     setAppRvalue: PropTypes.func,
     setSlope: PropTypes.func,
     setIntercept: PropTypes.func,

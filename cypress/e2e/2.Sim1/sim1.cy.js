@@ -21,7 +21,6 @@ describe('Graph Data', () => {
     it('Graph Seeding', () => {
         cy.get('h2.h2-primary')
             .should('contain', 'Graph seeding');
-        // cy.get('label input[value="seedString"]').should('exist');
     });
     it('Graph Coefficients', () => {
         cy.get('h2.h2-primary')
@@ -32,5 +31,4 @@ describe('Graph Data', () => {
         cy.get('h2.h2-primary')
             .should('contain', 'Defining null hypothesis');
     });
-
 });
