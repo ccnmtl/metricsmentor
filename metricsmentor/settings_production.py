@@ -1,3 +1,4 @@
+import os
 from django.conf import settings
 from ctlsettings.production import common, init_sentry
 from metricsmentor.settings_shared import *  # noqa: F403
@@ -15,10 +16,8 @@ locals().update(
         #       s3static=False,
     ))
 
-try:
-    from metricsmentor.local_settings import *  # noqa: F403
-except ImportError:
-    pass
+SENTRY_DSN = os.environ.get('SENTRY_DSN')
+SNETRY_KEY = os.environ.get('SENTRY_KEY')
 
 
 if hasattr(settings, 'SENTRY_DSN'):
