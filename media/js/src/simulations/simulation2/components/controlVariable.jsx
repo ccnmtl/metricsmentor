@@ -6,9 +6,8 @@ import { Katex } from '../../../utils/katexComponent';
 
 
 export const ControlVariable = ({
-    controls, data, handleControls, controlText
+    controls, data, handleControls, controlText, index
 }) => {
-    // const baseData = data.lines[data.y];
     return (
         <>
             <p>
@@ -52,7 +51,7 @@ export const ControlVariable = ({
             {/* container for all variables */}
             <div className="choice-list ms-0">
                 {/* original variables y and x1 below */}
-                {Object.entries(data).slice(0,2)
+                {[['y', index.y], ['x_1', index.x_1]]
                     .map((dType, i) => (
                         <div key={i} className="dataset-variable-item ps-4">
                             {inlineKatex(`${dType[0]}
@@ -60,8 +59,8 @@ export const ControlVariable = ({
                         </div>
                     ))}
                 {/* control variables below */}
-                {data.option.map((dType, i) => {
-                    const selectData = data.lines[dType];
+                {index.option.map((dType, i) => {
+                    const selectData = data[dType];
                     return (
                         <div key={i}
                             className={'form-check dataset-variable-item'}
@@ -93,10 +92,10 @@ export const ControlVariable = ({
                             {controls[dType] === true && [
                                 {
                                     title: 'Regression line equation',
-                                    body: [`\\widehat{${labelIndex[data.y]}
+                                    body: [`\\widehat{${labelIndex[index.y]}
                                         _i} = ${selectData.intercept} +
                                         ${selectData.slope_x1 +
-                                            labelIndex[data.x_1]}_i +
+                                            labelIndex[index.x_1]}_i +
                                         ${selectData.slope_x2 +
                                             labelIndex[dType]}_i`],
                                 },
@@ -105,7 +104,7 @@ export const ControlVariable = ({
                                         coefficient
                                         for {inlineKatex('x_1')}</>,
                                     body: [`\\hat{\\beta_1} =
-                                        ${data.lines[data.x_1].slope}`],
+                                        ${data[index.x_1].slope}`],
                                 },
                                 {
                                     title: <>New sample slope coefficient
@@ -153,4 +152,5 @@ ControlVariable.propTypes = {
     data: PropTypes.object.isRequired,
     handleControls: PropTypes.func.isRequired,
     controlText: PropTypes.object.isRequired,
+    index: PropTypes.object.isRequired,
 };

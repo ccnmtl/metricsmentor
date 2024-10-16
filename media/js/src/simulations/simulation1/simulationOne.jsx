@@ -19,8 +19,6 @@ export const SimulationOne = () => {
     const [N, setN] = useState(50);
     const [yCorrelation, setYcorrelation] = useState(0.3);
     const [xCorrelation, setXcorrelation] = useState(0.3);
-    // eslint-disable-next-line no-unused-vars
-    const [seed, setSeed] = useState('seedString');
     const [slope, setSlope] = useState(null);
     const [intercept, setIntercept] = useState(null);
     const [intercept3d, setIntercept3d] = useState(null);
@@ -46,10 +44,10 @@ export const SimulationOne = () => {
     const createSubmission = async() => {
         // Define the data to be saved based on the plot type
         const data = plotType === '2d' ? {
-            N, yCorrelation, seed, slope, intercept, stderror, appRvalue,
+            N, yCorrelation, slope, intercept, stderror, appRvalue,
             tvalue, hypothesizedSlope
         } : {
-            N, yCorrelation, seed, slope, intercept, stderror, appRvalue,
+            N, yCorrelation, slope, intercept, stderror, appRvalue,
             tvalue, hypothesizedSlope, slopes, stderrs, xCorrelation,
             appRvalue3d, intercept3d
         };
@@ -126,10 +124,6 @@ export const SimulationOne = () => {
     const handleXcorrelationChange = (e) => {
         setXcorrelation(parseFloat(e.target.value));
     };
-
-    // const handleSeedChange = (e) => {
-    //     setSeed(e.target.value);
-    // };
 
     const handlePlotTypeChange = (type) => {
         setPlotType(type);
@@ -348,15 +342,6 @@ export const SimulationOne = () => {
                                     </div>
                                 </>
                             )}
-                            {/* <div className="mt-3">
-                                <label className="dev-only"> Seed ID:
-                                    <input type="text"
-                                        value={seed}
-                                        // disabled={startQuiz}
-                                        className="ms-1 mt-2 dev-only" size="10"
-                                        onChange={handleSeedChange} />
-                                </label>
-                            </div> */}
                         </div>
                     </div>
                 </div> {/* div class=simulation__step-container */}
@@ -483,7 +468,6 @@ export const SimulationOne = () => {
                     N={N}
                     yCorrelation={yCorrelation}
                     xCorrelation={xCorrelation}
-                    seed={seed}
                     setSlopes={setSlopes}
                     setSlope={setSlope}
                     setStderrs={setStderrs}

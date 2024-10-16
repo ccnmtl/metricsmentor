@@ -1,7 +1,10 @@
 
-import { dataAttr, labelIndex, takeaways2, sim2TextVariable as varText,
-    sim2TextControl as controlText,
+import { dataAttr, dataIndex, dataRange, labelIndex, takeaways2,
+    sim2TextVariable as varText, sim2TextControl as controlText,
     sim2Information as info } from '../dataAttr';
+
+
+const knownDatasets = ['affairs_sim2', 'campus_sim2', 'gpa4', 'income'];
 
 describe('Simulation 2 Object types', () => {
     test('dataAttr object is defined', () => {
@@ -26,33 +29,60 @@ describe('Simulation 2 Object types', () => {
 
 describe('dataAttr object properties', () => {
     // Ordering must be precise, the follow order in the dataAttr definition
-    const knownDatasets = ['affairs_sim2', 'campus_sim2', 'gpa4', 'income'];
     const attrKeys = Object.keys(dataAttr);
 
     test('dataAttr object has all known datasets and no others', () => {
         expect(attrKeys).toEqual(knownDatasets);
     });
 
+    for (const dataset in dataAttr) {
+        for (const variable in dataAttr[dataset]) {
+            test(`${dataset}.${variable} has the known keys`, () => {
+                for (const key of ['intercept', 'corr_y', 'stderr']) {
+                    expect(dataAttr[dataset][variable]).toHaveProperty(key);
+                }
+            });
+        }
+    }
+});
+
+describe('dataIndex object properties', () => {
+    const indexKeys = Object.keys(dataIndex);
+
+    test('dataIndex object has all known datasets and no others', () => {
+        expect(indexKeys).toEqual(knownDatasets);
+    });
+
     for (const dataset of knownDatasets) {
         test(`${dataset} has the known keys`, () => {
-            const knownKeys = ['y', 'x_1', 'option',
-                'lines', 'xRange'];
-            for (const key of knownKeys) {
-                expect(dataAttr[dataset]).toHaveProperty(key);
+            for (const key of ['option', 'x_1', 'x_2', 'y']) {
+                expect(dataIndex[dataset]).toHaveProperty(key);
             }
         });
-        const lineKeys = ['label', 'color', 'intercept',
-            'corr_y', 'stderr', 'y'];
-        const lines = dataAttr[dataset]['lines'];
-        for (const dataType in lines) {
-            test(
-                `${dataset}.lines.${dataType} havs the base properties`,
-                () => {
-                    for (const key of lineKeys) {
-                        expect(lines[dataType]).toHaveProperty(key);
+    }
+});
+
+describe('dataRange object properties', () => {
+    const rangeKeys = Object.keys(dataRange);
+
+    test('dataRange object has all known datasets and no others', () => {
+        expect(rangeKeys).toEqual(knownDatasets);
+    });
+
+    for (const dataset in dataRange) {
+        for (const variable in dataRange[dataset]) {
+            if (variable === 'xRange') {
+                test(`${dataset}.${variable} has the correct length`, () => {
+                    expect(dataRange[dataset][variable]).toHaveLength(2);
+                });
+            } else {
+                test(`${dataset}.${variable} has the known keys`, () => {
+                    for (const key of ['label', 'color', 'y']) {
+                        expect(dataRange[dataset][variable])
+                            .toHaveProperty(key);
                     }
-                }
-            );
+                });
+            }
         }
     }
 });
@@ -81,7 +111,7 @@ describe('takeaways2 object properties', () => {
 
     for (const takeaway of knownTakeaways) {
         test(`${takeaway} has the known keys`, () => {
-            const knownKeys = ['q_id', 'prompt', 'options', 'answer',
+            const knownKeys = ['q_id', 'prompt', 'choices', 'answer',
                 'feedback_bad', 'feedback_good'];
             expect(Object.keys(takeaways2[takeaway])).toEqual(knownKeys);
         });
@@ -100,14 +130,12 @@ describe('sim2TextVariable object properties', () => {
 
 describe('sim2TextControl object properties', () => {
     const controlTextKeys = Object.keys(controlText);
-    const knownControlText = ['income', 'gpa4', 'affairs_sim2',
-        'campus_sim2'];
 
     test('sim2TextControl object has all known datasets and no others', () => {
-        expect(controlTextKeys).toEqual(knownControlText);
+        expect(controlTextKeys).toEqual(knownDatasets);
     });
 
-    for (const control of knownControlText) {
+    for (const control of knownDatasets) {
         test(`${control} has the known keys`, () => {
             const knownKeys = ['intro', 'general_inst', 'control_inst'];
             expect(Object.keys(controlText[control])).toEqual(knownKeys);
@@ -121,10 +149,8 @@ describe('sim2TextControl object properties', () => {
 
 describe('sim2Information object properties', () => {
     const infoKeys = Object.keys(info);
-    const knownInfo = ['income', 'gpa4', 'affairs_sim2',
-        'campus_sim2'];
 
     test('sim2Information object has all known datasets and no others', () => {
-        expect(infoKeys).toEqual(knownInfo);
+        expect(infoKeys).toEqual(knownDatasets);
     });
 });

@@ -10,8 +10,8 @@ export const MultipleChoiceQuestion2 = ({isSubmitted, setIsSubmitted, takeaways,
     const [selected, setSelected] = useState({});
     const [results, setResults] = useState({});
 
-    const handleOptionSelect = (topic, option) => {
-        setSelected({...selected, [topic]: option});
+    const handleOptionSelect = (topic, choice) => {
+        setSelected({...selected, [topic]: choice});
     };
 
     const asyncSave = async function() {
@@ -28,7 +28,7 @@ export const MultipleChoiceQuestion2 = ({isSubmitted, setIsSubmitted, takeaways,
         setIsSubmitted(true);
         const correct = {};
         for (let topic in takeaways) {
-            correct[topic] = $(`input[name="${topic}-options"]:checked`)
+            correct[topic] = $(`input[name="${topic}-choices"]:checked`)
                 .val() === takeaways[topic].answer;
         }
         setResults({...correct});
@@ -66,29 +66,29 @@ export const MultipleChoiceQuestion2 = ({isSubmitted, setIsSubmitted, takeaways,
     return (
         <>
             {Object.entries(takeaways)
-                .map(([topic, {prompt, options, answer, feedback_bad,
+                .map(([topic, {prompt, choices, answer, feedback_bad,
                     feedback_good}], i) => (
                     <div key={i}>
                         <p className={`mb-3 ${i > 0 ? 'mt-5' : ''}`}>
                             {prompt}
                         </p>
                         <div className="choice-list ms-0">
-                            {options.map((option, index) => (
+                            {choices.map((choice, index) => (
                                 <div key={index} className="form-check">
                                     <input
                                         className="form-check-input"
                                         type='radio'
-                                        id={`${topic}-option-${index}`}
-                                        name={`${topic}-options`}
-                                        value={option}
-                                        checked={selected[topic] === option}
+                                        id={`${topic}-choice-${index}`}
+                                        name={`${topic}-choices`}
+                                        value={choice}
+                                        checked={selected[topic] === choice}
                                         onChange={() => handleOptionSelect(
-                                            topic, option)}
+                                            topic, choice)}
                                     />
                                     <label className="form-check-label"
-                                        htmlFor={`${topic}-option-${index}`}
+                                        htmlFor={`${topic}-choice-${index}`}
                                     >
-                                        {option}
+                                        {choice}
                                     </label>
                                 </div>
                             ))}

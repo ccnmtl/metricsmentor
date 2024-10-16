@@ -8,7 +8,8 @@ import { LearningGoals } from './learningGoals';
 import { MultipleChoiceQuestion2 } from './multipleChoiceQuestion2';
 import { authedFetch } from '../../../utils/utils.jsx';
 import { dataAttr, labelIndex, takeaways2, sim2TextVariable as varText,
-    sim2TextControl as controlText, sim2Information as info
+    sim2TextControl as controlText, sim2Information as info, dataRange,
+    dataIndex
 } from '../dataAttr';
 
 const simContainer = document.querySelector('#react-root');
@@ -156,14 +157,15 @@ export const SimulationTwo = () => {
                         {
                             title: 'Variables of Interest',
                             body: <Variables params={{
-                                ...dataAttr[choice],
+                                ...dataAttr[choice], ...dataIndex[choice],
                                 varText: varText[choice]}} />
                         },
                         {
                             title: 'Control Variables',
                             body: <ControlVariable data={dataAttr[choice]}
                                 {...{controls, handleControls,
-                                    controlText: controlText[choice]}}/>
+                                    controlText: controlText[choice],
+                                    index: dataIndex[choice],}}/>
                         },
                     ].map((step, i) =>
                         <Step key={i} header={step.header} title={step.title}>
@@ -200,7 +202,8 @@ export const SimulationTwo = () => {
             <div className="simulation__graphspace">
                 <ScatterPlot2
                     {...{controls, data, labelIndex}}
-                    param={dataAttr[choice]}
+                    param={dataRange[choice]}
+                    index={dataIndex[choice]}
                 />
                 {choice && <div className="container text-center">
                     <p className="mx-auto px-5">{info[choice]}</p>
