@@ -5,6 +5,7 @@ from django.views.generic import TemplateView
 from django.views.static import serve
 from django_cas_ng import views as cas_views
 from metricsmentor.main import views
+from metricsmentor.design import views as design
 
 
 urlpatterns = [
@@ -23,8 +24,6 @@ urlpatterns = [
             views.LTICourseCreate.as_view(), name='lti-course-create'),
     re_path(r'^course/lti/(?P<context>\w[^/]*)/$',
             views.LTICourseSelector.as_view(), name='lti-course-select'),
-
-
 
     re_path('^$', views.CoursesView.as_view()),
     re_path(r'^course/(?P<pk>\d+)/simulations/',
@@ -60,7 +59,9 @@ urlpatterns = [
          name='delete_quiz'),
     path('delete_answer/', views.DeleteAnswerView.as_view(),
          name='delete_answer'),
-
+    re_path(r'^design/$', design.Index.as_view(), name='design-index'),
+    re_path(r'^design/simulation/$', design.Simulation.as_view(),
+            name='design-simulation'),
 ]
 
 
