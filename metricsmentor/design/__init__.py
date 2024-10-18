@@ -1,0 +1,1 @@
+import metricsmentor.design.views  # noqa
