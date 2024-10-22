@@ -1,7 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { ScatterPlot } from './scatterPlot';
 import { Katex } from '../../utils/katexComponent';
-import { authedFetch } from '../../utils/utils';
+import { authedFetch, fetchQuizData } from '../../utils/utils';
 import { SimulationOneQuiz } from './simulationOneQuiz';
 import { SimIntro } from './simulationIntro';
 import { GraphCoefficients } from './graphCoefficientsSection';
@@ -86,15 +86,15 @@ export const SimulationOne = () => {
 
     const handleCreateSub = async() => {
         try {
-            // if(!submissionId) {
-            //     await createSubmission();
-            // } else {
-            //     if (plotType === '2d') {
-            //         setStartQuiz(true);
-            //     } else {
-            //         setStartQuiz2(true);
-            //     }
-            // }
+            if(!submissionId) {
+                await createSubmission();
+            } else {
+                if (plotType === '2d') {
+                    setStartQuiz(true);
+                } else {
+                    setStartQuiz2(true);
+                }
+            }
             await createSubmission();
         } catch (error) {
             alert('Failed to save graph and submission.');
@@ -149,19 +149,20 @@ export const SimulationOne = () => {
         tvalue3d = parseFloat(((slopes[0].toFixed(3) - hypothesizedSlope) / stderrs[0].toFixed(3)).toFixed(2));
     }
 
-    // useEffect(() => {
-    //     fetchQuizData(coursePk, 1)
-    //         .then(data => {
-    //             if (data.submission_id) {
-    //                 if (plotType === '2d') {
-    //                     setStartQuiz(true);
-    //                 } else {
-    //                     setStartQuiz2(true);
-    //                 }
-    //                 setSubmissionId(data.submission_id);
-    //             }
-    //         });
-    // }, []);
+    useEffect(() => {
+        fetchQuizData(coursePk, 1)
+            .then(data => {
+                console.log('this is data', data)
+                if (data.submission_id) {
+                    if (plotType === '2d') {
+                        setStartQuiz(true);
+                    } else {
+                        setStartQuiz2(true);
+                    }
+                    setSubmissionId(data.submission_id);
+                }
+            });
+    }, []);
 
     return (
         <div className="simulation">
