@@ -395,8 +395,35 @@ class SaveAnswer(LoggedInCourseMixin, View):
             selected_option=selected_option,
             is_correct=is_correct,
             data=additional_data,
-            active=True
+            active=is_correct
         )
+
+        return JsonResponse({'status': 'success', 'answer_id': answer.id})
+
+
+class UpdateAnswer(LoggedInCourseMixin, View):
+
+    def put(self, request, *args, **kwargs):
+        data = json.loads(request.body)
+        sub_id = data.get('submission_id')
+        q_num = data.get('question_num')
+        to_update = data.get('to_update')
+        latest_sub = QuizSubmission.objects.filter(
+            id=sub_id, active=True).order_by('-created_at').first()
+
+        try:
+            answer = Answer.objects.filter(
+                active=True, quiz_submission_id=latest_sub.id,
+                question_number=q_num).order_by('-created_at').first()
+
+        except Answer.DoesNotExist:
+            return JsonResponse(
+                {'status': 'fail', 'message': 'Answer not found'},
+                status=404)
+
+        for key in to_update:
+            setattr(answer, key, to_update[key])
+        answer.save()
 
         return JsonResponse({'status': 'success', 'answer_id': answer.id})
 
