@@ -59,6 +59,8 @@ urlpatterns = [
          name='delete_quiz'),
     path('delete_answer/', views.DeleteAnswerView.as_view(),
          name='delete_answer'),
+    path('update_answer/', views.UpdateAnswer.as_view(),
+         name='update_answer'),
     re_path(r'^design/$', design.Index.as_view(), name='design-index'),
     re_path(r'^design/simulation/$', design.Simulation.as_view(),
             name='design-simulation'),

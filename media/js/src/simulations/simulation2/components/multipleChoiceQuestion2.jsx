@@ -4,8 +4,8 @@ import { saveAnswer } from '../../../utils/utils';
 
 
 export const MultipleChoiceQuestion2 = ({isSubmitted, setIsSubmitted, takeaways,
-    handleContinue, checkComplete, handleStartOver, submissionId,
-    createSubmission, coursePk, nextStep, setNextStep }) => {
+    handleContinue, checkComplete, handleStartOver, submissionId, isComplete,
+    setIsComplete, createSubmission, coursePk, nextStep, setNextStep }) => {
 
     const [selected, setSelected] = useState({});
     const [results, setResults] = useState({});
@@ -32,12 +32,19 @@ export const MultipleChoiceQuestion2 = ({isSubmitted, setIsSubmitted, takeaways,
                 .val() === takeaways[topic].answer;
         }
         setResults({...correct});
-        if (!submissionId) {
-            createSubmission(() => asyncSave());
-        } else {
-            asyncSave();
-        }
     };
+
+    useEffect(() => {
+        if (!submissionId) {
+            createSubmission(() => asyncSave()).then(() => {
+                setIsComplete({...isComplete, ...results});
+            });
+        } else {
+            asyncSave().then(() => {
+                setIsComplete({...isComplete, ...results});
+            });
+        }
+    }, [results]);
 
     const feedback = function(topic, feedback_bad, feedback_good) {
         if (results[topic] === true) {
@@ -139,6 +146,8 @@ MultipleChoiceQuestion2.propTypes = {
     isSubmitted: PropTypes.bool.isRequired,
     handleContinue: PropTypes.func.isRequired,
     checkComplete: PropTypes.func.isRequired,
+    isComplete: PropTypes.object.isRequired,
+    setIsComplete: PropTypes.func.isRequired,
     handleStartOver: PropTypes.func.isRequired,
     createSubmission: PropTypes.func.isRequired,
     submissionId: PropTypes.number,

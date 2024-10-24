@@ -135,5 +135,5 @@ ScatterPlot2.propTypes = {
     data: PropTypes.object,
     labelIndex: PropTypes.object.isRequired,
     param: PropTypes.object,
-    index: PropTypes.object.isRequired,
+    index: PropTypes.object,
 };

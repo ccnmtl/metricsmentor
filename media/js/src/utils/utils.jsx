@@ -46,6 +46,25 @@ export const saveAnswer = async(submissionId, questionNumber, questionType,
 };
 
 /**
+ * Function to update an answer.
+ * @param {number} answerId - The ID of the answer.
+ * @param {object} updated - Data to update.
+ * @returns {Promise<object>} - The response data.
+ */
+export const updateAnswer = async(submissionId, questionNum, updated) => {
+    try {
+        const response = await axios.put('/update_answer/', {
+            question_num: questionNum,
+            submission_id: submissionId,
+            to_update: updated
+        });
+        return response.data;
+    } catch (error) {
+        console.error('Error saving answer:', error);
+    }
+};
+
+/**
  * Function to retrieve answers for a quiz submission
  * @param {number} submissionId - The ID of the submission.
  * @param {number} courseId - The course id.
