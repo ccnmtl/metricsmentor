@@ -395,7 +395,7 @@ class SaveAnswer(LoggedInCourseMixin, View):
             selected_option=selected_option,
             is_correct=is_correct,
             data=additional_data,
-            active=True
+            active=is_correct
         )
 
         return JsonResponse({'status': 'success', 'answer_id': answer.id})

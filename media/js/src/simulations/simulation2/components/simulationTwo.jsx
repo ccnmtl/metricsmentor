@@ -6,7 +6,9 @@ import DATASETS from '../datasets.json';
 import { Step } from '../../../step.jsx';
 import { LearningGoals } from './learningGoals';
 import { MultipleChoiceQuestion2 } from './multipleChoiceQuestion2';
-import { authedFetch } from '../../../utils/utils.jsx';
+import { authedFetch, deleteAnswer,
+    fetchQuizData
+} from '../../../utils/utils.jsx';
 import { dataAttr, labelIndex, takeaways2, sim2TextVariable as varText,
     sim2TextControl as controlText, sim2Information as info, dataRange,
     dataIndex
@@ -15,6 +17,8 @@ import { dataAttr, labelIndex, takeaways2, sim2TextVariable as varText,
 const simContainer = document.querySelector('#react-root');
 const coursePk =
     simContainer ? Number(simContainer.dataset.course) : '';
+
+const qIndex = ['general', 'income', 'gpa4', 'affairs_sim2', 'campus_sim2'];
 
 export const SimulationTwo = () => {
     const freshComplete = () => Object.keys(DATASETS).reduce((acc, key) => {
@@ -29,6 +33,17 @@ export const SimulationTwo = () => {
     const [isComplete, setIsComplete] = useState(freshComplete());
     const [submissionId, setSubmissionId] = useState();
     const [nextStep, setNextStep] = useState(false);
+
+    useEffect(() => {
+        fetchQuizData(coursePk, 2).then(data => {
+            setSubmissionId(data.submission_id);
+            const store = {};
+            for (const answer of data.answers) {
+                store[qIndex[answer.question_number - 1]] = answer.is_correct;
+            }
+            setIsComplete(store);
+        });
+    }, []);
 
     const createSubmission = async(followUp=()=>true) => {
         // Define the data to be saved based on the plot type
@@ -75,6 +90,9 @@ export const SimulationTwo = () => {
     const handleStartOver = () => {
         setData();
         setControls({});
+        for (const topic in isComplete) {
+            deleteAnswer(submissionId, takeaways2[topic].q_id);
+        }
         setChoice();
         setIsComplete(freshComplete());
     };
@@ -99,27 +117,17 @@ export const SimulationTwo = () => {
         // If the user has completed the first question
         // for the current dataset, show the second with a
         // general question.
-        if (checkComplete() === 1 && !isComplete[choice])
-        {
-            return <MultipleChoiceQuestion2
-                {...{choice, isSubmitted, setIsSubmitted, handleStartOver,
-                    handleContinue, checkComplete, submissionId,
-                    createSubmission, coursePk, nextStep, setNextStep}}
-                takeaways={{[choice]: takeaways2[choice],
-                    'general': takeaways2.general}}
-            />;
-        } else {
-            return <MultipleChoiceQuestion2
-                {...{choice, isSubmitted, setIsSubmitted, handleStartOver,
-                    handleContinue, checkComplete, submissionId,
-                    createSubmission, coursePk, nextStep, setNextStep}}
-                takeaways={{[choice]: takeaways2[choice]}}
-            />;
-        }
+        const takeaways = checkComplete() === 1 && !isComplete[choice] ?
+            {[choice]: takeaways2[choice], 'general': takeaways2.general} :
+            {[choice]: takeaways2[choice]};
+        const data = {choice, isSubmitted, setIsSubmitted, handleStartOver,
+            handleContinue, checkComplete, submissionId, isComplete,
+            setIsComplete, createSubmission, coursePk, nextStep, setNextStep,
+            takeaways};
+        return <MultipleChoiceQuestion2 {...data} />;
     };
 
     const handleContinue = () => {
-        setIsComplete({...isComplete, [choice]: true});
         setChoice(null);
         setData(null);
         setIsSubmitted(false);
