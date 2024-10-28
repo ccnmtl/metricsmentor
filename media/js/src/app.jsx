@@ -5,6 +5,7 @@ import { SimulationOne} from './simulations/simulation1/simulationOne';
 import {
     SimulationTwo
 } from './simulations/simulation2/components/simulationTwo';
+import { SimulationThree } from './simulations/simulation3/simulationThree';
 
 const isSuperUser = window.MetricsMentor.currentUser.is_superuser;
 
@@ -31,9 +32,12 @@ export const App = () => {
                         isFaculty={isFaculty}/>} />
                 <Route path='course/:courseId/simulations/1/'
                     element={<SimulationOne />} />
-
                 <Route path='course/:courseId/simulations/2/'
                     element={<SimulationTwo />} />
+                {(isSuperUser || isFaculty) && (
+                    <Route path='course/:courseId/simulations/3/'
+                        element={<SimulationThree />} />
+                )}
             </Routes>
         </Router>
     );

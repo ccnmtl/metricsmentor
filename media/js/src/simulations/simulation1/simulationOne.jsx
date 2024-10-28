@@ -152,7 +152,6 @@ export const SimulationOne = () => {
     useEffect(() => {
         fetchQuizData(coursePk, 1)
             .then(data => {
-                console.log('this is data', data)
                 if (data.submission_id) {
                     if (plotType === '2d') {
                         setStartQuiz(true);
