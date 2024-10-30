@@ -10,19 +10,33 @@ export const ScatterPlot = ({ N, yCorrelation, setAppRvalue,
 }) => {
     const [data, setData] = useState([]);
     const [regressionLine, setRegressionLine] = useState(null);
+    const [seed] = useState(Math.floor(Math.random() * 100));
 
-    const generateData = () => {
+    const seededRandom = (seed) => {
+        let m = 0x80000000; // 2**31;
+        let a = 1103515245;
+        let c = 12345;
+        let state = seed ? seed : Math.floor(Math.random() * (m - 1));
+
+        return () => {
+            state = (a * state + c) % m;
+            return state / (m - 1);
+        };
+    };
+
+    const generateData = (seed) => {
         if (N < 50 || N > 500) {
             return [];
         }
 
+        const random = seededRandom(seed);
         let generatedData = [];
         if (typeof yCorrelation === 'number') {
             for (let i = 0; i < N; i++) {
-                const x = Math.round((Math.random() * 100 - 50) * 2);
+                const x = Math.round((random() * 100 - 50) * 2);
                 const y = Math.round(yCorrelation * x + Math.sqrt(
                     1 - Math.pow(yCorrelation, 2)) *
-                    (Math.random() * 100 - 50) * 2);
+                    (random() * 100 - 50) * 2);
                 generatedData.push({ x, y });
             }
         }
@@ -32,7 +46,7 @@ export const ScatterPlot = ({ N, yCorrelation, setAppRvalue,
                 ...point,
                 z: Math.round(xCorrelation * point.x + Math.sqrt(
                     1 - Math.pow(xCorrelation, 2)) *
-                    (Math.random() * 100 - 50) * 2)
+                    (random() * 100 - 50) * 2)
             }));
         }
 
@@ -122,7 +136,7 @@ export const ScatterPlot = ({ N, yCorrelation, setAppRvalue,
 
     useEffect(() => {
         if (N) {
-            setData(generateData());
+            setData(generateData(seed));
         }
     }, [N, yCorrelation, xCorrelation, plotType]);
 
