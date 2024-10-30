@@ -66,6 +66,32 @@ export const Dashboard = ({ isSuperUser, isFaculty}) => {
                             Begin &raquo;
                         </Link>
                     </div>
+                    {(isSuperUser) && (
+                        <div className="col-lg-5 p-4 mx-0 mx-lg-3 my-3 mx-lg-0
+                                        simulation-card">
+                            <h2 className="h2-primary">
+                                <span className="h2-secondary d-block"
+                                    data-cy="sim-2">
+                                    Simulation 3</span>
+                                <span className="h2-title d-block">
+                                    {'Standard Errors'}
+                                </span>
+                            </h2>
+                            <p>
+                                Lorem ipsum dolor sit amet consectetur
+                                adipisicing elit. Soluta quae cupiditate aut
+                                 nostrum, dolore harum veritatis sapiente enim
+                                 dignissimos praesentium, esse in modi nobis
+                                 mollitia? Id enim sequi quos harum.
+                            </p>
+
+                            <Link to={`/course/${courseId}/simulations/3/`}
+                                className="btn btn-success my-3"
+                                data-cy="sim-2-link">
+                                    Begin &raquo;
+                            </Link>
+                        </div>
+                    )}
                 </div>
             </section>
             <Footer />
