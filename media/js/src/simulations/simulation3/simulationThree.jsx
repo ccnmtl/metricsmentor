@@ -1,4 +1,5 @@
 import React from 'react';
+import { SkedasticityScatterPlot } from './skedasticityPlot';
 
 export const SimulationThree = () => {
     return (
@@ -7,7 +8,8 @@ export const SimulationThree = () => {
                 Work space
             </div>
             <div className="simulation__graphspace">
-                Graph space
+                <SkedasticityScatterPlot initialSlope={2} initialIntercept={5}
+                    N={50} />
             </div>
         </div>
     );
