@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import Plot from 'react-plotly.js';
 import axios from 'axios';
 import PropTypes from 'prop-types';
+import { seededRandom } from '../../utils/utils';
 
 
 export const ScatterPlot = ({ N, yCorrelation, setAppRvalue,
@@ -11,18 +12,6 @@ export const ScatterPlot = ({ N, yCorrelation, setAppRvalue,
     const [data, setData] = useState([]);
     const [regressionLine, setRegressionLine] = useState(null);
     const [seed] = useState(Math.floor(Math.random() * 100));
-
-    const seededRandom = (seed) => {
-        let m = 0x80000000; // 2**31;
-        let a = 1103515245;
-        let c = 12345;
-        let state = seed ? seed : Math.floor(Math.random() * (m - 1));
-
-        return () => {
-            state = (a * state + c) % m;
-            return state / (m - 1);
-        };
-    };
 
     const generateData = (seed) => {
         if (N < 50 || N > 500) {
