@@ -130,6 +130,7 @@ export const SimulationOneQuiz = ({
             {!completedChoices.includes(choiceKey) && (
                 <button
                     className="btn btn-sm btn-success"
+                    id={`choice-${choiceKey}`}
                     disabled={selectedAltHypothesis !== null}
                     onClick={() => handleSelectAltHypothesis(choiceKey)}
                 >

@@ -138,7 +138,7 @@ export const PvalueComponent = ({
 
     return (<>
         <div className="input-p mt-5">
-            <h2 className="mt-0">
+            <h2 className="mt-0" data-cy="pvalueSection" >
                 Obtain <Katex tex={'p'} className="katex-inline" />-value:
             </h2>
             <p>One method for hypothesis testing is to compare the <Katex
@@ -181,6 +181,7 @@ export const PvalueComponent = ({
                         className="btn btn-sm btn-success
                         mx-2 text-nowrap
                         align-self-center"
+                        id="pvalueInputButton"
                         disabled={isPvalueCorrect}
                         onClick={handleNextPvalueButtonClick}>
                     Continue &raquo;
@@ -198,7 +199,8 @@ export const PvalueComponent = ({
                     <div className="answer-incorrect flex-shrink-0
                         align-self-start">!</div>
                     <div>
-                        The value is incorrect; it&rsquo;s {pvalue}.
+                        The value is incorrect; it&rsquo;s
+                        <span data-cy="pvalueanswer"> {pvalue}.</span>
                         {hypothesisTest === 'value_two_sided' && (
                             <span>
                             &nbsp;Note that this is a two-sided test and the
@@ -259,6 +261,7 @@ export const PvalueComponent = ({
                     <div className="flex-grow-1 align-self-center ms-5">
                         <button
                             className="btn btn-sm btn-success"
+                            data-cy="pvalueComparisonButton"
                             disabled={isPvalCompareCorrect}
                             onClick={handleNextPvalueComparison}>
                         Continue &raquo;
@@ -343,6 +346,7 @@ export const PvalueComponent = ({
                 <div className="simulation__step-prompt">
                     <button
                         className="btn btn-sm btn-success"
+                        data-cy="hypothesisTest1Button"
                         disabled={hypothesisTest1validate}
                         onClick={handleNextNullHypothesisChoice1}>
                     Continue &raquo;
