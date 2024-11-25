@@ -63,6 +63,7 @@ export const NullHypothesisSection = ({
                                     } />
                                 </label>
                                 <input size="10"
+                                    name="nullHypothesis"
                                     className="form-control short-input"
                                     type="number" min="-5" max="5"
                                     disabled={selectedAltHypothesis}

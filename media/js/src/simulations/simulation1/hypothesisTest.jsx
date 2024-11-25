@@ -148,6 +148,7 @@ export const HypothesisTest = ({
                         </ul>
                         <div className="simulation__step-prompt">
                             <button className="btn btn-sm btn-success"
+                                id="alphaNextButton"
                                 onClick={handleNextButtonClick}
                                 disabled={!alpha || alphaSelected}>
                                 Continue &raquo;

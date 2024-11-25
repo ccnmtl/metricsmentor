@@ -249,6 +249,7 @@ export const CriticalValue = ({
                         className="btn btn-sm btn-success
                         mx-2 text-nowrap
                         align-self-center"
+                        data-cy="criticalValueButton"
                         disabled={isCriticalValueCorrect}
                         onClick={handleNextCriticalVal}>
                             Continue &raquo;
@@ -321,6 +322,7 @@ export const CriticalValue = ({
                         <button
                             className="btn btn-sm btn-success"
                             disabled={isCriticalCompareCorrect}
+                            data-cy="criticalValueCompareButton"
                             onClick={handleNextCriticalValCompare}>
                                 Continue &raquo;
                         </button>

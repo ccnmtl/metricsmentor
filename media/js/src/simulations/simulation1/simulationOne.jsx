@@ -382,6 +382,7 @@ export const SimulationOne = () => {
                                     {plotType === '2d' && (
                                         <button
                                             className="btn btn-sm btn-success"
+                                            id="gotoTesting2d"
                                             disabled={startQuiz}
                                             onClick={handleCreateSub}>
                                             Continue &raquo;
@@ -390,6 +391,7 @@ export const SimulationOne = () => {
                                     {plotType === '3d' && (
                                         <button
                                             className="btn btn-sm btn-success"
+                                            id="gotoTesting3d"
                                             disabled={startQuiz2}
                                             onClick={handleCreateSub}>
                                             Continue &raquo;
