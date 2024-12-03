@@ -234,7 +234,11 @@ def calculate_multiple_regression(request):
         if x1_values.size and x2_values.size and y_values.size:
             X = sm.add_constant(np.column_stack((x1_values, x2_values)))
             model = sm.OLS(y_values, X)
-            result = model.fit()
+            if data.get('robust', False) is True:
+                cov_type = 'HC3'
+            else:
+                cov_type = 'nonrobust'
+            result = model.fit(cov_type=cov_type)
 
             # Convert NumPy arrays to Python lists
             stderr_list = result.bse.tolist()
