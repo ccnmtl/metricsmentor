@@ -5,8 +5,8 @@ import { saveAnswer } from '../../utils/utils';
 
 export const CriticalValue = ({
     hypothesisTest2validate, tvalue, n, alpha, hypothesisTest, hypothesis,
-    nullHypothesis, submissionId, plotType,
-    setHypothesisTest2validate, criticalValues, isRedo,
+    nullHypothesis, submissionId, plotType, criticalValues, isRedo,
+    setHypothesisTest2validate, answers
 }) => {
     const [nullHypothesisChoice2, setNullHypothesisChoice2] = useState(null);
     const [userCriticalValue, setUserCriticalValue] = useState('');
@@ -448,5 +448,6 @@ CriticalValue.propTypes = {
     plotType: PropTypes.string.isRequired,
     setHypothesisTest2validate: PropTypes.func.isRequired,
     criticalValues: PropTypes.object,
-    isRedo: PropTypes.bool
+    isRedo: PropTypes.bool,
+    answers: PropTypes.array
 };
