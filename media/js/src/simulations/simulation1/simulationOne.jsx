@@ -39,7 +39,6 @@ export const SimulationOne = () => {
     const [completedChoices3d, setCompletedChoices3d] = useState([]);
     const [selectedAltHypothesis, setSelectedAltHypothesis] = useState(null);
     const [isNInvalid, setIsNInvalid] = useState(false);
-    const [answers, setAnswers] = useState([]);
 
 
     const createSubmission = async() => {
@@ -160,7 +159,6 @@ export const SimulationOne = () => {
                         setStartQuiz2(true);
                     }
                     setSubmissionId(data.submission_id);
-                    setAnswers(data.answers);
                 }
             });
     }, []);
@@ -406,7 +404,6 @@ export const SimulationOne = () => {
                             <SimulationOneQuiz
                                 plotType={plotType}
                                 coursePk={coursePk}
-                                answers={answers}
                                 tvalue={tvalue}
                                 hypothesizedSlope={hypothesizedSlope}
                                 n={N}
@@ -425,7 +422,6 @@ export const SimulationOne = () => {
                             <SimulationOneQuiz
                                 plotType={plotType}
                                 coursePk={coursePk}
-                                answers={answers}
                                 tvalue={tvalue3d}
                                 hypothesizedSlope={hypothesizedSlope}
                                 n={N}

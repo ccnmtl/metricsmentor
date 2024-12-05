@@ -7,7 +7,7 @@ import PropTypes from 'prop-types';
 export const PvalueComponent = ({
     pvalue, tvalue, submissionId, hypothesis, nullHypothesis,
     alpha, hypothesisTest1validate, setHypothesisTest1validate,
-    plotType, isRedo, hypothesisTest, answers
+    plotType, isRedo, hypothesisTest
 }) => {
 
     const [userPvalue, setUserPvalue] = useState('');
@@ -392,6 +392,5 @@ PvalueComponent.propTypes = {
     setHypothesisTest1validate: PropTypes.func,
     plotType: PropTypes.string,
     isRedo: PropTypes.bool,
-    hypothesisTest: PropTypes.string,
-    answers: PropTypes.array
+    hypothesisTest: PropTypes.string
 };

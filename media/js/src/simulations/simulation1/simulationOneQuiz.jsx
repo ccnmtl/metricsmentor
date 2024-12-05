@@ -9,7 +9,7 @@ export const SimulationOneQuiz = ({
     appRvalue, tvalue, hypothesizedSlope, n, setIsCompleted,
     isCompleted, submissionId, handlePlotTypeChange, plotType,
     completedChoices, setCompletedChoices, selectedAltHypothesis,
-    setSelectedAltHypothesis, coursePk, answers
+    setSelectedAltHypothesis, coursePk
 }) => {
     const [isSubmitted, setIsSubmitted] = useState(false);
     const [isTakeawayCorrect, setIsTakeawayCorrect] = useState({
@@ -145,56 +145,46 @@ export const SimulationOneQuiz = ({
 
     const renderTakeawayQuestion = (
         choiceKey, question, options, answer, correctFeedback,
-        incorrectFeedback, questionNumber) => {
-        const userAnswer = answers.find(
-            answer => answer.question_number === questionNumber);
-        return (
-            <MultipleChoiceQuestion
-                question={question}
-                header={'Takeaway'}
-                options={options}
-                answer={answer}
-                submissionId={submissionId}
-                questionNumber={questionNumber}
-                isSubmitted={isSubmitted}
-                setIsSubmitted={
-                    (correct) => handleTakeawaySubmit(choiceKey, correct)}
-                questionStyle={{}}
-                optionStyle={{}}
-                answerStyle={{}}
-                userAnswer={userAnswer}
-                correctFeedback={correctFeedback}
-                incorrectFeedback={incorrectFeedback}
-                idkey={`${choiceKey}-${plotType}`}
-            />
-        );
-    };
+        incorrectFeedback, questionNumber) => (
+        <MultipleChoiceQuestion
+            question={question}
+            header={'Takeaway'}
+            options={options}
+            answer={answer}
+            submissionId={submissionId}
+            questionNumber={questionNumber}
+            isSubmitted={isSubmitted}
+            setIsSubmitted={
+                (correct) => handleTakeawaySubmit(choiceKey, correct)}
+            questionStyle={{}}
+            optionStyle={{}}
+            answerStyle={{}}
+            correctFeedback={correctFeedback}
+            incorrectFeedback={incorrectFeedback}
+            idkey={`${choiceKey}-${plotType}`}
+        />
+    );
 
     const renderQualifierQuestion = (
         question, options, answer, correctFeedback,
-        incorrectFeedback, questionNumber) => {
-        const userAnswer = answers.find(
-            answer => answer.question_number === questionNumber);
-        return (
-            <MultipleChoiceQuestion
-                question={question}
-                header={'Qualifier'}
-                options={options}
-                answer={answer}
-                submissionId={submissionId}
-                questionNumber={questionNumber}
-                isSubmitted={isSubmitted}
-                setIsSubmitted={handleQualifierSubmit}
-                questionStyle={{}}
-                optionStyle={{}}
-                answerStyle={{}}
-                userAnswer={userAnswer}
-                correctFeedback={correctFeedback}
-                incorrectFeedback={incorrectFeedback}
-                idkey={'qualifier'}
-            />
-        );
-    };
+        incorrectFeedback, questionNumber) => (
+        <MultipleChoiceQuestion
+            question={question}
+            header={'Qualifier'}
+            options={options}
+            answer={answer}
+            submissionId={submissionId}
+            questionNumber={questionNumber}
+            isSubmitted={isSubmitted}
+            setIsSubmitted={handleQualifierSubmit}
+            questionStyle={{}}
+            optionStyle={{}}
+            answerStyle={{}}
+            correctFeedback={correctFeedback}
+            incorrectFeedback={incorrectFeedback}
+            idkey={'qualifier'}
+        />
+    );
 
     useEffect(() => {
         isCompletedfunc();
@@ -283,7 +273,6 @@ export const SimulationOneQuiz = ({
                     isHypothesisCompleted={isHypothesisCompleted}
                     isRedo={isRedo}
                     setIsRedo={setIsRedo}
-                    answers={answers}
                 />
             )}
             {isHypothesisCompleted && selectedAltHypothesis === 'A'
@@ -624,5 +613,4 @@ SimulationOneQuiz.propTypes = {
     selectedAltHypothesis: PropTypes.string,
     setSelectedAltHypothesis: PropTypes.func,
     coursePk: PropTypes.number.isRequired,
-    answers: PropTypes.array
 };
