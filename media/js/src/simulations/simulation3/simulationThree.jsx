@@ -19,10 +19,10 @@ export const SimulationThree = () => {
                     <ul>
                         {[
                             `corr(y, x_1) = ${DATA.x1.rvalue}`,
-                            `corr(x_1, x_2) = ${DATA.x2.rvalue}`,
+                            `corr(x_1, x_2) = ${DATA.x2.corr_x1}`,
                             `SE(\\hat \\beta_1) HTS-robust =  
                                 ${DATA.x2.stderr}`,
-                            `corr(x_1, x_3) =  ${DATA.x3.rvalue}`,
+                            `corr(x_1, x_3) =  ${DATA.x3.corr_x1}`,
                             `SE(\\hat \\beta_1) HTS-robust = 
                                 ${DATA.x3.stderr}`
                         ].map((fx,idx) => (
