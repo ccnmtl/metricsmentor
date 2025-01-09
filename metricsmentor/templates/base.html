@@ -71,6 +71,15 @@
                 {% endif %}
             }
         </script>
+        <!-- Google tag (gtag.js) -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-ZGK893M0MK"></script>
+        <script>
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){dataLayer.push(arguments);}
+            gtag('js', new Date());
+
+            gtag('config', 'G-ZGK893M0MK', { 'anonymize_ip': true });
+        </script>
 
         {% block feeds %}{% endblock %}
     </head>
