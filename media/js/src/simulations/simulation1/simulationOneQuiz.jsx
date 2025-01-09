@@ -9,7 +9,7 @@ export const SimulationOneQuiz = ({
     appRvalue, tvalue, hypothesizedSlope, n, setIsCompleted,
     isCompleted, submissionId, handlePlotTypeChange, plotType,
     completedChoices, setCompletedChoices, selectedAltHypothesis,
-    setSelectedAltHypothesis, coursePk, answers
+    setSelectedAltHypothesis, coursePk, answers, lockControls, setLockControls
 }) => {
     const [isSubmitted, setIsSubmitted] = useState(false);
     const [isTakeawayCorrect, setIsTakeawayCorrect] = useState({
@@ -284,6 +284,8 @@ export const SimulationOneQuiz = ({
                     isRedo={isRedo}
                     setIsRedo={setIsRedo}
                     answers={answers}
+                    lockControls={lockControls}
+                    setLockControls={setLockControls}
                 />
             )}
             {isHypothesisCompleted && selectedAltHypothesis === 'A'

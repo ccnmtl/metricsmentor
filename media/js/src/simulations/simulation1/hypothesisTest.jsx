@@ -6,9 +6,8 @@ import axios from 'axios';
 
 export const HypothesisTest = ({
     selectedAltHypothesis, appRvalue, tvalue, hypothesizedSlope, n,
-    completedChoices, submissionId, plotType, setSelectedAltHypothesis,
-    setIsHypothesisCompleted, isRedo, setIsRedo, isHypothesisCompleted,
-    answers
+    completedChoices, submissionId, plotType, isRedo, setIsRedo, 
+    setIsHypothesisCompleted, isHypothesisCompleted, answers, setLockControls
 }) => {
     const [pvalues, setPvalues] = useState(null);
     const [alpha, setAlpha] = useState(null);
@@ -43,6 +42,7 @@ export const HypothesisTest = ({
 
     const handleNextButtonClick = () => {
         setAlphaSelected(true);
+        setLockControls(true);
     };
 
     const calculatePvalue = async() => {
@@ -76,6 +76,7 @@ export const HypothesisTest = ({
             .scrollIntoView({ behavior: 'smooth'});
         if (isRedo) {
             setAlphaSelected(false);
+            setLockControls(false);
         }
     }, []);
 
@@ -184,7 +185,6 @@ export const HypothesisTest = ({
 
 HypothesisTest.propTypes = {
     selectedAltHypothesis: PropTypes.string,
-    setSelectedAltHypothesis: PropTypes.func,
     appRvalue: PropTypes.number.isRequired,
     tvalue: PropTypes.number.isRequired,
     coursePK: PropTypes.number,
