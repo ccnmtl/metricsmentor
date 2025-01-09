@@ -40,6 +40,7 @@ export const SimulationOne = () => {
     const [selectedAltHypothesis, setSelectedAltHypothesis] = useState(null);
     const [isNInvalid, setIsNInvalid] = useState(false);
     const [answers, setAnswers] = useState([]);
+    const [lockControls, setLockControls] = useState(false);
 
 
     const createSubmission = async() => {
@@ -129,6 +130,7 @@ export const SimulationOne = () => {
     const handlePlotTypeChange = (type) => {
         setPlotType(type);
         setSelectedAltHypothesis(null);
+        setLockControls(false);
         setShowNullHypothesis(false);
         document.getElementById('learningGoal')
             .scrollIntoView({ behavior: 'smooth'});
@@ -223,7 +225,7 @@ export const SimulationOne = () => {
                                     id="nSampleSize"
                                     className="form-control short-input"
                                     disabled={
-                                        is2DCompleted || selectedAltHypothesis}
+                                        is2DCompleted || lockControls}
                                     value={N}
                                     onBlur={handleNBlur}
                                     onChange={handleNChange} />
@@ -249,7 +251,7 @@ export const SimulationOne = () => {
                                                 max="1" value={yCorrelation}
                                                 className="form-range"
                                                 id="correlation"
-                                                disabled={selectedAltHypothesis}
+                                                disabled={lockControls}
                                                 onChange={
                                                     handleYcorrelationChange} />
                                             <div className="scale-value">
@@ -288,7 +290,7 @@ export const SimulationOne = () => {
                                                 max="1" value={xCorrelation}
                                                 className="form-range"
                                                 id="correlation"
-                                                disabled={selectedAltHypothesis}
+                                                disabled={lockControls}
 
                                                 onChange={
                                                     handleXcorrelationChange} />
@@ -419,7 +421,9 @@ export const SimulationOne = () => {
                                 selectedAltHypothesis={selectedAltHypothesis}
                                 // eslint-disable-next-line max-len
                                 setSelectedAltHypothesis={setSelectedAltHypothesis}
-                                handlePlotTypeChange={handlePlotTypeChange} />
+                                handlePlotTypeChange={handlePlotTypeChange}
+                                lockControls={lockControls}
+                                setLockControls={setLockControls} />
                         )}
                         {(startQuiz2 && plotType === '3d') && (
                             <SimulationOneQuiz
@@ -438,7 +442,9 @@ export const SimulationOne = () => {
                                 selectedAltHypothesis={selectedAltHypothesis}
                                 // eslint-disable-next-line max-len
                                 setSelectedAltHypothesis={setSelectedAltHypothesis}
-                                handlePlotTypeChange={handlePlotTypeChange} />
+                                handlePlotTypeChange={handlePlotTypeChange}
+                                lockControls={lockControls}
+                                setLockControls={setLockControls} />
                         )}
                     </>
                 )}
