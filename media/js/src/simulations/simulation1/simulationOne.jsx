@@ -27,13 +27,11 @@ export const SimulationOne = () => {
     const [appRvalue3d, setAppRvalue3d] = useState(null);
     const [startQuiz, setStartQuiz] = useState(false);
     const [startQuiz2, setStartQuiz2] = useState(false);
-    const [hypothesizedSlope, setHypothesizedSlope] = useState(0);
     const [plotType, setPlotType] = useState('2d');
     const [slopes, setSlopes] = useState([]);
     const [stderrs, setStderrs] = useState([]);
     const [is2DCompleted, setIs2DCompleted] = useState(false);
     const [is3DCompleted, setIs3DCompleted] = useState(false);
-    const [showNullHypothesis, setShowNullHypothesis] = useState(false);
     const [submissionId, setSubmissionId] = useState(null);
     const [completedChoices, setCompletedChoices] = useState([]);
     const [completedChoices3d, setCompletedChoices3d] = useState([]);
@@ -47,10 +45,10 @@ export const SimulationOne = () => {
         // Define the data to be saved based on the plot type
         const data = plotType === '2d' ? {
             N, yCorrelation, slope, intercept, stderror, appRvalue,
-            tvalue, hypothesizedSlope
+            tvalue
         } : {
             N, yCorrelation, slope, intercept, stderror, appRvalue,
-            tvalue, hypothesizedSlope, slopes, stderrs, xCorrelation,
+            tvalue, slopes, stderrs, xCorrelation,
             appRvalue3d, intercept3d
         };
 
@@ -131,25 +129,20 @@ export const SimulationOne = () => {
         setPlotType(type);
         setSelectedAltHypothesis(null);
         setLockControls(false);
-        setShowNullHypothesis(false);
         document.getElementById('learningGoal')
             .scrollIntoView({ behavior: 'smooth'});
-    };
-
-    const handleShowNullHypothesis = () => {
-        setShowNullHypothesis(true);
     };
 
     let tvalue;
     if (slope !== null) {
         // eslint-disable-next-line max-len
-        tvalue = parseFloat(((slope.toFixed(3) - hypothesizedSlope) / stderror.toFixed(3)).toFixed(2));
+        tvalue = parseFloat(((slope.toFixed(3) - 0) / stderror.toFixed(3)).toFixed(2));
     }
 
     let tvalue3d;
     if (slopes.length !== 0 && slopes[0]) {
         // eslint-disable-next-line max-len
-        tvalue3d = parseFloat(((slopes[0].toFixed(3) - hypothesizedSlope) / stderrs[0].toFixed(3)).toFixed(2));
+        tvalue3d = parseFloat(((slopes[0].toFixed(3) - 0) / stderrs[0].toFixed(3)).toFixed(2));
     }
 
     useEffect(() => {
@@ -358,59 +351,49 @@ export const SimulationOne = () => {
                             stderror={stderror}
                             plotType={plotType}
                             slopes={slopes}
-                            stderrs={stderrs}
-                            showNullHypothesis={showNullHypothesis}
-                            onShowNullHypothesis={handleShowNullHypothesis} />
-                        {showNullHypothesis && (
-                            <>
-                                <NullHypothesisSection
-                                    plotType={plotType}
-                                    slope={slope}
-                                    slopes={slopes}
-                                    stderror={stderror}
-                                    stderrs={stderrs}
-                                    tvalue={tvalue}
-                                    tvalue3d={tvalue3d}
-                                    hypothesizedSlope={hypothesizedSlope}
-                                    setHypothesizedSlope={setHypothesizedSlope}
-                                    // eslint-disable-next-line max-len
-                                    selectedAltHypothesis={selectedAltHypothesis}
-                                    startQuiz={startQuiz}
-                                    startQuiz2={startQuiz2} />
+                            stderrs={stderrs} />
 
-                                <div className="simulation__step-prompt-orphan">
-                                    <p>
-                                        Let&rsquo;s move on
-                                        to hypothesis testing.
-                                    </p>
-                                    {plotType === '2d' && (
-                                        <button
-                                            className="btn btn-sm btn-success"
-                                            id="gotoTesting2d"
-                                            disabled={startQuiz}
-                                            onClick={handleCreateSub}>
-                                            Continue &raquo;
-                                        </button>
-                                    )}
-                                    {plotType === '3d' && (
-                                        <button
-                                            className="btn btn-sm btn-success"
-                                            id="gotoTesting3d"
-                                            disabled={startQuiz2}
-                                            onClick={handleCreateSub}>
-                                            Continue &raquo;
-                                        </button>
-                                    )}
-                                </div>
-                            </>
-                        )}
+                        <NullHypothesisSection
+                            plotType={plotType}
+                            slope={slope}
+                            slopes={slopes}
+                            stderror={stderror}
+                            stderrs={stderrs}
+                            tvalue={tvalue}
+                            tvalue3d={tvalue3d}
+                            startQuiz={startQuiz}
+                            startQuiz2={startQuiz2} />
+
+                        <div className="simulation__step-prompt-orphan">
+                            <p>
+                                Let&rsquo;s move on
+                                to hypothesis testing.
+                            </p>
+                            {plotType === '2d' && (
+                                <button
+                                    className="btn btn-sm btn-success"
+                                    id="gotoTesting2d"
+                                    disabled={startQuiz}
+                                    onClick={handleCreateSub}>
+                                    Continue &raquo;
+                                </button>
+                            )}
+                            {plotType === '3d' && (
+                                <button
+                                    className="btn btn-sm btn-success"
+                                    id="gotoTesting3d"
+                                    disabled={startQuiz2}
+                                    onClick={handleCreateSub}>
+                                    Continue &raquo;
+                                </button>
+                            )}
+                        </div>
                         {(startQuiz && plotType === '2d') && (
                             <SimulationOneQuiz
                                 plotType={plotType}
                                 coursePk={coursePk}
                                 answers={answers}
                                 tvalue={tvalue}
-                                hypothesizedSlope={hypothesizedSlope}
                                 n={N}
                                 appRvalue={appRvalue}
                                 isCompleted={is2DCompleted}
@@ -431,7 +414,6 @@ export const SimulationOne = () => {
                                 coursePk={coursePk}
                                 answers={answers}
                                 tvalue={tvalue3d}
-                                hypothesizedSlope={hypothesizedSlope}
                                 n={N}
                                 appRvalue={appRvalue3d}
                                 isCompleted={is3DCompleted}

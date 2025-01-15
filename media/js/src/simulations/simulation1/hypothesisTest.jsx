@@ -5,7 +5,7 @@ import { Quiz } from './quiz';
 import axios from 'axios';
 
 export const HypothesisTest = ({
-    selectedAltHypothesis, appRvalue, tvalue, hypothesizedSlope, n,
+    selectedAltHypothesis, appRvalue, tvalue, n,
     completedChoices, submissionId, plotType, isRedo, setIsRedo, 
     setIsHypothesisCompleted, isHypothesisCompleted, answers, setLockControls
 }) => {
@@ -16,19 +16,19 @@ export const HypothesisTest = ({
     let hypothesis;
     let hypothesisTest;
 
-    const nullHypothesis = `\\Eta_0: {\\beta_1}=${hypothesizedSlope}`;
+    const nullHypothesis = `\\Eta_0: {\\beta_1}= 0`;
 
     switch (selectedAltHypothesis) {
     case 'A':
-        hypothesis = `\\Eta_1: {\\beta_1}~{\\neq}~${hypothesizedSlope}`;
+        hypothesis = `\\Eta_1: {\\beta_1}~{\\neq}~0`;
         hypothesisTest = 'value_two_sided';
         break;
     case 'B':
-        hypothesis = `\\Eta_1: {\\beta_1}~{\\gt}~${hypothesizedSlope}`;
+        hypothesis = `\\Eta_1: {\\beta_1}~{\\gt}~0`;
         hypothesisTest = 'value_right';
         break;
     case 'C':
-        hypothesis =  `\\Eta_1: {\\beta_1}~{\\lt}~${hypothesizedSlope}`;
+        hypothesis =  `\\Eta_1: {\\beta_1}~{\\lt}~0`;
         hypothesisTest = 'value_left';
         break;
     default:
@@ -188,7 +188,6 @@ HypothesisTest.propTypes = {
     appRvalue: PropTypes.number.isRequired,
     tvalue: PropTypes.number.isRequired,
     coursePK: PropTypes.number,
-    hypothesizedSlope: PropTypes.any.isRequired,
     n: PropTypes.number.isRequired,
     completedChoices: PropTypes.array.isRequired,
     submissionId: PropTypes.number.isRequired,
