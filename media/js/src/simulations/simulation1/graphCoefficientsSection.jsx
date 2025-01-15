@@ -4,11 +4,8 @@ import PropTypes from 'prop-types';
 
 export const GraphCoefficients = ({
     intercept, slope, stderror, plotType, slopes, stderrs,
-    onShowNullHypothesis, intercept3d, showNullHypothesis
+    intercept3d,
 }) => {
-    const handleNextClick = () => {
-        onShowNullHypothesis();
-    };
 
     return (
         <div className="simulation__step-container d-flex">
@@ -62,14 +59,6 @@ export const GraphCoefficients = ({
                                     `{SE(\\hat{\\beta_1})} = ${stderror.toFixed(3)}`} />
                             </div>
                         </div>
-                        <div className="simulation__step-prompt">
-                            <button className="btn btn-sm btn-success"
-                                data-cy="nullNextButton"
-                                disabled={showNullHypothesis}
-                                onClick={handleNextClick}>
-                                    Continue &raquo;
-                            </button>
-                        </div>
                     </div>
                 )}
                 {(plotType === '3d' && slopes.length > 0) && (
@@ -120,14 +109,6 @@ export const GraphCoefficients = ({
                                     `{SE(\\hat{\\beta_1})} = ${stderrs[0].toFixed(3)}`} />
                             </div>
                         </div>
-                        <div className="simulation__step-prompt">
-                            <button className="btn btn-sm btn-success"
-                                data-cy="nullNextButton"
-                                disabled={showNullHypothesis}
-                                onClick={handleNextClick}>
-                                    Continue &raquo;
-                            </button>
-                        </div>
                     </div>
                 )}
             </div>
@@ -142,7 +123,5 @@ GraphCoefficients.propTypes = {
     plotType: PropTypes.string,
     slopes: PropTypes.array,
     stderrs: PropTypes.array,
-    onShowNullHypothesis: PropTypes.func,
-    intercept3d: PropTypes.number,
-    showNullHypothesis: PropTypes.bool,
+    intercept3d: PropTypes.number
 };

@@ -97,7 +97,6 @@ class CreateSubmissionViewTest(CourseTestMixin, TestCase):
         data = {
             'appRvalue': 0.5817697100267285,
             'correlation': 0.5,
-            'hypothesizedSlope': 0,
             'intercept': 40.09861273560345,
             'N': 50,
             'slope': 0.5562578330177294,

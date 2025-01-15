@@ -6,7 +6,7 @@ import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 
 export const SimulationOneQuiz = ({
-    appRvalue, tvalue, hypothesizedSlope, n, setIsCompleted,
+    appRvalue, tvalue, n, setIsCompleted,
     isCompleted, submissionId, handlePlotTypeChange, plotType,
     completedChoices, setCompletedChoices, selectedAltHypothesis,
     setSelectedAltHypothesis, coursePk, answers, lockControls, setLockControls
@@ -125,7 +125,7 @@ export const SimulationOneQuiz = ({
             ' hypothesis-completed' : ''}`}
         >
             <div className="listset-alpha-card__title">
-                <Katex tex={formula + hypothesizedSlope} />
+                <Katex tex={formula + 0} />
             </div>
             {!completedChoices.includes(choiceKey) && (
                 <button
@@ -272,7 +272,6 @@ export const SimulationOneQuiz = ({
                 <HypothesisTest
                     selectedAltHypothesis={selectedAltHypothesis}
                     setSelectedAltHypothesis={setSelectedAltHypothesis}
-                    hypothesizedSlope={hypothesizedSlope}
                     appRvalue={appRvalue}
                     tvalue={tvalue}
                     n={parseInt(n)}
@@ -614,7 +613,6 @@ export const SimulationOneQuiz = ({
 SimulationOneQuiz.propTypes = {
     appRvalue: PropTypes.number.isRequired,
     tvalue: PropTypes.number.isRequired,
-    hypothesizedSlope: PropTypes.any.isRequired,
     n: PropTypes.any.isRequired,
     setIsCompleted: PropTypes.func.isRequired,
     isCompleted: PropTypes.bool.isRequired,

@@ -24,10 +24,6 @@ describe('Simulation 1 Initial Setup', () => {
         cy.get('h2.h2-primary').should(
             'contain', 'Resulting graph coefficients');
     });
-    it('should navigate to the null hypothesis section', () => {
-        cy.get('[data-cy="nullNextButton"]').click();
-        cy.get('h2.h2-primary').should('contain', 'Defining null hypothesis');
-    });
 });
 
 describe('Graph Data', () => {
@@ -39,40 +35,21 @@ describe('Graph Data', () => {
         cy.get('h2.h2-primary')
             .should('contain', 'Resulting graph coefficients');
     });
-    it('Null Hypothesis', () => {
-        cy.get('[data-cy="nullNextButton"]').click();
-        cy.get('h2.h2-primary')
-            .should('contain', 'Defining null hypothesis');
-    });
 });
 
 describe('Null Hypothesis', () => {
     it('should navigate through resulting graph coefficients', () => {
-        cy.get('[data-cy="nullNextButton"]').click();
         cy.get('#null-hypothesis').should(
             'contain', 'Defining null hypothesis');
     });
-    it('should allow selecting a different null hypothesis', () => {
-        cy.get('button').contains('Continue').first().click();
-        cy.get('input[name="nullHypothesis"]').clear();
-        cy.get('input[name="nullHypothesis"]').type('1');
-        cy.get('input[name="nullHypothesis"]').should('have.value', '1');
-    });
 
-    it('should submit the selected hypothesis and proceed', () => {
+    it('should move on to alternative hypothesis', () => {
         cy.get('button').contains('Continue').first().click();
-        cy.get('#gotoTesting2d').click();
         cy.get('#quiz-1').should('contain', 'Alternative hypothesis');
     });
 });
 
 describe('Alternative Hypothesis', () => {
-    it('should navigate through the alternative hypothesis section', () => {
-        cy.get('button').contains('Continue').first().click();
-        // cy.get('#gotoTesting2d').click();
-        cy.get('#quiz-1').should('contain', 'Alternative hypothesis');
-    });
-
     it('should show alternate hypothesis A', () => {
         cy.get('#choice-A').should('contain', 'Check');
         cy.get('#choice-A').click();
