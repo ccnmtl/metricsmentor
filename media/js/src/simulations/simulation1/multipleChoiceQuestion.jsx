@@ -23,19 +23,29 @@ export const MultipleChoiceQuestion = ({
         setSelectedOption(option);
     };
 
+    const handleRetry = () => {
+        setIsAnswered(false);
+        setIsCorrect(null);
+        setSelectedOption(null);
+    };
+
     const handleSubmit = async() => {
         setIsAnswered(true);
         // eslint-disable-next-line max-len
         const correct = extractTextContent(selectedOption) === extractTextContent(answer);
         setIsCorrect(correct);
-        const questionType = header;
-        const textOption = extractTextContent(selectedOption);
 
-        await saveAnswer(submissionId, questionNumber, questionType,
-            textOption, correct, {});
+        await saveAnswer(submissionId, questionNumber, header,
+            extractTextContent(selectedOption), correct, {});
 
-        setIsSubmitted(correct);
+        if (correct) {
+            setIsSubmitted(true);
+        } else {
+            setIsSubmitted(false); // Allow retry for incorrect answers
+        }
     };
+
+    const isQualifier = header === 'Qualifier';
 
     useEffect(() => {
         setShuffledOptions(shuffleArray([...options]));
@@ -94,6 +104,15 @@ export const MultipleChoiceQuestion = ({
                     {isAnswered && (
                         <div className="mt-3" style={answerStyle} id="feedback">
                             {isCorrect ? correctFeedback : incorrectFeedback}
+                        </div>
+                    )}
+                    {isAnswered && !isCorrect && !isQualifier && (
+                        <div className="mt-3">
+                            <button
+                                className="btn btn-sm btn-warning"
+                                onClick={handleRetry}>
+                                Retry
+                            </button>
                         </div>
                     )}
                 </div>
