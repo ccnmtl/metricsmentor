@@ -37,13 +37,16 @@ export const SimulationOneQuiz = ({
                 setIsSubmitted(false);
                 setCompletedChoices([...completedChoices, choiceKey]);
                 setShowQualifier(true);
+                setShowRedoButton(false);
             } else {
                 setCompletedChoices([...completedChoices, choiceKey]);
                 setSelectedAltHypothesis(null);
                 setIsSubmitted(true);
+                setShowRedoButton(false);
             }
             if (plotType === '3d' && choiceKey === 'A') {
                 setShowContinueToB(true);
+                setShowRedoButton(false);
             }
         } else {
             if (choiceKey === 'A') {
@@ -252,12 +255,12 @@ export const SimulationOneQuiz = ({
                                 className="katex-inline"/> Perform a
                                 hypothesis test against the null hypothesis.
                         </p>
-                        <ol className="listset-alpha listset-alpha-listnum">
+                        <ol className="listset-alpha listset-alpha-listnum"
+                            key={completedChoices.length}>
                             {/* Choice A default display */}
                             {renderChoice('A', '\\Eta_1: {\\beta_1}{\\neq} ')}
 
-                            {completedChoices.includes('A') &&
-                            isTakeawayCorrect.A && (
+                            {completedChoices.includes('A') && (
                                 renderChoice('B', '\\Eta_1: {\\beta_1}{\\gt} ')
                             )}
                             {completedChoices.includes('B') && (
@@ -530,7 +533,7 @@ export const SimulationOneQuiz = ({
                         would be smaller.
                     </span>,
                     <span>
-                        Excellent! You have correctly identified the correct
+                        Excellent! You identified the correct
                         answer.
                     </span>,
                     <span>
