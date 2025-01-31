@@ -4,6 +4,7 @@ import { HypothesisTest } from './hypothesisTest';
 import { MultipleChoiceQuestion } from './multipleChoiceQuestion';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
+import { questionsData } from './questionsData';
 
 export const SimulationOneQuiz = ({
     appRvalue, tvalue, n, setIsCompleted,
@@ -146,58 +147,60 @@ export const SimulationOneQuiz = ({
         </li>
     );
 
-    const renderTakeawayQuestion = (
-        choiceKey, question, options, answer, correctFeedback,
-        incorrectFeedback, questionNumber) => {
-        const userAnswer = answers.find(
-            answer => answer.question_number === questionNumber);
+    const renderTakeawayQuestion = (questionId) => {
+        const questionData = questionsData.find(q => q.id === questionId);
+
+        if (!questionData) return null;
+
         return (
             <MultipleChoiceQuestion
-                question={question}
-                header={'Takeaway'}
-                options={options}
-                answer={answer}
+                question={questionData.question}
+                header={questionData.header}
+                options={questionData.options}
+                answer={questionData.correctOption}
                 submissionId={submissionId}
-                questionNumber={questionNumber}
+                questionNumber={questionId}
                 isSubmitted={isSubmitted}
                 setIsSubmitted={
-                    (correct) => handleTakeawaySubmit(choiceKey, correct)}
+                    (correct) => handleTakeawaySubmit(
+                        questionData.choiceKey, correct)}
                 questionStyle={{}}
                 optionStyle={{}}
                 answerStyle={{}}
-                userAnswer={userAnswer}
-                correctFeedback={correctFeedback}
-                incorrectFeedback={incorrectFeedback}
-                idkey={`${choiceKey}-${plotType}`}
+                correctFeedback={questionData.feedback.correct}
+                incorrectFeedbackMap={questionData.feedback.incorrect}
+                idkey={`takeaway-${questionId}-${plotType}`}
             />
         );
     };
 
-    const renderQualifierQuestion = (
-        question, options, answer, correctFeedback,
-        incorrectFeedback, questionNumber) => {
+    const renderQualifierQuestion = (questionId) => {
+        const questionData = questionsData.find(q => q.id === questionId);
+        if (!questionData) return null;
         const userAnswer = answers.find(
-            answer => answer.question_number === questionNumber);
+            answer => answer.question_number === questionId);
+
         return (
             <MultipleChoiceQuestion
-                question={question}
+                question={questionData.question}
                 header={'Qualifier'}
-                options={options}
-                answer={answer}
+                options={questionData.options}
+                answer={questionData.correctOption}
                 submissionId={submissionId}
-                questionNumber={questionNumber}
+                questionNumber={questionId}
                 isSubmitted={isSubmitted}
                 setIsSubmitted={handleQualifierSubmit}
                 questionStyle={{}}
                 optionStyle={{}}
                 answerStyle={{}}
                 userAnswer={userAnswer}
-                correctFeedback={correctFeedback}
-                incorrectFeedback={incorrectFeedback}
-                idkey={'qualifier'}
+                correctFeedback={questionData.feedback.correct}
+                incorrectFeedbackMap={questionData.feedback.incorrect}
+                idkey={`qualifier-${questionId}`}
             />
         );
     };
+
 
     useEffect(() => {
         isCompletedfunc();
@@ -292,96 +295,13 @@ export const SimulationOneQuiz = ({
             )}
             {isHypothesisCompleted && selectedAltHypothesis === 'A'
                 && plotType === '2d' && (
-                renderTakeawayQuestion('A',
-                    <span>
-                        Based on what you have learned from this
-                        exercise, which of the following is true?
-                    </span>,
-                    [<span key="option1">
-                        The closer the correlation between y and x<sub>1</sub>
-                        &nbsp;is to one, the <strong>less likely </strong>
-                        it is to reject the null hypothesis β<sub>1</sub> = 0.
-                    </span>,
-                    <span key="option2">
-                        The closer the correlation between y and x<sub>1</sub>
-                        &nbsp;is to negative one, the <strong>less likely
-                        </strong>&nbsp;
-                        it is to reject the null hypothesis β<sub>1</sub> = 0.
-                    </span>,
-                    <span key="option3">
-                        The closer the correlation between y and x<sub>1</sub>
-                        &nbsp;is to zero, the <strong>more likely </strong>
-                        it is to reject the null hypothesis β<sub>1</sub> = 0.
-                    </span>,
-                    <span key="option4">
-                        The closer the correlation between y and x<sub>1</sub>
-                        &nbsp;is to zero, the <strong>less likely </strong>
-                        it is to reject the null hypothesis β<sub>1</sub> = 0.
-                    </span>,
-                    <span key="option5">
-                        None of these are correct
-                    </span>],
-
-                    <span>
-                        The closer the correlation between y and x<sub>1</sub>
-                        &nbsp;is to zero, the less likely it is to reject the
-                        null hypothesis β<sub>1</sub> = 0.
-                    </span>,
-                    <span>
-                        Excellent! You have correctly identified that a
-                        higher correlation between the dependent
-                        variable y and the independent variable x<sub>1</sub>
-                        would mean a non-zero slope.
-                    </span>,
-                    <span>
-                        Incorrect. Remember a higher correlation between the
-                        dependent variable y and the independent variable
-                        x<sub>1</sub> would mean a non-zero slope.
-                    </span>,
-                    7
-                )
+                renderTakeawayQuestion(7)
             )}
             {/* Takeaway Questions */}
             {(selectedAltHypothesis === 'A' || isTakeawayCorrect.A)
                 && !hideTakeaway3d
                 && isHypothesisCompleted && plotType === '3d' && (
-                renderTakeawayQuestion('A',
-                    <span>
-                            As we add x<sub>2</sub> to the regression,
-                    </span>,
-                    [<span key="option1">
-                            The slope of x<sub>1</sub>, B&#770;<sub>1</sub>,
-                            changed.
-                    </span>,
-                    <span key="option2">
-                            The standard error of the slope of x<sub>1</sub>,
-                            SE(B&#770;<sub>1</sub>), changed.
-                    </span>,
-                    <span key="option3">
-                            The intercept of the regression line,
-                            B&#770;<sub>0</sub>, changed.
-                    </span>,
-                    <span key="option4">
-                            All Choices Are Correct
-                    </span>,
-                    ],
-                    <span>
-                            All Choices Are Correct
-                    </span>,
-                    <span>
-                    Excellent! You have correctly identified that when we
-                    add control variables to the regression, the slope of
-                    the variable of interest changes, hence the regression
-                    line and the intercept changes as well.
-                    </span>,
-                    <span>
-                    Incorrect. Remember that when we add control
-                    variables to the regression, the slope of the variable
-                    of interest changes, hence the regression line and the
-                    intercept changes as well.
-                    </span>,
-                    13)
-
+                renderTakeawayQuestion(13)
             )}
 
             {showContinueToB && (
@@ -411,76 +331,7 @@ export const SimulationOneQuiz = ({
             {/* Qualifier Question for Choice A */}
             {isTakeawayCorrect.A && plotType !== '3d'
                 && showQualifier && (
-                renderQualifierQuestion(
-                    <span>
-                        If we change the null hypothesis to be
-                        <strong> at least </strong>
-                        a value like zero, then the alternative hypothesis
-                        should change to which one of the following? And
-                        how will that affect the critical value of
-                        your test given the same significance level
-                        as in two sided test
-                    </span>,
-                    [<span key="option1">
-                        The alternative hypothesis must be
-                        <strong> greater than </strong>
-                        the same value,
-                        and the critical value would be larger in
-                        absolute value.
-                    </span>,
-                    <span key="option2">
-                        The alternative hypothesis must be
-                        <strong> greater than </strong>
-                        the same value,
-                        and the critical value would be smaller in
-                        absolute value.
-                    </span>,
-                    <span key="option3">
-                        The alternative hypothesis must be
-                        <strong> less than </strong>
-                        the same value, and
-                        the critical value would be larger in
-                        absolute value.
-                    </span>,
-                    <span key="option4">
-                        The alternative hypothesis must be
-                        <strong> less than </strong>
-                        the same value, and
-                        the critical value would be smaller in
-                        absolute value.
-                    </span>,
-                    ],
-                    <span key="option4">
-                        The alternative hypothesis must be
-                        less than the same value, and
-                        the critical value would be smaller
-                        in absolute value.
-                    </span>,
-                    <span>
-                        Excellent! You have correctly identified
-                        that the null and the alternative
-                        hypotheses must be exhaustive and mutually
-                        exclusive and that we do not need to divide
-                        the significance level by two when it is a
-                        single sided hypothesis.
-                    </span>,
-                    <span>
-                        Remember that the null and the
-                        alternative hypotheses must be exhaustive
-                        and mutually exclusive. Also, remember in a
-                        two-sided hypothesis, (the alternative
-                        hypothesis has &quot;&#8800;&quot; sign),
-                        we divide the significance level by two,
-                        however this is a single sided hypothesis
-                        (the alternative hypothesis has
-                        &quot;&#60;&quot; sign in this case) hence
-                        no need to divide the significance level by
-                        two.
-                        <div className="fw-bold">
-                            Let&apos;s scroll up and continue with choice B!
-                        </div>
-                    </span>,
-                    14)
+                renderQualifierQuestion(14)
             )}
 
             {/* {// WORK IN PROGRESS
@@ -495,54 +346,7 @@ export const SimulationOneQuiz = ({
             {(selectedAltHypothesis === 'C'|| completedChoices.includes('C'))
             && plotType === '2d'
             && isHypothesisCompleted && (
-                renderTakeawayQuestion('C',
-                    <span>
-                        If we change the null hypothesis to be
-                        <strong> at most</strong> a
-                        value like zero, then the alternative hypothesis should
-                        change to which one of the following? And how will that
-                        affect the critical value of your test given the same
-                        significance level as in two sided test
-                    </span>,
-                    [
-                        <span key="option1">
-                            The alternative hypothesis must be
-                            <strong> greater than</strong> the same value, and
-                            the critical value would be larger.
-                        </span>,
-                        <span key="option2">
-                            The alternative hypothesis must be
-                            <strong> greater than</strong> the same value, and
-                            the critical value would be smaller.
-                        </span>,
-                        <span key="option3">
-                            The alternative hypothesis must be
-                            <strong> less than</strong> the same value, and
-                            the critical value would be larger.
-                        </span>,
-                        <span key="option4">
-                            The alternative hypothesis must be
-                            <strong> less than</strong> the same value, and
-                            the critical value would be smaller.
-                        </span>,
-                    ],
-                    <span>
-                        The alternative hypothesis must be
-                        <strong> greater
-                        than</strong> the same value, and the critical value
-                        would be smaller.
-                    </span>,
-                    <span>
-                        Excellent! You identified the correct
-                        answer.
-                    </span>,
-                    <span>
-                        That&apos;s not the right answer. The alternative
-                        hypothesis must be
-                        <strong> greater than</strong> the same
-                        value, and the critical value would be smaller.
-                    </span>,
-                    15)
+                renderTakeawayQuestion(15)
             )}
             {/* Redo button */}
             {showRedoButton &&(
@@ -627,5 +431,7 @@ SimulationOneQuiz.propTypes = {
     selectedAltHypothesis: PropTypes.string,
     setSelectedAltHypothesis: PropTypes.func,
     coursePk: PropTypes.number.isRequired,
-    answers: PropTypes.array
+    answers: PropTypes.array,
+    lockControls: PropTypes.bool,
+    setLockControls: PropTypes.func,
 };

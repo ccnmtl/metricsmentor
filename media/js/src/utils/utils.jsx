@@ -133,19 +133,29 @@ export const formulaText = (content = { title: '', body: [] }, i) => (
  * @returns {string} - The extracted plain text content.
  */
 export const extractTextContent = (element) => {
+    if (!element) return ''; // Handle null/undefined
     if (typeof element === 'string') return element;
 
     return React.Children.toArray(element)
         .map(child => {
-            if (typeof child === 'string')
-                return child;
-            if (React.isValidElement(child))
+            if (typeof child === 'string') {
+                return child; // Directly return text nodes
+            }
+            if (React.isValidElement(child)) {
                 return extractTextContent(child.props.children);
-            return '';
+            }
+            return ''; // Ignore non-text elements like numbers, booleans, etc.
         })
-        .join('');
+        .join(' ')
+        .trim(); // Ensure spacing between words
 };
 
+/**
+ * Generates a seeded random number generator function.
+ * @param {number} seed - The seed value for the random number generator.
+ * @returns {function} - A function that generates a random number between
+ * 0 and 1 based on the seed.
+ */
 export const seededRandom = (seed) => {
     let m = 0x80000000; // 2**31;
     let a = 1103515245;
@@ -156,4 +166,17 @@ export const seededRandom = (seed) => {
         state = (a * state + c) % m;
         return state / (m - 1);
     };
+};
+
+/**
+ * Shuffles an array in place using the Fisher-Yates algorithm.
+ * @param {Array} array - The array to shuffle.
+ * @returns {Array} - The shuffled array.
+ */
+export const shuffleArray = (array) => {
+    for (let i = array.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [array[i], array[j]] = [array[j], array[i]];
+    }
+    return array;
 };
