@@ -5,22 +5,15 @@ import { saveAnswer, extractTextContent } from './../../utils/utils';
 export const MultipleChoiceQuestion = ({
     isSubmitted, setIsSubmitted, submissionId, questionNumber,
     question, options, answer, header, questionStyle, optionStyle,
-    answerStyle, correctFeedback, incorrectFeedback, idkey }) => {
+    answerStyle, correctFeedback, incorrectFeedbackMap, idkey
+}) => {
     const [selectedOption, setSelectedOption] = useState(null);
     const [isCorrect, setIsCorrect] = useState(null);
-    const [shuffledOptions, setShuffledOptions] = useState([]);
+    // const [shuffledOptions, setShuffledOptions] = useState([]);
     const [isAnswered, setIsAnswered] = useState(false);
 
-    const shuffleArray = (array) => {
-        for (let i = array.length - 1; i > 0; i--) {
-            const j = Math.floor(Math.random() * (i + 1));
-            [array[i], array[j]] = [array[j], array[i]];
-        }
-        return array;
-    };
-
-    const handleOptionSelect = (option) => {
-        setSelectedOption(option);
+    const handleOptionSelect = (optionIndex) => {
+        setSelectedOption(optionIndex);
     };
 
     const handleRetry = () => {
@@ -31,94 +24,98 @@ export const MultipleChoiceQuestion = ({
 
     const handleSubmit = async() => {
         setIsAnswered(true);
-        // eslint-disable-next-line max-len
-        const correct = extractTextContent(selectedOption) === extractTextContent(answer);
+
+        const selectedText = extractTextContent(options[selectedOption]);
+        const correctText = extractTextContent(answer);
+
+        const correct = selectedText === correctText;
         setIsCorrect(correct);
 
         await saveAnswer(submissionId, questionNumber, header,
             extractTextContent(selectedOption), correct, {});
 
-        if (correct) {
-            setIsSubmitted(true);
-        } else {
-            setIsSubmitted(false); // Allow retry for incorrect answers
-        }
+        setIsSubmitted(correct);
     };
 
     const isQualifier = header === 'Qualifier';
 
     useEffect(() => {
-        setShuffledOptions(shuffleArray([...options]));
+        // setShuffledOptions(shuffleArray([...options]));
         document.getElementById(`multiple-${idkey}`).scrollIntoView(
-            { behavior: 'smooth'});
+            { behavior: 'smooth' });
     }, []);
 
     useEffect(() => {
         if (isAnswered) {
             document.getElementById('feedback')
-                .scrollIntoView({ behavior: 'smooth'});
+                .scrollIntoView({ behavior: 'smooth' });
         }
     }, [isAnswered]);
 
-    return (<>
-        <div className="simulation__step-container d-flex">
-            <div className="simulation__step-num">
-                &bull;
-            </div>
-            <div className="simulation__step-toggle--down">
-            </div>
-            <div className="simulation__step-body">
-                <header className="simulation__step-header">
-                    <h2 className="h2-primary">{header}</h2>
-                </header>
-                <div className="simulation__step-content">
-                    <p className="mb-2" style={questionStyle}>
-                        {question}
-                    </p>
-                    <div className="choice-list">
-                        {shuffledOptions.map((option, index) => (
-                            <div key={index} className="form-check">
-                                <input
-                                    className="form-check-input"
-                                    type="radio"
-                                    id={`option-${index}-${idkey}`}
-                                    name={`options-${idkey}-${index}`}
-                                    value={option}
-                                    checked={selectedOption === option}
-                                    onChange={() => handleOptionSelect(option)}
-                                    disabled={isAnswered}
-                                />
-                                <label className="form-check-label"
-                                    htmlFor={`option-${index}-${idkey}`}
-                                    style={optionStyle}>
-                                    {option}
-                                </label>
+    return (
+        <>
+            <div className="simulation__step-container d-flex">
+                <div className="simulation__step-num">
+                        &bull;
+                </div>
+                <div className="simulation__step-toggle--down">
+                </div>
+                <div className="simulation__step-body">
+                    <header className="simulation__step-header">
+                        <h2 className="h2-primary">{header}</h2>
+                    </header>
+                    <div className="simulation__step-content">
+                        <p className="mb-2" style={questionStyle}>
+                            {question}
+                        </p>
+                        <div className="choice-list">
+                            {options.map((option, index) => (
+                                <div key={index} className="form-check">
+                                    <input
+                                        className="form-check-input"
+                                        type="radio"
+                                        id={`option-${index}-${idkey}`}
+                                        name={`options-${idkey}`}
+                                        value={index}
+                                        checked={selectedOption === index}
+                                        onChange={
+                                            () => handleOptionSelect(index)}
+                                        disabled={isAnswered}
+                                    />
+                                    <label className="form-check-label"
+                                        htmlFor={`option-${index}-${idkey}`}
+                                        style={optionStyle}>
+                                        {option}
+                                    </label>
+                                </div>
+                            ))}
+                        </div>
+                        <button
+                            className="btn btn-sm btn-success mt-3"
+                            id={`multiple-${idkey}`}
+                            disabled={isAnswered || selectedOption === null}
+                            onClick={handleSubmit}>Submit</button>
+                        {isAnswered && (
+                            <div className="mt-3"
+                                style={answerStyle} id="feedback">
+                                {/* eslint-disable-next-line max-len */}
+                                {isCorrect ? correctFeedback : incorrectFeedbackMap[selectedOption]}
                             </div>
-                        ))}
+                        )}
+                        {isAnswered && !isCorrect && !isQualifier && (
+                            <div className="mt-3">
+                                <button
+                                    className="btn btn-sm btn-warning"
+                                    onClick={handleRetry}>
+                                        Retry
+                                </button>
+                            </div>
+                        )}
                     </div>
-                    <button
-                        className="btn btn-sm btn-success mt-3"
-                        id={`multiple-${idkey}`}
-                        disabled={isAnswered || !selectedOption}
-                        onClick={handleSubmit}>Submit</button>
-                    {isAnswered && (
-                        <div className="mt-3" style={answerStyle} id="feedback">
-                            {isCorrect ? correctFeedback : incorrectFeedback}
-                        </div>
-                    )}
-                    {isAnswered && !isCorrect && !isQualifier && (
-                        <div className="mt-3">
-                            <button
-                                className="btn btn-sm btn-warning"
-                                onClick={handleRetry}>
-                                Retry
-                            </button>
-                        </div>
-                    )}
                 </div>
             </div>
-        </div> {/* div class=simulation__step-container */}
-    </>);
+        </>
+    );
 };
 
 MultipleChoiceQuestion.propTypes = {
@@ -134,6 +131,6 @@ MultipleChoiceQuestion.propTypes = {
     optionStyle: PropTypes.object,
     answerStyle: PropTypes.object,
     correctFeedback: PropTypes.object,
-    incorrectFeedback: PropTypes.object,
+    incorrectFeedbackMap: PropTypes.object.isRequired,
     idkey: PropTypes.string
 };
