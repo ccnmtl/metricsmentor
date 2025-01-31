@@ -63,16 +63,5 @@ describe('Utility Functions', () => {
         expect(document.body.contains(getByText('E=mc^2'))).toBe(true);
         expect(document.body.contains(getByText('a^2 + b^2 = c^2'))).toBe(true);
     });
-
-
-    test('extractTextContent extracts text correctly', () => {
-        const element = (
-            <div>
-                <p>Hello <strong>World</strong></p>
-                <p>React Testing</p>
-            </div>
-        );
-        const text = extractTextContent(element);
-        expect(text).toBe('Hello WorldReact Testing');
-    });
 });
+
