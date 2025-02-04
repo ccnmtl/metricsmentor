@@ -144,18 +144,12 @@ export const questionsData = [
             (meaning greater than or equal to),
             the alternative hypothesis must be <strong> less than </strong>
             not <strong> greater than.</strong>
-                        <div className="fw-bold">
-                            Let&apos;s scroll up and continue with choice B!
-                        </div>
                     </span>
                 ),
                 1: (
                     <span>
             Let’s try again! You correctly identified that we do not divide the
             significance level by two in a single-sided alternative hypothesis.
-                        <div className="fw-bold">
-                            Let&apos;s scroll up and continue with choice B!
-                        </div>
                     </span>
                 ),
                 2: (
@@ -163,9 +157,6 @@ export const questionsData = [
             Let’s try again! You correctly identified the alternative
             hypothesis, but remember, in a two-sided hypothesis, we divide the
             significance level by two.
-                        <div className="fw-bold">
-                            Let&apos;s scroll up and continue with choice B!
-                        </div>
                     </span>
                 ),
             },

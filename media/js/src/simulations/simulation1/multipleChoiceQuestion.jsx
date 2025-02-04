@@ -96,11 +96,18 @@ export const MultipleChoiceQuestion = ({
                             disabled={isAnswered || selectedOption === null}
                             onClick={handleSubmit}>Submit</button>
                         {isAnswered && (
-                            <div className="mt-3"
-                                style={answerStyle} id="feedback">
-                                {/* eslint-disable-next-line max-len */}
-                                {isCorrect ? correctFeedback : incorrectFeedbackMap[selectedOption]}
+                            <div className={
+                                `form-check mt-3 mb-3
+                                ${isCorrect ? 'text-success' : 'text-danger'}`}
+                            id="feedback" role="alert">
+                                {isCorrect ? correctFeedback
+                                    : incorrectFeedbackMap[selectedOption]}
                             </div>
+                        )}
+                        {isAnswered && !isCorrect && isQualifier && (
+                            <span className="fw-bold form-check mt-3 mb-3">
+                                Let&apos;s scroll up and continue with choice B!
+                            </span>
                         )}
                         {isAnswered && !isCorrect && !isQualifier && (
                             <div className="mt-3">
