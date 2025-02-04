@@ -17,7 +17,7 @@ locals().update(
     ))
 
 SENTRY_DSN = os.environ.get('SENTRY_DSN')
-SNETRY_KEY = os.environ.get('SENTRY_KEY')
+SENTRY_KEY = os.environ.get('SENTRY_KEY')
 
 
 if hasattr(settings, 'SENTRY_DSN'):
