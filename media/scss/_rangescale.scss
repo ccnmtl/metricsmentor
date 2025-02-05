@@ -41,14 +41,6 @@
     }
     & .unit:nth-child(3) {
         border-right: 0;
-        height: 0.5rem;
-        &::after {
-            content: "-0.5";
-            position: absolute;
-            bottom: -1.25rem;
-            font: 0.75rem/1 sans-serif;
-            margin-left: -0.75rem;
-        }
     }
     & .unit:nth-child(4) {
         border-right: 0;
@@ -69,14 +61,6 @@
     }
     & .unit:nth-child(7) {
         border-right: 0;
-        height: 0.5rem;
-        &::after {
-            content: "0.5";
-            position: absolute;
-            bottom: -1.25rem;
-            font: 0.75rem/1 sans-serif;
-            margin-left: -0.5rem;
-        }
     }
     & .unit:nth-child(8) {
         border-right: 0;

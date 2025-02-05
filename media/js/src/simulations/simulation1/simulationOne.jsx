@@ -248,8 +248,12 @@ export const SimulationOne = () => {
                                                 onChange={
                                                     handleYcorrelationChange} />
                                             <div className="scale-value">
-                                                <Katex tex={
-                                                    `${yCorrelation}`} />
+                                                {slope !== null && (
+                                                    <Katex tex={
+                                                        `${
+                                                            appRvalue.toFixed(3)
+                                                        }`} />
+                                                )}
                                             </div>
                                         </div>
                                         <div className="slider-range__scale">
@@ -288,8 +292,11 @@ export const SimulationOne = () => {
                                                 onChange={
                                                     handleXcorrelationChange} />
                                             <div className="scale-value">
-                                                <Katex tex={`${xCorrelation}`}
-                                                />
+                                                {slopes.length > 0 && (
+                                                    <Katex tex={`${
+                                                        appRvalue3d.toFixed(3)}`
+                                                    } />
+                                                )}
                                             </div>
                                         </div>
                                         <div className="slider-range__scale">
