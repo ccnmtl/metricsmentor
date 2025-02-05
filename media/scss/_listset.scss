@@ -163,7 +163,8 @@
     align-self: center;
 }
 
-.answer-incorrect-container {
+.answer-incorrect-container,
+.alert-incorrect-container {
     display: flex;
     flex-direction: row;
     align-items: center;
@@ -175,7 +176,12 @@
     font-size: 0.875rem;
 }
 
-.answer-incorrect {
+.alert-incorrect-container {
+    font-size: 0.875rem !important;
+}
+
+.answer-incorrect,
+.alert-incorrect {
     display: inline-block;
     margin-right: 0.5rem;
     width: 1.25rem;
@@ -187,10 +193,11 @@
     font-family: "Gentium Plus", serif;
     font-weight: 700;
     line-height: 1.25rem;
-    font-size: 2rem;
+    font-size: 2rem !important;
     text-align: center;
     align-self: center;
 }
+
 
 .hypothesis-completed .status-complete {
     display: inline-block !important;

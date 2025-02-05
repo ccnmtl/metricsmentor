@@ -178,32 +178,20 @@ export const SimulationOne = () => {
                         </header>
                         <div className="simulation__step-content">
                             {plotType === '2d' && (
-                                <p>
-                                    Let&rsquo;s start by setting up your graph.
-                                    First define the parameters for generating
-                                    random data points. Specify the sample
-                                    size <Katex tex={'n'}
-                                        className="katex-inline"/> and
-                                    the estimated correlation coefficient
-                                    <Katex tex={'\\text{corr}(x,y)'}
-                                        className="katex-inline" />.
-                                </p>
+                                <p>Let&rsquo;s start setting up the parameters
+                                to generate random data points for your
+                                graph.</p>
                             )}
                             {plotType === '3d' && (
-                                <p>
-                                    Let&rsquo;s introduce another variable to
-                                    your graph, <Katex tex={'x_2'}
-                                        className="katex-inline"/>.
-                                    Sample size <Katex tex={'n'}
-                                        className="katex-inline"/> and
-                                    <Katex tex={'\\text{corr}(x_1,y)'}
-                                        className="katex-inline" /> are set
-                                    in the previous section. Here, you
-                                    can specify the estimated correlation
-                                    coefficient <Katex
-                                        tex={'\\text{corr}(x_1,x_2)'}
-                                        className="katex-inline" />.
-                                </p>
+                                <p>Let&rsquo;s introduce another variable to
+                                your graph, <Katex tex={'x_2'}
+                                    className="katex-inline"/> and <Katex
+                                    tex={'\\text{corr}(x_1,x_2)'}
+                                    className="katex-inline" />.
+                                <Katex tex={'n'} className="katex-inline"/> and
+                                <Katex tex={'\\text{corr}(x_1,y)'}
+                                    className="katex-inline" /> are values from
+                                the previous section.</p>
                             )}
                             <div className="mt-4 d-flex">
                                 <label htmlFor="nSampleSize"
@@ -216,23 +204,29 @@ export const SimulationOne = () => {
                                 </label>
                                 <input type="number" min="50" max="500"
                                     id="nSampleSize"
-                                    className="form-control short-input"
+                                    className="form-control extra-short-input"
                                     disabled={
                                         is2DCompleted || lockControls}
                                     value={N}
                                     onBlur={handleNBlur}
                                     onChange={handleNChange} />
+                                {isNInvalid && (<>
+                                    <div className="alert-incorrect-container
+                                        ms-2">
+                                        <div className="alert-incorrect">!</div>
+                                        <div>
+                                            <Katex tex={'50 \\leq n \\leq 500'}
+                                                className="katex-inline" />
+                                        </div>
+                                    </div>
+                                </>)}
                             </div>
-                            {isNInvalid && (
-                                <div className="text-danger mt-2">
-                                For practical purposes n is between 50 and 500
-                                </div>
-                            )}
                             {plotType === '2d' && (
                                 <div className="mt-4">
                                     <label htmlFor="correlation"
-                                        className="h2 form-label">
-                                    Estimated <Katex tex={'\\text{corr}(x,y)'}
+                                        className="h2 form-label">Correlation
+                                    coefficient <Katex
+                                            tex={'\\text{corr}(x,y)'}
                                             className="katex-inline" />:
                                     </label>
                                     <div className="slider-range__box">
@@ -249,21 +243,16 @@ export const SimulationOne = () => {
                                                     handleYcorrelationChange} />
                                             <div className="scale-value">
                                                 {slope !== null && (
-                                                    <Katex tex={
-                                                        `${
-                                                            appRvalue.toFixed(3)
-                                                        }`} />
+                                                    <div className="hi-val">
+                                                        <Katex tex={`${
+                                                            appRvalue.toFixed(
+                                                                3)}`}
+                                                        />
+                                                    </div>
                                                 )}
                                             </div>
                                         </div>
                                         <div className="slider-range__scale">
-                                            <div className="unit"></div>
-                                            <div className="unit"></div>
-                                            <div className="unit"></div>
-                                            <div className="unit"></div>
-                                            <div className="unit"></div>
-                                            <div className="unit"></div>
-                                            <div className="unit"></div>
                                             <div className="unit"></div>
                                             <div className="unit"></div>
                                         </div>
@@ -273,8 +262,8 @@ export const SimulationOne = () => {
                             {plotType === '3d' && (
                                 <div className="mt-4">
                                     <label htmlFor="correlation"
-                                        className="h2 form-label">
-                                        Estimated <Katex
+                                        className="h2 form-label">Correlation
+                                        coefficient <Katex
                                             tex={'\\text{corr}(x_1,x_2)'}
                                             className="katex-inline" />:
                                     </label>
@@ -293,58 +282,21 @@ export const SimulationOne = () => {
                                                     handleXcorrelationChange} />
                                             <div className="scale-value">
                                                 {slopes.length > 0 && (
-                                                    <Katex tex={`${
-                                                        appRvalue3d.toFixed(3)}`
-                                                    } />
+                                                    <div className="hi-val">
+                                                        <Katex tex={
+                                                            `${appRvalue3d
+                                                                .toFixed(3)
+                                                            }`} />
+                                                    </div>
                                                 )}
                                             </div>
                                         </div>
                                         <div className="slider-range__scale">
                                             <div className="unit"></div>
                                             <div className="unit"></div>
-                                            <div className="unit"></div>
-                                            <div className="unit"></div>
-                                            <div className="unit"></div>
-                                            <div className="unit"></div>
-                                            <div className="unit"></div>
-                                            <div className="unit"></div>
-                                            <div className="unit"></div>
                                         </div>
                                     </div>
                                 </div>
-                            )}
-                            {slopes.length > 0 && plotType === '3d' && (
-                                <>
-                                    <div className="mt-5 h2">
-                                    Calculated <Katex
-                                            tex={'\\text{corr}(x_1,x_2)'}
-                                            className="katex-inline" />:
-                                        <div
-                                            className="hi-val ms-2">
-                                            <Katex
-                                                tex={
-                                                    `${appRvalue3d.toFixed(3)}`
-                                                }
-                                                className="katex-inline" />
-                                        </div>
-                                    </div>
-                                </>
-                            )}
-                            {slope !== null && (
-                                <>
-                                    <div className="mt-5 h2">
-                                        Calculated
-                                        <Katex
-                                            tex={'\\text{corr}(x,y)'}
-                                            className="katex-inline" />:
-                                        <div
-                                            className="hi-val ms-2">
-                                            <Katex
-                                                tex={`${appRvalue.toFixed(3)}`}
-                                                className="katex-inline" />
-                                        </div>
-                                    </div>
-                                </>
                             )}
                         </div>
                     </div>

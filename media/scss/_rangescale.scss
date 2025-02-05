@@ -1,12 +1,11 @@
 .slider-range__input {
     display: flex;
     width: 100%;
-    margin-bottom: 0.5rem;
     .form-range {
-        width: calc(100% - 4rem);
+        width: 22rem;
     }
     .scale-value {
-        width: 3rem;
+        width: 6rem;
         padding-left: 1rem;
         text-align: left;
     }
@@ -23,7 +22,7 @@
         border-right: 0.0625rem solid $gray-md-600;
         border-collapse: separate;
         height: 0.25rem;
-        width: calc(100%/8 - 0.6125rem);
+        width: calc(22rem - 0.875rem);
     }
     & .unit:nth-child(1) {
         border-right: 0;
@@ -37,35 +36,6 @@
         }
     }
     & .unit:nth-child(2) {
-        border-right: 0;
-    }
-    & .unit:nth-child(3) {
-        border-right: 0;
-    }
-    & .unit:nth-child(4) {
-        border-right: 0;
-    }
-    & .unit:nth-child(5) {
-        border-right: 0;
-        height: 0.5rem;
-        &::after {
-            content: "0";
-            position: absolute;
-            bottom: -1.25rem;
-            font: 0.75rem/1 sans-serif;
-            margin-left: -0.25rem;
-        }
-    }
-    & .unit:nth-child(6) {
-        border-right: 0;
-    }
-    & .unit:nth-child(7) {
-        border-right: 0;
-    }
-    & .unit:nth-child(8) {
-        border-right: 0;
-    }
-    & .unit:nth-child(9) {
         border-right: 0;
         height: 0.5rem;
         width: 4rem;
