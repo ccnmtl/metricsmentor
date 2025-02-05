@@ -28,13 +28,15 @@ export const SimIntro = ({plotType}) => {
                     </header>
                     <div className="simulation__step-content">
                         <p>
-                            In this simulation, you&rsquo;ll learn about
+                            In this simulation, you&rsquo;ll revisit
                             hypothesis testing for the population slope
-                            in simple and multiple regression models.
-                            You&rsquo;ll be able to visualize the relationship
-                            between two, or three variables, and generate
-                            data to test the null hypothesis that the
-                            population slope is equal to a specified value.
+                            in simple and multiple regression models. Using
+                            generated data, you&rsquo;ll review the
+                            methodology involved in hypothesis testing,
+                            including the interpretation of
+                            <Katex tex={'p'} className="katex-inline" />-values
+                            and <Katex tex={'critical~values'}
+                                className="katex-inline"/>.
                         </p>
                         <p>
                             This glossary will help you review
@@ -60,24 +62,23 @@ export const SimIntro = ({plotType}) => {
                     </header>
                     {plotType === '2d' && (
                         <div className="simulation__step-content">
-                            <p>
-                                The sample size <Katex tex={'n'}
-                                    className="katex-inline"/> and the
-                                correlation between the dependent variable
-                                <Katex tex={'y'}
-                                    className="katex-inline"/> and the
-                                independent variable <Katex tex={'x'}
-                                    className="katex-inline"/> can
+                            <p>The learning goal is to understand that the
+                            sample size &mdash;<Katex tex={'n'}
+                                className="katex-inline"/>, and the
+                            correlation between the dependent and independent
+                            variables <Katex tex={'y'}
+                                className="katex-inline"/> and <Katex tex={'x'}
+                                className="katex-inline"/> &mdash; <Katex
+                                tex={'\\text{corr}(x,y)'}
+                                className="katex-inline"/> &mdash; can
                                 significantly influence the outcomes of your
-                                hypothesis tests about the population
-                                parameters.
-                            </p>
-                            <p>
-                                Consider how the choice of the correlation
-                                coefficient <Katex tex={'\\text{corr}(x,y)'}
-                                    className="katex-inline"/> and/or the
-                                sample size can influence your decision
-                                regarding the null hypothesis.
+                                hypothesis tests on the population
+                                parameters.</p>
+                            <p>Consider how the choice 
+                            of <Katex tex={'\\text{corr}(x,y)'}
+                                className="katex-inline"/> and <Katex tex={'n'}
+                                className="katex-inline"/> can influence your
+                                decision regarding the null hypothesis.
                             </p>
                         </div>
 

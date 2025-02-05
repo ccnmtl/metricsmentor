@@ -178,32 +178,20 @@ export const SimulationOne = () => {
                         </header>
                         <div className="simulation__step-content">
                             {plotType === '2d' && (
-                                <p>
-                                    Let&rsquo;s start by setting up your graph.
-                                    First define the parameters for generating
-                                    random data points. Specify the sample
-                                    size <Katex tex={'n'}
-                                        className="katex-inline"/> and
-                                    the estimated correlation coefficient
-                                    <Katex tex={'\\text{corr}(x,y)'}
-                                        className="katex-inline" />.
-                                </p>
+                                <p>Let&rsquo;s start setting up the parameters
+                                to generate random data points for your
+                                graph.</p>
                             )}
                             {plotType === '3d' && (
-                                <p>
-                                    Let&rsquo;s introduce another variable to
-                                    your graph, <Katex tex={'x_2'}
-                                        className="katex-inline"/>.
-                                    Sample size <Katex tex={'n'}
-                                        className="katex-inline"/> and
-                                    <Katex tex={'\\text{corr}(x_1,y)'}
-                                        className="katex-inline" /> are set
-                                    in the previous section. Here, you
-                                    can specify the estimated correlation
-                                    coefficient <Katex
-                                        tex={'\\text{corr}(x_1,x_2)'}
-                                        className="katex-inline" />.
-                                </p>
+                                <p>Let&rsquo;s introduce another variable to
+                                your graph, <Katex tex={'x_2'}
+                                    className="katex-inline"/> and <Katex
+                                    tex={'\\text{corr}(x_1,x_2)'}
+                                    className="katex-inline" />.
+                                <Katex tex={'n'} className="katex-inline"/> and
+                                <Katex tex={'\\text{corr}(x_1,y)'}
+                                    className="katex-inline" /> are values from
+                                the previous section.</p>
                             )}
                             <div className="mt-4 d-flex">
                                 <label htmlFor="nSampleSize"
