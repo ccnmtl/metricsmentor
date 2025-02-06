@@ -14,31 +14,31 @@ export const questionsData = [
         ),
         options: [
             <span key="option1">
-        The closer the correlation between y and x<sub>1</sub> is to one, the
+        A. The closer the correlation between y and x<sub>1</sub> is to one, the
                 <strong> less likely</strong> it is to reject the null
                 hypothesis <Katex tex={' \\beta_1 = 0'} />.
             </span>,
             <span key="option2">
-        The closer the correlation between y and x<sub>1</sub> is to negative
+        B. The closer the correlation between y and x<sub>1</sub> is to negative
         one, the <strong> less likely</strong> it is to reject the null
         hypothesis <Katex tex={' \\beta_1 = 0'} />.
             </span>,
             <span key="option3">
-        The closer the correlation between y and x<sub>1</sub> is to zero, the
-                <strong> more likely</strong> it is to reject the null
+        C. The closer the correlation between y and x<sub>1</sub> is to zero,
+        the <strong> more likely</strong> it is to reject the null
                 hypothesis <Katex tex={' \\beta_1 = 0'} />.
             </span>,
             <span key="option4">
-        The closer the correlation between y and x<sub>1</sub> is to zero, the
-                <strong> less likely</strong> it is to reject the null
+        D. The closer the correlation between y and x<sub>1</sub> is to zero,
+        the <strong> less likely</strong> it is to reject the null
                 hypothesis <Katex tex={' \\beta_1 = 0'} />.
             </span>,
-            <span key="option5">None of these are correct.</span>,
+            <span key="option5">E. None of these are correct.</span>,
         ],
         correctOption:
         <span key="option4">
-        The closer the correlation between y and x<sub>1</sub> is to zero, the
-            <strong> less likely</strong> it is to reject the null
+        D. The closer the correlation between y and x<sub>1</sub> is to zero,
+        the <strong> less likely</strong> it is to reject the null
                 hypothesis <Katex tex={' \\beta_1 = 0'} />.
         </span>,
         feedback: {
@@ -138,7 +138,7 @@ export const questionsData = [
             incorrect: {
                 0: (
                     <span>
-            Let’s try again! Remember that the null and the alternative
+            Remember that the null and the alternative
             hypotheses must be exhaustive and mutually exclusive. Hence, if the
             null hypothesis is <strong> at least </strong>
             (meaning greater than or equal to),
@@ -148,13 +148,13 @@ export const questionsData = [
                 ),
                 1: (
                     <span>
-            Let’s try again! You correctly identified that we do not divide the
+            You correctly identified that we do not divide the
             significance level by two in a single-sided alternative hypothesis.
                     </span>
                 ),
                 2: (
                     <span>
-            Let’s try again! You correctly identified the alternative
+            You correctly identified the alternative
             hypothesis, but remember, in a two-sided hypothesis, we divide the
             significance level by two.
                     </span>
@@ -168,7 +168,7 @@ export const questionsData = [
         choiceKey: 'C',
         question: (
             <span>
-        If we change the null hypothesis to be <strong> at most</strong>
+        If we change the null hypothesis to be <strong> at most </strong>
         a value like zero, then
         the alternative hypothesis should change to which one of the following?
         And how will that affect the critical value of your test given the same
@@ -177,27 +177,27 @@ export const questionsData = [
         ),
         options: [
             <span key="option1">
-        The alternative hypothesis must be <strong> greater than</strong>
+        The alternative hypothesis must be <strong> greater than </strong>
         the same value, and the critical value would be larger.
             </span>,
             <span key="option2">
-        The alternative hypothesis must be <strong> greater than</strong>
+        The alternative hypothesis must be <strong> greater than </strong>
         the same value, and the critical value would be smaller.
             </span>,
             <span key="option3">
-        The alternative hypothesis must be <strong> less than</strong>
+        The alternative hypothesis must be <strong> less than </strong>
         the same value, and the critical value would be larger.
             </span>,
             <span key="option4">
-        The alternative hypothesis must be <strong> less than</strong>
+        The alternative hypothesis must be <strong> less than </strong>
         the same value, and the
         critical value would be smaller.
             </span>,
         ],
         correctOption:
         <span key="option2">
-        The alternative hypothesis must be “greater than” the same value, and
-        the critical value would be smaller.
+        The alternative hypothesis must be <strong> greater than </strong>
+        the same value, and the critical value would be smaller.
         </span>,
         feedback: {
             correct: (

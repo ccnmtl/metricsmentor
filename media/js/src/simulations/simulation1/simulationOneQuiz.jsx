@@ -63,7 +63,7 @@ export const SimulationOneQuiz = ({
             } else {
                 setIsTakeawayCorrect({
                     ...isTakeawayCorrect,
-                    [choiceKey]: true,
+                    [choiceKey]: false,
                 });
                 setIsSubmitted(true);
                 setCompletedChoices([...completedChoices, choiceKey]);
@@ -224,6 +224,13 @@ export const SimulationOneQuiz = ({
                 .scrollIntoView({ behavior: 'smooth'});
         }
     }, [showRedoButton]);
+
+    useEffect(() => {
+        if (isTakeawayCorrect.C) {
+            document.getElementById('completed2d')
+                .scrollIntoView({ behavior: 'smooth'});
+        }
+    }, [isTakeawayCorrect.C]);
 
     useEffect(() => {
         if (isHypothesisCompleted && selectedAltHypothesis === 'B') {
