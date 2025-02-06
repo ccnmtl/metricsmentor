@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 
 export const GraphCoefficients = ({
     intercept, slope, stderror, plotType, slopes, stderrs,
-    intercept3d,
+    intercept3d, n, corr2d, corr3d
 }) => {
 
     return (
@@ -42,23 +42,30 @@ export const GraphCoefficients = ({
                                     `\\hat{y} = ${intercept.toFixed(3)} + ${slope.toFixed(3)}x`} />
                             </div>
                         </div>
-                        <h2>Sample slope coefficient:</h2>
-                        <div className="sub-content">
-                            <div className="katex-block">
-                                <Katex tex={
-                                    `\\hat{\\beta_1} = ${slope.toFixed(3)}`} />
-                            </div>
-                        </div>
-                        <h2>
-                            Standard error of the sample slope:
-                        </h2>
-                        <div className="sub-content">
-                            <div className="katex-block">
-                                <Katex tex={
-                                    // eslint-disable-next-line max-len
-                                    `{SE(\\hat{\\beta_1})} = ${stderror.toFixed(3)}`} />
-                            </div>
-                        </div>
+                        <table className="table table-bordered">
+                            <thead>
+                                <tr>
+                                    <th scope="col"><Katex tex={'n'} /></th>
+                                    <th scope="col"><Katex
+                                        tex={'\\text{corr}(x,y)'} /></th>
+                                    <th scope="col"><Katex
+                                        tex={'\\hat{\\beta_1}'} /></th>
+                                    <th scope="col"><Katex
+                                        tex={'{SE(\\hat{\\beta_1})}'} /></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><Katex tex={`${n}`} /></td>
+                                    <td><Katex
+                                        tex={`${corr2d.toFixed(3)}`} /></td>
+                                    <td><Katex
+                                        tex={`${slope.toFixed(3)}`} /></td>
+                                    <td><Katex
+                                        tex={`${stderror.toFixed(3)}`} /></td>
+                                </tr>
+                            </tbody>
+                        </table>
                     </div>
                 )}
                 {(plotType === '3d' && slopes.length > 0) && (
@@ -123,5 +130,8 @@ GraphCoefficients.propTypes = {
     plotType: PropTypes.string,
     slopes: PropTypes.array,
     stderrs: PropTypes.array,
-    intercept3d: PropTypes.number
+    intercept3d: PropTypes.number,
+    n: PropTypes.number,
+    corr2d: PropTypes.number,
+    corr3d: PropTypes.number
 };

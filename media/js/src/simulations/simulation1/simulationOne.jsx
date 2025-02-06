@@ -310,6 +310,9 @@ export const SimulationOne = () => {
                             stderror={stderror}
                             plotType={plotType}
                             slopes={slopes}
+                            n={N}
+                            corr2d={appRvalue}
+                            corr3d={plotType === '3d' ? appRvalue3d : null}
                             stderrs={stderrs} />
 
                         <NullHypothesisSection
