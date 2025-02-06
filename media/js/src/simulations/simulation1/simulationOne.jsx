@@ -234,8 +234,8 @@ export const SimulationOne = () => {
                                             <input
                                                 type="range"
                                                 step="0.01"
-                                                min="-1"
-                                                max="1" value={yCorrelation}
+                                                min="-0.999"
+                                                max="0.999" value={yCorrelation}
                                                 className="form-range"
                                                 id="correlation"
                                                 disabled={lockControls}
@@ -272,8 +272,8 @@ export const SimulationOne = () => {
                                             <input
                                                 type="range"
                                                 step="0.01"
-                                                min="-1"
-                                                max="1" value={xCorrelation}
+                                                min="-0.999"
+                                                max="0.999" value={xCorrelation}
                                                 className="form-range"
                                                 id="correlation"
                                                 disabled={lockControls}
