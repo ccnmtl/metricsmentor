@@ -106,7 +106,8 @@ export const MultipleChoiceQuestion = ({
                         )}
                         {isAnswered && !isCorrect && isQualifier && (
                             <span className="fw-bold form-check mt-3 mb-3">
-                                Let&apos;s scroll up and continue with choice B!
+                                Let&apos;s scroll up and continue with case B,
+                                a one-sided alternative!
                             </span>
                         )}
                         {isAnswered && !isCorrect && !isQualifier && (
