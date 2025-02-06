@@ -51,6 +51,7 @@ describe('Null Hypothesis', () => {
 
 describe('Alternative Hypothesis', () => {
     it('should show alternate hypothesis A', () => {
+        cy.get('#gotoTesting2d').click();
         cy.get('#choice-A').should('contain', 'Check');
         cy.get('#choice-A').click();
         cy.get('#significance5').click();
@@ -61,6 +62,7 @@ describe('Alternative Hypothesis', () => {
 
 describe('P-Value and Critical Value', () => {
     it('allows entering a p-value and critical value and validating', () => {
+        cy.get('#gotoTesting2d').click();
         cy.get('#choice-A').click();
         cy.get('#significance5').click();
         cy.get('#alphaNextButton').click();
