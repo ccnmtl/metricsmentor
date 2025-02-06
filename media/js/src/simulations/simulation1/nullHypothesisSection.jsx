@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { Katex } from '../../utils/katexComponent';
 import PropTypes from 'prop-types';
 
@@ -7,12 +7,6 @@ export const NullHypothesisSection = ({
     slope, stderror, tvalue, startQuiz, plotType, slopes, stderrs,
     tvalue3d, startQuiz2
 }) => {
-
-    useEffect(() => {
-        document.getElementById('null-hypothesis')
-            .scrollIntoView({ behavior: 'smooth' });
-
-    }, [plotType]);
 
     const tEquation =
     't = \\cfrac{\\hat{\\beta}_1 - \\beta_1}{SE(\\hat{\\beta_1})}';
