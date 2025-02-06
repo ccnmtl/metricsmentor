@@ -63,18 +63,18 @@ export const SimIntro = ({plotType}) => {
                     {plotType === '2d' && (
                         <div className="simulation__step-content">
                             <p>The learning goal is to understand that the
-                            sample size &mdash;<Katex tex={'n'}
+                            sample size, <Katex tex={'n'}
                                 className="katex-inline"/>, and the
                             correlation between the dependent and independent
                             variables <Katex tex={'y'}
                                 className="katex-inline"/> and <Katex tex={'x'}
-                                className="katex-inline"/> &mdash; <Katex
+                                className="katex-inline"/>, <Katex
                                 tex={'\\text{corr}(x,y)'}
-                                className="katex-inline"/> &mdash; can
+                                className="katex-inline"/>, can
                                 significantly influence the outcomes of your
                                 hypothesis tests on the population
                                 parameters.</p>
-                            <p>Consider how the choice 
+                            <p>Consider how the choice
                             of <Katex tex={'\\text{corr}(x,y)'}
                                 className="katex-inline"/> and <Katex tex={'n'}
                                 className="katex-inline"/> can influence your
