@@ -6,7 +6,7 @@ import axios from 'axios';
 
 export const HypothesisTest = ({
     selectedAltHypothesis, appRvalue, tvalue, n,
-    completedChoices, submissionId, plotType, isRedo, setIsRedo, 
+    completedChoices, submissionId, plotType, isRedo, setIsRedo,
     setIsHypothesisCompleted, isHypothesisCompleted, answers, setLockControls
 }) => {
     const [pvalues, setPvalues] = useState(null);
@@ -16,19 +16,19 @@ export const HypothesisTest = ({
     let hypothesis;
     let hypothesisTest;
 
-    const nullHypothesis = `\\Eta_0: {\\beta_1}= 0`;
+    const nullHypothesis = '\\Eta_0: {\\beta_1}= 0';
 
     switch (selectedAltHypothesis) {
     case 'A':
-        hypothesis = `\\Eta_1: {\\beta_1}~{\\neq}~0`;
+        hypothesis = '\\Eta_1: {\\beta_1}~{\\neq}~0';
         hypothesisTest = 'value_two_sided';
         break;
     case 'B':
-        hypothesis = `\\Eta_1: {\\beta_1}~{\\gt}~0`;
+        hypothesis = '\\Eta_1: {\\beta_1}~{\\gt}~0';
         hypothesisTest = 'value_right';
         break;
     case 'C':
-        hypothesis =  `\\Eta_1: {\\beta_1}~{\\lt}~0`;
+        hypothesis =  '\\Eta_1: {\\beta_1}~{\\lt}~0';
         hypothesisTest = 'value_left';
         break;
     default:
@@ -196,5 +196,6 @@ HypothesisTest.propTypes = {
     isRedo: PropTypes.bool,
     setIsRedo: PropTypes.func,
     isHypothesisCompleted: PropTypes.bool,
-    answers: PropTypes.array
+    answers: PropTypes.array,
+    setLockControls: PropTypes.func
 };

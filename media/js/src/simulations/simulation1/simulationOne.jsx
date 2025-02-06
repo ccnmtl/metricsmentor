@@ -149,12 +149,12 @@ export const SimulationOne = () => {
         fetchQuizData(coursePk, 1)
             .then(data => {
                 if (data.submission_id) {
-                    if (plotType === '2d') {
-                        setStartQuiz(true);
-                    } else {
-                        setStartQuiz2(true);
-                    }
-                    setSubmissionId(data.submission_id);
+                    // if (plotType === '2d') {
+                    //     setStartQuiz(true);
+                    // } else {
+                    //     setStartQuiz2(true);
+                    // }
+                    // setSubmissionId(data.submission_id);
                     setAnswers(data.answers);
                 }
             });
