@@ -1,0 +1,21 @@
+.prompt-gfx {
+    width: 1.5625rem;
+    height: 1.5625rem;
+    flex-shrink: 0;
+    display: flex;
+    margin: 0.325rem 0.5rem 0 0;
+    padding: 0.1875rem;
+    justify-content: center; // center horizontally
+    align-items: center; // center vertically
+    float: left;
+    border-radius: 50%;
+    border: 0;
+    background-color: $yellow-300;
+}
+
+.prompt-img {
+    display: block;
+    margin: 0.4rem;
+    width:auto;
+    height: 80%;
+}

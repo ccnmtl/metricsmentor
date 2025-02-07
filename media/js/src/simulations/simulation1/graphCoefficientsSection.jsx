@@ -2,6 +2,8 @@ import React from 'react';
 import { Katex } from '../../utils/katexComponent';
 import PropTypes from 'prop-types';
 
+export const STATIC_URL = window.MetricsMentor.staticUrl;
+
 export const GraphCoefficients = ({
     intercept, slope, stderror, plotType, slopes, stderrs,
     intercept3d, n, corr2d, corr3d
@@ -22,6 +24,11 @@ export const GraphCoefficients = ({
                 {plotType === '2d' && (
                     <div className="simulation__step-content">
                         <p>
+                            <div className="prompt-gfx">
+                                <img src={`${STATIC_URL}/img/icon-bell.svg`}
+                                    className="prompt-img"
+                                    alt="Lightbulb icon: Learning goals" />
+                            </div>
                             Observe how the linear regression
                             coefficients change as you continue to
                             adjust
