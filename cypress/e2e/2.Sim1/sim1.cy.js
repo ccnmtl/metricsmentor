@@ -40,7 +40,7 @@ describe('Graph Data', () => {
 describe('Null Hypothesis', () => {
     it('should navigate through resulting graph coefficients', () => {
         cy.get('#null-hypothesis').should(
-            'contain', 'Defining null hypothesis');
+            'contain', 'Null hypothesis');
     });
 
     it('should move on to alternative hypothesis', () => {
