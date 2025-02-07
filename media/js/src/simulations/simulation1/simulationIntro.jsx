@@ -1,8 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Katex } from '../../utils/katexComponent';
-import { GlossaryModal } from './modalGlossary';
-import { GlossaryButton }    from './glossary';
+import { GlossaryButton } from './glossary';
 
 export const STATIC_URL = window.MetricsMentor.staticUrl;
 
@@ -43,13 +42,12 @@ export const SimIntro = ({plotType}) => {
                             the key terms used here.
                         </p>
                         <GlossaryButton />
-                        <GlossaryModal />
                     </div>
                 </div>
             </div>
             <div className="simulation__step-container d-flex">
                 <div className="simulation__step-num tip-on">
-                    <img src={`${STATIC_URL}/img/icon-lightbulb-regular.svg`}
+                    <img src={`${STATIC_URL}/img/icon-goal.svg`}
                         className="simulation__step-icon"
                         alt="Lightbulb icon: Learning goals" />
                 </div>

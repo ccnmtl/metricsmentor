@@ -21,21 +21,20 @@ export const NullHypothesisSection = ({
             <div className="simulation__step-body">
                 <header className="simulation__step-header">
                     <h2 className="h2-primary" id="null-hypothesis">
-                    Defining null hypothesis</h2>
+                    Null hypothesis</h2>
                 </header>
                 {plotType === '2d' && (
                     <div className="simulation__step-content">
-                        <p>In this exercise, the null
-                        hypothesis (<Katex tex={'{\\Eta_0}'}
-                            className="katex-inline" />) states that the
-                        population slope (<Katex tex={'{\\beta_1}'}
-                            className="katex-inline" />) is equal to a
-                        particular value.
-                        Now, set this value as the baseline claim for
-                        <Katex tex={'{\\Eta_0}'}
-                            className="katex-inline" /> and observe the
-                        outcome of the test statistic
-                        <Katex tex={'t'} className="katex-inline" />.</p>
+                        <p>Here, the null hypothesis, <Katex tex={'{\\Eta_0}'}
+                            className="katex-inline" />, states that the
+                        population slope <Katex tex={'{\\beta_1} = 0'}
+                            className="katex-inline" />.
+                        Continue adjusting <Katex tex={'n'}
+                            className="katex-inline" /> and
+                        <Katex tex={'\\text{corr}(x,y)'}
+                            className="katex-inline" />, and observe the
+                        outcome of the test statistic <Katex tex={'t'}
+                            className="katex-inline" />.</p>
                         <div className="sub-content">
                             <div className="katex-block mt-3">
                                 <Katex tex={
@@ -56,18 +55,15 @@ export const NullHypothesisSection = ({
                 )}
                 {plotType === '3d' && slopes.length > 0 && (
                     <div className="simulation__step-content">
-                        <p>In this exercise, the null
-                        hypothesis (<Katex tex={'{\\Eta_0}'}
-                            className="katex-inline" />) states that the
-                        population slope (<Katex tex={'{\\beta_1}'}
-                            className="katex-inline" />) is equal to a
-                        particular value.
-                        Now, set this value as the baseline claim for
-                        <Katex tex={'{\\Eta_0}'}
-                            className="katex-inline" /> and observe the
-                        outcome of the test statistic
-                        <Katex tex={'t'} className="katex-inline" />.
-                        </p>
+                        <p>Here, the null hypothesis, <Katex tex={'{\\Eta_0}'}
+                            className="katex-inline" />, states that the
+                        population slope <Katex tex={'{\\beta_1} = 0'}
+                            className="katex-inline" />.
+                        Continue adjusting <Katex
+                            tex={'\\text{corr}(x_1,x_2)'}
+                            className="katex-inline" />, and observe the
+                        outcome of the test statistic <Katex tex={'t'}
+                            className="katex-inline" />.</p>
                         <div className="sub-content">
                             <div className="katex-block mt-3">
                                 <Katex tex={
