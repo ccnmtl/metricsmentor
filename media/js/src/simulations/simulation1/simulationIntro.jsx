@@ -27,7 +27,7 @@ export const SimIntro = ({plotType}) => {
                     </header>
                     <div className="simulation__step-content">
                         <p>
-                            In this simulation, you&rsquo;ll revisit
+                            In this simulation, you&rsquo;ll conduct
                             hypothesis testing for the population slope
                             in simple and multiple regression models. Using
                             generated data, you&rsquo;ll review the

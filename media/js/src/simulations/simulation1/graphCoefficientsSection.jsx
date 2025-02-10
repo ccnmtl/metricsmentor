@@ -23,19 +23,20 @@ export const GraphCoefficients = ({
                 </header>
                 {plotType === '2d' && (
                     <div className="simulation__step-content">
-                        <p>
+                        <div className="prompt-block">
                             <div className="prompt-gfx">
                                 <img src={`${STATIC_URL}/img/icon-bell.svg`}
                                     className="prompt-img"
                                     alt="Lightbulb icon: Learning goals" />
                             </div>
-                            Observe how the linear regression
-                            coefficients change as you continue to
-                            adjust
-                            <Katex tex={'n'} className="katex-inline" /> and
-                            <Katex tex={'\\text{corr}(x,y)'}
-                                className="katex-inline" />.
-                        </p>
+                            <p className="mb-0">
+                                Observe how the linear regression coefficients
+                                change as you continue to adjust <Katex
+                                    tex={'n'} className="katex-inline" /> and
+                                <Katex tex={'\\text{corr}(x,y)'}
+                                    className="katex-inline" />.
+                            </p>
+                        </div>
                         <h2>Regression line equation:</h2>
                         <div className="sub-content">
                             <div className="katex-block">

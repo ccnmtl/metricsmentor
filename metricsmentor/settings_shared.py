@@ -75,7 +75,10 @@ PYLTI_CONFIG = {
 }
 
 COURSEAFFILS_COURSESTRING_MAPPER = CourseStringMapper
-
+CSRF_COOKIE_SAMESITE = None
+CSRF_COOKIE_SECURE = False
+SESSION_COOKIE_SAMESITE = None
+SESSION_COOKIE_SECURE = False
 
 if 'integrationserver' in sys.argv:
     ENVIRONMENT = 'testing'
