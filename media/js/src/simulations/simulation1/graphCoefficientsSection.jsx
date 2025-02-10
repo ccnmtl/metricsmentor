@@ -95,7 +95,7 @@ export const GraphCoefficients = ({
                             <p className="mb-0">
                                 Observe how the regression coefficients, and
                                 the plane on the graph change as you continue
-                                to adjust <Katex tex={'\\text{corr}(x_1,x_2).'}
+                                to adjust <Katex tex={'\\text{corr}(x_1,x_2)'}
                                     className="katex-inline" />.
                             </p>
                         </div>
@@ -117,64 +117,51 @@ export const GraphCoefficients = ({
                         <table className="table table-bordered">
                             <thead>
                                 <tr>
-                                    <th scope="col"><Katex tex={'n'} /></th>
-                                    <th scope="col"><Katex
-                                        tex={'\\text{corr}(x,y)'} /></th>
-                                    <th scope="col"><Katex
-                                        tex={'\\text{corr}(x_1,x_2)'} /></th>
-                                    <th scope="col"><Katex
-                                        tex={'\\hat{\\beta_0}'} /></th>
-                                    <th scope="col"><Katex
-                                        tex={'\\hat{\\beta_1}'} /></th>
-                                    <th scope="col"><Katex
-                                        tex={'{SE(\\hat{\\beta_1})}'} /></th>
+                                    <th scope="col">
+                                        Coeff.
+                                    </th>
+                                    <th scope="col">
+                                        For simple<br />regression
+                                    </th>
+                                    <th scope="col">
+                                        For multiple<br />regresssion
+                                    </th>
                                 </tr>
                             </thead>
                             <tbody>
                                 <tr>
-                                    <td><Katex tex={`${n}`} /></td>
+                                    <th scope="col"><Katex
+                                        tex={'\\hat{\\beta_0}'} /></th>
                                     <td><Katex
-                                        tex={`${corr2d.toFixed(3)}`} /></td>
-                                    {(corr3d) && (<>
-                                        <td><Katex
-                                            tex={`${corr3d.toFixed(3)}`} /></td>
-                                        <td><Katex className="hi-val"
-                                            tex={`${intercept3d.toFixed(3)}`} />
-                                        </td>
-                                        <td><Katex className="hi-val"
-                                            tex={`${slopes[0].toFixed(3)}`} />
-                                        </td>
-                                        <td><Katex className="hi-val"
-                                            tex={`${stderrs[0].toFixed(3)}`} />
-                                        </td>
-                                    </>)}
+                                        tex={`${intercept.toFixed(3)}`} />
+                                    </td>
+                                    <td><Katex className="hi-val"
+                                        tex={`${intercept3d.toFixed(3)}`} />
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th scope="col"><Katex
+                                        tex={'\\hat{\\beta_1}'} /></th>
+                                    <td><Katex
+                                        tex={`${slope.toFixed(3)}`} />
+                                    </td>
+                                    <td><Katex className="hi-val"
+                                        tex={`${slopes[0].toFixed(3)}`} />
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <th scope="col"><Katex
+                                        tex={'{SE(\\hat{\\beta_1})}'} /></th>
+                                    <td><Katex
+                                        tex={`${stderror.toFixed(3)}`} />
+                                    </td>
+                                    <td><Katex className="hi-val"
+                                        tex={`${stderrs[0].toFixed(3)}`} />
+                                    </td>
                                 </tr>
                             </tbody>
                         </table>
-
-                        <h2>Sample slope coefficients:</h2>
-                        <div className="sub-content">
-                            <div className="katex-block">
-                                <Katex tex={
-                                    // eslint-disable-next-line max-len
-                                    `\\hat{\\beta_1} = ${slopes[0].toFixed(3)}`} />
-                            </div>
-                            <div className="katex-block">
-                                <Katex tex={
-                                    // eslint-disable-next-line max-len
-                                    `\\hat{\\beta_2} = ${slopes[1].toFixed(3)}`} />
-                            </div>
-                        </div>
-                        <h2>
-                            Standard error of the sample slope:
-                        </h2>
-                        <div className="sub-content">
-                            <div className="katex-block">
-                                <Katex tex={
-                                    // eslint-disable-next-line max-len
-                                    `{SE(\\hat{\\beta_1})} = ${stderrs[0].toFixed(3)}`} />
-                            </div>
-                        </div>
+                        <GlossaryButton />
                     </div>
                 )}
             </div>
