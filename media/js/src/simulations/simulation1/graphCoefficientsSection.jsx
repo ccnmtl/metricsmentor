@@ -1,6 +1,7 @@
 import React from 'react';
 import { Katex } from '../../utils/katexComponent';
 import PropTypes from 'prop-types';
+import { GlossaryButton } from './glossary';
 
 export const STATIC_URL = window.MetricsMentor.staticUrl;
 
@@ -27,11 +28,17 @@ export const GraphCoefficients = ({
                             <div className="prompt-gfx">
                                 <img src={`${STATIC_URL}/img/icon-bell.svg`}
                                     className="prompt-img"
-                                    alt="Lightbulb icon: Learning goals" />
+                                    alt="Reminder:" />
                             </div>
                             <p className="mb-0">
-                                Observe how the linear regression coefficients
-                                change as you continue to adjust <Katex
+                                Observe how the
+                                sample slope <Katex
+                                    tex={'\\hat{\\beta_1}'}
+                                    className="katex-inline" /> and
+                                the standard error <Katex
+                                    tex={'{SE(\\hat{\\beta_1})}'}
+                                    className="katex-inline" /> change
+                                as you continue to adjust <Katex
                                     tex={'n'} className="katex-inline" /> and
                                 <Katex tex={'\\text{corr}(x,y)'}
                                     className="katex-inline" />.
@@ -67,26 +74,32 @@ export const GraphCoefficients = ({
                                     <td><Katex tex={`${n}`} /></td>
                                     <td><Katex
                                         tex={`${corr2d.toFixed(3)}`} /></td>
-                                    <td><Katex
+                                    <td><Katex className="hi-val"
                                         tex={`${slope.toFixed(3)}`} /></td>
-                                    <td><Katex
+                                    <td><Katex className="hi-val"
                                         tex={`${stderror.toFixed(3)}`} /></td>
                                 </tr>
                             </tbody>
                         </table>
+                        <GlossaryButton />
                     </div>
                 )}
                 {(plotType === '3d' && slopes.length > 0) && (
                     <div className="simulation__step-content">
-                        <p>
-                        Observe how the regression coefficients, and the plane
-                        on the graph change as you continue to adjust
-                            <Katex tex={'\\text{corr}(x_1,x_2).'}
-                                className="katex-inline" />
-                        </p>
-                        <h2>
-                            Multiple Regression line equation:
-                        </h2>
+                        <div className="prompt-block">
+                            <div className="prompt-gfx">
+                                <img src={`${STATIC_URL}/img/icon-bell.svg`}
+                                    className="prompt-img"
+                                    alt="Reminder:" />
+                            </div>
+                            <p className="mb-0">
+                                Observe how the regression coefficients, and
+                                the plane on the graph change as you continue
+                                to adjust <Katex tex={'\\text{corr}(x_1,x_2).'}
+                                    className="katex-inline" />.
+                            </p>
+                        </div>
+                        <h2>Multiple regression line equation:</h2>
                         <div className="sub-content">
                             <div className="katex-block">
                                 <Katex tex={
@@ -101,6 +114,44 @@ export const GraphCoefficients = ({
                                 } />
                             </div>
                         </div>
+                        <table className="table table-bordered">
+                            <thead>
+                                <tr>
+                                    <th scope="col"><Katex tex={'n'} /></th>
+                                    <th scope="col"><Katex
+                                        tex={'\\text{corr}(x,y)'} /></th>
+                                    <th scope="col"><Katex
+                                        tex={'\\text{corr}(x_1,x_2)'} /></th>
+                                    <th scope="col"><Katex
+                                        tex={'\\hat{\\beta_0}'} /></th>
+                                    <th scope="col"><Katex
+                                        tex={'\\hat{\\beta_1}'} /></th>
+                                    <th scope="col"><Katex
+                                        tex={'{SE(\\hat{\\beta_1})}'} /></th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td><Katex tex={`${n}`} /></td>
+                                    <td><Katex
+                                        tex={`${corr2d.toFixed(3)}`} /></td>
+                                    {(corr3d) && (<>
+                                        <td><Katex
+                                            tex={`${corr3d.toFixed(3)}`} /></td>
+                                        <td><Katex className="hi-val"
+                                            tex={`${intercept3d.toFixed(3)}`} />
+                                        </td>
+                                        <td><Katex className="hi-val"
+                                            tex={`${slopes[0].toFixed(3)}`} />
+                                        </td>
+                                        <td><Katex className="hi-val"
+                                            tex={`${stderrs[0].toFixed(3)}`} />
+                                        </td>
+                                    </>)}
+                                </tr>
+                            </tbody>
+                        </table>
+
                         <h2>Sample slope coefficients:</h2>
                         <div className="sub-content">
                             <div className="katex-block">

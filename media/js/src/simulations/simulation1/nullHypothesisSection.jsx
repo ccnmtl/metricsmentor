@@ -34,7 +34,7 @@ export const NullHypothesisSection = ({
                             <div className="prompt-gfx">
                                 <img src={`${STATIC_URL}/img/icon-bell.svg`}
                                     className="prompt-img"
-                                    alt="Lightbulb icon: Learning goals" />
+                                    alt="Reminder" />
                             </div>
                             <p className="mb-0">
                                 Continue adjusting <Katex tex={'n'}
