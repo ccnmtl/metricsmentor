@@ -69,6 +69,7 @@ describe('P-Value and Critical Value', () => {
         cy.get('#pValue').type('0.05');
         cy.get('#pvalueInputButton').contains('Continue').click();
         cy.get('.answer-incorrect-container').should('exist');
+        cy.get('[data-cy="pvalueReveal"]').click();
         cy.get('[data-cy="pvalueanswer"]').invoke('text').then((text) => {
             cy.get('#pValue').clear();
             cy.get('#pValue').type(text);

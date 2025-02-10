@@ -15,6 +15,7 @@ export const PvalueComponent = ({
     const [isPvalCompareCorrect, setIsPvalCompareCorrect] = useState(null);
     const [pvalueComparison, setPvalueComparison] = useState(null);
     const [nullHypothesisChoice1, setNullHypothesisChoice1] = useState(null);
+    const [showAnswer, setShowAnswer] = useState(false);
 
 
 
@@ -199,15 +200,30 @@ export const PvalueComponent = ({
                     <div className="answer-incorrect flex-shrink-0
                         align-self-start">!</div>
                     <div>
-                        The value is incorrect; it&rsquo;s
-                        <span data-cy="pvalueanswer"> {pvalue}.</span>
-                        {hypothesisTest === 'value_two_sided' && (
-                            <span>
-                            &nbsp;Note that this is a two-sided test and the
-                            table value must be multiplied by two.&nbsp;
-                            </span>
+                        The value is incorrect;
+                        Please try again. {' '}
+                        {!showAnswer ? (
+                            <button
+                                type="button"
+                                className="btn btn-link p-0"
+                                onClick={() => setShowAnswer(true)}
+                                data-cy="pvalueReveal">
+                                Reveal answer
+                            </button>
+                        ) : (
+
+                            <>
+                                It&apos;s {' '}
+                                <span data-cy="pvalueanswer">{ pvalue}</span>.
+                                {hypothesisTest === 'value_two_sided' && (
+                                    <span>
+                                        &nbsp;Note that this is a two-sided
+                                        test and the table value must be
+                                        multiplied by two.&nbsp;
+                                    </span>
+                                )}
+                            </>
                         )}
-                        Please try again.
                     </div>
                 </div>
             )}
