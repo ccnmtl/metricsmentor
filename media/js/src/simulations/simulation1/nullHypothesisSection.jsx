@@ -53,10 +53,12 @@ export const NullHypothesisSection = ({
                                 } />
                             </div>
                             <div className="katex-block mt-3">
-                                <Katex tex={
+                                <Katex className="katex-inline" tex={
                                 // eslint-disable-next-line max-len
-                                    `${tEquation} = \\cfrac{${slope.toFixed(3)} - 0}{${stderror.toFixed(3)}} = ${tvalue}`
+                                    `${tEquation}~=~\\cfrac{${slope.toFixed(3)} - 0}{${stderror.toFixed(3)}}~=~`
                                 } />
+                                <Katex className="katex-inline hi-val"
+                                    tex={`${tvalue}`} />
                             </div>
                         </div>
                     </div>
@@ -66,12 +68,22 @@ export const NullHypothesisSection = ({
                         <p>Here, the null hypothesis, <Katex tex={'{\\Eta_0}'}
                             className="katex-inline" />, states that the
                         population slope <Katex tex={'{\\beta_1} = 0'}
-                            className="katex-inline" />.
-                        Continue adjusting <Katex
-                            tex={'\\text{corr}(x_1,x_2)'}
-                            className="katex-inline" />, and observe the
-                        outcome of the test statistic <Katex tex={'t'}
                             className="katex-inline" />.</p>
+                        <div className="prompt-block">
+                            <div className="prompt-gfx">
+                                <img src={`${STATIC_URL}/img/icon-bell.svg`}
+                                    className="prompt-img"
+                                    alt="Reminder" />
+                            </div>
+                            <p className="mb-0">
+                                Continue adjusting <Katex
+                                    tex={'\\text{corr}(x_1,x_2)'}
+                                    className="katex-inline" />, and observe
+                                the outcome of the test
+                                statistic <Katex tex={'t'}
+                                    className="katex-inline" />.
+                            </p>
+                        </div>
                         <div className="sub-content">
                             <div className="katex-block mt-3">
                                 <Katex tex={
@@ -79,13 +91,12 @@ export const NullHypothesisSection = ({
                                 } />
                             </div>
                             <div className="katex-block mt-3">
-                                <Katex tex={tEquation} />
-                            </div>
-                            <div className="katex-block mt-3">
-                                <Katex tex={
+                                <Katex className="katex-inline" tex={
                                     // eslint-disable-next-line max-len
-                                    `t = \\cfrac{${slopes[0].toFixed(3)} - 0}{${stderrs[0].toFixed(3)}} = ${tvalue3d}`
+                                    `${tEquation}~=~\\cfrac{${slopes[0].toFixed(3)} - 0}{${stderrs[0].toFixed(3)}}~=~`
                                 } />
+                                <Katex className="katex-inline hi-val"
+                                    tex={`${tvalue3d}`} />
                             </div>
                         </div>
                     </div>
