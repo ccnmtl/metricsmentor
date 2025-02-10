@@ -72,12 +72,6 @@ export const SimIntro = ({plotType}) => {
                                 significantly influence the outcomes of your
                                 hypothesis tests on the population
                                 parameters.</p>
-                            <p>Consider how the choice
-                            of <Katex tex={'\\text{corr}(x,y)'}
-                                className="katex-inline"/> and <Katex tex={'n'}
-                                className="katex-inline"/> can influence your
-                                decision regarding the null hypothesis.
-                            </p>
                         </div>
 
                     )}
