@@ -2,6 +2,8 @@ import React from 'react';
 import { Katex } from '../../utils/katexComponent';
 import PropTypes from 'prop-types';
 
+export const STATIC_URL = window.MetricsMentor.staticUrl;
+
 export const GraphCoefficients = ({
     intercept, slope, stderror, plotType, slopes, stderrs,
     intercept3d, n, corr2d, corr3d
@@ -21,14 +23,20 @@ export const GraphCoefficients = ({
                 </header>
                 {plotType === '2d' && (
                     <div className="simulation__step-content">
-                        <p>
-                            Observe how the linear regression
-                            coefficients change as you continue to
-                            adjust
-                            <Katex tex={'n'} className="katex-inline" /> and
-                            <Katex tex={'\\text{corr}(x,y)'}
-                                className="katex-inline" />.
-                        </p>
+                        <div className="prompt-block">
+                            <div className="prompt-gfx">
+                                <img src={`${STATIC_URL}/img/icon-bell.svg`}
+                                    className="prompt-img"
+                                    alt="Lightbulb icon: Learning goals" />
+                            </div>
+                            <p className="mb-0">
+                                Observe how the linear regression coefficients
+                                change as you continue to adjust <Katex
+                                    tex={'n'} className="katex-inline" /> and
+                                <Katex tex={'\\text{corr}(x,y)'}
+                                    className="katex-inline" />.
+                            </p>
+                        </div>
                         <h2>Regression line equation:</h2>
                         <div className="sub-content">
                             <div className="katex-block">

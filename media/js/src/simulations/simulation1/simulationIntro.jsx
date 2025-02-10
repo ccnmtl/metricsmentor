@@ -27,7 +27,7 @@ export const SimIntro = ({plotType}) => {
                     </header>
                     <div className="simulation__step-content">
                         <p>
-                            In this simulation, you&rsquo;ll revisit
+                            In this simulation, you&rsquo;ll conduct
                             hypothesis testing for the population slope
                             in simple and multiple regression models. Using
                             generated data, you&rsquo;ll review the
@@ -72,12 +72,6 @@ export const SimIntro = ({plotType}) => {
                                 significantly influence the outcomes of your
                                 hypothesis tests on the population
                                 parameters.</p>
-                            <p>Consider how the choice
-                            of <Katex tex={'\\text{corr}(x,y)'}
-                                className="katex-inline"/> and <Katex tex={'n'}
-                                className="katex-inline"/> can influence your
-                                decision regarding the null hypothesis.
-                            </p>
                         </div>
 
                     )}

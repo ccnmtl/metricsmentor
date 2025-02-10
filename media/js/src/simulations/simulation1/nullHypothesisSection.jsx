@@ -2,6 +2,7 @@ import React from 'react';
 import { Katex } from '../../utils/katexComponent';
 import PropTypes from 'prop-types';
 
+export const STATIC_URL = window.MetricsMentor.staticUrl;
 
 export const NullHypothesisSection = ({
     slope, stderror, tvalue, startQuiz, plotType, slopes, stderrs,
@@ -28,13 +29,23 @@ export const NullHypothesisSection = ({
                         <p>Here, the null hypothesis, <Katex tex={'{\\Eta_0}'}
                             className="katex-inline" />, states that the
                         population slope <Katex tex={'{\\beta_1} = 0'}
-                            className="katex-inline" />.
-                        Continue adjusting <Katex tex={'n'}
-                            className="katex-inline" /> and
-                        <Katex tex={'\\text{corr}(x,y)'}
-                            className="katex-inline" />, and observe the
-                        outcome of the test statistic <Katex tex={'t'}
                             className="katex-inline" />.</p>
+                        <div className="prompt-block">
+                            <div className="prompt-gfx">
+                                <img src={`${STATIC_URL}/img/icon-bell.svg`}
+                                    className="prompt-img"
+                                    alt="Lightbulb icon: Learning goals" />
+                            </div>
+                            <p className="mb-0">
+                                Continue adjusting <Katex tex={'n'}
+                                    className="katex-inline" /> and
+                                <Katex tex={'\\text{corr}(x,y)'}
+                                    className="katex-inline" />, and observe
+                                the outcome of the test
+                                statistic <Katex tex={'t'}
+                                    className="katex-inline" />.
+                            </p>
+                        </div>
                         <div className="sub-content">
                             <div className="katex-block mt-3">
                                 <Katex tex={
@@ -42,12 +53,9 @@ export const NullHypothesisSection = ({
                                 } />
                             </div>
                             <div className="katex-block mt-3">
-                                <Katex tex={tEquation} />
-                            </div>
-                            <div className="katex-block mt-3">
                                 <Katex tex={
                                 // eslint-disable-next-line max-len
-                                    `t = \\cfrac{${slope.toFixed(3)} - 0}{${stderror.toFixed(3)}} = ${tvalue}`
+                                    `${tEquation} = \\cfrac{${slope.toFixed(3)} - 0}{${stderror.toFixed(3)}} = ${tvalue}`
                                 } />
                             </div>
                         </div>
