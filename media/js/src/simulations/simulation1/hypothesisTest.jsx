@@ -78,7 +78,7 @@ export const HypothesisTest = ({
             setAlphaSelected(false);
             setLockControls(false);
         }
-    }, []);
+    }, [isRedo]);
 
     return (
         <>
