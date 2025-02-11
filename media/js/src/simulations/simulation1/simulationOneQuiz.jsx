@@ -86,6 +86,8 @@ export const SimulationOneQuiz = ({
         setShowContinueToB(false);
         setSelectedAltHypothesis(null);
         setHideTakeaway3d(true);
+        setLockControls(false);
+        setShowQualifier(false);
     };
 
     const handleQualifierSubmit = (correct) => {
@@ -331,9 +333,9 @@ export const SimulationOneQuiz = ({
                     <div className="simulation__step-prompt mt-3 text-center
                     mb-3">
                     Awesome! You&apos;ve successfully completed Simulation One.
-                    Want to keep practicing? You can move on to Case B and
-                    Case C, or head back to the Dashboard whenever you&apos;re
-                    ready.
+                    Want to keep practicing? You can move on to single-sided
+                    alternative hypothesis (Case B and Case C), or head back
+                    to the Dashboard whenever you&apos;re ready.
                     </div>
                     <div style={{ display: 'flex',
                         justifyContent: 'center', gap: '10px' }}>
