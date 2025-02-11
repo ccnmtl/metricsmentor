@@ -120,7 +120,7 @@ export const SimulationOneQuiz = ({
         }
     };
 
-    const renderChoice = (choiceKey, formula) => (
+    const renderChoice = (choiceKey, formula, testside) => (
         <li
             className={`listset-alpha-card
                 ${selectedAltHypothesis === choiceKey ?
@@ -129,7 +129,9 @@ export const SimulationOneQuiz = ({
             ' hypothesis-completed' : ''}`}
         >
             <div className="listset-alpha-card__title">
-                <Katex tex={formula + 0} />
+                <Katex tex={formula + 0} /> <span
+                    className="ms-2 small fst-italic text-secondary">
+                        ({testside})</span>
             </div>
             {!completedChoices.includes(choiceKey) && (
                 <button
@@ -261,20 +263,33 @@ export const SimulationOneQuiz = ({
                     <div className="simulation__step-content">
                         <p>
                             Review the following statement as
-                            alternative hypotheses <Katex tex={'\\Eta_1.'}
-                                className="katex-inline"/> Perform a
-                                hypothesis test against the null hypothesis.
+                            <Katex tex={'\\Eta_1'}
+                                className="katex-inline"/> and perform a
+                                hypothesis test against <Katex tex={'\\Eta_0.'}
+                                className="katex-inline"/>
                         </p>
                         <ol className="listset-alpha listset-alpha-listnum"
                             key={completedChoices.length}>
                             {/* Choice A default display */}
-                            {renderChoice('A', '\\Eta_1: {\\beta_1}{\\neq} ')}
+                            {renderChoice(
+                                'A',
+                                '\\Eta_1: {\\beta_1}{\\neq} ',
+                                'Two-sided test'
+                            )}
 
                             {completedChoices.includes('A') && (
-                                renderChoice('B', '\\Eta_1: {\\beta_1}{\\gt} ')
+                                renderChoice(
+                                    'B',
+                                    '\\Eta_1: {\\beta_1}{\\gt} ',
+                                    'One-sided test'
+                                )
                             )}
                             {completedChoices.includes('B') && (
-                                renderChoice('C', '\\Eta_1: {\\beta_1}{\\lt} ')
+                                renderChoice(
+                                    'C',
+                                    '\\Eta_1: {\\beta_1}{\\lt} ',
+                                    'One-sided test'
+                                )
                             )}
                         </ol>
                     </div>

@@ -11,9 +11,9 @@
         counter-increment: listNum-counter;
     }
     &-listnum li::before {
-        content: counter(listNum-counter, upper-alpha) ".";
+        content: "Case " counter(listNum-counter, upper-alpha) ".";
         display: block;
-        width: 1.5rem;
+        width: 3.75rem;
         font-weight: 600;
         line-height: 1.25;
         margin-right: 0.5rem;
