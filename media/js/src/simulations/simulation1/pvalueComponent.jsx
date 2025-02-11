@@ -3,6 +3,7 @@ import { Katex } from '../../utils/katexComponent';
 import { saveAnswer } from '../../utils/utils';
 import PropTypes from 'prop-types';
 
+export const STATIC_URL = window.MetricsMentor.staticUrl;
 
 export const PvalueComponent = ({
     pvalue, tvalue, submissionId, hypothesis, nullHypothesis,
@@ -147,8 +148,9 @@ export const PvalueComponent = ({
                 tex={'{\\alpha}'} className="katex-inline" />.
             Refer to the <Katex tex={'p'} className="katex-inline" />-value
             table and find the value
-            for <span className="hi-val px-1"><Katex tex={`t = ${tvalue}`}
-                className="katex-inline"/></span>.
+            for <span className="hi-val px-1 text-nowrap">
+                <Katex tex={`t = ${tvalue}`}
+                    className="katex-inline"/></span>.
             </p>
             <button
                 className="btn btn-sm btn-primary mb-3"
@@ -157,10 +159,17 @@ export const PvalueComponent = ({
                 <Katex tex={'p'} className="katex-inline" />-value table
             </button>
             {hypothesisTest === 'value_two_sided' && (
-                <p>
-                    This is a <strong>two-sided test</strong>, so you need to
-                    multiply the table value by two.
-                </p>
+                <div className="prompt-block">
+                    <div className="prompt-gfx">
+                        <img src={`${STATIC_URL}/img/icon-bell.svg`}
+                            className="prompt-img"
+                            alt="Reminder:" />
+                    </div>
+                    <p className="mb-0">
+                        This is a <strong>two-sided test</strong>,
+                        so you need to double the table value.
+                    </p>
+                </div>
             )}
             <div className="sub-content d-flex">
                 <label className="align-self-center text-nowrap"
@@ -200,26 +209,29 @@ export const PvalueComponent = ({
                     <div className="answer-incorrect flex-shrink-0
                         align-self-start">!</div>
                     <div>
-                        The value is incorrect;
+                        The value is incorrect.
                         Please try again. {' '}
-                        {!showAnswer ? (
+                        {!showAnswer ? (<>
+                            Or would your rather
                             <button
                                 type="button"
-                                className="btn btn-link p-0"
+                                className="btn btn-link btn-reveal"
                                 onClick={() => setShowAnswer(true)}
                                 data-cy="pvalueReveal">
-                                Reveal answer
-                            </button>
-                        ) : (
+                                see the <Katex tex={'p'}
+                                    className="katex-inline" />-value
+                            </button>?
+                        </>) : (
 
                             <>
-                                It&apos;s {' '}
-                                <span data-cy="pvalueanswer">{ pvalue}</span>.
+                                The <Katex tex={'p'}
+                                    className="katex-inline" />-value is <span
+                                    data-cy="pvalueanswer">{ pvalue}</span>.
                                 {hypothesisTest === 'value_two_sided' && (
                                     <span>
-                                        &nbsp;Note that this is a two-sided
-                                        test and the table value must be
-                                        multiplied by two.&nbsp;
+                                        &nbsp;This is a two-sided
+                                        test, so the table value is
+                                        doubled.&nbsp;
                                     </span>
                                 )}
                             </>
@@ -375,11 +387,24 @@ export const PvalueComponent = ({
                         <div className="answer-correct">&#10003;</div>
                         <div>That&rsquo;s the correct conclusion!</div>
                     </div>
-                    <p className="mt-3">
-                        Notice how <Katex tex={'\\text{corr}(x,y)'}
-                            className="katex-inline"/> affects your decision
-                        regarding the null hypothesis.
-                    </p>
+                    <div className="prompt-block">
+                        <div className="prompt-gfx">
+                            <img src={`${STATIC_URL}/img/icon-bell.svg`}
+                                className="prompt-img"
+                                alt="Reminder:" />
+                        </div>
+                        <p className="mb-0">
+                            Notice how
+                            {plotType === '2d' && (
+                                <Katex tex={'\\text{corr}(x,y)'}
+                                    className="katex-inline"/>
+                            )}
+                            {plotType === '3d' && (
+                                <Katex tex={'\\text{corr}(x_1,x_2)'}
+                                    className="katex-inline"/>
+                            )} affects your conclusion on the hypothesis test.
+                        </p>
+                    </div>
                 </>)}
                 {!hypothesisTest1validate &&
                     hypothesisTest1validate !== null && (

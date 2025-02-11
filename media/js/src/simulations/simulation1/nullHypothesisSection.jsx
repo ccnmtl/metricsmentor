@@ -41,7 +41,7 @@ export const NullHypothesisSection = ({
                                     className="katex-inline" /> and
                                 <Katex tex={'\\text{corr}(x,y)'}
                                     className="katex-inline" />, and observe
-                                the outcome of the test
+                                the effect on the test
                                 statistic <Katex tex={'t'}
                                     className="katex-inline" />.
                             </p>
@@ -79,7 +79,7 @@ export const NullHypothesisSection = ({
                                 Continue adjusting <Katex
                                     tex={'\\text{corr}(x_1,x_2)'}
                                     className="katex-inline" />, and observe
-                                the outcome of the test
+                                the effect on the test
                                 statistic <Katex tex={'t'}
                                     className="katex-inline" />.
                             </p>
