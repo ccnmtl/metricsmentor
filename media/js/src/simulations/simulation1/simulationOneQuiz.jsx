@@ -120,7 +120,7 @@ export const SimulationOneQuiz = ({
         }
     };
 
-    const renderChoice = (choiceKey, formula) => (
+    const renderChoice = (choiceKey, formula, testside) => (
         <li
             className={`listset-alpha-card
                 ${selectedAltHypothesis === choiceKey ?
@@ -129,7 +129,9 @@ export const SimulationOneQuiz = ({
             ' hypothesis-completed' : ''}`}
         >
             <div className="listset-alpha-card__title">
-                <Katex tex={formula + 0} />
+                <Katex tex={formula + 0} /> <span
+                    className="ms-2 small fst-italic text-secondary">
+                        ({testside})</span>
             </div>
             {!completedChoices.includes(choiceKey) && (
                 <button
@@ -261,20 +263,33 @@ export const SimulationOneQuiz = ({
                     <div className="simulation__step-content">
                         <p>
                             Review the following statement as
-                            alternative hypotheses <Katex tex={'\\Eta_1.'}
-                                className="katex-inline"/> Perform a
-                                hypothesis test against the null hypothesis.
+                            <Katex tex={'\\Eta_1'}
+                                className="katex-inline"/> and perform a
+                                hypothesis test against <Katex tex={'\\Eta_0.'}
+                                className="katex-inline"/>
                         </p>
                         <ol className="listset-alpha listset-alpha-listnum"
                             key={completedChoices.length}>
                             {/* Choice A default display */}
-                            {renderChoice('A', '\\Eta_1: {\\beta_1}{\\neq} ')}
+                            {renderChoice(
+                                'A',
+                                '\\Eta_1: {\\beta_1}{\\neq} ',
+                                'Two-sided test'
+                            )}
 
                             {completedChoices.includes('A') && (
-                                renderChoice('B', '\\Eta_1: {\\beta_1}{\\gt} ')
+                                renderChoice(
+                                    'B',
+                                    '\\Eta_1: {\\beta_1}{\\gt} ',
+                                    'One-sided test'
+                                )
                             )}
                             {completedChoices.includes('B') && (
-                                renderChoice('C', '\\Eta_1: {\\beta_1}{\\lt} ')
+                                renderChoice(
+                                    'C',
+                                    '\\Eta_1: {\\beta_1}{\\lt} ',
+                                    'One-sided test'
+                                )
                             )}
                         </ol>
                     </div>
@@ -384,17 +399,18 @@ export const SimulationOneQuiz = ({
             {(isQualifierCorrect && isTakeawayCorrect.A)
             && selectedAltHypothesis === 'A' && (
                 <>
-                    <div className="mt-3 mb fs-5 fw-medium text-center"
+                    <div className="mx-3 mb-3 fw-medium text-center"
                         id="completed2d">
-                    Congratulations! You can do case B if you want or move on
-                    to the 3D simulation.
+                    Congratulations! You can continue to single-sided
+                    alternative hypothesis (Case B), or move on
+                    to the multi-variable regression (3D) simulation.
                     </div>
-                    <div className="simulation__step-prompt-container"
+                    <div className="simulation__step-prompt-container mb-5"
                         style={{ display: 'flex',
                             justifyContent: 'center', gap: '10px' }}>
                         <div className="btn btn-secondary"
                             onClick={handleContinueToB}>
-                            Continue to B &raquo;
+                            Continue to Case B &raquo;
                         </div>
                         <div className="btn btn-success"
                             onClick={() => handlePlotTypeChange('3d')}>
@@ -405,7 +421,7 @@ export const SimulationOneQuiz = ({
             )}
             {(plotType === '3d' && completedChoices.includes('C')) && (
                 <>
-                    <div className="mt-3 mb-3 fs-5 fw-medium text-center"
+                    <div className="mx-3 mb-3 fw-medium text-center"
                         id="completed3d">
                         Congratulations on<br />completing Simulation 1!<br />
                         &#127881; &#127881; &#127881;

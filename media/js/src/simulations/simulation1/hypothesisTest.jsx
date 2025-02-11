@@ -94,8 +94,7 @@ export const HypothesisTest = ({
                     </header>
                     <div className="simulation__step-content">
                         <p className="mb-1">
-                            Let&rsquo;s conduct a hypothesis test with the
-                            alternative hypothesis you chose:
+                            Let&rsquo;s conduct the hypothesis test:
                         </p>
                         <div className="sub-content hi-val">
                             <div className="katex-block border-bottom
@@ -120,11 +119,10 @@ export const HypothesisTest = ({
                             </div>
                         </div>
                         <h2>Set the significance
-                            level <Katex tex={'({\\alpha})'}
+                            level, <Katex tex={'{\\alpha}'}
                             className="katex-inline" />:</h2>
                         <p>
-                            First, choose the significance
-                            level, <Katex tex={'{\\alpha}'}
+                            First, choose <Katex tex={'{\\alpha}'}
                                 className="katex-inline" />, which is
                             the probability of rejecting <Katex tex={'\\Eta_0'}
                                 className="katex-inline" /> when it is true.

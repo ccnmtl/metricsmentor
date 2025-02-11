@@ -3,6 +3,8 @@ import PropTypes from 'prop-types';
 import { Katex } from '../../utils/katexComponent';
 import { saveAnswer } from '../../utils/utils';
 
+export const STATIC_URL = window.MetricsMentor.staticUrl;
+
 export const CriticalValue = ({
     hypothesisTest2validate, tvalue, n, alpha, hypothesisTest, hypothesis,
     nullHypothesis, submissionId, plotType, criticalValues, isRedo,
@@ -414,11 +416,24 @@ export const CriticalValue = ({
                         <div className="answer-correct">&#10003;</div>
                         <div>That&rsquo;s the correct conclusion!</div>
                     </div>
-                    <p className="mt-3">
-                        Notice how <Katex tex={'\\text{corr}(x,y)'}
-                            className="katex-inline"/> affects your decision
-                        regarding the null hypothesis.
-                    </p>
+                    <div className="prompt-block">
+                        <div className="prompt-gfx">
+                            <img src={`${STATIC_URL}/img/icon-bell.svg`}
+                                className="prompt-img"
+                                alt="Reminder:" />
+                        </div>
+                        <p className="mb-0">
+                            Notice how
+                            {plotType === '2d' && (
+                                <Katex tex={'\\text{corr}(x,y)'}
+                                    className="katex-inline"/>
+                            )}
+                            {plotType === '3d' && (
+                                <Katex tex={'\\text{corr}(x_1,x_2)'}
+                                    className="katex-inline"/>
+                            )} affects your conclusion on the hypothesis test
+                        </p>
+                    </div>
                 </>)}
                 {!hypothesisTest2validate &&
                     hypothesisTest2validate !== null && (
