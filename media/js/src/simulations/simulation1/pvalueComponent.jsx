@@ -212,7 +212,7 @@ export const PvalueComponent = ({
                         The value is incorrect.
                         Please try again. {' '}
                         {!showAnswer ? (<>
-                            Or would your rather
+                            Or would your rather {' '}
                             <button
                                 type="button"
                                 className="btn btn-link btn-reveal"
