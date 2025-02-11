@@ -78,12 +78,12 @@ export const SimIntro = ({plotType}) => {
                     {plotType === '3d' && (
                         <div className="simulation__step-content">
                             <p>
-                                We&rsquo;re now moving on from the simple
+                                We&rsquo;re moving on from the simple
                                 regression (2D) to multiple regression (3D)
                                 section of this simulation.
                             </p>
                             <p>
-                                In this part, there are two independent
+                                Here, there are two independent
                                 variables (regressors),
                                 <Katex tex={'x_1'}
                                     className="katex-inline"/> and
@@ -92,17 +92,19 @@ export const SimIntro = ({plotType}) => {
                                 You&rsquo;ve already decided on
                                 <Katex tex={'\\text{corr}(x_1,y)'}
                                     className="katex-inline"/> in the preceding
-                                section. Here, you can select
-                                the degree of correlation between
+                                section. Now, you can select
+                                the correlation between
                                 <Katex tex={'x_1'}
                                     className="katex-inline"/> and
                                 <Katex tex={'x_2'}
                                     className="katex-inline"/>.
                             </p>
                             <p>
-                                How does this correlation influence your
+                                Think about how <Katex
+                                    tex={'\\text{corr}(x_1,x_2)'}
+                                    className="katex-inline" /> influences your
                                 decision about the null hypothesis you used
-                                previously?
+                                previously.
                             </p>
                         </div>
                     )}
