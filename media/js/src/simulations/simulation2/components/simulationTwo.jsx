@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { ScatterPlot2 } from './scatterPlot2';
 import { Variables } from './variables';
 import { ControlVariable } from './controlVariable';
+import { inlineKatex } from '../../../utils/utils';
 import DATASETS from '../datasets.json';
 import { Step } from '../../../step.jsx';
 import { LearningGoals } from './learningGoals';
@@ -140,15 +141,21 @@ export const SimulationTwo = () => {
                     {
                         header: 'Simulation 2',
                         title: 'Omitted Variable Bias',
-                        body: <p>This simulation will address the first
-                            endogeneity problem in regression analysis:
-                            omitted variable bias (OVB). Overlooking certain
-                            variables can lead to biased estimates of the
-                            sample slope of the variable of interest. Through
-                            interactive exercises and examples, you&rsquo;ll
-                            learn how to detect and correct for OVB in your
-                            econometric analysis, ensuring that your findings
-                            are both reliable and valid.</p>
+                        body: <>
+                            <p>This simulation will address one of the
+                            endogeneity problems: omitted variable bias (OVB).
+                            Omitting certain variables can lead to biased
+                            estimates of the sample slope of the variable of
+                            interest in regression analyses. Through
+                            interactive exercises, you&rsquo;ll learn how to
+                            detect the degree of OVB.</p>
+                            <p>In applied research, the goal is to ensure
+                            that {inlineKatex('\\hat{\\beta_1}')}, the
+                            estimated slope for the variable of
+                            interest ({inlineKatex('x_1')}), is an unbiased
+                            estimate of the population slope. If it is biased,
+                            the estimate becomes unreliable.</p>
+                        </>
                     },
                     {
                         title: 'Learning Goals',

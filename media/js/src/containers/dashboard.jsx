@@ -2,6 +2,7 @@ import React from 'react';
 import { useParams, Link } from 'react-router-dom';
 import { Footer } from '../footer';
 import PropTypes from 'prop-types';
+import { Katex } from '../utils/katexComponent';
 
 
 export const Dashboard = ({ isSuperUser, isFaculty}) => {
@@ -25,13 +26,16 @@ export const Dashboard = ({ isSuperUser, isFaculty}) => {
                                 </span>
                             </h2>
                             <p>
-                            In this simulation, you&rsquo;ll learn about
+                            In this simulation, you&rsquo;ll conduct
                             hypothesis testing for the population slope
-                            in simple and multiple regression models.
-                            You&rsquo;ll be able to visualize the relationship
-                            between two, or three variables, and generate
-                            data to test the null hypothesis that the
-                            population slope is equal to a specified value.
+                            in simple and multiple regression models. Using
+                            generated data, you&rsquo;ll review the
+                            methodology involved in hypothesis testing,
+                            including the interpretation of
+                            of <Katex tex={'p'}
+                                    className="katex-inline" />-values
+                            and <Katex tex={'critical~values'}
+                                    className="katex-inline"/>
                             </p>
                             <Link to={`/course/${courseId}/simulations/1/`}
                                 className="btn btn-success my-3"
@@ -52,15 +56,13 @@ export const Dashboard = ({ isSuperUser, isFaculty}) => {
                                 </span>
                             </h2>
                             <p>
-                            This simulation will address the first
-                            endogeneity problem in regression analysis:
-                            omitted variable bias (OVB). Overlooking certain
-                            variables can lead to biased estimates of the
-                            sample slope of the variable of interest. Through
-                            interactive exercises and examples, you&rsquo;ll
-                            learn how to detect and correct for OVB in your
-                            econometric analysis, ensuring that your findings
-                            are both reliable and valid.
+                            This simulation will address one of the
+                            endogeneity problems: omitted variable bias (OVB).
+                            Omitting certain variables can lead to biased
+                            estimates of the sample slope of the variable of
+                            interest in regression analyses. Through
+                            interactive exercises, you&rsquo;ll learn how to
+                            detect the degree of OVB.
                             </p>
 
                             <Link to={`/course/${courseId}/simulations/2/`}

@@ -8,17 +8,12 @@ export const LearningGoals = ({
     choice, handleChoice, isComplete, checkComplete
 }) => {
     return (
-        <div>
+        <>
             <p>
-                In applied research, the goal is to ensure that the estimated
-                slope for the variable of interest ({inlineKatex('x_1')}) is
-                an unbiased estimate of the population slope. If it is biased,
-                the estimate is unreliable, indicating that
-                {inlineKatex('x_1')} is endogenous. One cause of this
-                endogeneity is omitting relevant variables from the regression
-                equation, leaving them hidden in the error term. We will
-                examine four datasets to explore how different omitted
-                variables contribute to OVB to varying degrees.
+                The learning goal is to explore how different control
+                variables contribute to OVB to varying degrees. You&rsquo;ll
+                do so by comparing the strength of the correlations of
+                the variables.
             </p>
             <p>Be sure to explore at least <strong>two</strong> datasets for
                 this simulation. You&rsquo;ve completed <strong className=
@@ -68,7 +63,7 @@ export const LearningGoals = ({
                     </li>
                 ))}
             </ul>
-        </div>
+        </>
     );
 };
 
