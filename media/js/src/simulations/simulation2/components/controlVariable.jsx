@@ -2,43 +2,31 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { formulaText, inlineKatex } from '../../../utils/utils';
 import { labelIndex } from '../dataAttr';
-import { Katex } from '../../../utils/katexComponent';
 
+export const STATIC_URL = window.MetricsMentor.staticUrl;
 
 export const ControlVariable = ({
     controls, data, handleControls, controlText, index
 }) => {
     return (
         <>
-            <p>
-                In regression analysis, when a relevant control variable is
-                omitted, the effect of this missing variable gets absorbed
-                into the error term {inlineKatex('u')}.
-            </p>
-            <div className="sub-content">
-                <Katex tex={'y = \\beta_0 + \\beta_1x_1 + u'} />
+            <div className="prompt-block">
+                <div className="prompt-gfx">
+                    <img src={`${STATIC_URL}/img/icon-bell.svg`}
+                        className="prompt-img"
+                        alt="Reminder:" />
+                </div>
+                <p className="mb-2">
+                Take a moment to to familiarize yourself with OVB theory,
+                it&rsquo;ll help help as you move forward.
+                </p>
             </div>
-            <p className="mt-3">
-                This is known as the omitted variable bias (OVB). If the
-                omitted variable {inlineKatex('x_i')} is correlated with both
-                the dependent variable {inlineKatex('y')}, and the independent
-                variable of interest {inlineKatex('x_1')}, it introduces bias
-                into the estimated sample
-                slope {inlineKatex('\\hat{\\beta_1}')}.
-                In a simple linear regression, the effect of OVB on
-                {inlineKatex('\\hat{\\beta_1}')} is as follows:
-            </p>
-            <div className="sub-content">
-                <Katex tex={
-                    // eslint-disable-next-line max-len
-                    '\\hat{\\beta_1} \\xrightarrow{p} \\beta_1 + [bias]'} />
-            </div>
-            <p className="mt-3">
-                The correlations between the included and omitted variables,
-                specifically {inlineKatex('\\text{corr}(y,x_i)')} and
-                {inlineKatex('\\text{corr}(x_1,x_i)')},
-                contribute to the {inlineKatex('[bias]')}.
-            </p>
+            <button
+                className="btn btn-sm btn-primary"
+                data-bs-toggle="modal"
+                data-bs-target="#OVBTheoryModal">
+                OVB theory
+            </button>
             <h2>
                 Control variables for this dataset:
             </h2>
