@@ -112,7 +112,7 @@ describe('takeaways2 object properties', () => {
     for (const takeaway of knownTakeaways) {
         test(`${takeaway} has the known keys`, () => {
             const knownKeys = ['q_id', 'prompt', 'choices', 'answer',
-                'feedback_bad', 'feedback_good'];
+                'feedback'];
             expect(Object.keys(takeaways2[takeaway])).toEqual(knownKeys);
         });
     }
