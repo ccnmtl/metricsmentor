@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { labelIndex } from '../dataAttr';
-import { inlineKatex } from '../../../utils/utils';
 
 
 export const LearningGoals = ({

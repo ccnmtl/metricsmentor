@@ -1,11 +1,22 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+const STATIC_URL = window.MetricsMentor.staticUrl;
+
 export const Step = (props) => {
+
+    const learningGoals = props.title === 'Learning Goals';
+
     return (
         <div className="simulation__step-container d-flex">
-            <div className="simulation__step-num">
-            &bull;
+            <div className={`simulation__step-num 
+                        ${learningGoals ? 'tip-on' : ''}`}>
+                {learningGoals ?
+                    <img src={`${STATIC_URL}/img/icon-goal.svg`}
+                        className="simulation__step-icon"
+                        alt="Lightbulb icon: Learning goals" />
+                    : <>&bull;</>
+                }
             </div>
             <div className="simulation__step-toggle--down">
             </div>
