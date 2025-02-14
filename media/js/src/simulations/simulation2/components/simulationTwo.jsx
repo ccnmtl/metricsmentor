@@ -34,6 +34,7 @@ export const SimulationTwo = () => {
     const [isComplete, setIsComplete] = useState(freshComplete());
     const [submissionId, setSubmissionId] = useState();
     const [nextStep, setNextStep] = useState(false);
+    const [results, setResults] = useState({});
 
     useEffect(() => {
         fetchQuizData(coursePk, 2).then(data => {
@@ -76,6 +77,7 @@ export const SimulationTwo = () => {
     };
 
     const handleChoice = (e) => {
+        setResults({});
         setIsSubmitted(false);
         setNextStep(false);
         setChoice(e.target.value);
@@ -118,13 +120,13 @@ export const SimulationTwo = () => {
         // If the user has completed the first question
         // for the current dataset, show the second with a
         // general question.
-        const takeaways = checkComplete() === 1 && !isComplete[choice] ?
+        const takeaways = checkComplete() > 1 && isComplete['general'] != true ?
             {[choice]: takeaways2[choice], 'general': takeaways2.general} :
             {[choice]: takeaways2[choice]};
         const data = {choice, isSubmitted, setIsSubmitted, handleStartOver,
             handleContinue, checkComplete, submissionId, isComplete,
-            setIsComplete, createSubmission, coursePk, nextStep, setNextStep,
-            takeaways};
+            setIsComplete, createSubmission, coursePk, nextStep, results,
+            setResults, setNextStep, takeaways};
         return <MultipleChoiceQuestion2 {...data} />;
     };
 
