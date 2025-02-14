@@ -33,7 +33,7 @@ certifi==2025.1.31  # requests, sentry-sdk
 requests==2.32.2
 
 astroid==3.2.0
-pylint==3.2.0
+pylint==3.3.4
 
 six==1.17.0
 faker==36.1.1  # factory_boy
