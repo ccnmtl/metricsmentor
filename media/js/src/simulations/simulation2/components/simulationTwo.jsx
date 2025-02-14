@@ -7,6 +7,7 @@ import DATASETS from '../datasets.json';
 import { Step } from '../../../step.jsx';
 import { LearningGoals } from './learningGoals';
 import { MultipleChoiceQuestion2 } from './multipleChoiceQuestion2';
+import { OVBTheoryModal } from './modalOVBTheory.jsx';
 import { authedFetch, deleteAnswer,
     fetchQuizData
 } from '../../../utils/utils.jsx';
@@ -224,6 +225,9 @@ export const SimulationTwo = () => {
                     <p className="mx-auto px-5">{info[choice]}</p>
                 </div>}
             </div> {/* div class=simulation__graphspace */}
+
+            <OVBTheoryModal />
+
         </div> // div class=simulation
     );
 };
