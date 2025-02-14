@@ -41,7 +41,7 @@ export const ScatterPlot2 = ({controls, data, labelIndex, param, index}) => {
     const lineLabel = (line) => ({
         mode: 'text',
         text: [`x1 & ${line.label}`],
-        textfont: { color: 'black' },
+        textfont: { color: 'black', size: 14 },
         textposition: 'top center',
         x: [labelPos(param.xRange)],
         y: [line.y[1]],
@@ -68,7 +68,7 @@ export const ScatterPlot2 = ({controls, data, labelIndex, param, index}) => {
                     {
                         mode: 'text',
                         text: ['x1'],
-                        textfont: { color: 'black' },
+                        textfont: { color: 'black', size: 14 },
                         textposition: 'top center',
                         x: [labelPos(param.xRange)],
                         y: [param[index.x_1].y[1]],
