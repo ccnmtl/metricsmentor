@@ -440,26 +440,25 @@ export const takeaways2 = {
 
 export const sim2TextVariable = {
     income: <>In the &ldquo;Income&rdquo; dataset, our goal is to examine the
-        relationship between the dependent variable, annual income
-        ({inlineKatex('y')}), and the key variable of interest, which is the
-        years of education of the household head ({inlineKatex('x_1')}). Here
-        is the simple regression analysis for these variables:</>,
+        relationship between the dependent
+        variable, {inlineKatex('\\text{Income}')},
+        and the key variable of
+        interest, {inlineKatex('\\text{Years Of Education}')} of
+        the household head:</>,
     gpa4: <>In the &ldquo;GPA&rdquo; dataset, our goal is to examine the
-        relationship between the dependent variable, college GPA
-        ({inlineKatex('y')}), and the key variable of interest,
-        high school GPA ({inlineKatex('x_1')}). Here is the simple regression
-        analysis for these variables:</>,
+        relationship between the dependent
+        variable, {inlineKatex('\\text{CollegeGPA}')}, and the key variable of
+        interest, {inlineKatex('\\text{HighSchoolGPA}')}:</>,
     affairs_sim2: <>In the &ldquo;Affairs&rdquo; dataset, our goal is to
-        examine the relationship between the dependent variable, number of
-        extramarital affairs ({inlineKatex('y')}), and the key variable of
-        interest, which is the marriage satisfaction ratings
-        ({inlineKatex('x_1')}). Here is the simple
-        regression analysis for these variables:</>,
+        examine the relationship between the dependent
+        variable, ({inlineKatex('\\text{Number Of Affairs}')}), and the key
+        variable of
+        interest, {inlineKatex('\\text{Rating Of Marriage}')} satisfaction:</>,
     campus_sim2: <>In the &ldquo;Campus Crime Rates&rdquo; dataset, our goal is
-        to examine the relationship between the dependent variable, total campus
-        crime ({inlineKatex('y')}), and the key variable of interest, which is
-        total student enrollment ({inlineKatex('x_1')}). Here is the simple
-        regression analysis for these variables:</>,
+        to examine the relationship between the dependent
+        variable, {inlineKatex('\\text{Total Campus Crimes}')}, and the key
+        variable of
+        interest, {inlineKatex('\\text{Total Enrollment}')})of student:</>,
 };
 
 export const sim2TextControl = {
