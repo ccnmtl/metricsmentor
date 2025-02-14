@@ -241,75 +241,138 @@ export const labelIndex = {
 export const takeaways2 = {
     general: {
         q_id: 1,
-        prompt: <>Which of the following causes a higher change in the
-            slope of the variable of interest {inlineKatex('x_1')}?</>,
+        prompt: <>Which of the following causes a higher change in the slope of
+            the variable of interest {inlineKatex('x_1')} when 
+            {inlineKatex('x_2')} is omitted??</>,
         choices: [
             <>(a) High correlation between {inlineKatex('y')} and
                 {inlineKatex('x_1')}.</>,
             <>(b) High correlation between {inlineKatex('x_1')} and the
-                omitted variable.</>,
-            '(c) High correlation between the omitted variable and the ' +
-                'dependent variable.',
+                omitted variable ({inlineKatex('x_2')}).</>,
+            <>(c) High correlation between the omitted variable
+                ({inlineKatex('x_2')}) and the dependent variable
+                ({inlineKatex('x_2')}).</>,
             '(d) Both (b) and (c)',
             '(e) Both (a) and (c)'],
         answer: '(d) Both (b) and (c)',
-        feedback_bad: <>That&rsquo;s not the right choice, let&rsquo;s try
-            again! Remember that an omitted variable introduces bias in the
-            slope of the variable of interest {inlineKatex('x_1')}.
-            The extent of this bias depends on two factors:
-            (1) whether the OV is &ldquo;hidden&rdquo; in the error term,
-            meaning it is correlated with the dependent
-            variable {inlineKatex('y')}, and
-            (2) whether the OV is also correlated with the variable of
-            interest {inlineKatex('x_1')}.</>,
-        feedback_good: <>Well done! You&rsquo;ve pinpointed how an
-            omitted variable causes a high degree of bias in the
-            slope of the variable of interest {inlineKatex('x_1')}.
-            The extent of this bias depends on two factors:
-            (1) whether the OV is &ldquo;hidden&rdquo; in the error term,
-            meaning it is correlated with the dependent
-            variable {inlineKatex('y')}, and
-            (2) whether the OV is also correlated with the variable of
-            interest {inlineKatex('x_1')}.</>
+        feedback_bad: {
+            a: <>Let's try again! Remember, we saw in Simulation 1 that a high
+                correlation between y and x1 affects the slope of the
+                regression regardless of an omitted variable. On the other
+                hand, an omitted variable ({inlineKatex('x_2')}) causes bias in
+                the slope of the variable of interest ({inlineKatex('x_1')}).
+                This bias depends on two things: (1) whether
+                {inlineKatex('x_2')} is "hiding" in the error (meaning that it
+                is correlated with {inlineKatex('y')}) and (2) whether
+                {inlineKatex('x_2')} is correlated with the variable of
+                interest ({inlineKatex('x_1')}).</>,
+            b: 'Almost correct! You correctly identified one of the reasons for ' +
+                'omitted variable bias, but there is one more reason, remember ' +
+                'the other reason?',
+            c: 'Almost correct! You correctly identified one of the reasons for ' +
+                'omitted variable bias, but there is one more reason, remember ' +
+                'the other reason?',
+            e: <>Almost correct! You correctly identified that a high
+                correlation between the omitted variable ({inlineKatex('x_2')})
+                and the dependent variable ({inlineKatex('y')}) is one of the
+                reasons for the omitted variable bias. What is the other
+                reason? It is NOT a high correlation between {inlineKatex('y')}
+                and {inlineKatex('x_1')}. That correlation is not related to
+                the omitted variable. What is the other reason for omitted
+                variable bias in the sample slope of {inlineKatex('x_1')}?</>
+        },
+        feedback_good: <>Excellent! You've correctly identified that an omitted
+            variable ({inlineKatex('x_2')}) causes bias in the slope of the
+            variable of interest ({inlineKatex('x_1')}), and this bias depends
+            on (1) whether {inlineKatex('x_2')} is "hiding" in the error
+            (meaning that it is correlated with y) and (2) whether
+            {inlineKatex('x_2')} is correlated with the variable of interest
+            ({inlineKatex('x_1')}).</>
     },
     income: {
         q_id: 2,
-        prompt: 'Which one of the control variables causes the highest ' +
-            'bias in the slope of the variable of interest when omitted? ' +
-            'Why?',
+        prompt: 'Which of the control variables causes the highest bias in ' +
+            'the slope of the variable of interest when omitted? Why?',
         choices: [
-            '(a) Size, because it is negatively correlated with Income.',
+            '(a) Size, because it is negatively correlated with income.',
             '(b) Consumption, because it is highly correlated with ' +
-                'Income and somewhat correlated with Years Of Education.',
+                'income and somewhat correlated with education.',
             '(c) Black, because it is somewhat correlated with both ' +
-                'Income and Years Of Education.',
+                'income and education.',
             '(d) Income, because it is the dependent variable.',
-            '(e) Years Of Education, because it is the variable of interest.'],
+            '(e) Education, because it is the variable of interest.'],
         answer: '(b) Consumption, because it is highly correlated with ' +
-            'Income and somewhat correlated with Years Of Education.',
-        feedback_bad: <>This answer isn&rsquo;t right, but let&rsquo;s try
-            again! Recall that an omitted variable introduces bias in the
-            slope of the variable of interest {inlineKatex('x_1')}, which
-            is {inlineKatex('\\text{Years Of Education}')}.
-            The degree of this bias depends on two factors:
-            (1) whether the OV is &ldquo;hidden&rdquo; in the error term,
-            meaning it&rsquo;s correlated with the dependent
-            variable {inlineKatex('y')}, which
-            is {inlineKatex('\\text{Income}')}, and
-            (2) whether the OV is also correlated with the variable of
-            interest {inlineKatex('\\text{Years Of Education}')}.</>,
-        feedback_good: <>Good job! You&rsquo;ve correctly
-            selected {inlineKatex('\\text{Consumption}')} as the omitted
-            variable in this analysis. It causes bias in the
-            slope of the variable of interest {inlineKatex('x_1')}, which
-            is {inlineKatex('\\text{Years Of Education}')}.
-            The degree of this bias depends on two factors:
-            (1) whether the OV is &ldquo;hidden&rdquo; in the error term,
-            meaning it&rsquo;s correlated with the dependent
-            variable {inlineKatex('y')}, which
-            is {inlineKatex('\\text{Income}')}, and
-            (2) whether the OV is also correlated with the variable of
-            interest {inlineKatex('\\text{Years Of Education}')}.</>,
+            'income and somewhat correlated with education.',
+        feedback_bad: {
+            a: <>Let's try again! Here, the variable of interest
+                ({inlineKatex('x_1')}) is YearsOfEducation. It is correct that
+                Size and Income are negatively correlated, but the magnitude of
+                the correlation affects the OVB, not the sign. Remember an
+                omitted variable (OV) causes bias in the slope of the variable
+                of interest ({inlineKatex('x_1')}), and the degree of this bias
+                depends on (1) whether the OV is "hiding" in error (meaning
+                that it is correlated with {inlineKatex('y')}) and (2) whether
+                the OV is correlated with the variable of interest
+                ({inlineKatex('x_1')}).</>,
+            c: <>Let's try again! Here, the variable of interest
+                ({inlineKatex('x_1')}) is YearsOfEducation. Check the
+                correlations between Black and {inlineKatex('y')} as well as
+                the correlation between Black and {inlineKatex('x_1')}. Are
+                they lower (or higher) than the correlations between any other
+                omitted variable and {inlineKatex('y')} and the correlation
+                between that omitted variable and {inlineKatex('x_1')}?
+                Remember an omitted variable (OV) causes bias in the slope of
+                the variable of interest ({inlineKatex('x_1')}), and the degree
+                of this bias depends on (1) whether the OV is "hiding" in error
+                (meaning that it is correlated with {inlineKatex('y')}) and (2)
+                whether the OV is correlated with the variable of interest
+                ({inlineKatex('x_1')}). Size and Income are negatively
+                correlated but that does not affect the OVB.</>,
+            d: <>Let's try again! Income is the dependent variable, which is
+                correct! However, the question asks, "Which one of the control
+                variables causes the highest bias in the slope of the variable
+                of interest when omitted?" It does not ask which variable is
+                the dependent variable. Please check the correlations between
+                the control variables and {inlineKatex('x_1')} as well as the
+                correlations between the control variables and
+                {inlineKatex('y')}. Remember an omitted variable (OV) causes
+                bias in the slope of the variable of interest
+                ({inlineKatex('x_1')}), and the degree of this bias depends on
+                (1) whether the OV is "hiding" in error (meaning that it is
+                correlated with {inlineKatex('y')}) and (2) whether the OV is
+                correlated with the variable of interest ({inlineKatex('x_1')}).
+                Size and Income are negatively correlated, but that does not
+                affect the OVB.</>,
+            e: <>Let's try again! Education is the variable of interest, which
+                is correct!  However, the question asks, "Which of the control
+                variables causes the highest bias in the slope of the variable
+                of interest when omitted?” It does not ask which variable is
+                the variable of interest. Please check the correlations between
+                the control variables and {inlineKatex('x_1')} as well as the
+                correlation between the control variables and
+                {inlineKatex('y')}. Remember an omitted variable (OV) causes
+                bias in the slope of the variable of interest
+                ({inlineKatex('x_1')}), and the degree of this bias depends on
+                (1) whether the OV is "hiding" in error (meaning that it is
+                correlated with {inlineKatex('y')}) and (2) whether the OV is
+                correlated with the variable of interest ({inlineKatex('x_1')}).
+                Size and Income are negatively correlated but that does not
+                affect the OVB.</>
+        },
+        feedback_good: <>Excellent! Here, the variable of interest
+            ({inlineKatex('x_1')}) is YearsOfEducation. We want to make sure
+            that the sample slope of {inlineKatex('x_1')} is as unbiased as
+            possible. The difference in the slope of the regressions is the
+            highest when Consumption is omitted and when it is included. You've
+            correctly identified that an omitted variable (OV) causes bias in
+            the slope of the variable of interest ({inlineKatex('x_1')}), and
+            the degree of this bias depends on two things:
+            <ol>
+                <li>whether the OV is "hiding" in the error (meaning that it is
+                    correlated with {inlineKatex('y')}) and</li>
+                <li>whether the OV is correlated with the variable of interest
+                    ({inlineKatex('x_1')}).</li>
+            </ol></>,
     },
     gpa4: {
         q_id: 3,
@@ -317,124 +380,223 @@ export const takeaways2 = {
             'bias in the slope of the variable of interest when omitted? ' +
             'Why?',
         choices: [
-            '(a) Classes Skipped Weekly, because it is negatively correlated ' +
-                'with ACT Score.',
-            '(b) Lives On Campus, because it is a binary variable.',
+            '(a) ClassesSkippedWeekly, because it is negatively correlated ' +
+                'with CollegeACT.',
+            '(b) LivesOnCampus, because it is a binary variable.',
             '(c) ACT Score, because it has the highest correlation with ' +
-                'College GPA and High School GPA.',
-            '(d) Significant Other, because it has the lowest correlation ' +
-                'with College GPA and High School GPA.',
-            '(e) Classes Skipped Weekly, because it has some correlation ' +
-                'with College GPA and low correlation with High School GPA.'],
+                'CollegeGPA and HighSchoolGPA.',
+            '(d) SignificantOther, because it has the lowest correlation ' +
+                'with CollegeGPA and HighSchoolGPA.',
+            '(e) ClassesSkippedWeekly, because it has some correlation ' +
+                'with CollegeGPA and low correlation with HighSchoolGPA.'],
         answer: '(c) ACT Score, because it has the highest correlation with ' +
-            'College GPA and High School GPA.',
-        feedback_bad: <>This one&rsquo;s off, but don&rsquo;t
-            worry&mdash;let&rsquo;s choose again!
-            Remember that an omitted variable introduces bias in the
-            slope of the variable of interest {inlineKatex('x_1')}, which
-            is {inlineKatex('\\text{High School GPA}')}.
-            The degree of this bias depends on two factors:
-            (1) whether the OV is &ldquo;hidden&rdquo; in the error term,
-            meaning it&rsquo;s correlated with the dependent
-            variable {inlineKatex('y')}, which
-            is {inlineKatex('\\text{College GPA}')}, and
-            (2) whether the OV is also correlated with the variable of
-            interest {inlineKatex('\\text{High School GPA}')}.</>,
-        feedback_good: <>Great job
-            identifying {inlineKatex('\\text{ACT Score}')} as the omitted
-            variable in this analysis! It causes bias in the
-            slope of the variable of interest {inlineKatex('x_1')}, which
-            is {inlineKatex('\\text{High School GPA}')}.
-            The degree of this bias depends on two factors:
-            (1) whether the OV is &ldquo;hidden&rdquo; in the error term,
-            meaning it&rsquo;s correlated with the dependent
-            variable {inlineKatex('y')}, which
-            is {inlineKatex('\\text{College GPA}')}, and
-            (2) whether the OV is also correlated with the variable of
-            interest {inlineKatex('\\text{High School GPA}')}.</>,
+            'CollegeGPA and HighSchoolGPA.',
+        feedback_bad: {
+            a: <>Let's try again! Here, the variable of interest
+                ({inlineKatex('x_1')}) is HighSchoolGPA. Hence, we must check
+                the correlation between the omitted variable and
+                {inlineKatex('x_1')} and the correlation between the omitted
+                variable and {inlineKatex('y')}. Both ClassesSkippedWeekly and
+                CollegeACT are omitted variables that may cause OVB (Omitted
+                Variable Bias). Remember an omitted variable (OV) causes bias
+                in the slope of the variable of interest
+                ({inlineKatex('x_1')}), and the degree of this bias depends on
+                (1) whether the OV is "hiding" in the error (meaning that it is
+                correlated with {inlineKatex('y')}) and (2) whether the OV is
+                correlated with the variable of interest
+                ({inlineKatex('x_1')}).</>,
+            b: <>Let's try again! Here, the variable of interest
+                ({inlineKatex('x_1')}) is HighSchoolGPA. Yes, it is correct
+                that LivesOnCampus is a binary variable but the question is not
+                asking that. Please re-read the question. We must check the
+                correlation between the omitted variable and
+                {inlineKatex('x_1')} and the correlation between the omitted
+                variable and {inlineKatex('y')}. Remember an omitted variable
+                (OV) causes bias in the slope of the variable of interest
+                ({inlineKatex('x_1')}), and the degree of this bias depends on
+                (1) whether the OV is "hiding" in the error (meaning that it is
+                correlated with {inlineKatex('y')}) and (2) whether the OV is
+                correlated with the variable of interest
+                ({inlineKatex('x_1')}).</>,
+            d: <>Let's try again! Here the variable of interest
+                ({inlineKatex('x_1')}) is HighSchoolGPA. Yes, it is correct
+                that the variable SignificantOther has the lowest correlation
+                with CollegeGPA and HighSchoolGPA. But for an omitted variable
+                to cause OVB in the slope of the variable of interest, these
+                correlations should not be low. We must check the correlation
+                between the omitted variable and {inlineKatex('x_1')} and the
+                correlation between the omitted variable and
+                {inlineKatex('x_1')}. Remember an omitted variable (OV) causes
+                bias in the slope of the variable of interest
+                ({inlineKatex('x_1')}), and the degree of this bias depends on
+                (1) whether the OV is “hiding” in the error (meaning that it is
+                correlated with {inlineKatex('y')}) and (2) whether the OV is
+                correlated with the variable of interest
+                ({inlineKatex('x_1')}).</>,
+            e: <>Let's try again! Here the variable of interest
+                ({inlineKatex('x_1')}) is HighSchoolGPA. Yes, it is correct
+                that the variable ClassesSkippedWeekly has some correlation
+                with CollegeGPA and low correlation with HighSchoolGPA. But
+                these correlations should not be low for an omitted variable to
+                cause OVB in the slope of the variable of interest. We must
+                check the correlation between the omitted variable and
+                {inlineKatex('x_1')} and the correlation between the omitted
+                variable and {inlineKatex('y')}. Remember an omitted variable
+                (OV) causes bias in the slope of the variable of interest
+                ({inlineKatex('x_1')}), and the degree of this bias depends on
+                (1) whether the OV is "hiding" in the error (meaning that it is
+                correlated with {inlineKatex('y')}) and (2) whether the OV is
+                correlated with the variable of interest
+                ({inlineKatex('x_1')}) .</>
+        },
+        feedback_good: <>Excellent! Here, the variable of interest
+            ({inlineKatex('x_1')}) is HighscoolGPA. You've correctly identified
+            that an omitted variable (OV) causes bias in the slope of the
+            variable of interest ({inlineKatex('x_1')}), and the degree of this
+            bias depends on (1) whether the OV is "hiding" in the error
+            (meaning that it is correlated with {inlineKatex('y')}) and (2)
+            whether the OV is correlated with the variable of interest
+            ({inlineKatex('x_1')}).</>,
     },
     affairs_sim2: {
         q_id: 4,
-        prompt: 'Which one of the control variables causes the highest ' +
-            'bias in the slope of the variable of interest when omitted? ' +
-            'Why?',
+        prompt: 'Which of the control variables causes the highest bias in ' +
+            'the slope of the variable of interest when omitted? Why?',
         choices: [
-            '(a) Has Kids, because it is negatively correlated with Rating ' +
-                'of Marriage.',
-            '(b) Degree Of Religiosity, because it is highly correlated ' +
-                'with Rating of Marriage.',
-            '(c) Years Married, because it is negatively correlated with ' +
-                'Rating of Marriage.',
-            '(d) Years Married, because it has the highest correlation with ' +
-                'Number Of Affairs and with Rating Of Marriage.',
-            '(e) Number Of Affairs because it is the variable of interest.'],
-        answer: '(d) Years Married, because it has the highest correlation ' +
-            'with Number Of Affairs and with Rating Of Marriage.',
-        feedback_bad: <>That&rsquo;s not it&mdash;let&rsquo;s give it
-            another shot!
-            Remember that an omitted variable introduces bias in the
-            slope of the variable of interest {inlineKatex('x_1')}, which
-            is {inlineKatex('\\text{Rating Of Marriage}')}.
-            The degree of this bias depends on two factors:
-            (1) whether the OV is &ldquo;hidden&rdquo; in the error term,
-            meaning it&rsquo;s correlated with the dependent
-            variable {inlineKatex('y')}, which
-            is {inlineKatex('\\text{Number Of Affairs}')}, and
-            (2) whether the OV is also correlated with the variable of
-            interest {inlineKatex('\\text{Rating Of Marriage}')}.</>,
-        feedback_good: <>That&rsquo;s
-            right, {inlineKatex('\\text{Years Married}')} is the omitted
-            variable in this analysis. It causes bias in the
-            slope of the variable of interest {inlineKatex('x_1')}, which
-            is {inlineKatex('\\text{Rating Of Marriage}')}.
-            The degree of this bias hinges on two factors:
-            (1) whether the OV is &ldquo;hidden&rdquo; in the error term,
-            meaning it&rsquo;s correlated with the dependent
-            variable {inlineKatex('y')}, which
-            is {inlineKatex('\\text{Number Of Affairs}')}, and
-            (2) whether the OV is also correlated with the variable of
-            interest {inlineKatex('\\text{Rating Of Marriage}')}.</>,
+            '(a) HasKids, because it is negatively correlated with ' +
+                'RatingofMarriage.',
+            '(b) Religion, because it is highly correlated with ' +
+                'RatingofMarriage.',
+            '(c) YearsMarried, because it is negatively correlated with ' +
+                'RatingofMarriage.',
+            '(d) YearsMarried, because it has the highest correlation with ' +
+                'NumberOfAffairs and with RatingOfMarriage.',
+            '(e) NumberOfAffairs because it is the variable of interest.'],
+        answer: '(d) YearsMarried, because it has the highest correlation ' +
+            'with NumberOfAffairs and with RatingOfMarriage.',
+        feedback_bad: {
+            a: <>Let's try again! Here, the variable of interest
+                ({inlineKatex('x_1')}) is RatingOfMarriage. It is correct that
+                HasKids is negatively correlated with {inlineKatex('x_1')}, but
+                the magnitude of the correlation (not the sign) affects the
+                OVB. Remember an omitted variable (OV) causes bias in the slope
+                of the variable of interest ({inlineKatex('x_1')}), and the
+                degree of this bias depends on (1) whether the OV is "hiding"
+                in the error (meaning that it is correlated with
+                {inlineKatex('y')}) and (2) whether the OV is correlated with
+                the variable of interest ({inlineKatex('x_1')}).</>,
+            b: <>Let's try again! Here, the variable of interest
+                ({inlineKatex('x_1')}) is RatingOfMarriage. Religion is not a
+                variable we consider in this regression. So we do not know its
+                correlation with {inlineKatex('x_1')} and with
+                {inlineKatex('y')}. Remember an omitted variable (OV) causes
+                bias in the slope of the variable of interest
+                ({inlineKatex('x_1')}), and the degree of this bias depends on
+                (1) whether the OV is "hiding" in the error (meaning that it is
+                correlated with {inlineKatex('y')}) and (2) whether the OV is
+                correlated with the variable of interest
+                ({inlineKatex('x_1')}).</>,
+            c: <>Let's try again! Here, the variable of interest
+                ({inlineKatex('x_1')}) is RatingOfMarriage. It is correct that
+                YearsMarried is negatively correlated with
+                {inlineKatex('x_1')}, but the magnitude of the correlation (not
+                the sign) affects the OVB. Remember an omitted variable (OV)
+                causes bias in the slope of the variable of interest
+                ({inlineKatex('x_1')}), and the degree of this bias depends on
+                (1) whether the OV is "hiding" in the error (meaning that it is
+                correlated with {inlineKatex('y')}) and (2) whether the OV is
+                correlated with the variable of interest
+                ({inlineKatex('x_1')}).</>,
+            e: <>Let's try again! Here, the variable of interest
+                ({inlineKatex('x_1')}) is RatingOfMarriage and the variable
+                NumberOfAffairs is the dependent variable, not the variable of
+                interest. Nevertheless, the question does not ask about that.
+                Remember an omitted variable (OV) causes bias in the slope of
+                the variable of interest ({inlineKatex('x_1')}), and the degree
+                of this bias depends on (1) whether the OV is "hiding" in the
+                error (meaning that it is correlated with {inlineKatex('y')})
+                and (2) whether the OV is correlated with the variable of
+                interest ({inlineKatex('x_1')}).</>
+        },
+        feedback_good: <>Excellent! Here, the variable of interest
+            ({inlineKatex('x_1')}) is RatingOfMarriage. You've correctly
+            identified that an omitted variable (OV) causes bias in the slope
+            of the variable of interest ({inlineKatex('x_1')}), and the degree
+            of this bias depends on (1) whether the OV is "hiding" in the error
+            (meaning that it is correlated with {inlineKatex('y')}) and (2)
+            whether the OV is correlated with the variable of interest
+            ({inlineKatex('x_1')}).</>,
     },
     campus_sim2: {
         q_id: 5,
-        prompt: 'Which one of the control variables causes the highest ' +
-            'bias in the slope of the variable of interest when omitted? ' +
-            'Why?',
+        prompt: 'Which of the control variables causes the highest bias in ' +
+            'the slope of the variable of interest when omitted? Why?',
         choices: [
-            '(a) Police Employed, because it is highly correlated ' +
-                'with Total Campus Crime and Total Enrollment.',
-            '(b) Private School, because it is negatively correlated with ' +
-                'Total Campus Crime.',
-            '(c) Police Employed, because it is not highly correlated with ' +
-                'Total Campus Crime and Total Enrollment.',
-            '(d) Total Campus Crime, because it is the variable of interest.',
-            '(e) Total Campus Crime, because it is the dependent variable.'],
-        answer: '(a) Police Employed, because it is highly correlated ' +
-            'with Total Campus Crime and Total Enrollment.',
-        feedback_bad: <>This one&rsquo;s incorrect. Let&rsquo;s give it
-            another try.
-            Note that an omitted variable introduces bias in the
-            slope of the variable of interest {inlineKatex('x_1')}, which
-            is {inlineKatex('\\text{Total Enrollment}')}.
-            The degree of this bias depends on two factors:
-            (1) whether the OV is &ldquo;hidden&rdquo; in the error term,
-            meaning it&rsquo;s correlated with the dependent
-            variable {inlineKatex('y')}, which
-            is {inlineKatex('\\text{Total Campus Crimes}')}, and
-            (2) whether the OV is also correlated with the variable of
-            interest {inlineKatex('\\text{Total Enrollment}')}.</>,
-        feedback_good: <>Nicely done, you&rsquo;ve correctly
-            identified {inlineKatex('\\text{Police Employed On Campus}')} as
-            the omitted variable in this analysis! It causes bias in the
-            slope of the variable of interest {inlineKatex('x_1')}, which
-            is {inlineKatex('\\text{Total Enrollment}')}.
-            The degree of this bias depends on two factors:
-            (1) whether the OV is &ldquo;hidden&rdquo; in the error term,
-            meaning it&rsquo;s correlated with the dependent
-            variable {inlineKatex('y')}, which
-            is {inlineKatex('\\text{Total Campus Crimes}')}, and
-            (2) whether the OV is also correlated with the variable of
-            interest {inlineKatex('\\text{Total Enrollment}')}.</>,
+            '(a) Police, because it is highly correlated with Crime and ' +
+                'TotalEnrollment.',
+            '(b) Private, because it is negatively correlated with Crime.',
+            '(c) Police, because it is not highly correlated with Crime and ' +
+                'Enrollment.',
+            '(d) Crime, because it is the variable of interest.',
+            '(e) Crime, because it is the dependent variable.'],
+        answer: '(a) Police, because it is highly correlated with Crime and ' +
+            'TotalEnrollment.',
+        feedback_bad: {
+            b: <>Let's try again! Here, the variable of interest
+                ({inlineKatex('x_1')}) is TotalEnrollment. We want to make sure
+                that the sample slope of {inlineKatex('x_1')} is as unbiased as
+                possible. It is correct that Private is negatively correlated
+                with {inlineKatex('x_1')}, but the magnitude of the correlation
+                (not the sign) affects the OVB. Remember an omitted variable
+                (OV) causes bias in the slope of the variable of interest
+                ({inlineKatex('x_1')}), and the degree of this bias depends on
+                (1) whether the OV is "hiding" in error (meaning that it is
+                correlated with {inlineKatex('y')}) and (2) whether the OV is
+                correlated with the variable of interest
+                ({inlineKatex('x_1')}).</>,
+            c: <>Let's try again! Here, the variable of interest
+                ({inlineKatex('x_1')}) is TotalEnrollment. This answer says the
+                opposite of what is true: Police is highly correlated with
+                {inlineKatex('x_1')} and {inlineKatex('y')}. Both correlations
+                are 0.72. Remember an omitted variable (OV) causes bias in the
+                slope of the variable of interest ({inlineKatex('x_1')}), and
+                the degree of this bias depends on (1) whether the OV is
+                "hiding" in error (meaning that it is correlated with
+                {inlineKatex('y')}) and (2) whether the OV is correlated with
+                the variable of interest ({inlineKatex('x_1')}).</>,
+            d: <>Let's try again! Here, the variable of interest
+                ({inlineKatex('x_1')}) is TotalEnrollment, not Crime. Crime is
+                the dependent variable and this is not what the question asks.
+                Re-reading the question may be helpful. We want to make sure
+                that the sample slope of {inlineKatex('x_1')} is as unbiased as
+                possible. So, we must check all control variables one by one.
+                Remember an omitted variable (OV) causes bias in the slope of
+                the variable of interest ({inlineKatex('x_1')}), and the degree
+                of this bias depends on (1) whether the OV is "hiding" in error
+                (meaning that it is correlated with {inlineKatex('y')}) and (2)
+                whether the OV is correlated with the variable of interest
+                ({inlineKatex('x_1')}).</>,
+            e: <>Let's try again! Here, the variable of interest
+                ({inlineKatex('x_1')}) is TotalEnrollment. Yes, Crime is the
+                dependent variable but this is not what the question asks.
+                Re-reading the question may be helpful. We want to make sure
+                that the sample slope of {inlineKatex('x_1')} is as unbiased as
+                possible. So, we must check all control variables one by one.
+                Remember an omitted variable (OV) causes bias in the slope of
+                the variable of interest ({inlineKatex('x_1')}), and the degree
+                of this bias depends on (1) whether the OV is "hiding" in error
+                (meaning that it is correlated with {inlineKatex('y')}) and (2)
+                whether the OV is correlated with the variable of interest
+                ({inlineKatex('x_1')}).</>
+        },
+        feedback_good: <>Excellent! Here, the variable of interest
+            ({inlineKatex('x_1')}) is TotalEnrollment. You've correctly
+            identified that an omitted variable (OV) causes bias in the slope
+            of the variable of interest ({inlineKatex('x_1')}), and the degree
+            of this bias depends on (1) whether the OV is "hiding" in the error
+            (meaning that it is correlated with {inlineKatex('y')}) and (2)
+            whether the OV is correlated with the variable of interest
+            ({inlineKatex('x_1')}).</>,
     }
 };
 

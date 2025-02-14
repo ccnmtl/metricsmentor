@@ -56,7 +56,7 @@ export const MultipleChoiceQuestion2 = ({isSubmitted, setIsSubmitted, takeaways,
         } else if (results[topic] === false) {
             return (
                 <div className="form-check text-danger mt-3 mb-3" role="alert">
-                    {feedback_bad}
+                    {feedback_bad[selected[topic][1]]}
                 </div>
             );
         }
