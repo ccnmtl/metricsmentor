@@ -5,10 +5,13 @@ import { saveAnswer } from '../../../utils/utils';
 
 export const MultipleChoiceQuestion2 = ({isSubmitted, setIsSubmitted, takeaways,
     handleContinue, checkComplete, handleStartOver, submissionId, isComplete,
-    setIsComplete, createSubmission, coursePk, nextStep, setNextStep }) => {
+    setIsComplete, createSubmission, coursePk, nextStep, setNextStep, results,
+    setResults }) => {
 
     const [selected, setSelected] = useState({});
-    const [results, setResults] = useState({});
+    
+    const [showFeedback, setShowFeedback] = useState({});
+    const [isDone, setIsDone] = useState(false);
 
     const handleOptionSelect = (topic, choice) => {
         setSelected({...selected, [topic]: choice});
@@ -24,14 +27,11 @@ export const MultipleChoiceQuestion2 = ({isSubmitted, setIsSubmitted, takeaways,
         }
     };
 
-    const handleSubmit = async() => {
+    const handleSubmit = async(topic) => {
         setIsSubmitted(true);
-        const correct = {};
-        for (let topic in takeaways) {
-            correct[topic] = $(`input[name="${topic}-choices"]:checked`)
-                .val() === takeaways[topic].answer;
-        }
-        setResults({...correct});
+        const response = $(`input[name="${topic}-choices"]:checked`).val()
+        setShowFeedback({...showFeedback, [topic]: response[1]})
+        setResults({...results, [topic]: response === takeaways[topic].answer});
     };
 
     useEffect(() => {
@@ -46,36 +46,22 @@ export const MultipleChoiceQuestion2 = ({isSubmitted, setIsSubmitted, takeaways,
         }
     }, [results]);
 
-    const feedback = function(topic, feedback_bad, feedback_good) {
-        if (results[topic] === true) {
-            return (
-                <div className="form-check text-success mt-3 mb-3" role="alert">
-                    {feedback_good}
-                </div>
-            );
-        } else if (results[topic] === false) {
-            return (
-                <div className="form-check text-danger mt-3 mb-3" role="alert">
-                    {feedback_bad[selected[topic][1]]}
-                </div>
-            );
-        }
-    };
-
-    const isDone = isSubmitted && nextStep && ((checkComplete() > 0 &&
-        Object.values(results).length > 1) || checkComplete() > 1);
-
     useEffect(() => {
-        const result = Object.values(results);
-        setNextStep(result.length > 0 && !result.includes(false));
+        const result = Object.keys(takeaways);
+        setNextStep(result.length > 0 &&
+            result.reduce((acc, val) => acc === results[val], true));
     }, [results]);
 
-    return (
-        <>
-            {Object.entries(takeaways)
-                .map(([topic, {prompt, choices, answer, feedback_bad,
-                    feedback_good}], i) => (
-                    <div key={i}>
+    useEffect(() => {
+        setIsDone(isSubmitted && nextStep &&
+            isComplete['general'] === true);
+    }, [isComplete])
+
+    return <>
+        {Object.entries(takeaways)
+            .map(([topic, {prompt, choices, feedback}], i) => {
+                if (true) {
+                    return <div key={i}>
                         <p className={`mb-3 ${i > 0 ? 'mt-5' : ''}`}>
                             {prompt}
                         </p>
@@ -100,43 +86,47 @@ export const MultipleChoiceQuestion2 = ({isSubmitted, setIsSubmitted, takeaways,
                                 </div>
                             ))}
                         </div>
-                        {isSubmitted && feedback(topic, feedback_bad,
-                            feedback_good)}
+                        {isSubmitted &&
+                            <div className={`form-check text-${results[topic] ?
+                                    'success' : 'danger'} mt-3 mb-3`}
+                                role="alert"
+                            >
+                                {feedback[showFeedback[topic]]}
+                            </div>}
+                        {!nextStep &&
+                            <button className="btn btn-sm btn-success mt-3"
+                                type='submit' onClick={() => handleSubmit(topic)}
+                            >
+                                Submit &raquo;
+                            </button>
+                        }
                     </div>
-                ))
-            }
-            {!nextStep &&
-                <button className="btn btn-sm btn-success mt-3"
-                    type='submit' onClick={handleSubmit}
+                }
+            })
+        }
+        {isSubmitted && nextStep && <>
+            <button className="btn btn-sm btn-success me-3"
+                type='submit' onClick={handleContinue}
+            >
+                {isDone ?
+                    'Try another dataset »' : 'Continue »'}
+            </button>
+            {checkComplete() > 2 &&
+                <a className="btn btn-sm btn-success me-3" role="button"
+                    href={`/course/${coursePk}/`}
                 >
-                    Submit &raquo;
+                    I&rsquo;m Done! &raquo;
+                </a>
+            }
+            {checkComplete() > 2 &&
+                <button className="btn btn-sm btn-warning"
+                    onClick={handleStartOver}
+                >
+                    Start Over
                 </button>
             }
-            {isSubmitted && <>
-                {nextStep &&
-                    <button className="btn btn-sm btn-success me-3"
-                        type='submit' onClick={handleContinue}
-                    >
-                        {isDone ?
-                            'Try another dataset »' : 'Continue »'}
-                    </button>
-                }
-                {isDone &&
-                    <a className="btn btn-sm btn-success me-3" role="button"
-                        href={`/course/${coursePk}/`}
-                    >
-                        I&rsquo;m Done! &raquo;
-                    </a>
-                }
-                {isDone &&
-                    <button className="btn btn-sm btn-warning"
-                        onClick={handleStartOver}
-                    >
-                        Start Over
-                    </button>
-                }
-            </>}
-        </>);
+        </>}
+    </>;
 };
 
 MultipleChoiceQuestion2.propTypes = {
@@ -154,4 +144,6 @@ MultipleChoiceQuestion2.propTypes = {
     coursePk: PropTypes.number.isRequired,
     nextStep: PropTypes.bool.isRequired,
     setNextStep: PropTypes.func.isRequired,
+    results: PropTypes.object.isRequired,
+    setResults: PropTypes.func.isRequired
 };
