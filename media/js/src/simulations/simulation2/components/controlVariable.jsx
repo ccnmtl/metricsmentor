@@ -33,9 +33,21 @@ export const ControlVariable = ({
             <p>
                 {controlText.general_inst}
             </p>
-            <p className="mb-4">
-                Select any variable to add to the regression model.
-            </p>
+            <div className="prompt-block">
+                <div className="prompt-gfx">
+                    <img src={`${STATIC_URL}/img/icon-bell.svg`}
+                        className="prompt-img"
+                        alt="Reminder:" />
+                </div>
+                <ul className="ps-3 mb-2">
+                    <li>Add one variable at a time to the regression model</li>
+                    <li>Observe the resulting regression line
+                        on the graph and compare it to the original</li>
+                    <li>Compare the new regression line coeffiecients
+                        to the original</li>
+                </ul>
+            </div>
+
             {/* container for all variables */}
             <div className="choice-list ms-0">
                 {/* original variables y and x1 below */}
