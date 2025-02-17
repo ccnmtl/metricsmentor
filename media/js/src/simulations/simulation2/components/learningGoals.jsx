@@ -15,10 +15,11 @@ export const LearningGoals = ({
                 the variables.
             </p>
             <p>Be sure to explore at least <strong>two</strong> datasets for
-                this simulation. You&rsquo;ve completed <strong className=
+                this simulation.<br />
+                Dataset completed: <span className="hi-val"><strong className=
                 {`${checkComplete() > 1 ? ' text-success' : ''}`}
             >
-                {Math.min(checkComplete(), 2)} of 2</strong>.
+                {Math.min(checkComplete(), 2)} of 2</strong>.</span>
             </p>
             <p>
                 Let&rsquo;s choose a dataset for this analysis:
