@@ -83,6 +83,11 @@ export const ControlVariable = ({
                                 {inlineKatex(`x_1\\ and\\ x_${i+2} 
                                     \\text{ (${labelIndex[dType]}})`)}
                             </label>
+                            {controls[dType] === true && (<>
+                                <span className=
+                                    {`line-color line-color__x${i+2}`}>
+                                </span>
+                            </>)}
                             <input
                                 className="form-check-input"
                                 type="checkbox"

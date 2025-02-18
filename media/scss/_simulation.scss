@@ -203,6 +203,26 @@
     }
 }
 
+.line-color {
+    margin: 0 0 0 0.5rem;
+    display: inline-block;
+    width: 2rem;
+    height: 0.25rem;
+    vertical-align: middle;
+    &__x2 {
+        background-color: red;
+    }
+    &__x3 {
+        background-color: cyan;
+    }
+    &__x4 {
+        background-color: green;
+    }
+    &__x5 {
+        background-color: purple;
+    }
+}
+
 .icon-exclamation {
     width: 1.5rem;
     height: 1.5rem;
