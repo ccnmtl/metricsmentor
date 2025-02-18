@@ -34,10 +34,9 @@ export const App = () => {
                     <Route path='course/:courseId/simulations/1/'
                         element={<SimulationOne />} />
                 )}
-                {(isSuperUser || isFaculty) && (
-                    <Route path='course/:courseId/simulations/2/'
-                        element={<SimulationTwo />} />
-                )}
+                <Route path='course/:courseId/simulations/2/'
+                    element={<SimulationTwo />} />
+
                 {(isSuperUser || isFaculty) && (
                     <Route path='course/:courseId/simulations/3/'
                         element={<SimulationThree />} />
