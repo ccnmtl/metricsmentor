@@ -27,8 +27,8 @@ export const MultipleChoiceQuestion2 = ({takeaways, isSubmitted, setIsSubmitted,
     };
 
     const handleSubmit = async(topic) => {
-        const response = $(`input[name="${topic}-choices"]:checked`).val()
-        setShowFeedback({...showFeedback, [topic]: response[1]})
+        const response = $(`input[name="${topic}-choices"]:checked`).val();
+        setShowFeedback({...showFeedback, [topic]: response[1]});
         setResults({...results, [topic]: response === takeaways[topic].answer});
     };
 
@@ -47,7 +47,9 @@ export const MultipleChoiceQuestion2 = ({takeaways, isSubmitted, setIsSubmitted,
     }, [results]);
 
     useEffect(() => {
-        setShowGeneral(checkComplete() > 1 && isComplete['general'] != true);
+        if(isComplete['general'] != true)  {
+            setShowGeneral(checkComplete() > 1);
+        }
         const result = Object.keys(takeaways);
         setNextStep(result.length > 0 &&
             result.reduce((acc, val) => acc === results[val], true));
@@ -94,19 +96,20 @@ export const MultipleChoiceQuestion2 = ({takeaways, isSubmitted, setIsSubmitted,
                         </div>
                         {topic in results &&
                             <div className={`form-check text-${results[topic] ?
-                                    'success' : 'danger'} mt-3 mb-3`}
-                                role="alert"
+                                'success' : 'danger'} mt-3 mb-3`}
+                            role="alert"
                             >
                                 {feedback[showFeedback[topic]]}
                             </div>}
                         {!nextStep &&
                             <button className="btn btn-sm btn-success mt-3"
-                                type='submit' onClick={() => handleSubmit(topic)}
+                                type='submit'
+                                onClick={() => handleSubmit(topic)}
                             >
                                 Submit &raquo;
                             </button>
                         }
-                    </div>
+                    </div>;
                 }
             })
         }
