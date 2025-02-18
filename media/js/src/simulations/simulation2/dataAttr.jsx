@@ -251,7 +251,7 @@ export const takeaways2 = {
                 omitted variable ({inlineKatex('x_2')}).</>,
             <>(c) High correlation between the omitted variable
                 ({inlineKatex('x_2')}) and the dependent variable
-                ({inlineKatex('x_2')}).</>,
+                ({inlineKatex('y')}).</>,
             '(d) Both (b) and (c)',
             '(e) Both (a) and (c)'],
         answer: '(d) Both (b) and (c)',
