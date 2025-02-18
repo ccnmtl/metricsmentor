@@ -39,7 +39,8 @@ export const OVBTheoryModal = () => {
                             <Katex tex={'y = \\beta_0 + \\beta_1x_1 + u'} />
                         </div>
                         <p className="mt-3">
-                This is known as the omitted variable bias (OVB).
+                This is known as the <strong>omitted variable bias</strong>
+                (OVB).
                         </p>
                         <p>If the omitted
                 control variable {inlineKatex('x_i')} is correlated with both
@@ -64,6 +65,27 @@ export const OVBTheoryModal = () => {
                             {inlineKatex('\\text{corr}(x_1,x_i)')},
                 contribute to the {inlineKatex('[bias]')}.
                         </p>
+
+                        <p>
+                The extent of bias in {inlineKatex('\\hat{\\beta_1}')}
+                depends on
+                        </p>
+                        <ul>
+                            <li className="mb-2">the strength of the
+                                correlation between the dependent variable
+                                and the omitted
+                                variable, {inlineKatex('\\text{corr}(y, x_i)')},
+                            </li>
+                            <li className="mb-2">the strength of the
+                                correlation between the key variable of
+                                interest and the omitted
+                                variable, {inlineKatex(
+                                '\\text{corr}(x_1, x_i)'
+                            )},
+                            </li>
+                        </ul>
+
+
                     </div>
                     <div className="modal-footer">
                         <button className="btn btn-secondary"
