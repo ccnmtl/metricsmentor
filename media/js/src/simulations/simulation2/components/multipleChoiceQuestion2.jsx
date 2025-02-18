@@ -3,13 +3,12 @@ import PropTypes from 'prop-types';
 import { saveAnswer } from '../../../utils/utils';
 
 
-export const MultipleChoiceQuestion2 = ({isSubmitted, setIsSubmitted, takeaways,
-    handleContinue, checkComplete, handleStartOver, submissionId, isComplete,
+export const MultipleChoiceQuestion2 = ({takeaways, isSubmitted, setIsSubmitted,
+    handleContinue, handleStartOver, submissionId, isComplete, checkComplete,
     setIsComplete, createSubmission, coursePk, nextStep, setNextStep, results,
-    setResults }) => {
+    setResults, showGeneral, setShowGeneral}) => {
 
     const [selected, setSelected] = useState({});
-    
     const [showFeedback, setShowFeedback] = useState({});
     const [isDone, setIsDone] = useState(false);
 
@@ -28,13 +27,14 @@ export const MultipleChoiceQuestion2 = ({isSubmitted, setIsSubmitted, takeaways,
     };
 
     const handleSubmit = async(topic) => {
-        setIsSubmitted(true);
         const response = $(`input[name="${topic}-choices"]:checked`).val()
         setShowFeedback({...showFeedback, [topic]: response[1]})
         setResults({...results, [topic]: response === takeaways[topic].answer});
     };
 
     useEffect(() => {
+        const result = Object.keys(takeaways);
+        setIsSubmitted(results[result[0]]);
         if (!submissionId) {
             createSubmission(() => asyncSave()).then(() => {
                 setIsComplete({...isComplete, ...results});
@@ -47,20 +47,26 @@ export const MultipleChoiceQuestion2 = ({isSubmitted, setIsSubmitted, takeaways,
     }, [results]);
 
     useEffect(() => {
+        setShowGeneral(checkComplete() > 1 && isComplete['general'] != true);
         const result = Object.keys(takeaways);
         setNextStep(result.length > 0 &&
             result.reduce((acc, val) => acc === results[val], true));
-    }, [results]);
+    }, [isComplete]);
 
     useEffect(() => {
-        setIsDone(isSubmitted && nextStep &&
-            isComplete['general'] === true);
-    }, [isComplete])
+        const result = Object.keys(takeaways);
+        setNextStep(result.length > 0 &&
+            result.reduce((acc, val) => acc === results[val], true));
+    }, [showGeneral]);
+
+    useEffect(() => {
+        setIsDone(nextStep && isComplete['general'] === true);
+    }, [nextStep]);
 
     return <>
         {Object.entries(takeaways)
             .map(([topic, {prompt, choices, feedback}], i) => {
-                if (true) {
+                if (topic !== 'general' || isSubmitted) {
                     return <div key={i}>
                         <p className={`mb-3 ${i > 0 ? 'mt-5' : ''}`}>
                             {prompt}
@@ -86,7 +92,7 @@ export const MultipleChoiceQuestion2 = ({isSubmitted, setIsSubmitted, takeaways,
                                 </div>
                             ))}
                         </div>
-                        {isSubmitted &&
+                        {topic in results &&
                             <div className={`form-check text-${results[topic] ?
                                     'success' : 'danger'} mt-3 mb-3`}
                                 role="alert"
@@ -104,21 +110,21 @@ export const MultipleChoiceQuestion2 = ({isSubmitted, setIsSubmitted, takeaways,
                 }
             })
         }
-        {isSubmitted && nextStep && <>
+        {nextStep && <>
             <button className="btn btn-sm btn-success me-3"
                 type='submit' onClick={handleContinue}
             >
                 {isDone ?
                     'Try another dataset »' : 'Continue »'}
             </button>
-            {checkComplete() > 2 &&
+            {isDone &&
                 <a className="btn btn-sm btn-success me-3" role="button"
                     href={`/course/${coursePk}/`}
                 >
                     I&rsquo;m Done! &raquo;
                 </a>
             }
-            {checkComplete() > 2 &&
+            {isDone &&
                 <button className="btn btn-sm btn-warning"
                     onClick={handleStartOver}
                 >
@@ -145,5 +151,7 @@ MultipleChoiceQuestion2.propTypes = {
     nextStep: PropTypes.bool.isRequired,
     setNextStep: PropTypes.func.isRequired,
     results: PropTypes.object.isRequired,
-    setResults: PropTypes.func.isRequired
+    setResults: PropTypes.func.isRequired,
+    showGeneral: PropTypes.bool.isRequired,
+    setShowGeneral: PropTypes.func.isRequired
 };

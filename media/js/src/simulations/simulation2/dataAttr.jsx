@@ -245,13 +245,10 @@ export const takeaways2 = {
             the variable of interest {inlineKatex('x_1')} when 
             {inlineKatex('x_2')} is omitted??</>,
         choices: [
-            <>(a) High correlation between {inlineKatex('y')} and
-                {inlineKatex('x_1')}.</>,
-            <>(b) High correlation between {inlineKatex('x_1')} and the
-                omitted variable ({inlineKatex('x_2')}).</>,
-            <>(c) High correlation between the omitted variable
-                ({inlineKatex('x_2')}) and the dependent variable
-                ({inlineKatex('y')}).</>,
+            '(a) High correlation between the y and x1',
+            '(b) High correlation between x1 and the omitted variable x2.',
+            '(c) High correlation between the omitted variable x2 and the ' +
+                'dependent variable y.',
             '(d) Both (b) and (c)',
             '(e) Both (a) and (c)'],
         answer: '(d) Both (b) and (c)',
