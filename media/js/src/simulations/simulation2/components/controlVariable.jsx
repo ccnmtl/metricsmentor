@@ -112,30 +112,69 @@ export const ControlVariable = ({
                                             labelIndex[index.x_1]}_i +
                                         ${selectData.slope_x2 +
                                             labelIndex[dType]}_i`],
-                                },
-                                {
-                                    title: <>Original sample slope
-                                        coefficient
-                                        for {inlineKatex('x_1')}</>,
-                                    body: [`\\hat{\\beta_1} =
-                                        ${data[index.x_1].slope}`],
-                                },
-                                {
-                                    title: <>New sample slope coefficient
-                                        for {inlineKatex('x_1')}</>,
-                                    body: [`\\hat{\\beta_1} =
-                                        ${selectData.slope_x1}`],
-                                },
-                                {
-                                    title: 'Correlation coefficients',
-                                    body: [
-                                        `\\text{corr}(y, x_2) = 
-                                            ${selectData.corr_y}`,
-                                        `\\text{corr}(x_1, x_2) = 
-                                            ${selectData.corr_x1}`,
-                                    ],
                                 }
                             ].map((content, i) => formulaText(content, i))}
+                            {controls[dType] === true && (<>
+                                <table
+                                    className="table
+                                    table-bordered
+                                    w-75 mb-5 mt-3">
+                                    <thead>
+                                        <tr>
+                                            <th>Coeff.</th>
+                                            <th>Original</th>
+                                            <th>With control var</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                            <th
+                                                scope="col">{inlineKatex(
+                                                    '\\hat{\\beta_1}'
+                                                )}</th>
+                                            <td
+                                                scope="col">{inlineKatex(
+                                                    `${data[index.x_1].slope}`
+                                                )}</td>
+                                            <td
+                                                scope="col">
+                                                <span className="hi-val">
+                                                    {inlineKatex(
+                                                        `${selectData.slope_x1}`
+                                                    )}</span></td>
+                                        </tr>
+                                        <tr>
+                                            <th
+                                                scope="col">{inlineKatex(
+                                                    `\\text{corr}(y,x${i+2})`
+                                                )}</th>
+                                            <td
+                                                scope="col">&mdash;</td>
+                                            <td
+                                                scope="col">
+                                                <span className="hi-val">
+                                                    {inlineKatex(
+                                                        `${selectData.corr_y}`
+                                                    )}</span></td>
+                                        </tr>
+                                        <tr>
+                                            <th
+                                                scope="col">{inlineKatex(
+                                                    `\\text{corr}(x_1,x${i+2})`
+                                                )}</th>
+                                            <td
+                                                scope="col">&mdash;</td>
+                                            <td
+                                                scope="col">
+                                                <span className="hi-val">
+                                                    {inlineKatex(
+                                                        `${selectData.corr_x1}`
+                                                    )}</span></td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+
+                            </>)}
                         </div>);
                 })}
             </div>
