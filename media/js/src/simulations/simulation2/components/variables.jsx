@@ -49,11 +49,6 @@ export const Variables = ({params}) => {
                 </tr>
             </tbody>
         </table>
-
-
-
-
-
     </>);
 };
 
