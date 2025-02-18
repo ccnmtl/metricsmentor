@@ -39,12 +39,21 @@ export const ControlVariable = ({
                         className="prompt-img"
                         alt="Reminder:" />
                 </div>
-                <ul className="ps-3 mb-2">
+                <ul className="ps-3 mb-4">
                     <li>Add one variable at a time to the regression model</li>
                     <li>Observe the resulting regression line
                         on the graph and compare it to the original</li>
                     <li>Compare the new regression line coeffiecients
                         to the original</li>
+                    <li>Observe the affect
+                        of {
+                        inlineKatex('\\text{corr}(y, x_i)')
+                    } and {
+                        inlineKatex('\\text{corr}(x_1, x_i)')
+                    } on {
+                        inlineKatex('\\hat{\\beta_1}.')
+                    }
+                    </li>
                 </ul>
             </div>
 
@@ -125,21 +134,7 @@ export const ControlVariable = ({
                         </div>);
                 })}
             </div>
-            <p className="mt-3">
-                The extent of bias in {inlineKatex('\\hat{\\beta_1}')}
-                depends on
-            </p>
-            <ul>
-                <li className="mb-2">the strength of the correlation between
-                    the dependent variable and the omitted
-                    variable, {inlineKatex('\\text{corr}(y, x_i)')},
-                </li>
-                <li className="mb-2">the strength of the correlation between
-                    the key variable of interest and the omitted
-                    variable, {inlineKatex('\\text{corr}(x_1, x_i)')},
-                </li>
-            </ul>
-            <p>
+            <p className="mt-4">
                 Let&rsquo;s review what you&rsquo;ve learned here in the next
                 section.
             </p>
