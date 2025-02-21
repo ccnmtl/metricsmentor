@@ -1,7 +1,127 @@
 {% extends 'base.html' %}
+{% load static %}
 
 {% block title %}Design - Simulations{% endblock %}
+{% block pagetype %}--simulation{% endblock %}
 
 {% block content %}
-    <h1>Simulations</h1>
+<main id="maincontent" class="maincontent--simulation">
+    <div class="main-app">
+        <div class="simulation">
+            <div class="simulation__workspace">
+
+                <!-- ### Begin block for SIMULATION PREAMBLE -->
+                <div class="simulation__step-container d-flex">
+                    <div class="simulation__step-num">
+                        &bull;
+                    </div>
+                    <div class="simulation__step-toggle--down">
+                    </div>
+                    <div class="simulation__step-body">
+                        <header class="simulation__step-header">
+                            <h2 class="h2-primary">
+                                <span class="h2-secondary d-block">
+                                    Simulation 000</span>
+                                    <span class="h2-title d-block">
+                                        Title of simulation
+                                    </span>
+                            </h2>
+                        </header>
+                        <div class="simulation__step-content">
+                            <p>
+                                This is text space is for the overall
+                                description of this simulation. It should
+                                provide a brief overview of the simulation
+                                and its purpose. This text should be
+                                informative and engaging, but not too
+                                detailed.
+                            </p>
+                            <p>
+                                Approximately <b>60 to 70 words</b>
+                                is sufficient. <i>Formatting</i> should be
+                                allowed, as well as Katex element
+                                <span class="fake-katex">y = b + mx</span>.
+                            </p>
+                            <!-- The above span Katex is fake, don't use it
+                                in sim proper -->
+                        </div>
+                    </div>
+                </div>
+                <!-- ### End block for SIMULATION PREAMBLE -->
+
+
+                <!-- ### Begin block for LEARNING GOALS -->
+                <div class="simulation__step-container d-flex">
+                    <div class="simulation__step-num tip-on">
+                        <img src="{{STATIC_URL}}img/icon-goal.svg"
+                        class="simulation__step-icon"
+                        alt="Icon: Learning goals" />
+                    </div>
+                    <div class="simulation__step-toggle--down">
+                    </div>
+                    <div class="simulation__step-body">
+                        <header class="simulation__step-header">
+                            <h2 class="h2-primary" id="learningGoal">
+                                Learning goals</h2>
+                        </header>
+                        <div class="simulation__step-content">
+                            <p>
+                                This space is setting up students learning
+                                expectations for the simulation. It should be
+                                clear and concise. It should be rundown of
+                                learning goals that students should be able
+                                to achieve by the end of the simulation.
+                            </p>
+                            <p>
+                                Approximately <b>60 to 70 words</b>
+                                is sufficient. <i>Formatting</i> should be
+                                allowed, as well as Katex element
+                                <span class="fake-katex">y = b + mx</span>.
+                            </p>
+                            <!-- The above span Katex is fake, don't use it
+                                in sim proper -->
+                        </div>
+                    </div>
+                </div>
+                <!-- ### End block for LEARNING GOALS -->
+
+
+                <!-- ### Begin block for TAKEAWAY QUESTIONS -->
+                <div class="simulation__step-container d-flex">
+                    <div class="simulation__step-num">
+                        &bull;
+                    </div>
+                    <div class="simulation__step-toggle--down">
+                    </div>
+                    <div class="simulation__step-body">
+                        <header class="simulation__step-header">
+                            <h2 class="h2-primary" id="learningGoal">
+                                Takeaway questions</h2>
+                        </header>
+                        <div class="simulation__step-content">
+                            <p>
+                                TBD
+                            </p>
+                            <p>
+                                <i>Formatting</i> should be
+                                allowed, as well as Katex element
+                                <span class="fake-katex">y = b + mx</span>.
+                            </p>
+                            <!-- The above span Katex is fake, don't use it
+                                in sim proper -->
+                        </div>
+                    </div>
+                </div>
+                <!-- ### End block for TAKEAWAY QUESTIONS -->
+
+
+            </div>
+
+            <div class="simulation__graphspace">
+                Graph
+            </div>
+        </div>
+    </div>
+</main>
 {% endblock %}
+{% block footer%}{% endblock %}
