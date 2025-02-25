@@ -30,14 +30,13 @@ export const App = () => {
                     element={<Dashboard
                         isSuperUser={isSuperUser}
                         isFaculty={isFaculty}/>} />
-                {(isSuperUser || isFaculty) && (
-                    <Route path='course/:courseId/simulations/1/'
-                        element={<SimulationOne />} />
-                )}
-                {(isSuperUser || isFaculty) && (
-                    <Route path='course/:courseId/simulations/2/'
-                        element={<SimulationTwo />} />
-                )}
+                <Route path='course/:courseId/simulations/1/'
+                    element={<SimulationOne />} />
+
+
+                <Route path='course/:courseId/simulations/2/'
+                    element={<SimulationTwo />} />
+
                 {(isSuperUser || isFaculty) && (
                     <Route path='course/:courseId/simulations/3/'
                         element={<SimulationThree />} />
