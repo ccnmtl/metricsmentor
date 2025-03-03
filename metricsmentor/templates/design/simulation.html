@@ -40,7 +40,14 @@
                                 Approximately <b>60 to 70 words</b>
                                 is sufficient. <i>Formatting</i> should be
                                 allowed, as well as Katex element
-                                <span class="fake-katex">y = b + mx</span>.
+                                <span class="fake-katex katex-inline">
+                                    y = b + mx
+                                </span>.
+                            </p>
+                            <p>
+                                Katex that appear inline has
+                                <code>className="katex-inline"</code>. Block Katex
+                                does not have a class name.
                             </p>
                             <!-- The above span Katex is fake, don't use it
                                 in sim proper -->
@@ -76,7 +83,12 @@
                                 Approximately <b>60 to 70 words</b>
                                 is sufficient. <i>Formatting</i> should be
                                 allowed, as well as Katex element
-                                <span class="fake-katex">y = b + mx</span>.
+                                <span class="fake-katex katex-inline">y = b + mx</span>.
+                            </p>
+                            <p>
+                                Katex that appear inline has
+                                <code>className="katex-inline"</code>. Block Katex
+                                does not have a class name.
                             </p>
                             <!-- The above span Katex is fake, don't use it
                                 in sim proper -->
@@ -84,6 +96,98 @@
                     </div>
                 </div>
                 <!-- ### End block for LEARNING GOALS -->
+
+
+                <!-- ### Begin block for A STEP CONTAINER -->
+                <div class="simulation__step-container d-flex">
+                    <div class="simulation__step-num">
+                        &bull;
+                    </div>
+                    <div class="simulation__step-toggle--down">
+                    </div>
+                    <div class="simulation__step-body">
+                        <header class="simulation__step-header">
+                            <h2 class="h2-primary" id="learningGoal">
+                                A step container</h2>
+                        </header>
+                        <div class="simulation__step-content">
+                            <p>
+                                This is a typical step container. There are
+                                some basic components that are common to
+                                content in all step containers.
+                            </p>
+                            <p>
+                                The instructions can be in paragraphs.
+                                In <b>all content</b> on the workspace,
+                                <i>formatting</i> should be
+                                allowed, as well as Katex element
+                                <span class="fake-katex katex-inline">y = b + mx</span>.
+                                Katex that appear inline has
+                                <code>className="katex-inline"</code>.
+                            </p>
+                            <div class="prompt-block">
+                                <div class="prompt-gfx">
+                                    <img class="prompt-img" alt="Reminder:" src="{{STATIC_URL}}img/icon-bell.svg">
+                                </div>
+                                <p class="mb-2">
+                                    This is a <b>prompt block.</b> It is used to
+                                    highlight important tips or reminders
+                                    to urge students to pay more attention.
+                                </p>
+                            </div>
+                            <p>Sometimes, equations are listed under a
+                                sub-segment content, like the following...</p>
+                            <h2>This is a sub-segment heading</h2>
+                            <div class="sub-content">
+                                <div class="katex-block">
+                                    <span class="fake-katex">
+                                        y = 123 + 45x
+                                    </span>
+                                </div>
+                            </div>
+                            <p><code>&lt;div class="sub-content"&gt;</code>
+                                indents the block, and
+                                <code>&lt;div class="katex-block"&gt;</code>
+                                wrapping the Katex element adds top and bottom
+                                padding.
+                            </p>
+                            <p>
+                                Finally, here's a table component, for value
+                                comparisons. I need to be able to add a class to
+                                the <code>&lt;table&gt;</code> element, for example,
+                                <code>w-75</code> to control the width of the
+                                table.
+                            </p>
+                            <table class="table table-bordered mb-5 mt-3">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">#</th>
+                                        <th scope="col">Header 1</th>
+                                        <th scope="col">Header 2</th>
+                                        <th scope="col">Header 3</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <th scope="row">1</th>
+                                        <td><span class="fake-katex katex-inline">123</span></td>
+                                        <td><span class="fake-katex katex-inline">456</span></td>
+                                        <td><span class="fake-katex katex-inline">789</span></td>
+                                      </tr>
+                                      <tr>
+                                        <th scope="row">2</th>
+                                        <td><span class="fake-katex katex-inline">984</span></td>
+                                        <td><span class="fake-katex katex-inline">735</span></td>
+                                        <td><span class="fake-katex katex-inline">326</span></td>
+                                      </tr>
+                                </tbody>
+                            </table>
+                            <!-- The above span Katex is fake, don't use it
+                                in sim proper -->
+                        </div>
+                    </div>
+                </div>
+                <!-- ### End block for A STEP CONTAINER -->
 
 
                 <!-- ### Begin block for TAKEAWAY QUESTIONS -->
@@ -105,7 +209,9 @@
                             <p>
                                 <i>Formatting</i> should be
                                 allowed, as well as Katex element
-                                <span class="fake-katex">y = b + mx</span>.
+                                <span class="fake-katex katex-inline">y = b + mx</span>.
+                                Katex that appear inline has
+                                <code>className="katex-inline"</code>.
                             </p>
                             <!-- The above span Katex is fake, don't use it
                                 in sim proper -->
