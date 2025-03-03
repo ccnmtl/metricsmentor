@@ -13,11 +13,18 @@
     padding: 0.3125rem 0;
 }
 
-.fake-katex {
+span.fake-katex {
     font: normal 1.21em KaTeX_Main, Times New Roman, serif;
     line-height: 1.2;
     text-indent: 0;
     text-rendering: auto;
     font-style: italic;
-    display: inline-block !important;
+    display: block;
+}
+span.fake-katex.katex-inline
+{   
+    display: inline !important;
+    &::before {
+        content: " ";
+      }
 }
