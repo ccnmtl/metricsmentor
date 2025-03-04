@@ -16,6 +16,7 @@ export const SimulationThree = () => {
     const [intercept, setIntercept] = useState(null);
     const [robustStandardError, setRobustStandardError] = useState(null);
     const [useRealDataSked, setUseRealDataSked] = useState(false);
+    const [progress, setProgress] = useState(0);
 
     const handleStage = (e) => setStage(parseInt(e.target.value));
 
@@ -111,19 +112,26 @@ export const SimulationThree = () => {
         {
             // Learning goals
             icon: `${STATIC_URL}/img/icon-goal.svg`,
-            headerId: 'learningGoal',
-            title: 'Learning goals',
+            headerId: 'learningObjective',
+            title: 'Learning Objectives',
             content: (
                 <>
+                    <h3>Multicollinearity</h3>
                     <p>
-                This section outlines the learning expectations for the
-                simulation. It should be clear, concise, and list the goals
-                that students should achieve.
+                        This space is setting up students learning expectations
+                        for <strong>Multicollinearity</strong> section. This
+                        should outline what student should be taking away from
+                        this, and just other general functional instructions.
                     </p>
-                    <p>
-                Approximately <b>60 to 70 words</b> is sufficient.
-                        <i>Formatting</i> is allowed, along with KaTeX elements
-                    </p>
+                    <label htmlFor='progress'><strong>Your progress:</strong></label>
+                    <div id='progress' className='row text-light mx-1'>
+                        {['Learn', 'Apply', 'Assess'].map((word, i) => 
+                            <div key={i} className={`col-4 border border-light
+                                ${i > progress ?
+                                    'bg-secondary' : 'bg-primary'}`}
+                            >{word}</div>
+                        )}
+                    </div>
                 </>
             )
         },
