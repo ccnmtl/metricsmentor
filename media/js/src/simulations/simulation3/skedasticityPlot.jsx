@@ -14,15 +14,18 @@ export const SkedasticityScatterPlot = () => {
     const [heteroskedasticity, setHeteroskedasticity] = useState(0);
     const [seed] = useState(Math.floor(Math.random() * 100));
 
-    // Generate data points with increasing heteroskedasticity
     const generateData = () => {
         let generatedData = [];
         const random = seededRandom(seed);
-        for (let i = 0; i < N; i++) {
-            const x = i - N / 2;
+        let i = 0;
+        while (generatedData.length < N) {
+            const x = i; // x is always positive
             const y = 2 * x + (1 + heteroskedasticity * x / 10) * (
                 random() - 0.5) * 20;
-            generatedData.push({ x, y });
+            if (y > 0) {  // Only add if y is positive
+                generatedData.push({ x, y });
+            }
+            i++;
         }
         return generatedData;
     };
@@ -83,9 +86,9 @@ export const SkedasticityScatterPlot = () => {
     }, [heteroskedasticity]);
 
     return (
-        <div>
+        <>
             <div>
-                <label>Heteroskedasticity:</label>
+                <label>Degree of Heteroskedasticity: </label>
                 <input
                     type="range"
                     min="0"
@@ -116,12 +119,11 @@ export const SkedasticityScatterPlot = () => {
                     regressionLine,
                 ]}
                 layout={{
-                    title: 'Scatterplot with Adjustable Skedasticity',
+                    title: 'Skedasticity',
                     showlegend: false,
-                    xaxis: { title: 'X', dtick: 25,
-                        range: [0, Math.max(...data.map(point => point.x))] },
-                    yaxis: { title: 'Y', dtick: 25
-                    },
+                    xaxis: { title: 'X',  minallowed: 0 },
+                    yaxis: { title: 'Y', scaleratio: 1,  minallowed: 0},
+                    dragmode: false,
                     annotations: [
                         {
                             // eslint-disable-next-line max-len
@@ -151,15 +153,15 @@ export const SkedasticityScatterPlot = () => {
                     ],
                 }}
                 useResizeHandler={true}
-                style={{ height: '80%' }}
+                style={{ height: '88%' }}
                 config={{
-                    scrollZoom: true,
+                    scrollZoom: false,
                     displayModeBar: true,
                     modeBarButtonsToRemove: [
                         'toImage', 'resetCameraLastSave3d', 'select2d',
                         'lasso2d', 'autoScale2d'],
                 }}
             />
-        </div>
+        </>
     );
 };
