@@ -4,12 +4,13 @@ import { MulticollinearityScatterPlot } from './multicollinearityPlot';
 import DATA from './multicollinearityData.json';
 import { Katex } from '../../utils/katexComponent';
 import { SimulationPanel } from '../../SimulationPanel';
+import { HeteroskedasticitySlider } from './heteroskedasticitySlider';
 
 const STATIC_URL = window.MetricsMentor.staticUrl;
 
 export const SimulationThree = () => {
-
     const [stage, setStage] = useState(0);
+    const [heteroskedasticity, setHeteroskedasticity] = useState(0);
 
     const handleStage = (e) => setStage(parseInt(e.target.value));
 
@@ -58,6 +59,22 @@ export const SimulationThree = () => {
                 </>
             )
         },
+        {
+            headerId: 'What is Heteroskedasticity?',
+            title: 'What is Heteroskedasticity?',
+            content: (
+                <>
+                    <p> This segment is to teach users about Heteroskedasticity.
+                        Space is for instructions.</p>
+                    <button className='btn btn-secondary m-1 btn-sm'>
+                        Glossary
+                    </button>
+                    <HeteroskedasticitySlider
+                        heteroskedasticity={heteroskedasticity}
+                        setHeteroskedasticity={setHeteroskedasticity} />
+                </>
+            )
+        }
     ];
 
     const multicollinearitySteps = [
@@ -133,8 +150,14 @@ export const SimulationThree = () => {
         <>
             {stage === 0 && (
                 <SimulationPanel steps={heteroSkadasticSteps}
-                    graphContent={<SkedasticityScatterPlot initialSlope={2}
-                        initialIntercept={5} N={50} />}
+                    graphContent={
+                        <SkedasticityScatterPlot
+                            heteroskedasticity={heteroskedasticity}
+                            initialSlope={2}
+                            initialIntercept={5}
+                            N={50}
+                        />
+                    }
                 />
             )}
             {stage === 1 && (
