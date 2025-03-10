@@ -4,13 +4,17 @@ import { MulticollinearityScatterPlot } from './multicollinearityPlot';
 import DATA from './multicollinearityData.json';
 import { Katex } from '../../utils/katexComponent';
 import { SimulationPanel } from '../../SimulationPanel';
-import { HeteroskedasticitySlider } from './heteroskedasticitySlider';
+import { SkedasticityLearning } from './skedasticityLearning';
 
 const STATIC_URL = window.MetricsMentor.staticUrl;
 
 export const SimulationThree = () => {
     const [stage, setStage] = useState(0);
     const [heteroskedasticity, setHeteroskedasticity] = useState(0);
+    const [standardError, setStandardError] = useState(null);
+    const [slope, setSlope] = useState(null);
+    const [intercept, setIntercept] = useState(null);
+    const [robustStandardError, setRobustStandardError] = useState(null);
 
     const handleStage = (e) => setStage(parseInt(e.target.value));
 
@@ -63,16 +67,14 @@ export const SimulationThree = () => {
             headerId: 'What is Heteroskedasticity?',
             title: 'What is Heteroskedasticity?',
             content: (
-                <>
-                    <p> This segment is to teach users about Heteroskedasticity.
-                        Space is for instructions.</p>
-                    <button className='btn btn-secondary m-1 btn-sm'>
-                        Glossary
-                    </button>
-                    <HeteroskedasticitySlider
-                        heteroskedasticity={heteroskedasticity}
-                        setHeteroskedasticity={setHeteroskedasticity} />
-                </>
+                <SkedasticityLearning
+                    heteroskedasticity={heteroskedasticity}
+                    setHeteroskedasticity={setHeteroskedasticity}
+                    slope={slope}
+                    intercept={intercept}
+                    standardError={standardError}
+                    robustStandardError={robustStandardError}
+                />
             )
         }
     ];
@@ -153,9 +155,10 @@ export const SimulationThree = () => {
                     graphContent={
                         <SkedasticityScatterPlot
                             heteroskedasticity={heteroskedasticity}
-                            initialSlope={2}
-                            initialIntercept={5}
-                            N={50}
+                            setSlope={setSlope}
+                            setIntercept={setIntercept}
+                            setStandardError={setStandardError}
+                            setRobustStandardError={setRobustStandardError}
                         />
                     }
                 />

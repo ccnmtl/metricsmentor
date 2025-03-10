@@ -180,3 +180,25 @@ export const shuffleArray = (array) => {
     }
     return array;
 };
+
+
+export const computeRobustSE = (dataPoints, slope, intercept) => {
+    // Calculate mean of x values
+    const x_values = dataPoints.map(d => d.x);
+    const meanX = x_values.reduce((sum, x) => sum + x, 0) / x_values.length;
+
+    // Calculate the denominator: sum of squared deviations of x from the mean
+    const sxx = x_values.reduce((acc, x) => acc + Math.pow(x - meanX, 2), 0);
+
+    // Calculate the numerator: weighted sum of squared residuals
+    const numerator = dataPoints.reduce((acc, point) => {
+        const residual = point.y - (slope * point.x + intercept);
+        return acc + Math.pow(point.x - meanX, 2) * Math.pow(residual, 2);
+    }, 0);
+
+    // The robust variance of the slope is numerator divided by sxx squared
+    const robustVar = numerator / Math.pow(sxx, 2);
+
+    // Return the robust standard error (the square root of the variance)
+    return Math.sqrt(robustVar);
+};
