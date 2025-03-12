@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 export const HeteroskedasticitySlider = ({
     heteroskedasticity, setHeteroskedasticity }) => (
     <div className='mt-3 me-2'>
-        <label className='me-2'>Degree of Heteroskedasticity: </label>
+        <label className='me-2'>Homoskedasticity</label>
         <input
             type="range"
             min="0"
@@ -13,7 +13,7 @@ export const HeteroskedasticitySlider = ({
             value={heteroskedasticity}
             onChange={(e) => setHeteroskedasticity(parseFloat(e.target.value))}
         />
-        <span>{' ' + heteroskedasticity}</span>
+        <span>{' Heteroskedasticity'}</span>
     </div>
 );
 

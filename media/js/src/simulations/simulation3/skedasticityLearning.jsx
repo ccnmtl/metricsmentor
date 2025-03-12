@@ -42,13 +42,16 @@ export const SkedasticityLearning = ({
                         </th>
                         <td>
                             <Katex tex={
-                                standardError ? standardError.toFixed(2) : ''}
+                                (standardError || standardError === 0) ?
+                                    standardError.toFixed(2) : ''}
                             />
                         </td>
                         <td>
                             <Katex tex={
-                                robustStandardError ?
+                                (robustStandardError ||
+                                    robustStandardError === 0) ?
                                     robustStandardError.toFixed(2) : ''}
+
                             />
                         </td>
                     </tr>

@@ -211,6 +211,7 @@ def calculate_regression(request):
 
         if x_values and y_values:
             result = linregress(x_values, y_values)
+            robust_se = calculate_whites_robust_se(x_values, y_values)
 
             return JsonResponse({
                 'slope': result.slope,
@@ -218,9 +219,22 @@ def calculate_regression(request):
                 'rvalue': result.rvalue,
                 'pvalue': result.pvalue,
                 'stderr': result.stderr,
+                'stderr_robust': robust_se[1],
             })
 
     return JsonResponse({'error': 'Invalid data.'}, status=400)
+
+
+def calculate_whites_robust_se(x_values, y_values):
+    # Add a constant to the independent variables
+    X = sm.add_constant(x_values)
+    # Fit the OLS model
+    model = sm.OLS(y_values, X).fit()
+    # Get the robust covariance matrix using White's method
+    robust_cov = model.get_robustcov_results(cov_type='HC0')
+    # Extract the robust standard errors
+    robust_se = robust_cov.bse
+    return robust_se
 
 
 @csrf_exempt

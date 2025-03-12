@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Plot from 'react-plotly.js';
 import axios from 'axios';
-import { seededRandom, computeRobustSE } from '../../utils/utils';
+import { seededRandom } from '../../utils/utils';
 import PropTypes from 'prop-types';
 
 export const SkedasticityScatterPlot = ({
@@ -20,8 +20,11 @@ export const SkedasticityScatterPlot = ({
         let i = 0;
         while (generatedData.length < N) {
             const x = i; // x is always positive
-            const y = 2 * x + (1 + heteroskedasticity * x / 10) * (
-                random() - 0.5) * 20;
+            // const y = 2 * x + heteroskedasticity * (x / 10) * (
+            //     random() - 0.5) * 20;
+            const baseNoise = (random() - 0.5) * 20;
+            const heteroNoise = (x / 10) * (random() - 0.5) * 20;
+            const y = 2 * x + heteroskedasticity * (baseNoise + heteroNoise);
             if (y > 0) {
                 generatedData.push({ x, y });
             }
@@ -39,15 +42,14 @@ export const SkedasticityScatterPlot = ({
                 x_values,
                 y_values,
             });
-            const { slope, intercept, stderr, rvalue } = response.data;
+            const { slope, intercept, stderr,
+                rvalue, stderr_robust } = response.data;
 
             setSlope(slope);
             setIntercept(intercept);
             setStandardError(stderr);
             setRValue(rvalue);
-
-            const robustSE = computeRobustSE(generatedData, slope, intercept);
-            setRobustStandardError(robustSE);
+            setRobustStandardError(stderr_robust);
 
             // Set the regression line for the plot
             setRegressionLine({
@@ -120,5 +122,3 @@ SkedasticityScatterPlot.propTypes = {
     setStandardError: PropTypes.func,
     setRobustStandardError: PropTypes.func,
 };
-
-export default SkedasticityScatterPlot;
