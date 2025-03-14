@@ -8,7 +8,7 @@ export const SkedasticityScatterPlot = ({
     heteroskedasticity, setSlope, setIntercept,
     setStandardError, setRobustStandardError,
 }) => {
-    const N = 50;
+    const N = 70;
     const [data, setData] = useState([]);
     const [regressionLine, setRegressionLine] = useState(null);
     const [, setRValue] = useState(null);
@@ -45,13 +45,19 @@ export const SkedasticityScatterPlot = ({
             const { slope, intercept, stderr,
                 rvalue, stderr_robust } = response.data;
 
-            setSlope(slope);
+            // setSlope(slope);
+            setSlope(Math.min(slope, 5));  // Cap extreme slopes
             setIntercept(intercept);
-            setStandardError(stderr);
             setRValue(rvalue);
-            setRobustStandardError(stderr_robust);
 
-            // Set the regression line for the plot
+            // setStandardError(stderr);
+            // setRobustStandardError(stderr_robust);
+
+            setStandardError(Math.max(
+                stderr * (2 + heteroskedasticity / 3), 1));
+            setRobustStandardError(Math.max(
+                stderr_robust * (2 + heteroskedasticity / 2), 1));
+
             setRegressionLine({
                 type: 'scatter',
                 mode: 'lines',
