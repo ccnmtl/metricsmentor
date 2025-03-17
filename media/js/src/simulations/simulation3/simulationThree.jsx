@@ -5,8 +5,8 @@ import DATA from './multicollinearityData.json';
 import { Katex } from '../../utils/katexComponent';
 import { SimulationPanel } from '../../SimulationPanel';
 import { SkedasticityLearning } from './skedasticityLearning';
+import { STATIC_URL } from '../../utils/utils';
 
-const STATIC_URL = window.MetricsMentor.staticUrl;
 
 export const SimulationThree = () => {
     const [stage, setStage] = useState(0);

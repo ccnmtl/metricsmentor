@@ -2,8 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { formulaText, inlineKatex } from '../../../utils/utils';
 import { labelIndex } from '../dataAttr';
+import { STATIC_URL } from '../../../utils/utils';
 
-export const STATIC_URL = window.MetricsMentor.staticUrl;
 
 export const ControlVariable = ({
     controls, data, handleControls, controlText, index

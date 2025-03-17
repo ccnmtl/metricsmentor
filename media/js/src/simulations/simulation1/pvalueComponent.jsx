@@ -2,8 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { Katex } from '../../utils/katexComponent';
 import { saveAnswer } from '../../utils/utils';
 import PropTypes from 'prop-types';
+import { STATIC_URL } from '../../utils/utils';
 
-export const STATIC_URL = window.MetricsMentor.staticUrl;
 
 export const PvalueComponent = ({
     pvalue, tvalue, submissionId, hypothesis, nullHypothesis,

@@ -2,7 +2,6 @@ import React from 'react';
 import { Katex } from '../../../utils/katexComponent';
 import { inlineKatex } from '../../../utils/utils';
 
-export const STATIC_URL = window.MetricsMentor.staticUrl;
 
 export const OVBTheoryModal = () => {
 

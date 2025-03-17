@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { Katex } from '../../utils/katexComponent';
 import { GlossaryButton } from './glossary';
 
-export const STATIC_URL = window.MetricsMentor.staticUrl;
+import { STATIC_URL } from '../../utils/utils';
 
 
 export const SimIntro = ({plotType}) => {

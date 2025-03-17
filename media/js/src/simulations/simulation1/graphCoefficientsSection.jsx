@@ -2,8 +2,8 @@ import React from 'react';
 import { Katex } from '../../utils/katexComponent';
 import PropTypes from 'prop-types';
 import { GlossaryButton } from './glossary';
+import { STATIC_URL } from '../../utils/utils';
 
-export const STATIC_URL = window.MetricsMentor.staticUrl;
 
 export const GraphCoefficients = ({
     intercept, slope, stderror, plotType, slopes, stderrs,

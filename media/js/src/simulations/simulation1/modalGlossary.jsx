@@ -1,7 +1,6 @@
 import React from 'react';
 import { Katex } from '../../utils/katexComponent';
 
-export const STATIC_URL = window.MetricsMentor.staticUrl;
 
 export const GlossaryModal = () => {
 
