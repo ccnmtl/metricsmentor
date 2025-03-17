@@ -6,6 +6,7 @@ import { SkedasticityLearning } from './skedasticityLearning';
 import { SkedasticityReal } from './skedasticityReal';
 import { STATIC_URL } from '../../utils/utils';
 import { WhatIsMulticollinearity } from './whatIsMulticollinearity';
+import { MulticollinearityGlossary } from './multicollinearityGlossary';
 
 
 export const SimulationThree = () => {
@@ -171,6 +172,7 @@ export const SimulationThree = () => {
                         controls={controls}
                         handleControls={handleControls}
                         setProgress={setProgress} />
+                    <MulticollinearityGlossary />
                 </>
             )
         }
