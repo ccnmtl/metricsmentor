@@ -13,6 +13,12 @@ export const WhatIsMulticollinearity = (controls, handleControls,
             Multicollinearity. This space is for instructions, but
             what do we do about theory? Lorem ipsum
         </p>
+        <button
+            className="btn btn-sm btn-secondary mb-4"
+            data-bs-toggle="modal"
+            data-bs-target="#MulticollinearityGlossary">
+            Glossary
+        </button>
         <p>
             Instructions for this step. Guide user with a narrative, lead them
             to what they need to pay attention to when turning on/off each
