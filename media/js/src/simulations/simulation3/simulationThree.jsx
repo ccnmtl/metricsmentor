@@ -1,12 +1,11 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { SkedasticityScatterPlot } from './skedasticityPlot';
 import { MulticollinearityScatterPlot } from './multicollinearityPlot';
-import DATA from './multicollinearityGeneratedData.json';
-import { Katex } from '../../utils/katexComponent';
 import { SimulationPanel } from '../../SimulationPanel';
 import { SkedasticityLearning } from './skedasticityLearning';
 import { SkedasticityReal } from './skedasticityReal';
 import { STATIC_URL } from '../../utils/utils';
+import { WhatIsMulticollinearity } from './whatIsMulticollinearity';
 
 
 export const SimulationThree = () => {
@@ -18,6 +17,13 @@ export const SimulationThree = () => {
     const [robustStandardError, setRobustStandardError] = useState(null);
     const [useRealDataSked, setUseRealDataSked] = useState(false);
     const [progress, setProgress] = useState(0);
+    const [controls, setControls] = useState([false, false])
+
+    const handleControls = (e) => {
+        const update = [...controls];
+        update[e.target.value] = e.target.checked;
+        setControls(update)
+    };
 
     const handleStage = (e) => setStage(parseInt(e.target.value));
 
@@ -156,23 +162,13 @@ export const SimulationThree = () => {
         },
         {
             // Simulation steps
-            headerId: 'Learning Piece',
-            title: 'Learning Piece',
+            headerId: 'whatIsMulticollinearity',
+            title: 'What is Multicollinearity?',
             content: (
                 <>
-                    <ul>
-                        {[
-                            `corr(y, x_1) = ${DATA.x1.rvalue}`,
-                            `corr(x_1, x_2) = ${DATA.x2.corr_x1}`,
-                            `SE(\\hat \\beta_1) HTS-robust =  
-                                    ${DATA.x2.stderr}`,
-                            `corr(x_1, x_3) =  ${DATA.x3.corr_x1}`,
-                            `SE(\\hat \\beta_1) HTS-robust = 
-                                    ${DATA.x3.stderr}`
-                        ].map((fx,idx) => (
-                            <li key={idx}><Katex tex={fx} /></li>
-                        ))}
-                    </ul>
+                    <WhatIsMulticollinearity 
+                        controls={controls}
+                        handleControls={handleControls} />
                 </>
             )
         }
@@ -197,7 +193,9 @@ export const SimulationThree = () => {
             {stage === 1 && (
                 <SimulationPanel steps={multicollinearitySteps}
                     graphContent={
-                        <MulticollinearityScatterPlot data={DATA} />}
+                        <MulticollinearityScatterPlot
+                        controls={controls} 
+                        />}
                 />
             )}
         </>
