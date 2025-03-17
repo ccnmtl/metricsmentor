@@ -3,10 +3,12 @@ import Plot from 'react-plotly.js';
 import axios from 'axios';
 import { seededRandom } from '../../utils/utils';
 import PropTypes from 'prop-types';
+import DATAPOINTS from './Growth_Assasin.json';
+import REGRESSIONDATA from './Regression_Results.json';
 
 export const SkedasticityScatterPlot = ({
     heteroskedasticity, setSlope, setIntercept,
-    setStandardError, setRobustStandardError,
+    setStandardError, setRobustStandardError, useRealData
 }) => {
     const N = 70;
     const [data, setData] = useState([]);
@@ -74,12 +76,48 @@ export const SkedasticityScatterPlot = ({
     };
 
     useEffect(() => {
-        const newData = generateData();
-        setData(newData);
-        if (newData.length > 0) {
+        let newData;
+
+        if (useRealData) {
+            // Use real-world data from JSON
+            newData = DATAPOINTS.map(item => ({
+                x: item.assasin,  // X-axis: Number of assassinations
+                y: item.growth    // Y-axis: Growth
+            }));
+
+            const { slope, standard_error } = REGRESSIONDATA.non_robust;
+            const { standard_error: robust_stderr } = REGRESSIONDATA.robust;
+
+            setSlope(Math.min(slope, 5));
+            setIntercept(2.104108);
+
+            setStandardError(Math.max(standard_error * (
+                2 + heteroskedasticity / 3), 1));
+            setRobustStandardError(Math.max(robust_stderr * (
+                2 + heteroskedasticity / 2), 1));
+
+
+            const x_values = newData.map((point) => point.x);
+            setRegressionLine({
+                type: 'scatter',
+                mode: 'lines',
+                x: [Math.min(...x_values), Math.max(...x_values)],
+                y: [
+                    slope * Math.min(...x_values) + 2.104108,
+                    slope * Math.max(...x_values) + 2.104108,
+                ],
+                marker: { color: 'red' },
+            });
+
+        } else {
+            // Use generated data
+            newData = generateData();
             calculateRegression(newData);
         }
-    }, [heteroskedasticity]);
+
+        setData(newData);
+
+    }, [heteroskedasticity, useRealData]);
 
     return (
         <Plot
@@ -127,4 +165,5 @@ SkedasticityScatterPlot.propTypes = {
     setIntercept: PropTypes.func,
     setStandardError: PropTypes.func,
     setRobustStandardError: PropTypes.func,
+    useRealData: PropTypes.bool,
 };
