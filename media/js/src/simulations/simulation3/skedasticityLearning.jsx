@@ -6,7 +6,7 @@ import axios from 'axios';
 
 export const SkedasticityLearning = ({
     heteroskedasticity, setHeteroskedasticity, slope, intercept, standardError,
-    robustStandardError
+    robustStandardError, setUseRealDataSked, useRealDataSked
 }) => {
     const [pvaluesStandard, setPvaluesStandard] = useState(null);
     const [pvaluesRobust, setPvaluesRobust] = useState(null);
@@ -190,6 +190,14 @@ export const SkedasticityLearning = ({
                     </tr>
                 </tbody>
             </table>
+            <div className="simulation__step-prompt">
+                <button
+                    className="btn btn-sm btn-success"
+                    disabled={useRealDataSked}
+                    onClick={() => setUseRealDataSked(true)}>
+                    Continue to Real Data &raquo;
+                </button>
+            </div>
         </>
     );
 };
@@ -201,4 +209,6 @@ SkedasticityLearning.propTypes = {
     intercept: PropTypes.number,
     standardError: PropTypes.number,
     robustStandardError: PropTypes.number,
+    setUseRealDataSked: PropTypes.func,
+    useRealDataSked: PropTypes.bool,
 };

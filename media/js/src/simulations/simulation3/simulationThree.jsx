@@ -15,6 +15,7 @@ export const SimulationThree = () => {
     const [slope, setSlope] = useState(null);
     const [intercept, setIntercept] = useState(null);
     const [robustStandardError, setRobustStandardError] = useState(null);
+    const [useRealDataSked, setUseRealDataSked] = useState(false);
 
     const handleStage = (e) => setStage(parseInt(e.target.value));
 
@@ -74,6 +75,8 @@ export const SimulationThree = () => {
                     intercept={intercept}
                     standardError={standardError}
                     robustStandardError={robustStandardError}
+                    useRealDataSked={useRealDataSked}
+                    setUseRealDataSked={setUseRealDataSked}
                 />
             )
         }
@@ -159,6 +162,7 @@ export const SimulationThree = () => {
                             setIntercept={setIntercept}
                             setStandardError={setStandardError}
                             setRobustStandardError={setRobustStandardError}
+                            useRealData={useRealDataSked}
                         />
                     }
                 />
