@@ -61,8 +61,10 @@ export const SkedasticityLearning = ({
     };
 
     useEffect(() => {
-        calculatePvalueStandard();
-        calculatePvalueRobust();
+        if (slope !== null) {
+            calculatePvalueStandard();
+            calculatePvalueRobust();
+        }
     }, [heteroskedasticity]);
 
     return (
