@@ -2,6 +2,8 @@ import axios from 'axios';
 import React from 'react';
 import { Katex } from './katexComponent';
 
+export const STATIC_URL = window.MetricsMentor.staticUrl;
+
 export const authedFetch = (url, method, data) => {
     const elt = document.getElementById('csrf-token');
     const token = elt ? elt.getAttribute('content') : '';

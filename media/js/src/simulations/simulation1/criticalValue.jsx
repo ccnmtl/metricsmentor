@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { Katex } from '../../utils/katexComponent';
-import { saveAnswer } from '../../utils/utils';
+import { saveAnswer, STATIC_URL } from '../../utils/utils';
 
-export const STATIC_URL = window.MetricsMentor.staticUrl;
 
 export const CriticalValue = ({
     hypothesisTest2validate, tvalue, n, alpha, hypothesisTest, hypothesis,

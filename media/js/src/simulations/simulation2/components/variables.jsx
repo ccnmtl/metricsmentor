@@ -2,8 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { inlineKatex, formulaText } from '../../../utils/utils';
 import { labelIndex as label } from '../dataAttr';
+import { STATIC_URL } from '../../../utils/utils';
 
-export const STATIC_URL = window.MetricsMentor.staticUrl;
 
 // If this get's implemented into other Simulations, rewrite as a JSX component
 
