@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { SkedasticityScatterPlot } from './skedasticityPlot';
 import { MulticollinearityScatterPlot } from './multicollinearityPlot';
 import { SimulationPanel } from '../../SimulationPanel';
@@ -6,6 +6,9 @@ import { SkedasticityLearning } from './skedasticityLearning';
 import { SkedasticityReal } from './skedasticityReal';
 import { STATIC_URL } from '../../utils/utils';
 import { WhatIsMulticollinearity } from './whatIsMulticollinearity';
+import { MulticollinearityApply } from './multicollinearityApply';
+import MULTIGENDATA from './multicollinearityGeneratedData.json';
+import MULTIREALDATA from './multicollinearityRealData.json';
 
 
 export const SimulationThree = () => {
@@ -18,6 +21,8 @@ export const SimulationThree = () => {
     const [useRealDataSked, setUseRealDataSked] = useState(false);
     const [progress, setProgress] = useState(0);
     const [controls, setControls] = useState([false, false]);
+    const [controls2, setControls2] = useState([false, false]);
+    const [multiData, setMultiData] = useState(MULTIGENDATA);
 
     const handleControls = (e) => {
         const update = [...controls];
@@ -25,7 +30,22 @@ export const SimulationThree = () => {
         setControls(update);
     };
 
+    const handleControls2 = (e) => {
+        const update = [...controls2];
+        update[e.target.value] = e.target.checked;
+        setControls2(update);
+    };
+
     const handleStage = (e) => setStage(parseInt(e.target.value));
+    const handleProgress = (val) => setProgress(val);
+
+    useEffect(() => {
+        if (progress > 0) {
+            setMultiData(MULTIREALDATA);
+        } else {
+            setMultiData(MULTIGENDATA);
+        }
+    }, [progress]);
 
     const heteroSkadasticSteps = [
         {
@@ -162,7 +182,6 @@ export const SimulationThree = () => {
             )
         },
         {
-            // Simulation steps
             headerId: 'whatIsMulticollinearity',
             title: 'What is Multicollinearity?',
             content: (
@@ -170,11 +189,26 @@ export const SimulationThree = () => {
                     <WhatIsMulticollinearity
                         controls={controls}
                         handleControls={handleControls}
-                        setProgress={setProgress} />
+                        handleProgress={handleProgress} />
                 </>
             )
         }
     ];
+
+    if (progress > 0) {
+        multicollinearitySteps.push({
+            headerId: 'multicollinearityRealData',
+            title: 'Real dataset problem',
+            content: (
+                <>
+                    <MulticollinearityApply
+                        controls={controls2}
+                        handleControls={handleControls2}
+                        handleProgress={handleProgress} />
+                </>
+            )
+        })
+    }
 
     return (
         <>
@@ -195,7 +229,8 @@ export const SimulationThree = () => {
             {stage === 1 && (
                 <SimulationPanel steps={multicollinearitySteps}
                     graphContent={<MulticollinearityScatterPlot
-                        controls={controls} />}
+                        controls={controls}
+                        data={multiData} />}
                 />
             )}
         </>
