@@ -1,6 +1,6 @@
 import React from 'react';
 import Plot from 'react-plotly.js';
-import DATA from './multicollinearityData.json';
+import DATA from './multicollinearityGeneratedData.json';
 
 
 export const MulticollinearityScatterPlot = () => {

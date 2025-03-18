@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import { SkedasticityScatterPlot } from './skedasticityPlot';
 import { MulticollinearityScatterPlot } from './multicollinearityPlot';
-import DATA from './multicollinearityData.json';
+import DATA from './multicollinearityGeneratedData.json';
 import { Katex } from '../../utils/katexComponent';
 import { SimulationPanel } from '../../SimulationPanel';
 import { SkedasticityLearning } from './skedasticityLearning';
