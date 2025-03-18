@@ -1,10 +1,13 @@
 import React from 'react';
 import Plot from 'react-plotly.js';
-import DATA from './multicollinearityGeneratedData.json';
+import GENDATA from './multicollinearityGeneratedData.json';
+import REALDATA from './multicollinearityRealData.json';
 import PropTypes from 'prop-types';
 
 
-export const MulticollinearityScatterPlot = ({controls}) => {
+export const MulticollinearityScatterPlot = ({controls, progress}) => {
+
+    const DATA = progress == 0 ? GENDATA : REALDATA;
 
     const labelPos = (range) => {
         return range[1] + (range[1] - range[0]) * 0.02;
@@ -89,5 +92,6 @@ export const MulticollinearityScatterPlot = ({controls}) => {
 };
 
 MulticollinearityScatterPlot.propTypes = {
-    controls: PropTypes.arrayOf(PropTypes.bool),
+    controls: PropTypes.arrayOf(PropTypes.bool).isRequired,
+    progress: PropTypes.number.isRequired
 };
