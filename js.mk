@@ -17,7 +17,7 @@
 #
 # Using quotes here will cause eslint to ignore this argument.
 #
-JS_FILES ?= media/js
+JS_FILES ?= media/js/src
 
 NODE_MODULES ?= ./node_modules
 JS_SENTINAL ?= $(NODE_MODULES)/sentinal
@@ -38,7 +38,7 @@ $(JS_SENTINAL): package.json
 	touch $(JS_SENTINAL)
 
 eslint: $(JS_SENTINAL)
-	$(ESLINT) $(JS_FILES)
+	$(ESLINT) --ext .js,.jsx $(JS_FILES)
 
 jstest: $(JS_SENTINAL)
 	npm test
