@@ -4,7 +4,9 @@ import { inlineKatex, STATIC_URL } from '../../utils/utils';
 import { Katex } from '../../utils/katexComponent';
 
 
-export const WhatIsMulticollinearity = ({controls, handleControls}) => {
+export const WhatIsMulticollinearity = (controls, handleControls,
+    setProgress
+) => {
     return <>
         <p>
             This segment is to teach users how about
@@ -32,10 +34,10 @@ export const WhatIsMulticollinearity = ({controls, handleControls}) => {
             </strong>
         </p>
         <div className="dataset-variable-item ps-4">
-            {inlineKatex(`x_1`)}
+            {inlineKatex('x_1')}
         </div>
         {['x_2', 'x_3'].map((val, i) =>
-            <div className='form-check dataset-variable-item' key={i}>
+            <div className="form-check dataset-variable-item" key={i}>
                 <label htmlFor={val} className="form-check-label">
                     {inlineKatex(`x_1\\ and\\ ${val}`)}
                 </label>
@@ -57,10 +59,15 @@ export const WhatIsMulticollinearity = ({controls, handleControls}) => {
         </p>
         <div className="container">
             {[
-                <>{inlineKatex('x_1')} only:&emsp;{inlineKatex('\\hat{y} = \\hat{\\beta_0} + \\hat{\\beta_1}x_1')}</>,
-                <>With {inlineKatex('x_2')}:&emsp;{inlineKatex('\\hat{y} = \\hat{\\beta_0} + \\hat{\\beta_1}x_1 + \\hat{\\beta_2}x_2')}</>,
-                <>With {inlineKatex('x_3')}:&emsp;{inlineKatex('\\hat{y} = \\hat{\\beta_0} + \\hat{\\beta_1}x_1 + \\hat{\\beta_3}x_3')}</>,
-            ].map((string, i) => 
+                <>{inlineKatex('x_1')} only:&emsp;{inlineKatex(
+                    '\\hat{y} = \\hat{\\beta_0} + \\hat{\\beta_1}x_1')}</>,
+                <>With {inlineKatex('x_2')}:&emsp;{inlineKatex(`\\hat{y} = 
+                    \\hat{\\beta_0} + \\hat{\\beta_1}x_1 + 
+                    \\hat{\\beta_2}x_2`)}</>,
+                <>With {inlineKatex('x_3')}:&emsp;{inlineKatex(`\\hat{y} = 
+                    \\hat{\\beta_0} + \\hat{\\beta_1}x_1 + 
+                    \\hat{\\beta_3}x_3`)}</>,
+            ].map((string, i) =>
                 <p key={i}>
                     {string}
                 </p>
@@ -102,7 +109,8 @@ export const WhatIsMulticollinearity = ({controls, handleControls}) => {
                 Multicollinearity effect on hypothesis testing:
             </strong>
         </p>
-        <p> Here is the explanation of how Multicollinearity can affect hypothesis testing.</p>
+        <p> Here is the explanation of how Multicollinearity can affect
+            hypothesis testing.</p>
         <p>For example:</p>
         <p>For {inlineKatex('H_0:\\beta_1=0; H_1:\\beta_1 \\ne 0; a=0.005')}</p>
         <table className="table table-bordered">
@@ -158,11 +166,12 @@ export const WhatIsMulticollinearity = ({controls, handleControls}) => {
                 </tr>
             </tbody>
         </table>
-        <p>Placeholder fo explanation of what's going on. </p>
-    </>
+        <p>Placeholder fo explanation of what&apos;s going on. </p>
+    </>;
 };
 
 WhatIsMulticollinearity.PropTypes = {
     controls: PropTypes.arrayOf(PropTypes.bool).isRequired,
-    handleControls: PropTypes.func.isRequired
-}
+    handleControls: PropTypes.func.isRequired,
+    setProgress: PropTypes.func.isRequired
+};

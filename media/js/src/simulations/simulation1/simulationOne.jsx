@@ -97,7 +97,7 @@ export const SimulationOne = () => {
             }
             await createSubmission();
         } catch (error) {
-            alert('Failed to save graph and submission.');
+            alert('Failed to save graph and submission.', error);
         }
     };
 

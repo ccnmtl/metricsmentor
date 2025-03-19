@@ -1,5 +1,4 @@
 /* global jest */
-import React from 'react';
 import axios from 'axios';
 import { render } from '@testing-library/react';
 import {
@@ -7,8 +6,7 @@ import {
     deleteAnswer,
     deleteQuiz,
     inlineKatex,
-    formulaText,
-    extractTextContent
+    formulaText
 } from './utils';
 
 jest.mock('axios');
