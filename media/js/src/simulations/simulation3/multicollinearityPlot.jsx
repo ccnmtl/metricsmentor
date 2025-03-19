@@ -1,9 +1,10 @@
 import React from 'react';
 import Plot from 'react-plotly.js';
 import DATA from './multicollinearityGeneratedData.json';
+import PropTypes from 'prop-types';
 
 
-export const MulticollinearityScatterPlot = () => {
+export const MulticollinearityScatterPlot = ({controls}) => {
 
     const labelPos = (range) => {
         return range[1] + (range[1] - range[0]) * 0.02;
@@ -26,37 +27,43 @@ export const MulticollinearityScatterPlot = () => {
         y: [DATA[line].yRange[1]],
     });
 
+    const data = [
+        {
+            type: 'scatter',
+            mode: 'markers',
+            x: DATA.x1.data,
+            y: DATA.y,
+            marker: {
+                color: 'teal',
+                size: 10,
+                line: {
+                    width: 1,
+                    color: 'blue',
+                },
+            },
+        },
+        {
+            mode: 'text',
+            text: ['x1'],
+            textfont: { color: 'black' },
+            textposition: 'top center',
+            x: [labelPos(DATA.xRange)],
+            y: [DATA.x1.yRange[1]],
+        },
+        linedata(DATA.x1.yRange, 'black'),
+    ];
+    if (controls[0]) {
+        data.push(linedata(DATA.x2.yRange, 'red'),
+            lineLabel('x2', 'red'))
+    }
+    if (controls[1]) {
+        data.push(linedata(DATA.x3.yRange, 'blue'),
+            lineLabel('x3', 'blue'))
+    }
+
     return (
         <Plot
-            data={[
-                {
-                    type: 'scatter',
-                    mode: 'markers',
-                    x: DATA.x1.data,
-                    y: DATA.y,
-                    marker: {
-                        color: 'teal',
-                        size: 10,
-                        line: {
-                            width: 1,
-                            color: 'blue',
-                        },
-                    },
-                },
-                {
-                    mode: 'text',
-                    text: ['x1'],
-                    textfont: { color: 'black' },
-                    textposition: 'top center',
-                    x: [labelPos(DATA.xRange)],
-                    y: [DATA.x1.yRange[1]],
-                },
-                linedata(DATA.x1.yRange, 'black'),
-                linedata(DATA.x2.yRange, 'red'),
-                lineLabel('x2', 'red'),
-                linedata(DATA.x3.yRange, 'blue'),
-                lineLabel('x3', 'blue'),
-            ]}
+            data={data}
             layout={{
                 title: 'Multicollinearity',
                 showlegend: false,
@@ -79,4 +86,8 @@ export const MulticollinearityScatterPlot = () => {
             }}
         />
     );
+};
+
+MulticollinearityScatterPlot.propTypes = {
+    controls: PropTypes.arrayOf(PropTypes.bool),
 };
