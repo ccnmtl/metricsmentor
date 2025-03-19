@@ -5,6 +5,7 @@ import DATA from './multicollinearityGeneratedData.json';
 import { Katex } from '../../utils/katexComponent';
 import { SimulationPanel } from '../../SimulationPanel';
 import { SkedasticityLearning } from './skedasticityLearning';
+import { SkedasticityReal } from './skedasticityReal';
 import { STATIC_URL } from '../../utils/utils';
 
 
@@ -49,8 +50,8 @@ export const SimulationThree = () => {
         {
             // Learning goals
             icon: `${STATIC_URL}/img/icon-goal.svg`,
-            headerId: 'learningGoal',
-            title: 'Learning goals',
+            headerId: 'learningObjective',
+            title: 'Learning objectives',
             content: (
                 <>
                     <p>
@@ -66,7 +67,7 @@ export const SimulationThree = () => {
             )
         },
         {
-            headerId: 'What is Heteroskedasticity?',
+            headerId: 'whatisHeteroskedasticity',
             title: 'What is Heteroskedasticity?',
             content: (
                 <SkedasticityLearning
@@ -80,7 +81,25 @@ export const SimulationThree = () => {
                     setUseRealDataSked={setUseRealDataSked}
                 />
             )
-        }
+        },
+        ...(useRealDataSked
+            ? [
+                {
+                    headerId: 'realDataSet',
+                    title: 'Real dataset problem',
+                    content: (
+                        <SkedasticityReal
+                            slope={slope}
+                            intercept={intercept}
+                            standardError={standardError}
+                            robustStandardError={robustStandardError}
+                            useRealDataSked={useRealDataSked}
+                            setUseRealDataSked={setUseRealDataSked}
+                        />
+                    )
+                }
+            ]
+            : [])
     ];
 
     const multicollinearitySteps = [

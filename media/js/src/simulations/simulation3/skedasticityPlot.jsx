@@ -85,18 +85,7 @@ export const SkedasticityScatterPlot = ({
                 y: item.growth    // Y-axis: Growth
             }));
 
-            const { slope, standard_error } = REGRESSIONDATA.non_robust;
-            const { standard_error: robust_stderr } = REGRESSIONDATA.robust;
-
-            setSlope(Math.min(slope, 5));
-            setIntercept(2.104108);
-
-            setStandardError(Math.max(standard_error * (
-                2 + heteroskedasticity / 3), 1));
-            setRobustStandardError(Math.max(robust_stderr * (
-                2 + heteroskedasticity / 2), 1));
-
-
+            const { slope } = REGRESSIONDATA.non_robust;
             const x_values = newData.map((point) => point.x);
             setRegressionLine({
                 type: 'scatter',
