@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { SkedasticityScatterPlot } from './skedasticityPlot';
 import { MulticollinearityScatterPlot } from './multicollinearityPlot';
 import { SimulationPanel } from '../../SimulationPanel';
@@ -17,12 +17,12 @@ export const SimulationThree = () => {
     const [robustStandardError, setRobustStandardError] = useState(null);
     const [useRealDataSked, setUseRealDataSked] = useState(false);
     const [progress, setProgress] = useState(0);
-    const [controls, setControls] = useState([false, false])
+    const [controls, setControls] = useState([false, false]);
 
     const handleControls = (e) => {
         const update = [...controls];
         update[e.target.value] = e.target.checked;
-        setControls(update)
+        setControls(update);
     };
 
     const handleStage = (e) => setStage(parseInt(e.target.value));
@@ -148,11 +148,12 @@ export const SimulationThree = () => {
                         should outline what student should be taking away from
                         this, and just other general functional instructions.
                     </p>
-                    <label htmlFor='progress'><strong>Your progress:</strong></label>
+                    <label htmlFor='progress'>
+                        <strong>Your progress:</strong></label>
                     <div id='progress' className='row text-light mx-1'>
-                        {['Learn', 'Apply', 'Assess'].map((word, i) => 
-                            <div key={i} className={`col-4 border border-light
-                                ${i > progress ?
+                        {['Learn', 'Apply', 'Assess'].map((word, i) =>
+                            <div key={i} className={
+                                `col-4 border border-light ${i > progress ?
                                     'bg-secondary' : 'bg-primary'}`}
                             >{word}</div>
                         )}
@@ -166,9 +167,10 @@ export const SimulationThree = () => {
             title: 'What is Multicollinearity?',
             content: (
                 <>
-                    <WhatIsMulticollinearity 
+                    <WhatIsMulticollinearity
                         controls={controls}
-                        handleControls={handleControls} />
+                        handleControls={handleControls}
+                        setProgress={setProgress} />
                 </>
             )
         }
@@ -192,10 +194,8 @@ export const SimulationThree = () => {
             )}
             {stage === 1 && (
                 <SimulationPanel steps={multicollinearitySteps}
-                    graphContent={
-                        <MulticollinearityScatterPlot
-                        controls={controls} 
-                        />}
+                    graphContent={<MulticollinearityScatterPlot
+                        controls={controls} />}
                 />
             )}
         </>

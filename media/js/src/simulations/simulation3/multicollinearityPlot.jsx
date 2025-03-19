@@ -54,11 +54,11 @@ export const MulticollinearityScatterPlot = ({controls}) => {
     ];
     if (controls[0]) {
         data.push(linedata(DATA.x2.yRange, 'red'),
-            lineLabel('x2', 'red'))
+            lineLabel('x2', 'red'));
     }
     if (controls[1]) {
         data.push(linedata(DATA.x3.yRange, 'blue'),
-            lineLabel('x3', 'blue'))
+            lineLabel('x3', 'blue'));
     }
 
     return (

@@ -62,7 +62,6 @@ export const ScatterPlot = ({ N, yCorrelation, setAppRvalue,
 
             if (plotType === '3d' && z_values[0]) {
 
-                // eslint-disable-next-line max-len
                 const response = await axios.post('/calc_multi_regression/', {
                     x1_values: x_values,
                     x2_values: y_values,
