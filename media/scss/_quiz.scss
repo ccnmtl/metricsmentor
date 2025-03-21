@@ -1,0 +1,84 @@
+.sim_quiz {
+    &__unit {
+        display: block;
+        margin: 0 0 3rem 0;
+    }
+    &__question {
+        display: block;
+        margin-bottom: 1rem;
+    }
+    &__choice-list {
+        display: block;
+        margin: 0.5rem 0 0.5rem 0;
+    }
+    &__choice-item {
+        display: block;
+        margin: 0.5rem 0 0.75rem 0;
+    }
+    &__choice-item label {
+        display: flex !important;
+        justify-content: flex-start !important;
+    }
+    &__choice-index {
+        display: block;
+        flex-shrink: 0 !important;
+        margin-right: 0.5rem;
+        height: 1.625rem !important;
+        width: 1.625rem !important;
+        background-color: $gray-md-300;
+        text-align: center;
+        line-height: 1.625rem;
+        border-radius: 50%;
+        font-weight: 500;
+    }
+    &__choice-index::after {
+        content: '.';
+        display: none;
+    }
+    &__choice-text {
+        display: block;
+        margin: 0;
+    }
+    &__feedback {
+        display: flex !important;
+        margin: 1.5rem 0 0 0;
+    }
+    &__feedback-text-correct {
+        color: $green;
+    }
+    &__feedback-text-incorrect {
+        color: $red;
+    }
+}
+
+.status-checkmark {
+    display: block;
+    width: 2rem;
+    height: 2rem;
+    background-color: $teal-200;
+    border-radius: 50%;
+    color: $green-600;
+    font-family: "Gentium Plus", serif;
+    font-weight: 700;
+    line-height: 2rem;
+    font-size: 2rem;
+    text-align: center;
+    align-self: center;
+    flex-shrink: 0 !important;
+}
+
+.status-warning {
+    display: block;
+    width: 2rem;
+    height: 2rem;
+    background-color: $red-100;
+    border-radius: 50%;
+    color: $red-600;
+    font-family: "Gentium Plus", serif;
+    font-weight: 700;
+    line-height: 2rem;
+    font-size: 2rem;
+    text-align: center;
+    align-self: center;
+    flex-shrink: 0 !important;
+}

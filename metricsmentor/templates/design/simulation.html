@@ -203,21 +203,155 @@
                                 Takeaway questions</h2>
                         </header>
                         <div class="simulation__step-content">
-                            <p>
-                                TBD
-                            </p>
-                            <p>
-                                <i>Formatting</i> should be
-                                allowed, as well as Katex element
-                                <span class="fake-katex katex-inline">y = b + mx</span>.
-                                Katex that appear inline has
-                                <code>className="katex-inline"</code>.
-                            </p>
-                            <!-- The above span Katex is fake, don't use it
-                                in sim proper -->
-                        </div>
-                    </div>
-                </div>
+                            <!-- ### Begin first question unit -->
+                            <div role="radiogroup" aria-labelledby="question1" class="sim_quiz__unit">
+                                <p class="sim_quiz__question" id="question1">
+                                    This is question 1 text. <i>Formatting</i> should be
+                                    allowed, as well as Katex element
+                                    <span class="fake-katex katex-inline">y = b + mx</span>
+                                    <b>in both
+                                    question text and answer choices</b>.
+                                    Katex that appear inline has
+                                    <code>className="katex-inline"</code>.
+                                </p>
+
+                                <div id="question1group" class="sim_quiz__choice-list">
+
+                                    <div class="form-check sim_quiz__choice-item">
+                                        <input name="question1-choices" type="radio" id="question1-choice-A" class="form-check-input" />
+                                        <label for="question1-choice-A" class="form-check-label">
+                                            <span class="sim_quiz__choice-index">
+                                                A
+                                            </span>
+                                            <span class="sim_quiz__choice-text">
+                                                Sed posuere velit eget orci malesuada, <span class="fake-katex katex-inline">y = b + mx</span> ac vulputate quam aliquam. Quisque cursus nec lorem non.
+                                            </span>
+                                        </label>
+                                    </div><!-- ** End sim_quiz__choice-item -->
+
+                                    <div class="form-check sim_quiz__choice-item">
+                                        <input name="question1-choices" type="radio" id="question1-choice-B" class="form-check-input" />
+                                        <label for="question1-choice-B" class="form-check-label">
+                                            <span class="sim_quiz__choice-index">
+                                                B
+                                            </span>
+                                            <span class="sim_quiz__choice-text">
+                                                Donec mollis massa tortor, vel <b>vestibulum</b> purus congue sed. Ut sed est pulvinar, ornare augue.
+                                            </span>
+                                        </label>
+                                    </div><!-- ** End sim_quiz__choice-item -->
+
+                                    <div class="form-check sim_quiz__choice-item">
+                                        <input name="question1-choices" type="radio" id="question1-choice-C" class="form-check-input" />
+                                        <label for="question1-choice-C" class="form-check-label">
+                                            <span class="sim_quiz__choice-index">
+                                                C
+                                            </span>
+                                            <span class="sim_quiz__choice-text">
+                                                Nunc consectetur justo vel sodales luctus. Integer malesuada sed odio eget malesuada.
+                                            </span>
+                                        </label>
+                                    </div><!-- ** End sim_quiz__choice-item -->
+
+                                </div><!-- ** End sim_quiz__choice-list -->
+
+                                <div class="sim_quiz__feedback">
+                                    <div class="status-checkmark align-self-start me-3">✓</div>
+                                    <div class="sim_quiz__feedback-text-correct">
+                                        <p>
+                                            This is feedback text for question 1, correct answer.
+                                        </p>
+                                        <p>
+                                            <i>Formatting</i> should be
+                                            allowed, as well as Katex element
+                                            <span class="fake-katex katex-inline">y = b + mx</span>
+                                            Katex that appear inline has
+                                            <code>className="katex-inline"</code>. Block Katex
+                                            does not have a class name.
+                                        </p>
+                                    </div>
+                                </div>
+
+                                <button class="btn btn-sm btn-success mt-2" type="submit">Submit »</button>
+
+                            </div><!-- ** End sim_quiz__choice-unit -->
+
+                            <!-- ### Begin second question unit -->
+                            <div role="radiogroup" aria-labelledby="question2" class="sim_quiz__unit">
+                                <p class="sim_quiz__question" id="question2">
+                                    This is question 2 text. <i>Formatting</i> should be
+                                    allowed, as well as Katex element
+                                    <span class="fake-katex katex-inline">y = b + mx</span>
+                                    <b>in both
+                                    question text and answer choices</b>.
+                                    Katex that appear inline has
+                                    <code>className="katex-inline"</code>.
+                                </p>
+
+                                <div id="question2group" class="sim_quiz__choice-list">
+
+                                    <div class="form-check sim_quiz__choice-item">
+                                        <input name="question2-choices" type="radio" id="question2-choice-A" class="form-check-input" />
+                                        <label for="question2-choice-A" class="form-check-label">
+                                            <span class="sim_quiz__choice-index">
+                                                A
+                                            </span>
+                                            <span class="sim_quiz__choice-text">
+                                                Sed posuere velit eget orci malesuada, ac vulputate quam aliquam. Quisque cursus nec lorem non.
+                                            </span>
+                                        </label>
+                                    </div><!-- ** End sim_quiz__choice-item -->
+
+                                    <div class="form-check sim_quiz__choice-item">
+                                        <input name="question2-choices" type="radio" id="question2-choice-B" class="form-check-input" />
+                                        <label for="question2-choice-B" class="form-check-label">
+                                            <span class="sim_quiz__choice-index">
+                                                B
+                                            </span>
+                                            <span class="sim_quiz__choice-text">
+                                                Donec mollis massa tortor, vel vestibulum purus congue sed. Ut sed est pulvinar, ornare augue.
+                                            </span>
+                                        </label>
+                                    </div><!-- ** End sim_quiz__choice-item -->
+
+                                    <div class="form-check sim_quiz__choice-item">
+                                        <input name="question2-choices" type="radio" id="question2-choice-C" class="form-check-input" />
+                                        <label for="question2-choice-C" class="form-check-label">
+                                            <span class="sim_quiz__choice-index">
+                                                C
+                                            </span>
+                                            <span class="sim_quiz__choice-text">
+                                                Nunc <b><i>consectetur</i></b> justo vel sodales luctus. <span class="fake-katex katex-inline">y = b + mx</span> Integer malesuada sed odio eget malesuada.
+                                            </span>
+                                        </label>
+                                    </div><!-- ** End sim_quiz__choice-item -->
+
+                                </div><!-- ** End sim_quiz__choice-list -->
+
+                                <div class="sim_quiz__feedback">
+                                    <div class="status-warning align-self-start me-3">!</div>
+                                    <div class="sim_quiz__feedback-text-incorrect">
+                                        <p>
+                                            This is feedback text for question 2, incorrect answer.
+                                        </p>
+                                        <p>
+                                            <i>Formatting</i> should be
+                                            allowed, as well as Katex element
+                                            <span class="fake-katex katex-inline">y = b + mx</span>
+                                            Katex that appear inline has
+                                            <code>className="katex-inline"</code>. Block Katex
+                                            does not have a class name.
+                                        </p>
+                                    </div>
+                                </div>
+
+                                <button class="btn btn-sm btn-success mt-2" type="submit">Submit »</button>
+
+                            </div><!-- ** End sim_quiz__choice-unit -->
+
+                        </div><!-- ** End simulation__step-content -->
+                    </div><!-- ** End simulation__step-body -->
+                </div><!-- ** End simulation__step-container -->
                 <!-- ### End block for TAKEAWAY QUESTIONS -->
 
 
