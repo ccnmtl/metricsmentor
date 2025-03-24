@@ -66,7 +66,7 @@ export const SimulationThree = () => {
                         In this section, you&rsquo;ll learn to identify and
                         address heteroskedasticity by analyzing datasets and
                         its impact on standard
-                        errors, <Katex tex={'{SE(\\hat{\\beta_1})}'} 
+                        errors, <Katex tex={'{SE(\\hat{\\beta_1})}'}
                             className="katex-inline" />,
                         and hypothesis testing. You&rsquo;ll compare the
                         outcomes of robust and
@@ -153,9 +153,9 @@ export const SimulationThree = () => {
                         Here, you&rsquo;ll learn to detect and address
                         multicollinearity by analyzing multivariable datasets
                         and its impact on standard errors standard
-                        errors, <Katex tex={'{SE(\\hat{\\beta_1})}'} 
+                        errors, <Katex tex={'{SE(\\hat{\\beta_1})}'}
                             className="katex-inline" />. You&rsquo;ll observe
-                        how these <Katex tex={'{SE(\\hat{\\beta_1})}'} 
+                        how these <Katex tex={'{SE(\\hat{\\beta_1})}'}
                             className="katex-inline" /> variations affect
                         hypothesis testing, and then practice using joint
                         hypothesis testing to correct for multicollinearity,
