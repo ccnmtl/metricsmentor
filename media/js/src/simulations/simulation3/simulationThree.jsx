@@ -61,11 +61,12 @@ export const SimulationThree = () => {
             title: 'Learning objectives',
             content: (
                 <>
+                    <h3>Heteroskedasticity:</h3>
                     <p>
-                        In this simulation, you&rsquo;ll learn to identify and
+                        In this section, you&rsquo;ll learn to identify and
                         address heteroskedasticity by analyzing datasets and
                         its impact on standard
-                        errors, <Katex tex={'{SE_(\\hat{\\beta_1})}'} 
+                        errors, <Katex tex={'{SE(\\hat{\\beta_1})}'} 
                             className="katex-inline" />,
                         and hypothesis testing. You&rsquo;ll compare the
                         outcomes of robust and
@@ -147,22 +148,31 @@ export const SimulationThree = () => {
             title: 'Learning Objectives',
             content: (
                 <>
-                    <h3>Multicollinearity</h3>
+                    <h3>Multicollinearity:</h3>
                     <p>
-                        This space is setting up students learning expectations
-                        for <strong>Multicollinearity</strong> section. This
-                        should outline what student should be taking away from
-                        this, and just other general functional instructions.
+                        Here, you&rsquo;ll learn to detect and address
+                        multicollinearity by analyzing multivariable datasets
+                        and its impact on standard errors standard
+                        errors, <Katex tex={'{SE(\\hat{\\beta_1})}'} 
+                            className="katex-inline" />. You&rsquo;ll observe
+                        how these <Katex tex={'{SE(\\hat{\\beta_1})}'} 
+                            className="katex-inline" /> variations affect
+                        hypothesis testing, and then practice using joint
+                        hypothesis testing to correct for multicollinearity,
+                        and determine whether population slopes differ
+                        from the null hypothesis.
                     </p>
-                    <label htmlFor='progress'>
-                        <strong>Your progress:</strong></label>
-                    <div id='progress' className='row text-light mx-1'>
-                        {['Learn', 'Apply', 'Assess'].map((word, i) =>
-                            <div key={i} className={
-                                `col-4 border border-light ${i > progress ?
-                                    'bg-secondary' : 'bg-primary'}`}
-                            >{word}</div>
-                        )}
+
+                    <div class="sim-progress">
+                        <h4>Your progress:</h4>
+                        <ul>
+                            {['Learn', 'Apply', 'Assess'].map((word, i) =>
+                                <li key={i} className={
+                                    `${i > progress ?
+                                        'incomplete' : 'completed'}`}
+                                >{word}</li>
+                            )}
+                        </ul>
                     </div>
                 </>
             )
