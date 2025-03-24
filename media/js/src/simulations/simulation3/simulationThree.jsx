@@ -5,6 +5,7 @@ import { SimulationPanel } from '../../SimulationPanel';
 import { WhatIsHeteroskedasticity } from './whatIsHeteroskedasticity';
 import { SkedasticityReal } from './skedasticityReal';
 import { STATIC_URL } from '../../utils/utils';
+import { Katex } from '../../utils/katexComponent';
 import { WhatIsMulticollinearity } from './whatIsMulticollinearity';
 
 
@@ -43,7 +44,7 @@ export const SimulationThree = () => {
                 Approximately <b>60 to 70 words</b> is sufficient.
                         <i>Formatting</i> is allowed, as well as KaTeX elements
                     </p>
-                    {['Skedasticity', 'Multicollinearity'].map(
+                    {['Heteroskedasticity', 'Multicollinearity'].map(
                         (label, index) => (
                             <button onClick={handleStage} key={index}
                                 value={index} className={'btn btn-primary m-1'}
@@ -61,13 +62,17 @@ export const SimulationThree = () => {
             content: (
                 <>
                     <p>
-                This section outlines the learning expectations for the
-                simulation. It should be clear, concise, and list the goals
-                that students should achieve.
-                    </p>
-                    <p>
-                Approximately <b>60 to 70 words</b> is sufficient.
-                        <i>Formatting</i> is allowed, along with KaTeX elements.
+                        In this simulation, you&rsquo;ll learn to identify and
+                        address heteroskedasticity by analyzing datasets and
+                        its impact on standard
+                        errors, <Katex tex={'SE'} className="katex-inline" />,
+                        and hypothesis testing. You&rsquo;ll compare the
+                        outcomes of robust and
+                        non-robust <Katex tex={'SE'}
+                            className="katex-inline" /> and
+                        see how failing to account for heteroskedasticity can
+                        lead to incorrect conclusions and affect hypothesis
+                        test results.
                     </p>
                 </>
             )
@@ -124,7 +129,7 @@ export const SimulationThree = () => {
                 Approximately <b>60 to 70 words</b> is sufficient.
                         <i>Formatting</i> is allowed, as well as KaTeX elements
                     </p>
-                    {['Skedasticity', 'Multicollinearity'].map(
+                    {['Heteroskedasticity', 'Multicollinearity'].map(
                         (label, index) => (
                             <button onClick={handleStage} key={index}
                                 value={index} className={'btn btn-primary m-1'}
