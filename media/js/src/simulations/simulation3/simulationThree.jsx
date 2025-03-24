@@ -65,10 +65,11 @@ export const SimulationThree = () => {
                         In this simulation, you&rsquo;ll learn to identify and
                         address heteroskedasticity by analyzing datasets and
                         its impact on standard
-                        errors, <Katex tex={'SE'} className="katex-inline" />,
+                        errors, <Katex tex={'{SE_(\\hat{\\beta_1})}'} 
+                            className="katex-inline" />,
                         and hypothesis testing. You&rsquo;ll compare the
                         outcomes of robust and
-                        non-robust <Katex tex={'SE'}
+                        non-robust <Katex tex={'{SE(\\hat{\\beta_1})}'}
                             className="katex-inline" /> and
                         see how failing to account for heteroskedasticity can
                         lead to incorrect conclusions and affect hypothesis
