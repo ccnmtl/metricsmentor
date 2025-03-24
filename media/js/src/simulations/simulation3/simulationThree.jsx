@@ -163,7 +163,7 @@ export const SimulationThree = () => {
                         from the null hypothesis.
                     </p>
 
-                    <div class="sim-progress">
+                    <div className="sim-progress">
                         <h4>Your progress:</h4>
                         <ul>
                             {['Learn', 'Apply', 'Assess'].map((word, i) =>
