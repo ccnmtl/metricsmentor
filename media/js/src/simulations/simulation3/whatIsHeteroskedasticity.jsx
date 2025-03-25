@@ -1,10 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { HeteroskedasticitySlider } from './heteroskedasticitySlider';
 import PropTypes from 'prop-types';
-import { Katex } from '../../utils/katexComponent';
+import { inlineKatex } from '../../utils/utils';
 import axios from 'axios';
 
-export const SkedasticityLearning = ({
+export const WhatIsHeteroskedasticity = ({
     heteroskedasticity, setHeteroskedasticity, slope, intercept, standardError,
     robustStandardError, setUseRealDataSked, useRealDataSked
 }) => {
@@ -78,9 +78,10 @@ export const SkedasticityLearning = ({
                 heteroskedasticity={heteroskedasticity}
                 setHeteroskedasticity={setHeteroskedasticity} />
             <div className="katex-block">
-                <Katex tex={
-                    // eslint-disable-next-line max-len
-                    `\\hat{y} = ${(intercept || intercept === 0) ? intercept.toFixed(2) : ''}x + ${slope ? slope.toFixed(2) : ''}`} />
+                {inlineKatex(
+                    `\\hat{y} = ${(intercept || intercept === 0) ?
+                        intercept.toFixed(2) : ''}x + ${slope ? slope.toFixed(2)
+                        : ''}`)}
             </div>
             <table className="table table-bordered mb-5 mt-3">
                 <thead>
@@ -93,7 +94,7 @@ export const SkedasticityLearning = ({
                 <tbody>
                     <tr>
                         <th scope="row">
-                            <Katex tex={'{SE(\\hat{\\beta_1})}'} />
+                            {inlineKatex('{SE(\\hat{\\beta_1})}')}
                         </th>
                         <td>
                             {(standardError || standardError === 0) ?
@@ -115,9 +116,9 @@ export const SkedasticityLearning = ({
                 For example:
             </p>
             <div className="katex-block">
-                <Katex tex={
+                {inlineKatex(
                     // eslint-disable-next-line max-len
-                    'H_0: \\beta_1 = 0; \\quad H_1: \\beta_1 \\neq 0; \\quad \\alpha = 0.05'} />
+                    'H_0: \\beta_1 = 0; \\quad H_1: \\beta_1 \\neq 0; \\quad \\alpha = 0.05')}
             </div>
             <table className="table table-bordered mb-5 mt-3">
                 <thead>
@@ -130,7 +131,7 @@ export const SkedasticityLearning = ({
                 <tbody>
                     <tr>
                         <th scope="row">
-                            <Katex tex={'{SE(\\hat{\\beta_1})}'} />
+                            {inlineKatex('{SE(\\hat{\\beta_1})}')}
                         </th>
                         <td>
                             {(standardError || standardError === 0) ?
@@ -144,7 +145,7 @@ export const SkedasticityLearning = ({
                     </tr>
                     <tr>
                         <th scope="row">
-                            <Katex tex={'{t}'} />
+                            {inlineKatex('{t}')}
                         </th>
                         <td>
                             {tvalueStandard}
@@ -155,7 +156,7 @@ export const SkedasticityLearning = ({
                     </tr>
                     <tr>
                         <th scope="row">
-                            <Katex tex={'{p-value}'} />
+                            {inlineKatex('{p-value}')}
                         </th>
                         <td>
                             {pvaluesStandard}
@@ -166,16 +167,16 @@ export const SkedasticityLearning = ({
                     </tr>
                     <tr>
                         <th scope="row">
-                            <Katex tex={'CI'} />
+                            {inlineKatex('CI')}
                         </th>
                         <td>
-                            {`${ciStandard.lower.toFixed(2)} `}
-                            <Katex tex={'< \\beta_1 <'} />
+                            {`${ciStandard.lower.toFixed(2)}`}
+                            {inlineKatex('< \\beta_1 <')}
                             {ciStandard.upper.toFixed(2)}
                         </td>
                         <td>
-                            {`${ciRobust.lower.toFixed(2)} `}
-                            <Katex tex={'< \\beta_1 <'} />
+                            {`${ciRobust.lower.toFixed(2)}`}
+                            {inlineKatex('< \\beta_1 <')}
                             {ciRobust.upper.toFixed(2)}
                         </td>
                     </tr>
@@ -192,19 +193,30 @@ export const SkedasticityLearning = ({
                     </tr>
                 </tbody>
             </table>
-            <div className="simulation__step-prompt">
-                <button
-                    className="btn btn-sm btn-success"
-                    disabled={useRealDataSked}
-                    onClick={() => setUseRealDataSked(true)}>
-                    Continue to Real Data &raquo;
-                </button>
-            </div>
+            {!useRealDataSked && (
+                <div className="simulation__step-prompt">
+                    <button
+                        className="btn btn-sm btn-success"
+                        disabled={useRealDataSked}
+                        onClick={() => setUseRealDataSked(true)}>
+                        Continue to Real Data &raquo;
+                    </button>
+                </div>
+            )}
+            {useRealDataSked && (
+                <div className="simulation__step-prompt">
+                    <button
+                        className="btn btn-sm btn-success"
+                        onClick={() => setUseRealDataSked(false)}>
+                        Review &laquo;
+                    </button>
+                </div>
+            )}
         </>
     );
 };
 
-SkedasticityLearning.propTypes = {
+WhatIsHeteroskedasticity.propTypes = {
     heteroskedasticity: PropTypes.number,
     setHeteroskedasticity: PropTypes.func,
     slope: PropTypes.number,

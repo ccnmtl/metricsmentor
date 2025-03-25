@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { SkedasticityScatterPlot } from './skedasticityPlot';
 import { MulticollinearityScatterPlot } from './multicollinearityPlot';
 import { SimulationPanel } from '../../SimulationPanel';
-import { SkedasticityLearning } from './skedasticityLearning';
+import { WhatIsHeteroskedasticity } from './whatIsHeteroskedasticity';
 import { SkedasticityReal } from './skedasticityReal';
 import { STATIC_URL } from '../../utils/utils';
 import { WhatIsMulticollinearity } from './whatIsMulticollinearity';
@@ -76,7 +76,7 @@ export const SimulationThree = () => {
             headerId: 'whatisHeteroskedasticity',
             title: 'What is Heteroskedasticity?',
             content: (
-                <SkedasticityLearning
+                <WhatIsHeteroskedasticity
                     heteroskedasticity={heteroskedasticity}
                     setHeteroskedasticity={setHeteroskedasticity}
                     slope={slope}
