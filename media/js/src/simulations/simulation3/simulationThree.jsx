@@ -17,7 +17,8 @@ export const SimulationThree = () => {
     const [intercept, setIntercept] = useState(null);
     const [robustStandardError, setRobustStandardError] = useState(null);
     const [useRealDataSked, setUseRealDataSked] = useState(false);
-    const [progress, setProgress] = useState(0);
+    const [progress1, setProgress1] = useState(0);
+    const [progress2, setProgress2] = useState(0);
     const [controls, setControls] = useState([false, false]);
 
     const handleControls = (e) => {
@@ -77,6 +78,18 @@ export const SimulationThree = () => {
                         lead to incorrect conclusions and affect hypothesis
                         test results.
                     </p>
+
+                    <div className="sim-progress">
+                        <h4>Your progress:</h4>
+                        <ul>
+                            {['Learn', 'Apply', 'Assess'].map((word, i) =>
+                                <li key={i} className={
+                                    `${i > progress1 ?
+                                        'incomplete' : 'completed'}`}
+                                >{word}</li>
+                            )}
+                        </ul>
+                    </div>
                 </>
             )
         },
@@ -93,6 +106,7 @@ export const SimulationThree = () => {
                     robustStandardError={robustStandardError}
                     useRealDataSked={useRealDataSked}
                     setUseRealDataSked={setUseRealDataSked}
+                    setProgress={setProgress1}
                 />
             )
         },
@@ -120,6 +134,7 @@ export const SimulationThree = () => {
         {
             // Simulation preamble
             stepNumber: '•',
+            segment: 'preamble',
             subtitle: 'Simulation 3',
             title: 'Standard Errors Problems: ' +
                 'Heteroskedasticity and Multicollinearity',
@@ -169,7 +184,7 @@ export const SimulationThree = () => {
                         <ul>
                             {['Learn', 'Apply', 'Assess'].map((word, i) =>
                                 <li key={i} className={
-                                    `${i > progress ?
+                                    `${i > progress2 ?
                                         'incomplete' : 'completed'}`}
                                 >{word}</li>
                             )}
@@ -187,7 +202,7 @@ export const SimulationThree = () => {
                     <WhatIsMulticollinearity
                         controls={controls}
                         handleControls={handleControls}
-                        setProgress={setProgress} />
+                        setProgress={setProgress2} />
                 </>
             )
         }
