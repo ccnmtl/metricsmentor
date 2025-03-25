@@ -48,3 +48,55 @@
         }
     }
 }
+
+.slider-end-to-end__input {
+    display: block;
+    margin: 0 0 0 2.25rem;
+    width: 100%;
+    .form-range {
+        width: 24rem;
+    }
+    .scale-value {
+        width: 6rem;
+        padding-left: 1rem;
+        text-align: left;
+    }
+}
+
+.slider-end-to-end__scale {
+    position: relative;
+    display: flex;
+    height: 0.5rem;
+    //width: 100%;
+    margin: 0 0 2rem 2.575rem;
+    & .unit {
+        border-left: 0.0625rem solid $gray-md-600;
+        border-right: 0.0625rem solid $gray-md-600;
+        border-collapse: separate;
+        height: 0.25rem;
+        width: calc(24rem - 0.875rem);
+    }
+    & .unit:nth-child(1) {
+        border-right: 0;
+        height: 0.5rem;
+        &::after {
+            content: "Homoskedastic";
+            position: absolute;
+            bottom: -1.25rem;
+            font: 0.75rem/1 sans-serif;
+            margin-left: -2.25rem;
+        }
+    }
+    & .unit:nth-child(2) {
+        border-right: 0;
+        height: 0.5rem;
+        width: 4rem;
+        &::after {
+            content: "Heteroskedastic";
+            position: absolute;
+            bottom: -1.25rem;
+            font: 0.75rem/1 sans-serif;
+            margin-left: -2.75rem;
+        }
+    }
+}
