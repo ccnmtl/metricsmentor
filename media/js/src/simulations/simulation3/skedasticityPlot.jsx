@@ -125,7 +125,7 @@ export const SkedasticityScatterPlot = ({
                 regressionLine,
             ]}
             layout={{
-                title: 'Skedasticity',
+                title: 'Heteroskedasticity',
                 showlegend: false,
                 xaxis: { title: 'X', minallowed: 0 },
                 yaxis: { title: 'Y', scaleratio: 1, minallowed: 0 },

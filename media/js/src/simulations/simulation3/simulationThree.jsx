@@ -5,6 +5,7 @@ import { SimulationPanel } from '../../SimulationPanel';
 import { WhatIsHeteroskedasticity } from './whatIsHeteroskedasticity';
 import { SkedasticityReal } from './skedasticityReal';
 import { STATIC_URL } from '../../utils/utils';
+import { Katex } from '../../utils/katexComponent';
 import { WhatIsMulticollinearity } from './whatIsMulticollinearity';
 
 
@@ -43,7 +44,7 @@ export const SimulationThree = () => {
                 Approximately <b>60 to 70 words</b> is sufficient.
                         <i>Formatting</i> is allowed, as well as KaTeX elements
                     </p>
-                    {['Skedasticity', 'Multicollinearity'].map(
+                    {['Heteroskedasticity', 'Multicollinearity'].map(
                         (label, index) => (
                             <button onClick={handleStage} key={index}
                                 value={index} className={'btn btn-primary m-1'}
@@ -60,14 +61,20 @@ export const SimulationThree = () => {
             title: 'Learning objectives',
             content: (
                 <>
+                    <h3>Heteroskedasticity:</h3>
                     <p>
-                This section outlines the learning expectations for the
-                simulation. It should be clear, concise, and list the goals
-                that students should achieve.
-                    </p>
-                    <p>
-                Approximately <b>60 to 70 words</b> is sufficient.
-                        <i>Formatting</i> is allowed, along with KaTeX elements.
+                        In this section, you&rsquo;ll learn to identify and
+                        address heteroskedasticity by analyzing datasets and
+                        its impact on standard
+                        errors, <Katex tex={'{SE(\\hat{\\beta_1})}'}
+                            className="katex-inline" />,
+                        and hypothesis testing. You&rsquo;ll compare the
+                        outcomes of robust and
+                        non-robust <Katex tex={'{SE(\\hat{\\beta_1})}'}
+                            className="katex-inline" /> and
+                        see how failing to account for heteroskedasticity can
+                        lead to incorrect conclusions and affect hypothesis
+                        test results.
                     </p>
                 </>
             )
@@ -124,7 +131,7 @@ export const SimulationThree = () => {
                 Approximately <b>60 to 70 words</b> is sufficient.
                         <i>Formatting</i> is allowed, as well as KaTeX elements
                     </p>
-                    {['Skedasticity', 'Multicollinearity'].map(
+                    {['Heteroskedasticity', 'Multicollinearity'].map(
                         (label, index) => (
                             <button onClick={handleStage} key={index}
                                 value={index} className={'btn btn-primary m-1'}
@@ -141,22 +148,31 @@ export const SimulationThree = () => {
             title: 'Learning Objectives',
             content: (
                 <>
-                    <h3>Multicollinearity</h3>
+                    <h3>Multicollinearity:</h3>
                     <p>
-                        This space is setting up students learning expectations
-                        for <strong>Multicollinearity</strong> section. This
-                        should outline what student should be taking away from
-                        this, and just other general functional instructions.
+                        Here, you&rsquo;ll learn to detect and address
+                        multicollinearity by analyzing multivariable datasets
+                        and its impact on standard errors standard
+                        errors, <Katex tex={'{SE(\\hat{\\beta_1})}'}
+                            className="katex-inline" />. You&rsquo;ll observe
+                        how these <Katex tex={'{SE(\\hat{\\beta_1})}'}
+                            className="katex-inline" /> variations affect
+                        hypothesis testing, and then practice using joint
+                        hypothesis testing to correct for multicollinearity,
+                        and determine whether population slopes differ
+                        from the null hypothesis.
                     </p>
-                    <label htmlFor='progress'>
-                        <strong>Your progress:</strong></label>
-                    <div id='progress' className='row text-light mx-1'>
-                        {['Learn', 'Apply', 'Assess'].map((word, i) =>
-                            <div key={i} className={
-                                `col-4 border border-light ${i > progress ?
-                                    'bg-secondary' : 'bg-primary'}`}
-                            >{word}</div>
-                        )}
+
+                    <div className="sim-progress">
+                        <h4>Your progress:</h4>
+                        <ul>
+                            {['Learn', 'Apply', 'Assess'].map((word, i) =>
+                                <li key={i} className={
+                                    `${i > progress ?
+                                        'incomplete' : 'completed'}`}
+                                >{word}</li>
+                            )}
+                        </ul>
                     </div>
                 </>
             )
