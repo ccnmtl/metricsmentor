@@ -110,6 +110,6 @@ scipy==1.15.1
 numpy==1.26.3
 statsmodels==0.14.1
 pandas==2.2.2
-pytz==2025.1
+pytz==2025.2
 packaging==24.2
 patsy==1.0.1
