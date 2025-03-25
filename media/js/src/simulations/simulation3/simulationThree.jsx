@@ -32,8 +32,10 @@ export const SimulationThree = () => {
         {
             // Simulation preamble
             stepNumber: '•',
+            segment: 'preamble',
             subtitle: 'Simulation 3',
-            title: 'Hetereoskedasticity',
+            title: 'Standard Errors Problems: ' +
+                'Heteroskedasticity and Multicollinearity',
             content: (
                 <>
                     <p>
@@ -58,10 +60,9 @@ export const SimulationThree = () => {
             // Learning goals
             icon: `${STATIC_URL}/img/icon-goal.svg`,
             headerId: 'learningObjective',
-            title: 'Learning objectives',
+            title: 'Learning objectives: Heteroskedasticity',
             content: (
                 <>
-                    <h3>Heteroskedasticity:</h3>
                     <p>
                         In this section, you&rsquo;ll learn to identify and
                         address heteroskedasticity by analyzing datasets and
@@ -120,7 +121,8 @@ export const SimulationThree = () => {
             // Simulation preamble
             stepNumber: '•',
             subtitle: 'Simulation 3',
-            title: 'Multicollinearity',
+            title: 'Standard Errors Problems: ' +
+                'Heteroskedasticity and Multicollinearity',
             content: (
                 <>
                     <p>
@@ -145,10 +147,9 @@ export const SimulationThree = () => {
             // Learning goals
             icon: `${STATIC_URL}/img/icon-goal.svg`,
             headerId: 'learningObjective',
-            title: 'Learning Objectives',
+            title: 'Learning objectives: Multicollinearity',
             content: (
                 <>
-                    <h3>Multicollinearity:</h3>
                     <p>
                         Here, you&rsquo;ll learn to detect and address
                         multicollinearity by analyzing multivariable datasets

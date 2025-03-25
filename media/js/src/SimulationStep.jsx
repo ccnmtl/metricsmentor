@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 
 export const SimulationStep = ({
-    icon, stepNumber, headerId, subtitle, title, content
+    icon, segment, stepNumber, headerId, subtitle, title, content
 }) => (
     <div className="simulation__step-container d-flex">
         <div className={`simulation__step-num 
@@ -24,7 +24,11 @@ export const SimulationStep = ({
                             {subtitle}
                         </span>
                     }
-                    <span className="h2-title d-block">{title}</span>
+                    {segment ? (
+                        <span className="h2-title d-block">{title}</span>
+                    ) : (
+                        title
+                    )}
                 </h2>
             </header>
             <div className="simulation__step-content">
@@ -37,6 +41,7 @@ export const SimulationStep = ({
 
 SimulationStep.propTypes = {
     icon: PropTypes.string,
+    segment: PropTypes.string,
     stepNumber: PropTypes.string,
     headerId: PropTypes.string,
     subtitle: PropTypes.string,
