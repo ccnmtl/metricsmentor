@@ -69,130 +69,134 @@ export const WhatIsHeteroskedasticity = ({
 
     return (
         <>
-            <p> This segment is to teach users about Heteroskedasticity.
-                Space is for instructions.</p>
-            <button className='btn btn-secondary m-1 btn-sm'>
-                Glossary
-            </button>
-            <HeteroskedasticitySlider
-                heteroskedasticity={heteroskedasticity}
-                setHeteroskedasticity={setHeteroskedasticity} />
-            <div className="katex-block">
-                {inlineKatex(
-                    `\\hat{y} = ${(intercept || intercept === 0) ?
-                        intercept.toFixed(2) : ''}x + ${slope ? slope.toFixed(2)
-                        : ''}`)}
+            <div className={`collapsible-section ${
+                useRealDataSked ? 'collapsed' : 'expanded'}`}>
+                <p> This segment is to teach users about Heteroskedasticity.
+                    Space is for instructions.</p>
+                <button className='btn btn-secondary m-1 btn-sm'>
+                    Glossary
+                </button>
+                <HeteroskedasticitySlider
+                    heteroskedasticity={heteroskedasticity}
+                    setHeteroskedasticity={setHeteroskedasticity} />
+                <div className="katex-block">
+                    {inlineKatex(
+                        `\\hat{y} = ${(intercept || intercept === 0) ?
+                            intercept.toFixed(2) : ''}x + ${
+                            slope ? slope.toFixed(2)
+                                : ''}`)}
+                </div>
+                <table className="table table-bordered mb-5 mt-3">
+                    <thead>
+                        <tr>
+                            <th scope="col"></th>
+                            <th scope="col">non-robust</th>
+                            <th scope="col">robust</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <th scope="row">
+                                {inlineKatex('{SE(\\hat{\\beta_1})}')}
+                            </th>
+                            <td>
+                                {(standardError || standardError === 0) ?
+                                    standardError.toFixed(2) : ''}
+                            </td>
+                            <td>
+                                {(robustStandardError ||
+                                        robustStandardError === 0) ?
+                                    robustStandardError.toFixed(2) : ''}
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <p>
+                    Here is the explanation of how SE-robust and SE-nonrobust
+                    can affect hypothesis testing.
+                </p>
+                <p>
+                    For example:
+                </p>
+                <div className="katex-block">
+                    {inlineKatex(
+                        // eslint-disable-next-line max-len
+                        'H_0: \\beta_1 = 0; \\quad H_1: \\beta_1 \\neq 0; \\quad \\alpha = 0.05')}
+                </div>
+                <table className="table table-bordered mb-5 mt-3">
+                    <thead>
+                        <tr>
+                            <th scope="col"></th>
+                            <th scope="col">non-robust</th>
+                            <th scope="col">robust</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <th scope="row">
+                                {inlineKatex('{SE(\\hat{\\beta_1})}')}
+                            </th>
+                            <td>
+                                {(standardError || standardError === 0) ?
+                                    standardError.toFixed(2) : ''}
+                            </td>
+                            <td>
+                                {(robustStandardError ||
+                                        robustStandardError === 0) ?
+                                    robustStandardError.toFixed(2) : ''}
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row">
+                                {inlineKatex('{t}')}
+                            </th>
+                            <td>
+                                {tvalueStandard}
+                            </td>
+                            <td>
+                                {tvalueRobust}
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row">
+                                {inlineKatex('{p-value}')}
+                            </th>
+                            <td>
+                                {pvaluesStandard}
+                            </td>
+                            <td>
+                                {pvaluesRobust}
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row">
+                                {inlineKatex('CI')}
+                            </th>
+                            <td>
+                                {`${ciStandard.lower.toFixed(2)}`}
+                                {inlineKatex('< \\beta_1 <')}
+                                {ciStandard.upper.toFixed(2)}
+                            </td>
+                            <td>
+                                {`${ciRobust.lower.toFixed(2)}`}
+                                {inlineKatex('< \\beta_1 <')}
+                                {ciRobust.upper.toFixed(2)}
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row">
+                                Hypothesis Test
+                            </th>
+                            <td>
+                                Lorem ipsum dolor sit amet
+                            </td>
+                            <td>
+                                Lorem ipsum dolor sit amet
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
             </div>
-            <table className="table table-bordered mb-5 mt-3">
-                <thead>
-                    <tr>
-                        <th scope="col"></th>
-                        <th scope="col">non-robust</th>
-                        <th scope="col">robust</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <th scope="row">
-                            {inlineKatex('{SE(\\hat{\\beta_1})}')}
-                        </th>
-                        <td>
-                            {(standardError || standardError === 0) ?
-                                standardError.toFixed(2) : ''}
-                        </td>
-                        <td>
-                            {(robustStandardError ||
-                                    robustStandardError === 0) ?
-                                robustStandardError.toFixed(2) : ''}
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-            <p>
-                Here is the explanation of how SE-robust and SE-nonrobust
-                can affect hypothesis testing.
-            </p>
-            <p>
-                For example:
-            </p>
-            <div className="katex-block">
-                {inlineKatex(
-                    // eslint-disable-next-line max-len
-                    'H_0: \\beta_1 = 0; \\quad H_1: \\beta_1 \\neq 0; \\quad \\alpha = 0.05')}
-            </div>
-            <table className="table table-bordered mb-5 mt-3">
-                <thead>
-                    <tr>
-                        <th scope="col"></th>
-                        <th scope="col">non-robust</th>
-                        <th scope="col">robust</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <th scope="row">
-                            {inlineKatex('{SE(\\hat{\\beta_1})}')}
-                        </th>
-                        <td>
-                            {(standardError || standardError === 0) ?
-                                standardError.toFixed(2) : ''}
-                        </td>
-                        <td>
-                            {(robustStandardError ||
-                                    robustStandardError === 0) ?
-                                robustStandardError.toFixed(2) : ''}
-                        </td>
-                    </tr>
-                    <tr>
-                        <th scope="row">
-                            {inlineKatex('{t}')}
-                        </th>
-                        <td>
-                            {tvalueStandard}
-                        </td>
-                        <td>
-                            {tvalueRobust}
-                        </td>
-                    </tr>
-                    <tr>
-                        <th scope="row">
-                            {inlineKatex('{p-value}')}
-                        </th>
-                        <td>
-                            {pvaluesStandard}
-                        </td>
-                        <td>
-                            {pvaluesRobust}
-                        </td>
-                    </tr>
-                    <tr>
-                        <th scope="row">
-                            {inlineKatex('CI')}
-                        </th>
-                        <td>
-                            {`${ciStandard.lower.toFixed(2)}`}
-                            {inlineKatex('< \\beta_1 <')}
-                            {ciStandard.upper.toFixed(2)}
-                        </td>
-                        <td>
-                            {`${ciRobust.lower.toFixed(2)}`}
-                            {inlineKatex('< \\beta_1 <')}
-                            {ciRobust.upper.toFixed(2)}
-                        </td>
-                    </tr>
-                    <tr>
-                        <th scope="row">
-                            Hypothesis Test
-                        </th>
-                        <td>
-                            Lorem ipsum dolor sit amet
-                        </td>
-                        <td>
-                            Lorem ipsum dolor sit amet
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
             {!useRealDataSked && (
                 <div className="simulation__step-prompt">
                     <button

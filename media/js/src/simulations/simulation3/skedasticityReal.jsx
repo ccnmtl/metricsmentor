@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 import PropTypes from 'prop-types';
 import { Katex } from '../../utils/katexComponent';
 import { PromptBlock } from '../../PromptBlock';
-import REGRESSIONDATA from './Regression_Results.json';
+import REGRESSIONDATA from './regressionHeterosked.json';
 
 export const SkedasticityReal = ({
     setUseRealDataSked, useRealDataSked
@@ -96,17 +96,21 @@ export const SkedasticityReal = ({
                         </div>
                     ))}
                 </div>
+                {feedback1 && (
+                    <div className={
+                        `${isCorrect1 ? 'answer-correct-container'
+                            : 'answer-incorrect-container'}`}>
+                        {isCorrect1 ? (
+                            <div className="answer-correct">&#10003;</div>
+                        ):<div className="answer-incorrect flex-shrink-0
+                            align-self-start">!</div>}
+                        {feedback1}
+                    </div>
+                )}
                 <button
                     className="btn btn-sm btn-success mt-3"
                     id={'multiple-option1'}
                     onClick={handleSubmit1}>Submit</button>
-                {feedback1 && (
-                    <div className={
-                        `form-check mt-3 mb-3
-                    ${isCorrect1 ? 'text-success' : 'text-danger'}`}
-                    id="feedback" role="alert">{feedback1}
-                    </div>
-                )}
             </div>
             <p>
                 Narrative on explanation of the null hypothesis and
@@ -186,18 +190,22 @@ export const SkedasticityReal = ({
                     </div>
                 ))}
             </div>
+            {feedback2 && (
+                <div className={
+                    `${isCorrect2 ? 'answer-correct-container'
+                        : 'answer-incorrect-container'}`}>
+                    {isCorrect2 ? (
+                        <div className="answer-correct">&#10003;</div>
+                    ):<div className="answer-incorrect flex-shrink-0
+                        align-self-start">!</div>}
+                    {feedback2}
+                </div>
+            )}
             <button className="btn btn-sm btn-success mt-3"
                 id={'multiple-option2'}
                 onClick={handleSubmit2}>
                     Submit
             </button>
-            {feedback2 && (
-                <div className={
-                    `form-check mt-3 mb-3
-                    ${isCorrect2 ? 'text-success' : 'text-danger'}`}
-                id="feedback2" role="alert">{feedback2}
-                </div>
-            )}
         </>
     );
 };
