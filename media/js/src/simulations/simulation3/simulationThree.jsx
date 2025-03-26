@@ -20,6 +20,7 @@ export const SimulationThree = () => {
     const [progress1, setProgress1] = useState(0);
     const [progress2, setProgress2] = useState(0);
     const [controls, setControls] = useState([false, false]);
+    const [gotToTakeAway, setGoToTakeAway] = useState(false);
 
     const handleControls = (e) => {
         const update = [...controls];
@@ -123,6 +124,8 @@ export const SimulationThree = () => {
                             robustStandardError={robustStandardError}
                             useRealDataSked={useRealDataSked}
                             setUseRealDataSked={setUseRealDataSked}
+                            setGoToTakeAway={setGoToTakeAway}
+                            goToTakeaway={gotToTakeAway}
                         />
                     )
                 }

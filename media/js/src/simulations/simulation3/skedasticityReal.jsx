@@ -5,7 +5,7 @@ import { PromptBlock } from '../../PromptBlock';
 import REGRESSIONDATA from './regressionHeterosked.json';
 
 export const SkedasticityReal = ({
-    setUseRealDataSked, useRealDataSked
+    setUseRealDataSked, useRealDataSked, setGoToTakeAway, goToTakeaway
 }) => {
     const [selectedOption1, setSelectedOption1] = useState(null);
     const [selectedOption2, setSelectedOption2] = useState(null);
@@ -73,147 +73,182 @@ export const SkedasticityReal = ({
         }
     };
 
+    const handleContinue = () => {
+        setGoToTakeAway(true);
+        setIsSubmit1Disabled(false);
+        setIsSubmit2Disabled(false);
+    };
+
+    const handleReview = () => {
+        setGoToTakeAway(false);
+        setFeedback1('');
+        setFeedback2('');
+        setSelectedOption1(null);
+        setSelectedOption2(null);
+    };
+
     return (
         <>
-            <p> This segment is to ask users to work on Heteroskedasticity
-                problem with real data.
-            </p>
-            <PromptBlock
-                text={'There may be a prompt block here.'} />
+            <div className={`collapsible-section ${
+                goToTakeaway ? 'collapsed' : 'expanded'}`}>
+                <p> This segment is to ask users to work on Heteroskedasticity
+                    problem with real data.
+                </p>
+                <PromptBlock
+                    text={'There may be a prompt block here.'} />
 
-            <div>
-                <p> Look at the graph. What do you think the dataset is? </p>
+                <div>
+                    <p> Look at the graph. What do you think the dataset is?</p>
+                    <div className="choice-list">
+                        {options1.map((option, index) => (
+                            <div key={index} className="form-check">
+                                <input
+                                    className="form-check-input"
+                                    type="radio"
+                                    id={`option1-${index}`}
+                                    name="datasetOptions1"
+                                    value={option}
+                                    onChange={
+                                        () => handleOptionSelect1(index)}
+                                />
+                                <label className="form-check-label"
+                                    htmlFor={`option1-${index}`}>
+                                    {option}
+                                </label>
+                            </div>
+                        ))}
+                    </div>
+                    {feedback1 && (
+                        <div className={
+                            `${isCorrect1 ? 'answer-correct-container'
+                                : 'answer-incorrect-container'}`}>
+                            {isCorrect1 ? (
+                                <div className="answer-correct">&#10003;</div>
+                            ):<div className="answer-incorrect flex-shrink-0
+                                align-self-start">!</div>}
+                            {feedback1}
+                        </div>
+                    )}
+                    <button
+                        className="btn btn-sm btn-success mt-3"
+                        id={'multiple-option1'}
+                        disabled={isSubmit1Disabled}
+                        onClick={handleSubmit1}>Submit</button>
+                </div>
+                <p>
+                    Narrative on explanation of the null hypothesis and
+                    inpact on the outcome. Language is relevant to the
+                    dataset.
+                </p>
+                <p>
+                    Narrative is important. Lorem ipsum dolor sit amet,
+                    consectetur adipiscing elit. Nullam nec tincidunt
+                    magna. Sed nec metus nec sapien ultricies
+                </p>
+                <PromptBlock
+                    text={'There may be a prompt block here.'} />
+
+                <table className="table table-bordered mb-5 mt-3">
+                    <thead>
+                        <tr>
+                            <th scope="col"></th>
+                            <th scope="col">non-robust</th>
+                            <th scope="col">robust</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <th scope="row">
+                                <Katex tex={'{SE(\\hat{\\beta_1})}'} />
+                            </th>
+                            <td>
+                                {standard_error.toFixed(2)}
+                            </td>
+                            <td>
+                                {robust_stderr.toFixed(2)}
+                            </td>
+                        </tr>
+                        <tr>
+                            <th scope="row">
+                                <Katex tex={'CI'} />
+                            </th>
+                            <td>
+                                {`${lowStandard.toFixed(2)} `}
+                                <Katex tex={'< \\beta_1 <'} />
+                                {highStandard.toFixed(2)}
+                            </td>
+                            <td>
+                                {`${lowRobust.toFixed(2)} `}
+                                <Katex tex={'< \\beta_1 <'} />
+                                {highRobust.toFixed(2)}
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <p>
+                    <Katex tex={
+                    // eslint-disable-next-line max-len
+                        'H_0: \\beta_1 = 0; \\quad H_1: \\beta_1 \\neq 0; \\quad \\alpha = 0.05'} />
+                </p>
+                <PromptBlock
+                    text={'There may be a prompt block here.'} />
+                <p>
+                    Which SE would you choose?
+                </p>
                 <div className="choice-list">
-                    {options1.map((option, index) => (
+                    {options2.map((option, index) => (
                         <div key={index} className="form-check">
                             <input
                                 className="form-check-input"
                                 type="radio"
-                                id={`option1-${index}`}
-                                name="datasetOptions"
+                                id={`option2-${index}`}
+                                name="datasetOptions2"
                                 value={option}
-                                onChange={
-                                    () => handleOptionSelect1(index)}
+                                onChange={() => handleOptionSelect2(index)}
                             />
                             <label className="form-check-label"
-                                htmlFor={`option1-${index}`}>
+                                htmlFor={`option2-${index}`}>
                                 {option}
                             </label>
                         </div>
                     ))}
                 </div>
-                {feedback1 && (
+                {feedback2 && (
                     <div className={
-                        `${isCorrect1 ? 'answer-correct-container'
+                        `${isCorrect2 ? 'answer-correct-container'
                             : 'answer-incorrect-container'}`}>
-                        {isCorrect1 ? (
+                        {isCorrect2 ? (
                             <div className="answer-correct">&#10003;</div>
                         ):<div className="answer-incorrect flex-shrink-0
                             align-self-start">!</div>}
-                        {feedback1}
+                        {feedback2}
                     </div>
                 )}
-                <button
-                    className="btn btn-sm btn-success mt-3"
-                    id={'multiple-option1'}
-                    disabled={isSubmit1Disabled}
-                    onClick={handleSubmit1}>Submit</button>
+                <button className="btn btn-sm btn-success mt-3"
+                    id={'multiple-option2'}
+                    disabled={isSubmit2Disabled}
+                    onClick={handleSubmit2}>
+                        Submit
+                </button>
             </div>
-            <p>
-                Narrative on explanation of the null hypothesis and
-                inpact on the outcome. Language is relevant to the
-                dataset.
-            </p>
-            <p>
-                Narrative is important. Lorem ipsum dolor sit amet,
-                consectetur adipiscing elit. Nullam nec tincidunt
-                magna. Sed nec metus nec sapien ultricies
-            </p>
-            <PromptBlock
-                text={'There may be a prompt block here.'} />
-
-            <table className="table table-bordered mb-5 mt-3">
-                <thead>
-                    <tr>
-                        <th scope="col"></th>
-                        <th scope="col">non-robust</th>
-                        <th scope="col">robust</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <th scope="row">
-                            <Katex tex={'{SE(\\hat{\\beta_1})}'} />
-                        </th>
-                        <td>
-                            {standard_error.toFixed(2)}
-                        </td>
-                        <td>
-                            {robust_stderr.toFixed(2)}
-                        </td>
-                    </tr>
-                    <tr>
-                        <th scope="row">
-                            <Katex tex={'CI'} />
-                        </th>
-                        <td>
-                            {`${lowStandard.toFixed(2)} `}
-                            <Katex tex={'< \\beta_1 <'} />
-                            {highStandard.toFixed(2)}
-                        </td>
-                        <td>
-                            {`${lowRobust.toFixed(2)} `}
-                            <Katex tex={'< \\beta_1 <'} />
-                            {highRobust.toFixed(2)}
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-            <p>
-                <Katex tex={
-                // eslint-disable-next-line max-len
-                    'H_0: \\beta_1 = 0; \\quad H_1: \\beta_1 \\neq 0; \\quad \\alpha = 0.05'} />
-            </p>
-            <PromptBlock
-                text={'There may be a prompt block here.'} />
-            <p>
-                Which SE would you choose?
-            </p>
-            <div className="choice-list">
-                {options2.map((option, index) => (
-                    <div key={index} className="form-check">
-                        <input
-                            className="form-check-input"
-                            type="radio"
-                            id={`option2-${index}`}
-                            name="datasetOptions"
-                            value={option}
-                            onChange={() => handleOptionSelect2(index)}
-                        />
-                        <label className="form-check-label"
-                            htmlFor={`option2-${index}`}>
-                            {option}
-                        </label>
-                    </div>
-                ))}
-            </div>
-            {feedback2 && (
-                <div className={
-                    `${isCorrect2 ? 'answer-correct-container'
-                        : 'answer-incorrect-container'}`}>
-                    {isCorrect2 ? (
-                        <div className="answer-correct">&#10003;</div>
-                    ):<div className="answer-incorrect flex-shrink-0
-                        align-self-start">!</div>}
-                    {feedback2}
+            {isSubmit2Disabled && (
+                <div className="simulation__step-prompt">
+                    <button
+                        className="btn btn-sm btn-success"
+                        onClick={handleContinue}>
+                        Continue &raquo;
+                    </button>
                 </div>
             )}
-            <button className="btn btn-sm btn-success mt-3"
-                id={'multiple-option2'}
-                disabled={isSubmit2Disabled}
-                onClick={handleSubmit2}>
-                    Submit
-            </button>
+            {goToTakeaway && (
+                <div className="simulation__step-prompt">
+                    <button
+                        className="btn btn-sm btn-success"
+                        onClick={handleReview}>
+                        Review &laquo;
+                    </button>
+                </div>
+            )}
         </>
     );
 };
@@ -225,4 +260,6 @@ SkedasticityReal.propTypes = {
     robustStandardError: PropTypes.number,
     setUseRealDataSked: PropTypes.func,
     useRealDataSked: PropTypes.bool,
+    setGoToTakeAway: PropTypes.func,
+    goToTakeaway: PropTypes.bool
 };
