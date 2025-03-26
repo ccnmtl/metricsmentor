@@ -11,7 +11,8 @@ export const SkedasticityReal = ({
     const [selectedOption2, setSelectedOption2] = useState(null);
     const [feedback1, setFeedback1] = useState('');
     const [feedback2, setFeedback2] = useState('');
-
+    const [isSubmit1Disabled, setIsSubmit1Disabled] = useState(false);
+    const [isSubmit2Disabled, setIsSubmit2Disabled] = useState(false);
 
     // eslint-disable-next-line no-unused-vars
     const { slope, p_value: pvalueStandard, t_value: tvalueStandard,
@@ -49,23 +50,28 @@ export const SkedasticityReal = ({
     const handleSubmit1 = () => {
         if (selectedOption1 === null) {
             setFeedback1('Please select an option before submitting.');
-        } else if (isCorrect1) {
-            setFeedback1('Correct! The dataset is heteroskedastic.');
         } else {
-            setFeedback1('Incorrect. The dataset is heteroskedastic.');
+            setIsSubmit1Disabled(true);
+            if (isCorrect1) {
+                setFeedback1('Correct! The dataset is heteroskedastic.');
+            } else {
+                setFeedback1('Incorrect. The dataset is heteroskedastic.');
+            }
         }
     };
 
     const handleSubmit2 = () => {
         if (selectedOption2 === null) {
             setFeedback2('Please select an option before submitting.');
-        } else if (isCorrect2) {
-            setFeedback2('Correct! Robust SE is the better choice.');
         } else {
-            setFeedback2('Incorrect. Robust SE is the better choice.');
+            setIsSubmit2Disabled(true);
+            if (isCorrect2) {
+                setFeedback2('Correct! Robust SE is the better choice.');
+            } else {
+                setFeedback2('Incorrect. Robust SE is the better choice.');
+            }
         }
     };
-
 
     return (
         <>
@@ -110,6 +116,7 @@ export const SkedasticityReal = ({
                 <button
                     className="btn btn-sm btn-success mt-3"
                     id={'multiple-option1'}
+                    disabled={isSubmit1Disabled}
                     onClick={handleSubmit1}>Submit</button>
             </div>
             <p>
@@ -203,6 +210,7 @@ export const SkedasticityReal = ({
             )}
             <button className="btn btn-sm btn-success mt-3"
                 id={'multiple-option2'}
+                disabled={isSubmit2Disabled}
                 onClick={handleSubmit2}>
                     Submit
             </button>
