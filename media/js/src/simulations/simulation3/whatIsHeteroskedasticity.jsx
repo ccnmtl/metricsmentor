@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { HeteroskedasticitySlider } from './heteroskedasticitySlider';
 import PropTypes from 'prop-types';
 import { inlineKatex } from '../../utils/utils';
+import { STATIC_URL } from '../../utils/utils';
 import axios from 'axios';
 
 export const WhatIsHeteroskedasticity = ({
@@ -71,14 +72,50 @@ export const WhatIsHeteroskedasticity = ({
         <>
             <div className={`collapsible-section ${
                 useRealDataSked ? 'collapsed' : 'expanded'}`}>
-                <p> This segment is to teach users about Heteroskedasticity.
-                    Space is for instructions.</p>
-                <button className='btn btn-secondary m-1 btn-sm'>
-                    Glossary
+                <p>
+                    Let&rsquo;s now learn to identify heteroskedasticity in a
+                    dataset plot, and then examine how it
+                    affects {inlineKatex('SE(\\hat{\\beta_1})')} and
+                    hypothesis testing results.
+                </p>
+                <div className="prompt-block">
+                    <div className="prompt-gfx">
+                        <img src={`${STATIC_URL}/img/icon-bell.svg`}
+                            className="prompt-img"
+                            alt="Reminder:" />
+                    </div>
+                    <p className="mb-2">
+                        But first, take a moment to familiarize yourself with
+                        the definition of heteroskedasticity; it&rsquo;ll help
+                        as you continue with this exercise.
+                    </p>
+                </div>
+                <button
+                    className="btn btn-sm btn-primary"
+                    // data-bs-toggle="modal"
+                    // data-bs-target="#modalName"
+                >
+                    Heteroskedasticy definition
                 </button>
+
                 <HeteroskedasticitySlider
                     heteroskedasticity={heteroskedasticity}
                     setHeteroskedasticity={setHeteroskedasticity} />
+
+                <div className="prompt-block pt-4 mb-3">
+                    <div className="prompt-gfx">
+                        <img src={`${STATIC_URL}/img/icon-bell.svg`}
+                            className="prompt-img"
+                            alt="Reminder:" />
+                    </div>
+                    <p className="mb-2">
+                        As you introduce heteroskedasticity into the dataset,
+                        observe the effect
+                        on {inlineKatex('SE(\\hat{\\beta_1})')} values
+                        calculated using non-robust and robust formulas.
+                    </p>
+                </div>
+
                 <div className="katex-block">
                     {inlineKatex(
                         `\\hat{y} = ${(intercept || intercept === 0) ?
@@ -86,12 +123,12 @@ export const WhatIsHeteroskedasticity = ({
                             slope ? slope.toFixed(2)
                                 : ''}`)}
                 </div>
-                <table className="table table-bordered mb-5 mt-3">
+                <table className="table table-bordered w-75 mb-5 mt-3">
                     <thead>
                         <tr>
-                            <th scope="col"></th>
-                            <th scope="col">non-robust</th>
-                            <th scope="col">robust</th>
+                            <td>&nbsp;</td>
+                            <th scope="col">Non-robust</th>
+                            <th scope="col">Robust</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -126,7 +163,7 @@ export const WhatIsHeteroskedasticity = ({
                 <table className="table table-bordered mb-5 mt-3">
                     <thead>
                         <tr>
-                            <th scope="col"></th>
+                            <td>&nbsp;</td>
                             <th scope="col">non-robust</th>
                             <th scope="col">robust</th>
                         </tr>

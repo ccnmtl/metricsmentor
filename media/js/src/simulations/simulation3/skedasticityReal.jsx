@@ -151,7 +151,7 @@ export const SkedasticityReal = ({
                 <table className="table table-bordered mb-5 mt-3">
                     <thead>
                         <tr>
-                            <th scope="col"></th>
+                            <td>&nbsp;</td>
                             <th scope="col">non-robust</th>
                             <th scope="col">robust</th>
                         </tr>

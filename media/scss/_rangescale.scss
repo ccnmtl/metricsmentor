@@ -51,10 +51,11 @@
 
 .slider-end-to-end__input {
     display: block;
-    margin: 0 0 0 2.25rem;
+    //margin: 0 0 0 2.25rem;
+    padding: 0 0 0 2.25rem;
     width: 100%;
     .form-range {
-        width: 24rem;
+        width: 22rem;
     }
     .scale-value {
         width: 6rem;
@@ -67,14 +68,16 @@
     position: relative;
     display: flex;
     height: 0.5rem;
-    //width: 100%;
-    margin: 0 0 2rem 2.575rem;
+    width: 100%;
+    //margin: 0 0 2rem 2.575rem;
+    padding: 0 0 0 2.575rem;
+    margin: 0 0 2rem 0;
     & .unit {
         border-left: 0.0625rem solid $gray-md-600;
         border-right: 0.0625rem solid $gray-md-600;
         border-collapse: separate;
         height: 0.25rem;
-        width: calc(24rem - 0.875rem);
+        width: 11rem;
     }
     & .unit:nth-child(1) {
         border-right: 0;
@@ -88,15 +91,15 @@
         }
     }
     & .unit:nth-child(2) {
-        border-right: 0;
+        border-left: 0;
         height: 0.5rem;
-        width: 4rem;
+        width: 10.125rem;
         &::after {
             content: "Heteroskedastic";
             position: absolute;
             bottom: -1.25rem;
             font: 0.75rem/1 sans-serif;
-            margin-left: -2.75rem;
+            margin-left: 7.25rem;
         }
     }
 }

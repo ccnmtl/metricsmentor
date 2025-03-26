@@ -3,10 +3,14 @@ import PropTypes from 'prop-types';
 
 export const HeteroskedasticitySlider = ({
     heteroskedasticity, setHeteroskedasticity }) => (
-    <div className="slider-end-to-end__box">
+    <div className="slider-end-to-end__box mt-4">
         <label htmlFor="skedasticityscale" className="h2 form-label">
             Degree of skedasticity
         </label>
+        <p>
+            Move the slider to adjust the level of heteroskedasticity in
+            the dataset, and see how the plot pattern changes on the graph.
+        </p>
         <div className="slider-end-to-end__input">
             <input
                 id="skedasticityscale"
