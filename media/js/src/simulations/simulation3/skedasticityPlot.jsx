@@ -3,8 +3,8 @@ import Plot from 'react-plotly.js';
 import axios from 'axios';
 import { seededRandom } from '../../utils/utils';
 import PropTypes from 'prop-types';
-import DATAPOINTS from './Growth_Assasin.json';
-import REGRESSIONDATA from './Regression_Results.json';
+import DATAPOINTS from './heteroskedRealData.json';
+import REGRESSIONDATA from './regressionHeterosked.json';
 
 export const SkedasticityScatterPlot = ({
     heteroskedasticity, setSlope, setIntercept,
