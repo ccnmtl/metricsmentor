@@ -92,8 +92,8 @@ export const WhatIsHeteroskedasticity = ({
                 </div>
                 <button
                     className="btn btn-sm btn-primary"
-                    // data-bs-toggle="modal"
-                    // data-bs-target="#modalName"
+                    data-bs-toggle="modal"
+                    data-bs-target="#heteroskedDefinition"
                 >
                     Heteroskedasticy definition
                 </button>

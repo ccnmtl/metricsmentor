@@ -8,6 +8,7 @@ import { STATIC_URL } from '../../utils/utils';
 import { Katex } from '../../utils/katexComponent';
 import { WhatIsMulticollinearity } from './whatIsMulticollinearity';
 import { MulticollinearityGlossary } from './multicollinearityGlossary';
+import { HeteroskedDefinition } from './heteroskedDefinition';
 
 
 export const SimulationThree = () => {
@@ -224,14 +225,15 @@ export const SimulationThree = () => {
                             setStandardError={setStandardError}
                             setRobustStandardError={setRobustStandardError}
                             useRealData={useRealDataSked}
-                        />
-                    }
+                        />}
+                    modal={<HeteroskedDefinition />}
                 />
             )}
             {stage === 1 && (
                 <SimulationPanel steps={multicollinearitySteps}
-                    graphContent={<MulticollinearityScatterPlot
-                        controls={controls} />}
+                    graphContent={
+                        <MulticollinearityScatterPlot
+                            controls={controls} />}
                     modal={<MulticollinearityGlossary />}
                 />
             )}
