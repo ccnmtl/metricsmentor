@@ -171,7 +171,7 @@ export const SimulationThree = () => {
                     <p>
                         Here, you&rsquo;ll learn to detect and address
                         multicollinearity by analyzing multivariable datasets
-                        and its impact on standard errors standard
+                        and its impact on standard
                         errors, <Katex tex={'{SE(\\hat{\\beta_1})}'}
                             className="katex-inline" />. You&rsquo;ll observe
                         how these <Katex tex={'{SE(\\hat{\\beta_1})}'}
