@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import { HeteroskedasticitySlider } from './heteroskedasticitySlider';
 import PropTypes from 'prop-types';
 import { inlineKatex } from '../../utils/utils';
-import { STATIC_URL } from '../../utils/utils';
 import axios from 'axios';
 import { PromptBlock } from '../../PromptBlock';
 
