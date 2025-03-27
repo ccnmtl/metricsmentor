@@ -10,6 +10,7 @@ import { WhatIsMulticollinearity } from './whatIsMulticollinearity';
 import { MulticollinearityGlossary } from './multicollinearityGlossary';
 import { HeteroskedDefinition } from './heteroskedDefinition';
 import { MulticollinearityApply } from './multicollinearityApply';
+import { HeteroskedTakeaway } from './heteroskedTakeaway';
 
 
 export const SimulationThree = () => {
@@ -149,7 +150,18 @@ export const SimulationThree = () => {
                     )
                 }
             ]
-            : [])
+            : []),
+
+        ...(gotToTakeAway
+            ? [
+                {
+                    headerId: 'takeAway1',
+                    title: 'Takeaway questions',
+                    content: (
+                        <HeteroskedTakeaway />
+                    )
+                }
+            ] : [])
     ];
 
     const multicollinearitySteps = [
