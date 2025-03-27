@@ -9,6 +9,7 @@ import { Katex } from '../../utils/katexComponent';
 import { WhatIsMulticollinearity } from './whatIsMulticollinearity';
 import { MulticollinearityGlossary } from './multicollinearityGlossary';
 import { HeteroskedDefinition } from './heteroskedDefinition';
+import { MulticollinearityApply } from './multicollinearityApply';
 
 
 export const SimulationThree = () => {
@@ -22,6 +23,7 @@ export const SimulationThree = () => {
     const [progress1, setProgress1] = useState(0);
     const [progress2, setProgress2] = useState(0);
     const [controls, setControls] = useState([false, false]);
+    const [controls2, setControls2] = useState([false, false]);
     const [gotToTakeAway, setGoToTakeAway] = useState(false);
 
     const handleControls = (e) => {
@@ -30,7 +32,22 @@ export const SimulationThree = () => {
         setControls(update);
     };
 
+    const handleControls2 = (e) => {
+        const update = [...controls2];
+        update[e.target.value] = e.target.checked;
+        setControls2(update);
+    };
+
     const handleStage = (e) => setStage(parseInt(e.target.value));
+    const handleProgress = (val) => setProgress2(val);
+
+    const mkReviewBtn = (val) => (
+        <button className="btn btn-secondary float-end"
+            onClick={() => setProgress2(val)}
+        >
+            Review &#8811;
+        </button>
+    );
 
     const heteroSkadasticSteps = [
         {
@@ -199,19 +216,35 @@ export const SimulationThree = () => {
             )
         },
         {
-            // Simulation steps
             headerId: 'whatIsMulticollinearity',
             title: 'What is Multicollinearity?',
-            content: (
+            content: (progress2 > 0 ?
+                mkReviewBtn(0):
                 <>
                     <WhatIsMulticollinearity
                         controls={controls}
                         handleControls={handleControls}
-                        setProgress={setProgress2} />
+                        handleProgress={handleProgress} />
                 </>
             )
         }
     ];
+
+    if (progress2 > 0) {
+        multicollinearitySteps.push({
+            headerId: 'multicollinearityRealData',
+            title: 'Real dataset problem',
+            content: (progress2 > 1 ?
+                mkReviewBtn(1):
+                <>
+                    <MulticollinearityApply
+                        controls={controls2}
+                        handleControls={handleControls2}
+                        handleProgress={handleProgress} />
+                </>
+            )
+        });
+    }
 
     return (
         <>
@@ -233,7 +266,8 @@ export const SimulationThree = () => {
                 <SimulationPanel steps={multicollinearitySteps}
                     graphContent={
                         <MulticollinearityScatterPlot
-                            controls={controls} />}
+                            controls={progress2 == 0 ? controls : controls2}
+                            progress={progress2} />}
                     modal={<MulticollinearityGlossary />}
                 />
             )}
