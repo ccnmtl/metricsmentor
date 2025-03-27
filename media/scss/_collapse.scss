@@ -1,10 +1,9 @@
 .collapsible-section {
-    overflow: hidden;
     transition: max-height 0.5s ease-out, opacity 0.5s ease-out;
 }
 
 .collapsible-section.expanded {
-    max-height: 2000px; /* large enough to show all content */
+    max-height: 2000px;
     opacity: 1;
 }
 
