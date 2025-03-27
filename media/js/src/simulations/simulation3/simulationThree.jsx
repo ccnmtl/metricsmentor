@@ -7,6 +7,7 @@ import { SkedasticityReal } from './skedasticityReal';
 import { STATIC_URL } from '../../utils/utils';
 import { Katex } from '../../utils/katexComponent';
 import { WhatIsMulticollinearity } from './whatIsMulticollinearity';
+import { MulticollinearityGlossary } from './multicollinearityGlossary';
 
 
 export const SimulationThree = () => {
@@ -231,6 +232,7 @@ export const SimulationThree = () => {
                 <SimulationPanel steps={multicollinearitySteps}
                     graphContent={<MulticollinearityScatterPlot
                         controls={controls} />}
+                    modal={<MulticollinearityGlossary />}
                 />
             )}
         </>
