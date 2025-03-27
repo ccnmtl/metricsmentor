@@ -10,7 +10,7 @@ export const PromptBlock = ({ text }) => {
                     src={`${STATIC_URL}img/icon-bell.svg`} />
             </div>
             <p className="mb-2">
-                <b>Prompt Block:</b> {text}
+                {text}
             </p>
         </div>
     );
