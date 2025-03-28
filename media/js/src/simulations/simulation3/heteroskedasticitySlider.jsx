@@ -17,7 +17,7 @@ export const HeteroskedasticitySlider = ({
                 className="form-range"
                 type="range"
                 min="0"
-                max="10"
+                max="4.5"
                 step="0.1"
                 value={heteroskedasticity}
                 onChange={(e) =>
