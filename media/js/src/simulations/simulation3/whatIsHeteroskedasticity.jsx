@@ -7,10 +7,20 @@ import { PromptBlock } from '../../PromptBlock';
 
 export const WhatIsHeteroskedasticity = ({
     heteroskedasticity, setHeteroskedasticity, slope, intercept, standardError,
-    robustStandardError, setUseRealDataSked, useRealDataSked
+    robustStandardError, setUseRealDataSked, useRealDataSked, setProgress
 }) => {
     const [pvaluesStandard, setPvaluesStandard] = useState(null);
     const [pvaluesRobust, setPvaluesRobust] = useState(null);
+
+    const handleContinue = () => {
+        setProgress(1);
+        setUseRealDataSked(true);
+    };
+
+    const handleReview = () => {
+        setProgress(0);
+        setUseRealDataSked(false);
+    };
 
     let tvalueStandard;
     if (slope !== null) {
@@ -231,7 +241,7 @@ export const WhatIsHeteroskedasticity = ({
                     <button
                         className="btn btn-sm btn-success"
                         disabled={useRealDataSked}
-                        onClick={() => setUseRealDataSked(true)}>
+                        onClick={handleContinue}>
                         Continue to Real Data &raquo;
                     </button>
                 </div>
@@ -240,7 +250,7 @@ export const WhatIsHeteroskedasticity = ({
                 <div className="simulation__step-prompt">
                     <button
                         className="btn btn-sm btn-success"
-                        onClick={() => setUseRealDataSked(false)}>
+                        onClick={handleReview}>
                         Review &laquo;
                     </button>
                 </div>
@@ -258,4 +268,5 @@ WhatIsHeteroskedasticity.propTypes = {
     robustStandardError: PropTypes.number,
     setUseRealDataSked: PropTypes.func,
     useRealDataSked: PropTypes.bool,
+    setProgress: PropTypes.func
 };
