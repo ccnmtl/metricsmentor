@@ -6,7 +6,7 @@ export const HeteroskedTakeaway = () => {
 
     const questions = [
         {
-            questionId: 'heteroskedasticity',
+            questionId: 1,
             questionText: 'What is <b>heteroskedasticity</b>?',
             choices: [
                 {
@@ -16,7 +16,7 @@ export const HeteroskedTakeaway = () => {
                         +   ' heteroskedasticity.',
                     isCorrect: false,
                     feedback: 'Conditional variance of the error is constant ' +
-                              'under <b>homoskedasticity</b>, not under ' +
+                              'under homoskedasticity, not under ' +
                               'heteroskedasticity.'
                 },
                 {
@@ -26,8 +26,8 @@ export const HeteroskedTakeaway = () => {
                           'regressor (X) under homoskedasticity.',
                     isCorrect: false,
                     feedback: 'Conditional variance of the error depends on ' +
-                              'the regressor (X) under <b>heteroskedasticity' +
-                              '</b>, not homoskedasticity.'
+                              'the regressor (X) under heteroskedasticity' +
+                              ', not homoskedasticity.'
                 },
                 {
                     id: 'hetero-choice-C',
@@ -51,7 +51,7 @@ export const HeteroskedTakeaway = () => {
             ]
         },
         {
-            questionId: 'heteroskedasticity-effects',
+            questionId: 2,
             questionText: '<b>Heteroskedasticity affects…</b>',
             choices: [
                 {
@@ -92,7 +92,7 @@ export const HeteroskedTakeaway = () => {
             ]
         },
         {
-            questionId: 'heteroskedasticity-true',
+            questionId: 3,
             questionText: '<b>Which one of the following is true under ' +
                           'heteroskedasticity?</b>',
             choices: [

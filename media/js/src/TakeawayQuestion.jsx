@@ -110,7 +110,7 @@ export const TakeawayQuestion = ({
 };
 
 TakeawayQuestion.propTypes = {
-    questionId: PropTypes.string.isRequired,
+    questionId: PropTypes.number.isRequired,
     questionText: PropTypes.string.isRequired,
     choices: PropTypes.arrayOf(
         PropTypes.shape({

@@ -6,7 +6,7 @@ export const MulticollinearityTakeaway = () => {
 
     const questions = [
         {
-            questionId: 'what-is-multicollinearity',
+            questionId: 4,
             questionText: 'What is <b>multicollinearity</b>?',
             choices: [
                 {
@@ -50,10 +50,10 @@ export const MulticollinearityTakeaway = () => {
             ]
         },
         {
-            questionId: 'test-statistic-effect',
+            questionId: 5,
             questionText: 'If two regressors are highly correlated in a linear'
-                        + 'regression, test statistic for significance test ' +
-                        'for those two coefficients tends to',
+                        + ' regression, test statistic for significance test '
+                        + 'for those two coefficients tends to',
             choices: [
                 {
                     id: 'multi2-choice-A',
@@ -63,7 +63,7 @@ export const MulticollinearityTakeaway = () => {
                     isCorrect: false,
                     feedback: 'Because the standard errors of sample slopes ' +
                     'are higher if regressors are correlated, the significance'
-                    + 'test tends to reject less often.'
+                    + ' test tends to reject less often.'
                 },
                 {
                     id: 'multi2-choice-B',
@@ -73,7 +73,7 @@ export const MulticollinearityTakeaway = () => {
                     isCorrect: false,
                     feedback: 'The significance test tends to reject less ' +
                     'often because the standard errors are higher not because'
-                    + 'standard errors are lower.'
+                    + ' standard errors are lower.'
                 },
                 {
                     id: 'multi2-choice-C',
@@ -95,7 +95,7 @@ export const MulticollinearityTakeaway = () => {
             ]
         },
         {
-            questionId: 'what-to-do-about-multicollinearity',
+            questionId: 6,
             questionText: 'What to do if there is multicollinearity?',
             choices: [
                 {
