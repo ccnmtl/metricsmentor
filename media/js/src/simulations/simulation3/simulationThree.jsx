@@ -11,6 +11,7 @@ import { MulticollinearityGlossary } from './multicollinearityGlossary';
 import { HeteroskedDefinition } from './heteroskedDefinition';
 import { MulticollinearityApply } from './multicollinearityApply';
 import { HeteroskedTakeaway } from './heteroskedTakeaway';
+import { MulticollinearityTakeaway } from './multicollinearityTakeaway';
 
 
 export const SimulationThree = () => {
@@ -254,6 +255,16 @@ export const SimulationThree = () => {
                         handleControls={handleControls2}
                         handleProgress={handleProgress} />
                 </>
+            )
+        });
+    }
+
+    if (progress2 > 1) {
+        multicollinearitySteps.push({
+            headerId: 'takeAway2',
+            title: 'Takeaway questions',
+            content: (
+                <MulticollinearityTakeaway />
             )
         });
     }
