@@ -2,9 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 export const HeteroskedasticitySlider = ({
-    heteroskedasticity, setHeteroskedasticity }) => {
-        console.log('hetero', heteroskedasticity)
-    return (
+    heteroskedasticity, setHeteroskedasticity }) => (
     <div className="slider-end-to-end__box mt-4">
         <label htmlFor="skedasticityscale" className="h2 form-label">
             Degree of skedasticity
@@ -31,7 +29,7 @@ export const HeteroskedasticitySlider = ({
             <div className="unit"></div>
         </div>
     </div>
-)};
+);
 
 HeteroskedasticitySlider.propTypes = {
     heteroskedasticity: PropTypes.number,

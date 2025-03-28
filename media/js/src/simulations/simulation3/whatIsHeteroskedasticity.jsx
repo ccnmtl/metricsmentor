@@ -61,6 +61,10 @@ export const WhatIsHeteroskedasticity = ({
         }
     };
 
+    const isZeroInConfidenceInterval = (ci) => {
+        return ci.lower <= 0 && ci.upper >= 0;
+    };
+
     useEffect(() => {
         if (slope !== null) {
             calculatePvalueStandard();
@@ -209,10 +213,14 @@ export const WhatIsHeteroskedasticity = ({
                                 Hypothesis Test
                             </th>
                             <td>
-                                Lorem ipsum dolor sit amet
+                                {isZeroInConfidenceInterval(ciStandard) ?
+                                    'Fail to reject' :
+                                    'Reject'}
                             </td>
                             <td>
-                                Lorem ipsum dolor sit amet
+                                {isZeroInConfidenceInterval(ciRobust) ?
+                                    'Fail to reject' :
+                                    'Reject'}
                             </td>
                         </tr>
                     </tbody>
