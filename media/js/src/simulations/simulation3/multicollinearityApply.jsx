@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { inlineKatex, STATIC_URL } from '../../utils/utils';
 import { Katex } from '../../utils/katexComponent';
+import DATA from './multicollinearityRealData.json';
 
 
 export const MulticollinearityApply = ({
@@ -91,15 +92,19 @@ export const MulticollinearityApply = ({
                 <tr>
                     <th className="rowheader text-nowrap">--</th>
                     <td></td>
-                    <td><Katex tex='corr(x_1, x_2): 0.0147' /></td>
-                    <td><Katex tex='corr(x_1, x_3): 0.9496' /></td>
+                    <td>
+                        <Katex tex={`corr(x_1, x_2): ${DATA.x2.corr_x1}`} />
+                    </td>
+                    <td>
+                        <Katex tex={`corr(x_1, x_3): ${DATA.x3.corr_x1}`} />
+                    </td>
                 </tr>
                 <tr>
                     <th className="rowheader text-nowrap">
                         <Katex tex='SE(\hat{\beta_1})' /></th>
-                    <td><Katex tex='0.3066' /></td>
-                    <td><Katex tex='0.3114' /></td>
-                    <td><Katex tex='0.5196' /></td>
+                    <td><Katex tex={`${DATA.x1.stderr}`} /></td>
+                    <td><Katex tex={`${DATA.x2.stderr}`} /></td>
+                    <td><Katex tex={`${DATA.x3.stderr}`} /></td>
                 </tr>
             </tbody>
         </table>
@@ -127,36 +132,49 @@ export const MulticollinearityApply = ({
                 <tr>
                     <th className="rowheader text-nowrap">--</th>
                     <td></td>
-                    <td><Katex tex='corr(x_1, x_2): 0.0147' /></td>
-                    <td><Katex tex='corr(x_1, x_3): 0.9496' /></td>
+                    <td>
+                        <Katex tex={`corr(x_1, x_2): ${DATA.x2.corr_x1}`} />
+                    </td>
+                    <td>
+                        <Katex tex={`corr(x_1, x_3): ${DATA.x3.corr_x1}`} />
+                    </td>
                 </tr>
                 <tr>
                     <th className="rowheader text-nowrap">
                         <Katex tex='SE(\hat{\beta_1})' /></th>
-                    <td><Katex tex='0.3066' /></td>
-                    <td><Katex tex='0.3114' /></td>
-                    <td><Katex tex='0.5196' /></td>
+                    <td><Katex tex={`${DATA.x1.stderr}`} /></td>
+                    <td><Katex tex={`${DATA.x2.stderr}`} /></td>
+                    <td><Katex tex={`${DATA.x3.stderr}`} /></td>
                 </tr>
                 <tr>
                     <th className="rowheader text-nowrap">
                         <Katex tex='t' /></th>
-                    <td><Katex tex='7.95' /></td>
-                    <td><Katex tex='7.82' /></td>
-                    <td><Katex tex='0.99' /></td>
+                    <td><Katex tex={`${DATA.x1.t}`} /></td>
+                    <td><Katex tex={`${DATA.x2.t}`} /></td>
+                    <td><Katex tex={`${DATA.x3.t}`} /></td>
                 </tr>
                 <tr>
                     <th className="rowheader text-nowrap">
                         <Katex tex='p-value' /></th>
-                    <td><Katex tex='0' /></td>
-                    <td><Katex tex='0' /></td>
-                    <td><Katex tex='0.332' /></td>
+                    <td><Katex tex={`${DATA.x1.pvalue}`} /></td>
+                    <td><Katex tex={`${DATA.x2.pvalue}`} /></td>
+                    <td><Katex tex={`${DATA.x3.pvalue}`} /></td>
                 </tr>
                 <tr>
                     <th className="rowheader text-nowrap">
                         <Katex tex='CI' /></th>
-                    <td></td>
-                    <td></td>
-                    <td></td>
+                    <td>
+                        <Katex tex={`[${DATA.x1.ci[0]},`} />
+                        <Katex tex={`${DATA.x1.ci[1]}]`} />
+                    </td>
+                    <td>
+                        <Katex tex={`[${DATA.x2.ci[0]},`} />
+                        <Katex tex={`${DATA.x2.ci[1]}]`} />
+                    </td>
+                    <td>
+                        <Katex tex={`[${DATA.x3.ci[0]},`} />
+                        <Katex tex={`${DATA.x3.ci[1]}]`} />
+                    </td>
                 </tr>
                 <tr>
                     <th className="rowheader text-nowrap">
