@@ -2,8 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { HeteroskedasticitySlider } from './heteroskedasticitySlider';
 import PropTypes from 'prop-types';
 import { inlineKatex } from '../../utils/utils';
-import { STATIC_URL } from '../../utils/utils';
 import axios from 'axios';
+import { PromptBlock } from '../../PromptBlock';
 
 export const WhatIsHeteroskedasticity = ({
     heteroskedasticity, setHeteroskedasticity, slope, intercept, standardError,
@@ -78,18 +78,10 @@ export const WhatIsHeteroskedasticity = ({
                     affects {inlineKatex('SE(\\hat{\\beta_1})')} and
                     hypothesis testing results.
                 </p>
-                <div className="prompt-block">
-                    <div className="prompt-gfx">
-                        <img src={`${STATIC_URL}/img/icon-bell.svg`}
-                            className="prompt-img"
-                            alt="Reminder:" />
-                    </div>
-                    <p className="mb-2">
-                        But first, take a moment to familiarize yourself with
+                <PromptBlock
+                    text="But first, take a moment to familiarize yourself with
                         the definition of heteroskedasticity; it&rsquo;ll help
-                        as you continue with this exercise.
-                    </p>
-                </div>
+                        as you continue with this exercise." />
                 <button
                     className="btn btn-sm btn-primary"
                     data-bs-toggle="modal"
@@ -102,19 +94,11 @@ export const WhatIsHeteroskedasticity = ({
                     heteroskedasticity={heteroskedasticity}
                     setHeteroskedasticity={setHeteroskedasticity} />
 
-                <div className="prompt-block pt-4 mb-3">
-                    <div className="prompt-gfx">
-                        <img src={`${STATIC_URL}/img/icon-bell.svg`}
-                            className="prompt-img"
-                            alt="Reminder:" />
-                    </div>
-                    <p className="mb-2">
-                        As you introduce heteroskedasticity into the dataset,
+                <PromptBlock
+                    text={`As you introduce heteroskedasticity into the dataset,
                         observe the effect
-                        on {inlineKatex('SE(\\hat{\\beta_1})')} values
-                        calculated using non-robust and robust formulas.
-                    </p>
-                </div>
+                        on ${inlineKatex('SE(\\hat{\\beta_1})')} values
+                        calculated using non-robust and robust formulas.`} />
 
                 <div className="katex-block">
                     {inlineKatex(
