@@ -36,12 +36,12 @@ export const SkedasticityReal = ({
 
     const handleOptionSelect1 = (index) => {
         setSelectedOption1(index);
-        setFeedback1(''); // Clear feedback when a new option is selected
+        setFeedback1('');
     };
 
     const handleOptionSelect2 = (index) => {
         setSelectedOption2(index);
-        setFeedback2(''); // Clear feedback when a new option is selected
+        setFeedback2('');
     };
 
     const isCorrect1 = selectedOption1 === correctAnswerIndex1;
@@ -188,7 +188,7 @@ export const SkedasticityReal = ({
                 <p>
                     <Katex tex={
                     // eslint-disable-next-line max-len
-                        'H_0: \\beta_1 = 0; \\quad H_1: \\beta_1 \\neq 0; \\quad \\alpha = 0.05'} />
+                        'H_0: \\beta_1 = 0; \\quad H_1: \\beta_1 \\neq 0; \\quad \\alpha = 0.10'} />
                 </p>
                 <PromptBlock
                     text={'There may be a prompt block here.'} />
