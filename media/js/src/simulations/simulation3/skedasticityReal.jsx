@@ -5,7 +5,8 @@ import { PromptBlock } from '../../PromptBlock';
 import REGRESSIONDATA from './regressionHeterosked.json';
 
 export const SkedasticityReal = ({
-    setUseRealDataSked, useRealDataSked, setGoToTakeAway, goToTakeaway
+    setUseRealDataSked, useRealDataSked, setGoToTakeAway, goToTakeaway,
+    setProgress
 }) => {
     const [selectedOption1, setSelectedOption1] = useState(null);
     const [selectedOption2, setSelectedOption2] = useState(null);
@@ -77,6 +78,7 @@ export const SkedasticityReal = ({
         setGoToTakeAway(true);
         setIsSubmit1Disabled(false);
         setIsSubmit2Disabled(false);
+        setProgress(2);
     };
 
     const handleReview = () => {
@@ -85,6 +87,7 @@ export const SkedasticityReal = ({
         setFeedback2('');
         setSelectedOption1(null);
         setSelectedOption2(null);
+        setProgress(1);
     };
 
     return (
@@ -261,5 +264,6 @@ SkedasticityReal.propTypes = {
     setUseRealDataSked: PropTypes.func,
     useRealDataSked: PropTypes.bool,
     setGoToTakeAway: PropTypes.func,
-    goToTakeaway: PropTypes.bool
+    goToTakeaway: PropTypes.bool,
+    setProgress: PropTypes.func
 };
