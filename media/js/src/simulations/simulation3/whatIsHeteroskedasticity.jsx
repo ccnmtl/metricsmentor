@@ -101,10 +101,15 @@ export const WhatIsHeteroskedasticity = ({
                 setHeteroskedasticity={setHeteroskedasticity} />
 
             <PromptBlock
-                text={`As you introduce heteroskedasticity into the dataset,
-                    observe the effect
-                    on ${inlineKatex('SE(\\hat{\\beta_1})')} values
-                    calculated using non-robust and robust formulas.`} />
+                text={
+                    <>
+                        As you introduce heteroskedasticity into the dataset,
+                        observe the effect on
+                        {inlineKatex('SE(\\hat{\\beta_1})')} values calculated
+                        using non-robust and robust formulas.
+                    </>
+                }
+            />
 
             <div className="katex-block">
                 {inlineKatex(
