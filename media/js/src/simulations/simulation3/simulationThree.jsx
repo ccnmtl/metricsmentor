@@ -77,12 +77,14 @@ export const SimulationThree = () => {
             content: (
                 <>
                     <p>
-                This text provides a brief overview of the simulation and
-                its purpose.
-                    </p>
-                    <p>
-                Approximately <b>60 to 70 words</b> is sufficient.
-                        <i>Formatting</i> is allowed, as well as KaTeX elements
+                        This simulation explores two common issues that affect
+                        the standard error of the sample
+                        slope, <Katex tex={'{SE(\\hat{\\beta_1})}'}
+                            className="katex-inline" />, in regression
+                        analysis: <i>Heteroskedasticity</i> and
+                        <i> Multicollinearity</i>. It demonstrates how to
+                        identify and understand their impact on the standard
+                        error of the sample slope.
                     </p>
                     {['Heteroskedasticity', 'Multicollinearity'].map(
                         (label, index) => (
@@ -184,12 +186,14 @@ export const SimulationThree = () => {
             content: (
                 <>
                     <p>
-                This text provides a brief overview of the simulation and
-                its purpose.
-                    </p>
-                    <p>
-                Approximately <b>60 to 70 words</b> is sufficient.
-                        <i>Formatting</i> is allowed, as well as KaTeX elements
+                        This simulation explores two common issues that affect
+                        the standard error of the sample
+                        slope, <Katex tex={'{SE(\\hat{\\beta_1})}'}
+                            className="katex-inline" />, in regression
+                        analysis: <i>Heteroskedasticity</i> and
+                        <i> Multicollinearity</i>. It demonstrates how to
+                        identify and understand their impact on the standard
+                        error of the sample slope.
                     </p>
                     {['Heteroskedasticity', 'Multicollinearity'].map(
                         (label, index) => (
