@@ -191,7 +191,7 @@ export const WhatIsMulticollinearity = ({
             </tbody>
         </table>
         <p>Placeholder fo explanation of what&apos;s going on. </p>
-        <button className="btn btn-secondary float-end"
+        <button className="btn btn-sm btn-success float-end"
             onClick={() => handleProgress(1)}
         >
             Continue &#8811;
