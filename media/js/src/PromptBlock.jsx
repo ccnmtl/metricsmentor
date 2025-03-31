@@ -17,5 +17,5 @@ export const PromptBlock = ({ text }) => {
 };
 
 PromptBlock.propTypes = {
-    text: PropTypes.string.isRequired
+    text: PropTypes.node.isRequired
 };
