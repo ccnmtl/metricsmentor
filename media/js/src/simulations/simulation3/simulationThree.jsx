@@ -26,7 +26,6 @@ export const SimulationThree = () => {
     const [progress2, setProgress2] = useState(0);
     const [controls, setControls] = useState([false, false]);
     const [controls2, setControls2] = useState([false, false]);
-    const [gotToTakeAway, setGoToTakeAway] = useState(false);
 
     const handleControls = (e) => {
         const update = [...controls];
@@ -44,7 +43,7 @@ export const SimulationThree = () => {
     const handleProgress = (val) => setProgress2(val);
 
     const mkReviewBtn = (val, setProgress) => (
-        <button className="btn btn-secondary float-end"
+        <button className="btn btn-sm btn-success float-end"
             onClick={() => setProgress(val)}
         >
             Review &#8811;
@@ -147,40 +146,30 @@ export const SimulationThree = () => {
                 />
             )
         },
-        ...(useRealDataSked
-            ? [
-                {
-                    headerId: 'realDataSet',
-                    title: 'Real dataset problem',
-                    content: (progress1 > 1 ?
-                        mkReviewBtn(1, setProgress1):
-                        <SkedasticityReal
-                            slope={slope}
-                            intercept={intercept}
-                            standardError={standardError}
-                            robustStandardError={robustStandardError}
-                            useRealDataSked={useRealDataSked}
-                            setUseRealDataSked={setUseRealDataSked}
-                            setGoToTakeAway={setGoToTakeAway}
-                            goToTakeaway={gotToTakeAway}
-                            setProgress={setProgress1}
-                        />
-                    )
-                }
-            ]
-            : []),
-
-        ...(gotToTakeAway
-            ? [
-                {
-                    headerId: 'takeAway1',
-                    title: 'Takeaway questions',
-                    content: (
-                        <HeteroskedTakeaway />
-                    )
-                }
-            ] : [])
     ];
+
+    if (progress1 > 0) {
+        heteroSkadasticSteps.push({
+            headerId: 'heteroskedasticityRealData',
+            title: 'Real dataset problem',
+            content: (progress1 > 1 ?
+                mkReviewBtn(1, setProgress1):
+                <SkedasticityReal
+                    setProgress={setProgress1}
+                />
+            )
+        });
+    }
+
+    if(progress1 > 1) {
+        heteroSkadasticSteps.push({
+            headerId: 'takeAway1',
+            title: 'Takeaway questions',
+            content: (
+                <HeteroskedTakeaway />
+            )
+        });
+    }
 
     const multicollinearitySteps = [
         {
@@ -266,12 +255,10 @@ export const SimulationThree = () => {
             title: 'Real dataset problem',
             content: (progress2 > 1 ?
                 mkReviewBtn(1, setProgress2):
-                <>
-                    <MulticollinearityApply
-                        controls={controls2}
-                        handleControls={handleControls2}
-                        handleProgress={handleProgress} />
-                </>
+                <MulticollinearityApply
+                    controls={controls2}
+                    handleControls={handleControls2}
+                    handleProgress={handleProgress} />
             )
         });
     }
