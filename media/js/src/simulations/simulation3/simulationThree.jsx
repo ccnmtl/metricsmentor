@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { SkedasticityScatterPlot } from './skedasticityPlot';
 import { MulticollinearityScatterPlot } from './multicollinearityPlot';
 import { SimulationPanel } from '../../SimulationPanel';
@@ -26,7 +26,6 @@ export const SimulationThree = () => {
     const [progress2, setProgress2] = useState(0);
     const [controls, setControls] = useState([false, false]);
     const [controls2, setControls2] = useState([false, false]);
-    const [gotToTakeAway, setGoToTakeAway] = useState(false);
 
     const handleControls = (e) => {
         const update = [...controls];
@@ -43,13 +42,27 @@ export const SimulationThree = () => {
     const handleStage = (e) => setStage(parseInt(e.target.value));
     const handleProgress = (val) => setProgress2(val);
 
-    const mkReviewBtn = (val) => (
-        <button className="btn btn-secondary float-end"
-            onClick={() => setProgress2(val)}
+    const mkReviewBtn = (val, setProgress) => (
+        <button className="btn btn-sm btn-success float-end"
+            onClick={() => setProgress(val)}
         >
             Review &#8811;
         </button>
     );
+
+    useEffect(() => {
+        if (progress1 == 1) {
+            document.getElementById('whatisHeteroskedasticity')
+                .scrollIntoView({behavior: 'smooth'});
+        }
+    }, [progress1]);
+
+    useEffect(() => {
+        if (progress2 == 1) {
+            document.getElementById('whatIsMulticollinearity')
+                .scrollIntoView({behavior: 'smooth'});
+        }
+    }, [progress2]);
 
     const heteroSkadasticSteps = [
         {
@@ -118,7 +131,8 @@ export const SimulationThree = () => {
         {
             headerId: 'whatisHeteroskedasticity',
             title: 'What is Heteroskedasticity?',
-            content: (
+            content: (progress1 > 0 ?
+                mkReviewBtn(0, setProgress1):
                 <WhatIsHeteroskedasticity
                     heteroskedasticity={heteroskedasticity}
                     setHeteroskedasticity={setHeteroskedasticity}
@@ -132,38 +146,30 @@ export const SimulationThree = () => {
                 />
             )
         },
-        ...(useRealDataSked
-            ? [
-                {
-                    headerId: 'realDataSet',
-                    title: 'Real dataset problem',
-                    content: (
-                        <SkedasticityReal
-                            slope={slope}
-                            intercept={intercept}
-                            standardError={standardError}
-                            robustStandardError={robustStandardError}
-                            useRealDataSked={useRealDataSked}
-                            setUseRealDataSked={setUseRealDataSked}
-                            setGoToTakeAway={setGoToTakeAway}
-                            goToTakeaway={gotToTakeAway}
-                        />
-                    )
-                }
-            ]
-            : []),
-
-        ...(gotToTakeAway
-            ? [
-                {
-                    headerId: 'takeAway1',
-                    title: 'Takeaway questions',
-                    content: (
-                        <HeteroskedTakeaway />
-                    )
-                }
-            ] : [])
     ];
+
+    if (progress1 > 0) {
+        heteroSkadasticSteps.push({
+            headerId: 'heteroskedasticityRealData',
+            title: 'Real dataset problem',
+            content: (progress1 > 1 ?
+                mkReviewBtn(1, setProgress1):
+                <SkedasticityReal
+                    setProgress={setProgress1}
+                />
+            )
+        });
+    }
+
+    if(progress1 > 1) {
+        heteroSkadasticSteps.push({
+            headerId: 'takeAway1',
+            title: 'Takeaway questions',
+            content: (
+                <HeteroskedTakeaway />
+            )
+        });
+    }
 
     const multicollinearitySteps = [
         {
@@ -232,7 +238,7 @@ export const SimulationThree = () => {
             headerId: 'whatIsMulticollinearity',
             title: 'What is Multicollinearity?',
             content: (progress2 > 0 ?
-                mkReviewBtn(0):
+                mkReviewBtn(0, setProgress2):
                 <>
                     <WhatIsMulticollinearity
                         controls={controls}
@@ -248,13 +254,11 @@ export const SimulationThree = () => {
             headerId: 'multicollinearityRealData',
             title: 'Real dataset problem',
             content: (progress2 > 1 ?
-                mkReviewBtn(1):
-                <>
-                    <MulticollinearityApply
-                        controls={controls2}
-                        handleControls={handleControls2}
-                        handleProgress={handleProgress} />
-                </>
+                mkReviewBtn(1, setProgress2):
+                <MulticollinearityApply
+                    controls={controls2}
+                    handleControls={handleControls2}
+                    handleProgress={handleProgress} />
             )
         });
     }
