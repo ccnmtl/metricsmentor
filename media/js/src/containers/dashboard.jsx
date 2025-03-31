@@ -82,11 +82,14 @@ export const Dashboard = ({ isSuperUser, isFaculty}) => {
                                 </span>
                             </h2>
                             <p>
-                                Lorem ipsum dolor sit amet consectetur
-                                adipisicing elit. Soluta quae cupiditate aut
-                                 nostrum, dolore harum veritatis sapiente enim
-                                 dignissimos praesentium, esse in modi nobis
-                                 mollitia? Id enim sequi quos harum.
+                                This simulation explores two common issues that
+                                affect the standard error of the sample
+                                slope, <Katex tex={'{SE(\\hat{\\beta_1})}'}
+                                    className="katex-inline" />, in regression
+                                analysis: <i>Heteroskedasticity</i> and
+                                <i> Multicollinearity</i>. It demonstrates
+                                how to identify and understand their impact on
+                                the standard error of the sample slope.
                             </p>
 
                             <Link to={`/course/${courseId}/simulations/3/`}

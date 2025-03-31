@@ -5,7 +5,7 @@ export const HeteroskedasticitySlider = ({
     heteroskedasticity, setHeteroskedasticity }) => (
     <div className="slider-end-to-end__box mt-4">
         <label htmlFor="skedasticityscale" className="h2 form-label">
-            Degree of skedasticity
+            Degree of skedasticity:
         </label>
         <p>
             Move the slider to adjust the level of heteroskedasticity in
