@@ -43,11 +43,13 @@ export const SimulationThree = () => {
     const handleProgress = (val) => setProgress2(val);
 
     const mkReviewBtn = (val, setProgress) => (
-        <button className="btn btn-sm btn-success float-end"
-            onClick={() => setProgress(val)}
-        >
-            Review &#8811;
-        </button>
+        <div className="simulation__step-prompt">
+            <button className="btn btn-sm btn-success"
+                onClick={() => setProgress(val)}
+            >
+                Review &#8811;
+            </button>
+        </div>
     );
 
     useEffect(() => {

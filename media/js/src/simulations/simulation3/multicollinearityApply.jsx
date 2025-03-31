@@ -79,18 +79,18 @@ export const MulticollinearityApply = ({
             </strong>
         </p>
         <p> Placeholder for instruction text or explanation</p>
-        <table className="table table-bordered">
+        <table className="table table-bordered mb-5 mt-3">
             <thead>
                 <tr>
-                    <th className="colheader">--</th>
-                    <th className="colheader">{inlineKatex('x_1')} only</th>
-                    <th className="colheader">With {inlineKatex('x_2')}</th>
-                    <th className="colheader">With {inlineKatex('x_3')}</th>
+                    <td>&nbsp;</td>
+                    <th scope="col">{inlineKatex('x_1')} only</th>
+                    <th scope="col">With {inlineKatex('x_2')}</th>
+                    <th scope="col">With {inlineKatex('x_3')}</th>
                 </tr>
             </thead>
             <tbody>
                 <tr>
-                    <th className="rowheader text-nowrap">--</th>
+                    <th scope="row"></th>
                     <td></td>
                     <td>
                         <Katex tex={`corr(x_1, x_2): ${DATA.x2.corr_x1}`} />
@@ -100,7 +100,7 @@ export const MulticollinearityApply = ({
                     </td>
                 </tr>
                 <tr>
-                    <th className="rowheader text-nowrap">
+                    <th scope="row">
                         <Katex tex='SE(\hat{\beta_1})' /></th>
                     <td><Katex tex={`${DATA.x1.stderr}`} /></td>
                     <td><Katex tex={`${DATA.x2.stderr}`} /></td>
@@ -118,19 +118,21 @@ export const MulticollinearityApply = ({
             hypothesis testing.
         </p>
         <p>For example:</p>
-        <p>For {inlineKatex('H_0:\\beta_1=0; H_1:\\beta_1 \\ne 0; a=0.005')}</p>
-        <table className="table table-bordered">
+        {inlineKatex(
+            // eslint-disable-next-line max-len
+            'H_0: \\beta_1 = 0; \\quad H_1: \\beta_1 \\neq 0; \\quad \\alpha = 0.05')}
+        <table className="table table-bordered mb-5 mt-3">
             <thead>
                 <tr>
-                    <th className="colheader">--</th>
-                    <th className="colheader">{inlineKatex('x_1')} only</th>
-                    <th className="colheader">With {inlineKatex('x_2')}</th>
-                    <th className="colheader">With {inlineKatex('x_3')}</th>
+                    <td>&nbsp;</td>
+                    <th scope="col">{inlineKatex('x_1')} only</th>
+                    <th scope="col">With {inlineKatex('x_2')}</th>
+                    <th scope="col">With {inlineKatex('x_3')}</th>
                 </tr>
             </thead>
             <tbody>
                 <tr>
-                    <th className="rowheader text-nowrap">--</th>
+                    <th scope="row"></th>
                     <td></td>
                     <td>
                         <Katex tex={`corr(x_1, x_2): ${DATA.x2.corr_x1}`} />
@@ -140,28 +142,28 @@ export const MulticollinearityApply = ({
                     </td>
                 </tr>
                 <tr>
-                    <th className="rowheader text-nowrap">
+                    <th scope="row">
                         <Katex tex='SE(\hat{\beta_1})' /></th>
-                    <td><Katex tex={`${DATA.x1.stderr}`} /></td>
-                    <td><Katex tex={`${DATA.x2.stderr}`} /></td>
-                    <td><Katex tex={`${DATA.x3.stderr}`} /></td>
+                    <td><Katex tex={`${DATA.x1.stderr.toFixed(4)}`} /></td>
+                    <td><Katex tex={`${DATA.x2.stderr.toFixed(4)}`} /></td>
+                    <td><Katex tex={`${DATA.x3.stderr.toFixed(4)}`} /></td>
                 </tr>
                 <tr>
-                    <th className="rowheader text-nowrap">
+                    <th scope="row">
                         <Katex tex='t' /></th>
                     <td><Katex tex={`${DATA.x1.t}`} /></td>
                     <td><Katex tex={`${DATA.x2.t}`} /></td>
                     <td><Katex tex={`${DATA.x3.t}`} /></td>
                 </tr>
                 <tr>
-                    <th className="rowheader text-nowrap">
+                    <th scope="row">
                         <Katex tex='p-value' /></th>
                     <td><Katex tex={`${DATA.x1.pvalue}`} /></td>
                     <td><Katex tex={`${DATA.x2.pvalue}`} /></td>
                     <td><Katex tex={`${DATA.x3.pvalue}`} /></td>
                 </tr>
                 <tr>
-                    <th className="rowheader text-nowrap">
+                    <th scope="row">
                         <Katex tex='CI' /></th>
                     <td>
                         <Katex tex={`[${DATA.x1.ci[0]},`} />
@@ -177,7 +179,7 @@ export const MulticollinearityApply = ({
                     </td>
                 </tr>
                 <tr>
-                    <th className="rowheader text-nowrap">
+                    <th scope="row">
                         Hypothesis test</th>
                     <td>Reject</td>
                     <td>Reject</td>
@@ -186,11 +188,13 @@ export const MulticollinearityApply = ({
             </tbody>
         </table>
         <p>Placeholder fo explanation of what&apos;s going on. </p>
-        <button className="btn btn-sm btn-success float-end"
-            onClick={() => handleProgress(2)}
-        >
-            Continue &#8811;
-        </button>
+        <div className="simulation__step-prompt">
+            <button className="btn btn-sm btn-success"
+                onClick={() => handleProgress(2)}
+            >
+                Continue &raquo;
+            </button>
+        </div>
     </>;
 };
 
