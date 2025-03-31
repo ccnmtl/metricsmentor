@@ -58,20 +58,28 @@ export const MulticollinearityApply = ({
             </strong>
         </p>
         <div className="container">
-            {[
-                <>{inlineKatex('x_1')} only:&emsp;{inlineKatex(
-                    '\\hat{y} = \\hat{\\beta_0} + \\hat{\\beta_1}x_1')}</>,
-                <>With {inlineKatex('x_2')}:&emsp;{inlineKatex(
-                    '\\hat{y} = \\hat{\\beta_0} + \\hat{\\beta_1}x_1 + ' +
-                    '\\hat{\\beta_2}x_2')}</>,
-                <>With {inlineKatex('x_3')}:&emsp;{inlineKatex(
-                    '\\hat{y} = \\hat{\\beta_0} + \\hat{\\beta_1}x_1 + ' +
-                    '\\hat{\\beta_3}x_3')}</>,
-            ].map((string, i) =>
-                <p key={i}>
-                    {string}
-                </p>
-            )}
+            <p>{inlineKatex('x_1')} only:&emsp;{inlineKatex(`\\hat{y} = 
+                    ${DATA.x1.intercept} + ${DATA.x1.slope}x_1`)}</p>
+            {controls[0] ?
+                <p>With {inlineKatex('x_2')}:&emsp;{inlineKatex(`\\hat{y} = 
+                    ${DATA.x2.intercept} 
+                    ${DATA.x2.slope_x1 < 0 ? '-' : '+'} 
+                    ${Math.abs(DATA.x2.slope_x1)}x_1 
+                    ${DATA.x2.slope_x2 < 0 ? '-' : '+'} 
+                    ${Math.abs(DATA.x2.slope_x2)}x_2`)}</p>
+                :
+                null
+            }
+            {controls[1] ?
+                <p>With {inlineKatex('x_3')}:&emsp;{inlineKatex(`\\hat{y} = 
+                    ${DATA.x3.intercept} 
+                    ${DATA.x3.slope_x1 < 0 ? '-' : '+'} 
+                    ${Math.abs(DATA.x3.slope_x1)}x_1 
+                    ${DATA.x3.slope_x2 < 0 ? '-' : '+'} 
+                    ${Math.abs(DATA.x3.slope_x2)}x_2`)}</p>
+                :
+                null
+            }
         </div>
         <p>
             <strong>
