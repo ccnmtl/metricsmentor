@@ -1,7 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { inlineKatex, STATIC_URL } from '../../utils/utils';
+import { inlineKatex} from '../../utils/utils';
 import { Katex } from '../../utils/katexComponent';
+import { PromptBlock } from '../../PromptBlock';
 import DATA from './multicollinearityGeneratedData.json';
 
 
@@ -10,36 +11,51 @@ export const WhatIsMulticollinearity = ({
 }) => {
     return <>
         <p>
-            This segment is to teach users how about
-            Multicollinearity. This space is for instructions, but
-            what do we do about theory? Lorem ipsum
+            Let&lsquo;s now learn to identify multicollinearity in a dataset
+            and then examine how this leads to
+            imprecise {inlineKatex('SE(\\hat{\\beta_1})')}, and subsequently
+            incorrect hypothesis testing results.
         </p>
+        <PromptBlock
+            text="But first, take a moment to familiarize yourself with
+                the definition of multicollinearity; it&rsquo;ll help
+                as you continue with this exercise." />
         <button
             className="btn btn-sm btn-primary"
             data-bs-toggle="modal"
-            data-bs-target="#simulationThreeGlossary">
-            Glossary
+            data-bs-target="#MulticollinearityGlossary">
+            Definition: Multicollinearity
         </button>
+        <h3 className="mt-4">
+            High correlation effects
+            on {inlineKatex('SE(\\hat{\\beta_1})')} values
+        </h3>
         <p>
-            Instructions for this step. Guide user with a narrative, lead them
-            to what they need to pay attention to when turning on/off each
-            variable.
+            Let&lsquo;s examine the correlations of independent variables and
+            see how they affect {inlineKatex('SE(\\hat{\\beta_1})')} values,
+            the related component values, and the hypothesis test
+            results.
+            Here, we&lsquo;re using the robust formula to calculate the
+            standard errors.
         </p>
-        <div className="prompt-block">
-            <div className="prompt-gfx">
-                <img src={`${STATIC_URL}/img/icon-bell.svg`}
-                    className="prompt-img"
-                    alt="Reminder:" />
-            </div>
-            <p className="mb-2">
-            Tip on what to do and pay attention to. Yadda yadda yadda.
-            </p>
-        </div>
-        <p>
-            <strong>
-                Choose one control variable on plot (need better header):
-            </strong>
-        </p>
+        <PromptBlock
+            text={
+                <>
+                    <ul className="ps-3 mb-3">
+                        <li>Add one variable at a time to the regression
+                            model</li>
+                        <li>Observe the resulting regression line on the
+                            graph and compare it to the original</li>
+                        <li>Compare the correlation coefficients of the
+                            independent variables</li>
+                        <li>Contrast the resulting
+                            {inlineKatex('SE(\\hat{\\beta_1})~')} values</li>
+                        <li>Contrast the related component values, and
+                            the hypothesis test results.</li>
+                    </ul>
+                </>
+            }
+        />
         <div className="dataset-variable-item ps-4">
             {inlineKatex('x_1')}
         </div>
@@ -59,11 +75,9 @@ export const WhatIsMulticollinearity = ({
                 />
             </div>
         )}
-        <p className='mt-4'>
-            <strong>
-                Regression equation:
-            </strong>
-        </p>
+        <h4 className="mt-4">
+            Regression line equations:
+        </h4>
         <div className="container">
             <p>{inlineKatex('x_1')} only:&emsp;{inlineKatex(`\\hat{y} = 
                     ${DATA.x1.intercept} + ${DATA.x1.slope}x_1`)}</p>
@@ -88,13 +102,19 @@ export const WhatIsMulticollinearity = ({
                 null
             }
         </div>
-        <p>
-            <strong>
-                Multicollinearity effect on values:
-            </strong>
-        </p>
-        <p> Placeholder for instruction text or explanation</p>
-        <table className="table table-bordered mb-5 mt-3">
+        <div className="mt-5 d-flex">
+            <div className="h4 my-0 me-2">
+                Hypothesis test:
+            </div>
+            <Katex
+                tex={`
+                    H_0: \\beta_1 = 0; ~ 
+                    H_1: \\beta_1 \\neq 0; ~ 
+                    \\alpha = 0.05
+                `}
+            />
+        </div>
+        <table className="table table-bordered mb-4 mt-3">
             <thead>
                 <tr>
                     <td>&nbsp;</td>
@@ -105,50 +125,8 @@ export const WhatIsMulticollinearity = ({
             </thead>
             <tbody>
                 <tr>
-                    <th scope="row">
-                    </th>
-                    <td></td>
-                    <td>
-                        <Katex tex={`corr(x_1, x_2): ${DATA.x2.corr_x1}`} />
-                    </td>
-                    <td>
-                        <Katex tex={`corr(x_1, x_3): ${DATA.x3.corr_x1}`} />
-                    </td>
-                </tr>
-                <tr>
-                    <th scope="row">
-                        <Katex tex='SE(\hat{\beta_1})' />
-                    </th>
-                    <td><Katex tex={`${DATA.x1.stderr}`} /></td>
-                    <td><Katex tex={`${DATA.x2.stderr}`} /></td>
-                    <td><Katex tex={`${DATA.x3.stderr}`} /></td>
-                </tr>
-            </tbody>
-        </table>
-        <p>
-            <strong>
-                Multicollinearity effect on hypothesis testing:
-            </strong>
-        </p>
-        <p> Here is the explanation of how Multicollinearity can affect
-            hypothesis testing.</p>
-        <p>For example:</p>
-        {inlineKatex(
-            // eslint-disable-next-line max-len
-            'H_0: \\beta_1 = 0; \\quad H_1: \\beta_1 \\neq 0; \\quad \\alpha = 0.05')}
-        <table className="table table-bordered mb-5 mt-3">
-            <thead>
-                <tr>
                     <td>&nbsp;</td>
-                    <th scope="col">{inlineKatex('x_1')} only</th>
-                    <th scope="col">With {inlineKatex('x_2')}</th>
-                    <th scope="col">With {inlineKatex('x_3')}</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <th scope="row"></th>
-                    <td></td>
+                    <td>&nbsp;</td>
                     <td>
                         <Katex tex={`corr(x_1, x_2): ${DATA.x2.corr_x1}`} />
                     </td>
@@ -201,16 +179,32 @@ export const WhatIsMulticollinearity = ({
                         Hypothesis test</th>
                     <td>Reject</td>
                     <td>Reject</td>
-                    <td>Reject</td>
+                    <td>Fail to reject</td>
                 </tr>
             </tbody>
         </table>
-        <p>Placeholder fo explanation of what&apos;s going on. </p>
+        <div className="text-end">
+            <button
+                className="btn btn-sm btn-primary mb-3"
+                data-bs-toggle="modal"
+                data-bs-target="#simulationThreeGlossary"
+            >
+                Glossary
+            </button>
+        </div>
+        <p>
+        As you&rsquo;ve seen
+        here, {inlineKatex('\\text{corr}(x_1,x_3)')} is high, and this
+        indicates the presence of multicollinearity, and can lead to incorrect
+        conclusions in significance tests. Let&lsquo;s apply this knowledge to
+        a real-world dataset and explore the steps you can take to help you
+        make more accurate inferences.
+        </p>
         <div className="simulation__step-prompt">
             <button className="btn btn-sm btn-success"
                 onClick={() => handleProgress(1)}
             >
-                Continue &raquo;
+                Continue to Real dataset &raquo;
             </button>
         </div>
     </>;
