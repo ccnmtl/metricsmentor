@@ -291,7 +291,7 @@ export const SimulationThree = () => {
                             setIntercept={setIntercept}
                             setStandardError={setStandardError}
                             setRobustStandardError={setRobustStandardError}
-                            useRealData={useRealDataSked}
+                            useRealData={(progress1 > 0)}
                         />}
                     modals={[
                         <HeteroskedDefinition key="modal1" />,
