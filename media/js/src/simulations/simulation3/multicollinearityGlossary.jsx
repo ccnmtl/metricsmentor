@@ -1,5 +1,5 @@
 import React from 'react';
-import { inlineKatex, STATIC_URL } from '../../utils/utils';
+import { inlineKatex } from '../../utils/utils';
 import { GenericModal } from '../../Modal';
 
 export const MulticollinearityGlossary = () => {
@@ -37,7 +37,7 @@ export const MulticollinearityGlossary = () => {
                     variable {inlineKatex('x_1')} is the effect
                     of {inlineKatex('x_1')} holding
                     {inlineKatex('x_2')} constant. But
-                    if {inlineKatex('x_1')} and {inlineKatex('x_2')} are 
+                    if {inlineKatex('x_1')} and {inlineKatex('x_2')} are
                     highly correlated, there is very little variation
                     in {inlineKatex('x_1')} once {inlineKatex('x_2')} is held
                     constant. Thus, the data are pretty much uninformative
