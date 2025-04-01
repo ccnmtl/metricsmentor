@@ -174,16 +174,19 @@ export const MulticollinearityApply = ({
                     <th scope="row">
                         <Katex tex='CI' /></th>
                     <td>
-                        <Katex tex={`[${DATA.x1.ci[0]},`} />
-                        <Katex tex={`${DATA.x1.ci[1]}]`} />
+                        <Katex tex={`${DATA.x1.ci[0].toFixed(2)}`} />
+                        <Katex tex={'< \\beta_1 <'} />
+                        <Katex tex={`${DATA.x1.ci[1].toFixed(2)}`} />
                     </td>
                     <td>
-                        <Katex tex={`[${DATA.x2.ci[0]},`} />
-                        <Katex tex={`${DATA.x2.ci[1]}]`} />
+                        <Katex tex={`${DATA.x2.ci[0].toFixed(2)}`} />
+                        <Katex tex={'< \\beta_1 <'} />
+                        <Katex tex={`${DATA.x2.ci[1].toFixed(2)}`} />
                     </td>
                     <td>
-                        <Katex tex={`[${DATA.x3.ci[0]},`} />
-                        <Katex tex={`${DATA.x3.ci[1]}]`} />
+                        <Katex tex={`${DATA.x3.ci[0].toFixed(2)}`} />
+                        <Katex tex={'< \\beta_1 <'} />
+                        <Katex tex={`${DATA.x3.ci[1].toFixed(2)}`} />
                     </td>
                 </tr>
                 <tr>
