@@ -125,10 +125,18 @@ export const SkedasticityScatterPlot = ({
                 regressionLine,
             ]}
             layout={{
-                title: 'Heteroskedasticity',
+                title: (useRealData) ?
+                    'Growth and Number of Assassination Attempts in 1960'
+                    :'Heteroskedasticity',
                 showlegend: false,
-                xaxis: { title: 'X', minallowed: 0 },
-                yaxis: { title: 'Y', scaleratio: 1, minallowed: 0 },
+                xaxis: { title: (useRealData)
+                    ? 'Assassinations'
+                    : 'X',
+                minallowed: 0 },
+                yaxis: { title: (useRealData)
+                    ? 'Growth'
+                    : 'Y',
+                scaleratio: 1, minallowed: 0 },
                 dragmode: false,
             }}
             useResizeHandler={true}
