@@ -8,6 +8,9 @@ import PropTypes from 'prop-types';
 export const MulticollinearityScatterPlot = ({controls, progress}) => {
 
     const DATA = progress == 0 ? GENDATA : REALDATA;
+    const title = progress == 0 ? 'Multicollinearity': 'Profit Margins';
+    const xaxis = progress == 0 ? 'x1' : REALDATA.x1.name;
+    const yaxis = progress == 0 ? 'y' : 'Profits';
 
     const labelPos = (range) => {
         return range[1] + (range[1] - range[0]) * 0.02;
@@ -68,11 +71,11 @@ export const MulticollinearityScatterPlot = ({controls, progress}) => {
         <Plot
             data={data}
             layout={{
-                title: 'Multicollinearity',
+                title: title,
                 showlegend: false,
-                xaxis: { title: 'x_1 label', minallowed: 0},
+                xaxis: { title: xaxis, minallowed: 0},
                 yaxis: {
-                    title: 'y label',
+                    title: yaxis,
                     scaleratio: 1,
                     minallowed: 0,
                 },
