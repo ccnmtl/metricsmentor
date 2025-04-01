@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import { inlineKatex, STATIC_URL } from '../../utils/utils';
+import { inlineKatex} from '../../utils/utils';
 import { Katex } from '../../utils/katexComponent';
+import { PromptBlock } from '../../PromptBlock';
 import DATA from './multicollinearityRealData.json';
 import { Table } from '../../Table';
 
@@ -87,29 +88,54 @@ export const MulticollinearityApply = ({
 
     return <>
         <p>
-            This segment is to ask users to work on Multicollinearity problems
-            with real datasets. Instruction text goes here.
+            Let&rsquo;s apply what you&rsquo;ve learned about
+            multicollinearity using a real-world dataset.
         </p>
         <p>
-            Instructions for this step. Guide user with a narrative, lead them
-            to what they need to pay attention to when turning on/off each
-            variable.
+            This data set is from <i>Wooldridge Source: Businessweek R&amp;D
+            Scoreboard</i>, October 25, 1991. It uses a regression to explain
+            the variations in profits by research and
+            development ({inlineKatex('\\text{R\\&D}')}),
+            profit margins ({inlineKatex('\\text{Profit Margin}')}),
+            and {inlineKatex('\\text{Sales}')}. Among these variables,
+            {inlineKatex('\\text{R\\&D}')} and
+            {inlineKatex('\\text{Profit Margin}')} have a low correlation,
+            but {inlineKatex('\\text{R\\&D}')} and
+            {inlineKatex('\\text{Sales}')} have a high correlation.
         </p>
-        <div className="prompt-block">
-            <div className="prompt-gfx">
-                <img src={`${STATIC_URL}/img/icon-bell.svg`}
-                    className="prompt-img"
-                    alt="Reminder:" />
-            </div>
-            <p className="mb-2">
-            Tip on what to do and pay attention to. Yadda yadda yadda.
-            </p>
-        </div>
+        <h3 className="mt-4">
+            High correlation effects
+            on {inlineKatex('SE(\\hat{\\beta_1})')} values
+        </h3>
         <p>
-            <strong>
-                Choose one control variable on plot (need better header):
-            </strong>
+            Let&rsquo;s examine the correlations of the independent
+            variables, {inlineKatex('\\text{R\\&D}')},
+            {inlineKatex('\\text{Profit Margin}')},
+            and {inlineKatex('\\text{Sales}')} and see how they
+            affect {inlineKatex('SE(\\hat{\\beta_1})')} values,
+            the related component values, and the hypothesis test
+            results.
+            Here, we&lsquo;re using the robust formula to calculate the
+            standard errors.
         </p>
+        <PromptBlock
+            text={
+                <>
+                    <ul className="ps-3 mb-3">
+                        <li>Add one variable at a time to the regression
+                            model</li>
+                        <li>Observe the resulting regression line on the
+                            graph and compare it to the original</li>
+                        <li>Compare the correlation coefficients of the
+                            independent variables</li>
+                        <li>Contrast the resulting
+                            {inlineKatex('SE(\\hat{\\beta_1})~')} values</li>
+                        <li>Contrast the related component values, and
+                            the hypothesis test results.</li>
+                    </ul>
+                </>
+            }
+        />
         <div className="dataset-variable-item ps-4">
             {inlineKatex('x_1 \\text{(R\\&D)}')} only
         </div>
@@ -129,11 +155,9 @@ export const MulticollinearityApply = ({
                 />
             </div>
         )}
-        <p className='mt-4'>
-            <strong>
-                Regression equation:
-            </strong>
-        </p>
+        <h4 className="mt-4">
+            Regression line equations:
+        </h4>
         <div className="container">
             <p>{inlineKatex('x_1')} only:&emsp;{inlineKatex(`\\hat{y} = 
                     ${DATA.x1.intercept} + ${DATA.x1.slope}x_1`)}</p>
@@ -159,11 +183,26 @@ export const MulticollinearityApply = ({
             }
         </div>
         <p>
-            <strong>
-                Multicollinearity effect on values:
-            </strong>
+            Examine the effects of multicollinearity on hypothesis testing
+            results. The null hypothesis is as
+            follows: {inlineKatex('H_0: \\beta_1 = 0')}, which states
+            that {inlineKatex('\\text{R\\&D}')} has no impact
+            on {inlineKatex('\\text{Profits}')}. Let&lsquo;s set the
+            significance level, {inlineKatex('\\alpha = 0.05')}.
         </p>
-        <p> Placeholder for instruction text or explanation</p>
+        <div className="mt-5 d-flex">
+            <div className="h4 my-0 me-2">
+                Hypothesis test:
+            </div>
+            <Katex
+                tex={`
+                    H_0: \\beta_1 = 0; ~ 
+                    H_1: \\beta_1 \\neq 0; ~ 
+                    \\alpha = 0.05
+                `}
+            />
+        </div>
+
         <table className="table table-bordered mb-5 mt-3">
             <thead>
                 <tr>
@@ -175,50 +214,8 @@ export const MulticollinearityApply = ({
             </thead>
             <tbody>
                 <tr>
-                    <th scope="row"></th>
-                    <td></td>
-                    <td>
-                        <Katex tex={`corr(x_1, x_2): ${DATA.x2.corr_x1}`} />
-                    </td>
-                    <td>
-                        <Katex tex={`corr(x_1, x_3): ${DATA.x3.corr_x1}`} />
-                    </td>
-                </tr>
-                <tr>
-                    <th scope="row">
-                        <Katex tex='SE(\hat{\beta_1})' /></th>
-                    <td><Katex tex={`${DATA.x1.stderr}`} /></td>
-                    <td><Katex tex={`${DATA.x2.stderr}`} /></td>
-                    <td><Katex tex={`${DATA.x3.stderr}`} /></td>
-                </tr>
-            </tbody>
-        </table>
-        <p>
-            <strong>
-                Multicollinearity effect on hypothesis testing:
-            </strong>
-        </p>
-        <p>
-            Here is the explanation of how Multicollinearity can affect
-            hypothesis testing.
-        </p>
-        <p>For example:</p>
-        {inlineKatex(
-            // eslint-disable-next-line max-len
-            'H_0: \\beta_1 = 0; \\quad H_1: \\beta_1 \\neq 0; \\quad \\alpha = 0.05')}
-        <table className="table table-bordered mb-5 mt-3">
-            <thead>
-                <tr>
                     <td>&nbsp;</td>
-                    <th scope="col">{inlineKatex('x_1')} only</th>
-                    <th scope="col">With {inlineKatex('x_2')}</th>
-                    <th scope="col">With {inlineKatex('x_3')}</th>
-                </tr>
-            </thead>
-            <tbody>
-                <tr>
-                    <th scope="row"></th>
-                    <td></td>
+                    <td>&nbsp;</td>
                     <td>
                         <Katex tex={`corr(x_1, x_2): ${DATA.x2.corr_x1}`} />
                     </td>
@@ -275,8 +272,16 @@ export const MulticollinearityApply = ({
                 </tr>
             </tbody>
         </table>
-        <p>Placeholder fo explanation of what&apos;s going on. </p>
-        <p> Look at the graph. What do you think the dataset is?</p>
+        <p>
+            The high {inlineKatex('\\text{corr}(x_1,x_3)')} inflates
+            the standard error of {inlineKatex('\\hat{\\beta_1}')}, and
+            impacts the conclusions drawn from hypothesis testing:
+            failing to reject {inlineKatex('H_0')}.
+        </p>
+        <p>
+            What is the next step to account for this difference in hypothesis
+            test results?
+        </p>
         <div className="choice-list">
             {options1.map((option, index) => (
                 <div key={index} className="form-check">
@@ -313,24 +318,29 @@ export const MulticollinearityApply = ({
             id={'multiple-option1'}
             disabled={isSubmit1Disabled}
             onClick={handleSubmit1}>Submit</button>
-        <p><strong>
-            Joint Hypothesis testing to mitigate Multicollinearity:
-        </strong></p>
+
+        <h3 className="mt-4">
+            Joint hypothesis testing to mitigate multicollinearity
+        </h3>
+
         <p>
-            Here is the explanation of how to mitigate
-            Multicollinearity. Join hypothesos and using F-test
-            statistics to lookup critical value.
+            Joint hypothesis testing gives us a reason to keep both variables
+            in the regression when one is not significant due to the high
+            correlation between them. We should test these two highly
+            correlated
+            variables, {inlineKatex('x_1 \\text{(R\\&D)}')} and
+            {inlineKatex('x_3 \\text{(Sales)}')} jointly,
+            using the {inlineKatex('F')}-test, to assess the collective
+            significance of these variables.
         </p>
         <p>
-            Lorem ipsum sit amet, more text.
+            So here&lsquo;s the joint hypothesis test:
         </p>
         <p className="mb-0">
             <Katex tex={'H_0: \\beta_1 = \\beta_3 = 0;'} />
-        </p>
-        <p className="mb-0">
+            <br />
             <Katex tex={'H_1: \\text{not} \\, H_0;'} />
-        </p>
-        <p className="mb-0">
+            <br />
             <Katex tex={'\\alpha = 0.05'} />
         </p>
         <Table
@@ -354,15 +364,17 @@ export const MulticollinearityApply = ({
                 ],
             ]} />
         <p>
-            Look up the critical value that corresponds to &alpha; =
-            0.05 and compare it to F-test statistics value.
+            Look up the critical value that corresponds
+            to {inlineKatex('\\alpha = 0.05')} and compare it
+            to {inlineKatex('F5')}-test statistics value.
         </p>
         <button
-            className="btn btn-sm btn-secondary mb-3"
+            className="btn btn-sm btn-primary mb-3"
             data-bs-toggle="modal"
             data-bs-target="#criticalValModal">
-            Look up critical values &raquo;
+            Critical value table
         </button>
+        <p>What is your conclusion for this joint hypothesis testing?</p>
         <div className="choice-list">
             {options2.map((option, index) => (
                 <div key={index} className="form-check">
@@ -400,7 +412,19 @@ export const MulticollinearityApply = ({
             onClick={handleSubmit2}>
                 Submit
         </button>
-        <p>Placeholder for conclusion text to end this segment.</p>
+        <p>
+            Multicollinearity (high correlation between variables) inflates
+            the standard errors of the sample slopes, resulting in a decrease
+            in the likelihood of rejection of the null hypothesis in the
+            individual significance tests. Thus, finding population slopes
+            insignificant. However, if we intuitively believe a variable is
+            associated with the dependent variable but due to multicollinearity
+            between independent variables, it seems that the association
+            disappeared. Then, we can use joint significance tests. We can
+            test highly correlated variables jointly to show that they are
+            jointly significant. Otherwise, dropping an insignificant variable
+            from the regression may cause OVB.
+        </p>
         {isSubmit2Disabled &&
             <div className="simulation__step-prompt">
                 <button className="btn btn-sm btn-success"

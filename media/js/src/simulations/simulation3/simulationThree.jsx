@@ -13,7 +13,7 @@ import { MulticollinearityApply } from './multicollinearityApply';
 import { HeteroskedTakeaway } from './heteroskedTakeaway';
 import { MulticollinearityTakeaway } from './multicollinearityTakeaway';
 import { SimThreeGlossary } from './simThreeGlossary';
-import { CriticalValueModal } from '../simulation1/modalCV';
+import { CriticalValueModal } from './modalCV';
 
 
 export const SimulationThree = () => {
