@@ -225,7 +225,7 @@ export const WhatIsHeteroskedasticity = ({
             </table>
             <div className="text-end">
                 <button
-                    className="btn btn-sm btn-primary mb-5"
+                    className="btn btn-sm btn-primary mb-3"
                     data-bs-toggle="modal"
                     data-bs-target="#simulationThreeGlossary"
                 >
@@ -245,7 +245,7 @@ export const WhatIsHeteroskedasticity = ({
                 <button
                     className="btn btn-sm btn-success"
                     onClick={handleContinue}>
-                    Continue to Real Data &raquo;
+                    Continue to Real dataset &raquo;
                 </button>
             </div>
         </>
