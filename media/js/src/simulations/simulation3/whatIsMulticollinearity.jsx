@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { inlineKatex, STATIC_URL } from '../../utils/utils';
 import { Katex } from '../../utils/katexComponent';
+import { PromptBlock } from '../../PromptBlock';
 import DATA from './multicollinearityGeneratedData.json';
 
 
@@ -10,15 +11,20 @@ export const WhatIsMulticollinearity = ({
 }) => {
     return <>
         <p>
-            This segment is to teach users how about
-            Multicollinearity. This space is for instructions, but
-            what do we do about theory? Lorem ipsum
+            Let&lsquo;s now learn to identify multicollinearity in a dataset
+            and then examine how this leads to
+            imprecise {inlineKatex('SE(\\hat{\\beta_1})')}, and subsequently
+            incorrect hypothesis testing results.
         </p>
+        <PromptBlock
+            text="But first, take a moment to familiarize yourself with
+                the definition of multicollinearity; it&rsquo;ll help
+                as you continue with this exercise." />
         <button
             className="btn btn-sm btn-primary"
             data-bs-toggle="modal"
-            data-bs-target="#simulationThreeGlossary">
-            Glossary
+            data-bs-target="#MulticollinearityGlossary">
+            Definition: Multicollinearity
         </button>
         <p>
             Instructions for this step. Guide user with a narrative, lead them
