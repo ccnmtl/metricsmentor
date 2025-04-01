@@ -13,6 +13,8 @@ export const SkedasticityReal = ({
     const [feedback2, setFeedback2] = useState('');
     const [isSubmit1Disabled, setIsSubmit1Disabled] = useState(false);
     const [isSubmit2Disabled, setIsSubmit2Disabled] = useState(false);
+    const [isSubmitted, setIsSubmitted] = useState(false);
+    const [isSubmitted2, setIsSubmitted2] = useState(false);
 
     // eslint-disable-next-line no-unused-vars
     const { slope, p_value: pvalueStandard, t_value: tvalueStandard,
@@ -50,6 +52,7 @@ export const SkedasticityReal = ({
     const isCorrect2 = selectedOption2 === correctAnswerIndex2;
 
     const handleSubmit1 = () => {
+        setIsSubmitted(true);
         if (selectedOption1 === null) {
             setFeedback1('Please select an option before submitting.');
         } else {
@@ -69,6 +72,7 @@ export const SkedasticityReal = ({
     };
 
     const handleSubmit2 = () => {
+        setIsSubmitted2(true);
         if (selectedOption2 === null) {
             setFeedback2('Please select an option before submitting.');
         } else {
@@ -279,7 +283,7 @@ export const SkedasticityReal = ({
                 standard errors.
             </p>
 
-            {isSubmit2Disabled && (
+            {isSubmitted && isSubmitted2 && (
                 <div className="simulation__step-prompt">
                     <button
                         className="btn btn-sm btn-success"

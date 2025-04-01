@@ -16,6 +16,8 @@ export const MulticollinearityApply = ({
     const [feedback2, setFeedback2] = useState('');
     const [isSubmit1Disabled, setIsSubmit1Disabled] = useState(false);
     const [isSubmit2Disabled, setIsSubmit2Disabled] = useState(false);
+    const [isSubmitted, setIsSubmitted] = useState(false);
+    const [isSubmitted2, setIsSubmitted2] = useState(false);
 
     const options1 = [
         <>Exclude {inlineKatex('x_3')} (Sales) from the regression
@@ -43,6 +45,7 @@ export const MulticollinearityApply = ({
     const isCorrect2 = selectedOption2 === correctAnswerIndex2;
 
     const handleSubmit1 = () => {
+        setIsSubmitted(true);
         if (selectedOption1 === null) {
             setFeedback1('Please select an option before submitting.');
         } else {
@@ -66,6 +69,7 @@ export const MulticollinearityApply = ({
     };
 
     const handleSubmit2 = () => {
+        setIsSubmitted2(true);
         if (selectedOption2 === null) {
             setFeedback2('Please select an option before submitting.');
         } else {
@@ -425,7 +429,7 @@ export const MulticollinearityApply = ({
             jointly significant. Otherwise, dropping an insignificant variable
             from the regression may cause OVB.
         </p>
-        {isSubmit2Disabled &&
+        {isSubmitted && isSubmitted2 &&
             <div className="simulation__step-prompt">
                 <button className="btn btn-sm btn-success"
                     onClick={() => handleProgress(2)}
