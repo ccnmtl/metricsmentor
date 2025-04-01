@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import PropTypes from 'prop-types';
+import { inlineKatex } from '../../utils/utils';
 import { Katex } from '../../utils/katexComponent';
-import { PromptBlock } from '../../PromptBlock';
 import REGRESSIONDATA from './regressionHeterosked.json';
 
 export const SkedasticityReal = ({
@@ -85,14 +85,23 @@ export const SkedasticityReal = ({
 
     return (
         <>
-            <p> This segment is to ask users to work on Heteroskedasticity
-                problem with real data.
+            <p>
+                Let&rsquo;s apply what you&rsquo;ve learned about
+                heteroskedasticity using a real-world dataset.
             </p>
-            <PromptBlock
-                text={'There may be a prompt block here.'} />
-
+            <p>
+                This dataset uses a simple regression to estimate the growth
+                of a country using the number of assassination attempts in
+                that country. It contains data from 1960-1995 for 65 countries
+                and is from &ldquo;Finance and the Sources of Growth&rdquo;
+                <i> Journal of Financial Economics</i>, 2000, Vol. 58,
+                pp. 261- 300.
+            </p>
             <div>
-                <p> Look at the graph. What do you think the dataset is?</p>
+                <p>
+                    Look at the graph. Based on the plot, how would you
+                    describe the dataset?
+                </p>
                 <div className="choice-list">
                     {options1.map((option, index) => (
                         <div key={index} className="form-check">
@@ -129,25 +138,37 @@ export const SkedasticityReal = ({
                     disabled={isSubmit1Disabled}
                     onClick={handleSubmit1}>Submit</button>
             </div>
-            <p>
-                Narrative on explanation of the null hypothesis and
-                inpact on the outcome. Language is relevant to the
-                dataset.
+            <p className="mt-3">
+                Examine the effects of heteroskedasticity on
+                hypothesis testing results. The null hypothesis is as
+                follows: {inlineKatex('H_0: \\beta_1 = 0')}, which states that
+                GDP growth has no impact on the number of assassination
+                attempts. Let&rsquo;s set the significance
+                level, {inlineKatex('\\alpha = 0.10')}.
             </p>
             <p>
-                Narrative is important. Lorem ipsum dolor sit amet,
-                consectetur adipiscing elit. Nullam nec tincidunt
-                magna. Sed nec metus nec sapien ultricies
+                Review the values calculated using non-robust and
+                robust {inlineKatex('SE(\\hat{\\beta_1})')}
+                in the following table.
             </p>
-            <PromptBlock
-                text={'There may be a prompt block here.'} />
-
+            <div className="mt-5 d-flex">
+                <div className="h4 my-0 me-2">
+                    Hypothesis test:
+                </div>
+                <Katex
+                    tex={`
+                        H_0: \\beta_1 = 0; ~ 
+                        H_1: \\beta_1 \\neq 0; ~ 
+                        \\alpha = 0.10
+                    `}
+                />
+            </div>
             <table className="table table-bordered mb-5 mt-3">
                 <thead>
                     <tr>
                         <td>&nbsp;</td>
-                        <th scope="col">non-robust</th>
-                        <th scope="col">robust</th>
+                        <th scope="col">Non-robust</th>
+                        <th scope="col">Robust</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -179,13 +200,6 @@ export const SkedasticityReal = ({
                     </tr>
                 </tbody>
             </table>
-            <p>
-                <Katex tex={
-                // eslint-disable-next-line max-len
-                    'H_0: \\beta_1 = 0; \\quad H_1: \\beta_1 \\neq 0; \\quad \\alpha = 0.10'} />
-            </p>
-            <PromptBlock
-                text={'There may be a prompt block here.'} />
             <p>
                 Which SE would you choose?
             </p>
@@ -224,6 +238,14 @@ export const SkedasticityReal = ({
                 onClick={handleSubmit2}>
                     Submit
             </button>
+            <p className="mt-3">
+                As this real dataset example shows, our conclusion for the
+                significance test would be incorrect if we use non-robust
+                standard errors. Since this data set exhibits
+                heteroskedasticity, we must use the heteroskedasticity robust
+                standard errors.
+            </p>
+
             {isSubmit2Disabled && (
                 <div className="simulation__step-prompt">
                     <button
