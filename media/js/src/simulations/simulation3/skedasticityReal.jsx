@@ -28,9 +28,11 @@ export const SkedasticityReal = ({
     const [lowStandard, highStandard] = ciStandard;
     const [lowRobust, highRobust] = ciRobust;
 
-    const options1 = ['The data set is heteroskedastic.',
-        'The data set is homoskedastic.'];
-    const options2 = ['non-robust', 'robust'];
+    const options1 = ['The dataset exhibits heteroskedasticity.',
+        'The dataset exhibits homoskedasticity.'];
+    const options2 = [
+        { label: 'The non-robust ', math: 'SE(\\hat{\\beta_1})' },
+        { label: 'The robust ', math: 'SE(\\hat{\\beta_1})' }];
     const correctAnswerIndex1 = 0;
     const correctAnswerIndex2 = 1;
 
@@ -51,11 +53,17 @@ export const SkedasticityReal = ({
         if (selectedOption1 === null) {
             setFeedback1('Please select an option before submitting.');
         } else {
-            setIsSubmit1Disabled(true);
             if (isCorrect1) {
-                setFeedback1('Correct! The dataset is heteroskedastic.');
+                setIsSubmit1Disabled(true);
+                setFeedback1(`That's correct! The plot shows a common
+                    "fan-shape" or "cone-shaped" pattern around the regression
+                     line, indicating that the dataset exhibits
+                     heteroskedasticity.`);
             } else {
-                setFeedback1('Incorrect. The dataset is heteroskedastic.');
+                setFeedback1(`That's incorrect. The plot shows a common
+                     "fan-shaped" or "cone-shaped" pattern around the
+                     regression line, indicating that the dataset
+                     exhibits heteroskedasticity.`);
             }
         }
     };
@@ -64,11 +72,31 @@ export const SkedasticityReal = ({
         if (selectedOption2 === null) {
             setFeedback2('Please select an option before submitting.');
         } else {
-            setIsSubmit2Disabled(true);
             if (isCorrect2) {
-                setFeedback2('Correct! Robust SE is the better choice.');
+                setIsSubmit2Disabled(true);
+                setFeedback2(
+                    <span>
+                        That&apos;s the correct conclusion for the hypothesis
+                        test. The null hypothesis states that <Katex tex={
+                            '\\beta_1 = 0'} />, and zero doesn&apos;t lie
+                        within the CI range. This results in rejecting{' '}
+                        <Katex tex="H_0" />, which means the number of
+                        assassination attempts in a country is associated with
+                        GDP growth.
+                    </span>
+                );
             } else {
-                setFeedback2('Incorrect. Robust SE is the better choice.');
+                setFeedback2(
+                    <span>
+                        That&apos;s an incorrect conclusion for the
+                        hypothesis test. The null hypothesis states that
+                        <Katex tex="\\beta_1 = 0" />, and zero lies within the
+                        CI range, which means we fail to reject{' '}
+                        <Katex tex="H_0" />. This result means that the number
+                        of assassination attempts in a country is not
+                        associated with GDP growth.
+                    </span>
+                );
             }
         }
     };
@@ -111,6 +139,7 @@ export const SkedasticityReal = ({
                                 id={`option1-${index}`}
                                 name="datasetOptions1"
                                 value={option}
+                                disabled={isSubmit1Disabled}
                                 onChange={
                                     () => handleOptionSelect1(index)}
                             />
@@ -201,7 +230,9 @@ export const SkedasticityReal = ({
                 </tbody>
             </table>
             <p>
-                Which SE would you choose?
+                Based on these values, which{' '}
+                <Katex tex={'{SE(\\hat{\\beta_1})}'} /> will you
+                choose?
             </p>
             <div className="choice-list">
                 {options2.map((option, index) => (
@@ -211,12 +242,14 @@ export const SkedasticityReal = ({
                             type="radio"
                             id={`option2-${index}`}
                             name="datasetOptions2"
-                            value={option}
+                            value={option.label}
+                            disabled={isSubmit2Disabled}
                             onChange={() => handleOptionSelect2(index)}
                         />
                         <label className="form-check-label"
                             htmlFor={`option2-${index}`}>
-                            {option}
+                            {option.label}
+                            <Katex tex={option.math} />
                         </label>
                     </div>
                 ))}
