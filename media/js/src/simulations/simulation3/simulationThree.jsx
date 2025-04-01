@@ -13,6 +13,7 @@ import { MulticollinearityApply } from './multicollinearityApply';
 import { HeteroskedTakeaway } from './heteroskedTakeaway';
 import { MulticollinearityTakeaway } from './multicollinearityTakeaway';
 import { SimThreeGlossary } from './simThreeGlossary';
+import { CriticalValueModal } from '../simulation1/modalCV';
 
 
 export const SimulationThree = () => {
@@ -306,7 +307,8 @@ export const SimulationThree = () => {
                             progress={progress2} />}
                     modals={[
                         <MulticollinearityGlossary key="modal1" />,
-                        <SimThreeGlossary key="modal2" />]}
+                        <SimThreeGlossary key="modal2" />,
+                        <CriticalValueModal key="modal3" />]}
                 />
             )}
         </>

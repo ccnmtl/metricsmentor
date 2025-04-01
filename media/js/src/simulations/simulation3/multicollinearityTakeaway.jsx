@@ -1,12 +1,13 @@
+import PropTypes from 'prop-types';
 import React, { useState } from 'react';
 import { TakeawayQuestion } from '../../TakeawayQuestion';
 
-export const MulticollinearityTakeaway = () => {
+export const MulticollinearityTakeaway = ({handleProgress}) => {
     const [visibleIndex, setVisibleIndex] = useState(0);
 
     const questions = [
         {
-            questionId: 4,
+            questionId: 6,
             questionText: 'What is <b>multicollinearity</b>?',
             choices: [
                 {
@@ -50,7 +51,7 @@ export const MulticollinearityTakeaway = () => {
             ]
         },
         {
-            questionId: 5,
+            questionId: 7,
             questionText: 'If two regressors are highly correlated in a linear'
                         + ' regression, test statistic for significance test '
                         + 'for those two coefficients tends to',
@@ -95,7 +96,7 @@ export const MulticollinearityTakeaway = () => {
             ]
         },
         {
-            questionId: 6,
+            questionId: 8,
             questionText: 'What to do if there is multicollinearity?',
             choices: [
                 {
@@ -153,6 +154,18 @@ export const MulticollinearityTakeaway = () => {
                     onCorrect={() => setVisibleIndex(i => Math.max(i, idx + 1))}
                 />
             ))}
+            {visibleIndex > 2}
+            <div className="simulation__step-prompt">
+                <button className="btn btn-sm btn-success"
+                    onClick={() => handleProgress(3)}
+                >
+                    Conclude &raquo;
+                </button>
+            </div>
         </>
     );
+};
+
+MulticollinearityTakeaway.propTypes = {
+    handleProgress: PropTypes.func.isRequired
 };
