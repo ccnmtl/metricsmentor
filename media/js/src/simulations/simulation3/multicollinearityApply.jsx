@@ -45,8 +45,8 @@ export const MulticollinearityApply = ({
         if (selectedOption1 === null) {
             setFeedback1('Please select an option before submitting.');
         } else {
-            setIsSubmit1Disabled(true);
             if (isCorrect1) {
+                setIsSubmit1Disabled(true);
                 setFeedback1('This is correct. Intuitively, we should keep ' +
                     'both R&D and sales variables. However, due to the high ' +
                     'correlation between these variables R&D slope now seems ' +
@@ -68,8 +68,8 @@ export const MulticollinearityApply = ({
         if (selectedOption2 === null) {
             setFeedback2('Please select an option before submitting.');
         } else {
-            setIsSubmit2Disabled(true);
             if (isCorrect2) {
+                setIsSubmit2Disabled(true);
                 setFeedback2(<p>This is the correct conclusion for the
                     hypothesis test. F-test value is larger that the critical
                     value for {inlineKatex('\\alpha')} = 0.05. This results in
@@ -286,6 +286,7 @@ export const MulticollinearityApply = ({
                         id={`option1-${index}`}
                         name="datasetOptions1"
                         value={option}
+                        disabled={isSubmit1Disabled}
                         onChange={
                             () => handleOptionSelect1(index)}
                     />
@@ -371,6 +372,7 @@ export const MulticollinearityApply = ({
                         id={`option2-${index}`}
                         name="datasetOptions2"
                         value={option}
+                        disabled={isSubmit2Disabled}
                         onChange={
                             () => handleOptionSelect2(index)}
                     />
