@@ -12,6 +12,7 @@ import { HeteroskedDefinition } from './heteroskedDefinition';
 import { MulticollinearityApply } from './multicollinearityApply';
 import { HeteroskedTakeaway } from './heteroskedTakeaway';
 import { MulticollinearityTakeaway } from './multicollinearityTakeaway';
+import { SimThreeGlossary } from './simThreeGlossary';
 
 
 export const SimulationThree = () => {
@@ -292,7 +293,9 @@ export const SimulationThree = () => {
                             setRobustStandardError={setRobustStandardError}
                             useRealData={useRealDataSked}
                         />}
-                    modal={<HeteroskedDefinition />}
+                    modals={[
+                        <HeteroskedDefinition key="modal1" />,
+                        <SimThreeGlossary key="modal2" />,]}
                 />
             )}
             {stage === 1 && (
@@ -301,7 +304,9 @@ export const SimulationThree = () => {
                         <MulticollinearityScatterPlot
                             controls={progress2 == 0 ? controls : controls2}
                             progress={progress2} />}
-                    modal={<MulticollinearityGlossary />}
+                    modals={[
+                        <MulticollinearityGlossary key="modal1" />,
+                        <SimThreeGlossary key="modal2" />]}
                 />
             )}
         </>

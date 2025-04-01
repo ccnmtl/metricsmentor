@@ -223,6 +223,16 @@ export const WhatIsHeteroskedasticity = ({
                     </tr>
                 </tbody>
             </table>
+            <div className="text-end">
+                <button
+                    className="btn btn-sm btn-primary mb-5"
+                    data-bs-toggle="modal"
+                    data-bs-target="#simulationThreeGlossary"
+                >
+                    Glossary
+                </button>
+            </div>
+
             <p>
                 As you&rsquo;ve seen here, failing to use the robust standard
                 errors to correct for heteroskedasticity can lead to incorrect

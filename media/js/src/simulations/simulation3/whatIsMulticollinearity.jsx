@@ -17,7 +17,7 @@ export const WhatIsMulticollinearity = ({
         <button
             className="btn btn-sm btn-primary"
             data-bs-toggle="modal"
-            data-bs-target="#MulticollinearityGlossary">
+            data-bs-target="#simulationThreeGlossary">
             Glossary
         </button>
         <p>
