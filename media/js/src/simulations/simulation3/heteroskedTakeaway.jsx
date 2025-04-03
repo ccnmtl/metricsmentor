@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
 import { TakeawayQuestion } from '../../TakeawayQuestion';
+import PropTypes from 'prop-types';
 
-export const HeteroskedTakeaway = () => {
+export const HeteroskedTakeaway = ({ submissionId }) => {
     const [visibleIndex, setVisibleIndex] = useState(0);
 
     const questions = [
@@ -149,6 +150,7 @@ export const HeteroskedTakeaway = () => {
                     questionId={q.questionId}
                     questionText={q.questionText}
                     choices={q.choices}
+                    submissionId={submissionId}
                     onCorrect={() =>
                         setVisibleIndex(i => Math.max(i, idx + 1))
                     }
@@ -156,4 +158,8 @@ export const HeteroskedTakeaway = () => {
             ))}
         </>
     );
+};
+
+HeteroskedTakeaway.propTypes = {
+    submissionId: PropTypes.number.isRequired
 };

@@ -1,10 +1,10 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 import { SkedasticityScatterPlot } from './skedasticityPlot';
 import { MulticollinearityScatterPlot } from './multicollinearityPlot';
 import { SimulationPanel } from '../../SimulationPanel';
 import { WhatIsHeteroskedasticity } from './whatIsHeteroskedasticity';
 import { SkedasticityReal } from './skedasticityReal';
-import { STATIC_URL } from '../../utils/utils';
+import { STATIC_URL, createSubmission, getCoursePk } from '../../utils/utils';
 import { Katex } from '../../utils/katexComponent';
 import { WhatIsMulticollinearity } from './whatIsMulticollinearity';
 import { MulticollinearityGlossary } from './multicollinearityGlossary';
@@ -16,8 +16,11 @@ import { SimThreeGlossary } from './simThreeGlossary';
 import { CriticalValueModal } from './modalCV';
 
 
+const coursePk = getCoursePk();
+
 export const SimulationThree = () => {
     const [stage, setStage] = useState(0);
+    const [submissionId, setSubmissionId] = useState(null);
     const [heteroskedasticity, setHeteroskedasticity] = useState(0);
     const [standardError, setStandardError] = useState(null);
     const [slope, setSlope] = useState(null);
@@ -28,6 +31,8 @@ export const SimulationThree = () => {
     const [progress2, setProgress2] = useState(0);
     const [controls, setControls] = useState([false, false]);
     const [controls2, setControls2] = useState([false, false]);
+
+    const initialized = useRef(false);
 
     const handleControls = (e) => {
         const update = [...controls];
@@ -47,26 +52,11 @@ export const SimulationThree = () => {
     const mkReviewBtn = (val, setProgress) => (
         <div className="simulation__step-prompt">
             <button className="btn btn-sm btn-success"
-                onClick={() => setProgress(val)}
-            >
+                onClick={() => setProgress(val)}>
                 Review &#8811;
             </button>
         </div>
     );
-
-    useEffect(() => {
-        if (progress1 == 1) {
-            document.getElementById('whatisHeteroskedasticity')
-                .scrollIntoView({behavior: 'smooth'});
-        }
-    }, [progress1]);
-
-    useEffect(() => {
-        if (progress2 == 1) {
-            document.getElementById('whatIsMulticollinearity')
-                .scrollIntoView({behavior: 'smooth'});
-        }
-    }, [progress2]);
 
     const heteroSkadasticSteps = [
         {
@@ -280,6 +270,31 @@ export const SimulationThree = () => {
             )
         });
     }
+
+    useEffect(() => {
+        if (progress1 == 1) {
+            document.getElementById('whatisHeteroskedasticity')
+                .scrollIntoView({behavior: 'smooth'});
+        }
+    }, [progress1]);
+
+    useEffect(() => {
+        if (progress2 == 1) {
+            document.getElementById('whatIsMulticollinearity')
+                .scrollIntoView({behavior: 'smooth'});
+        }
+    }, [progress2]);
+
+    useEffect(() => {
+        const initializeSubmission = async() => {
+            if (!initialized.current && submissionId === null) {
+                initialized.current = true;
+                const subId = await createSubmission(coursePk);
+                setSubmissionId(subId);
+            }
+        };
+        initializeSubmission();
+    }, []);
 
     return (
         <>
