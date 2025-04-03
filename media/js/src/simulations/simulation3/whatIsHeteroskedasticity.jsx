@@ -131,7 +131,7 @@ export const WhatIsHeteroskedasticity = ({
                     `}
                 />
             </div>
-            <div className="mt-3 d-flex">
+            {/* <div className="mt-3 d-flex">
                 <div className="h4 my-0 me-2">
                     Regression:
                 </div>
@@ -141,7 +141,7 @@ export const WhatIsHeteroskedasticity = ({
                         slope ? slope.toFixed(2)
                             : ''}`}
                 />
-            </div>
+            </div> */}
 
             <table className="table table-bordered mb-4 mt-3">
                 <thead>

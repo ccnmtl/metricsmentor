@@ -21,9 +21,7 @@ export const SkedasticityScatterPlot = ({
         const random = seededRandom(seed);
         let i = 0;
         while (generatedData.length < N) {
-            const x = i; // x is always positive
-            // const y = 2 * x + heteroskedasticity * (x / 10) * (
-            //     random() - 0.5) * 20;
+            const x = i;
             const baseNoise = (random() - 0.5) * 20;
             const heteroNoise = (x / 10) * (random() - 0.5) * 20;
             const y = 2 * x + heteroskedasticity * (baseNoise + heteroNoise);
@@ -47,18 +45,12 @@ export const SkedasticityScatterPlot = ({
             const { slope, intercept, stderr,
                 rvalue, stderr_robust } = response.data;
 
-            // setSlope(slope);
-            setSlope(Math.min(slope, 5));  // Cap extreme slopes
+            setSlope(slope);
             setIntercept(intercept);
             setRValue(rvalue);
-
-            // setStandardError(stderr);
-            // setRobustStandardError(stderr_robust);
-
-            setStandardError(Math.max(
-                stderr * (2 + heteroskedasticity / 3), 1));
-            setRobustStandardError(Math.max(
-                stderr_robust * (2 + heteroskedasticity / 2), 1));
+            setStandardError(stderr * (2 + heteroskedasticity / 3));
+            setRobustStandardError(stderr_robust * (
+                2 + heteroskedasticity / 2));
 
             setRegressionLine({
                 type: 'scatter',
