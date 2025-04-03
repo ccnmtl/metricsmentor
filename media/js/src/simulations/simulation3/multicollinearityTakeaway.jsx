@@ -1,13 +1,13 @@
-import PropTypes from 'prop-types';
 import React, { useState } from 'react';
 import { TakeawayQuestion } from '../../TakeawayQuestion';
+import PropTypes from 'prop-types';
 
-export const MulticollinearityTakeaway = ({handleProgress}) => {
+export const MulticollinearityTakeaway = ({ submissionId }) => {
     const [visibleIndex, setVisibleIndex] = useState(0);
 
     const questions = [
         {
-            questionId: 6,
+            questionId: 4,
             questionText: 'What is <b>multicollinearity</b>?',
             choices: [
                 {
@@ -51,7 +51,7 @@ export const MulticollinearityTakeaway = ({handleProgress}) => {
             ]
         },
         {
-            questionId: 7,
+            questionId: 5,
             questionText: 'If two regressors are highly correlated in a linear'
                         + ' regression, test statistic for significance test '
                         + 'for those two coefficients tends to',
@@ -96,7 +96,7 @@ export const MulticollinearityTakeaway = ({handleProgress}) => {
             ]
         },
         {
-            questionId: 8,
+            questionId: 6,
             questionText: 'What to do if there is multicollinearity?',
             choices: [
                 {
@@ -151,21 +151,16 @@ export const MulticollinearityTakeaway = ({handleProgress}) => {
                     questionId={q.questionId}
                     questionText={q.questionText}
                     choices={q.choices}
-                    onCorrect={() => setVisibleIndex(i => Math.max(i, idx + 1))}
+                    submissionId={submissionId}
+                    onCorrect={() =>
+                        setVisibleIndex(i => Math.max(i, idx + 1))}
+
                 />
             ))}
-            {visibleIndex > 2}
-            <div className="simulation__step-prompt">
-                <button className="btn btn-sm btn-success"
-                    onClick={() => handleProgress(3)}
-                >
-                    Conclude &raquo;
-                </button>
-            </div>
         </>
     );
 };
 
 MulticollinearityTakeaway.propTypes = {
-    handleProgress: PropTypes.func.isRequired
+    submissionId: PropTypes.string.isRequired
 };

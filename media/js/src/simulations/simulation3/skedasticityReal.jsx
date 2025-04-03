@@ -16,15 +16,9 @@ export const SkedasticityReal = ({
     const [isSubmitted, setIsSubmitted] = useState(false);
     const [isSubmitted2, setIsSubmitted2] = useState(false);
 
-    // eslint-disable-next-line no-unused-vars
-    const { slope, p_value: pvalueStandard, t_value: tvalueStandard,
-        standard_error
-    } = REGRESSIONDATA.non_robust;
 
-    const { standard_error: robust_stderr,
-        // eslint-disable-next-line no-unused-vars
-        p_value: pvalueRobust, t_value: tvalueRobust } = REGRESSIONDATA.robust;
-
+    const { standard_error } = REGRESSIONDATA.non_robust;
+    const { standard_error: robust_stderr} = REGRESSIONDATA.robust;
     const {confidence_interval: ciStandard} = REGRESSIONDATA.non_robust;
     const {confidence_interval: ciRobust} = REGRESSIONDATA.robust;
     const [lowStandard, highStandard] = ciStandard;

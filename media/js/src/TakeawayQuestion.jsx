@@ -1,11 +1,10 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
+import { saveAnswer } from './utils/utils';
 
 export const TakeawayQuestion = ({
-    questionId,
-    questionText,
-    choices,
-    onCorrect
+    questionId, questionText, choices, onCorrect, submissionId,
+
 }) => {
     const [selected, setSelected] = useState(null);
     const [submitted, setSubmitted] = useState(false);
@@ -15,10 +14,19 @@ export const TakeawayQuestion = ({
         (choice) => choice.index === selected
     );
 
-    const handleSubmit = () => {
+    const handleSubmit = async() => {
         if (!selected || locked) return;
-
         setSubmitted(true);
+
+        const isCorrect = selectedChoice.isCorrect;
+        await saveAnswer(
+            submissionId,
+            Number(questionId),
+            'takeaway',
+            selected,
+            isCorrect,
+            {}
+        );
 
         if (selectedChoice.isCorrect) {
             setLocked(true);
@@ -121,5 +129,6 @@ TakeawayQuestion.propTypes = {
             feedback: PropTypes.string.isRequired
         })
     ).isRequired,
-    onCorrect: PropTypes.func
+    onCorrect: PropTypes.func,
+    submissionId: PropTypes.number.isRequired,
 };

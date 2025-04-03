@@ -182,3 +182,88 @@ export const shuffleArray = (array) => {
     }
     return array;
 };
+
+
+/**
+ * Creates or updates a submission for a course.
+ *
+ * This function is used to either create a new submission or update an
+ * existing one for a specific course. It sends an authenticated HTTP
+ * request to the server with the necessary payload and handles the
+ * server's response.
+ *
+ * @param {number} coursePk - The primary key (ID) of the course for which the
+ * submission is being created or updated.
+ * @param {number|null} [submissionId=null] - The ID of an existing submission.
+ * If provided, the function updates the submission; otherwise, it creates a
+ * new one.
+ * @returns {Promise<number>} - A promise that resolves to the `submission_id`
+ *  of the created or updated submission.
+ * @throws {Error} - Throws an error if the request fails or the server responds
+ *  with a non-success status.
+ *
+ * @example
+ * // Create a new submission
+ * createSubmission(123)
+ *     .then((submissionId) => {
+ *         console.log('Submission created with ID:', submissionId);
+ *     })
+ *     .catch((error) => {
+ *         console.error('Failed to create submission:', error);
+ *     });
+ *
+ * @example
+ * // Update an existing submission
+ * createSubmission(123, 456)
+ *     .then((submissionId) => {
+ *         console.log('Submission updated with ID:', submissionId);
+ *     })
+ *     .catch((error) => {
+ *         console.error('Failed to update submission:', error);
+ *     });
+ */
+export const createSubmission = async(
+    coursePk, submissionId = null) => {
+    const data = {};
+
+    const payload = {
+        simulation: 3,
+        data: data,
+    };
+
+    const url = `/course/${coursePk}/api/create-sub/`;
+    const method = submissionId ? 'PUT' : 'POST';
+
+    try {
+        const response = await authedFetch(url, method, payload);
+        if (response.status === 201 || response.status === 200) {
+            const responseData = await response.json();
+            return responseData.submission_id;
+        } else {
+            throw new Error(`Error (${response.status})
+                ${response.statusText}`);
+        }
+    } catch (error) {
+        console.error('Error creating submission', error);
+        throw error;
+    }
+};
+
+/**
+ * Retrieves the primary key (ID) of the current course from the DOM.
+ *
+ * Searches for the `#react-root` element and extracts the `data-course`
+ * attribute. Returns the course ID as a number if found, or an empty string
+ * if not.
+ *
+ * @returns {number|string} - The course primary key or an empty string if
+ *  unavailable.
+ *
+ * @example
+ * const coursePk = getCoursePk();
+ * console.log(coursePk); // Output: 123 or ''
+ */
+export const getCoursePk = () => {
+    const simContainer = document.querySelector('#react-root');
+    return simContainer ? Number(simContainer.dataset.course) : '';
+};
