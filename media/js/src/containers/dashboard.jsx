@@ -96,7 +96,35 @@ export const Dashboard = ({ isSuperUser, isFaculty}) => {
 
                             <Link to={`/course/${courseId}/simulations/3/`}
                                 className="btn btn-success my-3"
-                                data-cy="sim-2-link">
+                                data-cy="sim-3-link">
+                                    Begin &raquo;
+                            </Link>
+                        </div>
+                    )}
+                    {(isSuperUser || isFaculty) && (
+                        <div className="col-lg-5 p-4 mx-0 mx-lg-3 my-3 mx-lg-0
+                                        simulation-card">
+                            <h2 className="h2-primary">
+                                <span className="h2-secondary d-block"
+                                    data-cy="sim-2">
+                                    Simulation 4</span>
+                                <span className="h2-title d-block">
+                                    {'Non-Linear Regression'}
+                                </span>
+                            </h2>
+                            <p>
+                                Lorem ipsum dolor sit amet, consectetur
+                                adipiscing elit.
+                                Donec euismod, nisl eget consectetur
+                                adipiscing, nisl nunc euismod nisi,
+                                vitae euismod nunc, quis
+                                euismod nisi euismod nunc, quis
+                                euismod nisi euismod nunc, quis
+                            </p>
+
+                            <Link to={`/course/${courseId}/simulations/4/`}
+                                className="btn btn-success my-3"
+                                data-cy="sim-4-link">
                                     Begin &raquo;
                             </Link>
                         </div>
