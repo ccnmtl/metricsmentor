@@ -2,10 +2,10 @@ import React, { useState, useEffect } from 'react';
 import { BrowserRouter as Router, Route, Routes  } from 'react-router-dom';
 import { Dashboard } from './containers/dashboard';
 import { SimulationOne} from './simulations/simulation1/simulationOne';
-import {
-    SimulationTwo
+import {SimulationTwo
 } from './simulations/simulation2/components/simulationTwo';
 import { SimulationThree } from './simulations/simulation3/simulationThree';
+import { SimulationFour } from './simulations/simulation4/simulationFour';
 
 const isSuperUser = window.MetricsMentor.currentUser.is_superuser;
 
@@ -42,6 +42,10 @@ export const App = () => {
                 {(isSuperUser || isFaculty) && (
                     <Route path='course/:courseId/simulations/3/'
                         element={<SimulationThree />} />
+                )}
+                {(isSuperUser || isFaculty) && (
+                    <Route path='course/:courseId/simulations/4/'
+                        element={<SimulationFour />} />
                 )}
             </Routes>
         </Router>
