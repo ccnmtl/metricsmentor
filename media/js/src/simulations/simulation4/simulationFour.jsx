@@ -8,6 +8,12 @@ export const SimulationFour = () => {
 
     const handleStage = (e) => setStage(parseInt(e.target.value));
 
+    // const [showRegLine, setshowRegLine] = useState(
+    //     [true, false, false, false]);
+    // const [showDatasets, setshowDatasets] = useState(
+    //     [true, false, false, false]);
+    // const [dataset, setDataset] = useState(polynomial);
+
     const polynomialSteps = [
         {
             // Simulation preamble
@@ -68,7 +74,11 @@ export const SimulationFour = () => {
             )}
             {stage === 2 && (
                 <SimulationPanel steps={polynomialSteps}
-                    graphContent={<ScatterPlot />}
+                    graphContent={<ScatterPlot
+                        // showRegLine={showRegLine}
+                        // showDatasets={showDatasets} />}
+                        showRegLine={[true, true, true, false]}
+                        showDatasets={[true, true, true, false]} />}
                     modals={[]}
                 />
             )}
