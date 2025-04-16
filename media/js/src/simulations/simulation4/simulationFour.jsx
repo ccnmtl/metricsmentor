@@ -3,6 +3,7 @@ import { SimulationPanel } from '../../SimulationPanel';
 import { STATIC_URL } from '../../utils/utils';
 import { ScatterPlot } from './polynomialGraph';
 import { WhatAreNonLinearRegressions } from './whatAreNonlinearRegs';
+import { NonlinearRegsDefinition } from './nonlinearRegModal';
 
 export const SimulationFour = () => {
     const [stage, setStage] = useState(0);
@@ -70,7 +71,7 @@ export const SimulationFour = () => {
             {stage === 0 && (
                 <SimulationPanel steps={polynomialSteps}
                     graphContent={<ScatterPlot />}
-                    modals={[]}
+                    modals={[<NonlinearRegsDefinition key="modal1" />]}
                 />
             )}
             {stage === 1 && (
