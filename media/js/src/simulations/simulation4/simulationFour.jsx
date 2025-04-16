@@ -2,6 +2,7 @@ import React, { useState} from 'react';
 import { SimulationPanel } from '../../SimulationPanel';
 import { STATIC_URL } from '../../utils/utils';
 import { ScatterPlot } from './polynomialGraph';
+import { WhatAreNonLinearRegressions } from './whatAreNonlinearRegs';
 
 export const SimulationFour = () => {
     const [stage, setStage] = useState(0);
@@ -54,7 +55,13 @@ export const SimulationFour = () => {
                     modi!
                 </p>
             )
-        }
+        },
+        {
+            headerId: 'whatarenonlinearregression',
+            title: 'What are non-linear regressions?',
+            content:
+               <WhatAreNonLinearRegressions />,
+        },
     ];
 
 
