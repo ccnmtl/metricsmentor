@@ -1,25 +1,37 @@
-import React from 'react';
+import React, { useState} from 'react';
 import { SimulationPanel } from '../../SimulationPanel';
 import { STATIC_URL } from '../../utils/utils';
 import { ScatterPlot } from './polynomialGraph';
 
 export const SimulationFour = () => {
+    const [stage, setStage] = useState(0);
 
-    const simFourSteps = [
+    const handleStage = (e) => setStage(parseInt(e.target.value));
+
+    const polynomialSteps = [
         {
             // Simulation preamble
             stepNumber: '•',
             segment: 'preamble',
             subtitle: 'Simulation 4',
-            title: 'Non-linear Regression',
+            title: 'Non-linear Regressions',
             content: (
-                <p>
+                <>
+                    <p>
                     Lorem ipsum dolor sit amet consectetur adipisicing elit
                     Mollitia doloremque iure explicabo quis asperiores
                     natus. Inventore laborum tempore, molestias expedita
                     nemo nostrum dicta vel eum autem laboriosam ad ipsa
                     modi!
-                </p>
+                    </p>
+                    {['Polynomials', 'Logarithms', 'Interactions'].map(
+                        (label, index) => (
+                            <button onClick={handleStage} key={index}
+                                value={index} className={'btn btn-primary m-1'}
+                                disabled={stage===index}>
+                                {label}
+                            </button>))}
+                </>
             )
         },
         {
@@ -42,10 +54,24 @@ export const SimulationFour = () => {
 
     return (
         <>
-            <SimulationPanel steps={simFourSteps}
-                graphContent={<ScatterPlot />}
-                modals={[]}
-            />
+            {stage === 0 && (
+                <SimulationPanel steps={polynomialSteps}
+                    graphContent={<ScatterPlot />}
+                    modals={[]}
+                />
+            )}
+            {stage === 1 && (
+                <SimulationPanel steps={polynomialSteps}
+                    graphContent={<ScatterPlot />}
+                    modals={[]}
+                />
+            )}
+            {stage === 2 && (
+                <SimulationPanel steps={polynomialSteps}
+                    graphContent={<ScatterPlot />}
+                    modals={[]}
+                />
+            )}
         </>
     );
 };
