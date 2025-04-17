@@ -4,9 +4,10 @@ import Plot from 'react-plotly.js';
 import dataset from './polynomial.json';
 
 
-export const ScatterPlot = ({
+export const PolynomialGraph = ({
     showDatasets, showRegLine, mysteryRegLine
 }) => {
+
     const generatePlotData = (i, mysteryRegLine=null) => {
         const index = dataset['index'];
         const data = dataset[index[i]];
@@ -59,14 +60,13 @@ export const ScatterPlot = ({
                 xaxis: { title: 'X' },
                 yaxis: { title: 'Y' },
                 legend: { orientation: 'h', xanchor: 'center', x: 0.5, y: 1.18 }
-            }
-            }
+            }}
             config={{ responsive: true }}
         />
     );
 };
 
-ScatterPlot.propTypes = {
+PolynomialGraph.propTypes = {
     mysteryRegLine: PropTypes.string,
     showRegLine: PropTypes.arrayOf(PropTypes.bool).isRequired,
     showDatasets: PropTypes.arrayOf(PropTypes.bool).isRequired
