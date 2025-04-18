@@ -58,36 +58,38 @@ export const SimulationThree = () => {
         </div>
     );
 
+    const preambleStep = {
+        // Simulation preamble
+        stepNumber: '•',
+        segment: 'preamble',
+        subtitle: 'Simulation 3',
+        title: 'Standard Errors Problems: ' +
+            'Heteroskedasticity and Multicollinearity',
+        content: (
+            <>
+                <p>
+                    This simulation explores two common issues that affect
+                    the standard error of the sample
+                    slope, <Katex tex={'{SE(\\hat{\\beta_1})}'}
+                        className="katex-inline" />, in regression
+                    analysis: <i>Heteroskedasticity</i> and
+                    <i> Multicollinearity</i>. It demonstrates how to
+                    identify and understand their impact on the standard
+                    error of the sample slope.
+                </p>
+                {['Heteroskedasticity', 'Multicollinearity'].map(
+                    (label, index) => (
+                        <button onClick={handleStage} key={index}
+                            value={index} className={'btn btn-primary m-1'}
+                            disabled={stage===index}>
+                            {label}
+                        </button>))}
+            </>
+        )
+    };
+
     const heteroSkadasticSteps = [
-        {
-            // Simulation preamble
-            stepNumber: '•',
-            segment: 'preamble',
-            subtitle: 'Simulation 3',
-            title: 'Standard Errors Problems: ' +
-                'Heteroskedasticity and Multicollinearity',
-            content: (
-                <>
-                    <p>
-                        This simulation explores two common issues that affect
-                        the standard error of the sample
-                        slope, <Katex tex={'{SE(\\hat{\\beta_1})}'}
-                            className="katex-inline" />, in regression
-                        analysis: <i>Heteroskedasticity</i> and
-                        <i> Multicollinearity</i>. It demonstrates how to
-                        identify and understand their impact on the standard
-                        error of the sample slope.
-                    </p>
-                    {['Heteroskedasticity', 'Multicollinearity'].map(
-                        (label, index) => (
-                            <button onClick={handleStage} key={index}
-                                value={index} className={'btn btn-primary m-1'}
-                                disabled={stage===index}>
-                                {label}
-                            </button>))}
-                </>
-            )
-        },
+        preambleStep,
         {
             // Learning goals
             icon: `${STATIC_URL}/img/icon-goal.svg`,
@@ -168,35 +170,7 @@ export const SimulationThree = () => {
     }
 
     const multicollinearitySteps = [
-        {
-            // Simulation preamble
-            stepNumber: '•',
-            segment: 'preamble',
-            subtitle: 'Simulation 3',
-            title: 'Standard Errors Problems: ' +
-                'Heteroskedasticity and Multicollinearity',
-            content: (
-                <>
-                    <p>
-                        This simulation explores two common issues that affect
-                        the standard error of the sample
-                        slope, <Katex tex={'{SE(\\hat{\\beta_1})}'}
-                            className="katex-inline" />, in regression
-                        analysis: <i>Heteroskedasticity</i> and
-                        <i> Multicollinearity</i>. It demonstrates how to
-                        identify and understand their impact on the standard
-                        error of the sample slope.
-                    </p>
-                    {['Heteroskedasticity', 'Multicollinearity'].map(
-                        (label, index) => (
-                            <button onClick={handleStage} key={index}
-                                value={index} className={'btn btn-primary m-1'}
-                                disabled={stage===index}>
-                                {label}
-                            </button>))}
-                </>
-            )
-        },
+        preambleStep,
         {
             // Learning goals
             icon: `${STATIC_URL}/img/icon-goal.svg`,
