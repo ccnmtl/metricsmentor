@@ -9,13 +9,16 @@ import { NonlinearRegsDefinition } from './nonlinearRegModal';
 export const SimulationFour = () => {
 
     const [stage, setStage] = useState(0);
-    const handleStage = (e) => setStage(parseInt(e.target.value));
+    const [showRegLine, setshowRegLine] = useState(
+        [false, false, false, false]);
+    const [showDatasets, setshowDatasets] = useState(
+        [true, false, false, false]);
     // Each index tracks the state for a different module
     // ['Polynomials', 'Logarithms', 'Interactions']
     const [progress, setProgress] = useState([0,0,0]);
 
-    // For the continue/review buttons
-    // eslint-disable-next-line no-unused-vars
+    const handleStage = (e) => setStage(parseInt(e.target.value));
+
     const handleProgress = (val) => {
         setProgress(progress.map((x,i) => i === stage ? val : x));
     };
@@ -39,28 +42,26 @@ export const SimulationFour = () => {
             )}
         </ul>
     </div>;
-    const [showRegLine, setshowRegLine] = useState(
-        [false, false, false, false]);
-    const [showDatasets, setshowDatasets] = useState(
-        [true, false, false, false]);
+
+    const preambleStep = {
+        stepNumber: '•',
+        segment: 'preamble',
+        subtitle: 'Simulation 4',
+        title: 'Non-linear Regressions',
+        content: <>
+            <p>
+            Lorem ipsum dolor sit amet consectetur adipisicing elit
+            Mollitia doloremque iure explicabo quis asperiores
+            natus. Inventore laborum tempore, molestias expedita
+            nemo nostrum dicta vel eum autem laboriosam ad ipsa
+            modi!
+            </p>
+            {mkModuleBtns()}
+        </>
+    };
 
     const polynomialSteps = [
-        {
-            stepNumber: '•',
-            segment: 'preamble',
-            subtitle: 'Simulation 4',
-            title: 'Non-linear Regressions',
-            content: <>
-                <p>
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit
-                    Mollitia doloremque iure explicabo quis asperiores
-                    natus. Inventore laborum tempore, molestias expedita
-                    nemo nostrum dicta vel eum autem laboriosam ad ipsa
-                    modi!
-                </p>
-                {mkModuleBtns()}
-            </>
-        },
+        preambleStep,
         {
             icon: `${STATIC_URL}/img/icon-goal.svg`,
             headerId: 'learningObjective',
@@ -80,14 +81,66 @@ export const SimulationFour = () => {
             headerId: 'whatarenonlinearregression',
             title: 'What are non-linear regressions?',
             content:
-               <WhatAreNonLinearRegressions
-                   setshowDatasets={setshowDatasets}
-                   setshowRegLine={setshowRegLine}
-                   showDatasets={showDatasets}
-                   showRegLine={showRegLine} />,
+            <>
+                <WhatAreNonLinearRegressions
+                    setshowDatasets={setshowDatasets}
+                    setshowRegLine={setshowRegLine}
+                    showDatasets={showDatasets}
+                    showRegLine={showRegLine} />
+                {progress[stage] < 1 ?
+                    <button
+                        className="btn btn-primary"
+                        onClick={() => handleProgress(1)}>
+                        Continue &#8811;
+                    </button>
+                    :
+                    <button
+                        className="btn btn-primary"
+                        onClick={() => handleProgress(0)}>
+                        Review &#8811;
+                    </button>
+                }
+            </>
         },
     ];
 
+    const logarithmSteps = [
+        preambleStep,
+        {
+            icon: `${STATIC_URL}/img/icon-goal.svg`,
+            headerId: 'learningObjectiveLogs',
+            title: 'Learning objectives: Logarithms',
+            content: <>
+                <p>
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit
+                    Mollitia doloremque iure explicabo quis asperiores
+                    natus. Inventore laborum tempore, molestias expedita
+                    nemo nostrum dicta vel eum autem laboriosam ad ipsa
+                    modi!
+                </p>
+                {mkProgressBar()}
+            </>
+        },
+    ];
+
+    const interactionSteps = [
+        preambleStep,
+        {
+            icon: `${STATIC_URL}/img/icon-goal.svg`,
+            headerId: 'learningObjectiveInteractions',
+            title: 'Learning objectives: Interactions',
+            content: <>
+                <p>
+                    Lorem ipsum dolor sit amet consectetur adipisicing elit
+                    Mollitia doloremque iure explicabo quis asperiores
+                    natus. Inventore laborum tempore, molestias expedita
+                    nemo nostrum dicta vel eum autem laboriosam ad ipsa
+                    modi!
+                </p>
+                {mkProgressBar()}
+            </>
+        },
+    ];
 
     return (
         <>
@@ -100,13 +153,13 @@ export const SimulationFour = () => {
                 />
             )}
             {stage === 1 && (
-                <SimulationPanel steps={polynomialSteps}
+                <SimulationPanel steps={logarithmSteps}
                     graphContent={<PolynomialGraph />}
                     modals={[]}
                 />
             )}
             {stage === 2 && (
-                <SimulationPanel steps={polynomialSteps}
+                <SimulationPanel steps={interactionSteps}
                     graphContent={<PolynomialGraph />}
                     modals={[]}
                 />

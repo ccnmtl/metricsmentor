@@ -23,7 +23,7 @@ export const PolynomialGraph = ({
             marker: {
                 color: data['fillcolor'],
                 line: { width: 1, color: `${data['bordercolor']}` },
-                size: 12,
+                size: 10,
                 symbol: data['symbol']
             },
             name: index[i]
