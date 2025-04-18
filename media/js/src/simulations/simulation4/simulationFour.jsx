@@ -1,18 +1,19 @@
 import React, { useState} from 'react';
 import { SimulationPanel } from '../../SimulationPanel';
 import { STATIC_URL } from '../../utils/utils';
-import { ScatterPlot } from './polynomialGraph';
+import { PolynomialGraph } from './polynomialGraph';
+import { WhatAreNonLinearRegressions } from './whatAreNonlinearRegs';
+import { NonlinearRegsDefinition } from './nonlinearRegModal';
+
 
 export const SimulationFour = () => {
+
     const [stage, setStage] = useState(0);
-
     const handleStage = (e) => setStage(parseInt(e.target.value));
-
-    // const [showRegLine, setshowRegLine] = useState(
-    //     [true, false, false, false]);
-    // const [showDatasets, setshowDatasets] = useState(
-    //     [true, false, false, false]);
-    // const [dataset, setDataset] = useState(polynomial);
+    const [showRegLine, setshowRegLine] = useState(
+        [false, false, false, false]);
+    const [showDatasets, setshowDatasets] = useState(
+        [true, false, false, false]);
 
     const polynomialSteps = [
         {
@@ -54,7 +55,17 @@ export const SimulationFour = () => {
                     modi!
                 </p>
             )
-        }
+        },
+        {
+            headerId: 'whatarenonlinearregression',
+            title: 'What are non-linear regressions?',
+            content:
+               <WhatAreNonLinearRegressions
+                   setshowDatasets={setshowDatasets}
+                   setshowRegLine={setshowRegLine}
+                   showDatasets={showDatasets}
+                   showRegLine={showRegLine} />,
+        },
     ];
 
 
@@ -62,23 +73,21 @@ export const SimulationFour = () => {
         <>
             {stage === 0 && (
                 <SimulationPanel steps={polynomialSteps}
-                    graphContent={<ScatterPlot />}
-                    modals={[]}
+                    graphContent={<PolynomialGraph
+                        showRegLine={showRegLine}
+                        showDatasets={showDatasets} />}
+                    modals={[<NonlinearRegsDefinition key="modal1" />]}
                 />
             )}
             {stage === 1 && (
                 <SimulationPanel steps={polynomialSteps}
-                    graphContent={<ScatterPlot />}
+                    graphContent={<PolynomialGraph />}
                     modals={[]}
                 />
             )}
             {stage === 2 && (
                 <SimulationPanel steps={polynomialSteps}
-                    graphContent={<ScatterPlot
-                        // showRegLine={showRegLine}
-                        // showDatasets={showDatasets} />}
-                        showRegLine={[true, true, true, false]}
-                        showDatasets={[true, true, true, false]} />}
+                    graphContent={<PolynomialGraph />}
                     modals={[]}
                 />
             )}
