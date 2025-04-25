@@ -16,6 +16,8 @@ export const SimulationFour = () => {
     // Each index tracks the state for a different module
     // ['Polynomials', 'Logarithms', 'Interactions']
     const [progress, setProgress] = useState([0,0,0]);
+    const [mysteryRegLine, setMysteryRegLine] = useState([]);
+
 
     const handleStage = (e) => setStage(parseInt(e.target.value));
 
@@ -86,7 +88,9 @@ export const SimulationFour = () => {
                     setshowDatasets={setshowDatasets}
                     setshowRegLine={setshowRegLine}
                     showDatasets={showDatasets}
-                    showRegLine={showRegLine} />
+                    showRegLine={showRegLine}
+                    setMysteryRegLine={setMysteryRegLine}
+                    mysteryRegLine={mysteryRegLine} />
                 {progress[stage] < 1 ?
                     <button
                         className="btn btn-primary"
@@ -148,7 +152,8 @@ export const SimulationFour = () => {
                 <SimulationPanel steps={polynomialSteps}
                     graphContent={<PolynomialGraph
                         showRegLine={showRegLine}
-                        showDatasets={showDatasets} />}
+                        showDatasets={showDatasets}
+                        mysteryRegLine={mysteryRegLine} />}
                     modals={[<NonlinearRegsDefinition key="modal1" />]}
                 />
             )}
