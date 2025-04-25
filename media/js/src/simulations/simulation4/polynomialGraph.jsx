@@ -8,13 +8,13 @@ export const PolynomialGraph = ({
     showDatasets, showRegLine, mysteryRegLine
 }) => {
 
-    const generatePlotData = (i, mysteryRegLine=null) => {
+    const generatePlotData = (i) => {
         const index = dataset['index'];
-        const data = dataset[index[i]];
+        const key = index[i];
+        const data = dataset[key];
         const x = data['x'];
         const y = data['y'];
-        const line = mysteryRegLine ?
-            data[mysteryRegLine]['line'] : data['line'];
+
         const plot = [{
             x: data[x],
             y: data[y],
@@ -22,35 +22,50 @@ export const PolynomialGraph = ({
             opacity: 0.50,
             marker: {
                 color: data['fillcolor'],
-                line: { width: 1, color: `${data['bordercolor']}` },
+                line: { width: 1, color: data['bordercolor'] },
                 size: 10,
                 symbol: data['symbol']
             },
-            name: index[i]
+            name: key
         }];
-        if (showRegLine[i]) {
+
+        if (key === 'mystery' && Array.isArray(mysteryRegLine)) {
+            mysteryRegLine.forEach(reg => {
+                const regData = data[reg];
+                if (regData && regData.line) {
+                    plot.push({
+                        type: 'scatter',
+                        mode: 'line',
+                        x: regData.line.x,
+                        y: regData.line.y,
+                        marker: { color: data['bordercolor'] },
+                        name: `${reg.charAt(0).toUpperCase()
+                            + reg.slice(1)} Reg.`
+                    });
+                }
+            });
+        } else if (showRegLine[i]) {
             plot.push({
                 type: 'scatter',
                 mode: 'line',
-                x: line['x'],
-                y: line['y'],
+                x: data.line.x,
+                y: data.line.y,
                 marker: { color: data['bordercolor'] },
-                name: index[i].slice(0,3) + '. Reg.'
+                name: key.slice(0, 3) + '. Reg.'
             });
         }
+
         return plot;
     };
 
     const plotData = [];
     if (showDatasets != null) {
-        for (const [i, topic] of showDatasets.entries()) {
-            if (topic) {
-                generatePlotData(i, mysteryRegLine)
-                    .forEach(x => plotData.push(x));
+        for (const [i, data] of showDatasets.entries()) {
+            if (data) {
+                generatePlotData(i).forEach(x => plotData.push(x));
             }
         }
     }
-
     return (
         <Plot
             data={plotData}
