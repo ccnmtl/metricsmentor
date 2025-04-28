@@ -2,6 +2,8 @@ import React from 'react';
 import { PromptBlock } from '../../PromptBlock';
 import PropTypes from 'prop-types';
 import { Katex } from '../../utils/katexComponent';
+import dataset from './polynomial.json';
+
 
 export const WhatAreNonLinearRegressions = ({
     setshowRegLine, setshowDatasets, showRegLine, showDatasets,
@@ -9,13 +11,23 @@ export const WhatAreNonLinearRegressions = ({
 
     const DATASET_NAMES = ['Linear','Quadratic','Cubic'];
 
-    const formulas = [
-        '\\hat{y} = \\hat{\\beta}_0 + \\hat{\\beta}_1 X + u',
-        // eslint-disable-next-line max-len
-        '\\hat{y} = \\hat{\\beta}_0 + \\hat{\\beta}_1 X + \\hat{\\beta}_2 X^2 + u',
-        // eslint-disable-next-line max-len
-        '\\hat{y} = \\hat{\\beta}_0 + \\hat{\\beta}_1 X + \\hat{\\beta}_2 X^2 + \\hat{\\beta}_3 X^3 + u',
-    ];
+    const getFormula = (key) => {
+        const data = dataset[key];
+
+        if (key === 'linear') {
+            return `\\hat{y} = ${data.intercept.toFixed(2)} +
+            ${data.slope.toFixed(2)}X`;
+        } else if (key === 'quadratic') {
+            return `\\hat{y} = ${data.intercept.toFixed(2)} +
+            ${data.slope.toFixed(2)}X + ${data.slope2.toFixed(2)}X^2`;
+        } else if (key === 'cubic') {
+            return `\\hat{y} = ${data.intercept.toFixed(2)} +
+            ${data.slope.toFixed(2)}X + ${data.slope2.toFixed(2)}X^2 +
+            ${data.slope3.toFixed(2)}X^3`;
+        } else {
+            return '';
+        }
+    };
 
     const toggleDataset = (i) =>
         setshowDatasets(arr => {
@@ -97,7 +109,7 @@ export const WhatAreNonLinearRegressions = ({
 
                     {showDatasets[i] && (
                         <div className="ps-2 mt-1">
-                            <Katex tex={formulas[i]} />
+                            <Katex tex={getFormula(key.toLowerCase())} />
                             <label className="mt-2 d-block">
                                 <input
                                     type="checkbox"
@@ -132,40 +144,20 @@ export const WhatAreNonLinearRegressions = ({
 
                 {showDatasets[3] && (
                     <>
-                        <div className="ps-2 mt-1">
-                            <label className="mt-2 d-block">
-                                <input
-                                    type="checkbox"
-                                    className="me-2"
-                                    checked={mysteryRegLine.includes('linear')}
-                                    value={'linear'}
-                                    onChange={handleMysteryReg} />
-                                    Linear regression
-                            </label>
-                        </div>
-                        <div className="ps-2 mt-1">
-                            <label className="mt-2 d-block">
-                                <input
-                                    type="checkbox"
-                                    className="me-2"
-                                    checked={mysteryRegLine.includes(
-                                        'quadratic')}
-                                    value={'quadratic'}
-                                    onChange={handleMysteryReg} />
-                                    Quadratic regression
-                            </label>
-                        </div>
-                        <div className="ps-2 mt-1">
-                            <label className="mt-2 d-block">
-                                <input
-                                    type="checkbox"
-                                    className="me-2"
-                                    checked={mysteryRegLine.includes('cubic')}
-                                    value={'cubic'}
-                                    onChange={handleMysteryReg} />
-                                    Cubic regression
-                            </label>
-                        </div>
+                        {DATASET_NAMES.map((reg) => (
+                            <div className="ps-2 mt-1" key={reg}>
+                                <label className="mt-2 d-block">
+                                    <input
+                                        type="checkbox"
+                                        className="me-2"
+                                        checked={mysteryRegLine.includes(reg)}
+                                        value={reg}
+                                        onChange={handleMysteryReg}
+                                    />
+                                    {reg} regression
+                                </label>
+                            </div>
+                        ))}
                     </>
                 )}
             </div>
