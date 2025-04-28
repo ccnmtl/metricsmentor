@@ -144,7 +144,7 @@ export const WhatAreNonLinearRegressions = ({
 
                 {showDatasets[3] && (
                     <>
-                        {['linear', 'quadratic', 'cubic'].map((reg) => (
+                        {DATASET_NAMES.map((reg) => (
                             <div className="ps-2 mt-1" key={reg}>
                                 <label className="mt-2 d-block">
                                     <input
@@ -154,8 +154,7 @@ export const WhatAreNonLinearRegressions = ({
                                         value={reg}
                                         onChange={handleMysteryReg}
                                     />
-                                    {reg.charAt(0).toUpperCase() + reg.slice(1)}
-                                    &nbsp;regression
+                                    {reg} regression
                                 </label>
                             </div>
                         ))}
