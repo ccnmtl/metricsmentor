@@ -76,6 +76,7 @@ export const PolynomialGraph = ({
                 yaxis: { title: 'Y' },
                 legend: { orientation: 'h', xanchor: 'center', x: 0.5, y: 1.18 }
             }}
+            style={{ height: '88%', width: '100%' }}
             config={{ responsive: true }}
         />
     );
