@@ -45,7 +45,7 @@ export const MulticollinearityTakeaway = ({ submissionId }) => {
                     text: 'Multicollinearity refers to high correlation ' +
                     'between independent variables.',
                     isCorrect: true,
-                    feedback: 'Excellent!, Multicollinearity refers to high' +
+                    feedback: 'Excellent! Multicollinearity refers to high' +
                     ' correlation between any two independent variables.'
                 }
             ]

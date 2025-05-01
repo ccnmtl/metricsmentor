@@ -5,19 +5,14 @@ import { Katex } from '../../utils/katexComponent';
 import { PromptBlock } from '../../PromptBlock';
 import DATA from './multicollinearityRealData.json';
 import { Table } from '../../Table';
+import { QuizComponent } from '../../Quiz';
 
 
 export const MulticollinearityApply = ({
-    controls, handleControls, handleProgress
+    controls, handleControls, handleProgress, submissionId
 }) => {
-    const [selectedOption1, setSelectedOption1] = useState(null);
-    const [selectedOption2, setSelectedOption2] = useState(null);
-    const [feedback1, setFeedback1] = useState('');
-    const [feedback2, setFeedback2] = useState('');
-    const [isSubmit1Disabled, setIsSubmit1Disabled] = useState(false);
-    const [isSubmit2Disabled, setIsSubmit2Disabled] = useState(false);
-    const [isSubmitted, setIsSubmitted] = useState(false);
-    const [isSubmitted2, setIsSubmitted2] = useState(false);
+    const [isQuestion1Correct, setIsQuestion1Correct] = useState(false);
+    const [isQuestion2Correct, setIsQuestion2Correct] = useState(false);
 
     const options1 = [
         <>Exclude {inlineKatex('x_3')} (Sales) from the regression
@@ -25,69 +20,40 @@ export const MulticollinearityApply = ({
         <>Keep {inlineKatex('x_3')} (Sales), and conduct a joint hypothesis
             test.</>
     ];
-    const options2 = [
-        'Reject the null hypothesis',
-        'Fail to reject the null hypothesis'];
     const correctAnswerIndex1 = 1;
-    const correctAnswerIndex2 = 0;
-
-    const handleOptionSelect1 = (index) => {
-        setSelectedOption1(index);
-        setFeedback1('');
-    };
-
-    const handleOptionSelect2 = (index) => {
-        setSelectedOption2(index);
-        setFeedback2('');
-    };
-
-    const isCorrect1 = selectedOption1 === correctAnswerIndex1;
-    const isCorrect2 = selectedOption2 === correctAnswerIndex2;
-
-    const handleSubmit1 = () => {
-        setIsSubmitted(true);
-        if (selectedOption1 === null) {
-            setFeedback1('Please select an option before submitting.');
-        } else {
-            if (isCorrect1) {
-                setIsSubmit1Disabled(true);
-                setFeedback1('This is correct. Intuitively, we should keep ' +
+    const correctFeedback1 = 'This is correct. Intuitively, we should keep ' +
                     'both R&D and sales variables. However, due to the high ' +
                     'correlation between these variables R&D slope now seems ' +
                     'to be not significant. Thus, we should test both slopes ' +
-                    'jointly.');
-            } else {
-                setFeedback1(<p>This is not the correct step. Excluding
-                    {inlineKatex('x_3')} (Sales) will introduce omitted
-                    variable bias in the coefficient of R&D. Due to the high
-                    correlation between these variables R&D slope now seems to
-                    be not significant. But, we can test both slopes jointly
-                    and if they are jointly significant, we can keep both in
-                    the regression.</p>);
-            }
-        }
-    };
+                    'jointly.';
+    const incorrectFeedback1 = <p>This is not the correct step. Excluding
+        {inlineKatex('x_3')} (Sales) will introduce omitted
+        variable bias in the coefficient of R&D. Due to the high
+        correlation between these variables R&D slope now seems to
+        be not significant. But, we can test both slopes jointly
+        and if they are jointly significant, we can keep both in
+        the regression.</p>;
 
-    const handleSubmit2 = () => {
-        setIsSubmitted2(true);
-        if (selectedOption2 === null) {
-            setFeedback2('Please select an option before submitting.');
-        } else {
-            if (isCorrect2) {
-                setIsSubmit2Disabled(true);
-                setFeedback2(<p>This is the correct conclusion for the
-                    hypothesis test. F-test value is larger that the critical
-                    value for {inlineKatex('\\alpha')} = 0.05. This results in
-                    rejecting {inlineKatex('H_0')}, which means R&D has an
-                    impact on Profit, which is correct intiutively.</p>);
-            } else {
-                setFeedback2(<p>This is an incorrect result for the hypothesis
-                    test. F-test value is larger that the critical value
-                    for {inlineKatex('\\alpha')} = 0.05. This results in
-                    failing to reject {inlineKatex('H_0')}, which means R&D has
-                    no impact on Profit, which isn&apos;t correct.</p>);
-            }
-        }
+
+    const options2 = [
+        'Reject the null hypothesis',
+        'Fail to reject the null hypothesis'];
+    const correctAnswerIndex2 = 0;
+
+    const correctFeedback2 = <p>This is the correct conclusion for the
+        hypothesis test. F-test value is larger that the critical
+        value for {inlineKatex('\\alpha')} = 0.05. This results in
+        rejecting {inlineKatex('H_0')}, which means R&D has an
+        impact on Profit, which is correct intiutively.</p>;
+
+    const incorrectFeedback2 = <p>This is an incorrect result for the hypothesis
+        test. F-test value is larger that the critical value
+        for {inlineKatex('\\alpha')} = 0.05. This results in
+        failing to reject {inlineKatex('H_0')}, which means R&D has
+        no impact on Profit, which isn&apos;t correct.</p>;
+
+    const handleContinue = () => {
+        handleProgress(2);
     };
 
     return <>
@@ -123,22 +89,19 @@ export const MulticollinearityApply = ({
             standard errors.
         </p>
         <PromptBlock
-            text={
+            list={[
+                'Add one variable at a time to the regression model',
+                'Observe the resulting regression line on the graph and ' +
+                'compare it to the original',
+                'Compare the correlation coefficients of the independent ' +
+                'variables',
                 <>
-                    <ul className="ps-3 mb-3">
-                        <li>Add one variable at a time to the regression
-                            model</li>
-                        <li>Observe the resulting regression line on the
-                            graph and compare it to the original</li>
-                        <li>Compare the correlation coefficients of the
-                            independent variables</li>
-                        <li>Contrast the resulting
-                            {inlineKatex('SE(\\hat{\\beta_1})~')} values</li>
-                        <li>Contrast the related component values, and
-                            the hypothesis test results.</li>
-                    </ul>
-                </>
-            }
+            Contrast the resulting {inlineKatex('SE(\\hat{\\beta_1})~')}
+            values
+                </>,
+                'Contrast the related component values, and the hypothesis ' +
+                'test results.'
+            ]}
         />
         <div className="dataset-variable-item ps-4">
             {inlineKatex('x_1 \\text{(R\\&D)}')} only
@@ -282,46 +245,18 @@ export const MulticollinearityApply = ({
             impacts the conclusions drawn from hypothesis testing:
             failing to reject {inlineKatex('H_0')}.
         </p>
-        <p>
-            What is the next step to account for this difference in hypothesis
-            test results?
-        </p>
-        <div className="choice-list">
-            {options1.map((option, index) => (
-                <div key={index} className="form-check">
-                    <input
-                        className="form-check-input"
-                        type="radio"
-                        id={`option1-${index}`}
-                        name="datasetOptions1"
-                        value={option}
-                        disabled={isSubmit1Disabled}
-                        onChange={
-                            () => handleOptionSelect1(index)}
-                    />
-                    <label className="form-check-label"
-                        htmlFor={`option1-${index}`}>
-                        {option}
-                    </label>
-                </div>
-            ))}
-        </div>
-        {feedback1 && (
-            <div className={
-                `${isCorrect1 ? 'answer-correct-container'
-                    : 'answer-incorrect-container'}`}>
-                {isCorrect1 ? (
-                    <div className="answer-correct">&#10003;</div>
-                ):<div className="answer-incorrect flex-shrink-0
-                    align-self-start">!</div>}
-                {feedback1}
-            </div>
-        )}
-        <button
-            className="btn btn-sm btn-success my-3"
-            id={'multiple-option1'}
-            disabled={isSubmit1Disabled}
-            onClick={handleSubmit1}>Submit</button>
+        {/* Question 1: Multiple Choice */}
+        <QuizComponent
+            question="What is the next step to account for this difference in
+            hypothesis test results?"
+            options={options1}
+            correctAnswerIndex={correctAnswerIndex1}
+            correctFeedback={correctFeedback1}
+            incorrectFeedback={incorrectFeedback1}
+            submissionId={submissionId}
+            questionNumber={6}
+            setIsCorrect={setIsQuestion1Correct}
+        />
 
         <h3 className="mt-4">
             Joint hypothesis testing to mitigate multicollinearity
@@ -378,71 +313,48 @@ export const MulticollinearityApply = ({
             data-bs-target="#criticalValModal">
             Critical value table
         </button>
-        <p>What is your conclusion for this joint hypothesis testing?</p>
-        <div className="choice-list">
-            {options2.map((option, index) => (
-                <div key={index} className="form-check">
-                    <input
-                        className="form-check-input"
-                        type="radio"
-                        id={`option2-${index}`}
-                        name="datasetOptions2"
-                        value={option}
-                        disabled={isSubmit2Disabled}
-                        onChange={
-                            () => handleOptionSelect2(index)}
-                    />
-                    <label className="form-check-label"
-                        htmlFor={`option2-${index}`}>
-                        {option}
-                    </label>
+        {/* Question 2: Multiple Choice */}
+        <QuizComponent
+            question="What is your conclusion for this joint hypothesis
+            testing?"
+            options={options2}
+            correctAnswerIndex={correctAnswerIndex2}
+            correctFeedback={correctFeedback2}
+            incorrectFeedback={incorrectFeedback2}
+            submissionId={submissionId}
+            questionNumber={7}
+            setIsCorrect={setIsQuestion2Correct}
+        />
+        {/* Continue Button */}
+        {isQuestion1Correct && isQuestion2Correct && (
+            <>
+                <p>
+                Multicollinearity (high correlation between variables) inflates
+                the standard errors of the sample slopes, resulting in a
+                decrease in the likelihood of rejection of the null hypothesis
+                in the individual significance tests. Thus, finding population
+                slopes insignificant. However, if we intuitively believe a
+                variable is associated with the dependent variable but due to
+                multicollinearity between independent variables, it seems that
+                the association disappeared. Then, we can use joint significance
+                tests. We can test highly correlated variables jointly to show
+                that they are jointly significant. Otherwise, dropping an
+                insignificant variable from the regression may cause OVB.
+                </p>
+                <div className="simulation__step-prompt">
+                    <button className="btn btn-sm btn-success"
+                        onClick={handleContinue}>
+                        Continue &raquo;
+                    </button>
                 </div>
-            ))}
-        </div>
-        {feedback2 && (
-            <div className={
-                `${isCorrect2 ? 'answer-correct-container'
-                    : 'answer-incorrect-container'}`}>
-                {isCorrect2 ? (
-                    <div className="answer-correct">&#10003;</div>
-                ):<div className="answer-incorrect flex-shrink-0
-                    align-self-start">!</div>}
-                {feedback2}
-            </div>
+            </>
         )}
-        <button className="btn btn-sm btn-success my-3"
-            id={'multiple-option2'}
-            disabled={isSubmit2Disabled}
-            onClick={handleSubmit2}>
-                Submit
-        </button>
-        <p>
-            Multicollinearity (high correlation between variables) inflates
-            the standard errors of the sample slopes, resulting in a decrease
-            in the likelihood of rejection of the null hypothesis in the
-            individual significance tests. Thus, finding population slopes
-            insignificant. However, if we intuitively believe a variable is
-            associated with the dependent variable but due to multicollinearity
-            between independent variables, it seems that the association
-            disappeared. Then, we can use joint significance tests. We can
-            test highly correlated variables jointly to show that they are
-            jointly significant. Otherwise, dropping an insignificant variable
-            from the regression may cause OVB.
-        </p>
-        {isSubmitted && isSubmitted2 &&
-            <div className="simulation__step-prompt">
-                <button className="btn btn-sm btn-success"
-                    onClick={() => handleProgress(2)}
-                >
-                    Continue &raquo;
-                </button>
-            </div>
-        }
     </>;
 };
 
 MulticollinearityApply.propTypes = {
     controls: PropTypes.arrayOf(PropTypes.bool).isRequired,
     handleControls: PropTypes.func.isRequired,
-    handleProgress: PropTypes.func.isRequired
+    handleProgress: PropTypes.func.isRequired,
+    submissionId: PropTypes.number.isRequired
 };
