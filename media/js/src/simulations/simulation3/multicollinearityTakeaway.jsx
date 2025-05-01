@@ -7,7 +7,7 @@ export const MulticollinearityTakeaway = ({ submissionId }) => {
 
     const questions = [
         {
-            questionId: 4,
+            questionId: 8,
             questionText: 'What is <b>multicollinearity</b>?',
             choices: [
                 {
@@ -51,7 +51,7 @@ export const MulticollinearityTakeaway = ({ submissionId }) => {
             ]
         },
         {
-            questionId: 5,
+            questionId: 9,
             questionText: 'If two regressors are highly correlated in a linear'
                         + ' regression, test statistic for significance test '
                         + 'for those two coefficients tends to',
@@ -96,7 +96,7 @@ export const MulticollinearityTakeaway = ({ submissionId }) => {
             ]
         },
         {
-            questionId: 6,
+            questionId: 10,
             questionText: 'What to do if there is multicollinearity?',
             choices: [
                 {
