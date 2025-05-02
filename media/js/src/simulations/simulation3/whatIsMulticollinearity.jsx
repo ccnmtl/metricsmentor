@@ -39,22 +39,19 @@ export const WhatIsMulticollinearity = ({
             standard errors.
         </p>
         <PromptBlock
-            text={
+            list={[
+                'Add one variable at a time to the regression model',
+                'Observe the resulting regression line on the graph and ' +
+                'compare it to the original',
+                'Compare the correlation coefficients of the independent ' +
+                'variables',
                 <>
-                    <ul className="ps-3 mb-3">
-                        <li>Add one variable at a time to the regression
-                            model</li>
-                        <li>Observe the resulting regression line on the
-                            graph and compare it to the original</li>
-                        <li>Compare the correlation coefficients of the
-                            independent variables</li>
-                        <li>Contrast the resulting
-                            {inlineKatex('SE(\\hat{\\beta_1})~')} values</li>
-                        <li>Contrast the related component values, and
-                            the hypothesis test results.</li>
-                    </ul>
-                </>
-            }
+            Contrast the resulting {inlineKatex('SE(\\hat{\\beta_1})')}
+            values
+                </>,
+                'Contrast the related component values, and the hypothesis ' +
+                'test results.'
+            ]}
         />
         <div className="dataset-variable-item ps-4">
             {inlineKatex('x_1')}

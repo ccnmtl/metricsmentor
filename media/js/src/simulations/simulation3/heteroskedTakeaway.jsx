@@ -7,7 +7,7 @@ export const HeteroskedTakeaway = ({ submissionId }) => {
 
     const questions = [
         {
-            questionId: 1,
+            questionId: 3,
             questionText: 'What is <b>heteroskedasticity</b>?',
             choices: [
                 {
@@ -52,7 +52,7 @@ export const HeteroskedTakeaway = ({ submissionId }) => {
             ]
         },
         {
-            questionId: 2,
+            questionId: 4,
             questionText: '<b>Heteroskedasticity affects…</b>',
             choices: [
                 {
@@ -93,7 +93,7 @@ export const HeteroskedTakeaway = ({ submissionId }) => {
             ]
         },
         {
-            questionId: 3,
+            questionId: 5,
             questionText: '<b>Which one of the following is true under ' +
                           'heteroskedasticity?</b>',
             choices: [

@@ -154,6 +154,7 @@ export const SimulationThree = () => {
                 mkReviewBtn(1, setProgress1):
                 <SkedasticityReal
                     setProgress={setProgress1}
+                    submissionId={submissionId}
                 />
             )
         });
@@ -164,7 +165,8 @@ export const SimulationThree = () => {
             headerId: 'takeAway1',
             title: 'Takeaway questions',
             content: (
-                <HeteroskedTakeaway />
+                <HeteroskedTakeaway
+                    submissionId={submissionId} />
             )
         });
     }
@@ -230,7 +232,8 @@ export const SimulationThree = () => {
                 <MulticollinearityApply
                     controls={controls2}
                     handleControls={handleControls2}
-                    handleProgress={handleProgress} />
+                    handleProgress={handleProgress}
+                    submissionId={submissionId} />
             )
         });
     }
@@ -240,7 +243,8 @@ export const SimulationThree = () => {
             headerId: 'takeAway2',
             title: 'Takeaway questions',
             content: (
-                <MulticollinearityTakeaway />
+                <MulticollinearityTakeaway
+                    submissionId={submissionId} />
             )
         });
     }
