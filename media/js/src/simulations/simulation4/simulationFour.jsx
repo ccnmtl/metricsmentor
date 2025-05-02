@@ -4,8 +4,10 @@ import { STATIC_URL, createSubmission, getCoursePk } from '../../utils/utils';
 import { PolynomialGraph } from './polynomialGraph';
 import { WhatAreNonLinearRegressions } from './whatAreNonlinearRegs';
 import { NonlinearRegsDefinition } from './nonlinearRegModal';
+import { RealDataPolynomials } from './realDataPolynomials';
 import { StepProgressButton } from '../../StepProgressButton';
 import { PolynomialTakeaway } from './polynomialTakeaway';
+import { CLEARREG, showOne } from './polyUtils';
 
 const coursePk = getCoursePk();
 
@@ -13,14 +15,12 @@ export const SimulationFour = () => {
 
     const [stage, setStage] = useState(0);
     const [submissionId, setSubmissionId] = useState(null);
-    const [showRegLine, setshowRegLine] = useState(
-        [false, false, false, false]);
-    const [showDatasets, setshowDatasets] = useState(
-        [true, false, false, false]);
+    const [showRegLine, setShowRegLine] = useState(CLEARREG);
+    const [showPolyDatasets, setShowPolyDatasets] = useState(showOne(0));
     // Each index tracks the state for a different module
     // ['Polynomials', 'Logarithms', 'Interactions']
     const [progress, setProgress] = useState([0,0,0]);
-    const [mysteryRegLine, setMysteryRegLine] = useState([]);
+    const [compareRegLine, setCompareRegLine] = useState([]);
 
 
     const initialized = useRef(false);
@@ -83,17 +83,15 @@ export const SimulationFour = () => {
         {
             headerId: 'whatarenonlinearregression',
             title: 'What are non-linear regressions?',
-            content:
-            <>
+            content: <>
                 {progress[stage] < 1 && (
                     <WhatAreNonLinearRegressions
-                        setshowDatasets={setshowDatasets}
-                        setshowRegLine={setshowRegLine}
-                        showDatasets={showDatasets}
+                        setShowDatasets={setShowPolyDatasets}
+                        setShowRegLine={setShowRegLine}
+                        showDatasets={showPolyDatasets}
                         showRegLine={showRegLine}
-                        setMysteryRegLine={setMysteryRegLine}
-                        mysteryRegLine={mysteryRegLine}
-                    />
+                        setCompareRegLine={setCompareRegLine}
+                        compareRegLine={compareRegLine}/>
                 )}
                 <StepProgressButton
                     progress={progress}
@@ -105,6 +103,31 @@ export const SimulationFour = () => {
                 />
             </>
         },
+        ...(progress[stage] > 0
+            ? [{
+                headerId: 'realData',
+                title: 'Real World Data',
+                content: <>
+                    {progress[stage] === 1 && (
+                        <RealDataPolynomials
+                            setShowDatasets={setShowPolyDatasets}
+                            setShowRegLine={setShowRegLine}
+                            showDatasets={showPolyDatasets}
+                            showRegLine={showRegLine}
+                            setCompareRegLine={setCompareRegLine}
+                            compareRegLine={compareRegLine} />
+                    )}
+                    <StepProgressButton
+                        progress={progress}
+                        stage={stage}
+                        setProgress={setProgress}
+                        continueLabel="A few more questions...»"
+                        reviewLabel="Review »"
+                        progressNumber={2}
+                    />
+                </>
+            }]
+            : []),
         ...(progress[stage] > 1
             ? [{
                 headerId: 'takeAway1',
@@ -121,6 +144,7 @@ export const SimulationFour = () => {
                 )
             }]
             : [])
+
     ];
 
     const logarithmSteps = [
@@ -178,8 +202,8 @@ export const SimulationFour = () => {
                 <SimulationPanel steps={polynomialSteps}
                     graphContent={<PolynomialGraph
                         showRegLine={showRegLine}
-                        showDatasets={showDatasets}
-                        mysteryRegLine={mysteryRegLine} />}
+                        showDatasets={showPolyDatasets}
+                        compareRegLine={compareRegLine} />}
                     modals={[<NonlinearRegsDefinition key="modal1" />]}
                 />
             )}
