@@ -86,82 +86,85 @@ export const SkedasticityReal = ({ setProgress, submissionId }) => {
                 questionNumber={1}
                 setIsCorrect={setIsQuestion1Correct}
             />
-            <p className="mt-3">
+            {isQuestion1Correct && (
+                <>
+                    <p className="mt-3">
                 Examine the effects of heteroskedasticity on
                 hypothesis testing results. The null hypothesis is as
                 follows: {inlineKatex('H_0: \\beta_1 = 0')}, which states that
                 GDP growth has no impact on the number of assassination
                 attempts. Let&rsquo;s set the significance
                 level, {inlineKatex('\\alpha = 0.10')}.
-            </p>
-            <p>
+                    </p>
+                    <p>
                 Review the values calculated using non-robust and
                 robust {inlineKatex('SE(\\hat{\\beta_1})')}
                 in the following table.
-            </p>
-            <div className="mt-5 d-flex">
-                <div className="h4 my-0 me-2">
+                    </p>
+                    <div className="mt-5 d-flex">
+                        <div className="h4 my-0 me-2">
                     Hypothesis test:
-                </div>
-                <Katex
-                    tex={`
+                        </div>
+                        <Katex
+                            tex={`
                         H_0: \\beta_1 = 0; ~
                         H_1: \\beta_1 \\neq 0; ~
                         \\alpha = 0.10
                     `}
-                />
-            </div>
-            <table className="table table-bordered mb-5 mt-3">
-                <thead>
-                    <tr>
-                        <td>&nbsp;</td>
-                        <th scope="col">Non-robust</th>
-                        <th scope="col">Robust</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    <tr>
-                        <th scope="row">
-                            <Katex tex={'{SE(\\hat{\\beta_1})}'} />
-                        </th>
-                        <td>
-                            {standard_error.toFixed(2)}
-                        </td>
-                        <td>
-                            {robust_stderr.toFixed(2)}
-                        </td>
-                    </tr>
-                    <tr>
-                        <th scope="row">
-                            <Katex tex={'CI'} />
-                        </th>
-                        <td>
-                            {`${lowStandard.toFixed(2)} `}
-                            <Katex tex={'< \\beta_1 <'} />
-                            {highStandard.toFixed(2)}
-                        </td>
-                        <td>
-                            {`${lowRobust.toFixed(2)} `}
-                            <Katex tex={'< \\beta_1 <'} />
-                            {highRobust.toFixed(2)}
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-
-            {/* Question 2*/}
-            <QuizComponent
-                question={<>Based on these values,
-                which <Katex tex={'{SE(\\hat{\\beta_1})}\\ '} />
-                will you choose?</>}
-                options={options2.map(option => option.label)}
-                correctAnswerIndex={correctAnswerIndex2}
-                correctFeedback={correctFeedback2}
-                incorrectFeedback={incorrectFeedback2}
-                submissionId={submissionId}
-                questionNumber={2}
-                setIsCorrect={setIsQuestion2Correct}
-            />
+                        />
+                    </div>
+                    <table className="table table-bordered mb-5 mt-3">
+                        <thead>
+                            <tr>
+                                <td>&nbsp;</td>
+                                <th scope="col">Non-robust</th>
+                                <th scope="col">Robust</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <th scope="row">
+                                    <Katex tex={'{SE(\\hat{\\beta_1})}'} />
+                                </th>
+                                <td>
+                                    {standard_error.toFixed(2)}
+                                </td>
+                                <td>
+                                    {robust_stderr.toFixed(2)}
+                                </td>
+                            </tr>
+                            <tr>
+                                <th scope="row">
+                                    <Katex tex={'CI'} />
+                                </th>
+                                <td>
+                                    {`${lowStandard.toFixed(2)} `}
+                                    <Katex tex={'< \\beta_1 <'} />
+                                    {highStandard.toFixed(2)}
+                                </td>
+                                <td>
+                                    {`${lowRobust.toFixed(2)} `}
+                                    <Katex tex={'< \\beta_1 <'} />
+                                    {highRobust.toFixed(2)}
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    {/* Question 2*/}
+                    <QuizComponent
+                        question={<>Based on these values,
+                            which <Katex tex={'{SE(\\hat{\\beta_1})}\\ '} />
+                            will you choose?</>}
+                        options={options2.map(option => option.label)}
+                        correctAnswerIndex={correctAnswerIndex2}
+                        correctFeedback={correctFeedback2}
+                        incorrectFeedback={incorrectFeedback2}
+                        submissionId={submissionId}
+                        questionNumber={2}
+                        setIsCorrect={setIsQuestion2Correct}
+                    />
+                </>
+            )}
             {isQuestion1Correct && isQuestion2Correct && (
                 <>
                     <p className="mt-3">
