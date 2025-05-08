@@ -43,7 +43,7 @@ export const QuizComponent = ({
                 setIsCorrect(isAnswerCorrect);
 
                 const additionalData = {
-                    question,
+                    question: extractTextContent(question),
                     correctAnswer: extractTextContent(correctTextAnswer)
                 };
                 await saveAnswer(submissionId, questionNumber, 'text',
@@ -62,7 +62,7 @@ export const QuizComponent = ({
                 }
                 setIsCorrect(isAnswerCorrect);
                 const additionalData = {
-                    question: question,
+                    question: extractTextContent(question),
                     correctAnswer: extractTextContent(
                         options[correctAnswerIndex])
                 };
@@ -129,7 +129,7 @@ export const QuizComponent = ({
 };
 
 QuizComponent.propTypes = {
-    question: PropTypes.string.isRequired,
+    question: PropTypes.node.isRequired,
     options: PropTypes.arrayOf(PropTypes.string).isRequired,
     correctAnswerIndex: PropTypes.number.isRequired,
     correctFeedback: PropTypes.string.isRequired,
