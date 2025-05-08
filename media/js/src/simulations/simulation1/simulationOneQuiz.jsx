@@ -164,7 +164,6 @@ export const SimulationOneQuiz = ({
                 answer={questionData.correctOption}
                 submissionId={submissionId}
                 questionNumber={questionId}
-                isSubmitted={isSubmitted}
                 setIsSubmitted={
                     (correct) => handleTakeawaySubmit(
                         questionData.choiceKey, correct)}
@@ -192,7 +191,6 @@ export const SimulationOneQuiz = ({
                 answer={questionData.correctOption}
                 submissionId={submissionId}
                 questionNumber={questionId}
-                isSubmitted={isSubmitted}
                 setIsSubmitted={handleQualifierSubmit}
                 questionStyle={{}}
                 optionStyle={{}}

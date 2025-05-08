@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { saveAnswer, extractTextContent } from './../../utils/utils';
 
 export const MultipleChoiceQuestion = ({
-    isSubmitted, setIsSubmitted, submissionId, questionNumber,
+    setIsSubmitted, submissionId, questionNumber,
     question, options, answer, header, questionStyle, optionStyle,
     answerStyle, correctFeedback, incorrectFeedbackMap, idkey
 }) => {
@@ -133,7 +133,6 @@ MultipleChoiceQuestion.propTypes = {
     submissionId: PropTypes.number.isRequired,
     questionNumber: PropTypes.number.isRequired,
     setIsSubmitted: PropTypes.func.isRequired,
-    isSubmitted: PropTypes.bool.isRequired,
     header: PropTypes.string,
     questionStyle: PropTypes.object,
     optionStyle: PropTypes.object,

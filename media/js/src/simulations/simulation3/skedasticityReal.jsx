@@ -151,8 +151,9 @@ export const SkedasticityReal = ({ setProgress, submissionId }) => {
 
             {/* Question 2*/}
             <QuizComponent
-                question="Based on these values,
-                which {SE(\\hat{\\beta_1})} will you choose?"
+                question={<>Based on these values,
+                which <Katex tex={'{SE(\\hat{\\beta_1})}\\ '} />
+                will you choose?</>}
                 options={options2.map(option => option.label)}
                 correctAnswerIndex={correctAnswerIndex2}
                 correctFeedback={correctFeedback2}
