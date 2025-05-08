@@ -258,77 +258,81 @@ export const MulticollinearityApply = ({
             setIsCorrect={setIsQuestion1Correct}
         />
 
-        <h3 className="mt-4">
-            Joint hypothesis testing to mitigate multicollinearity
-        </h3>
+        {isQuestion1Correct && (
+            <>
 
-        <p>
-            Joint hypothesis testing gives us a reason to keep both variables
-            in the regression when one is not significant due to the high
-            correlation between them. We should test these two highly
-            correlated
-            variables, {inlineKatex('x_1 \\text{(R\\&D)}')} and
-            {inlineKatex('x_3 \\text{(Sales)}')} jointly,
-            using the {inlineKatex('F')}-test, to assess the collective
-            significance of these variables.
-        </p>
-        <p>
-            So here&lsquo;s the joint hypothesis test:
-        </p>
-        <p className="mb-0">
-            <Katex tex={'H_0: \\beta_1 = \\beta_3 = 0;'} />
-            <br />
-            <Katex tex={'H_1: \\text{not} \\, H_0;'} />
-            <br />
-            <Katex tex={'\\alpha = 0.05'} />
-        </p>
-        <Table
-            headers={[]}
-            rows={[
-                [
-                    {content: <Katex tex={'corr(x_1, x_3)'} />},
-                    {content: <Katex tex={`${DATA.x3.corr_x1}`} />},
-                ],
-                [
-                    {content: <Katex tex={'SE(\\hat{\\beta_1})'} />},
-                    {content: <Katex tex={`${DATA.x3.stderr}`} />},
-                ],
-                [
-                    {content: <Katex tex={'F\\text{-}test'} />},
-                    {content: <Katex tex={`${DATA.x3.ftest}`} />},
-                ],
-                [
-                    {content: <Katex tex={'p\\text{-value}'} />},
-                    {content: <Katex tex={`${DATA.x3.jointP}`} />},
-                ],
-            ]} />
-        <p>
-            Look up the critical value that corresponds
-            to {inlineKatex('\\alpha = 0.05')} and compare it
-            to {inlineKatex('F5')}-test statistics value.
-        </p>
-        <button
-            className="btn btn-sm btn-primary mb-3"
-            data-bs-toggle="modal"
-            data-bs-target="#criticalValModal">
-            Critical value table
-        </button>
-        {/* Question 2: Multiple Choice */}
-        <QuizComponent
-            question="What is your conclusion for this joint hypothesis
-            testing?"
-            options={options2}
-            correctAnswerIndex={correctAnswerIndex2}
-            correctFeedback={correctFeedback2}
-            incorrectFeedback={incorrectFeedback2}
-            submissionId={submissionId}
-            questionNumber={7}
-            setIsCorrect={setIsQuestion2Correct}
-        />
+                <h3 className="mt-4">
+                    Joint hypothesis testing to mitigate multicollinearity
+                </h3>
+                <p>
+                    Joint hypothesis testing gives us a reason to keep both
+                    variables in the regression when one is not significant
+                    due to the high
+                    correlation between them. We should test these two highly
+                    correlated variables, {inlineKatex('x_1 \\text{(R\\&D)}')}
+                    and {inlineKatex('x_3 \\text{(Sales)}')} jointly,
+                    using the {inlineKatex('F')}-test, to assess the collective
+                    significance of these variables.
+                </p>
+                <p>
+                    So here&lsquo;s the joint hypothesis test:
+                </p>
+                <p className="mb-0">
+                    <Katex tex={'H_0: \\beta_1 = \\beta_3 = 0;'} />
+                    <br />
+                    <Katex tex={'H_1: \\text{not} \\, H_0;'} />
+                    <br />
+                    <Katex tex={'\\alpha = 0.05'} />
+                </p>
+                <Table
+                    headers={[]}
+                    rows={[
+                        [
+                            {content: <Katex tex={'corr(x_1, x_3)'} />},
+                            {content: <Katex tex={`${DATA.x3.corr_x1}`} />},
+                        ],
+                        [
+                            {content: <Katex tex={'SE(\\hat{\\beta_1})'} />},
+                            {content: <Katex tex={`${DATA.x3.stderr}`} />},
+                        ],
+                        [
+                            {content: <Katex tex={'F\\text{-}test'} />},
+                            {content: <Katex tex={`${DATA.x3.ftest}`} />},
+                        ],
+                        [
+                            {content: <Katex tex={'p\\text{-value}'} />},
+                            {content: <Katex tex={`${DATA.x3.jointP}`} />},
+                        ],
+                    ]} />
+                <p>
+                    Look up the critical value that corresponds
+                    to {inlineKatex('\\alpha = 0.05')} and compare it
+                    to {inlineKatex('F5')}-test statistics value.
+                </p>
+                <button
+                    className="btn btn-sm btn-primary mb-3"
+                    data-bs-toggle="modal"
+                    data-bs-target="#criticalValModal">
+                        Critical value table
+                </button>
+                {/* Question 2: Multiple Choice */}
+                <QuizComponent
+                    question="What is your conclusion for this joint hypothesis
+                                testing?"
+                    options={options2}
+                    correctAnswerIndex={correctAnswerIndex2}
+                    correctFeedback={correctFeedback2}
+                    incorrectFeedback={incorrectFeedback2}
+                    submissionId={submissionId}
+                    questionNumber={7}
+                    setIsCorrect={setIsQuestion2Correct}
+                />
+            </>
+        )}
         {/* Continue Button */}
         {isQuestion1Correct && isQuestion2Correct && (
             <>
-                <p>
+                <p className='mt-3'>
                 Multicollinearity (high correlation between variables) inflates
                 the standard errors of the sample slopes, resulting in a
                 decrease in the likelihood of rejection of the null hypothesis
