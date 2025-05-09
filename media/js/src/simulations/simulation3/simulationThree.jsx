@@ -166,7 +166,9 @@ export const SimulationThree = () => {
             title: 'Takeaway questions',
             content: (
                 <HeteroskedTakeaway
-                    submissionId={submissionId} />
+                    submissionId={submissionId}
+                    setStage={setStage}
+                    coursePk={coursePk} />
             )
         });
     }
@@ -244,7 +246,9 @@ export const SimulationThree = () => {
             title: 'Takeaway questions',
             content: (
                 <MulticollinearityTakeaway
-                    submissionId={submissionId} />
+                    submissionId={submissionId}
+                    setStage={setStage}
+                    coursePk={coursePk} />
             )
         });
     }
