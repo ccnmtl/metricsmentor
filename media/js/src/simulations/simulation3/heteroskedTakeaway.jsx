@@ -1,8 +1,10 @@
 import React, { useState } from 'react';
 import { TakeawayQuestion } from '../../TakeawayQuestion';
 import PropTypes from 'prop-types';
+import { Link } from 'react-router-dom';
 
-export const HeteroskedTakeaway = ({ submissionId }) => {
+export const HeteroskedTakeaway = ({
+    submissionId, setStage, coursePk }) => {
     const [visibleIndex, setVisibleIndex] = useState(0);
 
     const questions = [
@@ -156,10 +158,37 @@ export const HeteroskedTakeaway = ({ submissionId }) => {
                     }
                 />
             ))}
+            {visibleIndex === questions.length && (
+                <>
+                    <div className="mx-3 mb-3 fw-medium text-center">
+                        You&apos;ve successfully completed Simulation
+                        Three: Heteroskedasticity! <br />
+                        &#127881; &#127881; &#127881;
+                    </div>
+                    <div className="simulation__step-prompt mt-3 text-center
+                        mb-3">
+                        You can move on to Multicollinearity or
+                        head back to the Dashboard whenever you&apos;re ready.
+                    </div>
+                    <div style={{ display: 'flex',
+                        justifyContent: 'center', gap: '10px' }}>
+                        <div className="btn btn-primary"
+                            onClick={() => setStage(1)}>
+                                Multicollinearity
+                        </div>
+                        <Link to={`/course/${coursePk}/simulations/`}
+                            className="btn btn-success">
+                                Back to Dashboard
+                        </Link>
+                    </div>
+                </>
+            )}
         </>
     );
 };
 
 HeteroskedTakeaway.propTypes = {
-    submissionId: PropTypes.number.isRequired
+    submissionId: PropTypes.number.isRequired,
+    setStage: PropTypes.func.isRequired,
+    coursePk: PropTypes.number.isRequired
 };
