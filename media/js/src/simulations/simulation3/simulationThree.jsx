@@ -21,7 +21,7 @@ const coursePk = getCoursePk();
 export const SimulationThree = () => {
     const [stage, setStage] = useState(0);
     const [submissionId, setSubmissionId] = useState(null);
-    const [heteroskedasticity, setHeteroskedasticity] = useState(0);
+    const [heteroskedasticity, setHeteroskedasticity] = useState(0.2);
     const [standardError, setStandardError] = useState(null);
     const [slope, setSlope] = useState(null);
     const [intercept, setIntercept] = useState(null);
