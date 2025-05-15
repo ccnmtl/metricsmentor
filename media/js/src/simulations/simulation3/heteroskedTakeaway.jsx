@@ -173,10 +173,12 @@ export const HeteroskedTakeaway = ({
                     <div style={{ display: 'flex',
                         justifyContent: 'center', gap: '10px' }}>
                         <div className="btn btn-primary"
+                            data-cy="finish-to-multicollinearity"
                             onClick={() => setStage(1)}>
                                 Multicollinearity
                         </div>
                         <Link to={`/course/${coursePk}/simulations/`}
+                            data-cy="finish-to-dashboard"
                             className="btn btn-success">
                                 Back to Dashboard
                         </Link>

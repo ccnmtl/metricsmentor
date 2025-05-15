@@ -106,22 +106,23 @@ export const MulticollinearityApply = ({
         <div className="dataset-variable-item ps-4">
             {inlineKatex('x_1 \\text{(R\\&D)}')} only
         </div>
-        {['x_2\\text{(Profit margin)}', 'x_3\\text{(Sales)}'].map((val, i) =>
-            <div className='form-check dataset-variable-item' key={i}>
-                <label htmlFor={val} className="form-check-label">
-                    Add {inlineKatex(val)} to {inlineKatex('x_1')}
-                </label>
-                <input
-                    className="form-check-input"
-                    type="checkbox"
-                    id={val}
-                    name={val}
-                    value={i}
-                    onChange={handleControls}
-                    checked={controls[i] === true}
-                />
-            </div>
-        )}
+        {[['x_2', 'x_2\\text{(Profit margin)}'], ['x_3', 'x_3\\text{(Sales)}']]
+            .map(([id, val], i) =>
+                <div className='form-check dataset-variable-item' key={i}>
+                    <label htmlFor={id} className="form-check-label">
+                        Add {inlineKatex(val)} to {inlineKatex('x_1')}
+                    </label>
+                    <input
+                        className="form-check-input"
+                        type="checkbox"
+                        id={id}
+                        name={id}
+                        value={i}
+                        onChange={handleControls}
+                        checked={controls[i] === true}
+                    />
+                </div>
+            )}
         <h4 className="mt-4">
             Regression line equations:
         </h4>
@@ -129,7 +130,8 @@ export const MulticollinearityApply = ({
             <p>{inlineKatex('x_1')} only:&emsp;{inlineKatex(`\\hat{y} = 
                     ${DATA.x1.intercept} + ${DATA.x1.slope}x_1`)}</p>
             {controls[0] ?
-                <p>With {inlineKatex('x_2')}:&emsp;{inlineKatex(`\\hat{y} = 
+                <p data-cy="x2equation">
+                    With {inlineKatex('x_2')}:&emsp;{inlineKatex(`\\hat{y} = 
                     ${DATA.x2.intercept} 
                     ${DATA.x2.slope_x1 < 0 ? '-' : '+'} 
                     ${Math.abs(DATA.x2.slope_x1)}x_1 
@@ -139,7 +141,8 @@ export const MulticollinearityApply = ({
                 null
             }
             {controls[1] ?
-                <p>With {inlineKatex('x_3')}:&emsp;{inlineKatex(`\\hat{y} = 
+                <p data-cy="x3equation">
+                    With {inlineKatex('x_3')}:&emsp;{inlineKatex(`\\hat{y} = 
                     ${DATA.x3.intercept} 
                     ${DATA.x3.slope_x1 < 0 ? '-' : '+'} 
                     ${Math.abs(DATA.x3.slope_x1)}x_1 
@@ -312,6 +315,7 @@ export const MulticollinearityApply = ({
                 <button
                     className="btn btn-sm btn-primary mb-3"
                     data-bs-toggle="modal"
+                    data-cy="critical-value"
                     data-bs-target="#criticalValModal">
                         Critical value table
                 </button>
@@ -347,6 +351,7 @@ export const MulticollinearityApply = ({
                 </p>
                 <div className="simulation__step-prompt">
                     <button className="btn btn-sm btn-success"
+                        data-cy="to-takeaway"
                         onClick={handleContinue}>
                         Continue &raquo;
                     </button>

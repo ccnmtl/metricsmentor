@@ -121,6 +121,7 @@ export const QuizComponent = ({
                 className="btn btn-sm btn-success mt-3"
                 id="submit-button"
                 disabled={isSubmitDisabled}
+                data-cy={`submit${questionNumber}`}
                 onClick={handleSubmit}>
                 Submit
             </button>

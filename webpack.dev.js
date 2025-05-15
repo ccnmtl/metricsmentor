@@ -23,6 +23,12 @@ module.exports = merge(common, {
         },
         headers: {
             'Access-Control-Allow-Origin': '*',
+        },
+        client: {
+            overlay: {
+                warnings: false,
+                errors: true
+            }
         }
-    }
+    },
 });

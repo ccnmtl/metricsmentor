@@ -29,6 +29,7 @@ export const GenericModal = ({
                         <button
                             className="btn-close"
                             data-bs-dismiss="modal"
+                            data-cy={`${modalId}-close`}
                             aria-label="Close"
                         ></button>
                     </div>

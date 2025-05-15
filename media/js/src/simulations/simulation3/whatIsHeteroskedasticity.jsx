@@ -93,6 +93,7 @@ export const WhatIsHeteroskedasticity = ({
                 className="btn btn-sm btn-primary mb-5"
                 data-bs-toggle="modal"
                 data-bs-target="#heteroskedDefinition"
+                data-cy="define-heteroskedasticity"
             >
                 Definition: Heteroskedasticy
             </button>
@@ -228,6 +229,7 @@ export const WhatIsHeteroskedasticity = ({
                     className="btn btn-sm btn-primary mb-3"
                     data-bs-toggle="modal"
                     data-bs-target="#simulationThreeGlossary"
+                    data-cy="glossary"
                 >
                     Glossary
                 </button>
@@ -244,6 +246,7 @@ export const WhatIsHeteroskedasticity = ({
             <div className="simulation__step-prompt">
                 <button
                     className="btn btn-sm btn-success"
+                    data-cy="open-real-data"
                     onClick={handleContinue}>
                     Continue to Real dataset &raquo;
                 </button>
