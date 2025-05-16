@@ -22,7 +22,7 @@ export const Step = (props) => {
             </div>
             <div className="simulation__step-body">
                 <header className="simulation__step-header">
-                    <h2 className="h2-primary">
+                    <h2 className="h2-primary" data-cy={props.id}>
                         {props.header ? <>
                             <span className="h2-secondary d-block">
                                 {props.header}
@@ -45,5 +45,6 @@ export const Step = (props) => {
 Step.propTypes = {
     header: PropTypes.string,
     title: PropTypes.string.isRequired,
+    id: PropTypes.string,
     children: PropTypes.node.isRequired
 };

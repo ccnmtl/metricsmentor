@@ -24,7 +24,8 @@ export const ControlVariable = ({
             <button
                 className="btn btn-sm btn-primary"
                 data-bs-toggle="modal"
-                data-bs-target="#OVBTheoryModal">
+                data-bs-target="#OVBTheoryModal"
+                data-cy="ovb-modal">
                 OVB theory
             </button>
             <h2>
@@ -118,7 +119,8 @@ export const ControlVariable = ({
                                 <table
                                     className="table
                                     table-bordered
-                                    w-75 mb-5 mt-3">
+                                    w-75 mb-5 mt-3"
+                                    data-cy={`${dType}-table`}>
                                     <thead>
                                         <tr>
                                             <th>Coeff.</th>

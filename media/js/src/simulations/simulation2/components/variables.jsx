@@ -33,19 +33,21 @@ export const Variables = ({params}) => {
                 ]
             }
         ].map((content, i) => formulaText(content, i))}
-        <table className="table table-bordered w-75">
+        <table className="table table-bordered w-75" data-cy="voi-table">
             <thead>
                 <tr>
-                    <th className="w-50"
+                    <th className="w-50" data-cy="corr-header"
                         scope="col">{inlineKatex('\\text{corr}(y,x_1)')}</th>
-                    <th className="w-50"
+                    <th className="w-50" data-cy="beta-header"
                         scope="col">{inlineKatex('\\hat{\\beta_1}')}</th>
                 </tr>
             </thead>
             <tbody>
                 <tr>
-                    <td className="w-50">{inlineKatex(`${vars.corr_y}`)}</td>
-                    <td className="w-50">{inlineKatex(`${vars.slope}`)}</td>
+                    <td className="w-50" data-cy="corr">
+                        {inlineKatex(`${vars.corr_y}`)}</td>
+                    <td className="w-50" data-cy="beta">
+                        {inlineKatex(`${vars.slope}`)}</td>
                 </tr>
             </tbody>
         </table>

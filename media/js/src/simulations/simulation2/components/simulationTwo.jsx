@@ -171,7 +171,9 @@ export const SimulationTwo = () => {
                             checkComplete, handleChoice, isComplete}} />
                     },
                 ].map((step, i) =>
-                    <Step key={i} header={step.header} title={step.title}>
+                    <Step key={i} header={step.header} title={step.title}
+                        id={`section${i}`}
+                    >
                         {step.body}
                     </Step>)
                 }
@@ -191,7 +193,9 @@ export const SimulationTwo = () => {
                                     index: dataIndex[choice],}}/>
                         },
                     ].map((step, i) =>
-                        <Step key={i} header={step.header} title={step.title}>
+                        <Step key={i} header={step.header} title={step.title}
+                            id={`section${i+2}`}
+                        >
                             {step.body}
                         </Step>)
                     }
@@ -203,7 +207,7 @@ export const SimulationTwo = () => {
                         </div>
                         <div className="simulation__step-body">
                             <header className="simulation__step-header">
-                                <h2 className="h2-primary">
+                                <h2 className="h2-primary" data-cy="section4">
                                     Takeaway Questions
                                 </h2>
                             </header>
@@ -229,7 +233,8 @@ export const SimulationTwo = () => {
                     index={dataIndex[choice]}
                 />
                 {choice && <div className="container text-center">
-                    <p className="mx-auto px-5">{info[choice]}</p>
+                    <p className="mx-auto px-5"
+                        data-cy="attribution-text">{info[choice]}</p>
                 </div>}
             </div> {/* div class=simulation__graphspace */}
 
