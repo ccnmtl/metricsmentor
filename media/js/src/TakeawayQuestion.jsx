@@ -110,6 +110,7 @@ export const TakeawayQuestion = ({
                 type="button"
                 onClick={handleSubmit}
                 disabled={!selected || locked}
+                data-cy={`submit${questionId}`}
             >
                 Submit »
             </button>

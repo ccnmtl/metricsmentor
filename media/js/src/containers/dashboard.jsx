@@ -71,7 +71,7 @@ export const Dashboard = ({ isSuperUser, isFaculty}) => {
                                         simulation-card">
                         <h2 className="h2-primary">
                             <span className="h2-secondary d-block"
-                                data-cy="sim-2">
+                                data-cy="sim-3">
                                     Simulation 3</span>
                             <span className="h2-title d-block">
                                 {'Standard Errors'}
@@ -99,7 +99,7 @@ export const Dashboard = ({ isSuperUser, isFaculty}) => {
                                         simulation-card">
                             <h2 className="h2-primary">
                                 <span className="h2-secondary d-block"
-                                    data-cy="sim-2">
+                                    data-cy="sim-4">
                                     Simulation 4</span>
                                 <span className="h2-title d-block">
                                     {'Non-Linear Regression'}

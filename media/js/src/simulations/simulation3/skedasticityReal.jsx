@@ -176,6 +176,7 @@ export const SkedasticityReal = ({ setProgress, submissionId }) => {
                     </p>
                     <div className="simulation__step-prompt">
                         <button className="btn btn-sm btn-success"
+                            data-cy="to-takeaway"
                             onClick={handleContinue}>
                             Continue &raquo;
                         </button>

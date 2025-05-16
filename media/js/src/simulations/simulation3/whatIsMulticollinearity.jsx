@@ -23,6 +23,7 @@ export const WhatIsMulticollinearity = ({
         <button
             className="btn btn-sm btn-primary"
             data-bs-toggle="modal"
+            data-cy="MulticollinearityGlossary"
             data-bs-target="#MulticollinearityGlossary">
             Definition: Multicollinearity
         </button>
@@ -79,7 +80,8 @@ export const WhatIsMulticollinearity = ({
             <p>{inlineKatex('x_1')} only:&emsp;{inlineKatex(`\\hat{y} = 
                     ${DATA.x1.intercept} + ${DATA.x1.slope}x_1`)}</p>
             {controls[0] ?
-                <p>With {inlineKatex('x_2')}:&emsp;{inlineKatex(`\\hat{y} = 
+                <p data-cy="x2equation">
+                    With {inlineKatex('x_2')}:&emsp;{inlineKatex(`\\hat{y} = 
                     ${DATA.x2.intercept} 
                     ${DATA.x2.slope_x1 < 0 ? '-' : '+'} 
                     ${Math.abs(DATA.x2.slope_x1)}x_1 
@@ -89,7 +91,8 @@ export const WhatIsMulticollinearity = ({
                 null
             }
             {controls[1] ?
-                <p>With {inlineKatex('x_3')}:&emsp;{inlineKatex(`\\hat{y} = 
+                <p data-cy="x3equation">
+                    With {inlineKatex('x_3')}:&emsp;{inlineKatex(`\\hat{y} = 
                     ${DATA.x3.intercept} 
                     ${DATA.x3.slope_x1 < 0 ? '-' : '+'} 
                     ${Math.abs(DATA.x3.slope_x1)}x_1 
@@ -185,6 +188,7 @@ export const WhatIsMulticollinearity = ({
                 className="btn btn-sm btn-primary mb-3"
                 data-bs-toggle="modal"
                 data-bs-target="#simulationThreeGlossary"
+                data-cy="glossary"
             >
                 Glossary
             </button>
@@ -200,6 +204,7 @@ export const WhatIsMulticollinearity = ({
         <div className="simulation__step-prompt">
             <button className="btn btn-sm btn-success"
                 onClick={() => handleProgress(1)}
+                data-cy="open-real-data"
             >
                 Continue to Real dataset &raquo;
             </button>
