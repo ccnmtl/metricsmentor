@@ -87,10 +87,6 @@ describe('Heteroskedasticity', () => {
                 cy.get('[data-cy="finish-to-multicollinearity"]').click();
                 cy.get('h2#whatIsMulticollinearity').should('be.visible');
             });
-            it('can get to the dashboard', () => {
-                cy.get('[data-cy="finish-to-dashboard"]').click();
-                cy.get('[data-cy="sim-3"]').should('contain', 'Simulation 3');
-            });
         });
     });
 
@@ -213,7 +209,7 @@ describe('Multicollinearity', () => {
         });
     });
 
-    describe('Takeaway questions', () => {
+    describe('Takeaway questions - Multicollinearity', () => {
         beforeEach(() => {
             cy.get('[data-cy="open-real-data"]').click();
             cy.get('input#option6-1').click();
@@ -237,11 +233,6 @@ describe('Multicollinearity', () => {
                 cy.get('[data-cy="finish-to-heteroskedasticity"]').click();
                 cy.get('h2.h2-primary').should(
                     'contain', 'What is Heteroskedasticity?');
-            });
-
-            it('can get to the dashboard', () => {
-                cy.get('[data-cy="finish-to-dashboard"]').click();
-                cy.get('[data-cy="sim-3"]').should('contain', 'Simulation 3');
             });
         });
     });

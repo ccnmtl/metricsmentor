@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 
 export const HeteroskedTakeaway = ({
-    submissionId, setStage, coursePk }) => {
+    submissionId, setStage, coursePk, setProgress, multicollProgress }) => {
     const [visibleIndex, setVisibleIndex] = useState(0);
 
     const questions = [
@@ -144,6 +144,10 @@ export const HeteroskedTakeaway = ({
         }
     ];
 
+    if (visibleIndex === questions.length){
+        setProgress(3);
+    }
+
     return (
         <>
             {questions.slice(0, visibleIndex + 1).map((q, idx) => (
@@ -166,9 +170,13 @@ export const HeteroskedTakeaway = ({
                         &#127881; &#127881; &#127881;
                     </div>
                     <div className="simulation__step-prompt mt-3 text-center
-                        mb-3">
-                        You can move on to Multicollinearity or
-                        head back to the Dashboard whenever you&apos;re ready.
+                     mb-3">
+                        {multicollProgress === 3
+                            ? <>You can go back to Multicollinearity or head
+                            back to the Dashboard whenever you&apos;re ready.</>
+                            : <>You can move on to Multicollinearity whenever
+                             you&apos;re ready.</>
+                        }
                     </div>
                     <div style={{ display: 'flex',
                         justifyContent: 'center', gap: '10px' }}>
@@ -177,11 +185,13 @@ export const HeteroskedTakeaway = ({
                             onClick={() => setStage(1)}>
                                 Multicollinearity
                         </div>
-                        <Link to={`/course/${coursePk}/simulations/`}
-                            data-cy="finish-to-dashboard"
-                            className="btn btn-success">
+                        {multicollProgress === 3 && (
+                            <Link to={`/course/${coursePk}/simulations/`}
+                                data-cy="finish-to-dashboard"
+                                className="btn btn-success">
                                 Back to Dashboard
-                        </Link>
+                            </Link>
+                        )}
                     </div>
                 </>
             )}
@@ -192,5 +202,7 @@ export const HeteroskedTakeaway = ({
 HeteroskedTakeaway.propTypes = {
     submissionId: PropTypes.number.isRequired,
     setStage: PropTypes.func.isRequired,
-    coursePk: PropTypes.number.isRequired
+    coursePk: PropTypes.number.isRequired,
+    setProgress: PropTypes.func.isRequired,
+    multicollProgress: PropTypes.number.isRequired
 };

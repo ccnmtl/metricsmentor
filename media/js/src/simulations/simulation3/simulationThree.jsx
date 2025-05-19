@@ -168,6 +168,8 @@ export const SimulationThree = () => {
                 <HeteroskedTakeaway
                     submissionId={submissionId}
                     setStage={setStage}
+                    setProgress={setProgress1}
+                    multicollProgress={progress2}
                     coursePk={coursePk} />
             )
         });
@@ -248,6 +250,8 @@ export const SimulationThree = () => {
                 <MulticollinearityTakeaway
                     submissionId={submissionId}
                     setStage={setStage}
+                    handleProgress={handleProgress}
+                    skedasticityProgress={progress1}
                     coursePk={coursePk} />
             )
         });
