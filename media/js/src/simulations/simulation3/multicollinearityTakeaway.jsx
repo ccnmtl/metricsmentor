@@ -4,7 +4,8 @@ import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 
 export const MulticollinearityTakeaway = ({
-    submissionId, setStage, coursePk }) => {
+    submissionId, setStage, coursePk, handleProgress,
+    skedasticityProgress }) => {
     const [visibleIndex, setVisibleIndex] = useState(0);
 
     const questions = [
@@ -145,6 +146,10 @@ export const MulticollinearityTakeaway = ({
         }
     ];
 
+    if (visibleIndex === questions.length){
+        handleProgress(3);
+    }
+
     return (
         <>
             {questions.slice(0, visibleIndex + 1).map((q, idx) => (
@@ -167,9 +172,13 @@ export const MulticollinearityTakeaway = ({
                         &#127881; &#127881; &#127881;
                     </div>
                     <div className="simulation__step-prompt mt-3 text-center
-                        mb-3">
-                        You can move on to Heteroskedasticity or
-                        head back to the Dashboard whenever you&apos;re ready.
+                     mb-3">
+                        {skedasticityProgress === 3
+                            ? <>You can go back to Heteroskedasticity or head
+                            back to the Dashboard whenever you&apos;re ready.</>
+                            : <>You can move on to Heteroskedasticity whenever
+                             you&apos;re ready.</>
+                        }
                     </div>
                     <div style={{ display: 'flex',
                         justifyContent: 'center', gap: '10px' }}>
@@ -178,11 +187,13 @@ export const MulticollinearityTakeaway = ({
                             onClick={() => setStage(0)}>
                                 Heteroskedasticity
                         </div>
-                        <Link to={`/course/${coursePk}/simulations/`}
-                            data-cy="finish-to-dashboard"
-                            className="btn btn-success">
+                        {skedasticityProgress === 3 && (
+                            <Link to={`/course/${coursePk}/simulations/`}
+                                data-cy="finish-to-dashboard"
+                                className="btn btn-success">
                                 Back to Dashboard
-                        </Link>
+                            </Link>
+                        )}
                     </div>
                 </>
             )}
@@ -193,5 +204,7 @@ export const MulticollinearityTakeaway = ({
 MulticollinearityTakeaway.propTypes = {
     submissionId: PropTypes.string.isRequired,
     setStage: PropTypes.func.isRequired,
-    coursePk: PropTypes.number.isRequired
+    coursePk: PropTypes.number.isRequired,
+    handleProgress: PropTypes.func.isRequired,
+    skedasticityProgress: PropTypes.number.isRequired
 };
