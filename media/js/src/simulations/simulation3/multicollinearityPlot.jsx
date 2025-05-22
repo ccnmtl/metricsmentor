@@ -11,26 +11,17 @@ export const MulticollinearityScatterPlot = ({controls, progress}) => {
     const title = progress == 0 ? 'Multicollinearity': 'Profit Margins';
     const xaxis = progress == 0 ? 'x1' : REALDATA.x1.name;
     const yaxis = progress == 0 ? 'y' : 'Profits';
+    const names = progress == 0 ? ['x1', 'x1 & x2', 'x1 & x3'] :
+        ['R&D', 'R&D and Profit Margin', 'R&D and Sales'];
 
-    const labelPos = (range) => {
-        return range[1] + (range[1] - range[0]) * 0.02;
-    };
-
-    const linedata = (y, color) => ({
+    const linedata = (y, color, dash, name) => ({
         type: 'scatter',
         marker: { color },
         mode: 'lines',
+        line: {dash: dash},
         x: DATA.xRange,
         y: y,
-    });
-
-    const lineLabel = (line, color) => ({
-        mode: 'text',
-        text: [`x1 & ${line}`],
-        textfont: { color },
-        textposition: 'top center',
-        x: [labelPos(DATA.xRange)],
-        y: [DATA[line].yRange[1]],
+        name: name
     });
 
     const data = [
@@ -47,24 +38,15 @@ export const MulticollinearityScatterPlot = ({controls, progress}) => {
                     color: 'blue',
                 },
             },
+            name: 'Data'
         },
-        {
-            mode: 'text',
-            text: ['x1'],
-            textfont: { color: 'black' },
-            textposition: 'top center',
-            x: [labelPos(DATA.xRange)],
-            y: [DATA.x1.yRange[1]],
-        },
-        linedata(DATA.x1.yRange, 'black'),
+        linedata(DATA.x1.yRange, 'black', 'solid', names[0]),
     ];
     if (controls[0]) {
-        data.push(linedata(DATA.x2.yRange, 'red'),
-            lineLabel('x2', 'red'));
+        data.push(linedata(DATA.x2.yRange, 'red', 'dot', names[1]));
     }
     if (controls[1]) {
-        data.push(linedata(DATA.x3.yRange, 'blue'),
-            lineLabel('x3', 'blue'));
+        data.push(linedata(DATA.x3.yRange, 'blue', 'dashdot', names[2]));
     }
 
     return (
@@ -72,7 +54,8 @@ export const MulticollinearityScatterPlot = ({controls, progress}) => {
             data={data}
             layout={{
                 title: title,
-                showlegend: false,
+                legend: { orientation: 'h', xanchor: 'center',
+                    x: 0.5, y: 1.18 },
                 xaxis: { title: xaxis, minallowed: 0},
                 yaxis: {
                     title: yaxis,
