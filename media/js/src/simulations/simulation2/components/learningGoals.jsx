@@ -56,7 +56,9 @@ export const LearningGoals = ({
                             </p>
                         </label>
                         {isComplete[dType[0]] &&
-                            <div className="status-complete flex-shrink-0">
+                            <div className="status-complete flex-shrink-0"
+                                data-cy={`${dType[0]}-complete`}
+                            >
                                 &#10003;
                             </div>
                         }

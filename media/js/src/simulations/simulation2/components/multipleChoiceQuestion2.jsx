@@ -69,7 +69,7 @@ export const MultipleChoiceQuestion2 = ({takeaways, isSubmitted, setIsSubmitted,
         {Object.entries(takeaways)
             .map(([topic, {prompt, choices, feedback}], i) => {
                 if (topic !== 'general' || isSubmitted) {
-                    return <div key={i}>
+                    return <div key={i} id={`${topic}-question`}>
                         <p className={`mb-3 ${i > 0 ? 'mt-5' : ''}`}>
                             {prompt}
                         </p>
@@ -103,7 +103,7 @@ export const MultipleChoiceQuestion2 = ({takeaways, isSubmitted, setIsSubmitted,
                             </div>}
                         {!nextStep &&
                             <button className="btn btn-sm btn-success mt-3"
-                                type='submit'
+                                type='submit' data-cy={`submit-${topic}`}
                                 onClick={() => handleSubmit(topic)}
                             >
                                 Submit &raquo;
@@ -114,7 +114,7 @@ export const MultipleChoiceQuestion2 = ({takeaways, isSubmitted, setIsSubmitted,
             })
         }
         {nextStep && <>
-            <button className="btn btn-sm btn-success me-3"
+            <button className="btn btn-sm btn-success me-3" data-cy="continue"
                 type='submit' onClick={handleContinue}
             >
                 {isDone ?
@@ -122,13 +122,13 @@ export const MultipleChoiceQuestion2 = ({takeaways, isSubmitted, setIsSubmitted,
             </button>
             {isDone &&
                 <a className="btn btn-sm btn-success me-3" role="button"
-                    href={`/course/${coursePk}/`}
+                    href={`/course/${coursePk}/`} data-cy="finish"
                 >
                     I&rsquo;m Done! &raquo;
                 </a>
             }
             {isDone &&
-                <button className="btn btn-sm btn-warning"
+                <button className="btn btn-sm btn-warning" data-cy="start-over"
                     onClick={handleStartOver}
                 >
                     Start Over
