@@ -106,7 +106,13 @@
                             {% else %}
                             {{ request.user.username }}
                             {% endif %}
-                            (<a href="/accounts/logout/?next=/" title="Log Out">Sign out</a>)
+                            (
+                            <form action="{% url 'logout' %}" method="post">
+                                {% csrf_token %}
+                                <input type="hidden" name="next" value="/" />
+                                <button type="submit" title="Log Out">Sign out</button>
+                            </form>
+                            )
                             {% endif %}    
                         </li>
                         {% if request.user.is_superuser %}
