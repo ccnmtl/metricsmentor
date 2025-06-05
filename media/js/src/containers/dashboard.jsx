@@ -3,11 +3,13 @@ import { useParams, Link } from 'react-router-dom';
 import { Footer } from '../footer';
 import PropTypes from 'prop-types';
 import { Katex } from '../utils/katexComponent';
+import { getCoursePk } from '../utils/utils';
 
 
 export const Dashboard = ({ isSuperUser, isFaculty}) => {
 
     let { courseId } = useParams();
+    const coursePk = getCoursePk();
 
     return (
         <>
@@ -94,7 +96,7 @@ export const Dashboard = ({ isSuperUser, isFaculty}) => {
                                     Begin &raquo;
                         </Link>
                     </div>
-                    {(isSuperUser || isFaculty) && (
+                    {(isSuperUser || isFaculty || coursePk === 4) && (
                         <div className="col-lg-5 p-4 mx-0 mx-lg-3 my-3 mx-lg-0
                                         simulation-card">
                             <h2 className="h2-primary">

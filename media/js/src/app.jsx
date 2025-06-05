@@ -6,8 +6,10 @@ import {SimulationTwo
 } from './simulations/simulation2/components/simulationTwo';
 import { SimulationThree } from './simulations/simulation3/simulationThree';
 import { SimulationFour } from './simulations/simulation4/simulationFour';
+import { getCoursePk } from './utils/utils';
 
 const isSuperUser = window.MetricsMentor.currentUser.is_superuser;
+const coursePk = getCoursePk();
 
 export const App = () => {
     const [isFaculty, setIsFaculty] = useState(null);
@@ -39,7 +41,7 @@ export const App = () => {
                 <Route path='course/:courseId/simulations/3/'
                     element={<SimulationThree />} />
 
-                {(isSuperUser || isFaculty) && (
+                {(isSuperUser || isFaculty || coursePk === 4) && (
                     <Route path='course/:courseId/simulations/4/'
                         element={<SimulationFour />} />
                 )}
