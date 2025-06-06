@@ -10,7 +10,6 @@ export const Dashboard = ({ isSuperUser, isFaculty}) => {
 
     let { courseId } = useParams();
     const coursePk = getCoursePk();
-    console.log('coursePk', coursePk);
 
     return (
         <>
@@ -97,7 +96,7 @@ export const Dashboard = ({ isSuperUser, isFaculty}) => {
                                     Begin &raquo;
                         </Link>
                     </div>
-                    {(isSuperUser || isFaculty || coursePk === 4) && (
+                    {(isSuperUser || isFaculty || coursePk === 6) && (
                         <div className="col-lg-5 p-4 mx-0 mx-lg-3 my-3 mx-lg-0
                                         simulation-card">
                             <h2 className="h2-primary">
