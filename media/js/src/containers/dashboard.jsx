@@ -10,6 +10,7 @@ export const Dashboard = ({ isSuperUser, isFaculty}) => {
 
     let { courseId } = useParams();
     const coursePk = getCoursePk();
+    console.log('coursePk', coursePk);
 
     return (
         <>
