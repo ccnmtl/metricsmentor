@@ -21,12 +21,34 @@ describe('SimulationThree', () => {
         expect(screen.getByText(
             /Learning objectives: Multicollinearity/i)).toBeInTheDocument();
     });
-
     it('shows progress list for Heteroskedasticity', () => {
         render(<SimulationThree />);
         expect(screen.getByText('Your progress:')).toBeInTheDocument();
         expect(screen.getByText('Learn')).toBeInTheDocument();
         expect(screen.getByText('Apply')).toBeInTheDocument();
         expect(screen.getByText('Assess')).toBeInTheDocument();
+    });
+    it('shows progress list for Multicollinearity after switching', () => {
+        render(<SimulationThree />);
+        const multiBtn = screen.getByRole('button', {
+            name: /Multicollinearity/i });
+        fireEvent.click(multiBtn);
+        expect(screen.getByText('Your progress:')).toBeInTheDocument();
+        expect(screen.getByText('Learn')).toBeInTheDocument();
+        expect(screen.getByText('Apply')).toBeInTheDocument();
+        expect(screen.getByText('Assess')).toBeInTheDocument();
+    });
+
+    it('renders simulation cards for both stages', () => {
+        render(<SimulationThree />);
+        // Heteroskedasticity card
+        expect(screen.getByText(/Learning objectives: Heteroskedasticity/i))
+            .toBeInTheDocument();
+        // Switch to Multicollinearity and check card
+        const multiBtn = screen.getByRole('button', {
+            name: /Multicollinearity/i });
+        fireEvent.click(multiBtn);
+        expect(screen.getByText(/Learning objectives: Multicollinearity/i))
+            .toBeInTheDocument();
     });
 });
