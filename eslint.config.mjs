@@ -3,7 +3,7 @@ import globals from "globals";
 import js from "@eslint/js";
 import pluginReact from "eslint-plugin-react";
 import security from "eslint-plugin-security";
-import cypress from "eslint-plugin-cypress";
+import pluginCypress from "eslint-plugin-cypress";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
 import { FlatCompat } from "@eslint/eslintrc";
@@ -28,7 +28,7 @@ export default defineConfig([
         plugins: {
             js,
             security,
-            cypress,
+            pluginCypress,
         },
         languageOptions: {
             globals: {
