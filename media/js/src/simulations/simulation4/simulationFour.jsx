@@ -45,6 +45,29 @@ export const SimulationFour = () => {
         </ul>
     </div>;
 
+    const mkRealDataBtn = (progress, stage) => {
+        if (progress[stage] < 1) {
+            return (
+                <div className="simulation__step-prompt">
+                    <button
+                        className="btn btn-sm btn-success"
+                        onClick={() => handleProgress(1)}>
+                    Continue to Real dataset &raquo;
+                    </button>
+                </div>
+            );
+        }
+        return (
+            <div className="simulation__step-prompt">
+                <button
+                    className="btn btn-sm btn-success"
+                    onClick={() => handleProgress(0)}>
+                Review &#8811;
+                </button>
+            </div>
+        );
+    };
+
     const preambleStep = {
         stepNumber: '•',
         segment: 'preamble',
@@ -91,19 +114,7 @@ export const SimulationFour = () => {
                     showRegLine={showRegLine}
                     setMysteryRegLine={setMysteryRegLine}
                     mysteryRegLine={mysteryRegLine} />
-                {progress[stage] < 1 ?
-                    <button
-                        className="btn btn-primary"
-                        onClick={() => handleProgress(1)}>
-                        Continue &#8811;
-                    </button>
-                    :
-                    <button
-                        className="btn btn-primary"
-                        onClick={() => handleProgress(0)}>
-                        Review &#8811;
-                    </button>
-                }
+                {mkRealDataBtn(progress, stage, handleProgress)}
             </>
         },
     ];

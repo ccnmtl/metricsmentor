@@ -29,6 +29,24 @@ export const WhatAreNonLinearRegressions = ({
         }
     };
 
+    const getMysteryFormula = (key) => {
+        const data = dataset.mystery[key];
+
+        if (key === 'Linear') {
+            return `\\hat{y} = ${data.intercept.toFixed(2)} +
+            ${data.slope.toFixed(2)}X`;
+        } else if (key === 'Quadratic') {
+            return `\\hat{y} = ${data.intercept.toFixed(2)} +
+            ${data.slope.toFixed(2)}X + ${data.slope2.toFixed(2)}X^2`;
+        } else if (key === 'Cubic') {
+            return `\\hat{y} = ${data.intercept.toFixed(2)} +
+            ${data.slope.toFixed(2)}X + ${data.slope2.toFixed(2)}X^2 +
+            ${data.slope3.toFixed(2)}X^3`;
+        } else {
+            return '';
+        }
+    };
+
     const toggleDataset = (i) =>
         setshowDatasets(arr => {
             const next = [...arr];
@@ -82,7 +100,7 @@ export const WhatAreNonLinearRegressions = ({
                     the definition of non-linear regressions; it&rsquo;ll help
                     as you continue with this exercise." />
             <button
-                className="btn btn-sm btn-primary mb-5"
+                className="btn btn-sm btn-primary mb-2"
                 data-bs-toggle="modal"
                 data-bs-target="#nonlineardDefinition"
             >
@@ -132,6 +150,7 @@ export const WhatAreNonLinearRegressions = ({
                     <input
                         type="checkbox"
                         checked={showDatasets[3]}
+                        className='mb-4'
                         onChange={handleMysteryDatasetToggle}
                     /> Mystery dataset
                 </label>
@@ -156,6 +175,11 @@ export const WhatAreNonLinearRegressions = ({
                                     />
                                     {reg} regression
                                 </label>
+                                {mysteryRegLine.includes(reg) && (
+                                    <div className="ms-4 mt-1">
+                                        <Katex tex={getMysteryFormula(reg)} />
+                                    </div>
+                                )}
                             </div>
                         ))}
                     </>
