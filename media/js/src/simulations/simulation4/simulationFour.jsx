@@ -4,6 +4,7 @@ import { STATIC_URL } from '../../utils/utils';
 import { PolynomialGraph } from './polynomialGraph';
 import { WhatAreNonLinearRegressions } from './whatAreNonlinearRegs';
 import { NonlinearRegsDefinition } from './nonlinearRegModal';
+import { StepProgressButton } from '../../StepProgressButton';
 
 
 export const SimulationFour = () => {
@@ -20,10 +21,6 @@ export const SimulationFour = () => {
 
 
     const handleStage = (e) => setStage(parseInt(e.target.value));
-
-    const handleProgress = (val) => {
-        setProgress(progress.map((x,i) => i === stage ? val : x));
-    };
 
     const mkModuleBtns = () => ['Polynomials', 'Logarithms', 'Interactions']
         .map((label, index) => (
@@ -44,29 +41,6 @@ export const SimulationFour = () => {
             )}
         </ul>
     </div>;
-
-    const mkRealDataBtn = (progress, stage) => {
-        if (progress[stage] < 1) {
-            return (
-                <div className="simulation__step-prompt">
-                    <button
-                        className="btn btn-sm btn-success"
-                        onClick={() => handleProgress(1)}>
-                    Continue to Real dataset &raquo;
-                    </button>
-                </div>
-            );
-        }
-        return (
-            <div className="simulation__step-prompt">
-                <button
-                    className="btn btn-sm btn-success"
-                    onClick={() => handleProgress(0)}>
-                Review &#8811;
-                </button>
-            </div>
-        );
-    };
 
     const preambleStep = {
         stepNumber: '•',
@@ -107,14 +81,24 @@ export const SimulationFour = () => {
             title: 'What are non-linear regressions?',
             content:
             <>
-                <WhatAreNonLinearRegressions
-                    setshowDatasets={setshowDatasets}
-                    setshowRegLine={setshowRegLine}
-                    showDatasets={showDatasets}
-                    showRegLine={showRegLine}
-                    setMysteryRegLine={setMysteryRegLine}
-                    mysteryRegLine={mysteryRegLine} />
-                {mkRealDataBtn(progress, stage, handleProgress)}
+                {progress[stage] < 1 && (
+                    <WhatAreNonLinearRegressions
+                        setshowDatasets={setshowDatasets}
+                        setshowRegLine={setshowRegLine}
+                        showDatasets={showDatasets}
+                        showRegLine={showRegLine}
+                        setMysteryRegLine={setMysteryRegLine}
+                        mysteryRegLine={mysteryRegLine}
+                    />
+                )}
+                <StepProgressButton
+                    progress={progress}
+                    stage={stage}
+                    setProgress={setProgress}
+                    continueLabel="Continue to Real dataset »"
+                    reviewLabel="Review »"
+                    progressNumber={1}
+                />
             </>
         },
     ];
