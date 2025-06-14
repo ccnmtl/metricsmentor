@@ -1,15 +1,18 @@
-import React, { useState} from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { SimulationPanel } from '../../SimulationPanel';
-import { STATIC_URL } from '../../utils/utils';
+import { STATIC_URL, createSubmission, getCoursePk } from '../../utils/utils';
 import { PolynomialGraph } from './polynomialGraph';
 import { WhatAreNonLinearRegressions } from './whatAreNonlinearRegs';
 import { NonlinearRegsDefinition } from './nonlinearRegModal';
 import { StepProgressButton } from '../../StepProgressButton';
+import { PolynomialTakeaway } from './polynomialTakeaway';
 
+const coursePk = getCoursePk();
 
 export const SimulationFour = () => {
 
     const [stage, setStage] = useState(0);
+    const [submissionId, setSubmissionId] = useState(null);
     const [showRegLine, setshowRegLine] = useState(
         [false, false, false, false]);
     const [showDatasets, setshowDatasets] = useState(
@@ -20,6 +23,7 @@ export const SimulationFour = () => {
     const [mysteryRegLine, setMysteryRegLine] = useState([]);
 
 
+    const initialized = useRef(false);
     const handleStage = (e) => setStage(parseInt(e.target.value));
 
     const mkModuleBtns = () => ['Polynomials', 'Logarithms', 'Interactions']
@@ -101,6 +105,22 @@ export const SimulationFour = () => {
                 />
             </>
         },
+        ...(progress[stage] > 1
+            ? [{
+                headerId: 'takeAway1',
+                title: 'Takeaway questions',
+                content: (
+                    <PolynomialTakeaway
+                        submissionId={submissionId}
+                        setStage={setStage}
+                        coursePk={coursePk}
+                        stage={stage}
+                        setProgress={setProgress}
+                        progress={progress}
+                    />
+                )
+            }]
+            : [])
     ];
 
     const logarithmSteps = [
@@ -140,6 +160,17 @@ export const SimulationFour = () => {
             </>
         },
     ];
+
+    useEffect(() => {
+        const initializeSubmission = async() => {
+            if (!initialized.current && submissionId === null) {
+                initialized.current = true;
+                const subId = await createSubmission(coursePk);
+                setSubmissionId(subId);
+            }
+        };
+        initializeSubmission();
+    }, []);
 
     return (
         <>
