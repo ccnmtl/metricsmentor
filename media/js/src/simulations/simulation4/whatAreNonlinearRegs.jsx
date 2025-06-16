@@ -212,7 +212,7 @@ export const WhatAreNonLinearRegressions = ({
                         <p>Test between Linear and Quadratic regression:</p>
                         <div className='ms-3'>
                             <p><Katex tex={'H_0: \\beta_2 = 0; ~'} /></p>
-                            <p><Katex tex={'H_1: \\beta_2 \\neq 0; ~'} /></p>
+                            <p><Katex tex={'H_1: not~H_0; ~'} /></p>
                             <p>at <Katex tex={'\\alpha = 0.05; ~'}/></p>
                             <p className='mt-2'>
                             Resulting <Katex tex={'~p-value = 0.016'} />
@@ -239,7 +239,7 @@ export const WhatAreNonLinearRegressions = ({
                         <p>Test between Quadratic and Cubic regression:</p>
                         <div className='ms-3'>
                             <p><Katex tex={'H_0: \\beta_3 = 0; ~'} /></p>
-                            <p><Katex tex={'H_1: \\beta_3 \\neq 0; ~'} /></p>
+                            <p><Katex tex={'H_1: not~H_0; ~'} /></p>
                             <p>at <Katex tex={'\\alpha = 0.05; ~'}/></p>
 
                             <p className='mt-2'>
@@ -263,8 +263,7 @@ export const WhatAreNonLinearRegressions = ({
                         <div className='ms-3'>
                             <p><Katex tex={'H_0: \\beta_2 = \\beta_3 = 0; ~'} />
                             </p>
-                            <p><Katex tex={`H_1: \\beta_2 \\neq
-                            \\beta_3 \\neq 0; ~`} /></p>
+                            <p><Katex tex={'H_1: not~H_0; ~'} /></p>
                             <p>at <Katex tex={'\\alpha = 0.05; ~'}/></p>
                             <p>Resulting <Katex tex={'p-value = 0.0541'} /> </p>
                             <p>
