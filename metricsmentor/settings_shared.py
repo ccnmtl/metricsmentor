@@ -25,6 +25,10 @@ INSTALLED_APPS += [  # noqa
     'contactus',
 ]
 
+MIDDLEWARE += [  # noqa
+    'django.middleware.csrf.CsrfViewMiddleware',
+]
+
 THUMBNAIL_SUBDIR = "thumbs"
 LOGIN_REDIRECT_URL = "/"
 

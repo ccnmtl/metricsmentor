@@ -1,0 +1,17 @@
+// ...existing code...
+
+.btn-linklike {
+    background: none;
+    border: none;
+    color: #0d6efd;
+    text-decoration: underline;
+    cursor: pointer;
+    padding: 0;
+    font: inherit;
+    display: inline;
+}
+.btn-linklike:hover,
+.btn-linklike:focus {
+    color: #0a58ca;
+    text-decoration: underline;
+}
