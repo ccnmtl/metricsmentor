@@ -1,5 +1,5 @@
 beforeEach(() => {
-    cy.login('faculty_one', 'test');
+    cy.login('student_one', 'test');
     cy.visit('/course/1/simulations/2/');
     cy.get('input#affairs_sim2').click();
 });
@@ -64,18 +64,18 @@ describe('Takeaway Questions', () => {
     });
     it('shows negative feedback', () => {
         cy.get('input#affairs_sim2-choice-0').click();
-        cy.get('button[type="submit"]').click();
+        cy.get('[data-cy="submit-affairs_sim2"]').click();
         cy.get('.text-danger[role="alert"]').should('exist');
     });
     it('shows postive feedback', () => {
         cy.get('input#affairs_sim2-choice-3').click();
-        cy.get('button[type="submit"]').click();
+        cy.get('[data-cy="submit-affairs_sim2"]').click();
         cy.get('.text-success[role="alert"]').should('exist');
         cy.get('[data-cy="continue"]').click();
     });
     it('advances to the next topic', () => {
         cy.get('input#affairs_sim2-choice-3').click();
-        cy.get('button[type="submit"]').click();
+        cy.get('[data-cy="submit-affairs_sim2"]').click();
         cy.get('.text-success[role="alert"]').should('exist');
         cy.get('[data-cy="continue"]').click();
         cy.get('.hi-val').should('contain', '1 of 2');
