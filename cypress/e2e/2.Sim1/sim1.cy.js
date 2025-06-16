@@ -1,5 +1,5 @@
 beforeEach(() => {
-    cy.login('faculty_one', 'test');
+    cy.login('student_one', 'test');
     cy.visit('/course/1/simulations/1/');
 });
 

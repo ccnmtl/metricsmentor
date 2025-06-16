@@ -1,5 +1,5 @@
 beforeEach(() => {
-    cy.login('faculty_one', 'test');
+    cy.login('student_one', 'test');
 });
 
 describe('Heteroskedasticity', () => {
