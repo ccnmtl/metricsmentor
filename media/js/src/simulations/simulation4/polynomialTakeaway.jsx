@@ -35,28 +35,28 @@ export const PolynomialTakeaway = ({
                 {
                     id: 'poly1-choice-B',
                     index: 'B',
-                    text: 'A polynomial with X^3',
+                    text: 'A polynomial with X³',
                     isCorrect: false,
                     feedback:
-                    'A polynomial with X^3 would not reflect a quadratic ' +
+                    'A polynomial with X³ would not reflect a quadratic ' +
                     'relationship.'
                 },
                 {
                     id: 'poly1-choice-C',
                     index: 'C',
-                    text: 'A polynomial with X^2 and X^3',
+                    text: 'A polynomial with X² and X³',
                     isCorrect: false,
                     feedback:
-                    'A polynomial with X^2 and X^3 would reflect a cubic ' +
+                    'A polynomial with X² and X³ would reflect a cubic ' +
                     'relationship; not a quadratic one.'
                 },
                 {
                     id: 'poly1-choice-D',
                     index: 'D',
-                    text: 'A polynomial with X and X^2',
+                    text: 'A polynomial with X and X²',
                     isCorrect: true,
                     feedback:
-                    'Yes! A polynomial with X and X^2 would reflect a ' +
+                    'Yes! A polynomial with X and X² would reflect a ' +
                     'quadratic relationship.'
                 },
                 {
@@ -65,7 +65,7 @@ export const PolynomialTakeaway = ({
                     text: 'None of the above',
                     isCorrect: false,
                     feedback:
-                    'A polynomial with X and X^2 would reflect a quadratic ' +
+                    'A polynomial with X and X² would reflect a quadratic ' +
                     'relationship, and that option is given in the choices; ' +
                     'hence, “None of the above” is incorrect.'
                 }
@@ -88,27 +88,27 @@ export const PolynomialTakeaway = ({
                 {
                     id: 'poly2-choice-B',
                     index: 'B',
-                    text: 'A polynomial with X^2',
+                    text: 'A polynomial with X²',
                     isCorrect: false,
                     feedback:
-                'A polynomial with X^2 would not reflect a cubic relationship.'
+                'A polynomial with X² would not reflect a cubic relationship.'
                 },
                 {
                     id: 'poly2-choice-C',
                     index: 'C',
-                    text: 'A polynomial with X, X^2, and X^3.',
+                    text: 'A polynomial with X, X², and X³.',
                     isCorrect: true,
                     feedback:
-                    'Yes! A polynomial with X, X^2, and X^3 reflects a ' +
+                    'Yes! A polynomial with X, X², and X³ reflects a ' +
                     'cubic relationship.'
                 },
                 {
                     id: 'poly2-choice-D',
                     index: 'D',
-                    text: 'A polynomial with X and X^2',
+                    text: 'A polynomial with X and X²',
                     isCorrect: false,
                     feedback:
-                    'A polynomial with X and X^2 would reflect a quadratic ' +
+                    'A polynomial with X and X² would reflect a quadratic ' +
                     'relationship, but not a cubic one.'
                 },
                 {
@@ -117,7 +117,7 @@ export const PolynomialTakeaway = ({
                     text: 'None of the above',
                     isCorrect: false,
                     feedback:
-                    'A polynomial with X, X^2, and X^3 reflects a cubic ' +
+                    'A polynomial with X, X², and X³ reflects a cubic ' +
                     'relationship, and that option is given in the choices; ' +
                     'hence, “None of the above” is incorrect.'
                 }
