@@ -204,6 +204,12 @@ export const WhatAreNonLinearRegressions = ({
                             onClick={handleRunRegressionTest}>
                                 Run Regression Test &raquo;
                         </button>
+                        <span className="ms-2 align-middle">
+                            {mysteryRegLine.length !== 2
+                                ? 'Select two to run the test'
+                                : `${mysteryRegLine[0]} and 
+                                    ${mysteryRegLine[1]}`}
+                        </span>
                     </>
                 )}
                 {/* Show result based on regressionTestResult */}
