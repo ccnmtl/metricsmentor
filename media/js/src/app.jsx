@@ -31,7 +31,7 @@ export const App = () => {
                 <Route path='course/:courseId/simulations/'
                     element={<Dashboard
                         isSuperUser={isSuperUser}
-                        isFaculty={isFaculty}/>} />o
+                        isFaculty={isFaculty}/>} />
                 <Route path='course/:courseId/simulations/1/'
                     element={<SimulationOne />} />
 
