@@ -107,10 +107,10 @@
                             {{ request.user.username }}
                             {% endif %}
                             (
-                            <form action="{% url 'logout' %}" method="post">
+                            <form action="{% url 'logout' %}" method="post" style="display:inline;">
                                 {% csrf_token %}
                                 <input type="hidden" name="next" value="/" />
-                                <button type="submit" title="Log Out">Sign out</button>
+                                <button type="submit" title="Log Out" class="btn-linklike">Log Out</button>
                             </form>
                             )
                             {% endif %}    
