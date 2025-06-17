@@ -3,11 +3,12 @@ import { PromptBlock } from '../../PromptBlock';
 import PropTypes from 'prop-types';
 import { Katex } from '../../utils/katexComponent';
 import dataset from './polynomial.json';
+import { CLEARSET, showOne } from './polyUtils';
 
 
 export const WhatAreNonLinearRegressions = ({
-    setshowRegLine, setshowDatasets, showRegLine, showDatasets,
-    setMysteryRegLine, mysteryRegLine}) => {
+    setShowRegLine, setShowDatasets, showRegLine, showDatasets,
+    setCompareRegLine, compareRegLine}) => {
 
     const DATASET_KEYS = ['linear', 'quadratic', 'cubic'];
     const DATASET_LABELS = {
@@ -35,28 +36,28 @@ export const WhatAreNonLinearRegressions = ({
     };
 
     const toggleDataset = (i) =>
-        setshowDatasets(arr => {
+        setShowDatasets(arr => {
             const next = [...arr];
             next[i] = !next[i];
             if (i !== 3 && next[i]) {
                 next[3] = false; // mystery dataset reset
-                setMysteryRegLine([]);
+                setCompareRegLine([]);
             }
             return next;
         });
 
     const toggleReg = (i) =>
-        setshowRegLine(arr => {
+        setShowRegLine(arr => {
             const next = [...arr];
             next[i] = !next[i];
             return next;
         });
 
-    const handleMysteryReg = (e) => {
+    const handleCompareReg = (e) => {
         const value = e.target.value;
         const checked = e.target.checked;
 
-        setMysteryRegLine(prev => {
+        setCompareRegLine(prev => {
             let next;
             if (checked) {
                 next = [...prev, value];
@@ -73,25 +74,25 @@ export const WhatAreNonLinearRegressions = ({
 
     const handleMysteryDatasetToggle = () => {
         if (!showDatasets[3]) {
-            setshowDatasets([false, false, false, true]);
-            setshowRegLine([false, false, false, false]);
+            setShowDatasets(showOne(3));
+            setShowRegLine(CLEARSET);
         } else {
-            setshowDatasets([false, false, false, false]);
-            setMysteryRegLine([]);
+            setShowDatasets(CLEARSET);
+            setCompareRegLine([]);
             setRegressionTestResult(null);
         }
     };
 
     const handleRunRegressionTest = () => {
-        if (mysteryRegLine.length === 2) {
-            if (mysteryRegLine.includes('Linear')
-                && mysteryRegLine.includes('Quadratic')) {
+        if (compareRegLine.length === 2) {
+            if (compareRegLine.includes('Linear')
+                && compareRegLine.includes('Quadratic')) {
                 setRegressionTestResult('linear-vs-quadratic');
-            } else if (mysteryRegLine.includes('Quadratic')
-                && mysteryRegLine.includes('Cubic')) {
+            } else if (compareRegLine.includes('Quadratic')
+                && compareRegLine.includes('Cubic')) {
                 setRegressionTestResult('quadratic-vs-cubic');
-            } else if (mysteryRegLine.includes('Linear')
-                && mysteryRegLine.includes('Cubic')) {
+            } else if (compareRegLine.includes('Linear')
+                && compareRegLine.includes('Cubic')) {
                 setRegressionTestResult('linear-vs-cubic');
             } else {
                 setRegressionTestResult(null);
@@ -172,6 +173,7 @@ export const WhatAreNonLinearRegressions = ({
                     'Try out each regression line',
                     'Visually, which one fits best?',
                 ]} />
+
                 {showDatasets[3] && (
                     <>
                         {DATASET_KEYS.map((reg) => (
@@ -180,14 +182,14 @@ export const WhatAreNonLinearRegressions = ({
                                     <input
                                         type="checkbox"
                                         className="me-2"
-                                        checked={mysteryRegLine.includes(
+                                        checked={compareRegLine.includes(
                                             DATASET_LABELS[reg])}
                                         value={DATASET_LABELS[reg]}
-                                        onChange={handleMysteryReg}
+                                        onChange={handleCompareReg}
                                     />
                                     {DATASET_LABELS[reg]} regression
                                 </label>
-                                {mysteryRegLine.includes(DATASET_LABELS[reg])
+                                {compareRegLine.includes(DATASET_LABELS[reg])
                                 && (
                                     <div className="ms-4 mt-1">
                                         <Katex tex={
@@ -199,16 +201,16 @@ export const WhatAreNonLinearRegressions = ({
                         ))}
                         <button
                             className="btn btn-sm btn-secondary mt-2"
-                            disabled={mysteryRegLine.length < 2
-                                || mysteryRegLine.length === 3}
+                            disabled={compareRegLine.length < 2
+                                || compareRegLine.length === 3}
                             onClick={handleRunRegressionTest}>
                                 Run Regression Test &raquo;
                         </button>
                         <span className="ms-2 align-middle">
-                            {mysteryRegLine.length !== 2
+                            {compareRegLine.length !== 2
                                 ? 'Select two to run the test'
-                                : `${mysteryRegLine[0]} and 
-                                    ${mysteryRegLine[1]}`}
+                                : `${compareRegLine[0]} and 
+                                    ${compareRegLine[1]}`}
                         </span>
                     </>
                 )}
@@ -293,10 +295,10 @@ export const WhatAreNonLinearRegressions = ({
 };
 
 WhatAreNonLinearRegressions.propTypes = {
-    setshowRegLine: PropTypes.func.isRequired,
-    setshowDatasets: PropTypes.func.isRequired,
+    setShowRegLine: PropTypes.func.isRequired,
+    setShowDatasets: PropTypes.func.isRequired,
     showRegLine: PropTypes.arrayOf(PropTypes.bool).isRequired,
     showDatasets: PropTypes.arrayOf(PropTypes.bool).isRequired,
-    mysteryRegLine: PropTypes.arrayOf(PropTypes.string),
-    setMysteryRegLine: PropTypes.func.isRequired
+    compareRegLine: PropTypes.arrayOf(PropTypes.string),
+    setCompareRegLine: PropTypes.func.isRequired
 };

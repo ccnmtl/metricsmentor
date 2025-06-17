@@ -5,7 +5,7 @@ import dataset from './polynomial.json';
 
 
 export const PolynomialGraph = ({
-    showDatasets, showRegLine, mysteryRegLine
+    showDatasets, showRegLine, compareRegLine
 }) => {
 
     const generatePlotData = (i) => {
@@ -29,8 +29,10 @@ export const PolynomialGraph = ({
             name: key
         }];
 
-        if (key === 'mystery' && Array.isArray(mysteryRegLine)) {
-            mysteryRegLine.forEach(reg => {
+        if (['mystery', 'real', 'real2'].includes(key) &&
+            Array.isArray(compareRegLine)
+        ){
+            compareRegLine.forEach(reg => {
                 const regData = data[reg];
                 if (regData && regData.line) {
                     plot.push({
@@ -59,12 +61,19 @@ export const PolynomialGraph = ({
     };
 
     const plotData = [];
-    if (showDatasets != null) {
+    if (Array.isArray(showDatasets) && showDatasets.includes(true)) {
         for (const [i, data] of showDatasets.entries()) {
             if (data) {
                 generatePlotData(i).forEach(x => plotData.push(x));
             }
         }
+    } else {
+        plotData.push({
+            x: [1],
+            y: [1],
+            mode: 'text',
+            text: ['Choose a dataset to begin'],
+        });
     }
     return (
         <Plot
@@ -83,7 +92,7 @@ export const PolynomialGraph = ({
 };
 
 PolynomialGraph.propTypes = {
-    mysteryRegLine: PropTypes.string,
+    compareRegLine: PropTypes.string,
     showRegLine: PropTypes.arrayOf(PropTypes.bool).isRequired,
     showDatasets: PropTypes.arrayOf(PropTypes.bool).isRequired
 };
