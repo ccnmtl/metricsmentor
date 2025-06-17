@@ -275,7 +275,7 @@ export const SimulationThree = () => {
         const initializeSubmission = async() => {
             if (!initialized.current && submissionId === null) {
                 initialized.current = true;
-                const subId = await createSubmission(coursePk);
+                const subId = await createSubmission(coursePk, null, 3);
                 setSubmissionId(subId);
             }
         };

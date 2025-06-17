@@ -183,51 +183,21 @@ export const shuffleArray = (array) => {
     return array;
 };
 
-
 /**
  * Creates or updates a submission for a course.
  *
- * This function is used to either create a new submission or update an
- * existing one for a specific course. It sends an authenticated HTTP
- * request to the server with the necessary payload and handles the
- * server's response.
- *
- * @param {number} coursePk - The primary key (ID) of the course for which the
- * submission is being created or updated.
+ * @param {number} coursePk - The primary key (ID) of the course.
  * @param {number|null} [submissionId=null] - The ID of an existing submission.
- * If provided, the function updates the submission; otherwise, it creates a
- * new one.
- * @returns {Promise<number>} - A promise that resolves to the `submission_id`
- *  of the created or updated submission.
- * @throws {Error} - Throws an error if the request fails or the server responds
- *  with a non-success status.
- *
- * @example
- * // Create a new submission
- * createSubmission(123)
- *     .then((submissionId) => {
- *         console.log('Submission created with ID:', submissionId);
- *     })
- *     .catch((error) => {
- *         console.error('Failed to create submission:', error);
- *     });
- *
- * @example
- * // Update an existing submission
- * createSubmission(123, 456)
- *     .then((submissionId) => {
- *         console.log('Submission updated with ID:', submissionId);
- *     })
- *     .catch((error) => {
- *         console.error('Failed to update submission:', error);
- *     });
+ * @param {number} [simulation=3] - The simulation ID to use.
+ * @returns {Promise<number>} - Resolves to the submission_id.
+ * @throws {Error} - If the request fails.
  */
 export const createSubmission = async(
-    coursePk, submissionId = null) => {
+    coursePk, submissionId = null, simulation) => {
     const data = {};
 
     const payload = {
-        simulation: 3,
+        simulation: simulation,
         data: data,
     };
 
