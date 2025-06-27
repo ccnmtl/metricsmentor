@@ -1,12 +1,12 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { saveAnswer, extractTextContent } from './utils/utils';
 
 export const QuizComponent = ({
     question, options, correctAnswerIndex, correctFeedback, incorrectFeedback,
-    submissionId, questionNumber, setIsCorrect, isTextInput, correctTextAnswer
+    submissionId, questionNumber, setIsCorrect, isTextInput, correctTextAnswer,
+    selectedOption, setSelectedOption
 }) => {
-    const [selectedOption, setSelectedOption] = useState(null);
     const [textInputAnswer, setTextInputAnswer] = useState('');
     const [feedback, setFeedback] = useState('');
     const [isSubmitDisabled, setIsSubmitDisabled] = useState(false);
@@ -26,6 +26,12 @@ export const QuizComponent = ({
         setTextInputAnswer(e.target.value);
         setFeedback('');
     };
+
+    useEffect(() => {
+        if (textInputAnswer.length > 0) {
+            setFeedback(incorrectFeedback);
+        }
+    }, [incorrectFeedback]);
 
     const handleSubmit = async() => {
 
@@ -138,6 +144,8 @@ QuizComponent.propTypes = {
     submissionId: PropTypes.number.isRequired,
     questionNumber: PropTypes.number.isRequired,
     setIsCorrect: PropTypes.func.isRequired,
+    selectedOption: PropTypes.number,
+    setSelectedOption: PropTypes.func,
     isTextInput: PropTypes.bool,
     correctTextAnswer: PropTypes.string
 };

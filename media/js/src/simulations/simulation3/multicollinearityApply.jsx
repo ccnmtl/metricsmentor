@@ -13,6 +13,7 @@ export const MulticollinearityApply = ({
 }) => {
     const [isQuestion1Correct, setIsQuestion1Correct] = useState(false);
     const [isQuestion2Correct, setIsQuestion2Correct] = useState(false);
+    const [selectedOption, setSelectedOption] = useState(null);
 
     const options1 = [
         <>Exclude {inlineKatex('x_3')} (Sales) from the regression
@@ -259,6 +260,8 @@ export const MulticollinearityApply = ({
             submissionId={submissionId}
             questionNumber={6}
             setIsCorrect={setIsQuestion1Correct}
+            selectedOption={selectedOption}
+            setSelectedOption={setSelectedOption}
         />
 
         {isQuestion1Correct && (
@@ -330,6 +333,8 @@ export const MulticollinearityApply = ({
                     submissionId={submissionId}
                     questionNumber={7}
                     setIsCorrect={setIsQuestion2Correct}
+                    selectedOption={selectedOption}
+                    setSelectedOption={setSelectedOption}
                 />
             </>
         )}

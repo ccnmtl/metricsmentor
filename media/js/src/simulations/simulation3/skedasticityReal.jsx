@@ -14,6 +14,7 @@ export const SkedasticityReal = ({ setProgress, submissionId }) => {
     const [lowRobust, highRobust] = ciRobust;
     const [isQuestion1Correct, setIsQuestion1Correct] = useState(false);
     const [isQuestion2Correct, setIsQuestion2Correct] = useState(false);
+    const [selectedOption, setSelectedOption] = useState(null);
 
     // Question 1
     const options1 = ['The dataset exhibits heteroskedasticity.',
@@ -85,6 +86,8 @@ export const SkedasticityReal = ({ setProgress, submissionId }) => {
                 submissionId={submissionId}
                 questionNumber={1}
                 setIsCorrect={setIsQuestion1Correct}
+                selectedOption={selectedOption}
+                setSelectedOption={setSelectedOption}
             />
             {isQuestion1Correct && (
                 <>
@@ -162,6 +165,8 @@ export const SkedasticityReal = ({ setProgress, submissionId }) => {
                         submissionId={submissionId}
                         questionNumber={2}
                         setIsCorrect={setIsQuestion2Correct}
+                        selectedOption={selectedOption}
+                        setSelectedOption={setSelectedOption}
                     />
                 </>
             )}

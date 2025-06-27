@@ -4,14 +4,62 @@ import PropTypes from 'prop-types';
 import { Katex } from '../../utils/katexComponent';
 import dataset from './polynomial.json';
 import { CLEARREG, CLEARSET, showOne } from './polyUtils';
+import { QuizComponent } from '../../Quiz';
 
 
 export const RealDataPolynomials = ({
     setShowRegLine, setShowDatasets, showRegLine, showDatasets,
-    setCompareRegLine, compareRegLine}) => {
+    setCompareRegLine, compareRegLine, submissionId, isCorrect, setIsCorrect,
+    isCorrect2, setIsCorrect2}) => {
 
     const [selected, setSelected] = useState(null);
     const [showTest, setShowTest] = useState(false);
+    const [showQuiz, setShowQuiz] = useState(false);
+    const [showAnswer, setShowAnswer] = useState(false);
+    const [incorrectFeedback, setIncorrectFeedback] = useState(
+        <p>That is not the optimal study time. Please try again.
+            <button onClick={() => setShowAnswer(true)}>
+                Or would you rather see the correct answer?
+            </button>
+        </p>
+    );
+    const [incorrectFeedback2, setIncorrectFeedback2] = useState('');
+    const [selectedOption, setSelectedOption] = useState(null);
+
+    useEffect(() => {
+        console.log('showAnswer:', showAnswer);
+        if (showAnswer) {
+            setIncorrectFeedback(<p>
+                That is not the optimal study time. Please try again. Studying
+                on average <strong>13.95 hours a week </strong> maximizes the
+                grade.</p>);
+        } else {
+            setIncorrectFeedback(
+                <p>That is not the optimal study time. Please try again.
+                    <button className='btn btn-link btn-reveal'
+                        onClick={() => setShowAnswer(true)}
+                    >
+                        Or would you rather see the correct answer?
+                    </button>
+                </p>
+            );
+        }
+    },[showAnswer]);
+
+    useEffect(() => console.log(
+        'IncorrectFeedback:',incorrectFeedback),[incorrectFeedback]);
+
+    useEffect(() => {
+        if (selectedOption === 0) {
+            setIncorrectFeedback2('Linear regression is not the best fit for ' +
+                'this dataset. This is evident when we run the tests against ' +
+                'Quadratic and then Cubic regressions.');
+        } else if (selectedOption === 1) {
+            setIncorrectFeedback2('Quadratic regression is not the best fit ' +
+                'for this dataset. This is evident when we run the tests ' +
+                'against Linear and then Cubic regressions.');
+        }
+    },[selectedOption]);
 
     const LABELS = [['real', 'Grade and study time'],
         ['real2', 'Housing prices and distance to the incinerator']];
@@ -35,6 +83,10 @@ export const RealDataPolynomials = ({
 
     const handleShowTest = () => {
         setShowTest(true);
+    };
+
+    const handleQuiz = () => {
+        setShowQuiz(true);
     };
 
     useEffect(() => {
@@ -111,6 +163,10 @@ export const RealDataPolynomials = ({
     const handleDataset = (idx) => {
         setShowDatasets(showOne(4 + idx));
         setSelected(idx);
+        setShowQuiz(false);
+        setIsCorrect(false);
+        setIsCorrect2(false);
+        setShowAnswer(false);
         setShowRegLine(CLEARREG);
     };
 
@@ -211,6 +267,57 @@ export const RealDataPolynomials = ({
                             ${compareRegLine[1]}`}
                 </span>
                 {showTest && displayRegLineTest()}
+                {showQuiz ? <>
+                    {selected === 0 && <><div className='mt-4'><QuizComponent
+                        question={'Based on the quadratic regression model, ' +
+                            'what is the optimal study time that results in ' +
+                            'the highest predicted grade?'}
+                        correctFeedback={'13.95 hours per week is the ' +
+                            'correct optimal study time!'}
+                        incorrectFeedback={incorrectFeedback}
+                        correctTextAnswer={'13.95'}
+                        setIsCorrect={setIsCorrect}
+                        isTextInput={true}
+                        correctAnswerIndex={2}
+                        questionNumber={0}
+                        submissionId={submissionId} /></div>
+                    {isCorrect && <div className='mt-4'><QuizComponent
+                        question={'Based on your observations, which ' +
+                            'regression model fits best for this dataset?'}
+                        options={['Linear regression', 'Quadratic regression',
+                            'Cubic regression']}
+                        correctAnswerIndex={2}
+                        correctFeedback={'Cubic regression is the correct ' +
+                            'model. When we run the tests against Linear and ' +
+                            'Quadratic regressions, Cubic regression is ' +
+                            'shown to be the best fit'}
+                        incorrectFeedback={incorrectFeedback2}
+                        setIsCorrect={setIsCorrect2}
+                        questionNumber={1}
+                        selectedOption={selectedOption}
+                        setSelectedOption={setSelectedOption}
+                        submissionId={submissionId} /></div>}</>}
+                    {selected === 1 && <div className='mt-4'><QuizComponent
+                        question={'Based on your observations, which ' +
+                            'regression model fits best for this dataset?'}
+                        options={['Linear regression', 'Quadratic regression',
+                            'Cubic regression']}
+                        correctAnswerIndex={2}
+                        correctFeedback={'Cubic regression is the correct ' +
+                            'model. When we run the tests against Linear and ' +
+                            'Quadratic regressions, Cubic regression is ' +
+                            'shown to be the best fit'}
+                        incorrectFeedback={incorrectFeedback2}
+                        setIsCorrect={setIsCorrect}
+                        questionNumber={3}
+                        selectedOption={selectedOption}
+                        setSelectedOption={setSelectedOption}
+                        submissionId={submissionId} /></div>}
+                </>
+                    :
+                    <button className='btn btn-sm btn-success mt-4'
+                        onClick={handleQuiz}>A few more questions...»</button>
+                }
             </>}
         </>
     );
@@ -222,5 +329,10 @@ RealDataPolynomials.propTypes = {
     showRegLine: PropTypes.arrayOf(PropTypes.bool).isRequired,
     showDatasets: PropTypes.arrayOf(PropTypes.bool).isRequired,
     setCompareRegLine: PropTypes.func.isRequired,
-    compareRegLine: PropTypes.arrayOf(PropTypes.string).isRequired
+    compareRegLine: PropTypes.arrayOf(PropTypes.string).isRequired,
+    submissionId: PropTypes.number.isRequired,
+    isCorrect: PropTypes.bool.isRequired,
+    isCorrect2: PropTypes.bool.isRequired,
+    setIsCorrect: PropTypes.func.isRequired,
+    setIsCorrect2: PropTypes.func.isRequired
 };
