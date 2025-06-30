@@ -7,6 +7,8 @@ import dataset from './polynomial.json';
 export const PolynomialGraph = ({
     showDatasets, showRegLine, compareRegLine
 }) => {
+    const xAxis = { title: 'X'};
+    const yAxis = { title: 'Y'};
 
     const generatePlotData = (i) => {
         const index = dataset['index'];
@@ -14,6 +16,12 @@ export const PolynomialGraph = ({
         const data = dataset[key];
         const x = data['x'];
         const y = data['y'];
+        if (data['xAxis']) {
+            xAxis['range'] = data['xAxis'];
+        }
+        if (data['yAxis']) {
+            yAxis['range'] = data['yAxis'];
+        }
 
         const plot = [{
             x: data[x],
@@ -81,8 +89,8 @@ export const PolynomialGraph = ({
             layout={{
                 title: dataset['title'],
                 font: { textcase: 'word caps' },
-                xaxis: { title: 'X' },
-                yaxis: { title: 'Y' },
+                xaxis: xAxis,
+                yaxis: yAxis,
                 legend: { orientation: 'h', xanchor: 'center', x: 0.5, y: 1.18 }
             }}
             style={{ height: '88%', width: '100%' }}

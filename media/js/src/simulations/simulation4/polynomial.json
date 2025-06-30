@@ -68,6 +68,8 @@
         "symbol": "circle",
         "x": "X",
         "y": "Y",
+        "xAxis": [0,12],
+        "yAxis": [0,25],
         "Linear": {
             "slope": 1.0364,
             "intercept": 2.2393,
