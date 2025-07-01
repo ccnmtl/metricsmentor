@@ -172,10 +172,11 @@ export const RealDataPolynomials = ({
     const handleDataset = (idx) => {
         setShowDatasets(showOne(4 + idx));
         setSelected(idx);
-        setShowQuiz(false);
         setShowTest(false);
         setShowAnswer(false);
+        setShowQuiz(false);
         setShowRegLine(CLEARREG);
+        setCompareRegLine([]);
     };
 
     const displayRegLineTest = () => {
