@@ -112,8 +112,8 @@ export const WhatArePolynomialRegressions = ({
                 Polynomial regression plots
             </h2>
             <p>
-                Select a dataset from the options below; each with a
-                different underlying pattern to help you explore how the
+                Each of the following dataset has
+                different underlying pattern to help you explore how different
                 polynomial regressions fit.
             </p>
             <PromptBlock list={[
