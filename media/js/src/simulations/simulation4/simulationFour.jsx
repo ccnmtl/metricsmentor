@@ -72,11 +72,12 @@ export const SimulationFour = () => {
             title: 'Learning objectives: Polynomials',
             content: <>
                 <p>
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit
-                    Mollitia doloremque iure explicabo quis asperiores
-                    natus. Inventore laborum tempore, molestias expedita
-                    nemo nostrum dicta vel eum autem laboriosam ad ipsa
-                    modi!
+                In this section, you&rsquo;ll study quadratic and cubic
+                specifications and explore how these regressions can better
+                capture relationships in data compared to a linear fit. By
+                examining data plots and curve shapes, you&rsquo;ll compare
+                linear, quadratic, and cubic regressions, and work through
+                the steps to find the best-fitting model.
                 </p>
                 {mkProgressBar()}
             </>
