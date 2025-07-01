@@ -55,11 +55,10 @@ export const SimulationFour = () => {
         title: 'Non-linear Regressions',
         content: <>
             <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit
-            Mollitia doloremque iure explicabo quis asperiores
-            natus. Inventore laborum tempore, molestias expedita
-            nemo nostrum dicta vel eum autem laboriosam ad ipsa
-            modi!
+            In real-world data, not all relationships between variables are
+            linear. This simulation explores three common types of non-linear
+            regressions used to capture complex patterns: Polynomials,
+            Logarithms, and Regressions with Interaction Variables.
             </p>
             {mkModuleBtns()}
         </>
