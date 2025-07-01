@@ -10,7 +10,7 @@ import { QuizComponent } from '../../Quiz';
 export const RealDataPolynomials = ({
     setShowRegLine, setShowDatasets, showRegLine, showDatasets,
     setCompareRegLine, compareRegLine, submissionId, isCorrect, setIsCorrect,
-    isCorrect2, setIsCorrect2}) => {
+}) => {
 
     const [selected, setSelected] = useState(null);
     const [showTest, setShowTest] = useState(false);
@@ -26,8 +26,16 @@ export const RealDataPolynomials = ({
     const [incorrectFeedback2, setIncorrectFeedback2] = useState('');
     const [selectedOption, setSelectedOption] = useState(null);
 
+    const handleIsCorrect = (idx) => {
+        if (selected === 0) {
+            return (result) =>
+                setIsCorrect(isCorrect.map((x,i) => i === idx ? result : x));
+        } else {
+            return (result) => setIsCorrect([result]);
+        }
+    };
+
     useEffect(() => {
-        console.log('showAnswer:', showAnswer);
         if (showAnswer) {
             setIncorrectFeedback(<p>
                 That is not the optimal study time. Please try again. Studying
@@ -46,9 +54,6 @@ export const RealDataPolynomials = ({
         }
     },[showAnswer]);
 
-    useEffect(() => console.log(
-        'IncorrectFeedback:',incorrectFeedback),[incorrectFeedback]);
-
     useEffect(() => {
         if (selectedOption === 0) {
             setIncorrectFeedback2('Linear regression is not the best fit for ' +
@@ -60,6 +65,10 @@ export const RealDataPolynomials = ({
                 'against Linear and then Cubic regressions.');
         }
     },[selectedOption]);
+
+    useEffect(() => {
+        setIsCorrect(selected === 0 ? [false, false] : [false]);
+    },[selected]);
 
     const LABELS = [['real', 'Grade and study time'],
         ['real2', 'Housing prices and distance to the incinerator']];
@@ -164,8 +173,7 @@ export const RealDataPolynomials = ({
         setShowDatasets(showOne(4 + idx));
         setSelected(idx);
         setShowQuiz(false);
-        setIsCorrect(false);
-        setIsCorrect2(false);
+        setShowTest(false);
         setShowAnswer(false);
         setShowRegLine(CLEARREG);
     };
@@ -276,12 +284,12 @@ export const RealDataPolynomials = ({
                             'correct optimal study time!'}
                         incorrectFeedback={incorrectFeedback}
                         correctTextAnswer={'13.95'}
-                        setIsCorrect={setIsCorrect}
+                        setIsCorrect={handleIsCorrect(0)}
                         isTextInput={true}
                         correctAnswerIndex={2}
                         questionNumber={0}
                         submissionId={submissionId} /></div>
-                    {isCorrect && <div className='mt-4'><QuizComponent
+                    {isCorrect[0] && <div className='mt-4'><QuizComponent
                         question={'Based on your observations, which ' +
                             'regression model fits best for this dataset?'}
                         options={['Linear regression', 'Quadratic regression',
@@ -292,7 +300,7 @@ export const RealDataPolynomials = ({
                             'Quadratic regressions, Cubic regression is ' +
                             'shown to be the best fit'}
                         incorrectFeedback={incorrectFeedback2}
-                        setIsCorrect={setIsCorrect2}
+                        setIsCorrect={handleIsCorrect(1)}
                         questionNumber={1}
                         selectedOption={selectedOption}
                         setSelectedOption={setSelectedOption}
@@ -308,7 +316,7 @@ export const RealDataPolynomials = ({
                             'Quadratic regressions, Cubic regression is ' +
                             'shown to be the best fit'}
                         incorrectFeedback={incorrectFeedback2}
-                        setIsCorrect={setIsCorrect}
+                        setIsCorrect={handleIsCorrect(0)}
                         questionNumber={3}
                         selectedOption={selectedOption}
                         setSelectedOption={setSelectedOption}
@@ -332,7 +340,5 @@ RealDataPolynomials.propTypes = {
     compareRegLine: PropTypes.arrayOf(PropTypes.string).isRequired,
     submissionId: PropTypes.number.isRequired,
     isCorrect: PropTypes.bool.isRequired,
-    isCorrect2: PropTypes.bool.isRequired,
-    setIsCorrect: PropTypes.func.isRequired,
-    setIsCorrect2: PropTypes.func.isRequired
+    setIsCorrect: PropTypes.func.isRequired
 };
