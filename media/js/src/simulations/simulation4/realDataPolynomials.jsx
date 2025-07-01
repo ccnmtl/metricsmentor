@@ -71,7 +71,7 @@ export const RealDataPolynomials = ({
     },[selected]);
 
     const LABELS = [['real', 'Grade and study time'],
-        ['real2', 'Housing prices and distance to the incinerator']];
+        ['real2', 'Standard of Living Index and Income']];
 
     const handleCompareReg = (e, i) => {
         const value = e.target.value;
