@@ -21,9 +21,9 @@ export const SimulationFour = () => {
     // ['Polynomials', 'Logarithms', 'Interactions']
     const [progress, setProgress] = useState([0,0,0]);
     const [compareRegLine, setCompareRegLine] = useState([]);
-    const [isCorrect, setIsCorrect] = useState(false);
-    const [isCorrect2, setIsCorrect2] = useState(false);
+    const [isCorrect, setIsCorrect] = useState([false]);
 
+    const quizComplete = () => !isCorrect.includes(false);
 
     const initialized = useRef(false);
     const handleStage = (e) => setStage(parseInt(e.target.value));
@@ -114,7 +114,6 @@ export const SimulationFour = () => {
                         <RealDataPolynomials
                             isCorrect={isCorrect}
                             setIsCorrect={setIsCorrect}
-                            setIsCorrect2={setIsCorrect2}
                             setShowDatasets={setShowPolyDatasets}
                             setShowRegLine={setShowRegLine}
                             showDatasets={showPolyDatasets}
@@ -123,7 +122,7 @@ export const SimulationFour = () => {
                             submissionId={submissionId}
                             compareRegLine={compareRegLine} />
                     )}
-                    {isCorrect2 && <StepProgressButton
+                    {quizComplete() && <StepProgressButton
                         progress={progress}
                         stage={stage}
                         setProgress={setProgress}
