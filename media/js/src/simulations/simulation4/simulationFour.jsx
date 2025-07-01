@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { SimulationPanel } from '../../SimulationPanel';
 import { STATIC_URL, createSubmission, getCoursePk } from '../../utils/utils';
 import { PolynomialGraph } from './polynomialGraph';
-import { WhatAreNonLinearRegressions } from './whatAreNonlinearRegs';
+import { WhatArePolynomialRegressions } from './whatArePolynomialRegs';
 import { NonlinearRegsDefinition } from './nonlinearRegModal';
 import { RealDataPolynomials } from './realDataPolynomials';
 import { StepProgressButton } from '../../StepProgressButton';
@@ -83,11 +83,11 @@ export const SimulationFour = () => {
             </>
         },
         {
-            headerId: 'whatarenonlinearregression',
-            title: 'What are non-linear regressions?',
+            headerId: 'whatarepolynomialregression',
+            title: 'What are Polynomial regressions?',
             content: <>
                 {progress[stage] < 1 && (
-                    <WhatAreNonLinearRegressions
+                    <WhatArePolynomialRegressions
                         setShowDatasets={setShowPolyDatasets}
                         setShowRegLine={setShowRegLine}
                         showDatasets={showPolyDatasets}

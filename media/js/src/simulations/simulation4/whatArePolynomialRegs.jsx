@@ -6,7 +6,7 @@ import dataset from './polynomial.json';
 import { CLEARSET, showOne } from './polyUtils';
 
 
-export const WhatAreNonLinearRegressions = ({
+export const WhatArePolynomialRegressions = ({
     setShowRegLine, setShowDatasets, showRegLine, showDatasets,
     setCompareRegLine, compareRegLine}) => {
 
@@ -294,7 +294,7 @@ export const WhatAreNonLinearRegressions = ({
     );
 };
 
-WhatAreNonLinearRegressions.propTypes = {
+WhatArePolynomialRegressions.propTypes = {
     setShowRegLine: PropTypes.func.isRequired,
     setShowDatasets: PropTypes.func.isRequired,
     showRegLine: PropTypes.arrayOf(PropTypes.bool).isRequired,
