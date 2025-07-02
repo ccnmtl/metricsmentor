@@ -1,9 +1,9 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import { PromptBlock } from '../../PromptBlock';
 import PropTypes from 'prop-types';
 import { Katex } from '../../utils/katexComponent';
 import dataset from './polynomial.json';
-import { CLEARSET, showOne } from './polyUtils';
+import { CLEARREG, CLEARSET, showOne } from './polyUtils';
 
 
 export const WhatArePolynomialRegressions = ({
@@ -16,6 +16,12 @@ export const WhatArePolynomialRegressions = ({
         quadratic: 'Quadratic',
         cubic: 'Cubic'
     };
+
+    useEffect(() => {
+        setShowDatasets(showOne(0));
+        setShowRegLine(CLEARREG);
+        setCompareRegLine([]);
+    },[]);
 
     const [regressionTestResult, setRegressionTestResult] = useState(null);
 
