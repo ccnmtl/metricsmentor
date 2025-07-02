@@ -57,12 +57,12 @@ export const RealDataPolynomials = ({
     useEffect(() => {
         if (selectedOption === 0) {
             setIncorrectFeedback2('Linear regression is not the best fit for ' +
-                'this dataset. This is evident when we run the tests against ' +
-                'Quadratic and then Cubic regressions.');
+                'this dataset. This is evident when we run the test of ' +
+                'Linear against Quadratic, and then Cubic regressions.');
         } else if (selectedOption === 1) {
             setIncorrectFeedback2('Quadratic regression is not the best fit ' +
-                'for this dataset. This is evident when we run the tests ' +
-                'against Linear and then Cubic regressions.');
+                'for this dataset. This is evident when we run the test of ' +
+                'Quadratic against Linear, and then Cubic regressions.');
         }
     },[selectedOption]);
 
@@ -294,9 +294,9 @@ export const RealDataPolynomials = ({
                             'Cubic regression']}
                         correctAnswerIndex={2}
                         correctFeedback={'Cubic regression is the correct ' +
-                            'model. When we run the tests against Linear and ' +
-                            'Quadratic regressions, Cubic regression is ' +
-                            'shown to be the best fit'}
+                            'model. When we run the tests of Cubic against ' +
+                            'Linear and Quadratic regressions, Cubic ' +
+                            'regression is shown to be the best fit.'}
                         incorrectFeedback={incorrectFeedback2}
                         setIsCorrect={handleIsCorrect(1)}
                         questionNumber={1}
@@ -310,9 +310,9 @@ export const RealDataPolynomials = ({
                             'Cubic regression']}
                         correctAnswerIndex={2}
                         correctFeedback={'Cubic regression is the correct ' +
-                            'model. When we run the tests against Linear and ' +
-                            'Quadratic regressions, Cubic regression is ' +
-                            'shown to be the best fit'}
+                            'model. When we run the tests of Cubic against ' +
+                            'Linear and Quadratic regressions, Cubic ' +
+                            'regression is shown to be the best fit.'}
                         incorrectFeedback={incorrectFeedback2}
                         setIsCorrect={handleIsCorrect(0)}
                         questionNumber={3}
