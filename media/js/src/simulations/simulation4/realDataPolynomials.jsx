@@ -120,10 +120,7 @@ export const RealDataPolynomials = ({
         ],
         [  // real2 dataset
             'Standard of Living vs Income',
-            'Source: This data set is collected from several questionnaires ' +
-                'administered in the Introduction to Econometrics ' +
-                '(ECON UN3412) courses at Columbia University, Department of ' +
-                'Economics, from Fall 2022 to Spring 2025.',
+            'Source: World Bank Database.',
             'Paragraph block for text. Description of what the dataset is ' +
                 'about.  Lorem ipsum dolor sit amet, consectetur adipiscing ' +
                 'elit. Etiam dictum tristique faucibus.',
