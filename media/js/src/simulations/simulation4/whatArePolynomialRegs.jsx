@@ -2,6 +2,7 @@ import React, {useState, useEffect} from 'react';
 import { PromptBlock } from '../../PromptBlock';
 import PropTypes from 'prop-types';
 import { Katex } from '../../utils/katexComponent';
+import { inlineKatex } from '../../utils/utils';
 import dataset from './polynomial.json';
 import { CLEARREG, CLEARSET, showOne } from './polyUtils';
 
@@ -111,15 +112,26 @@ export const WhatArePolynomialRegressions = ({
     return (
         <>
             <p>
-                Let&rsquo;s use the generated datasets below to walk through
-                how polynomial regression works.
+                Polynomial regression is a type of analysis where the
+                relationship between the independent
+                variable {inlineKatex('x')} and the dependent
+                variable {inlineKatex('y')} is modeled as an nth-degree
+                polynomial in {inlineKatex('x')} that fits a curve to the data.
+            </p>
+            <p>
+                Some relationships are not linear, and polynomials can account
+                for that.
             </p>
             <h2>
                 Polynomial regression plots
             </h2>
             <p>
-                Each of the following dataset has
-                different underlying pattern to help you explore how different
+                Let&rsquo;s use the generated datasets below to walk through
+                how polynomial regression works.
+            </p>
+            <p>
+                Each of the following dataset has a
+                different pattern to help you explore how different
                 polynomial regressions fit.
             </p>
             <PromptBlock list={[
@@ -127,32 +139,44 @@ export const WhatArePolynomialRegressions = ({
                 'Observe how the regression line fits the data and captures ' +
                 'its overall pattern'
             ]} />
-            {DATASET_KEYS.map((key, i) => (
-                <div key={key} style={{ marginBottom: '1rem' }}>
-                    <label>
-                        <input
-                            type="checkbox"
-                            checked={showDatasets[i]}
-                            onChange={() => toggleDataset(i)}
-                        /> {DATASET_LABELS[key]} regression
-                    </label>
+            {/* container for regression line options */}
+            <div className="choice-list ms-0">
+                {DATASET_KEYS.map((key, i) => (
+                    <div key={key}
+                        className={'form-check dataset-variable-item'}>
+                        <label htmlFor={`dataset-${i}`}
+                            className="form-check-label">
+                            <input
+                                className="form-check-input"
+                                id ={`dataset-${i}`}
+                                name={key}
+                                type="checkbox"
+                                checked={showDatasets[i]}
+                                onChange={() => toggleDataset(i)}
+                            /> {DATASET_LABELS[key]} regression
+                        </label>
 
-                    {showDatasets[i] && (
-                        <div className="ps-2 mt-1">
-                            <Katex tex={
-                                getRegressionFormula(key)} />
-                            <label className="mt-2 d-block">
+                        {showDatasets[i] && (<>
+                            <div className="katex-block">
+                                <Katex tex={
+                                    getRegressionFormula(key)} />
+                            </div>
+                            <label htmlFor={`regline-${i}`}
+                                className="ps-4 mt-2 d-block">
                                 <input
+                                    className="form-check-input"
+                                    id ={`regline-${i}`}
+                                    name={`regline-${key}`}
                                     type="checkbox"
                                     checked={showRegLine[i]}
                                     onChange={() => toggleReg(i)}
                                 /> Show regression line
                             </label>
-                        </div>
-                    )}
-                </div>
-            ))}
-            <h2>Determining regression model in a dataset</h2>
+                        </>)}
+                    </div>
+                ))}
+            </div>
+            <h2 className="pt-2">Determining regression model in a dataset</h2>
             <p>
                 Let&apos;s determine which regression model fits best for a new
                 dataset
