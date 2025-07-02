@@ -48,7 +48,7 @@ export const PolynomialGraph = ({
                         mode: 'line',
                         x: regData.line.x,
                         y: regData.line.y,
-                        marker: { color: data['bordercolor'] },
+                        marker: { color: regData['bordercolor'] },
                         name: `${reg.charAt(0).toUpperCase()
                             + reg.slice(1)} Reg.`
                     });

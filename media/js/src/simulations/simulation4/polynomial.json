@@ -71,6 +71,7 @@
         "xAxis": [0,12],
         "yAxis": [0,25],
         "Linear": {
+            "bordercolor": "blue",
             "slope": 1.0364,
             "intercept": 2.2393,
             "stderr": 0.4421,
@@ -84,6 +85,7 @@
             }
         },
         "Quadratic": {
+            "bordercolor": "red",
             "slope": -11.0182,
             "slope2": 0.6610,
             "intercept": 56.5041,
@@ -98,6 +100,7 @@
             }
         },
         "Cubic": {
+            "bordercolor": "orange",
             "slope": 7.8296,
             "slope2": -1.4446,
             "slope3": 0.0777,
@@ -124,6 +127,7 @@
         "x": "studytime",
         "y": "grade",
         "Linear": {
+            "bordercolor": "blue",
             "slope": 2.1935,
             "intercept": 46.6457,
             "stderr": 0.3414,
@@ -136,6 +140,7 @@
             }
         },
         "Quadratic": {
+            "bordercolor": "red",
             "slope": 11.4399,
             "slope2": -0.4046,
             "intercept": 19.1547,
@@ -149,6 +154,7 @@
             }
         },
         "Cubic": {
+            "bordercolor": "orange",
             "slope": 18.8557,
             "slope2": -1.2951,
             "slope3": 0.0259,
@@ -172,6 +178,7 @@
         "x": "inc",
         "y": "std_liv",
         "Linear": {
+            "bordercolor": "blue",
             "slope": 7.5235,
             "intercept": -16.3253,
             "stderr": 1.6270,
@@ -184,6 +191,7 @@
             }
         },
         "Quadratic": {
+            "bordercolor": "red",
             "slope": -38.764,
             "slope2": 4.6779,
             "intercept": 93.9298,
@@ -197,6 +205,7 @@
             }
         },
         "Cubic": {
+            "bordercolor": "orange",
             "slope": 102.0104,
             "slope2": -24.8359,
             "slope3": 1.9830,
