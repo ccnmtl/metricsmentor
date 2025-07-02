@@ -1,4 +1,3 @@
-import axios from 'axios';
 import React from 'react';
 import { Katex } from './katexComponent';
 
@@ -30,18 +29,26 @@ export const authedFetch = (url, method, data) => {
  * @param {object} additionalData - Any additional data.
  * @returns {Promise<object>} - The response data.
  */
-export const saveAnswer = async(submissionId, questionNumber, questionType,
-    selectedOption, isCorrect, additionalData) => {
+export const saveAnswer = async(
+    submissionId, questionNumber, questionType,
+    selectedOption, isCorrect, additionalData
+) => {
+    const payload = {
+        submission_id: submissionId,
+        question_number: questionNumber,
+        question_type: questionType,
+        selected_option: selectedOption,
+        is_correct: isCorrect,
+        additional_data: additionalData
+    };
     try {
-        const response = await axios.post('/save_answer/', {
-            submission_id: submissionId,
-            question_number: questionNumber,
-            question_type: questionType,
-            selected_option: selectedOption,
-            is_correct: isCorrect,
-            additional_data: additionalData
-        });
-        return response.data;
+        const response = await authedFetch('/save_answer/', 'POST', payload);
+        if (response.ok) {
+            return await response.json();
+        } else {
+            throw new Error(`
+                Error (${response.status}) ${response.statusText}`);
+        }
     } catch (error) {
         console.error('Error saving answer:', error);
     }
@@ -54,13 +61,17 @@ export const saveAnswer = async(submissionId, questionNumber, questionType,
  * @returns {Promise<object>} - The response data.
  */
 export const fetchQuizData = async(courseId, simulationId) => {
+    const payload = { simulation_id: simulationId };
     try {
-        const response = await axios.get(`/course/${courseId}/get_quiz/`, {
-            params: {
-                simulation_id: simulationId,
-            },
-        });
-        return response.data;
+        const response = await authedFetch(
+            `/course/${courseId}/get_quiz/`, 'POST', payload
+        );
+        if (response.ok) {
+            return await response.json();
+        } else {
+            throw new Error(`Error (${response.status}) 
+                ${response.statusText}`);
+        }
     } catch (err) {
         console.error('Error fetching quiz data:', err);
         return {};
@@ -74,12 +85,18 @@ export const fetchQuizData = async(courseId, simulationId) => {
  * @returns {Promise<object>} - The response data.
  */
 export const deleteAnswer = async(submissionId, questionNumber) => {
+    const payload = {
+        submission_id: submissionId,
+        question_number: questionNumber,
+    };
     try {
-        const response = await axios.post('/delete_answer/', {
-            submission_id: submissionId,
-            question_number: questionNumber,
-        });
-        return response.data;
+        const response = await authedFetch('/delete_answer/', 'POST', payload);
+        if (response.ok) {
+            return await response.json();
+        } else {
+            throw new Error(`Error (${response.status}) 
+                ${response.statusText}`);
+        }
     } catch (error) {
         console.error('Error deleting answer:', error);
     }
@@ -92,11 +109,15 @@ export const deleteAnswer = async(submissionId, questionNumber) => {
  * @returns {Promise<object>} - The response data.
  */
 export const deleteQuiz = async(submissionId) => {
+    const payload = { submission_id: submissionId };
     try {
-        const response = await axios.post('/delete_quiz/', {
-            submission_id: submissionId,
-        });
-        return response.data;
+        const response = await authedFetch('/delete_quiz/', 'POST', payload);
+        if (response.ok) {
+            return await response.json();
+        } else {
+            throw new Error(`Error (${response.status}) 
+                ${response.statusText}`);
+        }
     } catch (error) {
         console.error('Error deleting quiz submission:', error);
         return { status: 'error', message: 'Failed to delete quiz submission' };
