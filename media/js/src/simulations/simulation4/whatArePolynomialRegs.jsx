@@ -6,7 +6,7 @@ import dataset from './polynomial.json';
 import { CLEARSET, showOne } from './polyUtils';
 
 
-export const WhatAreNonLinearRegressions = ({
+export const WhatArePolynomialRegressions = ({
     setShowRegLine, setShowDatasets, showRegLine, showDatasets,
     setCompareRegLine, compareRegLine}) => {
 
@@ -105,29 +105,21 @@ export const WhatAreNonLinearRegressions = ({
     return (
         <>
             <p>
-               Let&apos;s now learn about why non-linear regressions are
-               important. Very brief prelude to get user oriented with
-               this learning segment.
+                Let&rsquo;s use the generated datasets below to walk through
+                how polynomial regression works.
             </p>
-            <PromptBlock
-                text="But first, take a moment to familiarize yourself with
-                    the definition of non-linear regressions; it&rsquo;ll help
-                    as you continue with this exercise." />
-            <button
-                className="btn btn-sm btn-primary mb-2"
-                data-bs-toggle="modal"
-                data-bs-target="#nonlineardDefinition"
-            >
-                Non-linear regressions
-            </button>
             <h2>
-                Non-linear regression plots
+                Polynomial regression plots
             </h2>
-            <p>Transition paragraph to lead to the exercise</p>
+            <p>
+                Each of the following dataset has
+                different underlying pattern to help you explore how different
+                polynomial regressions fit.
+            </p>
             <PromptBlock list={[
-                'Look at the pattern of each dataset',
-                'Observe regression lines of each dataset',
-                'Any adiditional instructions here'
+                'Select a dataset based on its trend',
+                'Observe how the regression line fits the data and captures ' +
+                'its overall pattern'
             ]} />
             {DATASET_KEYS.map((key, i) => (
                 <div key={key} style={{ marginBottom: '1rem' }}>
@@ -294,7 +286,7 @@ export const WhatAreNonLinearRegressions = ({
     );
 };
 
-WhatAreNonLinearRegressions.propTypes = {
+WhatArePolynomialRegressions.propTypes = {
     setShowRegLine: PropTypes.func.isRequired,
     setShowDatasets: PropTypes.func.isRequired,
     showRegLine: PropTypes.arrayOf(PropTypes.bool).isRequired,

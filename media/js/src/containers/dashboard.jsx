@@ -108,13 +108,12 @@ export const Dashboard = ({ isSuperUser, isFaculty}) => {
                                 </span>
                             </h2>
                             <p>
-                                Lorem ipsum dolor sit amet, consectetur
-                                adipiscing elit.
-                                Donec euismod, nisl eget consectetur
-                                adipiscing, nisl nunc euismod nisi,
-                                vitae euismod nunc, quis
-                                euismod nisi euismod nunc, quis
-                                euismod nisi euismod nunc, quis
+                                In real-world data, not all relationships
+                                between variables are linear. This simulation
+                                explores three common types of non-linear
+                                regressions used to capture complex patterns:
+                                Polynomials, Logarithms, and Regressions with
+                                Interaction Variables.
                             </p>
 
                             <Link to={`/course/${courseId}/simulations/4/`}

@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import { SimulationPanel } from '../../SimulationPanel';
 import { STATIC_URL, createSubmission, getCoursePk } from '../../utils/utils';
 import { PolynomialGraph } from './polynomialGraph';
-import { WhatAreNonLinearRegressions } from './whatAreNonlinearRegs';
+import { WhatArePolynomialRegressions } from './whatArePolynomialRegs';
 import { NonlinearRegsDefinition } from './nonlinearRegModal';
 import { RealDataPolynomials } from './realDataPolynomials';
 import { StepProgressButton } from '../../StepProgressButton';
@@ -55,11 +55,10 @@ export const SimulationFour = () => {
         title: 'Non-linear Regressions',
         content: <>
             <p>
-            Lorem ipsum dolor sit amet consectetur adipisicing elit
-            Mollitia doloremque iure explicabo quis asperiores
-            natus. Inventore laborum tempore, molestias expedita
-            nemo nostrum dicta vel eum autem laboriosam ad ipsa
-            modi!
+            In real-world data, not all relationships between variables are
+            linear. This simulation explores three common types of non-linear
+            regressions used to capture complex patterns: Polynomials,
+            Logarithms, and Regressions with Interaction Variables.
             </p>
             {mkModuleBtns()}
         </>
@@ -73,21 +72,22 @@ export const SimulationFour = () => {
             title: 'Learning objectives: Polynomials',
             content: <>
                 <p>
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit
-                    Mollitia doloremque iure explicabo quis asperiores
-                    natus. Inventore laborum tempore, molestias expedita
-                    nemo nostrum dicta vel eum autem laboriosam ad ipsa
-                    modi!
+                In this section, you&rsquo;ll study quadratic and cubic
+                specifications and explore how these regressions can better
+                capture relationships in data compared to a linear fit. By
+                examining data plots and curve shapes, you&rsquo;ll compare
+                linear, quadratic, and cubic regressions, and work through
+                the steps to find the best-fitting model.
                 </p>
                 {mkProgressBar()}
             </>
         },
         {
-            headerId: 'whatarenonlinearregression',
-            title: 'What are non-linear regressions?',
+            headerId: 'whatarepolynomialregression',
+            title: 'What are Polynomial regressions?',
             content: <>
                 {progress[stage] < 1 && (
-                    <WhatAreNonLinearRegressions
+                    <WhatArePolynomialRegressions
                         setShowDatasets={setShowPolyDatasets}
                         setShowRegLine={setShowRegLine}
                         showDatasets={showPolyDatasets}
