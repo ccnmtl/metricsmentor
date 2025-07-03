@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { PromptBlock } from '../../PromptBlock';
 import PropTypes from 'prop-types';
 import { Katex } from '../../utils/katexComponent';
+import { inlineKatex } from '../../utils/utils';
 import dataset from './polynomial.json';
 import { CLEARREG, CLEARSET, showOne } from './polyUtils';
 import { QuizComponent } from '../../Quiz';
@@ -71,7 +72,7 @@ export const RealDataPolynomials = ({
     },[selected]);
 
     const LABELS = [['real', 'Grade and study time'],
-        ['real2', 'Standard of Living Index and Income']];
+        ['real2', 'Standard of living index and income']];
 
     const handleCompareReg = (e, i) => {
         const value = e.target.value;
@@ -108,24 +109,24 @@ export const RealDataPolynomials = ({
     const info = [
         [  // real dataset
             'Grade and Study Time',
-            'Source: This data set is collected from several questionnaires ' +
+            'This data set is collected from several questionnaires ' +
                 'administered in the Introduction to Econometrics ' +
                 '(ECON UN3412) courses at Columbia University, Department of ' +
                 'Economics, from Fall 2022 to Spring 2025.',
-            'Paragraph block for text. Description of what the dataset is ' +
-                'about.  Lorem ipsum dolor sit amet, consectetur adipiscing ' +
-                'elit. Etiam dictum tristique faucibus.',
-            'Paragraph block for text. Let&apos;s determine which regression ' +
-                'model fits best for this dataset'
+            <>In this dataset, our goal is to examine the relationship
+            between the dependent
+            variable, {inlineKatex('\\text{Grade}')}, as a result of time
+            spent studying, independent
+            variable {inlineKatex('\\text{StudyTime.}')}</>
         ],
         [  // real2 dataset
-            'Standard of Living vs Income',
-            'Source: World Bank Database.',
-            'Paragraph block for text. Description of what the dataset is ' +
-                'about.  Lorem ipsum dolor sit amet, consectetur adipiscing ' +
-                'elit. Etiam dictum tristique faucibus.',
-            'Paragraph block for text. Let&apos;s determine which regression ' +
-                'model fits best for this dataset'
+            'Standard of Living Index and Income',
+            'World Bank Database.',
+            <>In this dataset, our goal is to examine the relationship
+            between the dependent
+            variable, {inlineKatex('\\text{StandardofLiving}')} index and
+            the independent
+            variable {inlineKatex('\\text{Income}')} (in thousand).</>
         ]
     ];
 
@@ -201,9 +202,9 @@ export const RealDataPolynomials = ({
     return (
         <>
             <p>
-               Paragraph block for text. Let&apos;s apply what you&apos;ve
-               learned about about polynomial regressions using a real-world
-               dataset.
+               Let&rsquo;s apply what you&rsquo;ve
+               learned about about polynomial regressions using real-world
+               datasets.
             </p>
             <p>
                 Choose a dataset for your analysis:
@@ -230,36 +231,44 @@ export const RealDataPolynomials = ({
                 ))}
             </ul>
             {selected !== null && <>
-                <h2>{info[selected][0]}</h2>
-                <p><strong>Source</strong>: {info[selected][1]}</p>
+                <h3 className="pt-3">{info[selected][0]}</h3>
+                <p><b>Source</b>: {info[selected][1]}</p>
                 <p>{info[selected][2]}</p>
-                <h2>Determining regression model in a dataset</h2>
-                <p>{info[selected][3]}</p>
                 <PromptBlock list={[
-                    'Prompt block for text. Look at the pattern of the' +
-                        'dataset.',
-                    'Try out each regression line',
-                    'Visually, which one fits?'
+                    'Add one regression at a time to the graph',
+                    'Compare the regression lines to see which one fits ' +
+                    'the overall pattern of the dataset',
+                    'Select two regression lines to run a test to confirm ' +
+                    'best fit'
                 ]} />
-                {['Linear', 'Quadratic', 'Cubic'].map((reg, i) => (
-                    <div className="ps-2 mt-1" key={i}>
-                        <label className="mt-2 d-block">
-                            <input
-                                type="checkbox"
-                                className="me-2"
-                                checked={compareRegLine.includes(reg)}
-                                value={reg}
-                                onChange={(e) => handleCompareReg(e, i)}
-                            />
-                            {reg} regression
-                        </label>
-                        {showRegLine[i] &&
-                            <div className="ms-4 mt-1">
-                                <Katex tex={getRegressionFormula(reg)} />
-                            </div>
-                        }
-                    </div>
-                ))}
+                <div className="choice-list ms-0">
+                    {['Linear', 'Quadratic', 'Cubic'].map((reg, i) => (
+                        <div key={i}
+                            className="form-check dataset-variable-item">
+                            <label htmlFor={`realdata-reg-${reg}`}
+                                className={
+                                    `form-check-label ${
+                                        compareRegLine.includes(reg) ?
+                                            ' text-primary' : ''}`
+                                }>
+                                <input
+                                    className="form-check-input"
+                                    id={`realdata-reg-${reg}`}
+                                    type="checkbox"
+                                    checked={compareRegLine.includes(reg)}
+                                    value={reg}
+                                    onChange={(e) => handleCompareReg(e, i)}
+                                />
+                                {reg} regression
+                            </label>
+                            {showRegLine[i] &&
+                                <div className="katex-block">
+                                    <Katex tex={getRegressionFormula(reg)} />
+                                </div>
+                            }
+                        </div>
+                    ))}
+                </div>
                 <button
                     className="btn btn-sm btn-secondary mt-2"
                     disabled={checkTestSize() !== 2}

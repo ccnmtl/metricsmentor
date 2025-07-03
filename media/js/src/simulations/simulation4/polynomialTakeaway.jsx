@@ -211,7 +211,7 @@ export const PolynomialTakeaway = ({
             {visibleIndex === questions.length && (
                 <>
                     <div className="mx-3 mb-3 fw-medium text-center">
-                        You&apos;ve successfully completed Polynomial
+                        You&rsquo;ve successfully completed Polynomial
                         Regression!<br />
                         &#127881; &#127881; &#127881;
                     </div>
@@ -219,7 +219,7 @@ export const PolynomialTakeaway = ({
                         mt-3 text-center mb-3">
                         <>
                             You can move on to Logarithms whenever
-                            you&apos;re ready.
+                            you&rsquo;re ready.
                         </>
                     </div>
                     <div style={{display: 'flex', justifyContent: 'center',
