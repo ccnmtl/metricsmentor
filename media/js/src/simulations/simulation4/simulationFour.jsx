@@ -108,7 +108,7 @@ export const SimulationFour = () => {
         ...(progress[stage] > 0
             ? [{
                 headerId: 'realData',
-                title: 'Real World Data',
+                title: 'Real dataset problem',
                 content: <>
                     {progress[stage] === 1 && (
                         <RealDataPolynomials
