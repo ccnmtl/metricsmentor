@@ -126,13 +126,8 @@ export const WhatArePolynomialRegressions = ({
                 Polynomial regression plots
             </h2>
             <p>
-                Let&rsquo;s use the generated datasets below to walk through
-                how polynomial regression works.
-            </p>
-            <p>
-                Each of the following dataset has a
-                different pattern to help you explore how different
-                polynomial regressions fit.
+                Each generated dataset below show a distinct pattern to help
+                you explore how different polynomial models capture each trend.
             </p>
             <PromptBlock list={[
                 'Select a dataset based on its trend',
@@ -145,7 +140,10 @@ export const WhatArePolynomialRegressions = ({
                     <div key={key}
                         className={'form-check dataset-variable-item'}>
                         <label htmlFor={`dataset-${i}`}
-                            className="form-check-label">
+                            className={
+                                `form-check-label${showDatasets[i] ?
+                                    ' text-primary' : ''}`
+                            }>
                             <input
                                 className="form-check-input"
                                 id ={`dataset-${i}`}
@@ -176,57 +174,91 @@ export const WhatArePolynomialRegressions = ({
                     </div>
                 ))}
             </div>
-            <h2 className="pt-2">Determining regression model in a dataset</h2>
+            <h2 className="pt-3">Determining regression model in a dataset</h2>
             <p>
-                Let&apos;s determine which regression model fits best for a new
-                dataset
+                Using what you&rsquo;ve observed, apply what you&rsquo;ve
+                learned to a new dataset.
+            </p>
+            <p>
+                Select the following Mystery dataset, and let&rsquo;s
+                determine the best regression fit for it.
             </p>
             <div style={{ marginBottom: '1rem' }}>
-                <label>
-                    <input
-                        type="checkbox"
-                        checked={showDatasets[3]}
-                        className='mb-4'
-                        onChange={handleMysteryDatasetToggle}
-                    /> Mystery dataset
-                </label>
+                <div className="choice-list ms-0">
+                    <div className={
+                        `form-check
+                        dataset-variable-item
+                        border-bottom-0`
+                    }>
+                        <label htmlFor="mystery-dataset"
+                            className={
+                                `form-check-label${showDatasets[3] ?
+                                    ' text-primary' : ''}`
+                            }>
+                            <input
+                                className="form-check-input"
+                                id="mystery-dataset"
+                                name="mystery-dataset"
+                                type="checkbox"
+                                checked={showDatasets[3]}
+                                onChange={handleMysteryDatasetToggle}
+                            /> Mystery dataset
+                        </label>
+                    </div>
+                </div>
                 <PromptBlock list={[
-                    'Look at the pattern of the dataset',
-                    'Try out each regression line',
-                    'Visually, which one fits best?',
+                    'Add one regression at a time to the graph',
+                    'Compare the regression lines to see which one fits ' +
+                    'the overall pattern of the dataset',
+                    'Select two regression lines to run a test to confirm ' +
+                    'best fit'
                 ]} />
-
                 {showDatasets[3] && (
                     <>
-                        {DATASET_KEYS.map((reg) => (
-                            <div className="ps-2 mt-1" key={reg}>
-                                <label className="mt-2 d-block">
-                                    <input
-                                        type="checkbox"
-                                        className="me-2"
-                                        checked={compareRegLine.includes(
-                                            DATASET_LABELS[reg])}
-                                        value={DATASET_LABELS[reg]}
-                                        onChange={handleCompareReg}
-                                    />
-                                    {DATASET_LABELS[reg]} regression
-                                </label>
-                                {compareRegLine.includes(DATASET_LABELS[reg])
-                                && (
-                                    <div className="ms-4 mt-1">
-                                        <Katex tex={
-                                            getRegressionFormula(
-                                                DATASET_LABELS[reg], true)} />
-                                    </div>
-                                )}
-                            </div>
-                        ))}
+                        <div className="choice-list ms-0">
+                            {DATASET_KEYS.map((reg) => (
+                                <div key={reg}
+                                    className={
+                                        'form-check dataset-variable-item'
+                                    }>
+                                    <label
+                                        htmlFor={`compare-reg-${reg}`}
+                                        className={
+                                            `form-check-label ${
+                                                compareRegLine.includes(
+                                                    DATASET_LABELS[reg]
+                                                ) ? ' text-primary' : ''
+                                            }`}>
+                                        <input
+                                            className="form-check-input"
+                                            id={`compare-reg-${reg}`}
+                                            type="checkbox"
+                                            checked={compareRegLine.includes(
+                                                DATASET_LABELS[reg])}
+                                            value={DATASET_LABELS[reg]}
+                                            onChange={handleCompareReg}
+                                        />
+                                        {DATASET_LABELS[reg]} regression
+                                    </label>
+                                    {compareRegLine.includes(
+                                        DATASET_LABELS[reg]
+                                    ) && (
+                                        <div className="katex-block">
+                                            <Katex tex={
+                                                getRegressionFormula(
+                                                    DATASET_LABELS[reg], true)
+                                            } />
+                                        </div>
+                                    )}
+                                </div>
+                            ))}
+                        </div>
                         <button
-                            className="btn btn-sm btn-secondary mt-2"
+                            className="btn btn-sm btn-primary mt-2"
                             disabled={compareRegLine.length < 2
                                 || compareRegLine.length === 3}
                             onClick={handleRunRegressionTest}>
-                                Run Regression Test &raquo;
+                                Run test on regressions &raquo;
                         </button>
                         <span className="ms-2 align-middle">
                             {compareRegLine.length !== 2
