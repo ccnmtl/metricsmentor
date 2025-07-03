@@ -122,9 +122,9 @@ export const WhatArePolynomialRegressions = ({
                 Some relationships are not linear, and polynomials can account
                 for that.
             </p>
-            <h2>
+            <h3 className="pt-3">
                 Polynomial regression plots
-            </h2>
+            </h3>
             <p>
                 Each generated dataset below show a distinct pattern to help
                 you explore how different polynomial models capture each trend.
@@ -174,7 +174,7 @@ export const WhatArePolynomialRegressions = ({
                     </div>
                 ))}
             </div>
-            <h2 className="pt-3">Determining regression model in a dataset</h2>
+            <h3 className="pt-4">Determining regression model in a dataset</h3>
             <p>
                 Using what you&rsquo;ve observed, apply what you&rsquo;ve
                 learned to a new dataset.
@@ -183,7 +183,7 @@ export const WhatArePolynomialRegressions = ({
                 Select the following Mystery dataset, and let&rsquo;s
                 determine the best regression fit for it.
             </p>
-            <div style={{ marginBottom: '1rem' }}>
+            <div className="mb-4 pb-5 border-bottom">
                 <div className="choice-list ms-0">
                     <div className={
                         `form-check
@@ -270,77 +270,123 @@ export const WhatArePolynomialRegressions = ({
                 )}
                 {/* Show result based on regressionTestResult */}
                 {regressionTestResult === 'linear-vs-quadratic' && (
-                    <div className='mt-3'>
-                        <p>Test between Linear and Quadratic regression:</p>
-                        <div className='ms-3'>
-                            <p><Katex tex={'H_0: \\beta_2 = 0; ~'} /></p>
-                            <p><Katex tex={'H_1: \\beta_2 \\neq 0; ~'} /></p>
-                            <p>at <Katex tex={'\\alpha = 0.05; ~'}/></p>
-                            <p className='mt-2'>
-                            Resulting <Katex tex={'~p-value = 0.016'} />
+                    <div className="ms-4 mt-4">
+                        <h4>Hypothesis testing between Linear and Quadratic
+                            regressions:</h4>
+                        <div className="m-0 mt-3">
+                            <p className="mt-2"> For {inlineKatex(`
+                                H_0: \\beta_2 = 0; ~
+                                H_1: \\beta_2 \\neq 0; ~
+                                `)} at {inlineKatex('\\alpha = 0.05')}:
+                            </p>
+                            <p className="mt-2">
+                            Resulting {inlineKatex('p\\text{-value} = 0.016')},
+                                <br /> and {inlineKatex(`
+                                \\text{CI:}~0.13~
+                                \\text{<} \\beta_2~
+                                \\text{<} 1.19
+                                `)}
                             </p>
                             <p>
-                                <Katex tex={`p-value < \\alpha;
-                                    ~ \\beta_2 ~`} />
-                                is significantly different from
-                                <Katex tex={'~0.'} />
+                                {inlineKatex(`
+                                    p\\text{-value}
+                                    \\text{<}\\alpha;~
+                                    \\beta_2 ~
+                                `)} is significantly different
+                                from {inlineKatex('0.')}
                             </p>
                             <p>
-                                Therefore, we reject <Katex tex={'H_0'} />.</p>
+                                Therefore,
+                                we <span
+                                    className="hi-val px-1">
+                                    reject {inlineKatex('H_0.')}
+                                </span>
+                            </p>
                             <p>
-                                Conclusion: Quadratic regression is a
-                                better fit.
+                                <b>Conclusion:</b> <span
+                                    className="hi-val px-1">Quadratic
+                                </span> regression is a better fit.
                             </p>
                         </div>
-                        <p>Select another set of regression model to test</p>
-
+                        <p>Select another set of regression model to test.</p>
                     </div>
                 )}
                 {regressionTestResult === 'quadratic-vs-cubic' && (
-                    <div className='mt-3'>
-                        <p>Test between Quadratic and Cubic regression:</p>
-                        <div className='ms-3'>
-                            <p><Katex tex={'H_0: \\beta_3 = 0; ~'} /></p>
-                            <p><Katex tex={'H_1: \\beta_3 \\neq 0; ~'} /></p>
-                            <p>at <Katex tex={'\\alpha = 0.05; ~'}/></p>
-
-                            <p className='mt-2'>
-                            Resulting <Katex tex={'p-value = 0.754'} /> </p>
-                            <p>
-                                <Katex tex={'p-value > \\alpha; ~ \\beta_3~'} />
-                                is not significantly different from
-                                <Katex tex={'~0.'} />
+                    <div className="ms-4 mt-4">
+                        <h4>Hypothesis testing between Quadratic and Cubic
+                            regressions:</h4>
+                        <div className="m-0 mt-3">
+                            <p className="mt-2"> For {inlineKatex(`
+                                H_0: \\beta_3 = 0; ~
+                                H_1: \\beta_3 \\neq 0; ~
+                                `)} at {inlineKatex('\\alpha = 0.05')}:
                             </p>
-                            <p>Therefore, we do not reject
-                                <Katex tex={'~H_0'} />.</p>
-                            <p>Conclusion: Quadratic regression is a
-                                better fit.</p>
+                            <p className="mt-2">
+                            Resulting {inlineKatex('p\\text{-value} = 0.754')},
+                                <br /> and {inlineKatex(`
+                                \\text{CI:}~−0.41~
+                                \\text{<} \\beta_3~
+                                \\text{<} 0.57
+                                `)}
+                            </p>
+                            <p>
+                                {inlineKatex(`
+                                    p\\text{-value}
+                                    \\text{>}\\alpha;~
+                                    \\beta_3 ~
+                                `)} is <b>not</b> significantly different
+                                from {inlineKatex('0.')}
+                            </p>
+                            <p>
+                                Therefore,
+                                we <span
+                                    className="hi-val px-1">
+                                    do not reject {inlineKatex('H_0.')}
+                                </span>
+                            </p>
+                            <p>
+                                <b>Conclusion:</b> <span
+                                    className="hi-val px-1">Quadratic
+                                </span> regression is a better fit.
+                            </p>
                         </div>
-                        <p>Select another set of regression model to test</p>
+                        <p>Select another set of regression model to test.</p>
                     </div>
                 )}
                 {regressionTestResult === 'linear-vs-cubic' && (
-                    <div className='mt-3'>
-                        <p>Test between Linear and Cubic regression:</p>
-                        <div className='ms-3'>
-                            <p><Katex tex={'H_0: \\beta_2 = \\beta_3 = 0; ~'} />
+                    <div className="ms-4 mt-4">
+                        <h4>Hypothesis testing between Linear and Cubic
+                            regressions:</h4>
+                        <div className="m-0 mt-3">
+                            <p className="mt-2"> For {inlineKatex(`
+                                H_0: \\beta_2 = \\beta_3 = 0; ~
+                                H_1: \\text{not}~H_0; ~
+                                `)} at {inlineKatex('\\alpha = 0.05')}:
                             </p>
-                            <p><Katex tex={'H_1: not~H_0; ~'} /></p>
-                            <p>at <Katex tex={'\\alpha = 0.05; ~'}/></p>
-                            <p>Resulting <Katex tex={'p-value = 0.0541'} /> </p>
-                            <p>
-                                <Katex tex={`p-value > \\alpha; ~
-                                \\beta_3~and~\\beta_2~`} />
-                                are jointly not significantly different from
-                                <Katex tex={'~0.'} />
+                            <p className="mt-2">
+                            Resulting {inlineKatex('p\\text{-value} = 0.0541')}.
                             </p>
-                            <p>Therefore, we do not
-                                reject <Katex tex={'~H_0'} />.</p>
                             <p>
-                                Conclusion: Linear regression is a better fit.
+                                {inlineKatex(`
+                                    p\\text{-value} \\text{>}\\alpha;~
+                                   \\beta_3~and~\\beta_2~
+                                    `)} are jointly <b>not</b> significantly
+                                different from {inlineKatex('0.')}
+                            </p>
+                            <p>
+                                Therefore,
+                                we <span
+                                    className="hi-val px-1">
+                                    do not reject {inlineKatex('H_0.')}
+                                </span>
+                            </p>
+                            <p>
+                                <b>Conclusion:</b> <span
+                                    className="hi-val px-1">Linear
+                                </span> regression is a better fit.
                             </p>
                         </div>
-                        <p>Select another set of regression model to test</p>
+                        <p>Select another set of regression model to test.</p>
                     </div>
                 )}
             </div>
