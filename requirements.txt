@@ -107,7 +107,7 @@ typing_extensions==4.14.0
 django-courseaffils @ git+https://github.com/ccnmtl/django_courseaffils@master
 
 scipy==1.15.1
-numpy==1.26.3
+numpy==2.3.1
 statsmodels==0.14.1
 pandas==2.3.0
 pytz==2025.2
