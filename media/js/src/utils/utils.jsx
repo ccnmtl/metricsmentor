@@ -30,18 +30,26 @@ export const authedFetch = (url, method, data) => {
  * @param {object} additionalData - Any additional data.
  * @returns {Promise<object>} - The response data.
  */
-export const saveAnswer = async(submissionId, questionNumber, questionType,
-    selectedOption, isCorrect, additionalData) => {
+export const saveAnswer = async(
+    submissionId, questionNumber, questionType,
+    selectedOption, isCorrect, additionalData
+) => {
+    const payload = {
+        submission_id: submissionId,
+        question_number: questionNumber,
+        question_type: questionType,
+        selected_option: selectedOption,
+        is_correct: isCorrect,
+        additional_data: additionalData
+    };
     try {
-        const response = await axios.post('/save_answer/', {
-            submission_id: submissionId,
-            question_number: questionNumber,
-            question_type: questionType,
-            selected_option: selectedOption,
-            is_correct: isCorrect,
-            additional_data: additionalData
-        });
-        return response.data;
+        const response = await authedFetch('/save_answer/', 'POST', payload);
+        if (response.ok) {
+            return await response.json();
+        } else {
+            throw new Error(`
+                Error (${response.status}) ${response.statusText}`);
+        }
     } catch (error) {
         console.error('Error saving answer:', error);
     }
