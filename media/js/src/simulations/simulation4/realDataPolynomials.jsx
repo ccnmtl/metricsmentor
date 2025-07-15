@@ -273,7 +273,7 @@ export const RealDataPolynomials = ({
                     className="btn btn-sm btn-secondary mt-2"
                     disabled={checkTestSize() !== 2}
                     onClick={handleShowTest}>
-                        Run Regression Test &raquo;
+                        Run test on regressions &raquo;
                 </button>
                 <span className="ms-2 align-middle">
                     {compareRegLine.length !== 2
@@ -330,8 +330,12 @@ export const RealDataPolynomials = ({
                         submissionId={submissionId} /></div>}
                 </>
                     :
-                    <button className='btn btn-sm btn-success mt-4'
-                        onClick={handleQuiz}>A few more questions...»</button>
+                    <div className="simulation__step-prompt">
+                        <button className='btn btn-sm btn-success mt-4'
+                            onClick={handleQuiz}>
+                                A few more questions...»
+                        </button>
+                    </div>
                 }
             </>}
         </>
