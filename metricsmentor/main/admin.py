@@ -27,6 +27,7 @@ class QuizSubmissionAdmin(admin.ModelAdmin):
 class AnswerAdmin(admin.ModelAdmin):
     list_display = (
         'quiz_submission',
+        'get_user',
         'question_number',
         'question_type',
         'selected_option',
@@ -50,6 +51,10 @@ class AnswerAdmin(admin.ModelAdmin):
     )
     ordering = ('-created_at',)
     readonly_fields = ('created_at', 'updated_at')
+
+    def get_user(self, obj):
+        return obj.quiz_submission.user
+    get_user.short_description = 'User'
 
 
 admin.site.register(QuizSubmission, QuizSubmissionAdmin)
