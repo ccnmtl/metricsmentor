@@ -144,9 +144,11 @@ export const HeteroskedTakeaway = ({
         }
     ];
 
-    if (visibleIndex === questions.length){
-        setProgress(3);
-    }
+    React.useEffect(() => {
+        if (visibleIndex === questions.length) {
+            setProgress(3);
+        }
+    }, [visibleIndex, questions.length, setProgress]);
 
     return (
         <>

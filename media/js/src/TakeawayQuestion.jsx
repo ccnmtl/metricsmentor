@@ -1,14 +1,15 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import { saveAnswer } from './utils/utils';
+import { saveAnswer, getCoursePk } from './utils/utils';
 
 export const TakeawayQuestion = ({
-    questionId, questionText, choices, onCorrect, submissionId,
-
+    questionId, questionText, choices, onCorrect, submissionId
 }) => {
     const [selected, setSelected] = useState(null);
     const [submitted, setSubmitted] = useState(false);
     const [locked, setLocked] = useState(false);
+
+    const coursePk = getCoursePk();
 
     const selectedChoice = choices.find(
         (choice) => choice.index === selected
@@ -25,7 +26,8 @@ export const TakeawayQuestion = ({
             'takeaway',
             selected,
             isCorrect,
-            {}
+            {},
+            coursePk
         );
 
         if (selectedChoice.isCorrect) {
@@ -132,4 +134,5 @@ TakeawayQuestion.propTypes = {
     ).isRequired,
     onCorrect: PropTypes.func,
     submissionId: PropTypes.number.isRequired,
+    coursePk: PropTypes.number.isRequired
 };
