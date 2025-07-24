@@ -32,7 +32,7 @@ export const authedFetch = (url, method, data) => {
  */
 export const saveAnswer = async(
     submissionId, questionNumber, questionType,
-    selectedOption, isCorrect, additionalData
+    selectedOption, isCorrect, additionalData, coursePk
 ) => {
     const payload = {
         submission_id: submissionId,
@@ -42,8 +42,10 @@ export const saveAnswer = async(
         is_correct: isCorrect,
         additional_data: additionalData
     };
+    const url = `/course/${coursePk}/save_answer/`;
     try {
-        const response = await authedFetch('/save_answer/', 'POST', payload);
+        const response = await authedFetch(url, 'POST', payload);
+
         if (response.ok) {
             return await response.json();
         } else {
