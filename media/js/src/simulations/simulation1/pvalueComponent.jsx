@@ -1,14 +1,12 @@
 import React, { useState, useEffect } from 'react';
 import { Katex } from '../../utils/katexComponent';
-import { saveAnswer } from '../../utils/utils';
+import { getCoursePk, saveAnswer, STATIC_URL } from '../../utils/utils';
 import PropTypes from 'prop-types';
-import { STATIC_URL } from '../../utils/utils';
-
 
 export const PvalueComponent = ({
     pvalue, tvalue, submissionId, hypothesis, nullHypothesis,
     alpha, hypothesisTest1validate, setHypothesisTest1validate,
-    plotType, isRedo, hypothesisTest, answers
+    plotType, isRedo, hypothesisTest
 }) => {
 
     const [userPvalue, setUserPvalue] = useState('');
@@ -18,7 +16,7 @@ export const PvalueComponent = ({
     const [nullHypothesisChoice1, setNullHypothesisChoice1] = useState(null);
     const [showAnswer, setShowAnswer] = useState(false);
 
-
+    const coursePk = getCoursePk();
 
     useEffect(() => {
         if (isPvalueCorrect) {
@@ -83,7 +81,7 @@ export const PvalueComponent = ({
         };
         const questNumber = plotType === '2d' ? 1 : 8;
         await saveAnswer(submissionId, questNumber, 'numerical',
-            userPvalue, isCorrect, additionalData);
+            userPvalue, isCorrect, additionalData, coursePk);
     };
 
     const handlePvalueComparisonChange = (event) => {
@@ -108,7 +106,7 @@ export const PvalueComponent = ({
             nullHypothesis: nullHypothesis};
         const questNumber = plotType === '2d' ? 2 : 9;
         await saveAnswer(submissionId, questNumber, 'radio', pvalueComparison,
-            isCorrect, additionalData);
+            isCorrect, additionalData, coursePk);
     };
 
     const handleNullHypothesisChoice1Change = (event) => {
@@ -135,7 +133,7 @@ export const PvalueComponent = ({
             nullHypothesis: nullHypothesis};
         const questNumber = plotType === '2d' ? 3 : 10;
         await saveAnswer(submissionId, questNumber, 'radio',
-            nullHypothesisChoice1, isCorrect, additionalData);
+            nullHypothesisChoice1, isCorrect, additionalData, coursePk);
     };
 
     return (<>
@@ -433,6 +431,5 @@ PvalueComponent.propTypes = {
     setHypothesisTest1validate: PropTypes.func,
     plotType: PropTypes.string,
     isRedo: PropTypes.bool,
-    hypothesisTest: PropTypes.string,
-    answers: PropTypes.array
+    hypothesisTest: PropTypes.string
 };
