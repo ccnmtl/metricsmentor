@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
-import { saveAnswer, extractTextContent } from './../../utils/utils';
+import { saveAnswer, extractTextContent,
+    getCoursePk } from './../../utils/utils';
 
 export const MultipleChoiceQuestion = ({
     setIsSubmitted, submissionId, questionNumber,
@@ -32,7 +33,7 @@ export const MultipleChoiceQuestion = ({
         setIsCorrect(correct);
 
         await saveAnswer(submissionId, questionNumber, header,
-            extractTextContent(selectedOption), correct, {});
+            extractTextContent(selectedOption), correct, {}, getCoursePk());
 
         setIsSubmitted(correct);
     };

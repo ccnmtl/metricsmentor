@@ -161,7 +161,6 @@ export const HypothesisTest = ({
                                 setIsRedo={setIsRedo}
                                 tvalue={tvalue}
                                 pvalue={parseFloat(pvalue)}
-                                answers={answers}
                                 alpha={alpha}
                                 hypothesis={hypothesis}
                                 nullHypothesis={nullHypothesis}

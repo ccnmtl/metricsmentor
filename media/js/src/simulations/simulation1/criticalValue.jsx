@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { Katex } from '../../utils/katexComponent';
-import { saveAnswer, STATIC_URL } from '../../utils/utils';
+import { getCoursePk, saveAnswer, STATIC_URL } from '../../utils/utils';
 
 
 export const CriticalValue = ({
-    hypothesisTest2validate, tvalue, n, alpha, hypothesisTest, hypothesis,
+    hypothesisTest2validate, tvalue, alpha, hypothesisTest, hypothesis,
     nullHypothesis, submissionId, plotType, criticalValues, isRedo,
-    setHypothesisTest2validate, answers
+    setHypothesisTest2validate
 }) => {
     const [nullHypothesisChoice2, setNullHypothesisChoice2] = useState(null);
     const [userCriticalValue, setUserCriticalValue] = useState('');
@@ -16,6 +16,7 @@ export const CriticalValue = ({
     const [isCriticalCompareCorrect, setIsCriticalCompareCorrect] = useState(null);
     const [isCriticalValueCorrect, setIsCriticalValueCorrect] = useState(null);
 
+    const coursePk = getCoursePk();
 
     let criticalValue;
     if (criticalValues) {
@@ -65,7 +66,7 @@ export const CriticalValue = ({
 
         const questNumber = plotType === '2d' ? 4 : 11;
         await saveAnswer(submissionId, questNumber, 'numerical',
-            userCriticalValue, isCorrect, additionalData);
+            userCriticalValue, isCorrect, additionalData, coursePk);
     };
 
     const handleComparingCritical = (event) => {
@@ -123,7 +124,7 @@ export const CriticalValue = ({
 
         const questNumber = plotType === '2d' ? 5 : 12;
         saveAnswer(submissionId, questNumber, 'radio',
-            compareCritical, isCorrect, additionalData);
+            compareCritical, isCorrect, additionalData, coursePk);
     };
     const handleNullHypothesisChoice2Change = (event) => {
         setNullHypothesisChoice2(event.target.value);
@@ -168,7 +169,7 @@ export const CriticalValue = ({
             nullHypothesis: nullHypothesis};
         const questNumber = plotType === '2d' ? 6 : 13;
         await saveAnswer(submissionId, questNumber, 'radio',
-            nullHypothesisChoice2, isCorrect, additionalData);
+            nullHypothesisChoice2, isCorrect, additionalData, coursePk);
     };
 
     let absoluteTtext;
@@ -453,7 +454,6 @@ export const CriticalValue = ({
 CriticalValue.propTypes = {
     hypothesisTest2validate: PropTypes.bool,
     tvalue: PropTypes.number.isRequired,
-    n: PropTypes.number.isRequired,
     alpha: PropTypes.number.isRequired,
     hypothesisTest: PropTypes.string.isRequired,
     hypothesis: PropTypes.string.isRequired,
@@ -462,6 +462,5 @@ CriticalValue.propTypes = {
     plotType: PropTypes.string.isRequired,
     setHypothesisTest2validate: PropTypes.func.isRequired,
     criticalValues: PropTypes.object,
-    isRedo: PropTypes.bool,
-    answers: PropTypes.array
+    isRedo: PropTypes.bool
 };

@@ -70,12 +70,14 @@ describe('Takeaway Questions', () => {
         cy.get('input#campus_sim2-choice-0').click();
         cy.get('[data-cy="submit-campus_sim2"]').click();
         cy.get('.text-success[role="alert"]').should('exist');
+        cy.get('[data-cy="continue"]').scrollIntoView();
         cy.get('[data-cy="continue"]').click();
     });
     it('advances to the next topic', () => {
         cy.get('input#campus_sim2-choice-0').click();
         cy.get('[data-cy="submit-campus_sim2"]').click();
         cy.get('.text-success[role="alert"]').should('exist');
+        cy.get('[data-cy="continue"]').scrollIntoView();
         cy.get('[data-cy="continue"]').click();
         cy.get('.hi-val').should('contain', '1 of 2');
         cy.get('[data-cy="campus_sim2-complete"]').should('exist');
