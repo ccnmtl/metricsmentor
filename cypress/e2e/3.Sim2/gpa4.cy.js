@@ -1,4 +1,5 @@
 beforeEach(() => {
+    cy.resetTestDB();
     cy.login('student_one', 'test');
     cy.visit('/course/1/simulations/2/');
     cy.get('input#gpa4').click();
