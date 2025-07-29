@@ -146,9 +146,11 @@ export const MulticollinearityTakeaway = ({
         }
     ];
 
-    if (visibleIndex === questions.length){
-        handleProgress(3);
-    }
+    React.useEffect(() => {
+        if (visibleIndex === questions.length) {
+            handleProgress(3);
+        }
+    }, [visibleIndex, questions.length, handleProgress]);
 
     return (
         <>

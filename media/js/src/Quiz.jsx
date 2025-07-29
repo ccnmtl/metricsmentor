@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
-import { saveAnswer, extractTextContent } from './utils/utils';
+import { saveAnswer, extractTextContent, getCoursePk } from './utils/utils';
 
 export const QuizComponent = ({
     question, options, correctAnswerIndex, correctFeedback, incorrectFeedback,
@@ -11,6 +11,7 @@ export const QuizComponent = ({
     const [feedback, setFeedback] = useState('');
     const [isSubmitDisabled, setIsSubmitDisabled] = useState(false);
 
+    const coursePk = getCoursePk();
 
     const isCorrect = isTextInput
         ? textInputAnswer.toLowerCase().trim()
@@ -53,7 +54,7 @@ export const QuizComponent = ({
                     correctAnswer: extractTextContent(correctTextAnswer)
                 };
                 await saveAnswer(submissionId, questionNumber, 'text',
-                    textInputAnswer, isAnswerCorrect, additionalData);
+                    textInputAnswer, isAnswerCorrect, additionalData, coursePk);
             }
         } else {
             if (selectedOption === null) {
@@ -74,7 +75,7 @@ export const QuizComponent = ({
                 };
                 await saveAnswer(submissionId, questionNumber, 'radio',
                     extractTextContent(options[selectedOption]),
-                    isAnswerCorrect, additionalData);
+                    isAnswerCorrect, additionalData, coursePk);
             }
         }
     };
