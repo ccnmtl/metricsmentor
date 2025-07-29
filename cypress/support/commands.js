@@ -95,7 +95,10 @@ function callback(violations) {
 
 Cypress.Commands.add('checkPageA11y', () => {
     cy.injectAxe();
-
     const ctx = {runOnly: {type: 'tag', values: ['wcag2a']}};
     cy.checkA11y('html', ctx, callback, true);
+});
+
+Cypress.Commands.add('resetTestDB', () => {
+    cy.request('POST', '/reset_test_db/');
 });
