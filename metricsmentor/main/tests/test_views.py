@@ -317,7 +317,7 @@ class DeleteAnswerViewTest(CourseTestMixin, TestCase):
         response_data = json.loads(response.content)
         self.assertEqual(response_data['status'], 'success')
         self.assertEqual(response_data['message'],
-                         'Answer for question deleted')
+                         'All answers for question deleted')
         self.answer.refresh_from_db()
         self.assertFalse(self.answer.active)
 

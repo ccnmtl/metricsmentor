@@ -509,25 +509,21 @@ class DeleteAnswerView(LoginRequiredMixin, View):
                 'message': 'Quiz submission not found'
             }, status=404)
 
-        try:
-            answer = Answer.objects.get(
-                quiz_submission=quiz_submission,
-                question_number=question_number,
-                active=True
-            )
-        except Answer.DoesNotExist:
+        updated = Answer.objects.filter(
+            quiz_submission=quiz_submission,
+            question_number=question_number,
+            active=True
+        ).update(active=False)
+
+        if updated == 0:
             return JsonResponse({
                 'status': 'error',
                 'message': 'Answer for question not found'
             }, status=404)
 
-        # Mark the answer as inactive
-        answer.active = False
-        answer.save()
-
         return JsonResponse({
             'status': 'success',
-            'message': 'Answer for question deleted'
+            'message': 'All answers for question deleted'
         })
 
 
