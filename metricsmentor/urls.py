@@ -63,6 +63,8 @@ urlpatterns = [
     re_path(r'^design/$', design.Index.as_view(), name='design-index'),
     re_path(r'^design/simulation/$', design.Simulation.as_view(),
             name='design-simulation'),
+    path('reset_test_db/', views.reset_test_db,
+         name='reset_test_db'),
 ]
 
 

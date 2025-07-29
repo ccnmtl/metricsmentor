@@ -84,12 +84,19 @@ export const fetchQuizData = async(courseId, simulationId) => {
  * @returns {Promise<object>} - The response data.
  */
 export const deleteAnswer = async(submissionId, questionNumber) => {
+    const payload = {
+        submission_id: submissionId,
+        question_number: questionNumber,
+    };
     try {
-        const response = await axios.post('/delete_answer/', {
-            submission_id: submissionId,
-            question_number: questionNumber,
-        });
-        return response.data;
+        const response = await authedFetch('/delete_answer/', 'POST', payload);
+        if (response.ok) {
+            return await response.json();
+        } else {
+            throw new Error(
+                `Error (${response.status}) ${response.statusText}`
+            );
+        }
     } catch (error) {
         console.error('Error deleting answer:', error);
     }

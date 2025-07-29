@@ -529,3 +529,14 @@ class DeleteAnswerView(LoginRequiredMixin, View):
             'status': 'success',
             'message': 'Answer for question deleted'
         })
+
+
+@csrf_exempt
+def reset_test_db(request):
+    if not settings.DEBUG:
+        return JsonResponse({'error': 'Not allowed'}, status=403)
+    from metricsmentor.main.management.commands.integrationserver import (
+        reset_test_models
+    )
+    reset_test_models()
+    return JsonResponse({'status': 'ok'})
