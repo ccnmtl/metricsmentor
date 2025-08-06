@@ -136,10 +136,12 @@ class SaveAnswerViewTest(CourseTestMixin, TestCase):
             'question_type': 'multiple_choice',
             'selected_option': 'A',
             'is_correct': True,
-            'additional_data': {'example_key': 'example_value'}
+            'additional_data': {'example_key': 'example_value'},
+            'course_pk': self.registrar_course.pk
         }
 
-        url = reverse('save_answer')
+        url = reverse('save_answer', kwargs={'pk':
+                                             self.registrar_course.pk})
         response = self.client.post(url, data=answer_data,
                                     content_type='application/json')
         self.assertEqual(response.status_code, 200)
@@ -315,7 +317,7 @@ class DeleteAnswerViewTest(CourseTestMixin, TestCase):
         response_data = json.loads(response.content)
         self.assertEqual(response_data['status'], 'success')
         self.assertEqual(response_data['message'],
-                         'Answer for question deleted')
+                         'All answers for question deleted')
         self.answer.refresh_from_db()
         self.assertFalse(self.answer.active)
 
