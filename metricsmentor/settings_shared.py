@@ -23,10 +23,12 @@ INSTALLED_APPS += [  # noqa
     'courseaffils',
     'lti_provider',
     'contactus',
+    'debug_toolbar',
 ]
 
 MIDDLEWARE += [  # noqa
     'django.middleware.csrf.CsrfViewMiddleware',
+    'debug_toolbar.middleware.DebugToolbarMiddleware',
 ]
 
 THUMBNAIL_SUBDIR = "thumbs"
