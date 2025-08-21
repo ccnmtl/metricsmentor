@@ -20,21 +20,23 @@ export default defineConfig([
     ...compat.extends(
         "eslint:recommended",
         "plugin:security/recommended-legacy",
-        "plugin:react/recommended",
-        "plugin:cypress/recommended"
+        "plugin:react/recommended"
     ),
     {
         files: ["**/*.{js,mjs,cjs,jsx}"],
         plugins: {
             js,
             security,
-            pluginCypress,
+            cypress: pluginCypress,
         },
         languageOptions: {
             globals: {
                 ...globals.browser,
                 ...globals.amd,
                 ...globals.jquery,
+                ...globals.node,
+                ...globals.mocha,
+                ...globals.jest,
             },
             ecmaVersion: 2018,
             sourceType: "module",
@@ -92,6 +94,13 @@ export default defineConfig([
             "security/detect-possible-timing-attacks": 1,
             "security/detect-pseudoRandomBytes": 1,
             "security/detect-unsafe-regex": 1,
+            
+            "cypress/assertion-before-screenshot": "warn",
+            "cypress/no-unnecessary-waiting": "warn",
+            "cypress/no-assigning-return-values": "error",
+            "cypress/no-force": "warn",
+            "cypress/no-pause": "error",
+            "cypress/no-async-tests": "error",
         },
     },
 ]);

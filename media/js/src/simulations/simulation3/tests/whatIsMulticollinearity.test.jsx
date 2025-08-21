@@ -1,4 +1,3 @@
-/* global jest */
 import React from 'react';
 import { render, screen, fireEvent } from '@testing-library/react';
 import { WhatIsMulticollinearity } from '../whatIsMulticollinearity';

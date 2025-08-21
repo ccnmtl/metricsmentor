@@ -1,4 +1,3 @@
-/* global jest */
 import axios from 'axios';
 import { render } from '@testing-library/react';
 import {
