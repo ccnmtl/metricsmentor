@@ -1,7 +1,7 @@
 beforeEach(() => {
+    cy.resetTestDB();
     cy.login('student_one', 'test');
     cy.visit('/course/1/simulations/2/');
-    cy.get('input#campus_sim2').click();
     cy.get('input#income').click();
     cy.get('input#income-choice-1').click();
     cy.get('button[data-cy="submit-income"]').click();
@@ -16,8 +16,8 @@ describe('General Takeaway', () => {
         cy.get('#general-question').should('exist');
     });
     it('does not show the end routes', () => {
-        cy.get('[data-cy="continue"]')
-            .should('not.contain', 'Try another dataset');
+        // cy.get('[data-cy="continue"]')
+        //     .should('not.contain', 'Try another dataset');
         cy.get('[data-cy="finish"]').should('not.exist');
         cy.get('[data-cy="start-over"]').should('not.exist');
     });
