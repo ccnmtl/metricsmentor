@@ -32,7 +32,7 @@ export const authedFetch = (url, method, data) => {
  */
 export const saveAnswer = async(
     submissionId, questionNumber, questionType,
-    selectedOption, isCorrect, additionalData
+    selectedOption, isCorrect, additionalData, coursePk
 ) => {
     const payload = {
         submission_id: submissionId,
@@ -42,8 +42,10 @@ export const saveAnswer = async(
         is_correct: isCorrect,
         additional_data: additionalData
     };
+    const url = `/course/${coursePk}/save_answer/`;
     try {
-        const response = await authedFetch('/save_answer/', 'POST', payload);
+        const response = await authedFetch(url, 'POST', payload);
+
         if (response.ok) {
             return await response.json();
         } else {
@@ -82,12 +84,19 @@ export const fetchQuizData = async(courseId, simulationId) => {
  * @returns {Promise<object>} - The response data.
  */
 export const deleteAnswer = async(submissionId, questionNumber) => {
+    const payload = {
+        submission_id: submissionId,
+        question_number: questionNumber,
+    };
     try {
-        const response = await axios.post('/delete_answer/', {
-            submission_id: submissionId,
-            question_number: questionNumber,
-        });
-        return response.data;
+        const response = await authedFetch('/delete_answer/', 'POST', payload);
+        if (response.ok) {
+            return await response.json();
+        } else {
+            throw new Error(
+                `Error (${response.status}) ${response.statusText}`
+            );
+        }
     } catch (error) {
         console.error('Error deleting answer:', error);
     }

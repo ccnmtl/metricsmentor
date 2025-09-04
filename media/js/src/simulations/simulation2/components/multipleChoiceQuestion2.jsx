@@ -21,7 +21,7 @@ export const MultipleChoiceQuestion2 = ({takeaways, isSubmitted, setIsSubmitted,
             for (let topic in results) {
                 await saveAnswer(
                     submissionId, takeaways[topic].q_id, 'multiple-choice',
-                    selected[topic], results[topic], {});
+                    selected[topic], results[topic], {}, coursePk);
             }
         }
     };

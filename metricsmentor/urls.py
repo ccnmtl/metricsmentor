@@ -52,7 +52,8 @@ urlpatterns = [
             views.CreateSubmission.as_view(),
             name='create_submission'),
     re_path('^contact/', include('contactus.urls')),
-    path('save_answer/', views.SaveAnswer.as_view(), name='save_answer'),
+    path('course/<int:pk>/save_answer/', views.SaveAnswer.as_view(),
+         name='save_answer'),
     re_path(r'^course/(?P<pk>\d+)/get_quiz/$', views.GetQuizView.as_view(),
             name='get_quiz'),
     path('delete_quiz/', views.DeleteQuizSubmissionView.as_view(),
@@ -62,6 +63,8 @@ urlpatterns = [
     re_path(r'^design/$', design.Index.as_view(), name='design-index'),
     re_path(r'^design/simulation/$', design.Simulation.as_view(),
             name='design-simulation'),
+    path('reset_test_db/', views.reset_test_db,
+         name='reset_test_db'),
 ]
 
 
