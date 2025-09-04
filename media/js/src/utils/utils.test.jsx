@@ -11,6 +11,13 @@ import {
 jest.mock('axios');
 
 describe('Utility Functions', () => {
+    beforeEach(() => {
+    // Mock the low-level fetch used by authedFetch
+        global.fetch = jest.fn().mockResolvedValue({
+            ok: true,
+            json: async() => ({ success: true }),
+        });
+    });
     afterEach(() => {
         jest.clearAllMocks();
     });
@@ -26,13 +33,17 @@ describe('Utility Functions', () => {
     });
 
     test('deleteAnswer deletes answer correctly', async() => {
-        const mockData = { data: { success: true } };
-        axios.post.mockResolvedValue(mockData);
+        const res = await deleteAnswer(123, 2);
+        expect(res).toEqual({ success: true });
+        expect(global.fetch).toHaveBeenCalledTimes(1);
+        const [url, options] = global.fetch.mock.calls[0];
 
-        const data = await deleteAnswer(1, 2);
-        expect(data).toEqual(mockData.data);
-        expect(axios.post).toHaveBeenCalledWith(
-            '/delete_answer/', { submission_id: 1, question_number: 2 });
+        expect(url).toBe('/delete_answer/');
+        expect(options.method).toBe('POST');
+        expect(JSON.parse(options.body)).toEqual({
+            submission_id: 123,
+            question_number: 2,
+        });
     });
 
     test('deleteQuiz deletes quiz correctly', async() => {
