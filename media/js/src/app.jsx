@@ -32,9 +32,10 @@ export const App = () => {
                     element={<Dashboard
                         isSuperUser={isSuperUser}
                         isFaculty={isFaculty}/>} />
-                <Route path='course/:courseId/simulations/1/'
-                    element={<SimulationOne />} />
-
+                {(isSuperUser || isFaculty || coursePk === 6) && (
+                    <Route path='course/:courseId/simulations/1/'
+                        element={<SimulationOne />} />
+                )}
                 {(isSuperUser || isFaculty || coursePk === 6) && (
                     <Route path='course/:courseId/simulations/2/'
                         element={<SimulationTwo />} />
