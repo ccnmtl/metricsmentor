@@ -35,12 +35,14 @@ export const App = () => {
                 <Route path='course/:courseId/simulations/1/'
                     element={<SimulationOne />} />
 
-                <Route path='course/:courseId/simulations/2/'
-                    element={<SimulationTwo />} />
-
-                <Route path='course/:courseId/simulations/3/'
-                    element={<SimulationThree />} />
-
+                {(isSuperUser || isFaculty || coursePk === 6) && (
+                    <Route path='course/:courseId/simulations/2/'
+                        element={<SimulationTwo />} />
+                )}
+                {(isSuperUser || isFaculty || coursePk === 6) && (
+                    <Route path='course/:courseId/simulations/3/'
+                        element={<SimulationThree />} />
+                )}
                 {(isSuperUser || isFaculty || coursePk === 6) && (
                     <Route path='course/:courseId/simulations/4/'
                         element={<SimulationFour />} />
