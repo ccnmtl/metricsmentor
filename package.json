@@ -57,7 +57,7 @@
     "bootstrap": "^5.3.3",
     "file-saver": "^2.0.5",
     "katex": "^0.16.10",
-    "plotly.js": "^2.27.1",
+    "plotly.js": "^3.1.1",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "react-plotly.js": "^2.6.0",
