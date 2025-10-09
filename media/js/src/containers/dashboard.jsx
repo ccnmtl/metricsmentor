@@ -46,18 +46,18 @@ export const Dashboard = ({ isSuperUser, isFaculty}) => {
                             </Link>
                         </div>
                     )}
-                    {(isSuperUser || isFaculty || coursePk === 6) && (
-                        <div className="col-lg-5 p-4 mx-0 mx-lg-3 my-3 mx-lg-0
+
+                    <div className="col-lg-5 p-4 mx-0 mx-lg-3 my-3 mx-lg-0
                                         simulation-card">
-                            <h2 className="h2-primary">
-                                <span className="h2-secondary d-block"
-                                    data-cy="sim-2">
+                        <h2 className="h2-primary">
+                            <span className="h2-secondary d-block"
+                                data-cy="sim-2">
                                     Simulation 2</span>
-                                <span className="h2-title d-block">
-                                    {'Omitted Variable Bias'}
-                                </span>
-                            </h2>
-                            <p>
+                            <span className="h2-title d-block">
+                                {'Omitted Variable Bias'}
+                            </span>
+                        </h2>
+                        <p>
                                 This simulation will address one of the
                                 endogeneity problems: omitted variable bias (OVB).{/* eslint-disable-line max-len */}
                                 Omitting certain variables can lead to biased
@@ -65,14 +65,14 @@ export const Dashboard = ({ isSuperUser, isFaculty}) => {
                                 interest in regression analyses. Through
                                 interactive exercises, you&rsquo;ll learn how to
                                 detect the degree of OVB.
-                            </p>
-                            <Link to={`/course/${courseId}/simulations/2/`}
-                                className="btn btn-success my-3"
-                                data-cy="sim-2-link">
+                        </p>
+                        <Link to={`/course/${courseId}/simulations/2/`}
+                            className="btn btn-success my-3"
+                            data-cy="sim-2-link">
                                 Begin &raquo;
-                            </Link>
-                        </div>
-                    )}
+                        </Link>
+                    </div>
+
                     {(isSuperUser || isFaculty || coursePk === 6) && (
                         <div className="col-lg-5 p-4 mx-0 mx-lg-3 my-3 mx-lg-0
                                         simulation-card">
