@@ -94,7 +94,7 @@ export const dataAttr = {
             corr_x1: -0.24,
             corr_y: -0.16,
             stderr: [151.07, 2023.83]},
-        consump: {
+        pIncome: {
             slope_x1: 356.49,
             slope_x2: 0.74,
             intercept: -406.52,
@@ -127,8 +127,8 @@ export const dataIndex = {
         y: 'colGPA', x_1: 'hsGPA', x_2: 'ACT', x_3: 'campus', x_4: 'skipped',
         x_5: 'bgfriend', option: ['ACT', 'campus', 'skipped', 'bgfriend']},
     income: {
-        y: 'income', x_1: 'educ', x_2: 'consump', x_3: 'black', x_4: 'size',
-        option: ['consump', 'black', 'size']},
+        y: 'income', x_1: 'educ', x_2: 'pIncome', x_3: 'black', x_4: 'size',
+        option: ['pIncome', 'black', 'size']},
 };
 
 export const dataRange = {
@@ -196,7 +196,7 @@ export const dataRange = {
             label: 'x3',
             color: 'cyan',
             y: [3089.71, 16105.09]},
-        consump: {
+        pIncome: {
             label: 'x2',
             color: 'red',
             y: [306.47, 6723.38]},
@@ -220,7 +220,6 @@ export const labelIndex = {
     campus: 'Lives On Campus',
     campus_sim2: 'Campus Crime Rates',
     colGPA: 'College GPA',
-    consump: 'Consumption',
     crime: 'Total Campus Crimes',
     educ: 'Years Of Education',
     enroll: 'Total Enrollment',
@@ -229,6 +228,7 @@ export const labelIndex = {
     income: 'Income',
     kids: 'Has Kids',
     naffairs: 'Number Of Affairs',
+    pIncome: 'Parental Income',
     police: 'Police Employed On Campus',
     priv: 'Private School',
     ratemarr: 'Rating Of Marriage',
@@ -299,13 +299,13 @@ export const takeaways2 = {
             'the slope of the variable of interest when omitted? Why?',
         choices: [
             '(a) Size, because it is negatively correlated with income.',
-            '(b) Consumption, because it is highly correlated with ' +
+            '(b) Parental Income, because it is highly correlated with ' +
                 'income and somewhat correlated with education.',
             '(c) Black, because it is somewhat correlated with both ' +
                 'income and education.',
             '(d) Income, because it is the dependent variable.',
             '(e) Education, because it is the variable of interest.'],
-        answer: '(b) Consumption, because it is highly correlated with ' +
+        answer: '(b) Parental Income, because it is highly correlated with ' +
             'income and somewhat correlated with education.',
         feedback: {
             a: <>Let&apos;s try again! Here, the variable of interest
@@ -323,8 +323,8 @@ export const takeaways2 = {
                 ({inlineKatex('x_1')}) is YearsOfEducation. We want to make
                 sure that the sample slope of {inlineKatex('x_1')} is as
                 unbiased as possible. The difference in the slope of the
-                regressions is the highest when Consumption is omitted and when
-                it is included. You&apos;ve correctly identified that an
+                regressions is the highest when Parental Income is omitted and
+                when it is included. You&apos;ve correctly identified that an
                 omitted variable (OV) causes bias in the slope of the variable
                 of interest ({inlineKatex('x_1')}), and the degree of this bias
                 depends on two things:
@@ -729,7 +729,7 @@ export const sim2TextControl = {
             relationships between {inlineKatex('\\text{Income}')} and
         {inlineKatex('\\text{Years Of Education}')}.</>,
         control_inst: {
-            consump: <>When {inlineKatex('\\text{Consumption}')} (
+            pIncome: <>When {inlineKatex('\\text{Parental Income}')} (
                 {inlineKatex('x_2')}) is included, notice the changes in
                 {inlineKatex('\\hat{\\beta_1}')}, the correlation coefficients
                 {inlineKatex('\\text{corr}(y, x_2)')} and

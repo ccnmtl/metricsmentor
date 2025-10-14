@@ -89,9 +89,9 @@ describe('dataRange object properties', () => {
 
 describe('labelIndex object properties', () => {
     const knownLabels = ['ACT', 'affairs_sim2', 'bgfriend', 'black', 'campus',
-        'campus_sim2', 'colGPA', 'consump', 'crime', 'educ', 'enroll', 'gpa4',
-        'hsGPA', 'income', 'kids', 'naffairs', 'police', 'priv', 'ratemarr',
-        'relig', 'size', 'skipped', 'yrsmarr',
+        'campus_sim2', 'colGPA', 'crime', 'educ', 'enroll', 'gpa4',
+        'hsGPA', 'income', 'kids', 'naffairs', 'pIncome', 'police', 'priv',
+        'ratemarr', 'relig', 'size', 'skipped', 'yrsmarr',
     ];
     const labelIndexKeys = Object.keys(labelIndex);
 
