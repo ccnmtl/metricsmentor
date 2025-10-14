@@ -46,7 +46,7 @@
 //         cy.get('input[type="checkbox"].form-check-input').each(($el) => {
 //             cy.wrap($el).check();
 //         });
-//         cy.get('[data-cy="consump-table"]').should('exist');
+//         cy.get('[data-cy="pIncome-table"]').should('exist');
 //         cy.get('[data-cy="black-table"]').should('exist');
 //         cy.get('[data-cy="size-table"]').should('exist');
 //     });
