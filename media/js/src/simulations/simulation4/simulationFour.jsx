@@ -4,6 +4,8 @@ import { STATIC_URL, createSubmission, getCoursePk } from '../../utils/utils';
 import { PolynomialGraph } from './polynomialGraph';
 import { WhatArePolynomialRegressions } from './whatArePolynomialRegs';
 import { NonlinearRegsDefinition } from './nonlinearRegModal';
+import { WhatAreLogarithmRegs } from './whatAreLogarithms';
+import { LogarithmGraph } from './logarithmGraph';
 import { RealDataPolynomials } from './realDataPolynomials';
 import { StepProgressButton } from '../../StepProgressButton';
 import { PolynomialTakeaway } from './polynomialTakeaway';
@@ -22,6 +24,8 @@ export const SimulationFour = () => {
     const [progress, setProgress] = useState([0,0,0]);
     const [compareRegLine, setCompareRegLine] = useState([]);
     const [isCorrect, setIsCorrect] = useState([false]);
+    const [selectedModel, setSelectedModel] = useState('logLinear');
+    const [selectedFit, setSelectedFit] = useState('linearFit');
 
     const quizComplete = () => !isCorrect.includes(false);
 
@@ -169,6 +173,28 @@ export const SimulationFour = () => {
                 {mkProgressBar()}
             </>
         },
+        {
+            headerId: 'whatarelogarithms',
+            title: 'What are Logarithms?',
+            content: <>
+                {progress[stage] < 1 && (
+                    <WhatAreLogarithmRegs
+                        selectedModel={selectedModel}
+                        setSelectedModel={setSelectedModel}
+                        selectedFit={selectedFit}
+                        setSelectedFit={setSelectedFit}
+                    />
+                )}
+                {/* <StepProgressButton
+                    progress={progress}
+                    stage={stage}
+                    setProgress={setProgress}
+                    continueLabel="Continue to Real dataset »"
+                    reviewLabel="Review »"
+                    progressNumber={1}
+                /> */}
+            </>
+        },
     ];
 
     const interactionSteps = [
@@ -214,7 +240,9 @@ export const SimulationFour = () => {
             )}
             {stage === 1 && (
                 <SimulationPanel steps={logarithmSteps}
-                    graphContent={<PolynomialGraph />}
+                    graphContent={<LogarithmGraph
+                        selectedModel={selectedModel}
+                        selectedFit={selectedFit} />}
                     modals={[]}
                 />
             )}
