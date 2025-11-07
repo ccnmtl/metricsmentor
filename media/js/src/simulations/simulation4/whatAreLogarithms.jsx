@@ -16,17 +16,18 @@ export const WhatAreLogarithmRegs = ({
         <div>
             <h2>Exploring Logarithmic Relationships</h2>
             <p>
-        Select a model type below to explore how logarithmic transformations
-        affect regression fitting.
+                Select a model type below to explore how logarithmic
+                transformations affect regression fitting.
             </p>
 
             <div className="radio-group">
                 {Object.keys(fitOptions).map(model => (
                     <div key={model}>
-                        <label>
+                        <label htmlFor={`model-radio-${model}`}>
                             <input
                                 type="radio"
-                                name="model"
+                                name="model-radio-group"
+                                id={`model-radio-${model}`}
                                 value={model}
                                 checked={selectedModel === model}
                                 onChange={() => setSelectedModel(model)}
@@ -37,28 +38,32 @@ export const WhatAreLogarithmRegs = ({
                                     ? 'Linear-Log Model'
                                     : 'Log-Log Model'}
                         </label>
-                        <div className="nested-radio ps-4">
-                            {fitOptions[model].map(fit => (
-                                <label key={fit} className="d-block">
-                                    <input
-                                        type="radio"
-                                        name="fit"
-                                        value={fit}
-                                        checked={selectedFit === fit}
-                                        onChange={() => setSelectedFit(fit)}
-                                    />
-                                    {
-                                        (() => {
-                                            const fitLabel = fit
-                                                .replace('Fit', '')
-                                                .replace(/([A-Z])/g, ' $1')
-                                                .trim();
-                                            return `${fitLabel} Regression`;
-                                        })()
-                                    }
-                                </label>
-                            ))}
-                        </div>
+                        {selectedModel === model && (
+                            <div className="nested-radio ps-4">
+                                {fitOptions[model].map(fit => (
+                                    <label key={fit} className="d-block"
+                                        htmlFor={`fit-radio-${model}-${fit}`}>
+                                        <input
+                                            type="radio"
+                                            name={`fit-radio-group-${model}`}
+                                            id={`fit-radio-${model}-${fit}`}
+                                            value={fit}
+                                            checked={selectedFit === fit}
+                                            onChange={() => setSelectedFit(fit)}
+                                        />
+                                        {
+                                            (() => {
+                                                const fitLabel = fit
+                                                    .replace('Fit', '')
+                                                    .replace(/([A-Z])/g, ' $1')
+                                                    .trim();
+                                                return `${fitLabel} Regression`;
+                                            })()
+                                        }
+                                    </label>
+                                ))}
+                            </div>
+                        )}
                     </div>
                 ))}
             </div>

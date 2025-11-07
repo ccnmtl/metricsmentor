@@ -26,7 +26,7 @@ export const LogarithmGraph = ({ selectedModel, selectedFit }) => {
         fitData && fitData.line && {
             x: fitData.line.x,
             y: fitData.line.y,
-            mode: 'lines',
+            mode: 'line',
             line: { color: model.bordercolor },
             name: `${selectedFit.replace('Fit', '')} Fit`
         }
