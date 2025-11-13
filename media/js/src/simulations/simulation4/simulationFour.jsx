@@ -4,6 +4,7 @@ import { STATIC_URL, createSubmission, getCoursePk } from '../../utils/utils';
 import { PolynomialGraph } from './polynomialGraph';
 import { WhatArePolynomialRegressions } from './whatArePolynomialRegs';
 import { NonlinearRegsDefinition } from './nonlinearRegModal';
+import { LogarithmDefinition } from './logarithmRegressionsDef';
 import { WhatAreLogarithmRegs } from './whatAreLogarithms';
 import { LogarithmGraph } from './logarithmGraph';
 import { RealDataPolynomials } from './realDataPolynomials';
@@ -24,8 +25,8 @@ export const SimulationFour = () => {
     const [progress, setProgress] = useState([0,0,0]);
     const [compareRegLine, setCompareRegLine] = useState([]);
     const [isCorrect, setIsCorrect] = useState([false]);
-    const [selectedModel, setSelectedModel] = useState('logLinear');
-    const [selectedFit, setSelectedFit] = useState('linearFit');
+    const [selectedModel, setSelectedModel] = useState('');
+    const [selectedFit, setSelectedFit] = useState('');
 
     const quizComplete = () => !isCorrect.includes(false);
 
@@ -175,7 +176,7 @@ export const SimulationFour = () => {
         },
         {
             headerId: 'whatarelogarithms',
-            title: 'What are Logarithms?',
+            title: 'What are Logarithm regressions?',
             content: <>
                 {progress[stage] < 1 && (
                     <WhatAreLogarithmRegs
@@ -243,7 +244,7 @@ export const SimulationFour = () => {
                     graphContent={<LogarithmGraph
                         selectedModel={selectedModel}
                         selectedFit={selectedFit} />}
-                    modals={[]}
+                    modals={[<LogarithmDefinition key="modal2" />]}
                 />
             )}
             {stage === 2 && (

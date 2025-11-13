@@ -4,9 +4,37 @@ import dataset from './logarithm.json';
 import PropTypes from 'prop-types';
 
 export const LogarithmGraph = ({ selectedModel, selectedFit }) => {
-    const model = dataset[selectedModel];
-    if (!model) return null;
 
+    if (!selectedModel) {
+        return (
+            <Plot
+                data={[
+                    {
+                        x: [1],
+                        y: [1],
+                        mode: 'text',
+                        text: ['Select a model to begin'],
+                    }
+                ]}
+                layout={{
+                    title: 'Logarithm Regression Models',
+                    xaxis: { title: 'X' },
+                    yaxis: { title: 'Y' },
+                    font: { textcase: 'word caps' },
+                    legend: {
+                        orientation: 'h',
+                        xanchor: 'center',
+                        x: 0.5,
+                        y: 1.18
+                    },
+                }}
+                config={{ responsive: true }}
+                style={{ width: '100%', height: '85%' }}
+            />
+        );
+    }
+
+    const model = dataset[selectedModel];
     const x = model.X;
     const y = model.Y;
     const fitData = model[selectedFit];
@@ -22,15 +50,18 @@ export const LogarithmGraph = ({ selectedModel, selectedFit }) => {
                 symbol: model.symbol
             },
             name: 'Observed Data'
-        },
-        fitData && fitData.line && {
+        }
+    ];
+
+    if (fitData && fitData.line) {
+        plotData.push({
             x: fitData.line.x,
             y: fitData.line.y,
-            mode: 'line',
+            mode: 'lines',
             line: { color: model.bordercolor },
             name: `${selectedFit.replace('Fit', '')} Fit`
-        }
-    ].filter(Boolean);
+        });
+    }
 
     return (
         <Plot
@@ -39,7 +70,7 @@ export const LogarithmGraph = ({ selectedModel, selectedFit }) => {
                 title: model.title,
                 xaxis: { title: 'X' },
                 yaxis: { title: 'Y' },
-                legend: { orientation: 'h' }
+                legend: { orientation: 'h' },
             }}
             config={{ responsive: true }}
             style={{ width: '100%', height: '85%' }}
@@ -48,6 +79,6 @@ export const LogarithmGraph = ({ selectedModel, selectedFit }) => {
 };
 
 LogarithmGraph.propTypes = {
-    selectedModel: PropTypes.string.isRequired,
-    selectedFit: PropTypes.string.isRequired
+    selectedModel: PropTypes.string,
+    selectedFit: PropTypes.string
 };
