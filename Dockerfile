@@ -1,4 +1,4 @@
-FROM public.ecr.aws/docker/library/python:3.11.3-bullseye@sha256:13927a8172d13b6cdc87f50bf0a38ff4eceef05262f83870c9f6474d16117687
+FROM public.ecr.aws/docker/library/python:3.13-trixie
 ENV PYTHONDONTWRITEBYTECODE=1
 ENV PYTHONUNBUFFERED=1
 WORKDIR /src
