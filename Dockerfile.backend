@@ -1,4 +1,4 @@
-FROM public.ecr.aws/docker/library/python:3.11-trixie
+FROM public.ecr.aws/docker/library/python:3.11-bookworm
 ENV PYTHONDONTWRITEBYTECODE=1
 ENV PYTHONUNBUFFERED=1
 WORKDIR /src
