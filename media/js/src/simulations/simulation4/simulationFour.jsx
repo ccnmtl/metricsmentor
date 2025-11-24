@@ -165,18 +165,20 @@ export const SimulationFour = () => {
             title: 'Learning objectives: Logarithms',
             content: <>
                 <p>
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit
-                    Mollitia doloremque iure explicabo quis asperiores
-                    natus. Inventore laborum tempore, molestias expedita
-                    nemo nostrum dicta vel eum autem laboriosam ad ipsa
-                    modi!
+                    This exercise teaches you to compare linear and
+                    log-transformed regression models. You&rsquo;ll learn to
+                    recognize when log transformations improve model fit,
+                    interpret coefficients across model types, evaluate model
+                    fit using both visual diagnostics and statistical criteria,
+                    and build intuition for selecting the functional form that
+                    best represents the underlying relationship in the data.
                 </p>
                 {mkProgressBar()}
             </>
         },
         {
             headerId: 'whatarelogarithms',
-            title: 'What are Logarithm regressions?',
+            title: 'What are Logarithm regression models?',
             content: <>
                 {progress[stage] < 1 && (
                     <WhatAreLogarithmRegs
