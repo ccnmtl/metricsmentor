@@ -22,16 +22,15 @@ export const WhatAreLogarithmRegs = ({
     return (
         <>
             <p>
-                Lorem ipsum dolor sit amet consectetur adipisicing elit
-                Mollitia doloremque iure explicabo quis asperiores
-                natus. Inventore laborum tempore, molestias expedita
-                nemo nostrum dicta vel eum autem laboriosam ad ipsa
-                modi!
+                Logarithm-transformed regressions are models that use natural
+                logs of the dependent variable, the independent variable, or
+                both to better capture relationships that grow in percentage or
+                proportional terms.
             </p>
             <PromptBlock
                 text="But first, take a moment to familiarize yourself with
-                    the definition of logarithm regressions; it&rsquo;ll help
-                    as you continue with this exercise." />
+                    the basic concepts of logarithm-based regressions.
+                    This can help as you continue with this exercise." />
             <button
                 className="btn btn-sm btn-primary"
                 data-bs-toggle="modal"
@@ -41,14 +40,16 @@ export const WhatAreLogarithmRegs = ({
             </button>
 
             <h2>Logarithm regression plots</h2>
-            <p>Each generated dataset below show a distinct pattern to help
-                you expolore how different logarithm models is used.
+            <p>The generated datasets below are examples of three common
+                logarithm-transformed models to help
+                you explore how different regression capture
+                each trend.
             </p>
             <PromptBlock list={[
-                'Select a graph plot',
-                'Look at plot, look at regression line',
-                'Review interpretation of the fit',
-                'Read about when to use this method'
+                'Select a log-based regression model.',
+                'Compare the data plots and resulting regressions before ' +
+                'and after the log-based fit is applied.',
+                'Review and compare the interpretations for each instance.'
             ]} />
 
             <div className="choice-list ms-0">
