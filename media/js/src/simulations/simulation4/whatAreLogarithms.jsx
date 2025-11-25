@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 import PropTypes from 'prop-types';
 import { PromptBlock } from '../../PromptBlock';
+import { Katex } from '../../utils/katexComponent';
 
 export const WhatAreLogarithmRegs = ({
     selectedFit, setSelectedFit,
@@ -31,6 +32,34 @@ export const WhatAreLogarithmRegs = ({
             .replace(/([A-Z])/g, ' $1')
             .trim()
             .toLowerCase();
+
+    const getRegFormula = (model, fit) => {
+        const formulas = {
+            logLinear: {
+                linearFit: '\\hat{y} = -669.23 + 224.14X',
+                logLinearFit: '\\widehat{\\ln y} = 1.05 + 0.97X'
+            },
+            linearLog: {
+                linearFit: '\\hat{y} = 5.57 + 0.0025X',
+                linearLogFit: '\\hat{y} = 1.03 + 0.98\\ln X'
+            },
+            logLog: {
+                linearFit: '\\hat{y} = 106.15 + 2.48X',
+                logLogFit: '\\widehat{\\ln y} = 1.03 + 0.98X'
+            }
+        };
+        return (formulas[model] && formulas[model][fit])
+            ? formulas[model][fit]
+            : '';
+    };
+    const getRegLabel = (fit) =>
+        `Resulting ${
+            fit
+                .replace('Fit', '')
+                .replace(/([A-Z])/g, ' $1')
+                .trim()
+                .toLowerCase()
+        } equation:`;
 
     return (
         <>
@@ -115,6 +144,13 @@ export const WhatAreLogarithmRegs = ({
                                                         {formatFitName(fit)}
                                                     </b> regression fit.
                                                 </p>
+                                                <p>
+                                                    <b>{getRegLabel(fit)}</b>
+                                                </p>
+                                                <div className="katex-block">
+                                                    <Katex tex={getRegFormula(
+                                                        selectedModel, fit)} />
+                                                </div>
                                             </div>
                                         )}
                                     </div>
