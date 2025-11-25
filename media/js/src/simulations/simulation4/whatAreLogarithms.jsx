@@ -95,20 +95,15 @@ export const WhatAreLogarithmRegs = ({
                                     <div key={fit} className="collapsible-fit">
                                         <button
                                             type="button"
-                                            className="btn btn-link"
+                                            className="btn"
                                             onClick={() => toggleFit(fit)}
                                             aria-expanded={!!openFit[fit]}
                                             aria-controls={`fit-panel-${fit}`}
-                                            style={{ textAlign: 'left',
-                                                paddingLeft: '0' }}
                                         >
                                             <span>
                                                 {openFit[fit] ? '▼' : '▶'}{' '}
-                                                {fit.replace('Fit', '')
-                                                    .replace(/([A-Z])/g, ' $1')
-                                                    .trim()
-                                                    .toLowerCase()
-                                                } regression fit
+                                               With {formatFitName(fit)}{' '}
+                                               regression fit
                                             </span>
                                         </button>
                                         {openFit[fit] && (
