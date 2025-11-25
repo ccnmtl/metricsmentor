@@ -13,68 +13,138 @@ export const LogarithmGraph = ({ selectedModel, selectedFit }) => {
                         x: [1],
                         y: [1],
                         mode: 'text',
-                        text: ['Select a model to begin'],
+                        text: ['Choose a dataset to begin'],
+                        textposition: 'middle center',
+                        showlegend: false
                     }
                 ]}
                 layout={{
-                    title: 'Logarithm Regression Models',
-                    xaxis: { title: 'X' },
-                    yaxis: { title: 'Y' },
-                    font: { textcase: 'word caps' },
-                    legend: {
-                        orientation: 'h',
-                        xanchor: 'center',
-                        x: 0.5,
-                        y: 1.18
-                    },
+                    title: 'Logarithms',
+                    xaxis: { title: 'X'},
+                    yaxis: { title: 'Y'},
                 }}
+                style={{ height: '88%', width: '100%' }}
                 config={{ responsive: true }}
-                style={{ width: '100%', height: '85%' }}
             />
         );
     }
 
     const model = dataset[selectedModel];
-    const x = model.X;
-    const y = model.Y;
-    const fitData = model[selectedFit];
+    const fits = Object.keys(model).filter(k => k.endsWith('Fit'));
+    const chosenFits = fits;
 
-    const plotData = [
-        {
-            x,
-            y,
-            mode: 'markers',
-            marker: {
-                color: model.fillcolor,
-                size: 10,
-                symbol: model.symbol
-            },
-            name: 'Observed Data'
+    const makePlotData = (fitKey) => {
+        const fit = model[fitKey];
+        const x = model.X;
+        const y = model.Y;
+        const intercept = fit.intercept || 0;
+        const slope = fit.slope || 0;
+
+        let plotX = x;
+        let plotY = y;
+        let lineX, lineY;
+        let xAxisType = 'linear';
+        let yAxisType = 'linear';
+        let xAxisTitle = 'X';
+        let yAxisTitle = 'Y';
+
+        switch (fitKey) {
+        case 'linearFit':
+            // Linear regression: X vs Y
+            lineX = [Math.min(...x), Math.max(...x)];
+            lineY = lineX.map(xi => intercept + slope * xi);
+            break;
+        case 'logLinearFit':
+            // Log-linear: X vs log(Y)
+            plotY = y.map(yi => Math.log(yi));
+            lineX = [Math.min(...x), Math.max(...x)];
+            lineY = lineX.map(xi => intercept + slope * xi);
+            yAxisType = 'log';
+            yAxisTitle = 'log(Y)';
+            break;
+        case 'linearLogFit':
+            // Linear-log: log(X) vs Y
+            plotX = x.map(xi => Math.log(xi));
+            lineX = [Math.min(...plotX), Math.max(...plotX)];
+            lineY = lineX.map(xi => intercept + slope * xi);
+            xAxisType = 'log';
+            xAxisTitle = 'log(X)';
+            break;
+        case 'logLogFit':
+            // Log-log: log(X) vs log(Y)
+            plotX = x.map(xi => Math.log(xi));
+            plotY = y.map(yi => Math.log(yi));
+            lineX = [Math.min(...plotX), Math.max(...plotX)];
+            lineY = lineX.map(xi => intercept + slope * xi);
+            xAxisType = 'log';
+            yAxisType = 'log';
+            xAxisTitle = 'log(X)';
+            yAxisTitle = 'log(Y)';
+            break;
+        default:
+            lineX = [Math.min(...x), Math.max(...x)];
+            lineY = lineX.map(xi => intercept + slope * xi);
         }
-    ];
 
-    if (fitData && fitData.line) {
-        plotData.push({
-            x: fitData.line.x,
-            y: fitData.line.y,
-            mode: 'lines',
-            line: { color: model.bordercolor },
-            name: `${selectedFit.replace('Fit', '')} Fit`
-        });
-    }
+        const data = [
+            {
+                x: plotX,
+                y: plotY,
+                mode: 'markers',
+                marker: {
+                    color: model.fillcolor,
+                    size: 8,
+                    symbol: model.symbol
+                },
+                name: 'Observed Data'
+            },
+            {
+                x: lineX,
+                y: lineY,
+                mode: 'lines',
+                line: { color: model.bordercolor, width: 3 },
+                name: `${fitKey.replace('Fit', '')} Regression`
+            }
+        ];
+
+        const fitName = fitKey
+            .replace('Fit', '')
+            .replace(/([A-Z])/g, ' $1')
+            .trim();
+        const layout = {
+            title: `${model.title}: ${fitName}`,
+            xaxis: { title: xAxisTitle, type: xAxisType },
+            yaxis: { title: yAxisTitle, type: yAxisType },
+            margin: { t: 60, b: 40, l: 50, r: 20 },
+            showlegend: false
+        };
+
+        return { data, layout };
+    };
 
     return (
-        <Plot
-            data={plotData}
-            layout={{
-                title: model.title,
-                xaxis: { title: 'X' },
-                yaxis: { title: 'Y' },
-                legend: { orientation: 'h' },
-            }}
-            config={{ responsive: true }}
-            style={{ width: '100%', height: '85%' }}
-        />
+        <div style={{
+            display: 'flex',
+            flexDirection: selectedFit ? 'column' : 'row',
+            gap: '1.5rem',
+            width: '100%'
+        }}>
+            {chosenFits.map((fitKey) => {
+                const { data, layout } = makePlotData(fitKey);
+                return (
+                    <Plot
+                        key={fitKey}
+                        data={data}
+                        layout={layout}
+                        config={{ responsive: true }}
+                        style={{
+                            width: selectedFit ? '100%' : '50%',
+                            height: selectedFit ? '88%' : '88%'
+                        }}
+                    />
+                );
+            })}
+        </div>
     );
 };
 

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import PropTypes from 'prop-types';
 import { PromptBlock } from '../../PromptBlock';
 
@@ -13,11 +13,24 @@ export const WhatAreLogarithmRegs = ({
         logLog: ['linearFit', 'logLogFit']
     };
 
+    const [openFit, setOpenFit] = useState({});
+
     const handleModelChange = (model) => {
         setSelectedModel(model);
-        const defaultFit = fitOptions[model][0];
-        setSelectedFit(defaultFit);
+        setOpenFit({});
     };
+
+    const toggleFit = (fit) => {
+        setOpenFit(prev => ({
+            ...prev,
+            [fit]: !prev[fit]
+        }));
+    };
+    const formatFitName = (fit) =>
+        fit.replace('Fit', '')
+            .replace(/([A-Z])/g, ' $1')
+            .trim()
+            .toLowerCase();
 
     return (
         <>
@@ -79,33 +92,37 @@ export const WhatAreLogarithmRegs = ({
                         {selectedModel === model && (
                             <div className="nested-radio ps-4">
                                 {fitOptions[model].map(fit => (
-                                    <label key={fit}
-                                        className="ps-4 mt-2 d-block"
-                                        htmlFor={`fit-radio-${model}-${fit}`}>
-                                        <input
-                                            className="form-check-input"
-                                            type="radio"
-                                            name={`fit-radio-group-${model}`}
-                                            id={`fit-radio-${model}-${fit}`}
-                                            value={fit}
-                                            checked={selectedFit === fit}
-                                            onChange={() => setSelectedFit(fit)}
-                                        />
-                                        {
-                                            (() => {
-                                                let fitLabel = fit
-                                                    .replace('Fit', '')
+                                    <div key={fit} className="collapsible-fit">
+                                        <button
+                                            type="button"
+                                            className="btn btn-link"
+                                            onClick={() => toggleFit(fit)}
+                                            aria-expanded={!!openFit[fit]}
+                                            aria-controls={`fit-panel-${fit}`}
+                                            style={{ textAlign: 'left',
+                                                paddingLeft: '0' }}
+                                        >
+                                            <span>
+                                                {openFit[fit] ? '▼' : '▶'}{' '}
+                                                {fit.replace('Fit', '')
                                                     .replace(/([A-Z])/g, ' $1')
                                                     .trim()
-                                                    .toLowerCase();
-                                                return (
-                                                    'With ' +
-                                                    fitLabel +
-                                                    ' regression fit'
-                                                );
-                                            })()
-                                        }
-                                    </label>
+                                                    .toLowerCase()
+                                                } regression fit
+                                            </span>
+                                        </button>
+                                        {openFit[fit] && (
+                                            <div id={`fit-panel-${fit}`}
+                                                className="ps-4">
+                                                <p>
+                                                    Interpretation for
+                                                    <b>
+                                                        {formatFitName(fit)}
+                                                    </b> regression fit.
+                                                </p>
+                                            </div>
+                                        )}
+                                    </div>
                                 ))}
                             </div>
                         )}
