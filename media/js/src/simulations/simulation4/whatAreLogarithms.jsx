@@ -33,19 +33,38 @@ export const WhatAreLogarithmRegs = ({
             .trim()
             .toLowerCase();
 
+    const getModelFormula = (model) => {
+        switch (model) {
+        case 'logLinear':
+            return '\\ln(y) = \\widehat{\\beta}_0 + \\widehat{\\beta}_1 x';
+        case 'linearLog':
+            return (
+                '\\hat{y} = \\widehat{\\beta}_0 + ' +
+                '\\widehat{\\beta}_1 \\ln(x)'
+            );
+        case 'logLog':
+            return (
+                '\\widehat{\\ln(y)} = \\widehat{\\beta}_0 + ' +
+                '\\widehat{\\beta}_1 \\ln(x)'
+            );
+        default:
+            return '';
+        }
+    };
+
     const getRegFormula = (model, fit) => {
         const formulas = {
             logLinear: {
-                linearFit: '\\hat{y} = -669.23 + 224.14X',
-                logLinearFit: '\\widehat{\\ln y} = 1.05 + 0.97X'
+                linearFit: '\\hat{y} = -669.23 + 224.14x',
+                logLinearFit: '\\widehat{\\ln(y)} = 1.05 + 0.97x'
             },
             linearLog: {
-                linearFit: '\\hat{y} = 5.57 + 0.0025X',
-                linearLogFit: '\\hat{y} = 1.03 + 0.98\\ln X'
+                linearFit: '\\hat{y} = 5.57 + 0.0025x',
+                linearLogFit: '\\hat{y} = 1.03 + 0.98\\ln(x)'
             },
             logLog: {
-                linearFit: '\\hat{y} = 106.15 + 2.48X',
-                logLogFit: '\\widehat{\\ln y} = 1.03 + 0.98X'
+                linearFit: '\\hat{y} = 106.15 + 2.48x',
+                logLogFit: '\\widehat{\\ln(y)} = 1.03 + 0.98\\ln(x)'
             }
         };
         return (formulas[model] && formulas[model][fit])
@@ -118,6 +137,15 @@ export const WhatAreLogarithmRegs = ({
                                     ? 'Linear-Log Model'
                                     : 'Log-Log Model'}
                         </label>
+
+                        {selectedModel === model && (
+                            <div className="ps-4 mt-2 mb-3">
+                                <p className="me-2 mb-0">Form:&nbsp;
+                                    <Katex tex={getModelFormula(model)} />
+                                </p>
+                            </div>
+                        )}
+
                         {selectedModel === model && (
                             <div className="nested-radio ps-4">
                                 {fitOptions[model].map(fit => (
