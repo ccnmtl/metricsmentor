@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 import PropTypes from 'prop-types';
 import { PromptBlock } from '../../PromptBlock';
+import { Katex } from '../../utils/katexComponent';
 
 export const WhatAreLogarithmRegs = ({
     selectedFit, setSelectedFit,
@@ -31,6 +32,53 @@ export const WhatAreLogarithmRegs = ({
             .replace(/([A-Z])/g, ' $1')
             .trim()
             .toLowerCase();
+
+    const getModelFormula = (model) => {
+        switch (model) {
+        case 'logLinear':
+            return '\\ln(y) = \\widehat{\\beta}_0 + \\widehat{\\beta}_1 x';
+        case 'linearLog':
+            return (
+                '\\hat{y} = \\widehat{\\beta}_0 + ' +
+                '\\widehat{\\beta}_1 \\ln(x)'
+            );
+        case 'logLog':
+            return (
+                '\\widehat{\\ln(y)} = \\widehat{\\beta}_0 + ' +
+                '\\widehat{\\beta}_1 \\ln(x)'
+            );
+        default:
+            return '';
+        }
+    };
+
+    const getRegFormula = (model, fit) => {
+        const formulas = {
+            logLinear: {
+                linearFit: '\\hat{y} = -669.23 + 224.14x',
+                logLinearFit: '\\widehat{\\ln(y)} = 1.05 + 0.97x'
+            },
+            linearLog: {
+                linearFit: '\\hat{y} = 5.57 + 0.0025x',
+                linearLogFit: '\\hat{y} = 1.03 + 0.98\\ln(x)'
+            },
+            logLog: {
+                linearFit: '\\hat{y} = 106.15 + 2.48x',
+                logLogFit: '\\widehat{\\ln(y)} = 1.03 + 0.98\\ln(x)'
+            }
+        };
+        return (formulas[model] && formulas[model][fit])
+            ? formulas[model][fit]
+            : '';
+    };
+    const getRegLabel = (fit) =>
+        `Resulting ${
+            fit
+                .replace('Fit', '')
+                .replace(/([A-Z])/g, ' $1')
+                .trim()
+                .toLowerCase()
+        } equation:`;
 
     return (
         <>
@@ -89,6 +137,15 @@ export const WhatAreLogarithmRegs = ({
                                     ? 'Linear-Log Model'
                                     : 'Log-Log Model'}
                         </label>
+
+                        {selectedModel === model && (
+                            <div className="ps-4 mt-2 mb-3">
+                                <p className="me-2 mb-0">Form:&nbsp;
+                                    <Katex tex={getModelFormula(model)} />
+                                </p>
+                            </div>
+                        )}
+
                         {selectedModel === model && (
                             <div className="nested-radio ps-4">
                                 {fitOptions[model].map(fit => (
@@ -115,6 +172,13 @@ export const WhatAreLogarithmRegs = ({
                                                         {formatFitName(fit)}
                                                     </b> regression fit.
                                                 </p>
+                                                <p>
+                                                    <b>{getRegLabel(fit)}</b>
+                                                </p>
+                                                <div className="katex-block">
+                                                    <Katex tex={getRegFormula(
+                                                        selectedModel, fit)} />
+                                                </div>
                                             </div>
                                         )}
                                     </div>
