@@ -46,8 +46,8 @@
             "xAxis": [-126.03, 1591.38],
             "yAxis": [2.59, 9.14]
         },
-        "bordercolor": "red",
-        "fillcolor": "pink",
+        "bordercolor": "blue",
+        "fillcolor": "teal",
         "symbol": "circle"
     },
     "logLog": {
@@ -72,8 +72,8 @@
             "xAxis": [-127.76, 1610.44],
             "yAxis": [-500.86, 5914.20]
         },
-        "bordercolor": "orange",
-        "fillcolor": "yellow",
+        "bordercolor": "blue",
+        "fillcolor": "teal",
         "symbol": "circle"
     }
 }
