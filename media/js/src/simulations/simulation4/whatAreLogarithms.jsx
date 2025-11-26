@@ -78,7 +78,118 @@ export const WhatAreLogarithmRegs = ({
                 .replace(/([A-Z])/g, ' $1')
                 .trim()
                 .toLowerCase()
-        } equation:`;
+        } regression fit equation:`;
+
+    const getRegInterpretation = (model, fit) => {
+        const interpretations = {
+            logLinear: {
+                linearFit: (
+                    <>
+                    This linear-linear regression is not a good fit, the
+                    interpretation may be misleading or inaccurate
+                    </>),
+                logLinearFit: (
+                    <>1-unit change in <Katex tex="x" /> is associated with 97%
+                    (<Katex tex="0.97 × 100" />) change in <Katex tex="y" />
+                    </>)
+            },
+            linearLog: {
+                linearFit:
+                    'This linear-linear regression is not a good fit, the ' +
+                    'interpretation may be misleading or inaccurate.',
+                linearLogFit: (
+                    <>
+                        <Katex tex="1\%" /> change in x is associated with{' '}
+                        <Katex tex="0.98/100 units" /> change in{' '}
+                        <Katex tex="y" />
+                    </>
+                )
+            },
+            logLog: {
+                linearFit:
+                    'This linear-linear regression is not a good fit, the ' +
+                    'interpretation may be misleading or inaccurate.',
+                logLogFit: (
+                    <>
+                        <Katex tex="1\%" /> change in x is associated with{' '}
+                        <Katex tex="0.98%//units" /> change in{' '}
+                        <Katex tex="y" />
+                    </>
+                )
+            }
+        };
+        return (interpretations[model] && interpretations[model][fit])
+            ? interpretations[model][fit]
+            : '';
+    };
+
+    const getRegNotes = (model, fit) => {
+        const notes = {
+            logLinear: {
+                linearFit: (
+                    <>
+                        Observe the regression line when this linear-linear
+                        model is applied on the raw data. Purely from
+                        observation, does the regression line represent the
+                            relationship between <Katex tex="y" /> and{' '}
+                        <Katex tex="x" />?
+                    </>
+                ),
+                logLinearFit: (
+                    <>
+                        Notice the data plot when natural log is applied to{' '}
+                        <Katex tex="y" />.
+                        Does the resulting regression line better represent or
+                        summarize the linear relationship of the data?
+                    </>
+                )
+            },
+            linearLog: {
+                linearFit: (
+                    <>
+                        Observe the regression line when this linear-linear
+                        model is applied on the raw data. Purely from
+                        observation, does the regression line represent the
+                            relationship between <Katex tex="y" /> and{' '}
+                        <Katex tex="x" />?
+                    </>
+                ),
+                linearLogFit: (
+                    <>
+                        Notice the data plot when natural log is applied to{' '}
+                        <Katex tex="x" />.
+                        Does the resulting regression line better represent or
+                        summarize the linear relationship of the data?
+                    </>
+                )
+            },
+            logLog: {
+                linearFit: (
+                    <>
+                        Observe the regression line when this linear-linear
+                        model is applied on the raw data. Purely from
+                        observation, does the regression line represent the
+                            relationship between <Katex tex="y" /> and{' '}
+                        <Katex tex="x" />?
+                    </>
+                ),
+                logLogFit: (
+                    <>
+                        Notice the data plot when natural log is applied to{' '}
+                        <Katex tex="y" /> and <Katex tex="x" />.
+                        Does the resulting regression line better represent or
+                        summarize the linear relationship of the data?
+                        This is the elasticity interpretation of the regression
+                        slope, which could be helpful with empirical data in
+                        Economics.
+                    </>
+                )
+            }
+        };
+        return (notes[model] && notes[model][fit])
+            ? notes[model][fit]
+            : '';
+    };
 
     return (
         <>
@@ -155,8 +266,7 @@ export const WhatAreLogarithmRegs = ({
                                             className="btn"
                                             onClick={() => toggleFit(fit)}
                                             aria-expanded={!!openFit[fit]}
-                                            aria-controls={`fit-panel-${fit}`}
-                                        >
+                                            aria-controls={`fit-panel-${fit}`}>
                                             <span>
                                                 {openFit[fit] ? '▼' : '▶'}{' '}
                                                With {formatFitName(fit)}{' '}
@@ -167,18 +277,24 @@ export const WhatAreLogarithmRegs = ({
                                             <div id={`fit-panel-${fit}`}
                                                 className="ps-4">
                                                 <p>
-                                                    Interpretation for
-                                                    <b>
-                                                        {formatFitName(fit)}
-                                                    </b> regression fit.
-                                                </p>
-                                                <p>
                                                     <b>{getRegLabel(fit)}</b>
                                                 </p>
                                                 <div className="katex-block">
                                                     <Katex tex={getRegFormula(
                                                         selectedModel, fit)} />
                                                 </div>
+                                                <p>
+                                                    <b>Interpretation: </b>
+                                                    {getRegInterpretation(
+                                                        selectedModel,
+                                                        fit)}
+                                                </p>
+                                                <p>
+                                                    <b>Notes: </b>
+                                                    {getRegNotes(
+                                                        selectedModel,
+                                                        fit)}
+                                                </p>
                                             </div>
                                         )}
                                     </div>
