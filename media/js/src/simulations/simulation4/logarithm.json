@@ -19,7 +19,7 @@
         },
         "logLinearFit": {
             "intercept": 1.05,
-            "slope": 0.97,
+            "slope": 0.9737,
             "xAxis": [1.24, 6.64],
             "yAxis": [-162.02, 1963.01]
         },
@@ -42,7 +42,7 @@
         },
         "linearLogFit": {
             "intercept": 1.03,
-            "slope": 0.98,
+            "slope": 0.9841,
             "xAxis": [-126.03, 1591.38],
             "yAxis": [2.59, 9.14]
         },
