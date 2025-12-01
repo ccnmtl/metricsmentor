@@ -26,7 +26,7 @@ export const SimulationFour = () => {
     const [compareRegLine, setCompareRegLine] = useState([]);
     const [isCorrect, setIsCorrect] = useState([false]);
     const [selectedModel, setSelectedModel] = useState('');
-    const [selectedFit, setSelectedFit] = useState('');
+    const [highlightedFit, setHighlightedFit] = useState('');
 
     const quizComplete = () => !isCorrect.includes(false);
 
@@ -184,8 +184,7 @@ export const SimulationFour = () => {
                     <WhatAreLogarithmRegs
                         selectedModel={selectedModel}
                         setSelectedModel={setSelectedModel}
-                        selectedFit={selectedFit}
-                        setSelectedFit={setSelectedFit}
+                        setHighlightedFit={setHighlightedFit}
                     />
                 )}
                 {/* <StepProgressButton
@@ -245,7 +244,7 @@ export const SimulationFour = () => {
                 <SimulationPanel steps={logarithmSteps}
                     graphContent={<LogarithmGraph
                         selectedModel={selectedModel}
-                        selectedFit={selectedFit} />}
+                        highlightedFit={highlightedFit} />}
                     modals={[<LogarithmDefinition key="modal2" />]}
                 />
             )}

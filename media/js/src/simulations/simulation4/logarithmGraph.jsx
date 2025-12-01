@@ -3,7 +3,8 @@ import Plot from 'react-plotly.js';
 import dataset from './logarithm.json';
 import PropTypes from 'prop-types';
 
-export const LogarithmGraph = ({ selectedModel, selectedFit }) => {
+export const LogarithmGraph = ({
+    selectedModel, highlightedFit }) => {
 
     if (!selectedModel) {
         return (
@@ -85,7 +86,6 @@ export const LogarithmGraph = ({ selectedModel, selectedFit }) => {
             lineX = [Math.min(...x), Math.max(...x)];
             lineY = lineX.map(xi => intercept + slope * xi);
         }
-
         const data = [
             {
                 x: plotX,
@@ -125,23 +125,41 @@ export const LogarithmGraph = ({ selectedModel, selectedFit }) => {
     return (
         <div style={{
             display: 'flex',
-            flexDirection: selectedFit ? 'column' : 'row',
-            gap: '1.5rem',
-            width: '100%'
+            flexDirection: 'row',
+            alignItems: 'stretch',
+            gap: '0',
+            width: '100%',
+            height: '88%',
         }}>
             {chosenFits.map((fitKey) => {
                 const { data, layout } = makePlotData(fitKey);
+                const isHighlighted = highlightedFit === fitKey;
                 return (
-                    <Plot
+                    <div
                         key={fitKey}
-                        data={data}
-                        layout={layout}
-                        config={{ responsive: true }}
                         style={{
-                            width: selectedFit ? '100%' : '50%',
-                            height: selectedFit ? '88%' : '88%'
+                            display: 'flex',
+                            flexDirection: 'column',
+                            width: '50%',
+                            height: '88%',
+                            border: isHighlighted ?
+                                '4px solid gold' : '2px solid #ddd',
+                            borderRadius: '10px',
+                            boxShadow: isHighlighted
+                                ? '0 2px 8px rgba(255, 215, 0, 0.5)'
+                                : '0 2px 8px rgba(0,0,0,0.08)',
                         }}
-                    />
+                    >
+                        <Plot
+                            data={data}
+                            layout={layout}
+                            config={{ responsive: true }}
+                            style={{
+                                width: '100%',
+                                height: '100%'
+                            }}
+                        />
+                    </div>
                 );
             })}
         </div>
@@ -150,5 +168,6 @@ export const LogarithmGraph = ({ selectedModel, selectedFit }) => {
 
 LogarithmGraph.propTypes = {
     selectedModel: PropTypes.string,
-    selectedFit: PropTypes.string
+    selectedFit: PropTypes.string,
+    highlightedFit: PropTypes.string
 };
