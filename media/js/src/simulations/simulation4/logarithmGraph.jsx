@@ -128,9 +128,10 @@ export const LogarithmGraph = ({
             display: 'flex',
             flexDirection: 'row',
             alignItems: 'stretch',
-            gap: '0',
+            gap: '0.5rem',
             width: '100%',
             height: '88%',
+            padding: '0.5rem',
         }}>
             {chosenFits.map((fitKey) => {
                 const { data, layout } = makePlotData(fitKey);
@@ -146,8 +147,8 @@ export const LogarithmGraph = ({
                             border: isHighlighted ?
                                 '2px solid gold' : '2px solid #ddd',
                             boxShadow: isHighlighted
-                                ? '0 2px 8px rgba(255, 215, 0, 0.5)'
-                                : '0 2px 8px rgba(0,0,0,0.08)',
+                                ? 'inset 0 0 1rem -4px rgba(255,215,0,0.7)'
+                                : 'inset 0 0 1rem -4px rgba(0,0,0,0.08)',
                         }}
                     >
                         <Plot
@@ -156,7 +157,8 @@ export const LogarithmGraph = ({
                             config={{ responsive: true }}
                             style={{
                                 width: '99%',
-                                height: '100%'
+                                height: '100%',
+                                margin: 'auto',
                             }}
                         />
                     </div>
