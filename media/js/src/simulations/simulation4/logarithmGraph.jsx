@@ -142,10 +142,9 @@ export const LogarithmGraph = ({
                             display: 'flex',
                             flexDirection: 'column',
                             width: '50%',
-                            height: '88%',
+                            height: '100%',
                             border: isHighlighted ?
-                                '4px solid gold' : '2px solid #ddd',
-                            borderRadius: '10px',
+                                '2px solid gold' : '2px solid #ddd',
                             boxShadow: isHighlighted
                                 ? '0 2px 8px rgba(255, 215, 0, 0.5)'
                                 : '0 2px 8px rgba(0,0,0,0.08)',
@@ -156,7 +155,7 @@ export const LogarithmGraph = ({
                             layout={layout}
                             config={{ responsive: true }}
                             style={{
-                                width: '100%',
+                                width: '99%',
                                 height: '100%'
                             }}
                         />
