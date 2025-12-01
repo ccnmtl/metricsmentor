@@ -40,8 +40,8 @@ export const LogarithmDefinition = () => {
                     </thead>
                     <tbody>
                         <tr>
-                            <td>Log-Linear</td>
-                            <td>
+                            <td className="text-nowrap">Log-Linear</td>
+                            <td className="text-nowrap">
                                 <Katex
                                     tex={
                                         '\\ln(y) = ' +
@@ -56,8 +56,8 @@ export const LogarithmDefinition = () => {
                             in {inlineKatex('y')}</td>
                         </tr>
                         <tr>
-                            <td>Linear-Log</td>
-                            <td>
+                            <td className="text-nowrap">Linear-Log</td>
+                            <td className="text-nowrap">
                                 <Katex
                                     tex={
                                         'y = ' +
@@ -71,8 +71,8 @@ export const LogarithmDefinition = () => {
                             change in {inlineKatex('y')}</td>
                         </tr>
                         <tr>
-                            <td>Log-Log</td>
-                            <td>
+                            <td className="text-nowrap">Log-Log</td>
+                            <td className="text-nowrap">
                                 <Katex
                                     tex={
                                         '\\ln(y) = ' +
