@@ -51,7 +51,7 @@ export const LogarithmDefinition = () => {
                                 />
                             </td>
                             <td>1 unit change of {inlineKatex('x')} is
-                            associated with {inlineKatex('\\beta_1%')}
+                            associated with {inlineKatex('\\beta_1\\%')}
                             ({inlineKatex('~\\beta_1 \\times 100')}) change
                             in {inlineKatex('y')}</td>
                         </tr>
@@ -82,7 +82,7 @@ export const LogarithmDefinition = () => {
                                 />
                             </td>
                             <td>1% change of {inlineKatex('x')} is
-                            associated with {inlineKatex('\\beta_1%')} change
+                            associated with {inlineKatex('\\beta_1\\%')} change
                             in {inlineKatex('y')}</td>
                         </tr>
                     </tbody>

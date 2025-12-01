@@ -4,8 +4,7 @@ import { PromptBlock } from '../../PromptBlock';
 import { Katex } from '../../utils/katexComponent';
 
 export const WhatAreLogarithmRegs = ({
-    selectedFit, setSelectedFit,
-    selectedModel, setSelectedModel
+    setHighlightedFit, selectedModel, setSelectedModel
 }) => {
 
     const fitOptions = {
@@ -19,14 +18,20 @@ export const WhatAreLogarithmRegs = ({
     const handleModelChange = (model) => {
         setSelectedModel(model);
         setOpenFit({});
+        setHighlightedFit('');
     };
 
     const toggleFit = (fit) => {
-        setOpenFit(prev => ({
-            ...prev,
-            [fit]: !prev[fit]
-        }));
+        setOpenFit(prev => {
+            if (prev[fit]) {
+                return {};
+            } else {
+                return { [fit]: true };
+            }
+        });
+        setHighlightedFit(prev => prev === fit ? '' : fit);
     };
+
     const formatFitName = (fit) =>
         fit.replace('Fit', '')
             .replace(/([A-Z])/g, ' $1')
@@ -112,7 +117,7 @@ export const WhatAreLogarithmRegs = ({
                 logLogFit: (
                     <>
                         <Katex tex="1\%" /> change in x is associated with{' '}
-                        <Katex tex="0.98%//units" /> change in{' '}
+                        <Katex tex="0.98\% units" /> change in{' '}
                         <Katex tex="y" />
                     </>
                 )
@@ -309,8 +314,7 @@ export const WhatAreLogarithmRegs = ({
 };
 
 WhatAreLogarithmRegs.propTypes = {
-    selectedFit: PropTypes.string.isRequired,
-    setSelectedFit: PropTypes.func.isRequired,
     selectedModel: PropTypes.string.isRequired,
-    setSelectedModel: PropTypes.func.isRequired
+    setSelectedModel: PropTypes.func.isRequired,
+    setHighlightedFit: PropTypes.func.isRequired
 };
