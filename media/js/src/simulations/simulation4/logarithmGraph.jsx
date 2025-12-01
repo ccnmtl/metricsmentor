@@ -56,31 +56,32 @@ export const LogarithmGraph = ({
             lineY = lineX.map(xi => intercept + slope * xi);
             break;
         case 'logLinearFit':
-            // Log-linear: X vs log(Y)
+            // Log-linear: X vs lnY
             plotY = y.map(yi => Math.log(yi));
             lineX = [Math.min(...x), Math.max(...x)];
             lineY = lineX.map(xi => intercept + slope * xi);
-            yAxisType = 'log';
-            yAxisTitle = 'log(Y)';
+            yAxisType = 'linear';
+            yAxisTitle = 'ln(Y)';
             break;
         case 'linearLogFit':
-            // Linear-log: log(X) vs Y
+            // Linear-log: ln(X) vs Y
             plotX = x.map(xi => Math.log(xi));
+            plotY = y;
             lineX = [Math.min(...plotX), Math.max(...plotX)];
             lineY = lineX.map(xi => intercept + slope * xi);
-            xAxisType = 'log';
-            xAxisTitle = 'log(X)';
+            xAxisType = 'linear';
+            xAxisTitle = 'ln(X)';
             break;
         case 'logLogFit':
-            // Log-log: log(X) vs log(Y)
+            // Log-log: ln(X) vs ln(Y)
             plotX = x.map(xi => Math.log(xi));
             plotY = y.map(yi => Math.log(yi));
             lineX = [Math.min(...plotX), Math.max(...plotX)];
             lineY = lineX.map(xi => intercept + slope * xi);
-            xAxisType = 'log';
-            yAxisType = 'log';
-            xAxisTitle = 'log(X)';
-            yAxisTitle = 'log(Y)';
+            xAxisType = 'linear';
+            yAxisType = 'linear';
+            xAxisTitle = 'ln(X)';
+            yAxisTitle = 'ln(Y)';
             break;
         default:
             lineX = [Math.min(...x), Math.max(...x)];
