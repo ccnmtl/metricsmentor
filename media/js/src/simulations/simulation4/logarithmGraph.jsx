@@ -109,11 +109,12 @@ export const LogarithmGraph = ({
         ];
 
         const fitName = fitKey
-            .replace('Fit', '')
             .replace(/([A-Z])/g, ' $1')
-            .trim();
+            .trim()
+            .replace(/^./, str => str.toUpperCase());
+
         const layout = {
-            title: `${model.title}: ${fitName}`,
+            title: `${fitName}`,
             xaxis: { title: xAxisTitle, type: xAxisType },
             yaxis: { title: yAxisTitle, type: yAxisType },
             margin: { t: 60, b: 40, l: 50, r: 20 },
