@@ -102,33 +102,33 @@ export const Dashboard = ({ isSuperUser, isFaculty}) => {
                             </Link>
                         </div>
                     )}
-
-                    <div className="col-lg-5 p-4 mx-0 mx-lg-3 my-3 mx-lg-0
+                    {(isSuperUser || isFaculty || coursePk === 6) && (
+                        <div className="col-lg-5 p-4 mx-0 mx-lg-3 my-3 mx-lg-0
                                         simulation-card">
-                        <h2 className="h2-primary">
-                            <span className="h2-secondary d-block"
-                                data-cy="sim-4">
+                            <h2 className="h2-primary">
+                                <span className="h2-secondary d-block"
+                                    data-cy="sim-4">
                                     Simulation 4</span>
-                            <span className="h2-title d-block">
-                                {'Non-Linear Regression'}
-                            </span>
-                        </h2>
-                        <p>
+                                <span className="h2-title d-block">
+                                    {'Non-Linear Regression'}
+                                </span>
+                            </h2>
+                            <p>
                                 In real-world data, not all relationships
                                 between variables are linear. This simulation
                                 explores three common types of non-linear
                                 regressions used to capture complex patterns:
                                 Polynomials, Logarithms, and Regressions with
                                 Interaction Variables.
-                        </p>
+                            </p>
 
-                        <Link to={`/course/${courseId}/simulations/4/`}
-                            className="btn btn-success my-3"
-                            data-cy="sim-4-link">
+                            <Link to={`/course/${courseId}/simulations/4/`}
+                                className="btn btn-success my-3"
+                                data-cy="sim-4-link">
                                     Begin &raquo;
-                        </Link>
-                    </div>
-
+                            </Link>
+                        </div>
+                    )}
                 </div>
             </section>
             <Footer />
