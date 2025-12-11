@@ -290,7 +290,7 @@ export const RealDataPolynomials = ({
                         correctFeedback={'13.95 hours per week is the ' +
                             'correct optimal study time!'}
                         incorrectFeedback={incorrectFeedback}
-                        correctTextAnswer={'13.95'}
+                        correctTextAnswer={'14.3'}
                         setIsCorrect={handleIsCorrect(0)}
                         isTextInput={true}
                         correctAnswerIndex={2}
