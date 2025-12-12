@@ -20,5 +20,5 @@ SENTRY_DSN = os.environ.get('SENTRY_DSN')
 SENTRY_KEY = os.environ.get('SENTRY_KEY')
 
 
-if hasattr(settings, 'SENTRY_DSN'):
+if SENTRY_DSN:
     init_sentry(SENTRY_DSN)  # noqa: F405
