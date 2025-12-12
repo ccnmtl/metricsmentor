@@ -1,5 +1,4 @@
 import os
-from django.conf import settings
 from ctlsettings.production import common, init_sentry
 from metricsmentor.settings_shared import *  # noqa: F403
 
