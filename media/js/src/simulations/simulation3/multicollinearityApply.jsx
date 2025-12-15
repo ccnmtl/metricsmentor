@@ -148,7 +148,7 @@ export const MulticollinearityApply = ({
                     ${DATA.x3.slope_x1 < 0 ? '-' : '+'} 
                     ${Math.abs(DATA.x3.slope_x1)}x_1 
                     ${DATA.x3.slope_x2 < 0 ? '-' : '+'} 
-                    ${Math.abs(DATA.x3.slope_x2)}x_2`)}</p>
+                    ${Math.abs(DATA.x3.slope_x2)}x_3`)}</p>
                 :
                 null
             }
