@@ -103,7 +103,7 @@ django-contact-us==1.1.0
 entrypoints==0.4
 typing_extensions==4.15.0
 
-django-courseaffils @ git+https://github.com/ccnmtl/django_courseaffils@master
+django-courseaffils==2.5.1
 
 scipy==1.16.3
 numpy==2.3.5
