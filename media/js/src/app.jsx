@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from 'react';
-import { BrowserRouter as Router, Route, Routes  } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import { Dashboard } from './containers/dashboard';
-import { SimulationOne} from './simulations/simulation1/simulationOne';
-import {SimulationTwo
-} from './simulations/simulation2/components/simulationTwo';
+import { SimulationOne } from './simulations/simulation1/simulationOne';
+import { SimulationTwo } from './simulations/simulation2/simulationTwo';
 import { SimulationThree } from './simulations/simulation3/simulationThree';
 import { SimulationFour } from './simulations/simulation4/simulationFour';
 import { getCoursePk } from './utils/utils';
@@ -31,7 +30,7 @@ export const App = () => {
                 <Route path='course/:courseId/simulations/'
                     element={<Dashboard
                         isSuperUser={isSuperUser}
-                        isFaculty={isFaculty}/>} />
+                        isFaculty={isFaculty} />} />
                 {(isSuperUser || isFaculty || coursePk === 6) && (
                     <Route path='course/:courseId/simulations/1/'
                         element={<SimulationOne />} />
