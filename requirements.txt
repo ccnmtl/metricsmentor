@@ -105,7 +105,7 @@ typing_extensions==4.15.0
 django-courseaffils==2.5.1
 
 scipy==1.16.3
-numpy==2.3.5
+numpy==2.4.0
 statsmodels==0.14.5
 pandas==2.3.0
 pytz==2025.2
