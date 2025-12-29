@@ -8,7 +8,7 @@ import {
 } from '../../utils/utils';
 import DATASETS from './datasets.json';
 import { LearningGoals } from './components/learningGoals';
-import { MultipleChoiceQuestion2 } from './components/multipleChoiceQuestion2';
+import { SimulationTwoTakeaway } from './simulationTwoTakeaway';
 import { OVBTheoryModal } from './components/modalOVBTheory.jsx';
 import {
     dataAttr, labelIndex, takeaways2, sim2TextVariable as varText,
@@ -27,7 +27,7 @@ export const SimulationTwo = () => {
     const freshComplete = () => Object.keys(DATASETS).reduce((acc, key) => {
         acc[key] = false;
         return acc;
-    }, {});
+    }, { general: false });
 
     const [choice, setChoice] = useState();
     const [data, setData] = useState();
@@ -41,8 +41,7 @@ export const SimulationTwo = () => {
     const checkComplete = () => Object.values(isComplete)
         .reduce((acc, val) => acc + val, 0);
 
-    const [showGeneral, setShowGeneral] = useState(
-        checkComplete() > 1 && isComplete['general'] != true);
+
 
     useEffect(() => {
         fetchQuizData(coursePk, 2).then(data => {
@@ -116,33 +115,22 @@ export const SimulationTwo = () => {
         setControls({});
     }, [data]);
 
-    /**
-     * If the user has completed the first question for the current dataset,
-     * show the second with a general question.
-     * @returns {JSX.Element} The question component to render.
-     */
-    const getQuestions = () => {
-        // If the user has completed the first question
-        // for the current dataset, show the second with a
-        // general question.
+    const completedDatasetsCount = Object.keys(DATASETS)
+        .filter(k => isComplete[k]).length;
 
-        const takeaways = showGeneral ?
-            { [choice]: takeaways2[choice], 'general': takeaways2.general } :
-            { [choice]: takeaways2[choice] };
-        const data = {
-            choice, isSubmitted, handleStartOver, setIsSubmitted,
-            handleContinue, checkComplete, submissionId, isComplete,
-            setIsComplete, createSubmission, coursePk, nextStep, results,
-            setResults, setNextStep, takeaways, showGeneral, setShowGeneral
-        };
-        return <MultipleChoiceQuestion2 {...data} />;
-    };
+    const activeQuestions = [];
+    if (choice && takeaways2[choice]) {
+        activeQuestions.push({ topic: choice, ...takeaways2[choice] });
+    }
+    if (completedDatasetsCount >= 2 &&
+        (!isComplete['general'] || (isComplete[choice] && completedDatasetsCount === 2))) {
+        activeQuestions.push({ topic: 'general', ...takeaways2.general });
+    }
 
     const handleContinue = () => {
         setChoice(null);
         setData(null);
         setIsSubmitted(false);
-        setShowGeneral(checkComplete() > 1 && isComplete['general'] != true);
     };
 
     const steps = [
@@ -206,7 +194,20 @@ export const SimulationTwo = () => {
                         haven&rsquo;t examined.
                     </p>
                 }
-                {getQuestions()}
+                {/* Takeaways Component */}
+                <SimulationTwoTakeaway
+                    activeQuestions={activeQuestions}
+                    isComplete={isComplete}
+                    checkComplete={checkComplete}
+                    handleContinue={handleContinue}
+                    handleStartOver={handleStartOver}
+                    submissionId={submissionId}
+                    coursePk={coursePk}
+                    setIsComplete={setIsComplete}
+                    createSubmission={createSubmission}
+                    nextStep={nextStep}
+                    setNextStep={setNextStep}
+                />
             </>
         });
     }
