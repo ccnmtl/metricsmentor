@@ -15,7 +15,7 @@ export const TakeawayQuestion = ({
         (choice) => choice.index === selected
     );
 
-    const handleSubmit = async () => {
+    const handleSubmit = async() => {
         if (!selected || locked) return;
         setSubmitted(true);
 
@@ -93,18 +93,20 @@ export const TakeawayQuestion = ({
             {submitted && selectedChoice && (
                 <div className="sim_quiz__feedback">
                     <div
-                        className={`align-self-start me-3 ${selectedChoice.isCorrect
+                        className={`align-self-start me-3 ${
+                            selectedChoice.isCorrect
                                 ? 'status-checkmark'
                                 : 'status-warning'
-                            }`}
+                        }`}
                     >
                         {selectedChoice.isCorrect ? '✓' : '!'}
                     </div>
                     <div
-                        className={`sim_quiz__feedback-text-${selectedChoice.isCorrect
+                        className={`sim_quiz__feedback-text-${
+                            selectedChoice.isCorrect
                                 ? 'correct'
                                 : 'incorrect'
-                            }`}
+                        }`}
                     >
                         <p>{selectedChoice.feedback}</p>
                     </div>

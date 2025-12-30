@@ -32,11 +32,10 @@ export const SimulationTwo = () => {
     const [choice, setChoice] = useState();
     const [data, setData] = useState();
     const [controls, setControls] = useState({});
-    const [isSubmitted, setIsSubmitted] = useState(false);
     const [isComplete, setIsComplete] = useState(freshComplete());
     const [submissionId, setSubmissionId] = useState();
     const [nextStep, setNextStep] = useState(false);
-    const [results, setResults] = useState({});
+
 
     const checkComplete = () => Object.values(isComplete)
         .reduce((acc, val) => acc + val, 0);
@@ -54,7 +53,7 @@ export const SimulationTwo = () => {
         });
     }, []);
 
-    const createSubmission = async (followUp = () => true) => {
+    const createSubmission = async(followUp = () => true) => {
         // Define the data to be saved based on the plot type
         const data = {};
 
@@ -84,8 +83,6 @@ export const SimulationTwo = () => {
     };
 
     const handleChoice = (e) => {
-        setResults({});
-        setIsSubmitted(false);
         setNextStep(false);
         setChoice(e.target.value);
     };
@@ -123,14 +120,18 @@ export const SimulationTwo = () => {
         activeQuestions.push({ topic: choice, ...takeaways2[choice] });
     }
     if (completedDatasetsCount >= 2 &&
-        (!isComplete['general'] || (isComplete[choice] && completedDatasetsCount === 2))) {
+        (!isComplete['general'] ||
+            (isComplete[choice] &&
+                completedDatasetsCount === 2
+            )
+        )
+    ) {
         activeQuestions.push({ topic: 'general', ...takeaways2.general });
     }
 
     const handleContinue = () => {
         setChoice(null);
         setData(null);
-        setIsSubmitted(false);
     };
 
     const steps = [
@@ -158,6 +159,7 @@ export const SimulationTwo = () => {
             icon: `${STATIC_URL}/img/icon-goal.svg`,
             headerId: 'learning-goals',
             title: 'Learning Goals',
+            ['data-cy']: 'section1',
             content: <LearningGoals id="learning-goals" {...{
                 choice,
                 checkComplete, handleChoice, isComplete
@@ -168,6 +170,7 @@ export const SimulationTwo = () => {
     if (data) {
         steps.push({
             title: 'Variables of Interest',
+            ['data-cy']: 'section2',
             content: <Variables params={{
                 ...dataAttr[choice], ...dataIndex[choice],
                 varText: varText[choice]
@@ -175,6 +178,7 @@ export const SimulationTwo = () => {
         });
         steps.push({
             title: 'Control Variables',
+            ['data-cy']: 'section3',
             content: <ControlVariable data={dataAttr[choice]}
                 {...{
                     controls, handleControls,
@@ -185,6 +189,7 @@ export const SimulationTwo = () => {
         steps.push({
             title: 'Takeaway Questions',
             headerId: 'takeawayQuestions',
+            ['data-cy']: 'section4',
             content: <>
                 {isComplete[choice] &&
                     <p className="text-success">
