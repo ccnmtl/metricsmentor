@@ -3,9 +3,9 @@ import PropTypes from 'prop-types';
 
 
 export const SimulationStep = ({
-    icon, segment, stepNumber, headerId, subtitle, title, content
+    icon, segment, stepNumber, headerId, subtitle, title, content, ...rest
 }) => (
-    <div className="simulation__step-container d-flex">
+    <div className="simulation__step-container d-flex" {...rest}>
         <div className={`simulation__step-num 
                         ${icon ? 'tip-on' : ''}`}>
             {icon ? (

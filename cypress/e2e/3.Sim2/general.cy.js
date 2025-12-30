@@ -3,17 +3,17 @@ beforeEach(() => {
     cy.login('faculty_one', 'test');
     cy.visit('/course/1/simulations/2/');
     cy.get('input#income').click();
-    cy.get('input#income-choice-1').click();
-    cy.get('button[data-cy="submit-income"]').click();
+    cy.get('input#income-choice-b').click();
+    cy.get('button[data-cy="submit2"]').click();
     cy.get('[data-cy="continue"]').click();
     cy.get('input#gpa4').click();
-    cy.get('input#gpa4-choice-2').click();
-    cy.get('button[data-cy="submit-gpa4"]').click();
+    cy.get('input#gpa4-choice-c').click();
+    cy.get('button[data-cy="submit3"]').click();
 });
 
 describe('General Takeaway', () => {
     it('shows the general takeaway question', () => {
-        cy.get('#general-question').should('exist');
+        cy.get('[id="1"]').should('exist');
     });
     it('does not show the end routes', () => {
         // cy.get('[data-cy="continue"]')
@@ -22,21 +22,21 @@ describe('General Takeaway', () => {
         cy.get('[data-cy="start-over"]').should('not.exist');
     });
     it('shows negative feedback', () => {
-        cy.get('input#general-choice-0').click();
-        cy.get('button[data-cy="submit-general"]').click();
-        cy.get('.text-danger[role="alert"]').should('exist');
+        cy.get('input#general-choice-a').click();
+        cy.get('button[data-cy="submit1"]').click();
+        cy.get('.sim_quiz__feedback-text-incorrect').should('exist');
     });
     it('shows positive feedback', () => {
-        cy.get('input#general-choice-3').click();
-        cy.get('button[data-cy="submit-general"]').click();
-        cy.get('.text-success[role="alert"]').should('exist');
+        cy.get('input#general-choice-d').click();
+        cy.get('button[data-cy="submit1"]').click();
+        cy.get('.sim_quiz__feedback-text-correct').should('exist');
     });
 });
 
 describe('End Routes', () => {
     beforeEach(() => {
-        cy.get('input#general-choice-3').click();
-        cy.get('button[data-cy="submit-general"]').click();
+        cy.get('input#general-choice-d').click();
+        cy.get('button[data-cy="submit1"]').click();
     });
     it('continues to a new topic', () => {
         cy.get('[data-cy="continue"]')
