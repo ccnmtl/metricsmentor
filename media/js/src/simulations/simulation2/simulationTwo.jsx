@@ -3,8 +3,8 @@ import { ScatterPlot2 } from './components/scatterPlot2';
 import { Variables } from './components/variables';
 import { ControlVariable } from './components/controlVariable';
 import {
-    inlineKatex, authedFetch, deleteAnswer,
-    fetchQuizData, STATIC_URL,
+    inlineKatex, deleteAnswer,
+    fetchQuizData, STATIC_URL, createSubmission,
 } from '../../utils/utils';
 import DATASETS from './datasets.json';
 import { LearningGoals } from './components/learningGoals';
@@ -53,32 +53,14 @@ export const SimulationTwo = () => {
         });
     }, []);
 
-    const createSubmission = async(followUp = () => true) => {
-        // Define the data to be saved based on the plot type
-        const data = {};
-
-        const payload = {
-            simulation: 2,
-            data: data
-        };
-
-        const url = `/course/${coursePk}/api/create-sub/`;
-
-        authedFetch(url, 'POST', payload)
-            .then(response => {
-                if (response.status === 201) {
-                    return response.json();
-                } else {
-                    throw `Error (${response.status}) ${response.statusText}`;
-                }
-            })
-            .then(data => {
-                setSubmissionId(data.submission_id);
+    const createSubmissionLocal = async(followUp = () => true) => {
+        createSubmission(coursePk, submissionId, 2)
+            .then(id => {
+                setSubmissionId(id);
                 followUp();
             })
-            .catch(error => {
-                console.error('Error saving graph data:', error);
-                throw error;
+            .catch(() => {
+                // Error already logged in utils.jsx
             });
     };
 
@@ -209,7 +191,7 @@ export const SimulationTwo = () => {
                     submissionId={submissionId}
                     coursePk={coursePk}
                     setIsComplete={setIsComplete}
-                    createSubmission={createSubmission}
+                    createSubmission={createSubmissionLocal}
                     nextStep={nextStep}
                     setNextStep={setNextStep}
                 />
