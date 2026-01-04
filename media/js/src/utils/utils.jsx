@@ -210,9 +210,7 @@ export const shuffleArray = (array) => {
  * @throws {Error} - If the request fails.
  */
 export const createSubmission = async(
-    coursePk, submissionId = null, simulation) => {
-    const data = {};
-
+    coursePk, submissionId = null, simulation, data = {}) => {
     const payload = {
         simulation: simulation,
         data: data,

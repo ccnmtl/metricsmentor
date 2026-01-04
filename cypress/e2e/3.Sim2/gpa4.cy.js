@@ -56,8 +56,8 @@ describe('Control Variables', () => {
 
 describe('Takeaway Questions', () => {
     it('only shows one initial question without feedback', () => {
-        cy.get('#gpa4-question').should('exist');
-        cy.get('input[name="gpa4-choices"]').each(($el) => {
+        cy.get('[id="3"]').should('exist');
+        cy.get('input[name="3-choices"]').each(($el) => {
             cy.wrap($el).should('not.be.checked');
         });
     });
@@ -65,20 +65,20 @@ describe('Takeaway Questions', () => {
         cy.get('[role="alert"]').should('not.exist');
     });
     it('shows negative feedback', () => {
-        cy.get('input#gpa4-choice-0').click();
-        cy.get('[data-cy="submit-gpa4"]').click();
-        cy.get('.text-danger[role="alert"]').should('exist');
+        cy.get('input#gpa4-choice-a').click();
+        cy.get('[data-cy="submit3"]').click();
+        cy.get('.sim_quiz__feedback-text-incorrect').should('exist');
     });
     it('shows postive feedback', () => {
-        cy.get('input#gpa4-choice-2').click();
-        cy.get('[data-cy="submit-gpa4"]').click();
-        cy.get('.text-success[role="alert"]').should('exist');
+        cy.get('input#gpa4-choice-c').click();
+        cy.get('[data-cy="submit3"]').click();
+        cy.get('.sim_quiz__feedback-text-correct').should('exist');
         cy.get('[data-cy="continue"]').click();
     });
     it('advances to the next topic', () => {
-        cy.get('input#gpa4-choice-2').click();
-        cy.get('[data-cy="submit-gpa4"]').click();
-        cy.get('.text-success[role="alert"]').should('exist');
+        cy.get('input#gpa4-choice-c').click();
+        cy.get('[data-cy="submit3"]').click();
+        cy.get('.sim_quiz__feedback-text-correct').should('exist');
         cy.get('[data-cy="continue"]').click();
         cy.get('.hi-val').should('contain', '1 of 2');
         cy.get('[data-cy="gpa4-complete"]').should('exist');

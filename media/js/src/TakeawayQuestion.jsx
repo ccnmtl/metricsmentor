@@ -42,11 +42,17 @@ export const TakeawayQuestion = ({
             aria-labelledby={questionId}
             className="sim_quiz__unit"
         >
-            <p
-                className="sim_quiz__question"
-                id={questionId}
-                dangerouslySetInnerHTML={{ __html: questionText }}
-            />
+            {typeof questionText === 'string' ? (
+                <p
+                    className="sim_quiz__question"
+                    id={questionId}
+                    dangerouslySetInnerHTML={{ __html: questionText }}
+                />
+            ) : (
+                <div className="sim_quiz__question" id={questionId}>
+                    {questionText}
+                </div>
+            )}
 
             <div
                 id={`${questionId}group`}
@@ -122,7 +128,10 @@ export const TakeawayQuestion = ({
 
 TakeawayQuestion.propTypes = {
     questionId: PropTypes.number.isRequired,
-    questionText: PropTypes.string.isRequired,
+    questionText: PropTypes.oneOfType([
+        PropTypes.string,
+        PropTypes.node
+    ]).isRequired,
     choices: PropTypes.arrayOf(
         PropTypes.shape({
             id: PropTypes.string.isRequired,

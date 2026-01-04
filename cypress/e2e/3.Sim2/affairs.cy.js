@@ -54,8 +54,8 @@ describe('Control Variables', () => {
 
 describe('Takeaway Questions', () => {
     it('only shows one initial question without feedback', () => {
-        cy.get('#affairs_sim2-question').should('exist');
-        cy.get('input[name="affairs_sim2-choices"]').each(($el) => {
+        cy.get('[id="4"]').should('exist');
+        cy.get('input[name="4-choices"]').each(($el) => {
             cy.wrap($el).should('not.be.checked');
         });
     });
@@ -63,20 +63,20 @@ describe('Takeaway Questions', () => {
         cy.get('[role="alert"]').should('not.exist');
     });
     it('shows negative feedback', () => {
-        cy.get('input#affairs_sim2-choice-0').click();
-        cy.get('[data-cy="submit-affairs_sim2"]').click();
-        cy.get('.text-danger[role="alert"]').should('exist');
+        cy.get('input#affairs_sim2-choice-a').click();
+        cy.get('[data-cy="submit4"]').click();
+        cy.get('.sim_quiz__feedback-text-incorrect').should('exist');
     });
     it('shows postive feedback', () => {
-        cy.get('input#affairs_sim2-choice-3').click();
-        cy.get('[data-cy="submit-affairs_sim2"]').click();
-        cy.get('.text-success[role="alert"]').should('exist');
+        cy.get('input#affairs_sim2-choice-d').click();
+        cy.get('[data-cy="submit4"]').click();
+        cy.get('.sim_quiz__feedback-text-correct').should('exist');
         cy.get('[data-cy="continue"]').click();
     });
     it('advances to the next topic', () => {
-        cy.get('input#affairs_sim2-choice-3').click();
-        cy.get('[data-cy="submit-affairs_sim2"]').click();
-        cy.get('.text-success[role="alert"]').should('exist');
+        cy.get('input#affairs_sim2-choice-d').click();
+        cy.get('[data-cy="submit4"]').click();
+        cy.get('.sim_quiz__feedback-text-correct').should('exist');
         cy.get('[data-cy="continue"]').click();
         cy.get('.hi-val').should('contain', '1 of 2');
         cy.get('[data-cy="affairs_sim2-complete"]').should('exist');
