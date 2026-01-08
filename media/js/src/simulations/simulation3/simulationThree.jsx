@@ -81,7 +81,7 @@ export const SimulationThree = () => {
                     (label, index) => (
                         <button onClick={handleStage} key={index}
                             value={index} className={'btn btn-primary m-1'}
-                            disabled={stage===index}>
+                            disabled={stage === index}>
                             {label}
                         </button>))}
             </>
@@ -160,7 +160,7 @@ export const SimulationThree = () => {
         });
     }
 
-    if(progress1 > 1) {
+    if (progress1 > 1) {
         heteroSkadasticSteps.push({
             headerId: 'takeAway1',
             title: 'Takeaway questions',
@@ -260,23 +260,30 @@ export const SimulationThree = () => {
     useEffect(() => {
         if (progress1 == 1) {
             document.getElementById('whatisHeteroskedasticity')
-                .scrollIntoView({behavior: 'smooth'});
+                .scrollIntoView({ behavior: 'smooth' });
         }
     }, [progress1]);
 
     useEffect(() => {
         if (progress2 == 1) {
             document.getElementById('whatIsMulticollinearity')
-                .scrollIntoView({behavior: 'smooth'});
+                .scrollIntoView({ behavior: 'smooth' });
         }
     }, [progress2]);
 
     useEffect(() => {
         const initializeSubmission = async() => {
             if (!initialized.current && submissionId === null) {
+                const currentCoursePk = getCoursePk();
                 initialized.current = true;
-                const subId = await createSubmission(coursePk, null, 3);
-                setSubmissionId(subId);
+                try {
+                    const subId = await createSubmission(
+                        currentCoursePk, null, 3);
+                    setSubmissionId(subId);
+                } catch (error) {
+                    initialized.current = false;
+                    console.error('Failed to initialize simulation:', error);
+                }
             }
         };
         initializeSubmission();

@@ -1,4 +1,3 @@
-/* eslint-disable */
 const Path = require('path');
 const { merge } = require('webpack-merge');
 const common = require('./webpack.common.js');
@@ -11,20 +10,23 @@ module.exports = merge(common, {
         filename: 'bundle.js'
     },
     devServer: {
+        host: '0.0.0.0',
         hot: false,
         port: 9091,
         historyApiFallback: true,
         devMiddleware: {
             writeToDisk: true,
-            publicPath: 'http://localhost:9091/',
+            publicPath: '/media/build/',
         },
         static: {
             directory: './'
         },
+        allowedHosts: 'all',
         headers: {
             'Access-Control-Allow-Origin': '*',
         },
         client: {
+            webSocketURL: 'auto://0.0.0.0:0/ws',
             overlay: {
                 warnings: false,
                 errors: true

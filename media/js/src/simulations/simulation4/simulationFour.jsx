@@ -22,7 +22,7 @@ export const SimulationFour = () => {
     const [showPolyDatasets, setShowPolyDatasets] = useState(showOne(0));
     // Each index tracks the state for a different module
     // ['Polynomials', 'Logarithms', 'Interactions']
-    const [progress, setProgress] = useState([0,0,0]);
+    const [progress, setProgress] = useState([0, 0, 0]);
     const [compareRegLine, setCompareRegLine] = useState([]);
     const [isCorrect, setIsCorrect] = useState([false]);
     const [selectedModel, setSelectedModel] = useState('');
@@ -37,7 +37,7 @@ export const SimulationFour = () => {
         .map((label, index) => (
             <button onClick={handleStage} key={index}
                 value={index} className={'btn btn-primary m-1'}
-                disabled={stage===index}>
+                disabled={stage === index}>
                 {label}
             </button>));
 
@@ -77,12 +77,12 @@ export const SimulationFour = () => {
             title: 'Learning objectives: Polynomials',
             content: <>
                 <p>
-                In this section, you&rsquo;ll study quadratic and cubic
-                specifications and explore how these regressions can better
-                capture relationships in data compared to a linear fit. By
-                examining data plots and curve shapes, you&rsquo;ll compare
-                linear, quadratic, and cubic regressions, and work through
-                the steps to find the best-fitting model.
+                    In this section, you&rsquo;ll study quadratic and cubic
+                    specifications and explore how these regressions can better
+                    capture relationships in data compared to a linear fit. By
+                    examining data plots and curve shapes, you&rsquo;ll compare
+                    linear, quadratic, and cubic regressions, and work through
+                    the steps to find the best-fitting model.
                 </p>
                 {mkProgressBar()}
             </>
@@ -98,7 +98,7 @@ export const SimulationFour = () => {
                         showDatasets={showPolyDatasets}
                         showRegLine={showRegLine}
                         setCompareRegLine={setCompareRegLine}
-                        compareRegLine={compareRegLine}/>
+                        compareRegLine={compareRegLine} />
                 )}
                 <StepProgressButton
                     progress={progress}
@@ -221,9 +221,16 @@ export const SimulationFour = () => {
     useEffect(() => {
         const initializeSubmission = async() => {
             if (!initialized.current && submissionId === null) {
+                const currentCoursePk = getCoursePk();
                 initialized.current = true;
-                const subId = await createSubmission(coursePk, null, 4);
-                setSubmissionId(subId);
+                try {
+                    const subId = await createSubmission(
+                        currentCoursePk, null, 4);
+                    setSubmissionId(subId);
+                } catch (error) {
+                    initialized.current = false;
+                    console.error('Failed to initialize simulation:', error);
+                }
             }
         };
         initializeSubmission();
