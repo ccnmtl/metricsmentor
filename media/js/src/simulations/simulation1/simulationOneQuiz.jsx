@@ -133,7 +133,7 @@ export const SimulationOneQuiz = ({
             <div className="listset-alpha-card__title">
                 <Katex tex={formula + 0} /> <span
                     className="ms-2 small fst-italic text-secondary">
-                        ({testside})</span>
+                    ({testside})</span>
             </div>
             {!completedChoices.includes(choiceKey) && (
                 <button
@@ -210,7 +210,7 @@ export const SimulationOneQuiz = ({
 
     useEffect(() => {
         document.getElementById('quiz-1')
-            .scrollIntoView({ behavior: 'smooth'});
+            .scrollIntoView({ behavior: 'smooth' });
     }, []);
 
     useEffect(() => {
@@ -223,14 +223,14 @@ export const SimulationOneQuiz = ({
     useEffect(() => {
         if (showRedoButton) {
             document.getElementById('redo-button')
-                .scrollIntoView({ behavior: 'smooth'});
+                .scrollIntoView({ behavior: 'smooth' });
         }
     }, [showRedoButton]);
 
     useEffect(() => {
         if (isTakeawayCorrect.C) {
             document.getElementById('completed2d')
-                .scrollIntoView({ behavior: 'smooth'});
+                .scrollIntoView({ behavior: 'smooth' });
         }
     }, [isTakeawayCorrect.C]);
 
@@ -265,7 +265,7 @@ export const SimulationOneQuiz = ({
                             Review the following statement as
                             <Katex tex={'\\Eta_1'}
                                 className="katex-inline"/> and perform a
-                                hypothesis test against <Katex tex={'\\Eta_0.'}
+                            hypothesis test against <Katex tex={'\\Eta_0.'}
                                 className="katex-inline"/>
                         </p>
                         <ol className="listset-alpha listset-alpha-listnum"
@@ -331,15 +331,15 @@ export const SimulationOneQuiz = ({
                     <div className="simulation__step-prompt mt-3 text-center
                     mb-3">
                     Awesome! You&apos;ve successfully completed Simulation One.
-                    Want to keep practicing? You can move on to single-sided
-                    alternative hypothesis (Case B and Case C), or head back
-                    to the Dashboard whenever you&apos;re ready.
+                        Want to keep practicing? You can move on to single-sided
+                        alternative hypothesis (Case B and Case C), or head back
+                        to the Dashboard whenever you&apos;re ready.
                     </div>
                     <div style={{ display: 'flex',
                         justifyContent: 'center', gap: '10px' }}>
                         <div className="btn btn-secondary"
                             onClick={handleContinueToB}>
-                                Continue to Case B &raquo;
+                            Continue to Case B &raquo;
                         </div>
                         <Link to={`/course/${coursePk}/simulations/`}
                             className="btn btn-success"
@@ -356,22 +356,15 @@ export const SimulationOneQuiz = ({
                 renderQualifierQuestion(14)
             )}
 
-            {/* {// WORK IN PROGRESS
-                (!isQualifierCorrect && showQualifier)
-            && selectedAltHypothesis === 'A' && (
-                    <div className="btn btn-secondary"
-                        onClick={handleContinueToB}>
-                    Continue to Case B &raquo;
-                    </div>
-                )} */}
 
-            {(selectedAltHypothesis === 'C'|| completedChoices.includes('C'))
-            && plotType === '2d'
-            && isHypothesisCompleted && (
+
+            {(selectedAltHypothesis === 'C' || completedChoices.includes('C'))
+                && plotType === '2d'
+                && isHypothesisCompleted && (
                 renderTakeawayQuestion(15)
             )}
             {/* Redo button */}
-            {showRedoButton &&(
+            {showRedoButton && (
                 <div className="mt-3 mb-3 text-center" id="redo-button">
                     <button
                         className="btn btn-warning"
@@ -385,7 +378,7 @@ export const SimulationOneQuiz = ({
                 <>
                     <div className="mt-3 mb fs-5 fw-medium text-center"
                         id="completed2d">
-                    You have completed the 2D simulation! Move on to the 3D
+                        You have completed the 2D simulation! Move on to the 3D
                     </div>
                     <div className="simulation__step-prompt">
                         <div className="btn btn-sm btn-success"
@@ -397,24 +390,24 @@ export const SimulationOneQuiz = ({
             )}
 
             {(isQualifierCorrect && isTakeawayCorrect.A)
-            && selectedAltHypothesis === 'A' && (
+                && selectedAltHypothesis === 'A' && (
                 <>
                     <div className="mx-3 mb-3 fw-medium text-center"
                         id="completed2d">
-                    Congratulations! You can continue to single-sided
-                    alternative hypothesis (Case B), or move on
-                    to the multi-variable regression (3D) simulation.
+                            Congratulations! You can continue to single-sided
+                            alternative hypothesis (Case B), or move on
+                            to the multi-variable regression (3D) simulation.
                     </div>
                     <div className="simulation__step-prompt-container mb-5"
                         style={{ display: 'flex',
                             justifyContent: 'center', gap: '10px' }}>
                         <div className="btn btn-secondary"
                             onClick={handleContinueToB}>
-                            Continue to Case B &raquo;
+                                Continue to Case B &raquo;
                         </div>
                         <div className="btn btn-success"
                             onClick={() => handlePlotTypeChange('3d')}>
-                            Continue to 3D &raquo;
+                                Continue to 3D &raquo;
                         </div>
                     </div>
                 </>

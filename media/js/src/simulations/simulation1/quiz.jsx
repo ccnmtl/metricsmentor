@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
-import axios from 'axios';
+import { authedFetch } from '../../utils/utils';
 import { PvalueComponent } from './pvalueComponent.jsx';
 import { CriticalValue } from './criticalValue.jsx';
 
@@ -20,10 +20,11 @@ export const Quiz = ({
     // Critical Value Logic
     const calculateCriticalValue = async() => {
         try {
-            const response = await axios.post('/calculate_critical/',
-                {n, alpha});
+            const response = await authedFetch('/calculate_critical/',
+                'POST', { n, alpha });
 
-            setCriticalValues(response.data);
+            const data = await response.json();
+            setCriticalValues(data);
 
         } catch (error) {
             console.error('Error calculating critical value:', error);
@@ -44,14 +45,14 @@ export const Quiz = ({
     useEffect(() => {
         if (hypothesisTest1validate) {
             document.getElementById('criticalvalue')
-                .scrollIntoView({ behavior: 'smooth'});
+                .scrollIntoView({ behavior: 'smooth' });
         }
     }, [hypothesisTest1validate]);
 
     useEffect(() => {
         calculateCriticalValue();
         document.getElementById('quiz')
-            .scrollIntoView({ behavior: 'smooth'});
+            .scrollIntoView({ behavior: 'smooth' });
     }, []);
 
     return (
@@ -92,7 +93,7 @@ export const Quiz = ({
                     <div className="row text-right">
                         <div className="col-6 text-center">
                             {!isRedo && (
-                                <button className= "btn btn-sm btn-success"
+                                <button className="btn btn-sm btn-success"
                                     id="redo"
                                     disabled={isHypothesisCompleted}
                                     onClick={handleRedo}>
@@ -101,11 +102,11 @@ export const Quiz = ({
                             )}
                         </div>
                         <div className="col-6 text-left">
-                            <button className= "btn btn-sm btn-success"
+                            <button className="btn btn-sm btn-success"
                                 id="proceed"
                                 disabled={isHypothesisCompleted}
                                 onClick={handleOnComplete}>
-                                    Let&rsquo;s move on &raquo;
+                                Let&rsquo;s move on &raquo;
                             </button>
                         </div>
                     </div>

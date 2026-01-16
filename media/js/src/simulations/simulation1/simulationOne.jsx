@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { ScatterPlot } from './scatterPlot';
 import { Katex } from '../../utils/katexComponent';
-import { authedFetch, fetchQuizData } from '../../utils/utils';
+import {
+    fetchQuizData, createSubmission, getCoursePk
+} from '../../utils/utils';
 import { SimulationOneQuiz } from './simulationOneQuiz';
 import { SimIntro } from './simulationIntro';
 import { GraphCoefficients } from './graphCoefficientsSection';
@@ -11,9 +13,7 @@ import { CriticalValueModal } from './modalCV';
 import { GlossaryModal } from './modalGlossary';
 
 
-const simContainer = document.querySelector('#react-root');
-const coursePk =
-    simContainer ? Number(simContainer.dataset.course) : '';
+const coursePk = getCoursePk();
 
 export const SimulationOne = () => {
     const [N, setN] = useState(50);
@@ -41,7 +41,7 @@ export const SimulationOne = () => {
     const [lockControls, setLockControls] = useState(false);
 
 
-    const createSubmission = async() => {
+    const handleCreateSub = async() => {
         // Define the data to be saved based on the plot type
         const data = plotType === '2d' ? {
             N, yCorrelation, slope, intercept, stderror, appRvalue,
@@ -52,52 +52,24 @@ export const SimulationOne = () => {
             appRvalue3d, intercept3d
         };
 
-        const payload = {
-            simulation: 1,
-            data: data,
-            submission_id: submissionId
-        };
-
-        const url = `/course/${coursePk}/api/create-sub/`;
-        const method = submissionId ? 'PUT' : 'POST';
-
-        return authedFetch(url, method, payload)
-            .then(response => {
-                if (response.status === 201 || response.status === 200) {
-                    return response.json();
-                } else {
-                    throw `Error (${response.status}) ${response.statusText}`;
-                }
-            })
-            .then(data => {
-                if (plotType === '2d') {
-                    setStartQuiz(true);
-                } else {
-                    setStartQuiz2(true);
-                }
-                setSubmissionId(data.submission_id);
-                return data;
-            })
-            .catch(error => {
-                console.error('Error creating submission', error);
-                throw error;
-            });
-    };
-
-    const handleCreateSub = async() => {
         try {
-            if(!submissionId) {
-                await createSubmission();
+            const newSubmissionId = await createSubmission(
+                coursePk,
+                submissionId,
+                1,
+                data
+            );
+
+            setSubmissionId(newSubmissionId);
+
+            if (plotType === '2d') {
+                setStartQuiz(true);
             } else {
-                if (plotType === '2d') {
-                    setStartQuiz(true);
-                } else {
-                    setStartQuiz2(true);
-                }
+                setStartQuiz2(true);
             }
-            await createSubmission();
         } catch (error) {
-            alert('Failed to save graph and submission.', error);
+            alert('Failed to save graph and submission.');
+            console.error(error);
         }
     };
 
@@ -130,7 +102,7 @@ export const SimulationOne = () => {
         setSelectedAltHypothesis(null);
         setLockControls(false);
         document.getElementById('learningGoal')
-            .scrollIntoView({ behavior: 'smooth'});
+            .scrollIntoView({ behavior: 'smooth' });
     };
 
     let tvalue;
@@ -179,19 +151,19 @@ export const SimulationOne = () => {
                         <div className="simulation__step-content">
                             {plotType === '2d' && (
                                 <p>Let&rsquo;s start setting up the parameters
-                                to generate random data points for your
-                                graph.</p>
+                                    to generate random data points for your
+                                    graph.</p>
                             )}
                             {plotType === '3d' && (
                                 <p>Let&rsquo;s introduce another variable to
-                                your graph, <Katex tex={'x_2'}
-                                    className="katex-inline"/> and <Katex
+                                    your graph, <Katex tex={'x_2'}
+                                    className="katex-inline" /> and <Katex
                                     tex={'\\text{corr}(x_1,x_2)'}
                                     className="katex-inline" />.
-                                <Katex tex={'n'} className="katex-inline"/> and
+                                <Katex tex={'n'} className="katex-inline" /> and
                                 <Katex tex={'\\text{corr}(x_1,y)'}
                                     className="katex-inline" /> are values from
-                                the previous section.</p>
+                                    the previous section.</p>
                             )}
                             <div className="mt-4 d-flex">
                                 <label htmlFor="nSampleSize"
@@ -225,7 +197,7 @@ export const SimulationOne = () => {
                                 <div className="mt-4">
                                     <label htmlFor="correlation"
                                         className="h2 form-label">Correlation
-                                    coefficient <Katex
+                                        coefficient <Katex
                                             tex={'\\text{corr}(x,y)'}
                                             className="katex-inline" />:
                                     </label>

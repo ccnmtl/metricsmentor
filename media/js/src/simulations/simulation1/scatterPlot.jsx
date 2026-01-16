@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Plot from 'react-plotly.js';
-import axios from 'axios';
 import PropTypes from 'prop-types';
-import { seededRandom } from '../../utils/utils';
+import { authedFetch, seededRandom } from '../../utils/utils';
 
 
 export const ScatterPlot = ({ N, yCorrelation, setAppRvalue,
@@ -62,14 +61,17 @@ export const ScatterPlot = ({ N, yCorrelation, setAppRvalue,
 
             if (plotType === '3d' && z_values[0]) {
 
-                const response = await axios.post('/calc_multi_regression/', {
-                    x1_values: x_values,
-                    x2_values: y_values,
-                    y_values: z_values,
-                });
+                const response = await authedFetch('/calc_multi_regression/',
+                    'POST', {
+                        x1_values: x_values,
+                        x2_values: y_values,
+                        y_values: z_values,
+                    });
+
+                const responseData = await response.json();
 
                 const { slope_x1, slope_x2, intercept,
-                    stderr, rvalue } = response.data;
+                    stderr, rvalue } = responseData;
                 setSlopes([slope_x1, slope_x2]);
                 setIntercept3d(intercept);
                 setStderrs(stderr);
@@ -94,11 +96,14 @@ export const ScatterPlot = ({ N, yCorrelation, setAppRvalue,
                 });
 
             } else {
-                const response = await axios.post('/calc_regression/', {
-                    x_values,
-                    y_values,
-                });
-                const { slope, intercept, stderr, rvalue } = response.data;
+                const response = await authedFetch('/calc_regression/',
+                    'POST', {
+                        x_values,
+                        y_values,
+                    });
+
+                const responseData = await response.json();
+                const { slope, intercept, stderr, rvalue } = responseData;
 
                 setSlope(slope);
                 setIntercept(intercept);

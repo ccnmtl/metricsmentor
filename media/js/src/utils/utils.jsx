@@ -214,6 +214,7 @@ export const createSubmission = async(
     const payload = {
         simulation: simulation,
         data: data,
+        submission_id: submissionId,
     };
 
     const url = `/course/${coursePk}/api/create-sub/`;
