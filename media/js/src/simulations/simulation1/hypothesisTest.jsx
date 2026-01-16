@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Katex } from '../../utils/katexComponent';
 import PropTypes from 'prop-types';
 import { Quiz } from './quiz';
-import axios from 'axios';
+import { authedFetch } from '../../utils/utils';
 
 export const HypothesisTest = ({
     selectedAltHypothesis, appRvalue, tvalue, n,
@@ -28,7 +28,7 @@ export const HypothesisTest = ({
         hypothesisTest = 'value_right';
         break;
     case 'C':
-        hypothesis =  '\\Eta_1: {\\beta_1}~{\\lt}~0';
+        hypothesis = '\\Eta_1: {\\beta_1}~{\\lt}~0';
         hypothesisTest = 'value_left';
         break;
     default:
@@ -55,12 +55,13 @@ export const HypothesisTest = ({
                 tvalueString = '-Infinity';
             }
 
-            const response = await axios.post('/calculate_pvalue/', {
+            const response = await authedFetch('/calculate_pvalue/', 'POST', {
                 n,
                 tvalue: tvalueString
             });
 
-            setPvalues(response.data);
+            const data = await response.json();
+            setPvalues(data);
         } catch (error) {
             console.error('Error calculating pvalue:', error);
         }
@@ -73,7 +74,7 @@ export const HypothesisTest = ({
     useEffect(() => {
         calculatePvalue();
         document.getElementById('hypothesis-test')
-            .scrollIntoView({ behavior: 'smooth'});
+            .scrollIntoView({ behavior: 'smooth' });
         if (isRedo) {
             setAlphaSelected(false);
             setLockControls(false);
@@ -108,7 +109,7 @@ export const HypothesisTest = ({
                             <div className="katex-block border-bottom
                                 border-white">
                                 <Katex tex={
-                                // eslint-disable-next-line max-len
+                                    // eslint-disable-next-line max-len
                                     `\\text{corr}(x,y) = ${appRvalue.toFixed(3)}`
                                 } />
                             </div>
@@ -132,16 +133,16 @@ export const HypothesisTest = ({
                                 <li key={key}>
                                     <input
                                         type="radio"
-                                        id={`significance${val*100}`}
+                                        id={`significance${val * 100}`}
                                         name="significance"
                                         value={val}
                                         checked={alpha === val}
                                         onChange={handleAlphaChange}
                                         disabled={alphaSelected}
                                     />
-                                    <label htmlFor={`significance${val*100}`}
+                                    <label htmlFor={`significance${val * 100}`}
                                         className="mx-1">
-                                        {`${val*100}% (${val.toFixed(2)})`}
+                                        {`${val * 100}% (${val.toFixed(2)})`}
                                     </label>
                                 </li>
                             ))}
@@ -184,7 +185,6 @@ HypothesisTest.propTypes = {
     selectedAltHypothesis: PropTypes.string,
     appRvalue: PropTypes.number.isRequired,
     tvalue: PropTypes.number.isRequired,
-    coursePK: PropTypes.number,
     n: PropTypes.number.isRequired,
     completedChoices: PropTypes.array.isRequired,
     submissionId: PropTypes.number.isRequired,
