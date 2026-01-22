@@ -1,5 +1,6 @@
 import re
 
+
 from courseaffils.columbia import CourseStringTemplate, CanvasTemplate
 from courseaffils.models import Course
 from courseaffils.views import get_courses_for_user
@@ -19,7 +20,9 @@ from django.views.generic.detail import DetailView
 from lti_provider.models import LTICourseContext
 from metricsmentor.main.utils import send_template_email
 from metricsmentor.mixins import LoggedInCourseMixin
-from metricsmentor.main.models import Answer, QuizSubmission
+from metricsmentor.main.models import (
+    Answer, QuizSubmission, SimulationVisibility
+)
 from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 from django.utils.decorators import method_decorator
@@ -71,11 +74,60 @@ class SimulationDashboardView(LoginRequiredMixin, TemplateView):
         course = Course.objects.get(pk=course_id)
         is_faculty = course.is_true_faculty(self.request.user)
 
+        # Get visible simulations
+        visible_sims = SimulationVisibility.objects.filter(
+            course=course,
+            is_visible=True
+        ).values_list('simulation', flat=True)
+
+        # Convert to list for JSON serialization
+        visible_simulations = list(visible_sims)
+
         return {
             'user': self.request.user,
             'course': course,
-            'is_faculty': is_faculty
+            'is_faculty': is_faculty,
+            'visible_simulations': json.dumps(visible_simulations)
         }
+
+
+class ToggleVisibilityView(LoginRequiredMixin, View):
+    def post(self, request, *args, **kwargs):
+        if not request.user.is_superuser:
+            return JsonResponse({
+                    'status': 'error',
+                    'message': 'Unauthorized'
+                },
+                status=403
+            )
+
+        try:
+            data = json.loads(request.body)
+            course_id = data.get('course_id')
+            simulation_id = data.get('simulation_id')
+
+            course = Course.objects.get(pk=course_id)
+
+            visibility, created = SimulationVisibility.objects.get_or_create(
+                course=course,
+                simulation=simulation_id
+            )
+
+            # Toggle visibility
+            visibility.is_visible = not visibility.is_visible
+            visibility.save()
+
+            return JsonResponse({
+                'status': 'success',
+                'is_visible': visibility.is_visible,
+                'simulation_id': simulation_id
+            })
+
+        except Exception:
+            return JsonResponse(
+                {'status': 'error', 'message': 'An internal error occurred'},
+                status=500
+            )
 
 
 class LTICourseCreate(LoginRequiredMixin, View):

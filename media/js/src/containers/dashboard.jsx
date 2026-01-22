@@ -3,21 +3,59 @@ import { useParams, Link } from 'react-router-dom';
 import { Footer } from '../footer';
 import PropTypes from 'prop-types';
 import { Katex } from '../utils/katexComponent';
-import { getCoursePk } from '../utils/utils';
+import { getCoursePk, toggleVisibility } from '../utils/utils';
+import { useState } from 'react';
 
 
-export const Dashboard = ({ isSuperUser, isFaculty}) => {
+export const Dashboard = ({ isSuperUser, isFaculty, initialVisibleSims }) => {
 
     let { courseId } = useParams();
     const coursePk = getCoursePk();
+    const [visibleSimulations, setVisibleSimulations] = useState(
+        initialVisibleSims || []
+    );
+
+    const handleToggle = async(simId) => {
+        const result = await toggleVisibility(coursePk, simId);
+        if (result.status === 'success') {
+            setVisibleSimulations(prev => {
+                if (result.is_visible) {
+                    return [...prev, simId];
+                } else {
+                    return prev.filter(id => id !== simId);
+                }
+            });
+        }
+    };
+
+    const isVisible = (simId) => {
+        if (isSuperUser || isFaculty) return true;
+        return visibleSimulations.includes(simId);
+    };
+
+    const renderToggle = (simId) => {
+        if (!isSuperUser) return null;
+        const isShown = visibleSimulations.includes(simId);
+        return (
+            <button
+                className={`btn btn-sm ${
+                    isShown ? 'btn-outline-danger' : 'btn-outline-primary'
+                } mb-3`}
+                onClick={() => handleToggle(simId)}
+            >
+                {isShown ? 'Hide from Students' : 'Show to Students'}
+            </button>
+        );
+    };
 
     return (
         <>
             <section className="section-sim-dashboard">
                 <div className="row">
-                    {(isSuperUser || isFaculty || coursePk === 6) && (
+                    {isVisible(1) && (
                         <div className="col-lg-5 p-4 mx-0 mx-lg-3 my-3 mx-lg-0
                                         simulation-card">
+                            {renderToggle(1)}
                             <h2 className="h2-primary">
                                 <span className="h2-secondary d-block"
                                     data-cy="sim-1">
@@ -46,9 +84,10 @@ export const Dashboard = ({ isSuperUser, isFaculty}) => {
                             </Link>
                         </div>
                     )}
-                    {(isSuperUser || isFaculty || coursePk === 6) && (
+                    {isVisible(2) && (
                         <div className="col-lg-5 p-4 mx-0 mx-lg-3 my-3 mx-lg-0
                                         simulation-card">
+                            {renderToggle(2)}
                             <h2 className="h2-primary">
                                 <span className="h2-secondary d-block"
                                     data-cy="sim-2">
@@ -73,9 +112,10 @@ export const Dashboard = ({ isSuperUser, isFaculty}) => {
                             </Link>
                         </div>
                     )}
-                    {(isSuperUser || isFaculty || coursePk === 6) && (
+                    {isVisible(3) && (
                         <div className="col-lg-5 p-4 mx-0 mx-lg-3 my-3 mx-lg-0
                                         simulation-card">
+                            {renderToggle(3)}
                             <h2 className="h2-primary">
                                 <span className="h2-secondary d-block"
                                     data-cy="sim-3">
@@ -102,9 +142,10 @@ export const Dashboard = ({ isSuperUser, isFaculty}) => {
                             </Link>
                         </div>
                     )}
-                    {(isSuperUser || isFaculty || coursePk === 6) && (
+                    {isVisible(4) && (
                         <div className="col-lg-5 p-4 mx-0 mx-lg-3 my-3 mx-lg-0
                                         simulation-card">
+                            {renderToggle(4)}
                             <h2 className="h2-primary">
                                 <span className="h2-secondary d-block"
                                     data-cy="sim-4">
@@ -138,5 +179,6 @@ export const Dashboard = ({ isSuperUser, isFaculty}) => {
 
 Dashboard.propTypes = {
     isSuperUser: PropTypes.bool,
-    isFaculty: PropTypes.bool
+    isFaculty: PropTypes.bool,
+    initialVisibleSims: PropTypes.array
 };

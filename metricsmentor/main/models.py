@@ -34,3 +34,19 @@ class Answer(models.Model):
     created_at = models.DateTimeField(auto_now_add=True)
     updated_at = models.DateTimeField(auto_now=True)
     active = models.BooleanField(default=True)
+
+
+class SimulationVisibility(models.Model):
+    course = models.ForeignKey(Course, on_delete=models.CASCADE)
+    simulation = models.IntegerField(choices=SIMULATIONS)
+    is_visible = models.BooleanField(default=False)
+
+    class Meta:
+        unique_together = ('course', 'simulation')
+        verbose_name_plural = "Simulation Visibilities"
+
+    def __str__(self):
+        return (
+            f"{self.course} - {self.get_simulation_display()} - "
+            f"{'Visible' if self.is_visible else 'Hidden'}"
+        )
