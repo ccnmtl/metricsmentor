@@ -253,3 +253,22 @@ export const getCoursePk = () => {
     const simContainer = document.querySelector('#react-root');
     return simContainer ? Number(simContainer.dataset.course) : '';
 };
+
+/**
+ * Toggles visibility of a simulation.
+ * @param {number} coursePk
+ * @param {number} simulationId
+ * @returns {Promise<object>}
+ */
+export const toggleVisibility = async(coursePk, simulationId) => {
+    try {
+        const response = await authedFetch('/api/toggle-visibility/', 'POST', {
+            course_id: coursePk,
+            simulation_id: simulationId
+        });
+        return await response.json();
+    } catch (error) {
+        console.error('Error toggling visibility:', error);
+        return { status: 'error' };
+    }
+};

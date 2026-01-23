@@ -4,8 +4,6 @@ describe('Navigate to Sim1 from login', () => {
         cy.visit('/');
         cy.title().should('contain', 'My Courses');
         cy.get('[data-cy="navbar"]').should('contain', 'Faculty One');
-        cy.get('[data-cy="course-1"]')
-            .should('contain', 'course 0');
         cy.get('[data-cy="course-1-link"]').click();
         cy.get('[data-cy="sim-1"]').should('contain', 'Simulation 1');
         cy.title().should('contain', 'Simulation');

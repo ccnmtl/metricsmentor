@@ -353,3 +353,69 @@ class DeleteAnswerViewTest(CourseTestMixin, TestCase):
         response_data = json.loads(response.content)
         self.assertEqual(response_data['status'], 'error')
         self.assertEqual(response_data['message'], 'Quiz submission not found')
+
+
+class ToggleVisibilityViewTest(CourseTestMixin, TestCase):
+    def test_toggle_visibility_superuser(self):
+        self.setup_course()
+        self.client.force_login(self.superuser)
+
+        url = reverse('toggle-visibility')
+        data = {
+            'course_id': self.registrar_course.pk,
+            'simulation_id': 1
+        }
+
+        # Test enabling visibility
+        response = self.client.post(
+            url,
+            data=json.dumps(data),
+            content_type='application/json'
+        )
+        self.assertEqual(response.status_code, 200)
+        response_data = json.loads(response.content)
+        self.assertTrue(response_data['is_visible'])
+
+        # Test disabling visibility
+        response = self.client.post(
+            url,
+            data=json.dumps(data),
+            content_type='application/json'
+        )
+        self.assertEqual(response.status_code, 200)
+        response_data = json.loads(response.content)
+        self.assertFalse(response_data['is_visible'])
+
+    def test_toggle_visibility_permission_denied(self):
+        self.setup_course()
+        self.client.force_login(self.student)
+
+        url = reverse('toggle-visibility')
+        data = {
+            'course_id': self.registrar_course.pk,
+            'simulation_id': 1
+        }
+
+        response = self.client.post(
+            url,
+            data=json.dumps(data),
+            content_type='application/json'
+        )
+        self.assertEqual(response.status_code, 403)
+
+    def test_toggle_visibility_faculty_denied(self):
+        self.setup_course()
+        self.client.force_login(self.faculty)
+
+        url = reverse('toggle-visibility')
+        data = {
+            'course_id': self.registrar_course.pk,
+            'simulation_id': 1
+        }
+
+        response = self.client.post(
+            url,
+            data=json.dumps(data),
+            content_type='application/json'
+        )
+        self.assertEqual(response.status_code, 403)

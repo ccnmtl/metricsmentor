@@ -51,6 +51,8 @@ urlpatterns = [
     re_path(r'^course/(?P<pk>\d+)/api/create-sub/$',
             views.CreateSubmission.as_view(),
             name='create_submission'),
+    path('api/toggle-visibility/', views.ToggleVisibilityView.as_view(),
+         name='toggle-visibility'),
     re_path('^contact/', include('contactus.urls')),
     path('course/<int:pk>/save_answer/', views.SaveAnswer.as_view(),
          name='save_answer'),
