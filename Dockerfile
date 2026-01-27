@@ -7,7 +7,7 @@ COPY requirements.txt .
 RUN apt-get update && \
     apt-get install -y curl && \
     curl -L https://raw.githubusercontent.com/tj/n/master/bin/n -o n && \
-    bash n 22.16.0 && \
+    bash n 24 && \
     apt-get clean
 
 SHELL ["/bin/bash", "-o", "pipefail", "-c"]
