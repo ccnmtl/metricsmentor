@@ -22,7 +22,13 @@ COPY ["package*.json","./"]
 
 RUN npm install
 RUN npm run build:prod
-EXPOSE 8000
-RUN chmod u+x entrypoint.sh
 
+EXPOSE 8000
+
+RUN adduser --system --group django
+RUN chown -R django:django /src
+
+USER django
+
+RUN chmod u+x entrypoint.sh
 CMD ["./entrypoint.sh"]
