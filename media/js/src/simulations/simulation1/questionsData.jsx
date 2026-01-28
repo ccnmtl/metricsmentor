@@ -138,7 +138,7 @@ export const questionsData = [
             incorrect: {
                 0: (
                     <span>
-            Remember that the null and the alternative
+            Let’s try again! Remember that the null and the alternative
             hypotheses must be exhaustive and mutually exclusive. Hence, if the
             null hypothesis is <strong> at least </strong>
             (meaning greater than or equal to),
@@ -148,13 +148,13 @@ export const questionsData = [
                 ),
                 1: (
                     <span>
-            You correctly identified that we do not divide the
+            Let’s try again! You correctly identified that we do not divide the
             significance level by two in a single-sided alternative hypothesis.
                     </span>
                 ),
                 2: (
                     <span>
-            You correctly identified the alternative
+            Let’s try again! You correctly identified the alternative
             hypothesis, but remember, in a two-sided hypothesis, we divide the
             significance level by two.
                     </span>
