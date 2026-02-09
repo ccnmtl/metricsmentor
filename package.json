@@ -23,7 +23,7 @@
     "@babel/eslint-parser": "^7.22.15",
     "@babel/preset-env": "^7.23.2",
     "@babel/preset-react": "^7.22.15",
-    "@eslint/js": "^9.23.0",
+    "@eslint/js": "^10.0.1",
     "@pmmmwh/react-refresh-webpack-plugin": "^0.6.2",
     "@testing-library/dom": "^10.4.0",
     "@testing-library/jest-dom": "^6.6.3",
