@@ -91,7 +91,6 @@ class SimulationDashboardView(LoginRequiredMixin, TemplateView):
         }
 
 
-@method_decorator(csrf_exempt, name='dispatch')
 class ToggleVisibilityView(LoginRequiredMixin, View):
     def post(self, request, *args, **kwargs):
         if not request.user.is_superuser:
