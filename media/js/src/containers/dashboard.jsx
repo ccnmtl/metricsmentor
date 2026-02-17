@@ -29,6 +29,7 @@ export const Dashboard = ({ isSuperUser, isFaculty, initialVisibleSims }) => {
     };
 
     const isVisible = (simId) => {
+        if (simId === 1) return true; // Simulation 1 is always visible
         if (isSuperUser || isFaculty) return true;
         return visibleSimulations.includes(simId);
     };

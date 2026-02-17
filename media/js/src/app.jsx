@@ -43,11 +43,10 @@ export const App = () => {
                         isSuperUser={isSuperUser}
                         isFaculty={isFaculty}
                         initialVisibleSims={initialVisibleSims} />} />
-                {(isSuperUser || isFaculty || coursePk === 6
-                || initialVisibleSims.includes(1)) && (
-                    <Route path='course/:courseId/simulations/1/'
-                        element={<SimulationOne />} />
-                )}
+
+                <Route path='course/:courseId/simulations/1/'
+                    element={<SimulationOne />} />
+
                 {(isSuperUser || isFaculty || coursePk === 6
                 || initialVisibleSims.includes(2)) && (
                     <Route path='course/:courseId/simulations/2/'
