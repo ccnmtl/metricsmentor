@@ -40,7 +40,7 @@ export const RealDataPolynomials = ({
         if (showAnswer) {
             setIncorrectFeedback(<p>
                 That is not the optimal study time. Please try again. Studying
-                on average <strong>13.95 hours a week </strong> maximizes the
+                on average <strong>14.3 hours a week </strong> maximizes the
                 grade.</p>);
         } else {
             setIncorrectFeedback(
@@ -287,7 +287,7 @@ export const RealDataPolynomials = ({
                         question={'Based on the quadratic regression model, ' +
                             'what is the optimal study time that results in ' +
                             'the highest predicted grade?'}
-                        correctFeedback={'13.95 hours per week is the ' +
+                        correctFeedback={'14.3 hours per week is the ' +
                             'correct optimal study time!'}
                         incorrectFeedback={incorrectFeedback}
                         correctTextAnswer={'14.3'}
