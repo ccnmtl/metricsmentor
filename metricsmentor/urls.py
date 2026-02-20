@@ -6,6 +6,11 @@ from django.views.static import serve
 from django_cas_ng import views as cas_views
 from metricsmentor.main import views
 from metricsmentor.design import views as design
+from metricsmentor.main.views import (
+    JSONConfigView, LtiLaunchView, MyOIDCLoginInitView,
+    DynamicRegistrationView
+)
+from lti_tool.views import jwks
 
 
 urlpatterns = [
@@ -24,6 +29,15 @@ urlpatterns = [
             views.LTICourseCreate.as_view(), name='lti-course-create'),
     re_path(r'^course/lti/(?P<context>\w[^/]*)/$',
             views.LTICourseSelector.as_view(), name='lti-course-select'),
+
+    path(".well-known/jwks.json", jwks, name="jwks"),
+    path("init/<uuid:registration_uuid>/", MyOIDCLoginInitView.as_view(),
+         name="oidc_init"),
+    path('<uuid:registration_uuid>/config.json',
+         JSONConfigView.as_view()),
+    path('launch/', LtiLaunchView.as_view(), name='lti-launch'),
+    path('tool_configuration', DynamicRegistrationView.as_view(),
+         name='dynamic_registration'),
 
     re_path('^$', views.CoursesView.as_view()),
     re_path(r'^course/(?P<pk>\d+)/simulations/',
