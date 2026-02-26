@@ -22,6 +22,7 @@ INSTALLED_APPS += [  # noqa
     'metricsmentor.main',
     'courseaffils',
     'lti_provider',
+    'lti_tool',
     'contactus',
     'debug_toolbar',
 ]
@@ -29,6 +30,11 @@ INSTALLED_APPS += [  # noqa
 MIDDLEWARE += [  # noqa
     'django.middleware.csrf.CsrfViewMiddleware',
     'debug_toolbar.middleware.DebugToolbarMiddleware',
+    'django.contrib.sessions.middleware.SessionMiddleware',
+    'lti_tool.middleware.LtiLaunchMiddleware',
+    'django.contrib.auth.middleware.AuthenticationMiddleware',
+    'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'lti_authentication.middleware.LtiLaunchAuthenticationMiddleware',
 ]
 
 THUMBNAIL_SUBDIR = "thumbs"
@@ -42,6 +48,9 @@ ACCOUNT_ACTIVATION_DAYS = 7
 DEFAULT_AUTO_FIELD = 'django.db.models.AutoField'
 
 AUTHENTICATION_BACKENDS += [  # noqa
+    'django.contrib.auth.backends.ModelBackend',
+    # django-lti-authentication (LTI 1.3)
+    'lti_authentication.backends.LtiLaunchAuthenticationBackend',
     'lti_provider.auth.LTIBackend',
 ]
 
@@ -55,11 +64,21 @@ EMAIL_PORT = os.environ.get('EMAIL_PORT')
 EMAIL_HOST_USER = os.environ.get('SES_USERNAME')
 EMAIL_HOST_PASSWORD = os.environ.get('SES_PASSWORD')
 
+LTI_AUTHENTICATION = {
+    'use_person_sourcedid': True,
+}
+
+SESSION_ENGINE = 'django.contrib.sessions.backends.signed_cookies'
+SESSION_COOKIE_SECURE = True
+SESSION_COOKIE_HTTPONLY = True
+SESSION_COOKIE_DOMAIN = None
+SESSION_COOKIE_SAMESITE = 'Lax'
+X_FRAME_OPTIONS = 'SAMEORIGIN'
 
 LTI_TOOL_CONFIGURATION = {
     'title': 'Metrics Mentor',
     'description': 'Econometrics Simulations',
-    'launch_url': 'lti/',
+    'launch_url': 'launch/',
     'embed_url': '',
     'embed_icon_url': '',
     'embed_tool_id': '',
