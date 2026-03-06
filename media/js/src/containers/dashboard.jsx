@@ -157,15 +157,40 @@ export const Dashboard = ({ isSuperUser, isFaculty, initialVisibleSims }) => {
                             <p>
                                 In real-world data, not all relationships
                                 between variables are linear. This simulation
-                                explores three common types of non-linear
-                                regressions used to capture complex patterns:
-                                Polynomials, Logarithms, and Regressions with
-                                Interaction Variables.
+                                 explores two common types of non-linear
+                                 regressions used to capture complex patterns:
+                                 Polynomials and Logarithms.
                             </p>
 
                             <Link to={`/course/${courseId}/simulations/4/`}
                                 className="btn btn-success my-3"
                                 data-cy="sim-4-link">
+                                     Begin &raquo;
+                            </Link>
+                        </div>
+                    )}
+                    {isVisible(5) && (
+                        <div className="col-lg-5 p-4 mx-0 mx-lg-3 my-3 mx-lg-0
+                                        simulation-card">
+                            {renderToggle(5)}
+                            <h2 className="h2-primary">
+                                <span className="h2-secondary d-block"
+                                    data-cy="sim-5">
+                                    Simulation 5</span>
+                                <span className="h2-title d-block">
+                                    {'Interactions'}
+                                </span>
+                            </h2>
+                            <p>
+                                In this simulation, you&rsquo;ll explore
+                                Interaction Variables and how they allow
+                                for more complex relationships between
+                                variables in regression models.
+                            </p>
+
+                            <Link to={`/course/${courseId}/simulations/5/`}
+                                className="btn btn-success my-3"
+                                data-cy="sim-5-link">
                                     Begin &raquo;
                             </Link>
                         </div>

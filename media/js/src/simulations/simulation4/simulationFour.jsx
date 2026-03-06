@@ -21,8 +21,8 @@ export const SimulationFour = () => {
     const [showRegLine, setShowRegLine] = useState(CLEARREG);
     const [showPolyDatasets, setShowPolyDatasets] = useState(showOne(0));
     // Each index tracks the state for a different module
-    // ['Polynomials', 'Logarithms', 'Interactions']
-    const [progress, setProgress] = useState([0, 0, 0]);
+    // ['Polynomials', 'Logarithms']
+    const [progress, setProgress] = useState([0, 0]);
     const [compareRegLine, setCompareRegLine] = useState([]);
     const [isCorrect, setIsCorrect] = useState([false]);
     const [selectedModel, setSelectedModel] = useState('');
@@ -33,7 +33,7 @@ export const SimulationFour = () => {
     const initialized = useRef(false);
     const handleStage = (e) => setStage(parseInt(e.target.value));
 
-    const mkModuleBtns = () => ['Polynomials', 'Logarithms', 'Interactions']
+    const mkModuleBtns = () => ['Polynomials', 'Logarithms']
         .map((label, index) => (
             <button onClick={handleStage} key={index}
                 value={index} className={'btn btn-primary m-1'}
@@ -199,25 +199,6 @@ export const SimulationFour = () => {
         },
     ];
 
-    const interactionSteps = [
-        preambleStep,
-        {
-            icon: `${STATIC_URL}/img/icon-goal.svg`,
-            headerId: 'learningObjectiveInteractions',
-            title: 'Learning objectives: Interactions',
-            content: <>
-                <p>
-                    Lorem ipsum dolor sit amet consectetur adipisicing elit
-                    Mollitia doloremque iure explicabo quis asperiores
-                    natus. Inventore laborum tempore, molestias expedita
-                    nemo nostrum dicta vel eum autem laboriosam ad ipsa
-                    modi!
-                </p>
-                {mkProgressBar()}
-            </>
-        },
-    ];
-
     useEffect(() => {
         const initializeSubmission = async() => {
             if (!initialized.current && submissionId === null) {
@@ -253,12 +234,6 @@ export const SimulationFour = () => {
                         selectedModel={selectedModel}
                         highlightedFit={highlightedFit} />}
                     modals={[<LogarithmDefinition key="modal2" />]}
-                />
-            )}
-            {stage === 2 && (
-                <SimulationPanel steps={interactionSteps}
-                    graphContent={<PolynomialGraph />}
-                    modals={[]}
                 />
             )}
         </>
