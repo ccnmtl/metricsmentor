@@ -5,6 +5,7 @@ import { SimulationOne } from './simulations/simulation1/simulationOne';
 import { SimulationTwo } from './simulations/simulation2/simulationTwo';
 import { SimulationThree } from './simulations/simulation3/simulationThree';
 import { SimulationFour } from './simulations/simulation4/simulationFour';
+import { SimulationFive } from './simulations/simulation5/simulationFive';
 import { getCoursePk } from './utils/utils';
 
 const isSuperUser = window.MetricsMentor.currentUser.is_superuser;
@@ -62,6 +63,11 @@ export const App = () => {
                 || initialVisibleSims.includes(4)) && (
                     <Route path='course/:courseId/simulations/4/'
                         element={<SimulationFour />} />
+                )}
+                {(isSuperUser || isFaculty || coursePk === 6
+                || initialVisibleSims.includes(5)) && (
+                    <Route path='course/:courseId/simulations/5/'
+                        element={<SimulationFive />} />
                 )}
             </Routes>
         </Router>
