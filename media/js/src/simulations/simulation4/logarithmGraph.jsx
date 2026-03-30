@@ -39,7 +39,9 @@ export const LogarithmGraph = ({
         );
     }
 
-    const modelKey = isRealData ? REAL_LABELS[activeRealDataIndex] : selectedModel;
+    const modelKey = isRealData
+        ? REAL_LABELS[activeRealDataIndex]
+        : selectedModel;
     const model = isRealData ? realDataset[modelKey] : baseDataset[modelKey];
     const fits = isRealData
         ? compareRegLine
@@ -108,12 +110,12 @@ export const LogarithmGraph = ({
             // the legacy code also mapped y logic in default wait
         }
 
-        // if there's no fit or it's none, use raw values for plot if they are missing
+        // if there's no fit or it's none, use
+        // raw values for plot if they are missing
         if (!isRealData && fitKey === 'none') {
             lineX = [Math.min(...x), Math.max(...x)];
             lineY = lineX.map(xi => intercept + slope * xi);
         } else if (!isRealData && fitKey !== 'none') {
-            // For the learn section, the default logic mapped math.log from original PR
             if (fitKey === 'logLinearFit') {
                 plotY = y.map(yi => Math.log(yi));
             } else if (fitKey === 'linearLogFit') {
