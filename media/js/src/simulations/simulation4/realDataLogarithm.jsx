@@ -261,81 +261,113 @@ export const RealDataLogarithm = ({
                     ]} />
                     <ul className='choice-list dataset-opt'>
                         {currentLabels.map((dType) => (
-                            <li className="form-check d-flex mb-2"
+                            <li className="mb-2 list-unstyled"
                                 key={dType[2]}>
-                                <input
-                                    className="form-check-input"
-                                    type="radio"
-                                    id={`log-real-${dType[0]}`}
-                                    name="log-data-choice"
-                                    value={dType[0]}
-                                    checked={showDatasets[dType[2]] === true}
-                                    disabled={
-                                        selected !== null &&
-                                        selected !== dType[2]
-                                    }
-                                    onChange={() => handleDataset(dType[2])}
-                                />
-                                <label htmlFor={`log-real-${dType[0]}`}
-                                    className={`form-check-label pb-2 me-2 ${
-                                        (selected !== null &&
-                                            selected !== dType[2])
-                                            ? 'text-muted' : ''
-                                    }`}>
-                                    {dType[1]}<br />
-                                    <small className="text-muted">
-                                        Source: {info[dType[2]][2]}
-                                    </small>
-                                </label>
+                                <div className="form-check">
+                                    <input
+                                        className="form-check-input"
+                                        type="radio"
+                                        id={`log-real-${dType[0]}`}
+                                        name="log-data-choice"
+                                        value={dType[0]}
+                                        checked={
+                                            showDatasets[dType[2]] === true
+                                        }
+                                        disabled={
+                                            selected !== null &&
+                                            selected !== dType[2]
+                                        }
+                                        onChange={() => handleDataset(dType[2])}
+                                    />
+                                    <label htmlFor={`log-real-${dType[0]}`}
+                                        className={'form-check-label ' +
+                                            `pb-2 me-2 ${
+                                                (selected !== null &&
+                                                selected !== dType[2])
+                                                    ? 'text-muted' : ''
+                                            }`}>
+                                        {dType[1]}<br />
+                                        <small className="text-muted">
+                                            Source: {info[dType[2]][2]}
+                                        </small>
+                                    </label>
+                                </div>
+                                {selected === dType[2] && (
+                                    <div className="nested-radio ps-4 mt-2">
+                                        <p className="mb-3">
+                                            {info[selected][1]}
+                                        </p>
+                                        {REGS_MAP[ALL_LABELS[selected][0]].map(
+                                            (fit) => (
+                                                <div key={fit}
+                                                    className={
+                                                        'collapsible-fit ' +
+                                                        'mb-2'
+                                                    }>
+                                                    <button
+                                                        type="button"
+                                                        className="btn"
+                                                        onClick={() =>
+                                                            toggleFit(fit)
+                                                        }
+                                                        aria-expanded={
+                                                            !!openFit[fit]
+                                                        }
+                                                        aria-controls={
+                                                            `fit-panel-${fit}`
+                                                        }>
+                                                        <span>
+                                                            {openFit[fit] ?
+                                                                '▼' : '▶'}{' '}
+                                                            With {
+                                                                formatFitName(
+                                                                    fit
+                                                                )
+                                                            } regression fit
+                                                        </span>
+                                                    </button>
+                                                    {openFit[fit] && (
+                                                        <div
+                                                            id={'fit-panel-' +
+                                                                `${fit}`
+                                                            }
+                                                            className={
+                                                                'ps-4 pt-2'
+                                                            }>
+                                                            <p>
+                                                                <em>
+                                                                    Once you
+                                                                    select this
+                                                                    regression
+                                                                    fit, the
+                                                                    graph will
+                                                                    be
+                                                                    highlighted
+                                                                    to help you
+                                                                    compare
+                                                                    the models
+                                                                    side by
+                                                                    side.
+                                                                    Interpret.
+                                                                    text will
+                                                                    be populated
+                                                                    here later.
+                                                                </em>
+                                                            </p>
+                                                        </div>
+                                                    )}
+                                                </div>
+                                            )
+                                        )}
+                                    </div>
+                                )}
                             </li>
                         ))}
                     </ul>
                 </>
             )}
 
-            {datasetStarted && selected !== null && (
-                <>
-                    <hr className="my-4" />
-                    <h3 className="pt-3">{info[selected][0]}</h3>
-                    <p className="mb-1">
-                        <strong>Source:</strong> {info[selected][2]}
-                    </p>
-                    <p>{info[selected][1]}</p>
 
-                    <div className="choice-list ms-0 mt-4 nested-radio">
-                        {REGS_MAP[ALL_LABELS[selected][0]].map((fit) => (
-                            <div key={fit} className="collapsible-fit mb-2">
-                                <button
-                                    type="button"
-                                    className="btn"
-                                    onClick={() => toggleFit(fit)}
-                                    aria-expanded={!!openFit[fit]}
-                                    aria-controls={`fit-panel-${fit}`}>
-                                    <span>
-                                        {openFit[fit] ? '▼' : '▶'}{' '}
-                                        With {formatFitName(fit)} regression fit
-                                    </span>
-                                </button>
-                                {openFit[fit] && (
-                                    <div id={`fit-panel-${fit}`}
-                                        className="ps-4 pt-2">
-                                        <p>
-                                            <em>
-                                                Once you select this regression
-                                                fit, the graph will be
-                                                highlighted to help you compare
-                                                the models side by side.
-                                                Interpretation text will be
-                                                populated here later.
-                                            </em>
-                                        </p>
-                                    </div>
-                                )}
-                            </div>
-                        ))}
-                    </div>
-                </>
-            )}
         </>
     );
 };
