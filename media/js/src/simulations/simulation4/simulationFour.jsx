@@ -8,6 +8,7 @@ import { LogarithmDefinition } from './logarithmRegressionsDef';
 import { WhatAreLogarithmRegs } from './whatAreLogarithms';
 import { LogarithmGraph } from './logarithmGraph';
 import { RealDataPolynomials } from './realDataPolynomials';
+import { RealDataLogarithm } from './realDataLogarithm';
 import { StepProgressButton } from '../../StepProgressButton';
 import { PolynomialTakeaway } from './polynomialTakeaway';
 import { CLEARREG, showOne } from './polyUtils';
@@ -24,8 +25,11 @@ export const SimulationFour = () => {
     // ['Polynomials', 'Logarithms']
     const [progress, setProgress] = useState([0, 0]);
     const [compareRegLine, setCompareRegLine] = useState([]);
+    const [logCompareRegLine, setLogCompareRegLine] = useState([]);
     const [isCorrect, setIsCorrect] = useState([false]);
     const [selectedModel, setSelectedModel] = useState('');
+    const [showLogDatasets, setShowLogDatasets] = useState(
+        [false, false, false, false, false, false]);
     const [highlightedFit, setHighlightedFit] = useState('');
 
     const quizComplete = () => !isCorrect.includes(false);
@@ -187,16 +191,41 @@ export const SimulationFour = () => {
                         setHighlightedFit={setHighlightedFit}
                     />
                 )}
-                {/* <StepProgressButton
+                <StepProgressButton
                     progress={progress}
                     stage={stage}
                     setProgress={setProgress}
                     continueLabel="Continue to Real dataset »"
                     reviewLabel="Review »"
                     progressNumber={1}
-                /> */}
+                />
             </>
         },
+        ...(progress[stage] > 0
+            ? [{
+                headerId: 'realDataLogarithms',
+                title: 'Real dataset problem',
+                content: <>
+                    {progress[stage] === 1 && (
+                        <RealDataLogarithm
+                            setShowDatasets={setShowLogDatasets}
+                            showDatasets={showLogDatasets}
+                            setCompareRegLine={setLogCompareRegLine}
+                            compareRegLine={logCompareRegLine}
+                            setHighlightedFit={setHighlightedFit}
+                        />
+                    )}
+                    {/* <StepProgressButton
+                        progress={progress}
+                        stage={stage}
+                        setProgress={setProgress}
+                        continueLabel="Continue »"
+                        reviewLabel="Review »"
+                        progressNumber={2}
+                    /> */}
+                </>
+            }]
+            : [])
     ];
 
     useEffect(() => {
@@ -232,7 +261,10 @@ export const SimulationFour = () => {
                 <SimulationPanel steps={logarithmSteps}
                     graphContent={<LogarithmGraph
                         selectedModel={selectedModel}
-                        highlightedFit={highlightedFit} />}
+                        highlightedFit={highlightedFit}
+                        showDatasets={showLogDatasets}
+                        compareRegLine={logCompareRegLine}
+                    />}
                     modals={[<LogarithmDefinition key="modal2" />]}
                 />
             )}

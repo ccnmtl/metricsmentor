@@ -4,13 +4,13 @@
   "description": "metricsmentor",
   "license": "GPL-3.0+",
   "scripts": {
-    "build:dev": "webpack --node-env development",
+    "build:dev": "webpack --mode development --config webpack.dev.js",
     "build:prod": "webpack --config webpack.prod.js",
     "cypress:run": "cypress run",
     "cypress:open": "cypress open",
     "cypress:test": "start-server-and-test 'make integrationserver' http-get://127.0.0.1:8000 cypress:run",
     "cypress:opentest": "start-server-and-test 'make integrationserver' http-get://127.0.0.1:8000 cypress:open",
-    "dev": "webpack serve --node-env development --config webpack.dev.js",
+    "dev": "webpack serve --mode development --config webpack.dev.js",
     "test": "jest",
     "test:watch": "jest --watch",
     "eslint": "eslint --ext .js,.jsx src/"
