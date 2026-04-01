@@ -1,12 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { PromptBlock } from '../../PromptBlock';
 import { Katex } from '../../utils/katexComponent';
+import { LogarithmQuizzes } from './logarithmQuizData';
 import PropTypes from 'prop-types';
 
 export const RealDataLogarithm = ({
     setShowDatasets, showDatasets,
     setCompareRegLine, compareRegLine,
-    setHighlightedFit
+    setHighlightedFit, submissionId
 }) => {
 
     const [selectedGroup, setSelectedGroup] = useState(null);
@@ -325,6 +326,12 @@ export const RealDataLogarithm = ({
                                                 </div>
                                             )
                                         )}
+                                        <LogarithmQuizzes
+                                            datasetIdx={dType[2]}
+                                            submissionId={
+                                                submissionId
+                                            }
+                                        />
                                     </div>
                                 )}
                             </li>
@@ -342,6 +349,9 @@ RealDataLogarithm.propTypes = {
     setShowDatasets: PropTypes.func.isRequired,
     showDatasets: PropTypes.arrayOf(PropTypes.bool).isRequired,
     setCompareRegLine: PropTypes.func.isRequired,
-    compareRegLine: PropTypes.arrayOf(PropTypes.string).isRequired,
-    setHighlightedFit: PropTypes.func
+    compareRegLine: PropTypes.arrayOf(
+        PropTypes.string
+    ).isRequired,
+    setHighlightedFit: PropTypes.func,
+    submissionId: PropTypes.number
 };

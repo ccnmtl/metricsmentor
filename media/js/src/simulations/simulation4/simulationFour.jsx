@@ -213,6 +213,7 @@ export const SimulationFour = () => {
                             setCompareRegLine={setLogCompareRegLine}
                             compareRegLine={logCompareRegLine}
                             setHighlightedFit={setHighlightedFit}
+                            submissionId={submissionId}
                         />
                     )}
                     {/* <StepProgressButton

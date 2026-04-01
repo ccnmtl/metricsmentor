@@ -50,7 +50,7 @@ export const LogarithmGraph = ({
         ? (fits.length > 0 ? fits : ['none'])
         : fits;
 
-    const makePlotData = (fitKey) => {
+    const makePlotData = (fitKey, fitIndex) => {
         const x = model.X;
         const y = model.Y;
         const logX = model.log_X || x;
@@ -151,12 +151,17 @@ export const LogarithmGraph = ({
             });
         }
 
-        const fitName = fitKey === 'none' ? 'Raw Data' : fitKey
-            .replace(/([A-Z])/g, ' $1')
-            .trim()
-            .replace(/^./, str => str.toUpperCase());
+        const REG_AB = ['Regression A', 'Regression B'];
+        const fitName = fitKey === 'none'
+            ? 'Raw Data'
+            : fitKey
+                .replace(/([A-Z])/g, ' $1')
+                .trim()
+                .replace(/^./, str => str.toUpperCase());
 
-        let title = isRealData ? `${model.title} (${fitName})` : `${fitName}`;
+        let title = isRealData
+            ? (REG_AB[fitIndex] || fitName)
+            : `${fitName}`;
 
         const layout = {
             title: title,
@@ -192,8 +197,10 @@ export const LogarithmGraph = ({
 
     return (
         <div style={wrapperStyle}>
-            {chosenFits.map((fitKey) => {
-                const { data, layout } = makePlotData(fitKey);
+            {chosenFits.map((fitKey, fitIndex) => {
+                const { data, layout } = makePlotData(
+                    fitKey, fitIndex
+                );
                 const isHighlighted = highlightedFit === fitKey;
                 const childWidth = isRealData
                     ? (chosenFits.length === 1 ? '100%' : '48%')
