@@ -14,43 +14,30 @@ export const QUIZ_DATA = {
                 'rates affect exports. Which plot ' +
                 'better represents the relationship ' +
                 'between the two variables?',
-            options: [
-                'Regression A',
-                'Regression B',
-                'Both'
-            ],
+            options: ['Regression A', 'Regression B', 'Both'],
             correctAnswerIndex: 1,
-            correctFeedback: 'Correct! ' +
-                'Exact text TBD',
-            incorrectFeedback: 'Incorrect. ' +
-                'Exact text TBD',
-            questionNumber: 10
+            correctFeedback: ' Correct! Exact text TBD',
+            incorrectFeedback: ' Incorrect. Exact text TBD',
+            questionNumber: 7
         },
         q2: {
             question: 'Which interpretation ' +
                 'correctly explains the regression ' +
                 'that best fits the relationship ' +
                 'between tariff rates and exports?',
-            options: [
-                'A 1-unit change in tariff rate is ' +
-                'associated with a 97% change in ' +
-                'exports.',
-                'A 1-unit change in tariff rate is ' +
-                'associated with 0.97 unit change ' +
-                'in exports.',
-                'A 1% change in tariff rate is ' +
-                'associated with 0.97 unit change ' +
-                'in exports.',
-                'A 1% change in tariff rate is ' +
-                'associated with 0.97% change in ' +
-                'exports.'
+            options: ['A 1-unit change in tariff rate is ' +
+                'associated with a 97% change in exports.',
+            'A 1-unit change in tariff rate is ' +
+                'associated with 0.97 unit change in exports.',
+            'A 1% change in tariff rate is ' +
+                'associated with 0.97 unit change in exports.',
+            'A 1% change in tariff rate is ' +
+                'associated with 0.97% change in exports.'
             ],
             correctAnswerIndex: 0,
-            correctFeedback: 'Correct! ' +
-                'Exact text TBD',
-            incorrectFeedback: 'Incorrect. ' +
-                'Exact text TBD',
-            questionNumber: 11
+            correctFeedback: ' Correct! Exact text TBD',
+            incorrectFeedback: ' Incorrect. Exact text TBD',
+            questionNumber: 8
         }
     },
     // Group 1: gdp_life_exp
@@ -62,17 +49,11 @@ export const QUIZ_DATA = {
                 ' Which plot better represents the ' +
                 'relationship between the two ' +
                 'variables?',
-            options: [
-                'Regression A',
-                'Regression B',
-                'Both'
-            ],
+            options: ['Regression A', 'Regression B', 'Both'],
             correctAnswerIndex: 1,
-            correctFeedback: 'Correct! ' +
-                'Exact text TBD',
-            incorrectFeedback: 'Incorrect. ' +
-                'Exact text TBD',
-            questionNumber: 12
+            correctFeedback: ' Correct! Exact text TBD',
+            incorrectFeedback: ' Incorrect. Exact text TBD',
+            questionNumber: 9
         },
         q2: {
             question: 'Which interpretation ' +
@@ -95,11 +76,9 @@ export const QUIZ_DATA = {
                 'population\'s life expectancy.'
             ],
             correctAnswerIndex: 0,
-            correctFeedback: 'Correct! ' +
-                'Exact text TBD',
-            incorrectFeedback: 'Incorrect. ' +
-                'Exact text TBD',
-            questionNumber: 13
+            correctFeedback: ' Correct! Exact text TBD',
+            incorrectFeedback: ' Incorrect. Exact text TBD',
+            questionNumber: 10
         }
     },
     // Group 1: gdp_co2
@@ -111,17 +90,11 @@ export const QUIZ_DATA = {
                 'emission per capita. Which plot ' +
                 'better represents the relationship ' +
                 'between the two variables?',
-            options: [
-                'Regression A',
-                'Regression B',
-                'Both'
-            ],
+            options: ['Regression A', 'Regression B', 'Both'],
             correctAnswerIndex: 1,
-            correctFeedback: 'Correct! ' +
-                'Exact text TBD',
-            incorrectFeedback: 'Incorrect. ' +
-                'Exact text TBD',
-            questionNumber: 14
+            correctFeedback: ' Correct! Exact text TBD',
+            incorrectFeedback: ' Incorrect. Exact text TBD',
+            questionNumber: 11
         },
         q2: {
             question: 'Which interpretation ' +
@@ -144,11 +117,9 @@ export const QUIZ_DATA = {
                 'in CO2 emission per capita.'
             ],
             correctAnswerIndex: 0,
-            correctFeedback: 'Correct! ' +
-                'Exact text TBD',
-            incorrectFeedback: 'Incorrect. ' +
-                'Exact text TBD',
-            questionNumber: 15
+            correctFeedback: ' Correct! Exact text TBD',
+            incorrectFeedback: ' Incorrect. Exact text TBD',
+            questionNumber: 12
         }
     },
     // Group 2: advertising
@@ -160,21 +131,17 @@ export const QUIZ_DATA = {
                 'sales. Which plot better ' +
                 'represents the relationship ' +
                 'between the two variables?',
-            options: [
-                'Regression A',
-                'Regression B',
-                'Both'
-            ],
+            options: ['Regression A', 'Regression B', 'Both'],
             correctAnswerIndex: 1,
-            correctFeedback: 'Correct! This is ' +
+            correctFeedback: ' Correct! This is ' +
                 'the better fit, because the ' +
                 'regression represents the ' +
                 'observations more closely.',
-            incorrectFeedback: 'Incorrect. This ' +
+            incorrectFeedback: ' Incorrect. This ' +
                 'is not the correct answer, ' +
                 'because the regression does not ' +
                 'represent the observations.',
-            questionNumber: 16
+            questionNumber: 13
         },
         q2: {
             question: 'Which interpretation ' +
@@ -201,12 +168,10 @@ export const QUIZ_DATA = {
                 'change in sales.'
             ],
             correctAnswerIndex: 1,
-            correctFeedback: 'Yes! You are ' +
-                'correct because this is a ' +
-                'log-linear regression.',
-            incorrectFeedback: 'Incorrect. ' +
-                'Exact text TBD',
-            questionNumber: 17
+            correctFeedback: ' Yes! You are ' +
+                'correct because this is a log-linear regression.',
+            incorrectFeedback: ' Incorrect. Exact text TBD',
+            questionNumber: 14
         }
     },
     // Group 2: ceosal2
@@ -218,19 +183,14 @@ export const QUIZ_DATA = {
                 ' Which plot better represents the ' +
                 'relationship between the two ' +
                 'variables?',
-            options: [
-                'Regression A',
-                'Regression B',
-                'Both'
-            ],
+            options: ['Regression A', 'Regression B', 'Both'],
             correctAnswerIndex: 1,
-            correctFeedback: 'Correct! ' +
-                'Exact text TBD',
-            incorrectFeedback: 'Incorrect. This ' +
+            correctFeedback: ' Correct! Exact text TBD',
+            incorrectFeedback: ' Incorrect. This ' +
                 'is not the correct answer, because' +
                 ' the regression does not represent' +
                 ' the observations.',
-            questionNumber: 18
+            questionNumber: 15
         },
         q2: {
             question: 'Which interpretation ' +
@@ -252,12 +212,12 @@ export const QUIZ_DATA = {
                 'change in CEO\'s salaries.'
             ],
             correctAnswerIndex: 3,
-            correctFeedback: 'Correct! This is ' +
+            correctFeedback: ' Correct! This is ' +
                 'the better fit, because it is a ' +
                 'linear-log regression.',
-            incorrectFeedback: 'Incorrect. ' +
+            incorrectFeedback: ' Incorrect. ' +
                 'Exact text TBD',
-            questionNumber: 19
+            questionNumber: 16
         }
     },
     // Group 2: houseprice
@@ -269,17 +229,11 @@ export const QUIZ_DATA = {
                 'of houses. Which plot better ' +
                 'represents the relationship ' +
                 'between the two variables?',
-            options: [
-                'Regression A',
-                'Regression B',
-                'Both'
-            ],
+            options: ['Regression A', 'Regression B', 'Both'],
             correctAnswerIndex: 1,
-            correctFeedback: 'Correct! ' +
-                'Exact text TBD',
-            incorrectFeedback: 'Incorrect. ' +
-                'Exact text TBD',
-            questionNumber: 20
+            correctFeedback: ' Correct! Exact text TBD',
+            incorrectFeedback: ' Incorrect. Exact text TBD',
+            questionNumber: 17
         },
         q2: {
             question: 'Which interpretation ' +
@@ -302,21 +256,26 @@ export const QUIZ_DATA = {
                 'change in house sale price.'
             ],
             correctAnswerIndex: 1,
-            correctFeedback: 'Correct! ' +
-                'Exact text TBD',
-            incorrectFeedback: 'Incorrect. ' +
-                'Exact text TBD',
-            questionNumber: 21
+            correctFeedback: ' Correct! Exact text TBD',
+            incorrectFeedback: ' Incorrect. Exact text TBD',
+            questionNumber: 18
         }
     }
 };
 
 export const LogarithmQuizzes = ({
-    datasetIdx, submissionId
+    datasetIdx, submissionId, onComplete, onAnalyzeAnother
 }) => {
     const [selectedOption, setSelectedOption] = useState(null);
     const [selectedOption2, setSelectedOption2] = useState(null);
     const [q1Correct, setQ1Correct] = useState(false);
+    const [q2Correct, setQ2Correct] = useState(false);
+
+    React.useEffect(() => {
+        if (q2Correct && onComplete) {
+            onComplete(datasetIdx);
+        }
+    }, [q2Correct, datasetIdx, onComplete]);
 
     const quizzes = QUIZ_DATA[datasetIdx];
     if (!quizzes) return null;
@@ -327,63 +286,50 @@ export const LogarithmQuizzes = ({
                 <QuizComponent
                     question={quizzes.q1.question}
                     options={quizzes.q1.options}
-                    correctAnswerIndex={
-                        quizzes.q1.correctAnswerIndex
-                    }
-                    correctFeedback={
-                        quizzes.q1.correctFeedback
-                    }
-                    incorrectFeedback={
-                        quizzes.q1.incorrectFeedback
-                    }
+                    correctAnswerIndex={quizzes.q1.correctAnswerIndex}
+                    correctFeedback={quizzes.q1.correctFeedback}
+                    incorrectFeedback={quizzes.q1.incorrectFeedback}
                     setIsCorrect={setQ1Correct}
-                    questionNumber={
-                        quizzes.q1.questionNumber
-                    }
+                    questionNumber={quizzes.q1.questionNumber}
                     selectedOption={selectedOption}
-                    setSelectedOption={
-                        setSelectedOption
-                    }
+                    setSelectedOption={setSelectedOption}
                     submissionId={submissionId}
                 />
             </div>
             {q1Correct && (
                 <div className="mt-3">
                     <QuizComponent
-                        question={
-                            quizzes.q2.question
-                        }
-                        options={
-                            quizzes.q2.options
-                        }
-                        correctAnswerIndex={
-                            quizzes.q2.correctAnswerIndex
-                        }
-                        correctFeedback={
-                            quizzes.q2.correctFeedback
-                        }
-                        incorrectFeedback={
-                            quizzes.q2.incorrectFeedback
-                        }
-                        setIsCorrect={() => {}}
-                        questionNumber={
-                            quizzes.q2.questionNumber
-                        }
-                        selectedOption={
-                            selectedOption2
-                        }
-                        setSelectedOption={
-                            setSelectedOption2
-                        }
+                        question={quizzes.q2.question}
+                        options={quizzes.q2.options}
+                        correctAnswerIndex={quizzes.q2.correctAnswerIndex}
+                        correctFeedback={quizzes.q2.correctFeedback}
+                        incorrectFeedback={quizzes.q2.incorrectFeedback}
+                        setIsCorrect={setQ2Correct}
+                        questionNumber={quizzes.q2.questionNumber}
+                        selectedOption={selectedOption2}
+                        setSelectedOption={setSelectedOption2}
                         submissionId={submissionId}
                     />
                 </div>
             )}
+            {q2Correct && (
+                <div className="mt-4 text-center border-top pt-3">
+                    <p className="text-success fw-bold">
+                        You&apos;ve completed the analysis of this dataset.
+                    </p>
+                    <button
+                        className="btn btn-outline-primary mt-2"
+                        onClick={onAnalyzeAnother}>
+                        Analyze another dataset
+                    </button>
+                </div>)}
         </div>
     );
 };
 
 LogarithmQuizzes.propTypes = {
     datasetIdx: PropTypes.number.isRequired,
-    submissionId: PropTypes.number
+    submissionId: PropTypes.number,
+    onComplete: PropTypes.func,
+    onAnalyzeAnother: PropTypes.func
 };

@@ -14,6 +14,7 @@ export const RealDataLogarithm = ({
     const [datasetStarted, setDatasetStarted] = useState(false);
     const [selected, setSelected] = useState(null);
     const [openFit, setOpenFit] = useState({});
+    const [completedDatasets, setCompletedDatasets] = useState([]);
 
     const LABELS_GROUP_1 = [
         ['exports_tariffs', 'Effect of tariffs on exports', 0],
@@ -69,10 +70,7 @@ export const RealDataLogarithm = ({
     ];
 
     useEffect(() => {
-        setShowDatasets([
-            false, false, false,
-            false, false, false
-        ]);
+        setShowDatasets([false, false, false, false, false, false]);
         setCompareRegLine([]);
         if (setHighlightedFit) {
             setHighlightedFit('');
@@ -93,6 +91,24 @@ export const RealDataLogarithm = ({
         }
     };
 
+    const handleComplete = (idx) => {
+        setCompletedDatasets(prev => {
+            if (!prev.includes(idx)) {
+                return [...prev, idx];
+            }
+            return prev;
+        });
+    };
+
+    const handleAnalyzeAnother = () => {
+        setSelected(null);
+        setShowDatasets(prev => prev.map(() => false));
+        setCompareRegLine([]);
+        if (setHighlightedFit) {
+            setHighlightedFit('');
+        }
+    };
+
     const toggleFit = (fit) => {
         setOpenFit(prev => {
             if (prev[fit]) {
@@ -108,9 +124,7 @@ export const RealDataLogarithm = ({
     const REG_LABELS = ['Regression A', 'Regression B'];
 
     const renderFitPanel = (fit) => (
-        <div
-            id={`fit-panel-${fit}`}
-            className="ps-4 pt-2">
+        <div id={`fit-panel-${fit}`} className="ps-4 pt-2">
             <p>
                 <b>Form:&nbsp;</b>
                 <Katex tex={''} />
@@ -149,34 +163,23 @@ export const RealDataLogarithm = ({
             <p>Choose one group for your analysis.</p>
             <div className="choice-list dataset-opt">
                 <div className="form-check mb-3">
-                    <input
-                        className="form-check-input"
-                        type="radio"
-                        id="group-1"
-                        name="log-group-choice"
-                        value="1"
+                    <input className="form-check-input" type="radio" value="1"
+                        id="group-1" name="log-group-choice"
                         checked={selectedGroup === 1}
                         disabled={datasetStarted}
-                        onChange={() => {
-                            setSelectedGroup(1);
-                            setDatasetStarted(false);
-                            setSelected(null);
-                            setShowDatasets([
-                                false, false, false,
-                                false, false, false
-                            ]);
+                        onChange={() => {setSelectedGroup(1);
+                            setDatasetStarted(false); setSelected(null);
+                            setShowDatasets([false, false, false,
+                                false, false, false]);
                             setCompareRegLine([]);
                             if (setHighlightedFit) setHighlightedFit('');
                         }}
                     />
-                    <label htmlFor="group-1"
-                        className={`form-check-label ${
-                            datasetStarted ? 'text-muted' : ''
-                        }`}>
+                    <label htmlFor="group-1" className={`form-check-label ${
+                        datasetStarted ? 'text-muted' : ''}`}>
                         Group 1
                     </label>
-                    <ul className={
-                        `mt-2 ${datasetStarted ? 'text-muted' : ''}`
+                    <ul className={`mt-2 ${datasetStarted ? 'text-muted' : ''}`
                     }>
                         <li>
                             Effect of tariffs on exports
@@ -192,34 +195,23 @@ export const RealDataLogarithm = ({
                     </ul>
                 </div>
                 <div className="form-check mb-3">
-                    <input
-                        className="form-check-input"
-                        type="radio"
-                        id="group-2"
-                        name="log-group-choice"
-                        value="2"
+                    <input className="form-check-input" type="radio" value="2"
+                        id="group-2" name="log-group-choice"
                         checked={selectedGroup === 2}
                         disabled={datasetStarted}
-                        onChange={() => {
-                            setSelectedGroup(2);
-                            setDatasetStarted(false);
-                            setSelected(null);
-                            setShowDatasets([
-                                false, false, false,
-                                false, false, false
-                            ]);
+                        onChange={() => {setSelectedGroup(2);
+                            setDatasetStarted(false); setSelected(null);
+                            setShowDatasets([false, false, false,
+                                false, false, false]);
                             setCompareRegLine([]);
                             if (setHighlightedFit) setHighlightedFit('');
                         }}
                     />
-                    <label htmlFor="group-2"
-                        className={`form-check-label ${
-                            datasetStarted ? 'text-muted' : ''
-                        }`}>
+                    <label htmlFor="group-2" className={`form-check-label ${
+                        datasetStarted ? 'text-muted' : ''}`}>
                         Group 2
                     </label>
-                    <ul className={
-                        `mt-2 ${datasetStarted ? 'text-muted' : ''}`
+                    <ul className={`mt-2 ${datasetStarted ? 'text-muted' : ''}`
                     }>
                         <li>
                             Effect of television advertising spending on
@@ -237,8 +229,7 @@ export const RealDataLogarithm = ({
                 </div>
             </div>
             <div className="d-flex justify-content-end mt-4">
-                <button
-                    className="btn btn-sm btn-success"
+                <button className="btn btn-sm btn-success"
                     onClick={() => setDatasetStarted(true)}
                     disabled={datasetStarted || selectedGroup === null}>
                         Continue &raquo;
@@ -262,35 +253,41 @@ export const RealDataLogarithm = ({
                     ]} />
                     <ul className='choice-list dataset-opt ms-0'>
                         {currentLabels.map((dType) => (
-                            <li className="mb-2 list-unstyled"
-                                key={dType[2]}>
+                            <li className="mb-2 list-unstyled" key={dType[2]}>
                                 <div className="form-check">
-                                    <input
-                                        className="form-check-input"
-                                        type="radio"
+                                    <input className="form-check-input"
+                                        type="radio" value={dType[0]}
                                         id={`log-real-${dType[0]}`}
                                         name="log-data-choice"
-                                        value={dType[0]}
                                         checked={
                                             showDatasets[dType[2]] === true
                                         }
-                                        disabled={
-                                            selected !== null &&
-                                            selected !== dType[2]
-                                        }
+                                        disabled={selected !== null &&
+                                            selected !== dType[2]}
                                         onChange={() => handleDataset(dType[2])}
                                     />
                                     <label htmlFor={`log-real-${dType[0]}`}
                                         className={'form-check-label ' +
+                                            'd-flex align-items-center ' +
                                             `pb-2 me-2 ${
                                                 (selected !== null &&
                                                 selected !== dType[2])
                                                     ? 'text-muted' : ''
                                             }`}>
-                                        {dType[1]}<br />
-                                        <small className="text-muted">
-                                            Source: {info[dType[2]][1]}
-                                        </small>
+                                        <span>
+                                            {dType[1]}<br />
+                                            <small className="text-muted">
+                                                Source: {info[dType[2]][1]}
+                                            </small>
+                                        </span>
+                                        {completedDatasets.includes(
+                                            dType[2]) && (
+                                            <span
+                                                className={'ms-2 ' +
+                                                    'status-checkmark'}>
+                                                &#10003;
+                                            </span>
+                                        )}
                                     </label>
                                 </div>
                                 {selected === dType[2] && (
@@ -299,21 +296,16 @@ export const RealDataLogarithm = ({
                                             (fit, idx) => (
                                                 <div key={fit}
                                                     className={
-                                                        'collapsible-fit ' +
-                                                        'mb-2'
-                                                    }>
-                                                    <button
-                                                        type="button"
+                                                        'collapsible-fit mb-2'}>
+                                                    <button type="button"
                                                         className="btn"
                                                         onClick={() =>
-                                                            toggleFit(fit)
-                                                        }
+                                                            toggleFit(fit)}
                                                         aria-expanded={
                                                             !!openFit[fit]
                                                         }
                                                         aria-controls={
-                                                            `fit-panel-${fit}`
-                                                        }>
+                                                            `fit-panel-${fit}`}>
                                                         <span>
                                                             {openFit[fit] ?
                                                                 '▼' : '▶'}{' '}
@@ -321,17 +313,14 @@ export const RealDataLogarithm = ({
                                                         </span>
                                                     </button>
                                                     {openFit[fit] &&
-                                                        renderFitPanel(fit)
-                                                    }
-                                                </div>
-                                            )
-                                        )}
+                                                        renderFitPanel(fit)}
+                                                </div>))}
                                         <LogarithmQuizzes
                                             datasetIdx={dType[2]}
-                                            submissionId={
-                                                submissionId
-                                            }
-                                        />
+                                            submissionId={submissionId}
+                                            onComplete={handleComplete}
+                                            onAnalyzeAnother={
+                                                handleAnalyzeAnother} />
                                     </div>
                                 )}
                             </li>
@@ -339,8 +328,6 @@ export const RealDataLogarithm = ({
                     </ul>
                 </>
             )}
-
-
         </>
     );
 };
