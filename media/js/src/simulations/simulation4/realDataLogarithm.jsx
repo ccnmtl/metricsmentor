@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { PromptBlock } from '../../PromptBlock';
+import { Katex } from '../../utils/katexComponent';
 import PropTypes from 'prop-types';
 
 export const RealDataLogarithm = ({
@@ -15,16 +16,17 @@ export const RealDataLogarithm = ({
 
     const LABELS_GROUP_1 = [
         ['exports_tariffs', 'Effect of tariffs on exports', 0],
-        ['gdp_life_exp', 'Effect of average income level of countries ' +
-            '(GDP per capita) on their population’s life expectancy', 1],
-        ['gdp_co2', 'Effect of average income level of a country ' +
-            '(GDP per capita) on CO2 emission per capita', 2]
+        ['gdp_life_exp', 'Effect of countries’ GDP per capita on their ' +
+            'population’s life expectancy', 1],
+        ['gdp_co2', 'Effect of a country’s GDP per capita on CO2 emission',
+            2]
     ];
 
     const LABELS_GROUP_2 = [
-        ['advertising', 'Advertising (Sales vs TV)', 3],
-        ['ceosal2', 'CEO Salary vs Sales', 4],
-        ['houseprice', 'House Price vs Area', 5]
+        ['advertising', 'Effect of television advertising spending on sales',
+            3],
+        ['ceosal2', 'Effect of firm’s sales on CEO’s salaries', 4],
+        ['houseprice', 'Effect of size of living area on housing prices', 5]
     ];
 
     const ALL_LABELS = [...LABELS_GROUP_1, ...LABELS_GROUP_2];
@@ -41,33 +43,27 @@ export const RealDataLogarithm = ({
     const info = [
         [
             'Effect of tariffs on exports',
-            'Based on exports and tariffs dataset.',
             'World Bank Database'
         ],
         [
             'Income and Life Expectancy',
-            'Based on GDP per capita and life expectancy dataset.',
             'World Bank Database'
         ],
         [
             'Income and CO2 Emission',
-            'Based on GDP per capita and CO2 emission dataset.',
             'World Bank Database'
         ],
         [
             'Advertising (Sales vs TV)',
-            'Based on advertising dataset.',
-            'World Bank Database'
+            'ISLR Advertising-to-Sales data, 2017'
         ],
         [
             'CEO Salary vs Sales',
-            'Based on CEO salary dataset.',
-            'World Bank Database'
+            'Wooldridge CEO Pay and Firm Sales, 1990'
         ],
         [
             'House Price vs Area',
-            'Based on house price dataset.',
-            'World Bank Database'
+            'Housing Price and Living Area [Ames, Iowa, 2020]'
         ]
     ];
 
@@ -108,13 +104,35 @@ export const RealDataLogarithm = ({
         });
     };
 
-    const formatFitName = (fit) =>
-        fit.replace('Fit', '')
-            .replace(/([A-Z])/g, ' $1')
-            .trim()
-            .toLowerCase();
+    const REG_LABELS = ['Regression A', 'Regression B'];
 
-    const currentLabels = selectedGroup === 1 ? LABELS_GROUP_1 : LABELS_GROUP_2;
+    const renderFitPanel = (fit) => (
+        <div
+            id={`fit-panel-${fit}`}
+            className="ps-4 pt-2">
+            <p>
+                <b>Form:&nbsp;</b>
+                <Katex tex={''} />
+            </p>
+            <p>
+                <b>
+                    Resulting regression fit equation:
+                </b>
+            </p>
+            <div className="katex-block">
+                <Katex tex={''} />
+            </div>
+            <p>
+                <b>Interpretation: </b>
+            </p>
+            <p>
+                <b>Notes: </b>
+            </p>
+        </div>
+    );
+
+    const currentLabels = selectedGroup === 1
+        ? LABELS_GROUP_1 : LABELS_GROUP_2;
 
     return (
         <>
@@ -160,24 +178,15 @@ export const RealDataLogarithm = ({
                         `mt-2 ${datasetStarted ? 'text-muted' : ''}`
                     }>
                         <li>
-                            Effect of tariffs on exports<br />
-                            <small className="text-muted">
-                                Source: World Bank Database
-                            </small>
+                            Effect of tariffs on exports
                         </li>
                         <li>
                             Effect of countries&apos; GDP per capita on their
-                            population’s life expectancy<br />
-                            <small className="text-muted">
-                                Source: World Bank Database
-                            </small>
+                            population’s life expectancy
                         </li>
                         <li>
                             Effect of a country&apos;s GDP per capita on CO2
-                            emission<br />
-                            <small className="text-muted">
-                                Source: World Bank Database
-                            </small>
+                            emission
                         </li>
                     </ul>
                 </div>
@@ -213,24 +222,15 @@ export const RealDataLogarithm = ({
                     }>
                         <li>
                             Effect of television advertising spending on
-                            sales<br />
-                            <small className="text-muted">
-                                Source: World Bank Database
-                            </small>
+                            sales
                         </li>
                         <li>
                             Effect of firm&apos;s sales on CEO&apos;s
-                            salaries<br />
-                            <small className="text-muted">
-                                Source: World Bank Database
-                            </small>
+                            salaries
                         </li>
                         <li>
                             Effect of size of living area on housing
-                            prices<br />
-                            <small className="text-muted">
-                                Source: World Bank Database
-                            </small>
+                            prices
                         </li>
                     </ul>
                 </div>
@@ -259,7 +259,7 @@ export const RealDataLogarithm = ({
                         'Review and decide the interpretations for each ' +
                         'instance.'
                     ]} />
-                    <ul className='choice-list dataset-opt'>
+                    <ul className='choice-list dataset-opt ms-0'>
                         {currentLabels.map((dType) => (
                             <li className="mb-2 list-unstyled"
                                 key={dType[2]}>
@@ -288,17 +288,14 @@ export const RealDataLogarithm = ({
                                             }`}>
                                         {dType[1]}<br />
                                         <small className="text-muted">
-                                            Source: {info[dType[2]][2]}
+                                            Source: {info[dType[2]][1]}
                                         </small>
                                     </label>
                                 </div>
                                 {selected === dType[2] && (
                                     <div className="nested-radio ps-4 mt-2">
-                                        <p className="mb-3">
-                                            {info[selected][1]}
-                                        </p>
                                         {REGS_MAP[ALL_LABELS[selected][0]].map(
-                                            (fit) => (
+                                            (fit, idx) => (
                                                 <div key={fit}
                                                     className={
                                                         'collapsible-fit ' +
@@ -319,43 +316,12 @@ export const RealDataLogarithm = ({
                                                         <span>
                                                             {openFit[fit] ?
                                                                 '▼' : '▶'}{' '}
-                                                            With {
-                                                                formatFitName(
-                                                                    fit
-                                                                )
-                                                            } regression fit
+                                                            {REG_LABELS[idx]}
                                                         </span>
                                                     </button>
-                                                    {openFit[fit] && (
-                                                        <div
-                                                            id={'fit-panel-' +
-                                                                `${fit}`
-                                                            }
-                                                            className={
-                                                                'ps-4 pt-2'
-                                                            }>
-                                                            <p>
-                                                                <em>
-                                                                    Once you
-                                                                    select this
-                                                                    regression
-                                                                    fit, the
-                                                                    graph will
-                                                                    be
-                                                                    highlighted
-                                                                    to help you
-                                                                    compare
-                                                                    the models
-                                                                    side by
-                                                                    side.
-                                                                    Interpret.
-                                                                    text will
-                                                                    be populated
-                                                                    here later.
-                                                                </em>
-                                                            </p>
-                                                        </div>
-                                                    )}
+                                                    {openFit[fit] &&
+                                                        renderFitPanel(fit)
+                                                    }
                                                 </div>
                                             )
                                         )}
