@@ -37,6 +37,17 @@ export const SimulationFour = () => {
     const initialized = useRef(false);
     const handleStage = (e) => setStage(parseInt(e.target.value));
 
+    useEffect(() => {
+        // Reset selected elements and graphs when switching segments or stages
+        setSelectedModel('');
+        setHighlightedFit('');
+        setCompareRegLine([]);
+        setLogCompareRegLine([]);
+        setShowLogDatasets([false, false, false, false, false, false]);
+        setShowPolyDatasets(showOne(0));
+        setShowRegLine(CLEARREG);
+    }, [stage, progress[0], progress[1]]);
+
     const mkModuleBtns = () => ['Polynomials', 'Logarithms']
         .map((label, index) => (
             <button onClick={handleStage} key={index}

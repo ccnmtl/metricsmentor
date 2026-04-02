@@ -34,12 +34,12 @@ export const RealDataLogarithm = ({
     const ALL_LABELS = [...LABELS_GROUP_1, ...LABELS_GROUP_2];
 
     const REGS_MAP = {
-        exports_tariffs: ['linearFit', 'logLinearFit'],
+        exports_tariffs: ['logLinearFit', 'linearFit'],
         gdp_life_exp: ['linearFit', 'linearLogFit'],
-        gdp_co2: ['linearFit', 'logLogFit'],
+        gdp_co2: ['logLogFit', 'linearFit'],
         advertising: ['linearFit', 'logLinearFit'],
-        ceosal2: ['linearFit', 'linearLogFit'],
-        houseprice: ['linearFit', 'logLogFit']
+        ceosal2: ['linearLogFit', 'linearFit'],
+        houseprice: ['logLogFit', 'linearFit']
     };
 
     const info = [
