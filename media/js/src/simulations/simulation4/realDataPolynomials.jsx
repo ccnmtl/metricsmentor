@@ -294,7 +294,7 @@ export const RealDataPolynomials = ({
                         setIsCorrect={handleIsCorrect(0)}
                         isTextInput={true}
                         correctAnswerIndex={2}
-                        questionNumber={0}
+                        questionNumber={1}
                         submissionId={submissionId} /></div>
                     {isCorrect[0] && <div className='mt-4'><QuizComponent
                         question={'Based on your observations, which ' +
@@ -308,7 +308,7 @@ export const RealDataPolynomials = ({
                             'regression is shown to be the best fit.'}
                         incorrectFeedback={incorrectFeedback2}
                         setIsCorrect={handleIsCorrect(1)}
-                        questionNumber={1}
+                        questionNumber={2}
                         selectedOption={selectedOption}
                         setSelectedOption={setSelectedOption}
                         submissionId={submissionId} /></div>}</>}

@@ -14,7 +14,7 @@ export const PolynomialTakeaway = ({
 
     const questions = [
         {
-            questionId: 1,
+            questionId: 4,
             questionText:
             '“The more I study, the better grade I will get.” This sentence ' +
             'ignores the fact that if you do not sleep or eat but just ' +
@@ -72,7 +72,7 @@ export const PolynomialTakeaway = ({
             ]
         },
         {
-            questionId: 2,
+            questionId: 5,
             questionText:
             'When you graph your data set, you see an S-shaped relationship ' +
             'between X and Y. Which one of the following should be used?',
@@ -124,7 +124,7 @@ export const PolynomialTakeaway = ({
             ]
         },
         {
-            questionId: 3,
+            questionId: 6,
             questionText:
             'Using a polynomial regression instead of a linear one, which of ' +
             'the following can be done?',
