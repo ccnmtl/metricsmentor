@@ -11,6 +11,7 @@ import { RealDataPolynomials } from './realDataPolynomials';
 import { RealDataLogarithm } from './realDataLogarithm';
 import { StepProgressButton } from '../../StepProgressButton';
 import { PolynomialTakeaway } from './polynomialTakeaway';
+import { LogarithmTakeaway } from './logarithmTakeaway';
 import { CLEARREG, showOne } from './polyUtils';
 
 const coursePk = getCoursePk();
@@ -31,6 +32,7 @@ export const SimulationFour = () => {
     const [showLogDatasets, setShowLogDatasets] = useState(
         [false, false, false, false, false, false]);
     const [highlightedFit, setHighlightedFit] = useState('');
+    const [isLogGroupComplete, setIsLogGroupComplete] = useState(false);
 
     const quizComplete = () => !isCorrect.includes(false);
 
@@ -225,17 +227,29 @@ export const SimulationFour = () => {
                             compareRegLine={logCompareRegLine}
                             setHighlightedFit={setHighlightedFit}
                             submissionId={submissionId}
+                            setIsGroupComplete={setIsLogGroupComplete}
                         />
                     )}
-                    {/* <StepProgressButton
+                    {isLogGroupComplete && <StepProgressButton
                         progress={progress}
                         stage={stage}
                         setProgress={setProgress}
                         continueLabel="Continue »"
                         reviewLabel="Review »"
                         progressNumber={2}
-                    /> */}
+                    />}
                 </>
+            }]
+            : []),
+        ...(progress[stage] > 1
+            ? [{
+                headerId: 'takeAway2',
+                title: 'Takeaway questions',
+                content: (
+                    <LogarithmTakeaway
+                        submissionId={submissionId}
+                    />
+                )
             }]
             : [])
     ];

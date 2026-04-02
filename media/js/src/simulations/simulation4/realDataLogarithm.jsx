@@ -7,7 +7,7 @@ import PropTypes from 'prop-types';
 export const RealDataLogarithm = ({
     setShowDatasets, showDatasets,
     setCompareRegLine, compareRegLine,
-    setHighlightedFit, submissionId
+    setHighlightedFit, submissionId, setIsGroupComplete
 }) => {
 
     const [selectedGroup, setSelectedGroup] = useState(null);
@@ -260,6 +260,12 @@ export const RealDataLogarithm = ({
         dType => completedDatasets.includes(dType[2])
     ).length;
 
+    useEffect(() => {
+        if (setIsGroupComplete) {
+            setIsGroupComplete(completedGroupCount === 3);
+        }
+    }, [completedGroupCount, setIsGroupComplete]);
+
     return (
         <>
             <p>
@@ -365,6 +371,26 @@ export const RealDataLogarithm = ({
                             {completedGroupCount} of 3
                         </span>
                     </p>
+                    {completedGroupCount === 3 && (
+                        <div className="d-flex gap-3 my-4">
+                            <button className="btn btn-outline-primary"
+                                onClick={() => {
+                                    setSelectedGroup(null);
+                                    setDatasetStarted(false);
+                                    setSelected(null);
+                                    setShowDatasets(
+                                        [false, false, false,
+                                            false, false, false]
+                                    );
+                                    setCompareRegLine([]);
+                                    if (setHighlightedFit) {
+                                        setHighlightedFit('');
+                                    }
+                                }}>
+                                Try another Group &raquo;
+                            </button>
+                        </div>
+                    )}
                     <PromptBlock list={[
                         'Select a dataset to review',
                         'Compare the data plots and resulting regressions ' +
@@ -450,6 +476,7 @@ export const RealDataLogarithm = ({
                             </li>
                         ))}
                     </ul>
+                    <p>Have you completed all three datatsets in this group?</p>
                 </>
             )}
         </>
@@ -464,5 +491,6 @@ RealDataLogarithm.propTypes = {
         PropTypes.string
     ).isRequired,
     setHighlightedFit: PropTypes.func,
-    submissionId: PropTypes.number
+    submissionId: PropTypes.number,
+    setIsGroupComplete: PropTypes.func
 };
