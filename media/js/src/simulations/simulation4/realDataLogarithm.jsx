@@ -111,37 +111,144 @@ export const RealDataLogarithm = ({
 
     const toggleFit = (fit) => {
         setOpenFit(prev => {
-            if (prev[fit]) {
-                if (setHighlightedFit) setHighlightedFit('');
-                return {};
-            } else {
-                if (setHighlightedFit) setHighlightedFit(fit);
-                return { [fit]: true };
-            }
+            const isOpen = !!prev[fit];
+            return isOpen ? {} : { [fit]: true };
         });
+        if (setHighlightedFit) {
+            setHighlightedFit(prev => prev === fit ? '' : fit);
+        }
     };
 
     const REG_LABELS = ['Regression A', 'Regression B'];
 
-    const renderFitPanel = (fit) => (
+    const MODEL_FORMULAS = {
+        linearFit:
+            '\\hat{y} = \\widehat{\\beta}_0 + \\widehat{\\beta}_1 x',
+        logLinearFit:
+            '\\widehat{\\ln(y)} = \\widehat{\\beta}_0 + ' +
+            '\\widehat{\\beta}_1 x',
+        linearLogFit:
+            '\\hat{y} = \\widehat{\\beta}_0 + ' +
+            '\\widehat{\\beta}_1 \\ln(x)',
+        logLogFit:
+            '\\widehat{\\ln(y)} = \\widehat{\\beta}_0 + ' +
+            '\\widehat{\\beta}_1 \\ln(x)'
+    };
+
+    const REG_FORMULAS = {
+        exports_tariffs: {
+            logLinearFit: '\\widehat{log_exports} = 25.65 - 0.31tariffs',
+            linearFit: '\\widehat{exports} = 368,000,000,000' +
+            ' - 30,900,000,000tariffs'
+        },
+        gdp_life_exp: {
+            linearFit: '\\widehat{life_expect} = 5.57 + 0.0025gdp_cap',
+            linearLogFit: '\\widehat{life_expect} = 1.03 + 4.16log(gdp_cap)'
+        },
+        gdp_co2: {
+            logLogFit: '\\widehat{log_co2_pop} = -6.277863 + 0.7807log_gdp_cap',
+            linearFit: '\\widehat{co2_pop} = 2.6697 + 0.0001019gdp_cap'
+        },
+        advertising: {
+            linearFit: '\\widehat{Sales} = 7.03 + 0.05tv',
+            logLinearFit: '\\widehat{log(Sales)} = 2.01 + 0.0038tv'
+        },
+        ceosal2: {
+            linearLogFit: '\\widehat{CEO Salary} = -379.23 + 171.77log(Sales)',
+            linearFit: '\\widehat{CEOSalary} = 717.63 + 0.043Sales'
+        },
+        houseprice: {
+            logLogFit: '\\widehat{log(SalePrice)} = 6.58 + 0.75log(HouseArea)',
+            linearFit: '\\widehat{SalePrice} = 65240.89 + 72.23HouseArea'
+        }
+    };
+
+    const REG_INTERPRETATIONS = {
+        exports_tariffs: {
+            logLinearFit: '',
+            linearFit: ''
+        },
+        gdp_life_exp: {
+            linearFit: '',
+            linearLogFit: ''
+        },
+        gdp_co2: {
+            logLogFit: '',
+            linearFit: ''
+        },
+        advertising: {
+            linearFit: '',
+            logLinearFit: ''
+        },
+        ceosal2: {
+            linearLogFit: '',
+            linearFit: ''
+        },
+        houseprice: {
+            logLogFit: '',
+            linearFit: ''
+        }
+    };
+
+    const REG_NOTES = {
+        exports_tariffs: {
+            logLinearFit: '',
+            linearFit: ''
+        },
+        gdp_life_exp: {
+            linearFit: '',
+            linearLogFit: ''
+        },
+        gdp_co2: {
+            logLogFit: '',
+            linearFit: ''
+        },
+        advertising: {
+            linearFit: '',
+            logLinearFit: ''
+        },
+        ceosal2: {
+            linearLogFit: '',
+            linearFit: ''
+        },
+        houseprice: {
+            logLogFit: '',
+            linearFit: ''
+        }
+    };
+
+    const getFormula = (fit) => MODEL_FORMULAS[fit] || '';
+
+    const getRegFormula = (datasetKey, fit) =>
+        (REG_FORMULAS[datasetKey] && REG_FORMULAS[datasetKey][fit]) || '';
+
+    const getInterpretation = (datasetKey, fit) =>
+        (REG_INTERPRETATIONS[datasetKey] &&
+            REG_INTERPRETATIONS[datasetKey][fit]) || '';
+
+    const getNotes = (datasetKey, fit) =>
+        (REG_NOTES[datasetKey] && REG_NOTES[datasetKey][fit]) || '';
+
+    const renderFitPanel = (fit, datasetKey) => (
         <div id={`fit-panel-${fit}`} className="ps-4 pt-2">
-            <p>
-                <b>Form:&nbsp;</b>
-                <Katex tex={''} />
+            <p className="me-2 mb-3">Form:&nbsp;
+                <Katex tex={getFormula(fit)} />
             </p>
-            <p>
+            <p className="mb-0">
                 <b>
                     Resulting regression fit equation:
                 </b>
             </p>
             <div className="katex-block">
-                <Katex tex={''} />
+                <Katex tex={getRegFormula(datasetKey, fit)} />
             </div>
             <p>
                 <b>Interpretation: </b>
+                {getInterpretation(datasetKey, fit)}
             </p>
             <p>
                 <b>Notes: </b>
+                {getNotes(datasetKey, fit)}
             </p>
         </div>
     );
@@ -313,7 +420,10 @@ export const RealDataLogarithm = ({
                                                         </span>
                                                     </button>
                                                     {openFit[fit] &&
-                                                        renderFitPanel(fit)}
+                                                        renderFitPanel(
+                                                            fit,
+                                                            ALL_LABELS[
+                                                                selected][0])}
                                                 </div>))}
                                         <LogarithmQuizzes
                                             datasetIdx={dType[2]}
