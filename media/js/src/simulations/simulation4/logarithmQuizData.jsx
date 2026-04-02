@@ -15,7 +15,7 @@ export const QUIZ_DATA = {
                 'better represents the relationship ' +
                 'between the two variables?',
             options: ['Regression A', 'Regression B', 'Both'],
-            correctAnswerIndex: 1,
+            correctAnswerIndex: 0,
             correctFeedback: ' Correct! Exact text TBD',
             incorrectFeedback: ' Incorrect. Exact text TBD',
             questionNumber: 7
@@ -91,7 +91,7 @@ export const QUIZ_DATA = {
                 'better represents the relationship ' +
                 'between the two variables?',
             options: ['Regression A', 'Regression B', 'Both'],
-            correctAnswerIndex: 1,
+            correctAnswerIndex: 0,
             correctFeedback: ' Correct! Exact text TBD',
             incorrectFeedback: ' Incorrect. Exact text TBD',
             questionNumber: 11
@@ -184,7 +184,7 @@ export const QUIZ_DATA = {
                 'relationship between the two ' +
                 'variables?',
             options: ['Regression A', 'Regression B', 'Both'],
-            correctAnswerIndex: 1,
+            correctAnswerIndex: 0,
             correctFeedback: ' Correct! Exact text TBD',
             incorrectFeedback: ' Incorrect. This ' +
                 'is not the correct answer, because' +
@@ -230,7 +230,7 @@ export const QUIZ_DATA = {
                 'represents the relationship ' +
                 'between the two variables?',
             options: ['Regression A', 'Regression B', 'Both'],
-            correctAnswerIndex: 1,
+            correctAnswerIndex: 0,
             correctFeedback: ' Correct! Exact text TBD',
             incorrectFeedback: ' Incorrect. Exact text TBD',
             questionNumber: 17
