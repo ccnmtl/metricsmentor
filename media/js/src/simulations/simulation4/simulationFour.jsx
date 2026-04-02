@@ -38,7 +38,7 @@ export const SimulationFour = () => {
     const handleStage = (e) => setStage(parseInt(e.target.value));
 
     useEffect(() => {
-        // Reset selected elements and graphs when switching segments or stages
+        // Reset selected elements and graphs when switching stages
         setSelectedModel('');
         setHighlightedFit('');
         setCompareRegLine([]);
