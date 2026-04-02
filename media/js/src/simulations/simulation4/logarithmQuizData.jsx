@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { QuizComponent } from '../../Quiz';
+import { Katex } from '../../utils/katexComponent';
 import PropTypes from 'prop-types';
 
 // Quiz data: keyed by dataset index (0-5)
@@ -16,8 +17,10 @@ export const QUIZ_DATA = {
                 'between the two variables?',
             options: ['Regression A', 'Regression B', 'Both'],
             correctAnswerIndex: 0,
-            correctFeedback: ' Correct! Exact text TBD',
-            incorrectFeedback: ' Incorrect. Exact text TBD',
+            correctFeedback: ' Correct! The log-linear regression is the better'
+            + ' fit, because it represents the observations more closely.',
+            incorrectFeedback: ' Incorrect. This is not the best fit, ' +
+            'because the regression does not represent the observations.',
             questionNumber: 7
         },
         q2: {
@@ -35,8 +38,19 @@ export const QUIZ_DATA = {
                 'associated with 0.97% change in exports.'
             ],
             correctAnswerIndex: 0,
-            correctFeedback: ' Correct! Exact text TBD',
-            incorrectFeedback: ' Incorrect. Exact text TBD',
+            correctFeedback: ' Correct! Because the Y is in log form and X is' +
+            ' in linear form',
+            incorrectFeedback: {
+                1: ' Incorrect. This interpretation describes a ' +
+                    'linear-linear model. Check how tariffs and ' +
+                    'exports are expressed in your model.',
+                2: ' Incorrect. This would have been correct for a ' +
+                    'log-log regression.',
+                3: <><span> Incorrect. This is correct for a log-linear{' '}
+                    regression but{' '}
+                    <Katex tex={'\\hat{\\beta}'} />{' '}
+                    needs to be multiplied by 100.</span></>
+            },
             questionNumber: 8
         }
     },
@@ -77,7 +91,11 @@ export const QUIZ_DATA = {
             ],
             correctAnswerIndex: 0,
             correctFeedback: ' Correct! Exact text TBD',
-            incorrectFeedback: ' Incorrect. Exact text TBD',
+            incorrectFeedback: {
+                1: ' Incorrect. TBD',
+                2: ' Incorrect. TBD',
+                3: ' Incorrect. TBD'
+            },
             questionNumber: 10
         }
     },
@@ -118,7 +136,11 @@ export const QUIZ_DATA = {
             ],
             correctAnswerIndex: 0,
             correctFeedback: ' Correct! Exact text TBD',
-            incorrectFeedback: ' Incorrect. Exact text TBD',
+            incorrectFeedback: {
+                1: ' Incorrect. TBD',
+                2: ' Incorrect. TBD',
+                3: ' Incorrect. TBD'
+            },
             questionNumber: 12
         }
     },
@@ -133,14 +155,10 @@ export const QUIZ_DATA = {
                 'between the two variables?',
             options: ['Regression A', 'Regression B', 'Both'],
             correctAnswerIndex: 1,
-            correctFeedback: ' Correct! This is ' +
-                'the better fit, because the ' +
-                'regression represents the ' +
-                'observations more closely.',
-            incorrectFeedback: ' Incorrect. This ' +
-                'is not the correct answer, ' +
-                'because the regression does not ' +
-                'represent the observations.',
+            correctFeedback: ' Correct! This is the better fit, because the ' +
+                'regression represents the observations more closely.',
+            incorrectFeedback: ' Incorrect. This is not the correct answer, ' +
+                'because the regression does not represent the observations.',
             questionNumber: 13
         },
         q2: {
@@ -150,27 +168,25 @@ export const QUIZ_DATA = {
                 'between television advertising ' +
                 'and sales?',
             options: [
-                '$1 change in television ' +
-                'advertising spending is ' +
-                'associated with 0.0038 unit ' +
-                'change in sales.',
-                '$1 change in television ' +
-                'advertising spending is ' +
-                'associated with 0.38% ' +
-                '(0.0038 \u00d7 100) change in sales.',
-                '1% change in television ' +
-                'advertising spending is ' +
-                'associated with 0.05 unit ' +
-                'change in sales.',
-                '1% change in television ' +
-                'advertising spending is ' +
-                'associated with 0.0038% ' +
-                'change in sales.'
+                '$1 change in television advertising spending is ' +
+                'associated with 0.0038 unit change in sales.',
+                '$1 change in television advertising spending is ' +
+                'associated with 0.38% (0.0038 \u00d7 100) change in sales.',
+                '1% change in television advertising spending is ' +
+                'associated with 0.05 unit change in sales.',
+                '1% change in television advertising spending is ' +
+                'associated with 0.0038% change in sales.'
             ],
             correctAnswerIndex: 1,
             correctFeedback: ' Yes! You are ' +
                 'correct because this is a log-linear regression.',
-            incorrectFeedback: ' Incorrect. Exact text TBD',
+            incorrectFeedback: {
+                0: <><span> Incorrect. You forgot to multiply{' '}
+                    <Katex tex={'\\hat{\\beta}'} />{' '}
+                    by 100, as we do in log-linear regressions.</span></>,
+                2: ' Incorrect. Because this is not a linear-log regression.',
+                3: ' Incorrect. Because this is not a log-log regression.'
+            },
             questionNumber: 14
         }
     },
@@ -198,25 +214,26 @@ export const QUIZ_DATA = {
                 'that best fits the relationship ' +
                 'between sales and CEO\'s salaries?',
             options: [
-                '1 unit change in sales is ' +
-                'associated with 171.77 unit ' +
-                'change in CEO\'s salaries.',
-                '1 unit change in sales is ' +
-                'associated with 0.043 unit ' +
-                'change in CEO\'s salaries.',
-                '1% change in sales is ' +
-                'associated with 171.77% change ' +
-                'in CEO\'s salaries.',
-                '1% change in sales is ' +
-                'associated with 1.717 unit ' +
-                'change in CEO\'s salaries.'
+                '1 unit change in sales is associated with 171.77 unit ' +
+                'change in CEO\'s salaries. 1 unit change in sales is ' +
+                'associated with 0.043 unit change in CEO\'s salaries.',
+                '1% change in sales is associated with 171.77% change ' +
+                'in CEO\'s salaries. 1% change in sales is ' +
+                'associated with 1.717 unit change in CEO\'s salaries.'
             ],
             correctAnswerIndex: 3,
             correctFeedback: ' Correct! This is ' +
                 'the better fit, because it is a ' +
                 'linear-log regression.',
-            incorrectFeedback: ' Incorrect. ' +
-                'Exact text TBD',
+            incorrectFeedback: {
+                0: ' No, because this it is not a linear-linear regression.',
+                1: <><span> No, because it is not a linear-linear regression
+                    and{' '}<Katex tex={'\\hat{\\beta}'} />{' '}
+                    is not 0.043.</span></>,
+                2: <><span> It would have been correct if you divided{' '}
+                    <Katex tex={'\\hat{\\beta}'} />{' '} by 100, as we do
+                    in linear-log regressions.</span></>,
+            },
             questionNumber: 16
         }
     },
@@ -257,7 +274,13 @@ export const QUIZ_DATA = {
             ],
             correctAnswerIndex: 1,
             correctFeedback: ' Correct! Exact text TBD',
-            incorrectFeedback: ' Incorrect. Exact text TBD',
+            incorrectFeedback: {
+                0: ' No, because this is a log-log regression, both Y and'
+                + ' X interpretations must be in percentage terms',
+                2: 'Exact text TBD',
+                3: 'No, because this is a log-log regression, both' +
+                'Y and X interpretations must be in percentage terms',
+            },
             questionNumber: 18
         }
     }

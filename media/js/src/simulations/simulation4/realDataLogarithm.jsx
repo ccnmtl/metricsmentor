@@ -256,6 +256,10 @@ export const RealDataLogarithm = ({
     const currentLabels = selectedGroup === 1
         ? LABELS_GROUP_1 : LABELS_GROUP_2;
 
+    const completedGroupCount = currentLabels.filter(
+        dType => completedDatasets.includes(dType[2])
+    ).length;
+
     return (
         <>
             <p>
@@ -350,6 +354,16 @@ export const RealDataLogarithm = ({
                     </h2>
                     <p>
                         Complete analysis on all three datasets in this group.
+                    </p>
+                    <p>
+                        Datasets completed in this group:{' '}
+                        <span className={
+                            completedGroupCount === 3
+                                ? 'text-success fw-bold'
+                                : 'fw-bold'
+                        }>
+                            {completedGroupCount} of 3
+                        </span>
                     </p>
                     <PromptBlock list={[
                         'Select a dataset to review',
