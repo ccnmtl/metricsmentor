@@ -65,7 +65,11 @@ export const QuizComponent = ({
                     setIsSubmitDisabled(true);
                     setFeedback(correctFeedback);
                 } else {
-                    setFeedback(incorrectFeedback);
+                    const fb = typeof incorrectFeedback === 'object'
+                        ? (incorrectFeedback[selectedOption]
+                            || 'Incorrect.')
+                        : incorrectFeedback;
+                    setFeedback(fb);
                 }
                 setIsCorrect(isAnswerCorrect);
                 const additionalData = {
@@ -141,7 +145,10 @@ QuizComponent.propTypes = {
     options: PropTypes.arrayOf(PropTypes.string).isRequired,
     correctAnswerIndex: PropTypes.number.isRequired,
     correctFeedback: PropTypes.string.isRequired,
-    incorrectFeedback: PropTypes.string.isRequired,
+    incorrectFeedback: PropTypes.oneOfType([
+        PropTypes.string,
+        PropTypes.objectOf(PropTypes.node)
+    ]).isRequired,
     submissionId: PropTypes.number.isRequired,
     questionNumber: PropTypes.number.isRequired,
     setIsCorrect: PropTypes.func.isRequired,
