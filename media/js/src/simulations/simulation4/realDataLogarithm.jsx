@@ -7,7 +7,8 @@ import PropTypes from 'prop-types';
 export const RealDataLogarithm = ({
     setShowDatasets, showDatasets,
     setCompareRegLine, compareRegLine,
-    setHighlightedFit, submissionId, setIsGroupComplete
+    setHighlightedFit, submissionId, setIsGroupComplete,
+    resetTrigger
 }) => {
 
     const [selectedGroup, setSelectedGroup] = useState(null);
@@ -15,6 +16,15 @@ export const RealDataLogarithm = ({
     const [selected, setSelected] = useState(null);
     const [openFit, setOpenFit] = useState({});
     const [completedDatasets, setCompletedDatasets] = useState([]);
+
+    useEffect(() => {
+        if (resetTrigger && resetTrigger > 0) {
+            setSelectedGroup(null);
+            setDatasetStarted(false);
+            setSelected(null);
+            setOpenFit({});
+        }
+    }, [resetTrigger]);
 
     const LABELS_GROUP_1 = [
         ['exports_tariffs', 'Effect of tariffs on exports', 0],
@@ -262,9 +272,9 @@ export const RealDataLogarithm = ({
 
     useEffect(() => {
         if (setIsGroupComplete) {
-            setIsGroupComplete(completedGroupCount === 3);
+            setIsGroupComplete(completedGroupCount === 3 && datasetStarted);
         }
-    }, [completedGroupCount, setIsGroupComplete]);
+    }, [completedGroupCount, datasetStarted, setIsGroupComplete]);
 
     return (
         <>
@@ -371,26 +381,6 @@ export const RealDataLogarithm = ({
                             {completedGroupCount} of 3
                         </span>
                     </p>
-                    {completedGroupCount === 3 && (
-                        <div className="d-flex gap-3 my-4">
-                            <button className="btn btn-outline-primary"
-                                onClick={() => {
-                                    setSelectedGroup(null);
-                                    setDatasetStarted(false);
-                                    setSelected(null);
-                                    setShowDatasets(
-                                        [false, false, false,
-                                            false, false, false]
-                                    );
-                                    setCompareRegLine([]);
-                                    if (setHighlightedFit) {
-                                        setHighlightedFit('');
-                                    }
-                                }}>
-                                Try another Group &raquo;
-                            </button>
-                        </div>
-                    )}
                     <PromptBlock list={[
                         'Select a dataset to review',
                         'Compare the data plots and resulting regressions ' +
@@ -470,13 +460,21 @@ export const RealDataLogarithm = ({
                                             submissionId={submissionId}
                                             onComplete={handleComplete}
                                             onAnalyzeAnother={
-                                                handleAnalyzeAnother} />
+                                                handleAnalyzeAnother}
+                                            isLastDataset={
+                                                completedGroupCount >= 3}
+                                        />
                                     </div>
                                 )}
                             </li>
                         ))}
                     </ul>
-                    <p>Have you completed all three datatsets in this group?</p>
+                    {completedGroupCount === 3 && (
+                        <p className="text-success fw-bold">
+                            You have completed all datasets in
+                            Group {selectedGroup}!
+                        </p>
+                    )}
                 </>
             )}
         </>
@@ -492,5 +490,6 @@ RealDataLogarithm.propTypes = {
     ).isRequired,
     setHighlightedFit: PropTypes.func,
     submissionId: PropTypes.number,
-    setIsGroupComplete: PropTypes.func
+    setIsGroupComplete: PropTypes.func,
+    resetTrigger: PropTypes.number
 };

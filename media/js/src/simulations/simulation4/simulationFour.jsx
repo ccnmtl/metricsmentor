@@ -39,6 +39,16 @@ export const SimulationFour = () => {
     const initialized = useRef(false);
     const handleStage = (e) => setStage(parseInt(e.target.value));
 
+    const [logGroupKey, setLogGroupKey] = useState(0);
+
+    const handleLogGroupReset = () => {
+        setShowLogDatasets([false, false, false, false, false, false]);
+        setLogCompareRegLine([]);
+        setHighlightedFit('');
+        setIsLogGroupComplete(false);
+        setLogGroupKey(prev => prev + 1);
+    };
+
     useEffect(() => {
         // Reset selected elements and graphs when switching stages
         setSelectedModel('');
@@ -221,6 +231,7 @@ export const SimulationFour = () => {
                 content: <>
                     {progress[stage] === 1 && (
                         <RealDataLogarithm
+                            resetTrigger={logGroupKey}
                             setShowDatasets={setShowLogDatasets}
                             showDatasets={showLogDatasets}
                             setCompareRegLine={setLogCompareRegLine}
@@ -237,7 +248,15 @@ export const SimulationFour = () => {
                         continueLabel="Continue »"
                         reviewLabel="Review »"
                         progressNumber={2}
-                    />}
+                    >
+                        <div className="simulation__step-prompt">
+                            <button
+                                className="btn btn-sm btn-outline-primary"
+                                onClick={handleLogGroupReset}>
+                                Try another Group &raquo;
+                            </button>
+                        </div>
+                    </StepProgressButton>}
                 </>
             }]
             : []),
@@ -248,6 +267,10 @@ export const SimulationFour = () => {
                 content: (
                     <LogarithmTakeaway
                         submissionId={submissionId}
+                        setProgress={setProgress}
+                        progress={progress}
+                        stage={stage}
+                        coursePk={coursePk}
                     />
                 )
             }]

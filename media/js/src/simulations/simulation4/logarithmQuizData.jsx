@@ -157,8 +157,11 @@ export const QUIZ_DATA = {
             correctAnswerIndex: 1,
             correctFeedback: ' Correct! This is the better fit, because the ' +
                 'regression represents the observations more closely.',
-            incorrectFeedback: ' Incorrect. This is not the correct answer, ' +
+            incorrectFeedback: {
+                0: ' Incorrect. This is not the correct answer, ' +
                 'because the regression does not represent the observations.',
+                2: ' Incorrect. TBD'
+            },
             questionNumber: 13
         },
         q2: {
@@ -202,29 +205,30 @@ export const QUIZ_DATA = {
             options: ['Regression A', 'Regression B', 'Both'],
             correctAnswerIndex: 0,
             correctFeedback: ' Correct! Exact text TBD',
-            incorrectFeedback: ' Incorrect. This ' +
-                'is not the correct answer, because' +
-                ' the regression does not represent' +
-                ' the observations.',
+            incorrectFeedback: {
+                1: ' Incorrect. This is not the correct answer, ' +
+                'because the regression does not represent the observations.',
+                2: ' Incorrect. TBD'
+            },
             questionNumber: 15
         },
         q2: {
-            question: 'Which interpretation ' +
-                'correctly explains the regression ' +
-                'that best fits the relationship ' +
+            question: 'Which interpretation correctly explains the regression '
+                + 'that best fits the relationship ' +
                 'between sales and CEO\'s salaries?',
             options: [
                 '1 unit change in sales is associated with 171.77 unit ' +
-                'change in CEO\'s salaries. 1 unit change in sales is ' +
-                'associated with 0.043 unit change in CEO\'s salaries.',
+                'change in CEO\'s salaries.',
+                ' 1 unit change in sales is associated with 0.043 unit ' +
+                'change in CEO\'s salaries.',
                 '1% change in sales is associated with 171.77% change ' +
-                'in CEO\'s salaries. 1% change in sales is ' +
-                'associated with 1.717 unit change in CEO\'s salaries.'
+                'in CEO\'s salaries.',
+                '1% change in sales is associated with 1.717 unit change ' +
+                'in CEO\'s salaries.'
             ],
             correctAnswerIndex: 3,
-            correctFeedback: ' Correct! This is ' +
-                'the better fit, because it is a ' +
-                'linear-log regression.',
+            correctFeedback: ' Correct! This is the better fit, because it ' +
+            'is a linear-log regression.',
             incorrectFeedback: {
                 0: ' No, because this it is not a linear-linear regression.',
                 1: <><span> No, because it is not a linear-linear regression
@@ -287,7 +291,7 @@ export const QUIZ_DATA = {
 };
 
 export const LogarithmQuizzes = ({
-    datasetIdx, submissionId, onComplete, onAnalyzeAnother
+    datasetIdx, submissionId, onComplete, onAnalyzeAnother, isLastDataset
 }) => {
     const [selectedOption, setSelectedOption] = useState(null);
     const [selectedOption2, setSelectedOption2] = useState(null);
@@ -340,11 +344,13 @@ export const LogarithmQuizzes = ({
                     <p className="text-success fw-bold">
                         You&apos;ve completed the analysis of this dataset.
                     </p>
-                    <button
-                        className="btn btn-outline-primary mt-2"
-                        onClick={onAnalyzeAnother}>
-                        Analyze another dataset
-                    </button>
+                    {!isLastDataset && (
+                        <button
+                            className="btn btn-outline-primary mt-2"
+                            onClick={onAnalyzeAnother}>
+                            Analyze another dataset
+                        </button>
+                    )}
                 </div>)}
         </div>
     );
@@ -354,5 +360,6 @@ LogarithmQuizzes.propTypes = {
     datasetIdx: PropTypes.number.isRequired,
     submissionId: PropTypes.number,
     onComplete: PropTypes.func,
-    onAnalyzeAnother: PropTypes.func
+    onAnalyzeAnother: PropTypes.func,
+    isLastDataset: PropTypes.bool
 };
