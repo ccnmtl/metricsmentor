@@ -241,22 +241,25 @@ export const SimulationFour = () => {
                             setIsGroupComplete={setIsLogGroupComplete}
                         />
                     )}
-                    {isLogGroupComplete && <StepProgressButton
-                        progress={progress}
-                        stage={stage}
-                        setProgress={setProgress}
-                        continueLabel="Continue »"
-                        reviewLabel="Review »"
-                        progressNumber={2}
-                    >
-                        <div className="simulation__step-prompt">
+                    {isLogGroupComplete && (
+                        <div className="simulation__step-prompt d-flex
+                            align-items-center justify-content-center gap-2">
                             <button
-                                className="btn btn-sm btn-outline-primary"
+                                className="btn btn-sm btn-success"
                                 onClick={handleLogGroupReset}>
                                 Try another Group &raquo;
                             </button>
+                            <span>or</span>
+                            <StepProgressButton
+                                progress={progress}
+                                stage={stage}
+                                setProgress={setProgress}
+                                continueLabel="Continue »"
+                                reviewLabel="Review »"
+                                progressNumber={2}
+                            />
                         </div>
-                    </StepProgressButton>}
+                    )}
                 </>
             }]
             : []),
