@@ -11,6 +11,7 @@ import { RealDataPolynomials } from './realDataPolynomials';
 import { RealDataLogarithm } from './realDataLogarithm';
 import { StepProgressButton } from '../../StepProgressButton';
 import { PolynomialTakeaway } from './polynomialTakeaway';
+import { LogarithmTakeaway } from './logarithmTakeaway';
 import { CLEARREG, showOne } from './polyUtils';
 
 const coursePk = getCoursePk();
@@ -31,11 +32,22 @@ export const SimulationFour = () => {
     const [showLogDatasets, setShowLogDatasets] = useState(
         [false, false, false, false, false, false]);
     const [highlightedFit, setHighlightedFit] = useState('');
+    const [isLogGroupComplete, setIsLogGroupComplete] = useState(false);
 
     const quizComplete = () => !isCorrect.includes(false);
 
     const initialized = useRef(false);
     const handleStage = (e) => setStage(parseInt(e.target.value));
+
+    const [logGroupKey, setLogGroupKey] = useState(0);
+
+    const handleLogGroupReset = () => {
+        setShowLogDatasets([false, false, false, false, false, false]);
+        setLogCompareRegLine([]);
+        setHighlightedFit('');
+        setIsLogGroupComplete(false);
+        setLogGroupKey(prev => prev + 1);
+    };
 
     useEffect(() => {
         // Reset selected elements and graphs when switching stages
@@ -219,23 +231,48 @@ export const SimulationFour = () => {
                 content: <>
                     {progress[stage] === 1 && (
                         <RealDataLogarithm
+                            resetTrigger={logGroupKey}
                             setShowDatasets={setShowLogDatasets}
                             showDatasets={showLogDatasets}
                             setCompareRegLine={setLogCompareRegLine}
                             compareRegLine={logCompareRegLine}
                             setHighlightedFit={setHighlightedFit}
                             submissionId={submissionId}
+                            setIsGroupComplete={setIsLogGroupComplete}
                         />
                     )}
-                    {/* <StepProgressButton
+                    {isLogGroupComplete && <StepProgressButton
                         progress={progress}
                         stage={stage}
                         setProgress={setProgress}
                         continueLabel="Continue »"
                         reviewLabel="Review »"
                         progressNumber={2}
-                    /> */}
+                    >
+                        <div className="simulation__step-prompt">
+                            <button
+                                className="btn btn-sm btn-outline-primary"
+                                onClick={handleLogGroupReset}>
+                                Try another Group &raquo;
+                            </button>
+                        </div>
+                    </StepProgressButton>}
                 </>
+            }]
+            : []),
+        ...(progress[stage] > 1
+            ? [{
+                headerId: 'takeAway2',
+                title: 'Takeaway questions',
+                content: (
+                    <LogarithmTakeaway
+                        submissionId={submissionId}
+                        setProgress={setProgress}
+                        progress={progress}
+                        stage={stage}
+                        coursePk={coursePk}
+                    />
+                )
             }]
             : [])
     ];

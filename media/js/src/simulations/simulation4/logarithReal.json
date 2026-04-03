@@ -589,8 +589,8 @@
                 30.048062170651697
             ]
         },
-        "bordercolor": "#e89e47",
-        "fillcolor": "#e89e47",
+        "bordercolor": "blue",
+        "fillcolor": "teal",
         "symbol": "circle"
     },
     "gdp_life_exp": {
@@ -1447,8 +1447,8 @@
                 4.504779583056589
             ]
         },
-        "bordercolor": "#e89e47",
-        "fillcolor": "#e89e47",
+        "bordercolor": "blue",
+        "fillcolor": "teal",
         "symbol": "circle"
     },
     "gdp_co2": {
@@ -2253,8 +2253,8 @@
                 5.169393281922761
             ]
         },
-        "bordercolor": "#e89e47",
-        "fillcolor": "#e89e47",
+        "bordercolor": "blue",
+        "fillcolor": "teal",
         "symbol": "circle"
     },
     "advertising": {
@@ -3131,8 +3131,8 @@
                 3.5784201896801884
             ]
         },
-        "bordercolor": "#e89e47",
-        "fillcolor": "#e89e47",
+        "bordercolor": "blue",
+        "fillcolor": "teal",
         "symbol": "circle"
     },
     "ceosal2": {
@@ -3913,8 +3913,8 @@
                 8.972283724143228
             ]
         },
-        "bordercolor": "#e89e47",
-        "fillcolor": "#e89e47",
+        "bordercolor": "blue",
+        "fillcolor": "teal",
         "symbol": "circle"
     },
     "houseprice": {
@@ -4391,8 +4391,8 @@
                 13.00916370895255
             ]
         },
-        "bordercolor": "#e89e47",
-        "fillcolor": "#e89e47",
+        "bordercolor": "blue",
+        "fillcolor": "teal",
         "symbol": "circle"
     }
 }

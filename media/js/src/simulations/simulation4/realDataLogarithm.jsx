@@ -7,7 +7,8 @@ import PropTypes from 'prop-types';
 export const RealDataLogarithm = ({
     setShowDatasets, showDatasets,
     setCompareRegLine, compareRegLine,
-    setHighlightedFit, submissionId
+    setHighlightedFit, submissionId, setIsGroupComplete,
+    resetTrigger
 }) => {
 
     const [selectedGroup, setSelectedGroup] = useState(null);
@@ -15,6 +16,15 @@ export const RealDataLogarithm = ({
     const [selected, setSelected] = useState(null);
     const [openFit, setOpenFit] = useState({});
     const [completedDatasets, setCompletedDatasets] = useState([]);
+
+    useEffect(() => {
+        if (resetTrigger && resetTrigger > 0) {
+            setSelectedGroup(null);
+            setDatasetStarted(false);
+            setSelected(null);
+            setOpenFit({});
+        }
+    }, [resetTrigger]);
 
     const LABELS_GROUP_1 = [
         ['exports_tariffs', 'Effect of tariffs on exports', 0],
@@ -260,6 +270,12 @@ export const RealDataLogarithm = ({
         dType => completedDatasets.includes(dType[2])
     ).length;
 
+    useEffect(() => {
+        if (setIsGroupComplete) {
+            setIsGroupComplete(completedGroupCount === 3 && datasetStarted);
+        }
+    }, [completedGroupCount, datasetStarted, setIsGroupComplete]);
+
     return (
         <>
             <p>
@@ -444,12 +460,21 @@ export const RealDataLogarithm = ({
                                             submissionId={submissionId}
                                             onComplete={handleComplete}
                                             onAnalyzeAnother={
-                                                handleAnalyzeAnother} />
+                                                handleAnalyzeAnother}
+                                            isLastDataset={
+                                                completedGroupCount >= 3}
+                                        />
                                     </div>
                                 )}
                             </li>
                         ))}
                     </ul>
+                    {completedGroupCount === 3 && (
+                        <p className="text-success fw-bold">
+                            You have completed all datasets in
+                            Group {selectedGroup}!
+                        </p>
+                    )}
                 </>
             )}
         </>
@@ -464,5 +489,7 @@ RealDataLogarithm.propTypes = {
         PropTypes.string
     ).isRequired,
     setHighlightedFit: PropTypes.func,
-    submissionId: PropTypes.number
+    submissionId: PropTypes.number,
+    setIsGroupComplete: PropTypes.func,
+    resetTrigger: PropTypes.number
 };
