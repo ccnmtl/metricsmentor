@@ -3,6 +3,7 @@ import { PromptBlock } from '../../PromptBlock';
 import { Katex } from '../../utils/katexComponent';
 import { LogarithmQuizzes } from './logarithmQuizData';
 import PropTypes from 'prop-types';
+import { scrollTo } from '../../utils/utils';
 
 export const RealDataLogarithm = ({
     setShowDatasets, showDatasets,
@@ -295,9 +296,20 @@ export const RealDataLogarithm = ({
         }
     }, [completedGroupCount, datasetStarted, setIsGroupComplete]);
 
+    useEffect(() => {
+        scrollTo('startRealDataLog');
+    }, []);
+
+    useEffect(() => {
+        if (selectedGroup) {
+            console.log(selectedGroup);
+            scrollTo(`group-${selectedGroup}-header`);
+        }
+    }, [datasetStarted]);
+
     return (
         <>
-            <p>
+            <p id="startRealDataLog">
                 Let&rsquo;s apply what you&rsquo;ve learned about logarithm
                 regressions using real-world datasets.
             </p>
@@ -384,7 +396,7 @@ export const RealDataLogarithm = ({
             {datasetStarted && selectedGroup !== null && (
                 <>
                     <hr className="my-4" />
-                    <h2>
+                    <h2 id={`group-${selectedGroup}-header`}>
                         Group {selectedGroup}:
                     </h2>
                     <p>

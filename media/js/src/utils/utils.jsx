@@ -272,3 +272,10 @@ export const toggleVisibility = async(coursePk, simulationId) => {
         return { status: 'error' };
     }
 };
+
+export const scrollTo = (id) => {
+    const el = document.getElementById(id);
+    if (el) {
+        el.scrollIntoView({behavior: 'smooth'});
+    }
+};
