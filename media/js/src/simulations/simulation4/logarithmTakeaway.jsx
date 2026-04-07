@@ -69,7 +69,7 @@ export const LogarithmTakeaway = ({
                     index: 'D',
                     text: <>
                         {inlineKatex('100xbeta1%')} change in education is
-                        associated with a {inlineKatex('$100')} change in
+                        associated with a $100 change in
                         salary
                     </>,
                     isCorrect: false,
