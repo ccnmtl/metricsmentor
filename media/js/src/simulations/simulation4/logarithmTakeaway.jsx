@@ -2,6 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { TakeawayQuestion } from '../../TakeawayQuestion';
 import PropTypes from 'prop-types';
 import { inlineKatex } from '../../utils/utils';
+import { Link } from 'react-router-dom';
 
 export const LogarithmTakeaway = ({
     submissionId, setProgress, progress, stage, coursePk
@@ -292,6 +293,11 @@ export const LogarithmTakeaway = ({
                         You&rsquo;ve successfully completed Logarithms!<br />
                         &#127881; &#127881; &#127881;
                     </div>
+                    <Link to={`/course/${coursePk}/simulations/`}
+                        data-cy="finish-to-dashboard"
+                        className="btn btn-success">
+                        Back to Dashboard
+                    </Link>
                 </>
             )}
         </div>
