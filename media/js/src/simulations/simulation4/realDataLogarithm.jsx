@@ -147,83 +147,102 @@ export const RealDataLogarithm = ({
 
     const REG_FORMULAS = {
         exports_tariffs: {
-            logLinearFit: '\\widehat{log_exports} = 25.65 - 0.31tariffs',
+            logLinearFit: '\\widehat{log\\_exports} = 25.65 - 0.31tariffs',
             linearFit: '\\widehat{exports} = 368,000,000,000' +
             ' - 30,900,000,000tariffs'
         },
         gdp_life_exp: {
-            linearFit: '\\widehat{life_expect} = 5.57 + 0.0025gdp_cap',
-            linearLogFit: '\\widehat{life_expect} = 1.03 + 4.16log(gdp_cap)'
+            linearFit: '\\widehat{life\\_expect} = 5.57 + 0.0025gdp\\_cap',
+            linearLogFit: '\\widehat{life\\_expect} = 1.03 + 4.16log(gdp\\_cap)'
         },
         gdp_co2: {
-            logLogFit: '\\widehat{log_co2_pop} = -6.277863 + 0.7807log_gdp_cap',
-            linearFit: '\\widehat{co2_pop} = 2.6697 + 0.0001019gdp_cap'
+            logLogFit: '\\widehat{log\\_co2\\_pop} = -6.277863 + ' +
+                '0.7807log\\_gdp\\_cap',
+            linearFit: '\\widehat{co2_pop} = 2.6697 + 0.0001019gdp\\_cap'
         },
         advertising: {
             linearFit: '\\widehat{Sales} = 7.03 + 0.05tv',
             logLinearFit: '\\widehat{log(Sales)} = 2.01 + 0.0038tv'
         },
         ceosal2: {
-            linearLogFit: '\\widehat{CEO Salary} = -379.23 + 171.77log(Sales)',
+            linearLogFit: '\\widehat{CEO Salary} = -379.23 + 171.77 * ' +
+                'ln(Sales)',
             linearFit: '\\widehat{CEOSalary} = 717.63 + 0.043Sales'
         },
         houseprice: {
-            logLogFit: '\\widehat{log(SalePrice)} = 6.58 + 0.75log(HouseArea)',
+            logLogFit: '\\widehat{log(SalePrice)} = 6.58 + 0.75ln(HouseArea)',
             linearFit: '\\widehat{SalePrice} = 65240.89 + 72.23HouseArea'
         }
     };
 
     const REG_INTERPRETATIONS = {
         exports_tariffs: {
-            logLinearFit: '',
-            linearFit: ''
+            logLinearFit: 'One percentage point increase in tariffs is ' +
+                'associated with a 31% (0.31 ⨉ 100) decrease in exports',
+            linearFit: 'Lorem ipsum sit amet...'
         },
         gdp_life_exp: {
-            linearFit: '',
-            linearLogFit: ''
+            linearFit: 'Lorem ipsum sit amet...',
+            linearLogFit: '1% change in GDP per capita is associated with ' +
+                '0.0416 (4.16/100) years increase in life-expectancy (or 10% ' +
+                'in GDP per capita is associated with 0.416 years increase ' +
+                'in life-expectancy)'
         },
         gdp_co2: {
-            logLogFit: '',
-            linearFit: ''
+            logLogFit: 'A 1% change in GDP per capita is associated with a ' +
+                '0.78% change in CO2 emissions per capita. This is also the ' +
+                'income elasticity of CO2 emissions.',
+            linearFit: 'Lorem ipsum sit amet...'
         },
         advertising: {
-            linearFit: '',
-            logLinearFit: ''
+            linearFit: 'Lorem ipsum sit amet...',
+            logLinearFit: 'Regressing money spent on TV advertising on sales ' +
+                'fails to capture the upscaling-effects of investing in TV, ' +
+                'where market sizes magnify investments to have a ' +
+                'percentage-increase effect on overall sales.'
         },
         ceosal2: {
-            linearLogFit: '',
-            linearFit: ''
+            linearLogFit: 'While we expect a CEO’s salary to grow ' +
+                'proportional to sales of their firm, it is unlikely that ' +
+                'such a growth is linear (i.e. that doubling a firm’s sales ' +
+                'would double its CEO’s salary). A linear-log regression ' +
+                'reflects that as a firm scales up its operations, growth of ' +
+                'CEO compensation tends to slow down in proportion to sales ' +
+                ' growth as firms increase in size.',
+            linearFit: 'Lorem ipsum sit amet...'
         },
         houseprice: {
-            logLogFit: '',
-            linearFit: ''
+            logLogFit: 'Logically, we’d expect that a percentage increase in ' +
+                'housing space to be associated with a percentage increase ' +
+                'in housing value.',
+            linearFit: 'Lorem ipsum sit amet...'
         }
     };
 
     const REG_NOTES = {
         exports_tariffs: {
-            logLinearFit: '',
-            linearFit: ''
+            logLinearFit: 'Lorem ipsum sit amet...',
+            linearFit: 'Lorem ipsum sit amet...'
         },
         gdp_life_exp: {
-            linearFit: '',
-            linearLogFit: ''
+            linearFit: 'Lorem ipsum sit amet...',
+            linearLogFit: 'Lorem ipsum sit amet...'
         },
         gdp_co2: {
-            logLogFit: '',
-            linearFit: ''
+            logLogFit: 'Lorem ipsum sit amet...',
+            linearFit: 'Lorem ipsum sit amet...'
         },
         advertising: {
-            linearFit: '',
-            logLinearFit: ''
+            linearFit: 'Lorem ipsum sit amet...',
+            logLinearFit: 'Lorem ipsum sit amet...'
         },
         ceosal2: {
-            linearLogFit: '',
-            linearFit: ''
+            linearLogFit: 'Lorem ipsum sit amet...',
+            linearFit: 'Lorem ipsum sit amet...'
         },
         houseprice: {
-            logLogFit: '',
-            linearFit: ''
+            logLogFit: 'Lorem ipsum sit amet...',
+            linearFit: 'Lorem ipsum sit amet...'
         }
     };
 
