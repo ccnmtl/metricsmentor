@@ -45,7 +45,6 @@ export const SimulationFour = () => {
         setShowLogDatasets([false, false, false, false, false, false]);
         setLogCompareRegLine([]);
         setHighlightedFit('');
-        setIsLogGroupComplete(false);
         setLogGroupKey(prev => prev + 1);
     };
 
@@ -238,12 +237,14 @@ export const SimulationFour = () => {
                             compareRegLine={logCompareRegLine}
                             setHighlightedFit={setHighlightedFit}
                             submissionId={submissionId}
+                            isGroupComplete={isLogGroupComplete}
                             setIsGroupComplete={setIsLogGroupComplete}
                         />
                     )}
                     {isLogGroupComplete && (
-                        <div className="simulation__step-prompt d-flex
-                            align-items-center justify-content-center gap-2">
+                        <div className="simulation__step-prompt d-flex p-2 mt-2
+                            align-items-center justify-content-center gap-2
+                            bg-warning rounded">
                             <button
                                 className="btn btn-sm btn-success"
                                 onClick={handleLogGroupReset}>
