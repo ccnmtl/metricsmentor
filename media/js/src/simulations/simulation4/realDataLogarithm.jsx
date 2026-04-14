@@ -153,26 +153,28 @@ export const RealDataLogarithm = ({
             ' - 30,900,000,000tariffs'
         },
         gdp_life_exp: {
-            linearFit: '\\widehat{life\\_expect} = 5.57 + 0.0025gdp\\_cap',
-            linearLogFit: '\\widehat{life\\_expect} = 1.03 + 4.16log(gdp\\_cap)'
+            linearFit: '\\widehat{life\\_expect} = 70.41 + 0.00015gdp\\_cap',
+            linearLogFit: '\\widehat{life\\_expect} = 36.06 + ' +
+                '4.16\\ln(gdp\\_cap)'
         },
         gdp_co2: {
-            logLogFit: '\\widehat{log\\_co2\\_pop} = -6.277863 + ' +
-                '0.7807log\\_gdp\\_cap',
-            linearFit: '\\widehat{co2_pop} = 2.6697 + 0.0001019gdp\\_cap'
+            logLogFit: '\\widehat{\\ln(co2\\_pop)} = -6.277863 + ' +
+                '0.7807\\ln(gdp\\_cap)',
+            linearFit: '\\widehat{co2\\_pop} = 2.6697 + 0.0001019gdp\\_cap'
         },
         advertising: {
-            linearFit: '\\widehat{Sales} = 7.03 + 0.05tv',
-            logLinearFit: '\\widehat{log(Sales)} = 2.01 + 0.0038tv'
+            linearFit: '\\widehat{sales} = 7.03 + 0.05tv\\_ads',
+            logLinearFit: '\\widehat{\\ln(sales)} = 2.01 + 0.0038tv\\_ads'
         },
         ceosal2: {
-            linearLogFit: '\\widehat{CEO Salary} = -379.23 + 171.77 * ' +
-                'ln(Sales)',
-            linearFit: '\\widehat{CEOSalary} = 717.63 + 0.043Sales'
+            linearLogFit: '\\widehat{CEO\\_salary} = -379.23 + ' +
+                '171.77\\ln(sales)',
+            linearFit: '\\widehat{CEO\\_salary} = 717.63 + 0.043sales'
         },
         houseprice: {
-            logLogFit: '\\widehat{log(SalePrice)} = 6.58 + 0.75ln(HouseArea)',
-            linearFit: '\\widehat{SalePrice} = 65240.89 + 72.23HouseArea'
+            logLogFit: '\\widehat{\\ln(salePrice)} = 6.58 + ' +
+                '0.75\\ln(livingArea)',
+            linearFit: '\\widehat{salePrice} = 65240.89 + 72.23livingArea'
         }
     };
 
