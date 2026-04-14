@@ -60,8 +60,8 @@ export const LogarithmGraph = ({
         let lineX = [], lineY = [];
         let xAxisType = 'linear';
         let yAxisType = 'linear';
-        let xAxisTitle = 'X';
-        let yAxisTitle = 'Y';
+        let xAxisTitle = model.xLabel || 'X';
+        let yAxisTitle = model.yLabel || 'Y';
         let intercept = 0;
         let slope = 0;
 
@@ -82,7 +82,7 @@ export const LogarithmGraph = ({
             lineX = [Math.min(...x), Math.max(...x)];
             lineY = lineX.map(xi => intercept + slope * xi);
             yAxisType = 'linear';
-            yAxisTitle = 'ln(Y)';
+            yAxisTitle = model.lnYLabel || 'ln(Y)';
             break;
         case 'linearLogFit':
             // Linear-log: ln(X) vs Y
@@ -91,7 +91,7 @@ export const LogarithmGraph = ({
             lineX = [Math.min(...plotX), Math.max(...plotX)];
             lineY = lineX.map(xi => intercept + slope * xi);
             xAxisType = 'linear';
-            xAxisTitle = 'ln(X)';
+            xAxisTitle = model.lnXLabel || 'ln(X)';
             break;
         case 'logLogFit':
             // Log-log: ln(X) vs ln(Y)
@@ -101,8 +101,8 @@ export const LogarithmGraph = ({
             lineY = lineX.map(xi => intercept + slope * xi);
             xAxisType = 'linear';
             yAxisType = 'linear';
-            xAxisTitle = 'ln(X)';
-            yAxisTitle = 'ln(Y)';
+            xAxisTitle = model.lnXLabel || 'ln(X)';
+            yAxisTitle = model.lnYLabel || 'ln(Y)';
             break;
         default:
             lineX = [Math.min(...x), Math.max(...x)];

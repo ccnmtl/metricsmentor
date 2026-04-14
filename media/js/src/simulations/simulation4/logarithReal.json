@@ -35,7 +35,11 @@
         }, 
         "bordercolor": "blue",
         "fillcolor": "teal",
-        "symbol": "circle"
+        "symbol": "circle",
+        "xLabel": "Tariff rate (%)",
+        "yLabel": "Exports ($)",
+        "lnXLabel": "ln(Tariff rate (%))",
+        "lnYLabel": "ln(Exports)"
     },
     "gdp_life_exp": {
         "title": "Effect of average income level of countries (GDP per capita) on their population\u2019s life expectancy",
@@ -73,7 +77,11 @@
         }, 
         "bordercolor": "blue",
         "fillcolor": "teal",
-        "symbol": "circle"
+        "symbol": "circle",
+        "xLabel": "GDP per capita ($)",
+        "yLabel": "Life expectancy (years)",
+        "lnXLabel": "ln(GDP per capita)",
+        "lnYLabel": "ln(Life expectancy)"
     },
     "gdp_co2": {
         "title": "Effect of average income level of a country (GDP per capita) on CO2 emission per capita",
@@ -111,7 +119,11 @@
         }, 
         "bordercolor": "blue",
         "fillcolor": "teal",
-        "symbol": "circle"
+        "symbol": "circle",
+        "xLabel": "GDP per capita ($)",
+        "yLabel": "CO2 emissions per capita (tonnes)",
+        "lnXLabel": "ln(GDP per capita)",
+        "lnYLabel": "ln(CO2 emissions per capita)"
     },
     "advertising": {
         "title": "Advertising (Sales vs TV)",
@@ -149,7 +161,11 @@
         }, 
         "bordercolor": "blue",
         "fillcolor": "teal",
-        "symbol": "circle"
+        "symbol": "circle",
+        "xLabel": "TV ad spending  ($1000)",
+        "yLabel": "Sales (1000 units)",
+        "lnXLabel": "ln(TV ad spending)",
+        "lnYLabel": "ln(Sales)"
     },
     "ceosal2": {
         "title": "CEO Salary vs Sales",
@@ -187,7 +203,11 @@
         }, 
         "bordercolor": "blue",
         "fillcolor": "teal",
-        "symbol": "circle"
+        "symbol": "circle",
+        "xLabel": "Firm Sales ($1 million)",
+        "yLabel": "CEO Salary ($1000)",
+        "lnXLabel": "ln(Firm Sales)",
+        "lnYLabel": "ln(CEO Salary)"
     },
     "houseprice": {
         "title": "House Price vs Area",
@@ -225,6 +245,10 @@
         }, 
         "bordercolor": "blue",
         "fillcolor": "teal",
-        "symbol": "circle"
+        "symbol": "circle",
+        "xLabel": "Living Area (Square ft)",
+        "yLabel": "Sale price ($)",
+        "lnXLabel": "ln(Living Area)",
+        "lnYLabel": "ln(Sale price)"
     }
 }
