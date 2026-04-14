@@ -1,6 +1,6 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
-import { saveAnswer, getCoursePk } from './utils/utils';
+import { saveAnswer, getCoursePk, scrollTo } from './utils/utils';
 
 export const TakeawayQuestion = ({
     questionId, questionText, choices, onCorrect, submissionId
@@ -35,6 +35,10 @@ export const TakeawayQuestion = ({
             if (onCorrect) onCorrect();
         }
     };
+
+    useEffect(() => {
+        scrollTo(`${questionId}group`);
+    }, []);
 
     return (
         <div
