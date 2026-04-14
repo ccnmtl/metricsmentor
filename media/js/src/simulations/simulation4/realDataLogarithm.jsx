@@ -24,6 +24,7 @@ export const RealDataLogarithm = ({
             setDatasetStarted(false);
             setSelected(null);
             setOpenFit({});
+            setCompletedDatasets([]);
         }
     }, [resetTrigger]);
 
