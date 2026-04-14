@@ -148,102 +148,157 @@ export const RealDataLogarithm = ({
 
     const REG_FORMULAS = {
         exports_tariffs: {
-            logLinearFit: '\\widehat{log\\_exports} = 25.65 - 0.31tariffs',
+            logLinearFit: '\\widehat{\\ln(exports)} = 25.65 - 0.31tariffs',
             linearFit: '\\widehat{exports} = 368,000,000,000' +
             ' - 30,900,000,000tariffs'
         },
         gdp_life_exp: {
-            linearFit: '\\widehat{life\\_expect} = 5.57 + 0.0025gdp\\_cap',
-            linearLogFit: '\\widehat{life\\_expect} = 1.03 + 4.16log(gdp\\_cap)'
+            linearFit: '\\widehat{life\\_expect} = 70.41 + 0.00015gdp\\_cap',
+            linearLogFit: '\\widehat{life\\_expect} = 36.06 + ' +
+                '4.16\\ln(gdp\\_cap)'
         },
         gdp_co2: {
-            logLogFit: '\\widehat{log\\_co2\\_pop} = -6.277863 + ' +
-                '0.7807log\\_gdp\\_cap',
-            linearFit: '\\widehat{co2_pop} = 2.6697 + 0.0001019gdp\\_cap'
+            logLogFit: '\\widehat{\\ln(co2\\_pop)} = -6.277863 + ' +
+                '0.7807\\ln(gdp\\_cap)',
+            linearFit: '\\widehat{co2\\_pop} = 2.6697 + 0.0001019gdp\\_cap'
         },
         advertising: {
-            linearFit: '\\widehat{Sales} = 7.03 + 0.05tv',
-            logLinearFit: '\\widehat{log(Sales)} = 2.01 + 0.0038tv'
+            linearFit: '\\widehat{sales} = 7.03 + 0.05tv\\_ads',
+            logLinearFit: '\\widehat{\\ln(sales)} = 2.01 + 0.0038tv\\_ads'
         },
         ceosal2: {
-            linearLogFit: '\\widehat{CEO Salary} = -379.23 + 171.77 * ' +
-                'ln(Sales)',
-            linearFit: '\\widehat{CEOSalary} = 717.63 + 0.043Sales'
+            linearLogFit: '\\widehat{CEO\\_salary} = -379.23 + ' +
+                '171.77\\ln(sales)',
+            linearFit: '\\widehat{CEO\\_salary} = 717.63 + 0.043sales'
         },
         houseprice: {
-            logLogFit: '\\widehat{log(SalePrice)} = 6.58 + 0.75ln(HouseArea)',
-            linearFit: '\\widehat{SalePrice} = 65240.89 + 72.23HouseArea'
+            logLogFit: '\\widehat{\\ln(salePrice)} = 6.58 + ' +
+                '0.75\\ln(livingArea)',
+            linearFit: '\\widehat{salePrice} = 65240.89 + 72.23livingArea'
         }
     };
 
     const REG_INTERPRETATIONS = {
         exports_tariffs: {
-            logLinearFit: 'One percentage point increase in tariffs is ' +
-                'associated with a 31% (0.31 ⨉ 100) decrease in exports',
-            linearFit: 'Lorem ipsum sit amet...'
+            logLinearFit: 'Consider how changes in tariffs are associated ' +
+            'with changes in exports as reflected in the regression ' +
+            'equation, and what this reveals about the rate and type of ' +
+            'relationship between the two variables.',
+            linearFit: 'Observe how changes in tariffs are associated ' +
+            'with changes in exports as in the regression ' +
+            'equation, and what this reveals about the rate and type of ' +
+            'relationship between them.'
         },
         gdp_life_exp: {
-            linearFit: 'Lorem ipsum sit amet...',
-            linearLogFit: '1% change in GDP per capita is associated with ' +
-                '0.0416 (4.16/100) years increase in life-expectancy (or 10% ' +
-                'in GDP per capita is associated with 0.416 years increase ' +
-                'in life-expectancy)'
+            linearFit: 'See how changes in GDP per capita are associated ' +
+            'with changes in life expectancy as in the regression ' +
+            'equation, and what this reveals about the rate and type of ' +
+            'relationship between them.',
+            linearLogFit: 'Consider how changes in GDP per capita are ' +
+            'associated with changes in life expectancy as reflected in ' +
+            'the regression equation, and what this reveals about the rate ' +
+            'and type of relationship between the two variables.'
         },
         gdp_co2: {
-            logLogFit: 'A 1% change in GDP per capita is associated with a ' +
-                '0.78% change in CO2 emissions per capita. This is also the ' +
-                'income elasticity of CO2 emissions.',
-            linearFit: 'Lorem ipsum sit amet...'
+            logLogFit: 'Consider how changes in GDP per capita are ' +
+            'associated with changes in CO2 emissions per capita as ' +
+            'reflected in the regression equation, and what this reveals ' +
+            'about the rate and type of relationship between the variables.',
+            linearFit: 'Observe how changes in GDP per capita are associated ' +
+            'with changes in CO2 emissions per capita as in the regression ' +
+            'equation, and what this reveals about the rate and type of ' +
+            'relationship between them.'
         },
         advertising: {
-            linearFit: 'Lorem ipsum sit amet...',
-            logLinearFit: 'Regressing money spent on TV advertising on sales ' +
-                'fails to capture the upscaling-effects of investing in TV, ' +
-                'where market sizes magnify investments to have a ' +
-                'percentage-increase effect on overall sales.'
+            linearFit: 'Observe how changes in TV advertising spending are ' +
+            'associated with changes in sales as in the regression ' +
+            'equation, and what this reveals about the rate and type of ' +
+            'relationship between them.',
+            logLinearFit: 'Observe how changes in TV advertising spending ' +
+            'are associated with changes in sales as in the regression ' +
+            'equation, and what this reveals about the rate and type of ' +
+            'relationship between them.'
         },
         ceosal2: {
-            linearLogFit: 'While we expect a CEO’s salary to grow ' +
-                'proportional to sales of their firm, it is unlikely that ' +
-                'such a growth is linear (i.e. that doubling a firm’s sales ' +
-                'would double its CEO’s salary). A linear-log regression ' +
-                'reflects that as a firm scales up its operations, growth of ' +
-                'CEO compensation tends to slow down in proportion to sales ' +
-                ' growth as firms increase in size.',
-            linearFit: 'Lorem ipsum sit amet...'
+            linearLogFit: 'Observe how changes in CEO\u2019s salary are ' +
+            'associated with changes in firm\u2019s sales as in the ' +
+            'regression equation, and what this reveals about the rate and ' +
+            'type of relationship between them.',
+            linearFit: 'Observe how changes in CEO\u2019s salary are ' +
+            'associated with changes in firm\u2019s sales as in the ' +
+            'regression equation, and what this reveals about the rate and ' +
+            'type of relationship between them.'
         },
         houseprice: {
-            logLogFit: 'Logically, we’d expect that a percentage increase in ' +
-                'housing space to be associated with a percentage increase ' +
-                'in housing value.',
-            linearFit: 'Lorem ipsum sit amet...'
+            logLogFit: 'Consider how changes in house prices are ' +
+            'associated with changes in living area space as ' +
+            'reflected in the regression equation, and what this reveals ' +
+            'about the rate and type of relationship between the variables.',
+            linearFit: 'Observe how changes in house prices are ' +
+            'associated with changes in living area space as in the ' +
+            'regression equation, and what this reveals about the rate and ' +
+            'type of relationship between them.'
         }
     };
 
     const REG_NOTES = {
         exports_tariffs: {
-            logLinearFit: 'Lorem ipsum sit amet...',
-            linearFit: 'Lorem ipsum sit amet...'
+            logLinearFit: 'Look at the shape and pattern of the data ' +
+            'points and the regression line, and consider how the axis ' +
+            'scaling affects the relationship between the tariffs and exports.',
+            linearFit: 'Look at the shape and pattern of the data ' +
+            'points and the regression line, and consider how the axis ' +
+            'scaling affects the relationship between the tariffs and exports.'
         },
         gdp_life_exp: {
-            linearFit: 'Lorem ipsum sit amet...',
-            linearLogFit: 'Lorem ipsum sit amet...'
+            linearFit: 'Look at the shape and pattern of the data ' +
+            'points and the regression line, and consider how the axis ' +
+            'scaling affects the relationship between GDP per capita and ' +
+            'life expectancy.',
+            linearLogFit: 'Look at the shape and pattern of the data ' +
+            'points and the regression line, and consider how the axis ' +
+            'scaling affects the relationship between GDP per capita and ' +
+            'life expectancy.'
         },
         gdp_co2: {
-            logLogFit: 'Lorem ipsum sit amet...',
-            linearFit: 'Lorem ipsum sit amet...'
+            logLogFit: 'Look at the shape and pattern of the data ' +
+            'points and the regression line, and consider how the axis ' +
+            'scaling affects the relationship between GDP per capita and ' +
+            'CO2 emissions per capita.',
+            linearFit: 'Look at the shape and pattern of the data ' +
+            'points and the regression line, and consider how the axis ' +
+            'scaling affects the relationship between GDP per capita and ' +
+            'CO2 emissions per capita.'
         },
         advertising: {
-            linearFit: 'Lorem ipsum sit amet...',
-            logLinearFit: 'Lorem ipsum sit amet...'
+            linearFit: 'Look at the shape and pattern of the data ' +
+            'points and the regression line, and consider how the axis ' +
+            'scaling affects the relationship between TV advertising ' +
+            'spending and sales.',
+            logLinearFit: 'Look at the shape and pattern of the data ' +
+            'points and the regression line, and consider how the axis ' +
+            'scaling affects the relationship between TV advertising ' +
+            'spending and sales.'
         },
         ceosal2: {
-            linearLogFit: 'Lorem ipsum sit amet...',
-            linearFit: 'Lorem ipsum sit amet...'
+            linearLogFit: 'Look at the shape and pattern of the data ' +
+            'points and the regression line, and consider how the axis ' +
+            'scaling affects the relationship between CEO\u2019s salary and ' +
+            'firm\u2019s sales.',
+            linearFit: 'Look at the shape and pattern of the data ' +
+            'points and the regression line, and consider how the axis ' +
+            'scaling affects the relationship between CEO\u2019s salary and ' +
+            'firm\u2019s sales.',
         },
         houseprice: {
-            logLogFit: 'Lorem ipsum sit amet...',
-            linearFit: 'Lorem ipsum sit amet...'
+            logLogFit: 'Look at the shape and pattern of the data ' +
+            'points and the regression line, and consider how the axis ' +
+            'scaling affects the relationship between house prices and ' +
+            'living area space.',
+            linearFit: 'Look at the shape and pattern of the data ' +
+            'points and the regression line, and consider how the axis ' +
+            'scaling affects the relationship between house prices and ' +
+            'living area space.'
         }
     };
 
@@ -310,15 +365,15 @@ export const RealDataLogarithm = ({
     return (
         <>
             <p id="startRealDataLog">
-                Let&rsquo;s apply what you&rsquo;ve learned about logarithm
-                regressions using real-world datasets.
+                Let&rsquo;s apply what you&rsquo;ve learne dabout logarithmic
+                regressions to real-world datasets.
             </p>
             <p>
-                Each group contains three datasets, each illustrating a
-                distinct pattern to show how different logarithmic models
-                capture trends.
+                Each group contains three datasets, each highlighting a
+                distinct pattern and how different logarithmic models capture
+                trends.
             </p>
-            <p>Choose one group for your analysis.</p>
+            <p>Choose one group and analyze its datasets.</p>
             <div className="choice-list dataset-opt">
                 <div className="form-check mb-3">
                     <input className="form-check-input" type="radio" value="1"
@@ -333,8 +388,9 @@ export const RealDataLogarithm = ({
                             if (setHighlightedFit) setHighlightedFit('');
                         }}
                     />
-                    <label htmlFor="group-1" className={`form-check-label ${
-                        datasetStarted ? 'text-muted' : ''}`}>
+                    <label htmlFor="group-1"
+                        className={`form-check-label fw-semibold ${
+                            datasetStarted ? 'text-muted' : ''}`}>
                         Group 1
                     </label>
                     <ul className={`mt-2 ${datasetStarted ? 'text-muted' : ''}`
@@ -365,8 +421,9 @@ export const RealDataLogarithm = ({
                             if (setHighlightedFit) setHighlightedFit('');
                         }}
                     />
-                    <label htmlFor="group-2" className={`form-check-label ${
-                        datasetStarted ? 'text-muted' : ''}`}>
+                    <label htmlFor="group-2"
+                        className={`form-check-label fw-semibold ${
+                            datasetStarted ? 'text-muted' : ''}`}>
                         Group 2
                     </label>
                     <ul className={`mt-2 ${datasetStarted ? 'text-muted' : ''}`
@@ -400,24 +457,26 @@ export const RealDataLogarithm = ({
                         Group {selectedGroup}:
                     </h2>
                     <p>
-                        Complete analysis on all three datasets in this group.
+                        Complete the analysis for all three datasets in
+                        this group.
                     </p>
                     <p>
-                        Datasets completed in this group:{' '}
-                        <span className={
+                        <strong>Progress:</strong>{' '}
+                        <span className={`hi-val fw-semibold ${
                             completedGroupCount === 3
-                                ? 'text-success fw-bold'
-                                : 'fw-bold'
-                        }>
-                            {completedGroupCount} of 3
-                        </span>
+                                ? 'text-success'
+                                : ''
+                        }`}>{completedGroupCount} of 3
+                        </span> datasets completed.
                     </p>
                     <PromptBlock list={[
-                        'Select a dataset to review',
-                        'Compare the data plots and resulting regressions ' +
-                        'before and after the log-based treatment is applied.',
-                        'Review and decide the interpretations for each ' +
-                        'instance.'
+                        'Select one dataset to analyze.',
+                        'Compare the data plots and regressions before ' +
+                        'and after applying the log-based transformation.',
+                        'Observe how the transformation changes the shape ' +
+                        'and fit of the regression.',
+                        'Interpret the results, and compare how the meaning ' +
+                        'of the regression changes across models.'
                     ]} />
                     <ul className='choice-list dataset-opt ms-0'>
                         {currentLabels.map((dType) => (

@@ -29,7 +29,9 @@ export const QUIZ_DATA = {
         q2: {
             question: 'Which interpretation correctly explains the ' +
                 'regression that best fits the relationship between ' +
-                'tariffs and exports?',
+                'tariffs and exports? ' +
+                'Note: A unit in tariffs is a percentage-point, ' +
+                'while a unit in exports is $1 billion.',
             options: [
                 'A 1 percentage-point increase in tariffs is ' +
                     'associated with a decrease in exports of $30,900,000,000.',
@@ -85,7 +87,9 @@ export const QUIZ_DATA = {
         q2: {
             question: 'Which interpretation correctly explains the ' +
                 'regression that best fits the relationship between GDP per ' +
-                'capita and life expectancy?',
+                'capita and life expectancy? ' +
+                'Note: A unit in GDP per capita is $1, while a unit in ' +
+                'life expectancy is 1 year.',
             options: [
                 'A $1 increase in GDP per capita is associated with 4.16 ' +
                     'years increase in population’s life expectancy.',
@@ -144,7 +148,9 @@ export const QUIZ_DATA = {
         q2: {
             question: 'Which interpretation correctly explains the ' +
                 'regression that best fits the relationship between GDP per ' +
-                'capita and CO2 emission per capita?',
+                'capita and CO2 emission per capita? ' +
+                'Note: A unit in GDP per capita is $1, while a unit in ' +
+                'CO2 emission per capita is 1 tonne.',
             options: [
                 'A 1% increase in GDP per capita is associated with a 0.78% ' +
                     'increase in CO2 emissions per capita.',
@@ -201,7 +207,9 @@ export const QUIZ_DATA = {
         q2: {
             question: 'Which interpretation correctly explains the ' +
                 'regression that best fits the relationship between ' +
-                'television advertising and sales?',
+                'television advertising and sales? ' +
+                'Note: A unit in television advertising is $1000, ' +
+                'while a unit in sales is 1 thousand-units.',
             options: [
                 'A $1,000 increase in television advertising spending is ' +
                     'associated with a change of 0.0038 thousand-units ' +
@@ -260,8 +268,10 @@ export const QUIZ_DATA = {
         },
         q2: {
             question: 'Which interpretation correctly explains the ' +
-                'regression that best fits the relationship between sales ' +
-                'and CEO’s salaries?',
+                'regression that best fits the relationship between ' +
+                'firm\u2019s sales and CEO\u2019s salaries? ' +
+                'Note: A unit in firm\u2019s sales is $1 million, ' +
+                'while a unit in CEO\u2019s salaries is $1,000.',
             options: [
                 'A $1 million increase in firm sales is associated with ' +
                     'about a 0.0017% increase in CEO salary.',
@@ -320,7 +330,9 @@ export const QUIZ_DATA = {
         q2: {
             question: 'Which interpretation correctly explains the ' +
                 'regression that best fits the relationship between the size ' +
-                'of living area and the sales price of the house?',
+                'of living area and the sales price of the house? ' +
+                'Note: A unit in the size of living area is 1 square foot, ' +
+                'while a unit in sales price is $1.',
             options: [
                 'A 1 square foot increase in living area is associated with ' +
                     'an increase in house price of $72.23.',
