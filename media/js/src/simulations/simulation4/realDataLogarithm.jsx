@@ -7,7 +7,7 @@ import { scrollTo } from '../../utils/utils';
 
 export const RealDataLogarithm = ({
     setShowDatasets, showDatasets,
-    setCompareRegLine, compareRegLine,
+    setCompareRegLine, compareRegLine, isGroupComplete,
     setHighlightedFit, submissionId, setIsGroupComplete,
     resetTrigger
 }) => {
@@ -291,7 +291,7 @@ export const RealDataLogarithm = ({
     ).length;
 
     useEffect(() => {
-        if (setIsGroupComplete) {
+        if (setIsGroupComplete && !isGroupComplete) {
             setIsGroupComplete(completedGroupCount === 3 && datasetStarted);
         }
     }, [completedGroupCount, datasetStarted, setIsGroupComplete]);
@@ -521,6 +521,7 @@ RealDataLogarithm.propTypes = {
     ).isRequired,
     setHighlightedFit: PropTypes.func,
     submissionId: PropTypes.number,
+    isGroupComplete: PropTypes.bool,
     setIsGroupComplete: PropTypes.func,
     resetTrigger: PropTypes.number
 };
