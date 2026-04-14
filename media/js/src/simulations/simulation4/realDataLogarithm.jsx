@@ -310,15 +310,15 @@ export const RealDataLogarithm = ({
     return (
         <>
             <p id="startRealDataLog">
-                Let&rsquo;s apply what you&rsquo;ve learned about logarithm
-                regressions using real-world datasets.
+                Let&rsquo;s apply what you&rsquo;ve learne dabout logarithmic
+                regressions to real-world datasets.
             </p>
             <p>
-                Each group contains three datasets, each illustrating a
-                distinct pattern to show how different logarithmic models
-                capture trends.
+                Each group contains three datasets, each highlighting a
+                distinct pattern and how different logarithmic models capture
+                trends.
             </p>
-            <p>Choose one group for your analysis.</p>
+            <p>Choose one group and analyze its datasets.</p>
             <div className="choice-list dataset-opt">
                 <div className="form-check mb-3">
                     <input className="form-check-input" type="radio" value="1"
@@ -333,8 +333,9 @@ export const RealDataLogarithm = ({
                             if (setHighlightedFit) setHighlightedFit('');
                         }}
                     />
-                    <label htmlFor="group-1" className={`form-check-label ${
-                        datasetStarted ? 'text-muted' : ''}`}>
+                    <label htmlFor="group-1"
+                        className={`form-check-label fw-semibold ${
+                            datasetStarted ? 'text-muted' : ''}`}>
                         Group 1
                     </label>
                     <ul className={`mt-2 ${datasetStarted ? 'text-muted' : ''}`
@@ -365,8 +366,9 @@ export const RealDataLogarithm = ({
                             if (setHighlightedFit) setHighlightedFit('');
                         }}
                     />
-                    <label htmlFor="group-2" className={`form-check-label ${
-                        datasetStarted ? 'text-muted' : ''}`}>
+                    <label htmlFor="group-2"
+                        className={`form-check-label fw-semibold ${
+                            datasetStarted ? 'text-muted' : ''}`}>
                         Group 2
                     </label>
                     <ul className={`mt-2 ${datasetStarted ? 'text-muted' : ''}`
@@ -400,16 +402,16 @@ export const RealDataLogarithm = ({
                         Group {selectedGroup}:
                     </h2>
                     <p>
-                        Complete analysis on all three datasets in this group.
+                        Complete the analysis for all three datasets in
+                        this group.
                     </p>
                     <p>
-                        Datasets completed in this group:{' '}
-                        <span className={
+                        <strong>Progress:</strong>{' '}
+                        <span className={`hi-val fw-semibold ${
                             completedGroupCount === 3
-                                ? 'text-success fw-bold'
-                                : 'fw-bold'
-                        }>
-                            {completedGroupCount} of 3
+                                ? 'text-success'
+                                : ''
+                        }`}>{completedGroupCount} of 3
                         </span>
                     </p>
                     <PromptBlock list={[
