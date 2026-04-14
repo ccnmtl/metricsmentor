@@ -217,16 +217,18 @@ export const WhatAreLogarithmRegs = ({
             </button>
 
             <h2>Logarithm regression plots</h2>
-            <p>The generated datasets below are examples of three common
-                logarithm-transformed models to help
-                you explore how different regression capture
-                each trend.
+            <p>The following generated datasets illustrate three common
+                logarithm-transformed models to help you explore how different
+                regression captures each trend.
             </p>
             <PromptBlock list={[
-                'Select a log-based regression model.',
+                'Select a log-based regression model to analyze.',
                 'Compare the data plots and resulting regressions before ' +
                 'and after the log-based fit is applied.',
-                'Review and compare the interpretations for each instance.'
+                'Observe how the transformation changes the shape and fit ' +
+                'of the regression.',
+                'Review and compare the interpretations for each regression ' +
+                'fit.'
             ]} />
 
             <div className="choice-list ms-0">
