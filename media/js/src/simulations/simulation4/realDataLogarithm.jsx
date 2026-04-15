@@ -375,8 +375,8 @@ export const RealDataLogarithm = ({
                 trends.
             </p>
             <p>Choose one group and analyze its datasets.</p>
-            <div className="choice-list dataset-opt">
-                <div className="form-check mb-3">
+            <div className="choice-list dataset-opt ms-0">
+                <div className={'form-check mb-3 dataset-variable-item'}>
                     <input className="form-check-input" type="radio" value="1"
                         id="group-1" name="log-group-choice"
                         checked={selectedGroup === 1}
@@ -409,7 +409,7 @@ export const RealDataLogarithm = ({
                         </li>
                     </ul>
                 </div>
-                <div className="form-check mb-3">
+                <div className="form-check mb-3 dataset-variable-item">
                     <input className="form-check-input" type="radio" value="2"
                         id="group-2" name="log-group-choice"
                         checked={selectedGroup === 2}
@@ -479,10 +479,11 @@ export const RealDataLogarithm = ({
                         'Interpret the results, and compare how the meaning ' +
                         'of the regression changes across models.'
                     ]} />
-                    <ul className='choice-list dataset-opt ms-0'>
+                    <div className='choice-list dataset-opt ms-0'>
                         {currentLabels.map((dType) => (
-                            <li className="mb-2 list-unstyled" key={dType[2]}>
-                                <div className="form-check">
+                            <div key={dType[2]}
+                                className={'form-check dataset-variable-item'}>
+                                <div className="m-0 p-0">
                                     <input className="form-check-input"
                                         type="radio" value={dType[0]}
                                         id={`log-real-${dType[0]}`}
@@ -519,7 +520,7 @@ export const RealDataLogarithm = ({
                                     </label>
                                 </div>
                                 {selected === dType[2] && (
-                                    <div className="nested-radio ps-4 mt-2">
+                                    <div className="nested-radio mt-2">
                                         {REGS_MAP[ALL_LABELS[selected][0]].map(
                                             (fit, idx) => (
                                                 <div key={fit}
@@ -557,9 +558,9 @@ export const RealDataLogarithm = ({
                                         />
                                     </div>
                                 )}
-                            </li>
+                            </div>
                         ))}
-                    </ul>
+                    </div>
                     {completedGroupCount === 3 && (
                         <p className="text-success fw-bold">
                             You have completed all datasets in
