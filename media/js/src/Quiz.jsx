@@ -120,12 +120,24 @@ export const QuizComponent = ({
                 </div>
             )}
             {feedback && (
-                <div className={isCorrect ? 'answer-correct-container'
-                    : 'answer-incorrect-container'}>
+                <div className={`${isCorrect ? 'answer-correct-container'
+                    : 'answer-incorrect-container'} sim_quiz__feedback`}>
                     {isCorrect ?
-                        <div className="answer-correct">&#10003;</div>
-                        : <div className="answer-incorrect">!</div>}
-                    {feedback}
+                        <div className={
+                            'answer-correct status-checkmark ' +
+                            'align-self-start me-3'}>
+                            &#10003;
+                        </div>
+                        : <div className={
+                            'answer-incorrect status-warning ' +
+                            'align-self-start me-3'}>
+                            !
+                        </div>}
+                    <div className={isCorrect
+                        ? 'sim_quiz__feedback-text-correct'
+                        : 'sim_quiz__feedback-text-incorrect'}>
+                        {feedback}
+                    </div>
                 </div>
             )}
             <button
