@@ -139,7 +139,7 @@ export const RealDataPolynomials = ({
             'Quadratic'
         ],
         [ // linear vs Cubic
-            '\\beta_2 = \\beta_3',
+            '\\beta_2 = \\beta_3 = 0',
             '\\text{ not } H_0',
             '\\beta_2 \\text{ and } \\beta_3 \\text{ is significantly ' +
                 'different from } 0',
@@ -188,11 +188,13 @@ export const RealDataPolynomials = ({
                 <p><Katex tex={`H_1: ${result[1]}`} /></p>
                 <p>at <Katex tex={'\\alpha = 0.05; ~'}/></p>
                 <p className='mt-2'>
-                    Resulting <Katex tex={'~p-value = 0'} />
+                    Resulting <Katex tex={'~p\\text{-value} = 0'} />
                 </p>
-                <p><Katex tex={`p-value < \\alpha; ~ ${result[2]} ~`} /></p>
+                <p><Katex tex={`p\\text{-value} < \\alpha; ~ ${result[2]} ~`} />
+                </p>
                 <p>Therefore, we reject <Katex tex={'H_0'} />.</p>
-                <p>Conclusion: {result[3]} regression is a better fit.</p>
+                <p><b>Conclusion:{' '}</b>
+                    {result[3]} regression is a better fit.</p>
             </div>
             <p>Select another set of regression model to test</p>
 
@@ -270,7 +272,7 @@ export const RealDataPolynomials = ({
                     ))}
                 </div>
                 <button
-                    className="btn btn-sm btn-secondary mt-2"
+                    className="btn btn-sm btn-primary mt-2"
                     disabled={checkTestSize() !== 2}
                     onClick={handleShowTest}>
                         Run test on regressions &raquo;
