@@ -55,7 +55,9 @@ export const SimulationFour = () => {
         .map((label, index) => (
             <button onClick={handleStage} key={index}
                 value={index} className={'btn btn-primary m-1'}
-                disabled={stage === index}>
+                disabled={stage === index ||
+                    (index === 0 && stage === 1 &&
+                    progress[1] > 1 && progress[1] < 4)}>
                 {label}
             </button>));
 
