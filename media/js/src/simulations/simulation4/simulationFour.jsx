@@ -329,6 +329,7 @@ export const SimulationFour = () => {
                         highlightedFit={highlightedFit}
                         showDatasets={showLogDatasets}
                         compareRegLine={logCompareRegLine}
+                        progress={progress[stage]}
                     />}
                     modals={[<LogarithmDefinition key="modal2" />]}
                 />

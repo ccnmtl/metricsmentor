@@ -6,7 +6,7 @@ import PropTypes from 'prop-types';
 
 export const LogarithmGraph = ({
     selectedModel, highlightedFit, showDatasets = [],
-    compareRegLine = [] }) => {
+    compareRegLine = [], progress }) => {
 
     const REAL_LABELS = [
         'exports_tariffs', 'gdp_life_exp', 'gdp_co2',
@@ -14,6 +14,8 @@ export const LogarithmGraph = ({
     ];
     const activeRealDataIndex = showDatasets.findIndex(v => v);
     const isRealData = activeRealDataIndex !== -1;
+    const placeholder = progress < 2 ? 'Choose a dataset to begin' :
+        'No dataset needed for Takeaway questions';
 
     if (!selectedModel && !isRealData) {
         return (
@@ -23,7 +25,7 @@ export const LogarithmGraph = ({
                         x: [1],
                         y: [1],
                         mode: 'text',
-                        text: ['Choose a dataset to begin'],
+                        text: [placeholder],
                         textposition: 'middle center',
                         showlegend: false
                     }
@@ -249,5 +251,6 @@ LogarithmGraph.propTypes = {
     selectedModel: PropTypes.string,
     highlightedFit: PropTypes.string,
     showDatasets: PropTypes.arrayOf(PropTypes.bool),
-    compareRegLine: PropTypes.arrayOf(PropTypes.string)
+    compareRegLine: PropTypes.arrayOf(PropTypes.string),
+    progress: PropTypes.number
 };
