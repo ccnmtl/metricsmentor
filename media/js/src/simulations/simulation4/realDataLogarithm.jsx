@@ -7,7 +7,7 @@ import { scrollTo } from '../../utils/utils';
 
 export const RealDataLogarithm = ({
     setShowDatasets, showDatasets,
-    setCompareRegLine, compareRegLine, isGroupComplete,
+    setCompareRegLine, isGroupComplete,
     setHighlightedFit, submissionId, setIsGroupComplete,
     resetTrigger
 }) => {
@@ -17,16 +17,6 @@ export const RealDataLogarithm = ({
     const [selected, setSelected] = useState(null);
     const [openFit, setOpenFit] = useState({});
     const [completedDatasets, setCompletedDatasets] = useState([]);
-
-    useEffect(() => {
-        if (resetTrigger && resetTrigger > 0) {
-            setSelectedGroup(null);
-            setDatasetStarted(false);
-            setSelected(null);
-            setOpenFit({});
-            setCompletedDatasets([]);
-        }
-    }, [resetTrigger]);
 
     const LABELS_GROUP_1 = [
         ['exports_tariffs', 'Effect of tariffs on exports', 0],
@@ -80,14 +70,6 @@ export const RealDataLogarithm = ({
             'Housing Price and Living Area [Ames, Iowa, 2020]'
         ]
     ];
-
-    useEffect(() => {
-        setShowDatasets([false, false, false, false, false, false]);
-        setCompareRegLine([]);
-        if (setHighlightedFit) {
-            setHighlightedFit('');
-        }
-    }, [setShowDatasets, setCompareRegLine, setHighlightedFit]);
 
     const handleDataset = (idx) => {
         const newShow = [false, false, false, false, false, false];
@@ -347,10 +329,25 @@ export const RealDataLogarithm = ({
     ).length;
 
     useEffect(() => {
-        if (setIsGroupComplete && !isGroupComplete) {
-            setIsGroupComplete(completedGroupCount === 3 && datasetStarted);
+        if (completedGroupCount === 3 && datasetStarted && selectedGroup) {
+            setIsGroupComplete(prev => {
+                if (!prev.includes(selectedGroup)) {
+                    return [...prev, selectedGroup];
+                }
+                return prev;
+            });
         }
     }, [completedGroupCount, datasetStarted, setIsGroupComplete]);
+
+    useEffect(() => {
+        if (resetTrigger && resetTrigger > 0) {
+            setSelectedGroup(null);
+            setDatasetStarted(false);
+            setSelected(null);
+            setOpenFit({});
+            setCompletedDatasets([]);
+        }
+    }, [resetTrigger]);
 
     useEffect(() => {
         scrollTo('startRealDataLog');
@@ -358,10 +355,17 @@ export const RealDataLogarithm = ({
 
     useEffect(() => {
         if (selectedGroup) {
-            console.log(selectedGroup);
             scrollTo(`group-${selectedGroup}-header`);
         }
     }, [datasetStarted]);
+
+    useEffect(() => {
+        setShowDatasets([false, false, false, false, false, false]);
+        setCompareRegLine([]);
+        if (setHighlightedFit) {
+            setHighlightedFit('');
+        }
+    }, [setShowDatasets, setCompareRegLine, setHighlightedFit]);
 
     return (
         <>
@@ -390,9 +394,15 @@ export const RealDataLogarithm = ({
                         }}
                     />
                     <label htmlFor="group-1"
-                        className={`form-check-label fw-semibold ${
-                            datasetStarted ? 'text-muted' : ''}`}>
+                        className={`form-check-label fw-semibold
+                            d-flex align-items-center 
+                            ${datasetStarted ? 'text-muted' : ''}`}>
                         Group 1
+                        {isGroupComplete.includes(1) && (
+                            <span className={'ms-2 status-checkmark'}>
+                                &#10003;
+                            </span>
+                        )}
                     </label>
                     <ul className={`mt-2 ${datasetStarted ? 'text-muted' : ''}`
                     }>
@@ -423,9 +433,15 @@ export const RealDataLogarithm = ({
                         }}
                     />
                     <label htmlFor="group-2"
-                        className={`form-check-label fw-semibold ${
-                            datasetStarted ? 'text-muted' : ''}`}>
+                        className={`form-check-label fw-semibold
+                            d-flex align-items-center 
+                            ${datasetStarted ? 'text-muted' : ''}`}>
                         Group 2
+                        {isGroupComplete.includes(2) && (
+                            <span className={'ms-2 status-checkmark'}>
+                                &#10003;
+                            </span>
+                        )}
                     </label>
                     <ul className={`mt-2 ${datasetStarted ? 'text-muted' : ''}`
                     }>
@@ -577,12 +593,9 @@ RealDataLogarithm.propTypes = {
     setShowDatasets: PropTypes.func.isRequired,
     showDatasets: PropTypes.arrayOf(PropTypes.bool).isRequired,
     setCompareRegLine: PropTypes.func.isRequired,
-    compareRegLine: PropTypes.arrayOf(
-        PropTypes.string
-    ).isRequired,
     setHighlightedFit: PropTypes.func,
     submissionId: PropTypes.number,
-    isGroupComplete: PropTypes.bool,
+    isGroupComplete: PropTypes.arrayOf(PropTypes.number),
     setIsGroupComplete: PropTypes.func,
     resetTrigger: PropTypes.number
 };

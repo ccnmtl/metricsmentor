@@ -32,7 +32,7 @@ export const SimulationFour = () => {
     const [showLogDatasets, setShowLogDatasets] = useState(
         [false, false, false, false, false, false]);
     const [highlightedFit, setHighlightedFit] = useState('');
-    const [isLogGroupComplete, setIsLogGroupComplete] = useState(false);
+    const [isLogGroupComplete, setIsLogGroupComplete] = useState([]);
 
     const quizComplete = () => !isCorrect.includes(false);
 
@@ -40,24 +40,16 @@ export const SimulationFour = () => {
     const handleStage = (e) => setStage(parseInt(e.target.value));
 
     const [logGroupKey, setLogGroupKey] = useState(0);
+    const [isCurrentGroupDone, setIsCurrentGroupDone] = useState(false);
+
 
     const handleLogGroupReset = () => {
         setShowLogDatasets([false, false, false, false, false, false]);
         setLogCompareRegLine([]);
         setHighlightedFit('');
+        setIsCurrentGroupDone(false);
         setLogGroupKey(prev => prev + 1);
     };
-
-    useEffect(() => {
-        // Reset selected elements and graphs when switching stages
-        setSelectedModel('');
-        setHighlightedFit('');
-        setCompareRegLine([]);
-        setLogCompareRegLine([]);
-        setShowLogDatasets([false, false, false, false, false, false]);
-        setShowPolyDatasets(showOne(0));
-        setShowRegLine(CLEARREG);
-    }, [stage, progress[0], progress[1]]);
 
     const mkModuleBtns = () => ['Polynomials', 'Logarithms']
         .map((label, index) => (
@@ -172,7 +164,6 @@ export const SimulationFour = () => {
                     <PolynomialTakeaway
                         submissionId={submissionId}
                         setStage={setStage}
-                        coursePk={coursePk}
                         stage={stage}
                         setProgress={setProgress}
                         progress={progress}
@@ -233,28 +224,33 @@ export const SimulationFour = () => {
                             setShowDatasets={setShowLogDatasets}
                             showDatasets={showLogDatasets}
                             setCompareRegLine={setLogCompareRegLine}
-                            compareRegLine={logCompareRegLine}
                             setHighlightedFit={setHighlightedFit}
                             submissionId={submissionId}
                             isGroupComplete={isLogGroupComplete}
                             setIsGroupComplete={setIsLogGroupComplete}
                         />
                     )}
-                    {isLogGroupComplete && (
-                        <div className="simulation__step-prompt d-flex p-2 mt-2
-                            align-items-center justify-content-center gap-2
-                            bg-warning rounded">
-                            <button
-                                className="btn btn-sm btn-success"
-                                onClick={handleLogGroupReset}>
-                                Try another Group &raquo;
-                            </button>
-                            <span>or</span>
+                    {isLogGroupComplete.length > 0 && (
+                        <div className={`simulation__step-prompt d-flex p-2 mt-2
+                            align-items-center gap-2 ${
+                        isCurrentGroupDone && progress[stage] === 1
+                            ? 'justify-content-center'
+                            : 'justify-content-end'}`}>
+                            {isCurrentGroupDone && progress[stage] === 1 && (
+                                <>
+                                    <button
+                                        className="btn btn-sm btn-success"
+                                        onClick={handleLogGroupReset}>
+                                        Try another Group &raquo;
+                                    </button>
+                                    <span>or</span>
+                                </>
+                            )}
                             <StepProgressButton
                                 progress={progress}
                                 stage={stage}
                                 setProgress={setProgress}
-                                continueLabel="Continue »"
+                                continueLabel="Go to Takeaways »"
                                 reviewLabel="Review »"
                                 progressNumber={2}
                             />
@@ -297,6 +293,23 @@ export const SimulationFour = () => {
         };
         initializeSubmission();
     }, []);
+
+    useEffect(() => {
+        if (isLogGroupComplete.length > 0) {
+            setIsCurrentGroupDone(true);
+        }
+    }, [isLogGroupComplete.length]);
+
+    useEffect(() => {
+        // Reset selected elements and graphs when switching stages
+        setSelectedModel('');
+        setHighlightedFit('');
+        setCompareRegLine([]);
+        setLogCompareRegLine([]);
+        setShowLogDatasets([false, false, false, false, false, false]);
+        setShowPolyDatasets(showOne(0));
+        setShowRegLine(CLEARREG);
+    }, [stage, progress[0], progress[1]]);
 
     return (
         <>

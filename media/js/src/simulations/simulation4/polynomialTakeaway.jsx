@@ -3,7 +3,7 @@ import { TakeawayQuestion } from '../../TakeawayQuestion';
 import PropTypes from 'prop-types';
 
 export const PolynomialTakeaway = ({
-    submissionId, setStage, coursePk, setProgress, stage,
+    submissionId, setStage, setProgress, stage,
     progress
 }) => {
     const [visibleIndex, setVisibleIndex] = useState(0);
@@ -228,13 +228,6 @@ export const PolynomialTakeaway = ({
                             onClick={() => setStage(1)}>
                              Logarithms
                         </div>
-                        {/* {progress === 4 && (
-                            <Link
-                                to={`/course/${coursePk}/simulations/`}
-                                className="btn btn-success">
-                                    Back to Dashboard
-                            </Link>
-                        )} */}
                     </div>
                 </>
             )}
@@ -245,7 +238,6 @@ export const PolynomialTakeaway = ({
 PolynomialTakeaway.propTypes = {
     submissionId: PropTypes.number.isRequired,
     setStage: PropTypes.func.isRequired,
-    coursePk: PropTypes.string.isRequired,
     setProgress: PropTypes.func.isRequired,
     progress: PropTypes.arrayOf(PropTypes.number).isRequired,
     stage: PropTypes.number.isRequired

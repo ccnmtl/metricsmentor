@@ -126,7 +126,7 @@ export const WhatArePolynomialRegressions = ({
                 Polynomial regression plots
             </h3>
             <p>
-                Each generated dataset below show a distinct pattern to help
+                Each generated dataset below shows a distinct pattern to help
                 you explore how different polynomial models capture each trend.
             </p>
             <PromptBlock list={[

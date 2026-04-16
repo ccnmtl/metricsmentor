@@ -100,7 +100,7 @@ export const PolynomialGraph = ({
 };
 
 PolynomialGraph.propTypes = {
-    compareRegLine: PropTypes.string,
+    compareRegLine: PropTypes.arrayOf(PropTypes.string),
     showRegLine: PropTypes.arrayOf(PropTypes.bool).isRequired,
     showDatasets: PropTypes.arrayOf(PropTypes.bool).isRequired
 };
