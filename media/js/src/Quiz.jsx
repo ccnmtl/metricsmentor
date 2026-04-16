@@ -4,8 +4,8 @@ import { saveAnswer, extractTextContent, getCoursePk } from './utils/utils';
 
 export const QuizComponent = ({
     question, options, correctAnswerIndex, correctFeedback, incorrectFeedback,
-    submissionId, questionNumber, setIsCorrect, isTextInput, correctTextAnswer,
-    selectedOption, setSelectedOption
+    submissionId, questionNumber, setIsCorrect, isTextInput, isNumericInput,
+    correctTextAnswer, selectedOption, setSelectedOption
 }) => {
     const [textInputAnswer, setTextInputAnswer] = useState('');
     const [feedback, setFeedback] = useState('');
@@ -14,8 +14,11 @@ export const QuizComponent = ({
     const coursePk = getCoursePk();
 
     const isCorrect = isTextInput
-        ? textInputAnswer.toLowerCase().trim()
-        === correctTextAnswer.toLowerCase().trim()
+        ? (isNumericInput
+            ? parseFloat(textInputAnswer.trim()) ===
+                parseFloat(correctTextAnswer.trim())
+            : textInputAnswer.toLowerCase().trim()
+                === correctTextAnswer.toLowerCase().trim())
         : selectedOption === correctAnswerIndex;
 
     const handleOptionSelect = (index) => {
@@ -167,5 +170,6 @@ QuizComponent.propTypes = {
     selectedOption: PropTypes.number,
     setSelectedOption: PropTypes.func,
     isTextInput: PropTypes.bool,
+    isNumericInput: PropTypes.bool,
     correctTextAnswer: PropTypes.string
 };

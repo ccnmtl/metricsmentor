@@ -295,6 +295,7 @@ export const RealDataPolynomials = ({
                         correctTextAnswer={'14.3'}
                         setIsCorrect={handleIsCorrect(0)}
                         isTextInput={true}
+                        isNumericInput={true}
                         correctAnswerIndex={2}
                         questionNumber={1}
                         submissionId={submissionId} /></div>
