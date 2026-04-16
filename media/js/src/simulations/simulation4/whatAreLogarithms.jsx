@@ -199,15 +199,15 @@ export const WhatAreLogarithmRegs = ({
     return (
         <>
             <p>
-                Logarithm-transformed regressions are models that use natural
-                logs of the dependent variable, the independent variable, or
-                both to better capture relationships that grow in percentage or
+                Logarithm-transformed regressions apply natural logs to the
+                dependent variable, the independent variable, or both to
+                better capture relationships that grow in percentage or
                 proportional terms.
             </p>
             <PromptBlock
-                text="But first, take a moment to familiarize yourself with
-                    the basic concepts of logarithm-based regressions.
-                    This can help as you continue with this exercise." />
+                text="First, take a moment to review the basic concepts of
+                log-based regressions. This will help as you continue with
+                the exercise." />
             <button
                 className="btn btn-sm btn-primary"
                 data-bs-toggle="modal"

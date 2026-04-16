@@ -17,12 +17,13 @@ export const LogarithmTakeaway = ({
         {
             questionId: 19,
             questionText: <>
-                Let the population regression equation be {inlineKatex('Ln ' +
-                '(Y) = β0 + β1(X1) + β2(Ln (X2)) + u')},
-                where {inlineKatex('Y')} is the salary in dollars per
-                month, {inlineKatex('X1')} is the education in years,
-                and {inlineKatex('X2')} is the experience in years. If we use a
-                sample to estimate this regression, which interpretation is
+                Let the population regression equation be<br />
+                {inlineKatex('ln ' +
+                '(Y) = \\beta_0 + \\beta_1(X_1) + \\beta_2(ln (X_2)) + u')},
+                <br />where {inlineKatex('Y')} is the salary in dollars per
+                month, {inlineKatex('X_1')} is the education in years,
+                and {inlineKatex('X_2')} is the experience in years. If we use
+                a sample to estimate this regression, which interpretation is
                 correct?
             </>,
             choices: [
@@ -30,8 +31,8 @@ export const LogarithmTakeaway = ({
                     id: 'log-choice-A',
                     index: 'A',
                     text: <>
-                        1% change in education is associated with
-                        a {inlineKatex('β1%')} change in salary
+                        {inlineKatex('1\\%')} change in education is associated
+                        with a {inlineKatex('\\beta_1\\%')} change in salary
                     </>,
                     isCorrect: false,
                     feedback: 'This is a log-linear regression for ' +
@@ -43,7 +44,8 @@ export const LogarithmTakeaway = ({
                     index: 'B',
                     text: <>
                         A one-year change in education is associated with
-                        a {inlineKatex('100xβ1%')} change in salary
+                        a {inlineKatex('100\\times\\beta_1\\%')} change in
+                        salary
                     </>,
                     isCorrect: true,
                     feedback: 'Yes! This is a log-linear regression for ' +
@@ -56,11 +58,11 @@ export const LogarithmTakeaway = ({
                     index: 'C',
                     text: <>
                         A one-year change in education is associated with
-                        a {inlineKatex('(β1/100)%')} change in salary
+                        a {inlineKatex('(\\beta_1/100)\\%')} change in salary
                     </>,
                     isCorrect: false,
                     feedback: 'This is a log-linear regression for ' +
-                    'education. This interpretation in part C would have ' +
+                    'education. This interpretation here would have ' +
                     'been correct if it were a linear-log regression in ' +
                     'education.'
                 },
@@ -68,9 +70,9 @@ export const LogarithmTakeaway = ({
                     id: 'log-choice-D',
                     index: 'D',
                     text: <>
-                        {inlineKatex('100xbeta1%')} change in education is
-                        associated with a $100 change in
-                        salary
+                        {inlineKatex('100\\times\\beta_1\\%')} change in
+                        education is associated with
+                        a {inlineKatex('\\$100')} change in salary
                     </>,
                     isCorrect: false,
                     feedback: <>
@@ -78,15 +80,17 @@ export const LogarithmTakeaway = ({
                         education. Salary is in logs, and education is in
                         linear form. Hence, the interpretation should follow
                         that an additional year of education is associated
-                        with a {inlineKatex('100xbeta1%')} change in salary.
+                        with a {inlineKatex('100\\times\\beta_1\\%')} change
+                        in salary.
                     </>
                 },
                 {
                     id: 'log-choice-E',
                     index: 'E',
                     text: <>
-                        A {inlineKatex('1%')} change in experience is
-                        associated with a {inlineKatex('100xβ1%')} change in
+                        {inlineKatex('1\\%')} change in experience is
+                        associated with
+                        a {inlineKatex('\\beta_1\\%')} change in
                         salary
                     </>,
                     isCorrect: false,
@@ -94,9 +98,9 @@ export const LogarithmTakeaway = ({
                         This is a log-log regression for experience. Both
                         salary and experience are in logarithmic form. Hence,
                         the interpretation should follow that an
-                        additional {inlineKatex('1%')} increase in experience
-                        is associated with a {inlineKatex('beta2%')} change in
-                        salary.
+                        additional {inlineKatex('1\\%')} increase in experience
+                        is associated with
+                        a {inlineKatex('\\beta_2\\%')} change in salary.
                     </>
                 }
             ]
@@ -115,7 +119,7 @@ export const LogarithmTakeaway = ({
                     id: 'log2-choice-A',
                     index: 'A',
                     text: <>
-                        By regressing {inlineKatex('Ln(grade)')} on the amount
+                        By regressing {inlineKatex('ln(grade)')} on the amount
                         of time spent studying.
                     </>,
                     isCorrect: false,
@@ -138,7 +142,7 @@ export const LogarithmTakeaway = ({
                     id: 'log2-choice-C',
                     index: 'C',
                     text: <>
-                        By regressing grade on the {inlineKatex('Ln(the ' +
+                        By regressing grade on the {inlineKatex('ln(the ' +
                         'amount of time spent studying)')}
                     </>,
                     isCorrect: true,
@@ -149,8 +153,8 @@ export const LogarithmTakeaway = ({
                     id: 'log2-choice-D',
                     index: 'D',
                     text: <>
-                        By regressing {inlineKatex('Ln(the amount of time ' +
-                        'spent studying)')} on {inlineKatex('Ln(grade)')}
+                        By regressing {inlineKatex('ln(the amount of time ' +
+                        'spent studying)')} on {inlineKatex('ln(grade)')}
                     </>,
                     isCorrect: false,
                     feedback: 'This answer describes a log-log regression, ' +
@@ -171,11 +175,12 @@ export const LogarithmTakeaway = ({
         {
             questionId: 21,
             questionText: <>
-                Let the population regression equation be {inlineKatex('Ln ' +
-                '(Y) = β0 + β1(X1) + β2(Ln (X2)) + u')},
-                where {inlineKatex('Y')} is the price of a house in
-                dollars, {inlineKatex('X1')} is a binary indicator whether the
-                house has a view or not, and {inlineKatex('X2')} is the size of
+                Let the population regression equation be:<br />
+                {inlineKatex('ln ' +
+                '(Y) = \\beta_0 + \\beta_1(X_1) + \\beta_2(ln (X_2)) + u')},
+                <br />where {inlineKatex('Y')} is the price of a house in
+                dollars, {inlineKatex('X_1')} is a binary indicator whether the
+                house has a view or not, and {inlineKatex('X_2')} is the size of
                 the house. If we use a sample to estimate this regression,
                 which interpretation is correct?
             </>,
@@ -184,16 +189,18 @@ export const LogarithmTakeaway = ({
                     id: 'log3-choice-A',
                     index: 'A',
                     text: <>
-                        A {inlineKatex('1%')} increase in the size of the house
-                        is associated with a {inlineKatex('1%')} increase in
+                        A {inlineKatex('1\\%')} increase in the size of the
+                        house is associated with
+                        a {inlineKatex('1\\%')} increase in
                         the price of the house.
                     </>,
                     isCorrect: false,
                     feedback: <>
                         This is a log-log regression in terms of size. So, you
                         correctly caught that both changes must be in logs;
-                        however, you forgot to use {inlineKatex('β2')}. Now try
-                        adding {inlineKatex('β2')} to your interpretation.
+                        however, you forgot to use
+                        {inlineKatex('\\beta_2')}. Now try
+                        adding {inlineKatex('\\beta_2')} to your interpretation.
                     </>
                 },
                 {
@@ -201,22 +208,24 @@ export const LogarithmTakeaway = ({
                     index: 'B',
                     text: <>
                         If a house has a view, the price is, on
-                        average, {inlineKatex('β2')} dollars higher.
+                        average, {inlineKatex('\\$\\beta_2')} higher.
                     </>,
                     isCorrect: false,
                     feedback: <>
                         This is a log-linear regression in terms of view. You
                         have correctly interpreted the view; however, the
-                        coefficient of view is not {inlineKatex('β2')}, but
-                        rather {inlineKatex('β1')}.
+                        coefficient of view is not
+                        {inlineKatex('\\beta_2')}, but
+                        rather {inlineKatex('\\beta_1')}.
                     </>
                 },
                 {
                     id: 'log3-choice-C',
                     index: 'C',
                     text: <>
-                        A {inlineKatex('β2%')} change in the size of a house is
-                        associated with a {inlineKatex('1%')} increase in the
+                        A {inlineKatex('\\beta_2\\%')} change in the size of a
+                        house is associated with a
+                        {inlineKatex('1\\%')} increase in the
                         house price.
                     </>,
                     isCorrect: false,
@@ -224,10 +233,10 @@ export const LogarithmTakeaway = ({
                         This is a log-log regression in terms of size. So, you
                         correctly noticed that both changes must be expressed
                         in percentages; however, you should use
-                        a {inlineKatex('β2%')} change for the price, not for
-                        the size. Remember, we always
+                        a {inlineKatex('\\beta_2\\%')} change for the price,
+                        not for the size. Remember, we always
                         change {inlineKatex('X')} (size in this regression)
-                        by {inlineKatex('1%')} first in log-log regressions.
+                        by {inlineKatex('1\\%')} first in log-log regressions.
                     </>
                 },
                 {
@@ -235,22 +244,23 @@ export const LogarithmTakeaway = ({
                     index: 'D',
                     text: <>
                         If a house has a view, the price
-                        is {inlineKatex('β2%')} higher.
+                        is {inlineKatex('\\beta_2\\%')} higher.
                     </>,
                     isCorrect: false,
                     feedback: <>
                         This is a log-linear regression in terms of view. So,
                         the change cannot be interpreted as a percentage
                         change, and the coefficient of view is
-                        not {inlineKatex('β2')}.
+                        not {inlineKatex('\\beta_2')}.
                     </>,
                 },
                 {
                     id: 'log3-choice-E',
                     index: 'E',
                     text: <>
-                        A {inlineKatex('1%')} change in the size of a house is
-                        associated with a {inlineKatex('β2%')} increase in the
+                        A {inlineKatex('1\\%')} change in the size of a house
+                        is associated with a
+                        {inlineKatex('\\beta_2\\%')} increase in the
                         house price.
                     </>,
                     isCorrect: true,
@@ -258,9 +268,9 @@ export const LogarithmTakeaway = ({
                         This is a log-log regression in terms of size. So, you
                         correctly noticed that both changes must be expressed
                         in percentages and you correctly started your
-                        interpretation with {inlineKatex('1%')} change
+                        interpretation with {inlineKatex('1\\%')} change
                         in {inlineKatex('X')} (size in this regression) is
-                        associated with a {inlineKatex('β2%')} change
+                        associated with a {inlineKatex('\\beta_2\\%')} change
                         in {inlineKatex('Y')} (price in this regression).
                     </>
                 }
