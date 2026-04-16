@@ -141,10 +141,8 @@ export const LogarithmTakeaway = ({
                 {
                     id: 'log2-choice-C',
                     index: 'C',
-                    text: <>
-                        By regressing grade on the {inlineKatex('ln(the ' +
-                        'amount of time spent studying)')}
-                    </>,
+                    text: <>By regressing grade on
+                        the {inlineKatex('ln(study time)')}</>,
                     isCorrect: true,
                     feedback: 'Yes! A linear-log regression can accurately ' +
                     'capture the quadratic shape explained in the question.'
@@ -153,8 +151,8 @@ export const LogarithmTakeaway = ({
                     id: 'log2-choice-D',
                     index: 'D',
                     text: <>
-                        By regressing {inlineKatex('ln(the amount of time ' +
-                        'spent studying)')} on {inlineKatex('ln(grade)')}
+                        By regressing {inlineKatex('ln(study time)')}<br />
+                        on {inlineKatex('ln(grade)')}
                     </>,
                     isCorrect: false,
                     feedback: 'This answer describes a log-log regression, ' +
