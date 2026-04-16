@@ -242,15 +242,18 @@ export const SimulationFour = () => {
                         />
                     )}
                     {isLogGroupComplete && (
-                        <div className="simulation__step-prompt d-flex p-2 mt-2
-                            align-items-center justify-content-center gap-2
-                            bg-warning rounded">
-                            <button
-                                className="btn btn-sm btn-success"
-                                onClick={handleLogGroupReset}>
-                                Try another Group &raquo;
-                            </button>
-                            <span>or</span>
+                        <div className={`simulation__step-prompt 
+                            ${progress[stage] < 2 ? ` d-flex align-items-center
+                                 justify-content-center gap-2 bg-warning 
+                                 rounded p-2 m-2` : ''}`}>
+                            {progress[stage] < 2 && <>
+                                <button
+                                    className="btn btn-sm btn-success"
+                                    onClick={handleLogGroupReset}>
+                                    Try another Group &raquo;
+                                </button>
+                                <span>or</span>
+                            </>}
                             <StepProgressButton
                                 progress={progress}
                                 stage={stage}
