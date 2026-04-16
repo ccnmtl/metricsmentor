@@ -86,10 +86,10 @@ export const SimulationFour = () => {
         title: 'Non-linear Regressions',
         content: <>
             <p>
-            In real-world data, not all relationships between variables are
-            linear. This simulation explores three common types of non-linear
-            regressions used to capture complex patterns: Polynomials,
-            Logarithms, and Regressions with Interaction Variables.
+            In real-world data, relationships between variables are often not
+            strictly linear. This simulation explores two commonly used
+            approaches for modeling nonlinearity: Polynomial regressions and
+            Logarithmic transformations.
             </p>
             {mkModuleBtns()}
         </>
@@ -103,12 +103,12 @@ export const SimulationFour = () => {
             title: 'Learning objectives: Polynomials',
             content: <>
                 <p>
-                    In this section, you&rsquo;ll study quadratic and cubic
-                    specifications and explore how these regressions can better
-                    capture relationships in data compared to a linear fit. By
-                    examining data plots and curve shapes, you&rsquo;ll compare
-                    linear, quadratic, and cubic regressions, and work through
-                    the steps to find the best-fitting model.
+                    In this section, you&rsquo;ll examine quadratic and cubic
+                    specifications and how they can better capture data
+                    patterns than a simple linear model. By analyzing data
+                    plots and curve shapes, you&rsquo;ll compare linear,
+                    quadratic, and cubic regressions and work through the
+                    steps to identify the best-fitting model.
                 </p>
                 {mkProgressBar()}
             </>
@@ -191,13 +191,12 @@ export const SimulationFour = () => {
             title: 'Learning objectives: Logarithms',
             content: <>
                 <p>
-                    This exercise teaches you to compare linear and
-                    log-transformed regression models. You&rsquo;ll learn to
-                    recognize when log transformations improve model fit,
-                    interpret coefficients across model types, evaluate model
-                    fit using both visual diagnostics and statistical criteria,
-                    and build intuition for selecting the functional form that
-                    best represents the underlying relationship in the data.
+                    This exercise guides you in comparing linear and
+                    log-transformed models. You&rsquo;ll learn when log
+                    transformations improve fit, how to interpret
+                    coefficients across models, evaluate fit using visual
+                    and statistical criteria, and build intuition for choosing
+                    the functional form that best represents the data.
                 </p>
                 {mkProgressBar()}
             </>
