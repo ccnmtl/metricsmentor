@@ -133,7 +133,7 @@ export const RealDataPolynomials = ({
     // The results for the real and real2 datasets are identical
     const testResults = [
         [ // Linear vs Quadratic
-            '\\beta_2',
+            '\\beta_2 = 0',
             '\\beta_2 \\neq 0',
             '\\beta_2 \\text{ is significantly different from } 0',
             'Quadratic'
@@ -146,7 +146,7 @@ export const RealDataPolynomials = ({
             'Cubic'
         ],
         [ // Quadratic vs Cubic
-            '\\beta_3',
+            '\\beta_3 = 0',
             '\\beta_3 \\neq 0',
             '\\beta_2 \\text{ is significantly different from } 0',
             'Cubic'
