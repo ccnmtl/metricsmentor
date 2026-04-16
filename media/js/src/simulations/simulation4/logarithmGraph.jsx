@@ -50,7 +50,7 @@ export const LogarithmGraph = ({
         ? (fits.length > 0 ? fits : ['none'])
         : fits;
 
-    const makePlotData = (fitKey, fitIndex) => {
+    const makePlotData = (fitKey, fitIndex, isHighlighted) => {
         const x = model.X;
         const y = model.Y;
         const logX = model.log_X || x;
@@ -168,7 +168,10 @@ export const LogarithmGraph = ({
             xaxis: { title: xAxisTitle, type: xAxisType },
             yaxis: { title: yAxisTitle, type: yAxisType },
             margin: { t: 60, b: 40, l: 50, r: 20 },
-            showlegend: false
+            showlegend: false,
+            paper_bgcolor: isHighlighted
+                ? 'rgba(183, 221, 221, 0.2)' : 'white',
+            plot_bgcolor: 'rgba(255, 255, 255, 0)'
         };
 
         return { data, layout };
@@ -198,10 +201,10 @@ export const LogarithmGraph = ({
     return (
         <div style={wrapperStyle}>
             {chosenFits.map((fitKey, fitIndex) => {
-                const { data, layout } = makePlotData(
-                    fitKey, fitIndex
-                );
                 const isHighlighted = highlightedFit === fitKey;
+                const { data, layout } = makePlotData(
+                    fitKey, fitIndex, isHighlighted
+                );
                 const childWidth = isRealData
                     ? (chosenFits.length === 1 ? '100%' : '48%')
                     : '50%';
@@ -212,10 +215,7 @@ export const LogarithmGraph = ({
                     width: childWidth,
                     minHeight: chosenFits.length > 2 ? '400px' : '100%',
                     border: isHighlighted ?
-                        '2px solid gold' : '2px solid #ddd',
-                    boxShadow: isHighlighted
-                        ? 'inset 0 0 1rem -4px rgba(255,215,0,0.7)'
-                        : 'inset 0 0 1rem -4px rgba(0,0,0,0.08)',
+                        '2px solid teal' : '2px solid #ddd',
                     flexGrow: 1
                 } : {
                     display: 'flex',
@@ -223,10 +223,7 @@ export const LogarithmGraph = ({
                     width: '50%',
                     height: '100%',
                     border: isHighlighted ?
-                        '2px solid gold' : '2px solid #ddd',
-                    boxShadow: isHighlighted
-                        ? 'inset 0 0 1rem -4px rgba(255,215,0,0.7)'
-                        : 'inset 0 0 1rem -4px rgba(0,0,0,0.08)'
+                        '2px solid teal' : '2px solid #ddd'
                 };
 
                 return (
