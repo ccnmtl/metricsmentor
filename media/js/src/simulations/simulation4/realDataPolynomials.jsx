@@ -352,6 +352,6 @@ RealDataPolynomials.propTypes = {
     setCompareRegLine: PropTypes.func.isRequired,
     compareRegLine: PropTypes.arrayOf(PropTypes.string).isRequired,
     submissionId: PropTypes.number.isRequired,
-    isCorrect: PropTypes.bool.isRequired,
+    isCorrect: PropTypes.arrayOf(PropTypes.bool).isRequired,
     setIsCorrect: PropTypes.func.isRequired
 };

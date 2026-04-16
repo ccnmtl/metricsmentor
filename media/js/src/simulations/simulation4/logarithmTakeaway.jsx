@@ -303,11 +303,14 @@ export const LogarithmTakeaway = ({
                         You&rsquo;ve successfully completed Logarithms!<br />
                         &#127881; &#127881; &#127881;
                     </div>
-                    <Link to={`/course/${coursePk}/simulations/`}
-                        data-cy="finish-to-dashboard"
-                        className="btn btn-success">
+                    <div style={{display: 'flex', justifyContent: 'center',
+                        gap: '10px'}}>
+                        <Link to={`/course/${coursePk}/simulations/`}
+                            data-cy="finish-to-dashboard"
+                            className="btn btn-success">
                         Back to Dashboard
-                    </Link>
+                        </Link>
+                    </div>
                 </>
             )}
         </div>

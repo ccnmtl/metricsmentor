@@ -421,7 +421,7 @@ export const LogarithmQuizzes = ({
                     </p>
                     {!isLastDataset && (
                         <button
-                            className="btn btn-outline-primary mt-2"
+                            className="btn btn-sm btn-outline-primary mt-2"
                             onClick={onAnalyzeAnother}>
                             Analyze another dataset
                         </button>

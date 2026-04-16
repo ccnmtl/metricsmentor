@@ -247,7 +247,6 @@ export const LogarithmGraph = ({
 
 LogarithmGraph.propTypes = {
     selectedModel: PropTypes.string,
-    selectedFit: PropTypes.string,
     highlightedFit: PropTypes.string,
     showDatasets: PropTypes.arrayOf(PropTypes.bool),
     compareRegLine: PropTypes.arrayOf(PropTypes.string)
