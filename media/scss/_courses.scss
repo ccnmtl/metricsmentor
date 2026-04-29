@@ -1,0 +1,137 @@
+// Courses list – responsive grid/card layout
+// Desktop: 3-column grid row (table-like)
+// Mobile:  stacked cards with inline labels
+
+$courses-grid-columns: 2fr 1fr 2fr;
+$courses-border-color: $gray-md-300;
+$courses-hover-bg: $gray-md-050;
+$courses-header-bg: $bluegray-md-050;
+$courses-row-radius: $radius-md;
+
+.courses-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+    border: 0.0625rem solid $courses-border-color;
+    border-radius: $courses-row-radius;
+    overflow: hidden;
+
+    // ── Header row ──────────────────────────────────
+    &__header {
+        display: none;
+
+        @include media-breakpoint-up(md) {
+            display: grid;
+            grid-template-columns: $courses-grid-columns;
+            gap: 0;
+            background-color: $courses-header-bg;
+            border-bottom: 0.125rem solid $courses-border-color;
+        }
+
+        .courses-list__cell {
+            padding: 0.75rem 1rem;
+            font-family: $font-family-sans-serif-secondary;
+            font-weight: 600;
+            font-size: 0.8125rem;
+            text-transform: uppercase;
+            letter-spacing: 0.04em;
+            color: $bluegray-md-700;
+        }
+    }
+
+    // ── Data row (each course) ──────────────────────
+    &__row {
+        display: flex;
+        flex-direction: column;
+        gap: 0.25rem;
+        padding: 1rem;
+        text-decoration: none;
+        color: inherit;
+        border-bottom: 0.0625rem solid $courses-border-color;
+        transition: background-color 0.15s ease, box-shadow 0.15s ease;
+
+        &:last-child {
+            border-bottom: none;
+        }
+
+        &:hover,
+        &:focus-visible {
+            background-color: $courses-hover-bg;
+            text-decoration: none;
+            color: inherit;
+        }
+
+        &:focus-visible {
+            outline: 0.125rem solid $bluegray-md-400;
+            outline-offset: -0.125rem;
+        }
+
+        @include media-breakpoint-up(md) {
+            display: grid;
+            grid-template-columns: $courses-grid-columns;
+            gap: 0;
+            padding: 0;
+            align-items: center;
+        }
+    }
+
+    // ── Individual cell ─────────────────────────────
+    &__cell {
+        display: flex;
+        align-items: baseline;
+        gap: 0.5rem;
+        min-width: 0; // allow text truncation / wrapping inside grid
+
+        @include media-breakpoint-up(md) {
+            padding: 0.875rem 1rem;
+        }
+
+        // Title column
+        &--title {
+            font-weight: 500;
+            color: $primary;
+            font-size: 1.0625rem;
+
+            @include media-breakpoint-up(md) {
+                font-size: 1rem;
+            }
+        }
+
+        // Semester column
+        &--semester {
+            color: $gray-md-700;
+            font-size: 0.9375rem;
+        }
+
+        // Authors column
+        &--authors {
+            color: $gray-md-600;
+            font-size: 0.875rem;
+        }
+    }
+
+    // ── Inline labels (visible only on mobile) ──────
+    &__label {
+        display: inline-block;
+        flex-shrink: 0;
+        font-family: $font-family-sans-serif-secondary;
+        font-weight: 600;
+        font-size: 0.6875rem;
+        text-transform: uppercase;
+        letter-spacing: 0.05em;
+        color: $bluegray-md-500;
+        min-width: 5rem;
+
+        @include media-breakpoint-up(md) {
+            display: none;
+        }
+    }
+
+    // ── Authors text wrapping ───────────────────────
+    &__authors-text {
+        display: inline;
+        word-break: break-word;
+        overflow-wrap: anywhere;
+        line-height: 1.45;
+    }
+}
