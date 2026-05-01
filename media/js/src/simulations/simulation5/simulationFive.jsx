@@ -2,18 +2,19 @@ import React, { useState, useEffect, useRef } from 'react';
 import { SimulationPanel } from '../../SimulationPanel';
 import { STATIC_URL, createSubmission, getCoursePk } from '../../utils/utils';
 import { StepProgressButton } from '../../StepProgressButton';
+import { WhatIsD1xD2 } from './whatIsD1xD2';
 
 // const coursePk = getCoursePk();
 
 export const SimulationFive = () => {
     const [stage, setStage] = useState(0);
     const [submissionId, setSubmissionId] = useState(null);
-    const [progress, setProgress] = useState([0]); // One module: Interactions
+    const [progress, setProgress] = useState([0, 0, 0]); // Three modules
     const initialized = useRef(false);
 
     const handleStage = (e) => setStage(parseInt(e.target.value));
 
-    const mkModuleBtns = () => ['Interactions']
+    const mkModuleBtns = () => ['D1 × D2', 'D × X', 'X1 × X2']
         .map((label, index) => (
             <button onClick={handleStage} key={index}
                 value={index} className={'btn btn-primary m-1'}
@@ -49,12 +50,12 @@ export const SimulationFive = () => {
         </>
     };
 
-    const interactionSteps = [
+    const d1xd2Steps = [
         preambleStep,
         {
             icon: `${STATIC_URL}/img/icon-goal.svg`,
-            headerId: 'learningObjectiveInteractions',
-            title: 'Learning objectives: Interactions',
+            headerId: 'learningObjectiveD1XD2',
+            title: 'Learning objectives: D1 × D2',
             content: <>
                 <p>
                     In this simulation, you will learn how to interpret
@@ -67,18 +68,16 @@ export const SimulationFive = () => {
         },
         {
             headerId: 'learnInteractions',
-            title: 'Part 1: Learning about Interactions',
+            title: 'What are D1 × D2 interactions?',
             content: <>
-                <p>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                    Nullam scelerisque, nisi at porta varius, enim sem
-                    venenatis tortor, vel efficitur nisi nunc ac nisi.
-                </p>
+                {progress[stage] < 1 && (
+                    <WhatIsD1xD2 />
+                )}
                 <StepProgressButton
                     progress={progress}
                     stage={stage}
                     setProgress={setProgress}
-                    continueLabel="Continue to Apply »"
+                    continueLabel="Continue to Real dataset »"
                     reviewLabel="Review »"
                     progressNumber={1}
                 />
@@ -87,7 +86,7 @@ export const SimulationFive = () => {
         ...(progress[stage] > 0
             ? [{
                 headerId: 'applyInteractions',
-                title: 'Part 2: Applying Interactions',
+                title: 'Real dataset problem',
                 content: <>
                     <p>
                         Pellentesque habitant morbi tristique senectus et netus
@@ -124,6 +123,162 @@ export const SimulationFive = () => {
             : [])
     ];
 
+    const dXxSteps = [
+        preambleStep,
+        {
+            icon: `${STATIC_URL}/img/icon-goal.svg`,
+            headerId: 'learningObjectiveDxX',
+            title: 'Learning objectives: D × X',
+            content: <>
+                <p>
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                    Sed do eiusmod tempor incididunt ut labore et dolore
+                    magna aliqua. Ut enim ad minim veniam, quis nostrud
+                    exercitation ullamco laboris nisi ut aliquip ex ea
+                    commodo consequat.
+                </p>
+                {mkProgressBar()}
+            </>
+        },
+        {
+            headerId: 'learnDxX',
+            title: 'What are D × X interactions?',
+            content: <>
+                {progress[stage] < 1 && (
+                    <p>
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                        Sed do eiusmod tempor incididunt ut labore et dolore
+                        magna aliqua.
+                    </p>
+                )}
+                <StepProgressButton
+                    progress={progress}
+                    stage={stage}
+                    setProgress={setProgress}
+                    continueLabel="Continue to Real dataset »"
+                    reviewLabel="Review »"
+                    progressNumber={1}
+                />
+            </>
+        },
+        ...(progress[stage] > 0
+            ? [{
+                headerId: 'applyDxX',
+                title: 'Real dataset problem',
+                content: <>
+                    <p>
+                        Pellentesque habitant morbi tristique senectus et netus
+                        et malesuada fames ac turpis egestas. Vestibulum tortor
+                        quam, feugiat vitae, ultricies eget, tempor sit amet,
+                        ante.
+                    </p>
+                    <StepProgressButton
+                        progress={progress}
+                        stage={stage}
+                        setProgress={setProgress}
+                        continueLabel="Continue to Assess »"
+                        reviewLabel="Review »"
+                        progressNumber={2}
+                    />
+                </>
+            }]
+            : []),
+        ...(progress[stage] > 1
+            ? [{
+                headerId: 'assessDxX',
+                title: 'Part 3: Assessing Interactions',
+                content: <>
+                    <p>
+                        Donec eu libero sit amet quam egestas semper. Aenean
+                        ultricies mi vitae est. Mauris placerat eleifend leo.
+                    </p>
+                    <p>
+                        Simulation complete! You have learned the basics of
+                        Interactions.
+                    </p>
+                </>
+            }]
+            : [])
+    ];
+
+    const x1xx2Steps = [
+        preambleStep,
+        {
+            icon: `${STATIC_URL}/img/icon-goal.svg`,
+            headerId: 'learningObjectiveX1xX2',
+            title: 'Learning objectives: X1 × X2',
+            content: <>
+                <p>
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit.
+                    Sed do eiusmod tempor incididunt ut labore et dolore
+                    magna aliqua. Ut enim ad minim veniam, quis nostrud
+                    exercitation ullamco laboris nisi ut aliquip ex ea
+                    commodo consequat.
+                </p>
+                {mkProgressBar()}
+            </>
+        },
+        {
+            headerId: 'learnX1xX2',
+            title: 'What are X1 × X2 interactions?',
+            content: <>
+                {progress[stage] < 1 && (
+                    <p>
+                        Lorem ipsum dolor sit amet, consectetur adipiscing
+                        elit. Sed do eiusmod tempor incididunt ut labore et
+                        dolore magna aliqua.
+                    </p>
+                )}
+                <StepProgressButton
+                    progress={progress}
+                    stage={stage}
+                    setProgress={setProgress}
+                    continueLabel="Continue to Real dataset »"
+                    reviewLabel="Review »"
+                    progressNumber={1}
+                />
+            </>
+        },
+        ...(progress[stage] > 0
+            ? [{
+                headerId: 'applyX1xX2',
+                title: 'Real dataset problem',
+                content: <>
+                    <p>
+                        Pellentesque habitant morbi tristique senectus et netus
+                        et malesuada fames ac turpis egestas. Vestibulum tortor
+                        quam, feugiat vitae, ultricies eget, tempor sit amet,
+                        ante.
+                    </p>
+                    <StepProgressButton
+                        progress={progress}
+                        stage={stage}
+                        setProgress={setProgress}
+                        continueLabel="Continue to Assess »"
+                        reviewLabel="Review »"
+                        progressNumber={2}
+                    />
+                </>
+            }]
+            : []),
+        ...(progress[stage] > 1
+            ? [{
+                headerId: 'assessX1xX2',
+                title: 'Part 3: Assessing Interactions',
+                content: <>
+                    <p>
+                        Donec eu libero sit amet quam egestas semper. Aenean
+                        ultricies mi vitae est. Mauris placerat eleifend leo.
+                    </p>
+                    <p>
+                        Simulation complete! You have learned the basics of
+                        Interactions.
+                    </p>
+                </>
+            }]
+            : [])
+    ];
+
     useEffect(() => {
         const initializeSubmission = async() => {
             if (!initialized.current && submissionId === null) {
@@ -145,7 +300,19 @@ export const SimulationFive = () => {
     return (
         <>
             {stage === 0 && (
-                <SimulationPanel steps={interactionSteps}
+                <SimulationPanel steps={d1xd2Steps}
+                    graphContent={<div className="p-4">Interactive Graph</div>}
+                    modals={[]}
+                />
+            )}
+            {stage === 1 && (
+                <SimulationPanel steps={dXxSteps}
+                    graphContent={<div className="p-4">Interactive Graph</div>}
+                    modals={[]}
+                />
+            )}
+            {stage === 2 && (
+                <SimulationPanel steps={x1xx2Steps}
                     graphContent={<div className="p-4">Interactive Graph</div>}
                     modals={[]}
                 />
