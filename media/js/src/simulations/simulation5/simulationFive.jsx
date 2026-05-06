@@ -3,6 +3,8 @@ import { SimulationPanel } from '../../SimulationPanel';
 import { STATIC_URL, createSubmission, getCoursePk } from '../../utils/utils';
 import { StepProgressButton } from '../../StepProgressButton';
 import { WhatIsD1xD2 } from './whatIsD1xD2';
+import { InteractionsD1D2Modal } from './interactionD1D2modal';
+import { NoInteractionTable, WithInteractionTable } from './d1xd2Tables';
 
 // const coursePk = getCoursePk();
 
@@ -10,6 +12,11 @@ export const SimulationFive = () => {
     const [stage, setStage] = useState(0);
     const [submissionId, setSubmissionId] = useState(null);
     const [progress, setProgress] = useState([0, 0, 0]); // Three modules
+    const [checkedModels, setCheckedModels] = useState({
+        noInteraction: true,
+        withInteraction: false,
+        effectsDiD: false,
+    });
     const initialized = useRef(false);
 
     const handleStage = (e) => setStage(parseInt(e.target.value));
@@ -55,7 +62,7 @@ export const SimulationFive = () => {
         {
             icon: `${STATIC_URL}/img/icon-goal.svg`,
             headerId: 'learningObjectiveD1XD2',
-            title: 'Learning objectives: D1 × D2',
+            title: 'Learning objectives: D1 × D2 interactions',
             content: <>
                 <p>
                     In this simulation, you will learn how to interpret
@@ -71,7 +78,10 @@ export const SimulationFive = () => {
             title: 'What are D1 × D2 interactions?',
             content: <>
                 {progress[stage] < 1 && (
-                    <WhatIsD1xD2 />
+                    <WhatIsD1xD2
+                        checkedModels={checkedModels}
+                        setCheckedModels={setCheckedModels}
+                    />
                 )}
                 <StepProgressButton
                     progress={progress}
@@ -128,7 +138,7 @@ export const SimulationFive = () => {
         {
             icon: `${STATIC_URL}/img/icon-goal.svg`,
             headerId: 'learningObjectiveDxX',
-            title: 'Learning objectives: D × X',
+            title: 'Learning objectives: D × X interactions',
             content: <>
                 <p>
                     Lorem ipsum dolor sit amet, consectetur adipiscing elit.
@@ -206,7 +216,7 @@ export const SimulationFive = () => {
         {
             icon: `${STATIC_URL}/img/icon-goal.svg`,
             headerId: 'learningObjectiveX1xX2',
-            title: 'Learning objectives: X1 × X2',
+            title: 'Learning objectives: X1 × X2 interactions',
             content: <>
                 <p>
                     Lorem ipsum dolor sit amet, consectetur adipiscing elit.
@@ -301,8 +311,17 @@ export const SimulationFive = () => {
         <>
             {stage === 0 && (
                 <SimulationPanel steps={d1xd2Steps}
-                    graphContent={<div className="p-4">Interactive Graph</div>}
-                    modals={[]}
+                    graphContent={
+                        <div className="p-4">
+                            {checkedModels.noInteraction && (
+                                <NoInteractionTable />
+                            )}
+                            {checkedModels.withInteraction && (
+                                <WithInteractionTable />
+                            )}
+                        </div>
+                    }
+                    modals={[<InteractionsD1D2Modal key="d1d2-modal" />]}
                 />
             )}
             {stage === 1 && (
