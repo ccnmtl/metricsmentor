@@ -33,7 +33,7 @@ export const Table = ({ headers = [], rows = [], tableClass = '' }) => {
 };
 
 Table.propTypes = {
-    headers: PropTypes.arrayOf(PropTypes.string),
+    headers: PropTypes.arrayOf(PropTypes.node),
     rows: PropTypes.arrayOf(PropTypes.arrayOf(PropTypes.shape({
         content: PropTypes.node.isRequired,
         isHeader: PropTypes.bool,
