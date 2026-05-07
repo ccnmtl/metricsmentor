@@ -164,3 +164,77 @@ export const WithInteractionTable = () => (
         />
     </>
 );
+
+export const DiDSetUpTable = () => (
+    <>
+        <Table
+            headers={[
+                <Katex key="h0"
+                    tex={'\\text{Group}'} />,
+                <Katex key="h1" tex={'D_1, D_2'} />,
+                <Katex key="h2" tex={'\\bar{y}'} />
+            ]}
+            rows={[
+                [
+                    {content: 'A: Control, Before'},
+                    {content: <Katex tex={'0, 0'} />},
+                    {content: <Katex tex={'\\hat\\beta_0'} />}
+                ],
+                [
+                    {content: 'B: Control, After'},
+                    {content: <Katex tex={'1, 0'} />},
+                    {content: <Katex tex={'\\hat\\beta_0 + \\hat\\beta_1'} />}
+                ],
+                [
+                    {content: 'C: Treated, Before'},
+                    {content: <Katex tex={'0, 1'} />},
+                    {content: <Katex tex={'\\hat\\beta_0 + \\hat\\beta_2'} />}
+                ],
+                [
+                    {content: 'D: Treated, After'},
+                    {content: <Katex tex={'1, 1'} />},
+                    {content: <Katex tex={'\\hat\\beta_0 + \\hat\\beta_1 + ' +
+                        '\\hat\\beta_2 + \\hat\\beta_3'} />}
+                ],
+            ]}
+        />
+    </>
+);
+
+export const DiDyValueTable = () => (
+    <>
+        <Table
+            headers={[
+                <Katex key="h0"
+                    tex={'\\text{Group}'} />,
+                <Katex key="h1" tex={'\\bar{y}\\text{ value}'} />,
+                <Katex key="h2" tex={'\\text{Group changes before} ' +
+                    '\\to \\text{after}'} />
+            ]}
+            rows={[
+                [
+                    {content: 'A: Control, Before'},
+                    {content: <Katex tex={'402.50'} />},
+                    {content: <Katex tex={'-'} />}
+                ],
+                [
+                    {content: 'B: Control, After'},
+                    {content: <Katex tex={'431.80'} />},
+                    {content: <Katex tex={'29.30 (\\hat\\beta_1)'} />}
+                ],
+                [
+                    {content: 'C: Treated, Before'},
+                    {content: <Katex tex={'418.77'} />},
+                    {content: <Katex tex={'-'} />}
+                ],
+                [
+                    {content: 'D: Treated, After'},
+                    {content: <Katex tex={'460.98'} />},
+                    {content: <Katex tex={'42.21 (\\hat\\beta_1 + ' +
+                        '\\hat\\beta_3)'} />}
+                ],
+            ]}
+        />
+    </>
+);
+
