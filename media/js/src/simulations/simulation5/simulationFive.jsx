@@ -5,6 +5,7 @@ import { StepProgressButton } from '../../StepProgressButton';
 import { WhatIsD1xD2 } from './whatIsD1xD2';
 import { InteractionsD1D2Modal } from './interactionD1D2modal';
 import { NoInteractionTable, WithInteractionTable } from './d1xd2Tables';
+import { DiDGraph } from './didGraph';
 
 // const coursePk = getCoursePk();
 
@@ -312,12 +313,22 @@ export const SimulationFive = () => {
             {stage === 0 && (
                 <SimulationPanel steps={d1xd2Steps}
                     graphContent={
-                        <div className="p-4">
-                            {checkedModels.noInteraction && (
-                                <NoInteractionTable />
-                            )}
-                            {checkedModels.withInteraction && (
-                                <WithInteractionTable />
+                        <div className="p-4" style={{
+                            height: '100%',
+                            display: 'flex',
+                            flexDirection: 'column',
+                        }}>
+                            {checkedModels.effectsDiD ? (
+                                <DiDGraph />
+                            ) : (
+                                <>
+                                    {checkedModels.noInteraction && (
+                                        <NoInteractionTable />
+                                    )}
+                                    {checkedModels.withInteraction && (
+                                        <WithInteractionTable />
+                                    )}
+                                </>
                             )}
                         </div>
                     }
