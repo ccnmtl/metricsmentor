@@ -148,7 +148,7 @@ export const RealDataPolynomials = ({
         [ // Quadratic vs Cubic
             '\\beta_3 = 0',
             '\\beta_3 \\neq 0',
-            '\\beta_2 \\text{ is significantly different from } 0',
+            '\\beta_3 \\text{ is significantly different from } 0',
             'Cubic'
         ]
     ];
