@@ -48,7 +48,7 @@ export const NoInteractionTable = () => (
                     } />},
                     {content: <Katex
                         tex={'433.71'} />},
-                    {content: <Katex tex={
+                    {content: <Katex className="hi-val" tex={
                         '33.43~(\\hat\\beta_1)'} />},
                 ],
                 [
@@ -75,7 +75,7 @@ export const NoInteractionTable = () => (
                     } />},
                     {content: <Katex
                         tex={'457.04'} />},
-                    {content: <Katex tex={
+                    {content: <Katex className="hi-val" tex={
                         '33.43~(\\hat\\beta_1)'} />},
                 ],
             ]}
@@ -129,7 +129,7 @@ export const WithInteractionTable = () => (
                     } />},
                     {content: <Katex
                         tex={'431.80'} />},
-                    {content: <Katex tex={
+                    {content: <Katex className="hi-val" tex={
                         '29.30~(\\hat\\beta_1)'} />},
                 ],
                 [
@@ -156,7 +156,7 @@ export const WithInteractionTable = () => (
                     } />},
                     {content: <Katex
                         tex={'460.98'} />},
-                    {content: <Katex tex={
+                    {content: <Katex className="hi-val" tex={
                         '42.21~(\\hat\\beta_1' +
                         ' + \\hat\\beta_3)'} />},
                 ],
