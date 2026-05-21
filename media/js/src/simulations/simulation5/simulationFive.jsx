@@ -19,6 +19,9 @@ export const SimulationFive = () => {
         effectsDiD: false,
     });
     const initialized = useRef(false);
+    const noModelSelected = !checkedModels.noInteraction
+        && !checkedModels.withInteraction
+        && !checkedModels.effectsDiD;
 
     const handleStage = (e) => setStage(parseInt(e.target.value));
 
@@ -320,6 +323,17 @@ export const SimulationFive = () => {
                         }}>
                             {checkedModels.effectsDiD ? (
                                 <DiDGraph />
+                            ) : noModelSelected ? (
+                                <div style={{
+                                    alignItems: 'center',
+                                    color: '#555',
+                                    display: 'flex',
+                                    fontSize: '1.2rem',
+                                    height: '100%',
+                                    justifyContent: 'center',
+                                }}>
+                                    Pick A Dataset
+                                </div>
                             ) : (
                                 <>
                                     {checkedModels.noInteraction && (
