@@ -25,9 +25,17 @@ export const WhatIsD1xD2 = ({ checkedModels, setCheckedModels }) => {
     return (
         <>
             <p>
-                Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                Nullam scelerisque, nisi at porta varius, enim sem
-                venenatis tortor, vel efficitur nisi nunc ac nisi.
+                Interactions between two dummies have two separate use cases:
+                <ul>
+                    <li>
+                        Creating differences in differences estimator to measure
+                        the impact of a treatment.
+                    </li>
+                    <li>
+                        Creating 4 groups, that are combinations of 2 binary
+                        variables, as long as there is an interaction term.
+                    </li>
+                </ul>
             </p>
             <PromptBlock
                 text="First, take a moment to review the basic concepts relevant
@@ -43,9 +51,9 @@ export const WhatIsD1xD2 = ({ checkedModels, setCheckedModels }) => {
             </button>
 
             <PromptBlock list={[
-                'Lorem ipsum dolor sit amet',
-                'consectetur adipiscing elit.',
-                'Nullam scelerisque, nisi at'
+                'Try clicking on each case to evaluate how each case differs',
+                'NOTE: If there are no interactions you can’t compare 4 '
+                + 'different groups, but you can compare two at a time.',
             ]} />
 
             <div className="form-check mt-3">
@@ -63,8 +71,8 @@ export const WhatIsD1xD2 = ({ checkedModels, setCheckedModels }) => {
             </div>
             {checkedModels.noInteraction ? (
                 <div className="ps-4 mt-2 mb-3 dataset-variable-item">
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing
-                        elit. Nullam scelerisque, nisi at porta varius.</p>
+                    <p>Notice that in this model there is no interaction term
+                        (D1xD2).</p>
                     <p className='fw-bold'>For no-interaction model:</p>
 
                     <Katex tex={
@@ -80,15 +88,16 @@ export const WhatIsD1xD2 = ({ checkedModels, setCheckedModels }) => {
                         '\\hat{y} = 400.28 + 33.43 D_1 + 23.33 D_2'
                     } />
                     <div className='mt-4'>
-                        <PromptBlock text=
-                            "Prompts to guide on what to look for" />
+                        <PromptBlock text={
+                            `Compare Group B to Group D and check to see if the
+                            values are the same.`} />
                     </div>
                     <div><b>Key Points:</b>
                         <ul>
-                            <li>In this no-interaction model, D1 shifts y by
-                                a fixed amount <Katex tex={'\\beta_1'} />,
-                                regardless of <Katex tex={'D_2'} /></li>
-                            <li>Somthing about comparing groups?.</li>
+                            <li>
+                                There is no way to compare these 4 groups, in
+                                general, because there is no interaction term.
+                            </li>
                         </ul>
                     </div>
                 </div>
@@ -111,8 +120,8 @@ export const WhatIsD1xD2 = ({ checkedModels, setCheckedModels }) => {
             </div>
             {checkedModels.withInteraction ? (
                 <div className="ps-4 mt-2 mb-3 dataset-variable-item">
-                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing
-                        elit. Placeholder text for with-interaction model.</p>
+                    <p>Notice that in this model there is an interaction term
+                        (D1xD2).</p>
                     <p className='fw-bold'>For with-interaction model:</p>
 
                     <Katex tex={
@@ -131,7 +140,8 @@ export const WhatIsD1xD2 = ({ checkedModels, setCheckedModels }) => {
 
                     <div className='mt-4'>
                         <PromptBlock text=
-                            "Prompts to guide on what to look for" />
+                            {`Compare Group B to Group D and check to see 
+                            if the values are the same.`} />
                     </div>
                     <div><b>Key Points:</b>
                         <ul>
@@ -161,6 +171,9 @@ export const WhatIsD1xD2 = ({ checkedModels, setCheckedModels }) => {
                             <li>
                                 <Katex tex={'\\hat\\beta_3'} /> is the
                                 interaction term
+                            </li>
+                            <li>
+                                Conclusion: We can compare 4 separate groups
                             </li>
                         </ul>
                     </div>
