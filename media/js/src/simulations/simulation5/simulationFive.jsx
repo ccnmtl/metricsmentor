@@ -51,12 +51,20 @@ export const SimulationFive = () => {
         subtitle: 'Simulation 5',
         title: 'Interactions',
         content: <>
-            <p>
+            {/* <p>
                 This simulation focuses on Interaction Variables in regression
                 models. Interactions allow us to see how the effect of one
                 independent variable on the dependent variable changes
                 depending on the value of another independent variable.
-            </p>
+            </p> */}
+            It can be useful to have interaction terms (multiplication of 2
+            variables) in the regression. There are 3 kinds of intereactions:
+            <ul>
+                <li>Interaction between 2 dummies (D1xD2).</li>
+                <li>Interaction between a dummy and a continuous variable (DxX).
+                </li>
+                <li>Interactions between 2 continuous variables (X1xX2).</li>
+            </ul>
             {mkModuleBtns()}
         </>
     };
@@ -69,10 +77,9 @@ export const SimulationFive = () => {
             title: 'Learning objectives: D1 × D2 interactions',
             content: <>
                 <p>
-                    In this simulation, you will learn how to interpret
-                    interaction terms, understand their statistical
-                    significance, and see how they can improve model fit when
-                    relationships between variables are conditional.
+                After completing this section you will understand differences
+                    in differences estimator and evaluate the mean difference in
+                    the dependent variable for 4 groups rather than 2 at a time.
                 </p>
                 {mkProgressBar()}
             </>
