@@ -20,7 +20,7 @@
     "url": "git+https://github.com/ccnmtl/metricsmentor.git"
   },
   "devDependencies": {
-    "@babel/eslint-parser": "^7.22.15",
+    "@babel/eslint-parser": "^8.0.1",
     "@babel/preset-env": "^7.23.2",
     "@babel/preset-react": "^7.22.15",
     "@eslint/js": "^9.23.0",
