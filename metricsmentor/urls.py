@@ -24,19 +24,21 @@ urlpatterns = [
     path('cas/logout', cas_views.LogoutView.as_view(),
          name='cas_ng_logout'),
 
+    # LTI 1.1
     re_path(r'lti/', include('lti_provider.urls')),
     re_path(r'^course/lti/create/',
             views.LTICourseCreate.as_view(), name='lti-course-create'),
     re_path(r'^course/lti/(?P<context>\w[^/]*)/$',
             views.LTICourseSelector.as_view(), name='lti-course-select'),
 
-    path(".well-known/jwks.json", jwks, name="jwks"),
-    path("init/<uuid:registration_uuid>/", MyOIDCLoginInitView.as_view(),
-         name="oidc_init"),
-    path('<uuid:registration_uuid>/config.json',
+    # LTI 1.3
+    path("lti13/.well-known/jwks.json", jwks, name="jwks"),
+    path("lti13/init/<uuid:registration_uuid>/",
+         MyOIDCLoginInitView.as_view(), name="oidc_init"),
+    path('lti13/<uuid:registration_uuid>/config.json',
          JSONConfigView.as_view()),
-    path('launch/', LtiLaunchView.as_view(), name='lti-launch'),
-    path('tool_configuration', DynamicRegistrationView.as_view(),
+    path('lti13/launch/', LtiLaunchView.as_view(), name='lti-launch'),
+    path('lti13/tool_configuration', DynamicRegistrationView.as_view(),
          name='dynamic_registration'),
 
     re_path('^$', views.CoursesView.as_view()),

@@ -33,8 +33,13 @@ MIDDLEWARE += [  # noqa
     'django.contrib.sessions.middleware.SessionMiddleware',
     'lti_tool.middleware.LtiLaunchMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
-    'django.middleware.clickjacking.XFrameOptionsMiddleware',
     'lti_authentication.middleware.LtiLaunchAuthenticationMiddleware',
+]
+
+# Allow framing by Canvas
+MIDDLEWARE = [
+    m for m in MIDDLEWARE
+    if m != 'django.middleware.clickjacking.XFrameOptionsMiddleware'
 ]
 
 THUMBNAIL_SUBDIR = "thumbs"
@@ -72,13 +77,11 @@ SESSION_ENGINE = 'django.contrib.sessions.backends.signed_cookies'
 SESSION_COOKIE_SECURE = True
 SESSION_COOKIE_HTTPONLY = True
 SESSION_COOKIE_DOMAIN = None
-SESSION_COOKIE_SAMESITE = 'Lax'
-X_FRAME_OPTIONS = 'SAMEORIGIN'
 
 LTI_TOOL_CONFIGURATION = {
     'title': 'Metrics Mentor',
     'description': 'Econometrics Simulations',
-    'launch_url': 'launch/',
+    'launch_url': 'lti/',
     'embed_url': '',
     'embed_icon_url': '',
     'embed_tool_id': '',
