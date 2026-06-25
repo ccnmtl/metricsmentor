@@ -7,7 +7,8 @@ import { getCoursePk, toggleVisibility } from '../utils/utils';
 import { useState } from 'react';
 
 
-export const Dashboard = ({ isSuperUser, isFaculty, initialVisibleSims }) => {
+export const Dashboard = ({
+    isSuperUser, isFaculty, username, initialVisibleSims }) => {
 
     let { courseId } = useParams();
     const coursePk = getCoursePk();
@@ -16,6 +17,12 @@ export const Dashboard = ({ isSuperUser, isFaculty, initialVisibleSims }) => {
     );
 
     const handleToggle = async(simId) => {
+        const isShown = visibleSimulations.includes(simId);
+        const message = isShown
+            ? 'Are you sure you want to hide this simulation from students?'
+            : 'Are you sure you want to show this simulation to students?';
+        if (!window.confirm(message)) return;
+
         const result = await toggleVisibility(coursePk, simId);
         if (result.status === 'success') {
             setVisibleSimulations(prev => {
@@ -34,7 +41,7 @@ export const Dashboard = ({ isSuperUser, isFaculty, initialVisibleSims }) => {
     };
 
     const renderToggle = (simId) => {
-        if (!isSuperUser) return null;
+        if (!isSuperUser && username !== 'sa2076') return null;
         const isShown = visibleSimulations.includes(simId);
         return (
             <button
@@ -205,5 +212,6 @@ export const Dashboard = ({ isSuperUser, isFaculty, initialVisibleSims }) => {
 Dashboard.propTypes = {
     isSuperUser: PropTypes.bool,
     isFaculty: PropTypes.bool,
+    username: PropTypes.string,
     initialVisibleSims: PropTypes.array
 };

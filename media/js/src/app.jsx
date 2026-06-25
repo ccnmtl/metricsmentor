@@ -9,6 +9,7 @@ import { SimulationFive } from './simulations/simulation5/simulationFive';
 import { getCoursePk } from './utils/utils';
 
 const isSuperUser = window.MetricsMentor.currentUser.is_superuser;
+const username = window.MetricsMentor.currentUser.username;
 const coursePk = getCoursePk();
 
 export const App = () => {
@@ -43,6 +44,7 @@ export const App = () => {
                     element={<Dashboard
                         isSuperUser={isSuperUser}
                         isFaculty={isFaculty}
+                        username={username}
                         initialVisibleSims={initialVisibleSims} />} />
                 {(isSuperUser || isFaculty || coursePk === 6
                 || initialVisibleSims.includes(1)) && (
