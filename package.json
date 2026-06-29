@@ -21,7 +21,7 @@
   },
   "devDependencies": {
     "@babel/eslint-parser": "^7.22.15",
-    "@babel/preset-env": "^7.23.2",
+    "@babel/preset-env": "^8.0.2",
     "@babel/preset-react": "^7.22.15",
     "@eslint/js": "^9.23.0",
     "@pmmmwh/react-refresh-webpack-plugin": "^0.6.2",
