@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { PromptBlock } from '../../PromptBlock';
 import { Katex } from '../../utils/katexComponent';
+import { WageNoInteractionTable,
+    QuizScoreNoInteractionTable } from './d1xd2Tables';
 
 
 export const RealDataD1D2 = () => {
@@ -96,9 +98,6 @@ export const RealDataD1D2 = () => {
                 </p>
                 <p>
                     <b>Variables:</b>
-                    <span className="ms-2">
-                    For this dataset:
-                    </span>
                 </p>
                 <ul className="list-unstyled ms-3">
                     <li>South=0: Non-Southern states</li>
@@ -122,21 +121,21 @@ export const RealDataD1D2 = () => {
                 </div>
                 {checkedModels.noInteraction ? (
                     <div className="ps-4 mt-2 mb-3 dataset-variable-item">
-                        <p>Notice that in this model there is no interaction
-                            term (D1xD2).</p>
-                        <p className='fw-bold'>For no-interaction model:</p>
+                        <p className='fw-bold'>Resulting regression equation,
+                            no-interaction:
+                        </p>
                         <Katex tex={
                             '\\bar{y} = \\hat\\beta_0 + \\hat\\beta_1 '
                             + 'D_{\\text{Black}} + \\hat\\beta_2 '
                             + 'D_{\\text{South}}'
                         } />
-                        <p className='mt-4 fw-bold'>
-                            Resulting regression equation:
-                        </p>
+                        <p className="mt-3"></p>
                         <Katex tex={
-                            '\\hat{y} = b_0 + b_1 D_{\\text{Black}}'
-                            + ' + b_2 D_{\\text{South}}'
+                            '\\widehat{\\text{Wage}} = 1020 - 99'
+                            + '\\text{South} - 222'
+                            + '\\text{Black}'
                         } />
+                        <WageNoInteractionTable />
                     </div>
                 ) : (
                     <div className="dataset-variable-item" />
@@ -157,8 +156,6 @@ export const RealDataD1D2 = () => {
                 </div>
                 {checkedModels.withInteraction ? (
                     <div className="ps-4 mt-2 mb-3 dataset-variable-item">
-                        <p>Notice that in this model there is an interaction
-                            term (D1xD2).</p>
                         <p className='fw-bold'>For with-interaction model:</p>
                         <Katex tex={
                             '\\bar{y} = \\hat\\beta_0 + \\hat\\beta_1 '
@@ -194,9 +191,6 @@ export const RealDataD1D2 = () => {
                 </p>
                 <p>
                     <b>Variables:</b>
-                    <span className="ms-2">
-                    For this dataset:
-                    </span>
                 </p>
                 <ul className="list-unstyled ms-3">
                     <li>Post=0: Before intervention</li>
@@ -220,21 +214,21 @@ export const RealDataD1D2 = () => {
                 </div>
                 {checkedModels.noInteraction ? (
                     <div className="ps-4 mt-2 mb-3 dataset-variable-item">
-                        <p>Notice that in this model there is no interaction
-                            term (D1xD2).</p>
-                        <p className='fw-bold'>For no-interaction model:</p>
+                        <p className='fw-bold'>Resulting regression equation,
+                            no-interaction:
+                        </p>
                         <Katex tex={
                             '\\bar{y} = \\hat\\beta_0 + \\hat\\beta_1 '
                             + 'D_{\\text{Post}} + \\hat\\beta_2 '
                             + 'D_{\\text{Treatment}}'
                         } />
-                        <p className='mt-4 fw-bold'>
-                            Resulting regression equation:
-                        </p>
+                        <p className="mt-3"></p>
                         <Katex tex={
-                            '\\hat{y} = b_0 + b_1 D_{\\text{Post}}'
-                            + ' + b_2 D_{\\text{Treatment}}'
+                            '\\widehat{\\text{quizScore}} = 4.29 + 1.11'
+                            + '\\text{Post} - 0.18'
+                            + '\\text{Treatment}'
                         } />
+                        <QuizScoreNoInteractionTable />
                     </div>
                 ) : (
                     <div className="dataset-variable-item" />
@@ -255,8 +249,6 @@ export const RealDataD1D2 = () => {
                 </div>
                 {checkedModels.withInteraction ? (
                     <div className="ps-4 mt-2 mb-3 dataset-variable-item">
-                        <p>Notice that in this model there is an interaction
-                            term (D1xD2).</p>
                         <p className='fw-bold'>For with-interaction model:</p>
                         <Katex tex={
                             '\\bar{y} = \\hat\\beta_0 + \\hat\\beta_1 '
