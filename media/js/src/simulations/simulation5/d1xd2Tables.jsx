@@ -201,6 +201,120 @@ export const DiDSetUpTable = () => (
     </>
 );
 
+export const WageNoInteractionTable = () => (
+    <>
+        <p className="fw-bold mt-4">
+            No-interaction-Table of mean{' '}
+            <Katex tex={'\\textit{Wage}'} /> values:
+        </p>
+        <Table
+            tableClass="text-center"
+            headers={[
+                'Group',
+                <Katex key="h1" tex={
+                    '\\textit{South, Black}'} />,
+                <Katex key="h2" tex={
+                    '\\bar{\\textit{Wage}}'
+                    + ' \\text{ value}'} />,
+                <Katex key="h3" tex={
+                    '\\text{Effect of}'
+                    + ' \\ \\textit{South}: 0 \\to 1'
+                } />,
+            ]}
+            rows={[
+                [
+                    {content: 'A: Non-Black, Non-South',
+                        isHeader: true},
+                    {content: '0, 0'},
+                    {content: '1020'},
+                    {content: '\u2013'},
+                ],
+                [
+                    {content: 'B: Non-Black, South',
+                        isHeader: true},
+                    {content: '1, 0'},
+                    {content: '921'},
+                    {content: <Katex tex={
+                        '- 99~(\\hat\\beta_1)'} />},
+                ],
+                [
+                    {content: 'C: Black, Non-South',
+                        isHeader: true},
+                    {content: '0, 1'},
+                    {content: '798'},
+                    {content: '\u2013'},
+                ],
+                [
+                    {content: 'D: Black, South',
+                        isHeader: true},
+                    {content: '1, 1'},
+                    {content: '700'},
+                    {content: <Katex tex={
+                        '- 99~(\\hat\\beta_1)'} />},
+                ],
+            ]}
+        />
+        <p className="fst-italic">We can only compare
+            South to N-South, or Black to Non-Black</p>
+    </>
+);
+
+export const QuizScoreNoInteractionTable = () => (
+    <>
+        <p className="fw-bold mt-4">
+            No-interaction-Table of mean{' '}
+            <Katex tex={'\\textit{quizScore}'} /> values:
+        </p>
+        <Table
+            tableClass="text-center"
+            headers={[
+                'Group',
+                <Katex key="h1" tex={
+                    '\\textit{Post, Treatment}'} />,
+                <Katex key="h2" tex={
+                    '\\bar{\\textit{quizScore}}'
+                    + ' \\text{ value}'} />,
+                <Katex key="h3" tex={
+                    '\\text{Effect of}'
+                    + ' \\ \\textit{Post}: 0 \\to 1'
+                } />,
+            ]}
+            rows={[
+                [
+                    {content: 'A: Control, Before',
+                        isHeader: true},
+                    {content: '0, 0'},
+                    {content: '4.29'},
+                    {content: '\u2013'},
+                ],
+                [
+                    {content: 'B: Control, After',
+                        isHeader: true},
+                    {content: '1, 0'},
+                    {content: '5.40'},
+                    {content: <Katex tex={
+                        '1.11~(\\hat\\beta_1)'} />},
+                ],
+                [
+                    {content: 'C: Treatment, Before',
+                        isHeader: true},
+                    {content: '0, 1'},
+                    {content: '4.11'},
+                    {content: '\u2013'},
+                ],
+                [
+                    {content: 'D: Treatment, After',
+                        isHeader: true},
+                    {content: '1, 1'},
+                    {content: '5.22'},
+                    {content: <Katex tex={
+                        '1.11~(\\hat\\beta_1)'} />},
+                ],
+            ]}
+        />
+    </>
+);
+
 export const DiDyValueTable = () => (
     <>
         <Table

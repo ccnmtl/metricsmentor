@@ -6,6 +6,7 @@ import { WhatIsD1xD2 } from './whatIsD1xD2';
 import { InteractionsD1D2Modal } from './interactionD1D2modal';
 import { NoInteractionTable, WithInteractionTable } from './d1xd2Tables';
 import { DiDGraph } from './didGraph';
+import { RealDataD1D2 } from './realDataD1D2';
 
 // const coursePk = getCoursePk();
 
@@ -109,17 +110,14 @@ export const SimulationFive = () => {
                 headerId: 'applyInteractions',
                 title: 'Real dataset problem',
                 content: <>
-                    <p>
-                        Pellentesque habitant morbi tristique senectus et netus
-                        et malesuada fames ac turpis egestas. Vestibulum tortor
-                        quam, feugiat vitae, ultricies eget, tempor sit amet,
-                        ante.
-                    </p>
+                    {progress[stage] === 1 && (
+                        <RealDataD1D2 />
+                    )}
                     <StepProgressButton
                         progress={progress}
                         stage={stage}
                         setProgress={setProgress}
-                        continueLabel="Continue to Assess »"
+                        continueLabel="Continue »"
                         reviewLabel="Review »"
                         progressNumber={2}
                     />
@@ -197,7 +195,7 @@ export const SimulationFive = () => {
                         progress={progress}
                         stage={stage}
                         setProgress={setProgress}
-                        continueLabel="Continue to Assess »"
+                        continueLabel="Continue »"
                         reviewLabel="Review »"
                         progressNumber={2}
                     />
@@ -275,7 +273,7 @@ export const SimulationFive = () => {
                         progress={progress}
                         stage={stage}
                         setProgress={setProgress}
-                        continueLabel="Continue to Assess »"
+                        continueLabel="Continue »"
                         reviewLabel="Review »"
                         progressNumber={2}
                     />
@@ -328,7 +326,18 @@ export const SimulationFive = () => {
                             display: 'flex',
                             flexDirection: 'column',
                         }}>
-                            {checkedModels.effectsDiD ? (
+                            {progress[stage] >= 1 ? (
+                                <div style={{
+                                    alignItems: 'center',
+                                    color: '#555',
+                                    display: 'flex',
+                                    fontSize: '1.2rem',
+                                    height: '100%',
+                                    justifyContent: 'center',
+                                }}>
+                                    Choose a dataset to begin
+                                </div>
+                            ) : checkedModels.effectsDiD ? (
                                 <DiDGraph />
                             ) : noModelSelected ? (
                                 <div style={{
