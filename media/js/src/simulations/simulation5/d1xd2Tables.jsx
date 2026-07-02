@@ -259,6 +259,62 @@ export const WageNoInteractionTable = () => (
     </>
 );
 
+export const WageWithInteractionTable = () => (
+    <>
+        <p className="fw-bold mt-4">
+            With-interaction-Table of mean{' '}
+            <Katex tex={'\\textit{Wage}'} /> values:
+        </p>
+        <Table
+            tableClass="text-center"
+            headers={[
+                'Group',
+                <Katex key="h1" tex={
+                    '\\textit{South, Black}'} />,
+                <Katex key="h2" tex={
+                    '\\bar{\\textit{Wage}}'
+                    + ' \\text{ value}'} />,
+                <Katex key="h3" tex={
+                    '\\text{Effect of}'
+                    + ' \\ \\textit{Black}: 0 \\to 1'
+                } />,
+            ]}
+            rows={[
+                [
+                    {content: 'A: Non-Black, Non-South',
+                        isHeader: true},
+                    {content: '0, 0'},
+                    {content: '1015'},
+                    {content: '\u2013'},
+                ],
+                [
+                    {content: 'B: Non-Black, South',
+                        isHeader: true},
+                    {content: '1, 0'},
+                    {content: '932'},
+                    {content: <Katex tex={
+                        '-83~(\\hat\\beta_1)'} />},
+                ],
+                [
+                    {content: 'C: Black, Non-South',
+                        isHeader: true},
+                    {content: '0, 1'},
+                    {content: '860'},
+                    {content: '\u2013'},
+                ],
+                [
+                    {content: 'D: Black, South',
+                        isHeader: true},
+                    {content: '1, 1'},
+                    {content: '664'},
+                    {content: <Katex tex={
+                        '-196~(\\hat\\beta_1 + \\hat\\beta_3)'} />},
+                ],
+            ]}
+        />
+    </>
+);
+
 export const QuizScoreNoInteractionTable = () => (
     <>
         <p className="fw-bold mt-4">
@@ -309,6 +365,62 @@ export const QuizScoreNoInteractionTable = () => (
                     {content: '5.22'},
                     {content: <Katex tex={
                         '1.11~(\\hat\\beta_1)'} />},
+                ],
+            ]}
+        />
+    </>
+);
+
+export const QuizScoreWithInteractionTable = () => (
+    <>
+        <p className="fw-bold mt-4">
+            With-interaction-Table of mean{' '}
+            <Katex tex={'\\textit{quizScore}'} /> values:
+        </p>
+        <Table
+            tableClass="text-center"
+            headers={[
+                'Group',
+                <Katex key="h1" tex={
+                    '\\textit{Post, Treatment}'} />,
+                <Katex key="h2" tex={
+                    '\\bar{\\textit{quizScore}}'
+                    + ' \\text{ value}'} />,
+                <Katex key="h3" tex={
+                    '\\text{Effect of}'
+                    + ' \\ \\textit{Post}: 0 \\to 1'
+                } />,
+            ]}
+            rows={[
+                [
+                    {content: 'A: Control, Before',
+                        isHeader: true},
+                    {content: '0, 0'},
+                    {content: '4.55'},
+                    {content: '\u2013'},
+                ],
+                [
+                    {content: 'B: Control, After',
+                        isHeader: true},
+                    {content: '1, 0'},
+                    {content: '5.15'},
+                    {content: <Katex tex={
+                        '0.60~(\\hat\\beta_1)'} />},
+                ],
+                [
+                    {content: 'C: Treatment, Before',
+                        isHeader: true},
+                    {content: '0, 1'},
+                    {content: '3.85'},
+                    {content: '\u2013'},
+                ],
+                [
+                    {content: 'D: Treatment, After',
+                        isHeader: true},
+                    {content: '1, 1'},
+                    {content: '5.49'},
+                    {content: <Katex tex={
+                        '1.64~(\\hat\\beta_1 + \\hat\\beta_3)'} />},
                 ],
             ]}
         />

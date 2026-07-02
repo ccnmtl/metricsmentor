@@ -1,8 +1,9 @@
 import React, { useState } from 'react';
 import { PromptBlock } from '../../PromptBlock';
 import { Katex } from '../../utils/katexComponent';
-import { WageNoInteractionTable,
-    QuizScoreNoInteractionTable } from './d1xd2Tables';
+import { WageNoInteractionTable, WageWithInteractionTable,
+    QuizScoreNoInteractionTable,
+    QuizScoreWithInteractionTable } from './d1xd2Tables';
 
 
 export const RealDataD1D2 = () => {
@@ -156,22 +157,15 @@ export const RealDataD1D2 = () => {
                 </div>
                 {checkedModels.withInteraction ? (
                     <div className="ps-4 mt-2 mb-3 dataset-variable-item">
-                        <p className='fw-bold'>For with-interaction model:</p>
-                        <Katex tex={
-                            '\\bar{y} = \\hat\\beta_0 + \\hat\\beta_1 '
-                            + 'D_{\\text{Black}} + \\hat\\beta_2 '
-                            + 'D_{\\text{South}} + \\hat\\beta_3'
-                            + '(D_{\\text{Black}} \\times D_{\\text{South}})'
-                        } />
-                        <p className='mt-4 fw-bold'>
-                            Resulting regression equation:
+                        <p className='fw-bold'>Resulting regression equation,
+                            with interaction:
                         </p>
                         <Katex tex={
-                            '\\hat{y} = b_0 + b_1 D_{\\text{Black}}'
-                            + ' + b_2 D_{\\text{South}}'
-                            + ' + b_3 (D_{\\text{Black}} \\times '
-                            + 'D_{\\text{South}})'
+                            '\\widehat{\\text{Wage}} = 1015 - 83'
+                            + '\\text{South} - 155\\text{Black}'
+                            + '- 113 (\\text{Black} \\times \\text{South})'
                         } />
+                        <WageWithInteractionTable />
                     </div>
                 ) : (
                     <div className="dataset-variable-item" />
@@ -249,23 +243,16 @@ export const RealDataD1D2 = () => {
                 </div>
                 {checkedModels.withInteraction ? (
                     <div className="ps-4 mt-2 mb-3 dataset-variable-item">
-                        <p className='fw-bold'>For with-interaction model:</p>
-                        <Katex tex={
-                            '\\bar{y} = \\hat\\beta_0 + \\hat\\beta_1 '
-                            + 'D_{\\text{Post}} + \\hat\\beta_2 '
-                            + 'D_{\\text{Treatment}} + \\hat\\beta_3'
-                            + '(D_{\\text{Post}} \\times '
-                            + 'D_{\\text{Treatment}})'
-                        } />
-                        <p className='mt-4 fw-bold'>
-                            Resulting regression equation:
+                        <p className='fw-bold'>Resulting regression equation,
+                            with interaction:
                         </p>
                         <Katex tex={
-                            '\\hat{y} = b_0 + b_1 D_{\\text{Post}}'
-                            + ' + b_2 D_{\\text{Treatment}}'
-                            + ' + b_3 (D_{\\text{Post}} \\times '
-                            + 'D_{\\text{Treatment}})'
+                            '\\widehat{\\text{quizScore}} = 4.55 + 0.60'
+                            + '\\text{Post} - 0.70'
+                            + '\\text{Treatment} + 1.04'
+                            + '(\\text{Post} \\times \\text{Treatment})'
                         } />
+                        <QuizScoreWithInteractionTable />
                     </div>
                 ) : (
                     <div className="dataset-variable-item" />
