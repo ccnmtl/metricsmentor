@@ -13,14 +13,13 @@
     "dev": "webpack serve --mode development --config webpack.dev.js",
     "test": "jest",
     "test:watch": "jest --watch",
-    "eslint": "eslint --ext .js,.jsx src/"
+    "eslint": "eslint media/js/src"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/ccnmtl/metricsmentor.git"
   },
   "devDependencies": {
-    "@babel/eslint-parser": "^7.22.15",
     "@babel/preset-env": "^7.23.2",
     "@babel/preset-react": "^7.22.15",
     "@eslint/js": "^9.23.0",
@@ -33,7 +32,7 @@
     "css-loader": "^7.0.0",
     "cypress": "^15.0.0",
     "cypress-axe": "^1.5.0",
-    "eslint": "~9.39.0",
+    "eslint": "~10.6.0",
     "eslint-plugin-cypress": "^6.0.0",
     "eslint-plugin-react": "^7.37.4",
     "globals": "^17.0.0",
@@ -63,5 +62,10 @@
     "react-dom": "^19.2.1",
     "react-plotly.js": "^2.6.0",
     "react-router-dom": "^7.0.0"
+  },
+  "overrides": {
+    "eslint-plugin-react": {
+      "eslint": "$eslint"
+    }
   }
 }
