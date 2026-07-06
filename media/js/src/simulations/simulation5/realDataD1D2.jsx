@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React from 'react';
+import PropTypes from 'prop-types';
 import { PromptBlock } from '../../PromptBlock';
 import { Katex } from '../../utils/katexComponent';
 import { WageNoInteractionTable, WageWithInteractionTable,
@@ -6,13 +7,9 @@ import { WageNoInteractionTable, WageWithInteractionTable,
     QuizScoreWithInteractionTable } from './d1xd2Tables';
 
 
-export const RealDataD1D2 = () => {
-    const [selected, setSelected] = useState(null);
-    const [checkedModels, setCheckedModels] = useState({
-        noInteraction: true,
-        withInteraction: false,
-    });
-
+export const RealDataD1D2 = ({
+    selected, setSelected, checkedModels, setCheckedModels
+}) => {
     const DATASETS = [
         {
             id: 'dataset1',
@@ -260,4 +257,14 @@ export const RealDataD1D2 = () => {
             </>}
         </>
     );
+};
+
+RealDataD1D2.propTypes = {
+    selected: PropTypes.number,
+    setSelected: PropTypes.func.isRequired,
+    checkedModels: PropTypes.shape({
+        noInteraction: PropTypes.bool,
+        withInteraction: PropTypes.bool,
+    }).isRequired,
+    setCheckedModels: PropTypes.func.isRequired,
 };

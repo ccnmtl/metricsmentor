@@ -5,7 +5,7 @@ import { StepProgressButton } from '../../StepProgressButton';
 import { WhatIsD1xD2 } from './whatIsD1xD2';
 import { InteractionsD1D2Modal } from './interactionD1D2modal';
 import { NoInteractionTable, WithInteractionTable } from './d1xd2Tables';
-import { DiDGraph } from './didGraph';
+import { InteractionGraph } from './interactionGraph';
 import { RealDataD1D2 } from './realDataD1D2';
 
 // const coursePk = getCoursePk();
@@ -18,6 +18,11 @@ export const SimulationFive = () => {
         noInteraction: true,
         withInteraction: false,
         effectsDiD: false,
+    });
+    const [realDataSelected, setRealDataSelected] = useState(null);
+    const [realDataModels, setRealDataModels] = useState({
+        noInteraction: true,
+        withInteraction: false,
     });
     const initialized = useRef(false);
     const noModelSelected = !checkedModels.noInteraction
@@ -111,7 +116,12 @@ export const SimulationFive = () => {
                 title: 'Real dataset problem',
                 content: <>
                     {progress[stage] === 1 && (
-                        <RealDataD1D2 />
+                        <RealDataD1D2
+                            selected={realDataSelected}
+                            setSelected={setRealDataSelected}
+                            checkedModels={realDataModels}
+                            setCheckedModels={setRealDataModels}
+                        />
                     )}
                     <StepProgressButton
                         progress={progress}
@@ -327,18 +337,53 @@ export const SimulationFive = () => {
                             flexDirection: 'column',
                         }}>
                             {progress[stage] >= 1 ? (
-                                <div style={{
-                                    alignItems: 'center',
-                                    color: '#555',
-                                    display: 'flex',
-                                    fontSize: '1.2rem',
-                                    height: '100%',
-                                    justifyContent: 'center',
-                                }}>
-                                    Choose a dataset to begin
-                                </div>
+                                realDataSelected === 0 ? (
+                                    <>
+                                        {realDataModels.noInteraction && (
+                                            <InteractionGraph
+                                                dataset="blackSouth"
+                                                model="noInteraction"
+                                            />
+                                        )}
+                                        {realDataModels.withInteraction && (
+                                            <InteractionGraph
+                                                dataset="blackSouth"
+                                                model="withInteraction"
+                                            />
+                                        )}
+                                    </>
+                                ) : realDataSelected === 1 ? (
+                                    <>
+                                        {realDataModels.noInteraction && (
+                                            <InteractionGraph
+                                                dataset="quizScore"
+                                                model="noInteraction"
+                                            />
+                                        )}
+                                        {realDataModels.withInteraction && (
+                                            <InteractionGraph
+                                                dataset="quizScore"
+                                                model="withInteraction"
+                                            />
+                                        )}
+                                    </>
+                                ) : (
+                                    <div style={{
+                                        alignItems: 'center',
+                                        color: '#555',
+                                        display: 'flex',
+                                        fontSize: '1.2rem',
+                                        height: '100%',
+                                        justifyContent: 'center',
+                                    }}>
+                                        Choose a dataset to begin
+                                    </div>
+                                )
                             ) : checkedModels.effectsDiD ? (
-                                <DiDGraph />
+                                <InteractionGraph
+                                    dataset="did"
+                                    model="withInteraction"
+                                />
                             ) : noModelSelected ? (
                                 <div style={{
                                     alignItems: 'center',
