@@ -12,14 +12,14 @@
                 <span class="main-banner__text banner-hero__text primary-text">A self-guided, interactive platform for learning econometrics through simulations</span>
             </h1>
             <section class="col-12 col-lg-4 loginbox row">
-                <div class="loginbox__body col-4 col-lg-12">
+                <div class="loginbox__body col-12 col-sm-4 col-lg-12">
                     <form class="text-center" method="get" action="/cas/login">
                         <input type="hidden" name="next" value="/" />
                         <button type="submit">Sign in with Columbia UNI</button>
                         <p class="small mt-2 mb-0"><a href="https://cuit.columbia.edu/cuit/manage-my-uni" title="Learn more about UNI" target="_blank">What is a UNI?</a></p>
                     </form>
                 </div>
-                <div class="loginbox__body col-4 col-lg-12">
+                <div class="loginbox__body col-12 col-sm-4 col-lg-12">
                     {% if form.errors %}
                         <div class="alert alert-danger" role="alert">
                             <div><b>Invalid username or password</b></div>
@@ -62,7 +62,7 @@
                         <p class="small mt-2 mb-0"><a href="/accounts/password_reset/" title="Reset Password">Forgot Password?</a></p>
                     </form>
                 </div>
-                <div class="loginbox__body col-4 col-lg-12">
+                <div class="loginbox__body col-12 col-sm-4 col-lg-12">
                     <a href="/contact/">Contact Us</a>
                 </div>
             </section>
