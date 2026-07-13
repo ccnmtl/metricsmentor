@@ -6,9 +6,13 @@ const COLOR_A = '#1f77b4';
 const COLOR_B = '#ff7f0e';
 const COLOR_C = '#2ca02c';
 
-export const InteractionGraph = ({ dataset, model }) => {
+const MODEL_COLORS = {
+    noInteraction: { a: '#9467bd', b: '#d62728' },
+    withInteraction: { a: COLOR_A, b: COLOR_B },
+};
+
+export const InteractionGraph = ({ dataset, models }) => {
     const config = DATASETS[dataset];
-    const withInteraction = model === 'withInteraction';
     const {
         xTitle, xTicks, yTitle, yRange, format, titleSuffix,
         seriesA, seriesB, counterfactual, diffLabel,
@@ -16,37 +20,59 @@ export const InteractionGraph = ({ dataset, model }) => {
         diffStyle = 'arrow',
     } = config;
 
-    const yA = seriesA[model];
-    const yB = seriesB[model];
-    const diff = withInteraction ? yB[1] - counterfactual[1] : null;
+    const showNo = !!models.noInteraction;
+    const showWith = !!models.withInteraction;
+    const bothShown = showNo && showWith;
 
-    const data = [
-        {
+    const seriesTrace = (series, model, colorKey) => {
+        const y = series[model];
+        const color = series.color || MODEL_COLORS[model][colorKey];
+        const suffix = bothShown
+            ? ` (${model === 'noInteraction' ? 'no' : 'with'} interaction)`
+            : '';
+        // When both models overlay, the two lines cross, so place each label
+        // away from the lines: above if this line is the higher one at that
+        // point (below otherwise), and outward (left at the first point,
+        // right at the last). For a single model, push the first point's
+        // label left and the last point's right, off the sloped line.
+        let textposition;
+        if (bothShown) {
+            const other = model === 'noInteraction'
+                ? 'withInteraction' : 'noInteraction';
+            const otherY = series[other];
+            textposition = y.map((v, i) => {
+                const vert = v >= otherY[i] ? 'top' : 'bottom';
+                const side = i === 0 ? 'left' : 'right';
+                return `${vert} ${side}`;
+            });
+        } else if (colorKey === 'a') {
+            textposition = ['top left', 'top right'];
+        } else {
+            textposition = series.textposition
+                || ['bottom left', 'bottom right'];
+        }
+        return {
             x: [0, 1],
-            y: yA,
+            y,
             mode: 'lines+markers+text',
-            name: seriesA.name,
-            line: { color: COLOR_A, width: 3 },
-            marker: { size: 10, color: COLOR_A },
-            text: yA.map(format),
-            textposition: ['top right', 'top right'],
-            textfont: { color: COLOR_A, size: 12 },
-        },
-        {
-            x: [0, 1],
-            y: yB,
-            mode: 'lines+markers+text',
-            name: seriesB.name,
-            line: { color: COLOR_B, width: 3 },
-            marker: { size: 10, color: COLOR_B },
-            text: yB.map(format),
-            textposition: seriesB.textposition
-                || ['bottom right', 'bottom right'],
-            textfont: { color: COLOR_B, size: 12 },
-        },
-    ];
+            name: series.name + suffix,
+            line: { color, width: 3 },
+            marker: { size: 10, color },
+            text: y.map(format),
+            textposition,
+            textfont: { color, size: 12 },
+            cliponaxis: false,
+        };
+    };
 
-    if (withInteraction) {
+    const data = [];
+    if (showNo) {
+        data.push(seriesTrace(seriesA, 'noInteraction', 'a'));
+        data.push(seriesTrace(seriesB, 'noInteraction', 'b'));
+    }
+    if (showWith) {
+        data.push(seriesTrace(seriesA, 'withInteraction', 'a'));
+        data.push(seriesTrace(seriesB, 'withInteraction', 'b'));
         data.push({
             x: [0, 1],
             y: counterfactual,
@@ -60,12 +86,18 @@ export const InteractionGraph = ({ dataset, model }) => {
         });
     }
 
+    const yBWith = seriesB.withInteraction;
+    const diff = showWith ? yBWith[1] - counterfactual[1] : null;
+
+    // Combined y-range so the scale stays constant across both models.
+    const combinedRange = [
+        Math.min(yRange.noInteraction[0], yRange.withInteraction[0]),
+        Math.max(yRange.noInteraction[1], yRange.withInteraction[1]),
+    ];
+
     const layout = {
         title: {
-            text: title
-                ? title({ model, diff })
-                : `${withInteraction ? 'With' : 'No'}-interaction: `
-                    + titleSuffix,
+            text: title ? title({ diff }) : titleSuffix,
             font: { size: 16 },
         },
         xaxis: {
@@ -74,32 +106,41 @@ export const InteractionGraph = ({ dataset, model }) => {
             ticktext: xTicks,
             range: [-0.15, 1.35],
             zeroline: false,
+            automargin: true,
         },
         yaxis: {
             title: yTitle,
-            range: yRange[model],
+            range: combinedRange,
             zeroline: false,
+            automargin: true,
         },
-        legend: { x: 0, y: 1.15, orientation: 'h', font: { size: 11 } },
-        margin: { t: 80, b: 60, l: 70, r: 40 },
+        legend: {
+            x: 0.5,
+            xanchor: 'center',
+            y: -0.2,
+            yanchor: 'top',
+            orientation: 'h',
+            font: { size: 11 },
+        },
+        margin: { t: 50, b: 110, l: 70, r: 40 },
         showlegend: true,
         paper_bgcolor: 'white',
         plot_bgcolor: 'white',
     };
 
-    if (withInteraction) {
-        const mid = (yB[1] + counterfactual[1]) / 2;
+    if (showWith) {
+        const mid = (yBWith[1] + counterfactual[1]) / 2;
         if (diffStyle === 'bracket') {
             // Bracket lines between counterfactual and series B
             layout.shapes = [
                 {
                     type: 'line', x0: 1.08, x1: 1.08,
-                    y0: counterfactual[1], y1: yB[1],
+                    y0: counterfactual[1], y1: yBWith[1],
                     line: { color: '#333', width: 2 },
                 },
                 {
                     type: 'line', x0: 1.06, x1: 1.10,
-                    y0: yB[1], y1: yB[1],
+                    y0: yBWith[1], y1: yBWith[1],
                     line: { color: '#333', width: 2 },
                 },
                 {
@@ -111,7 +152,7 @@ export const InteractionGraph = ({ dataset, model }) => {
             layout.annotations = [
                 {
                     x: 1.15, y: mid,
-                    text: diffLabel(yB[1], counterfactual[1]),
+                    text: diffLabel(yBWith[1], counterfactual[1]),
                     showarrow: false, xanchor: 'left',
                     font: { size: 13, color: '#333' },
                 },
@@ -120,7 +161,7 @@ export const InteractionGraph = ({ dataset, model }) => {
             layout.annotations = [
                 // Double-headed arrow between counterfactual and series B
                 {
-                    x: 1.08, y: yB[1], ax: 1.08, ay: mid,
+                    x: 1.08, y: yBWith[1], ax: 1.08, ay: mid,
                     axref: 'x', ayref: 'y', showarrow: true,
                     arrowhead: 2, arrowsize: 1, arrowwidth: 1.5,
                     arrowcolor: '#333',
@@ -133,7 +174,7 @@ export const InteractionGraph = ({ dataset, model }) => {
                 },
                 {
                     x: 1.12, y: mid,
-                    text: diffLabel(yB[1], counterfactual[1]),
+                    text: diffLabel(yBWith[1], counterfactual[1]),
                     showarrow: false, xanchor: 'left',
                     font: { size: 12, color: '#333' },
                 },
@@ -152,7 +193,10 @@ export const InteractionGraph = ({ dataset, model }) => {
 
 InteractionGraph.propTypes = {
     dataset: PropTypes.oneOf(['blackSouth', 'quizScore', 'did']).isRequired,
-    model: PropTypes.oneOf(['noInteraction', 'withInteraction']).isRequired,
+    models: PropTypes.shape({
+        noInteraction: PropTypes.bool,
+        withInteraction: PropTypes.bool,
+    }).isRequired,
 };
 
 const BLACK_SOUTH_GRAPH = {

@@ -338,35 +338,15 @@ export const SimulationFive = () => {
                         }}>
                             {progress[stage] >= 1 ? (
                                 realDataSelected === 0 ? (
-                                    <>
-                                        {realDataModels.noInteraction && (
-                                            <InteractionGraph
-                                                dataset="blackSouth"
-                                                model="noInteraction"
-                                            />
-                                        )}
-                                        {realDataModels.withInteraction && (
-                                            <InteractionGraph
-                                                dataset="blackSouth"
-                                                model="withInteraction"
-                                            />
-                                        )}
-                                    </>
+                                    <InteractionGraph
+                                        dataset="blackSouth"
+                                        models={realDataModels}
+                                    />
                                 ) : realDataSelected === 1 ? (
-                                    <>
-                                        {realDataModels.noInteraction && (
-                                            <InteractionGraph
-                                                dataset="quizScore"
-                                                model="noInteraction"
-                                            />
-                                        )}
-                                        {realDataModels.withInteraction && (
-                                            <InteractionGraph
-                                                dataset="quizScore"
-                                                model="withInteraction"
-                                            />
-                                        )}
-                                    </>
+                                    <InteractionGraph
+                                        dataset="quizScore"
+                                        models={realDataModels}
+                                    />
                                 ) : (
                                     <div style={{
                                         alignItems: 'center',
@@ -382,7 +362,7 @@ export const SimulationFive = () => {
                             ) : checkedModels.effectsDiD ? (
                                 <InteractionGraph
                                     dataset="did"
-                                    model="withInteraction"
+                                    models={{ withInteraction: true }}
                                 />
                             ) : noModelSelected ? (
                                 <div style={{
