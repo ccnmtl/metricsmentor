@@ -19,6 +19,7 @@
                         <p class="small mt-2 mb-0"><a href="https://cuit.columbia.edu/cuit/manage-my-uni" title="Learn more about UNI" target="_blank">What is a UNI?</a></p>
                     </form>
                 </div>
+                {% if debug %}
                 <div class="loginbox__body col-12 col-sm-4 col-lg-12">
                     {% if form.errors %}
                         <div class="alert alert-danger" role="alert">
@@ -62,6 +63,7 @@
                         <p class="small mt-2 mb-0"><a href="/accounts/password_reset/" title="Reset Password">Forgot Password?</a></p>
                     </form>
                 </div>
+                {% endif %}
                 <div class="loginbox__body col-12 col-sm-4 col-lg-12">
                     <a href="/contact/">Contact Us</a>
                 </div>
