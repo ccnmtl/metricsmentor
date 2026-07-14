@@ -1,7 +1,7 @@
 html, body {
     position: relative;
     min-height: 100vh;
-    min-width: 100vw;
+    min-width: 100%;
     background-color: $white;
 }
 
@@ -12,7 +12,7 @@ main {
         position: absolute;
         top: 3.25rem;
         bottom: 0;
-        width: 100vw;
+        width: 100%;
         padding-top: 0;
         padding-bottom: 0;
         z-index: 2;
