@@ -1,6 +1,6 @@
 import os
 from metricsmentor.settings_shared import *  # noqa: F401,F403
-from ctlsettings.staging import common, init_sentry
+from ctlsettings.production import common, init_sentry
 
 
 locals().update(
