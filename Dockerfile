@@ -26,7 +26,8 @@ RUN npm run build:prod
 EXPOSE 8000
 
 RUN adduser --system --group django
-RUN chown -R django:django /src
+RUN mkdir -p /var/log/django
+RUN chown -R django:django /src /var/log/django
 
 USER django
 
