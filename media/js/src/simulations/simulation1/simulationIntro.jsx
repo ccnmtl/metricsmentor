@@ -47,7 +47,7 @@ export const SimIntro = ({plotType}) => {
             </div>
             <div className="simulation__step-container d-flex">
                 <div className="simulation__step-num tip-on">
-                    <img src={`${STATIC_URL}/img/icon-goal.svg`}
+                    <img src={`${STATIC_URL}img/icon-goal.svg`}
                         className="simulation__step-icon"
                         alt="Lightbulb icon: Learning goals" />
                 </div>

@@ -32,7 +32,7 @@ export const CriticalValueModal = () => {
                                 className="modal-graph modal-graph--cvalue
                                 flex-fill">
                                 <img src={
-                                    `${STATIC_URL}/img/cv-2tail-curve.svg`
+                                    `${STATIC_URL}img/cv-2tail-curve.svg`
                                 } alt="critical-value graph" />
                             </figure>
                             <div className="cvalue-text flex-fill">
@@ -73,7 +73,7 @@ export const CriticalValueModal = () => {
                                 className="modal-graph modal-graph--cvalue
                                 flex-fill">
                                 <img src={
-                                    `${STATIC_URL}/img/cv-1tail-right-curve.svg`
+                                    `${STATIC_URL}img/cv-1tail-right-curve.svg`
                                 } alt="critical-value graph" />
                             </figure>
                             <div className="cvalue-text flex-fill">
@@ -114,7 +114,7 @@ export const CriticalValueModal = () => {
                                 className="modal-graph modal-graph--cvalue
                                 flex-fill">
                                 <img src={
-                                    `${STATIC_URL}/img/cv-1tail-left-curve.svg`
+                                    `${STATIC_URL}img/cv-1tail-left-curve.svg`
                                 } alt="critical-value graph" />
                             </figure>
                             <div className="cvalue-text flex-fill">

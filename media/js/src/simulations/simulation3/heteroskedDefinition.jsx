@@ -16,7 +16,7 @@ export const HeteroskedDefinition = () => {
                     spread of residuals.
                 </p>
                 <figure className="modal-graph modal-graph--hts-variance">
-                    <img src={`${STATIC_URL}/img/hts-variance-graph.svg`}
+                    <img src={`${STATIC_URL}img/hts-variance-graph.svg`}
                         alt="Graph illustration of heteroskedasticity" />
                 </figure>
                 <p>

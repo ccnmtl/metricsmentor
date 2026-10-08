@@ -12,7 +12,7 @@ export const ControlVariable = ({
         <>
             <div className="prompt-block">
                 <div className="prompt-gfx">
-                    <img src={`${STATIC_URL}/img/icon-bell.svg`}
+                    <img src={`${STATIC_URL}img/icon-bell.svg`}
                         className="prompt-img"
                         alt="Reminder:" />
                 </div>
@@ -36,7 +36,7 @@ export const ControlVariable = ({
             </p>
             <div className="prompt-block">
                 <div className="prompt-gfx">
-                    <img src={`${STATIC_URL}/img/icon-bell.svg`}
+                    <img src={`${STATIC_URL}img/icon-bell.svg`}
                         className="prompt-img"
                         alt="Reminder:" />
                 </div>

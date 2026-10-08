@@ -92,7 +92,7 @@ export const SimulationThree = () => {
         preambleStep,
         {
             // Learning goals
-            icon: `${STATIC_URL}/img/icon-goal.svg`,
+            icon: `${STATIC_URL}img/icon-goal.svg`,
             headerId: 'learningObjective',
             title: 'Learning objectives: Heteroskedasticity',
             content: (
@@ -179,7 +179,7 @@ export const SimulationThree = () => {
         preambleStep,
         {
             // Learning goals
-            icon: `${STATIC_URL}/img/icon-goal.svg`,
+            icon: `${STATIC_URL}img/icon-goal.svg`,
             headerId: 'learningObjective',
             title: 'Learning objectives: Multicollinearity',
             content: (

@@ -159,7 +159,7 @@ export const PvalueComponent = ({
             {hypothesisTest === 'value_two_sided' && (
                 <div className="prompt-block">
                     <div className="prompt-gfx">
-                        <img src={`${STATIC_URL}/img/icon-bell.svg`}
+                        <img src={`${STATIC_URL}img/icon-bell.svg`}
                             className="prompt-img"
                             alt="Reminder:" />
                     </div>
@@ -387,7 +387,7 @@ export const PvalueComponent = ({
                     </div>
                     <div className="prompt-block">
                         <div className="prompt-gfx">
-                            <img src={`${STATIC_URL}/img/icon-bell.svg`}
+                            <img src={`${STATIC_URL}img/icon-bell.svg`}
                                 className="prompt-img"
                                 alt="Reminder:" />
                         </div>

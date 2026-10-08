@@ -138,7 +138,7 @@ export const SimulationTwo = () => {
             </>
         },
         {
-            icon: `${STATIC_URL}/img/icon-goal.svg`,
+            icon: `${STATIC_URL}img/icon-goal.svg`,
             headerId: 'learning-goals',
             title: 'Learning Goals',
             ['data-cy']: 'section1',
