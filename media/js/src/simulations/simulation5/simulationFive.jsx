@@ -78,7 +78,7 @@ export const SimulationFive = () => {
     const d1xd2Steps = [
         preambleStep,
         {
-            icon: `${STATIC_URL}/img/icon-goal.svg`,
+            icon: `${STATIC_URL}img/icon-goal.svg`,
             headerId: 'learningObjectiveD1XD2',
             title: 'Learning objectives: D1 × D2 interactions',
             content: <>
@@ -155,7 +155,7 @@ export const SimulationFive = () => {
     const dXxSteps = [
         preambleStep,
         {
-            icon: `${STATIC_URL}/img/icon-goal.svg`,
+            icon: `${STATIC_URL}img/icon-goal.svg`,
             headerId: 'learningObjectiveDxX',
             title: 'Learning objectives: D × X interactions',
             content: <>
@@ -233,7 +233,7 @@ export const SimulationFive = () => {
     const x1xx2Steps = [
         preambleStep,
         {
-            icon: `${STATIC_URL}/img/icon-goal.svg`,
+            icon: `${STATIC_URL}img/icon-goal.svg`,
             headerId: 'learningObjectiveX1xX2',
             title: 'Learning objectives: X1 × X2 interactions',
             content: <>

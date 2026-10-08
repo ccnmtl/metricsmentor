@@ -32,7 +32,7 @@ export const NullHypothesisSection = ({
                             className="katex-inline" />.</p>
                         <div className="prompt-block">
                             <div className="prompt-gfx">
-                                <img src={`${STATIC_URL}/img/icon-bell.svg`}
+                                <img src={`${STATIC_URL}img/icon-bell.svg`}
                                     className="prompt-img"
                                     alt="Reminder" />
                             </div>
@@ -71,7 +71,7 @@ export const NullHypothesisSection = ({
                             className="katex-inline" />.</p>
                         <div className="prompt-block">
                             <div className="prompt-gfx">
-                                <img src={`${STATIC_URL}/img/icon-bell.svg`}
+                                <img src={`${STATIC_URL}img/icon-bell.svg`}
                                     className="prompt-img"
                                     alt="Reminder" />
                             </div>

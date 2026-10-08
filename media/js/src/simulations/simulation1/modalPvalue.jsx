@@ -28,7 +28,7 @@ export const PvalueModal = () => {
                     </div>
                     <div className="modal-body">
                         <figure className="modal-graph modal-graph--pvalue">
-                            <img src={`${STATIC_URL}/img/p-value-curve.svg`}
+                            <img src={`${STATIC_URL}img/p-value-curve.svg`}
                                 alt="p-value graph" />
                         </figure>
                         <div className="table-container">

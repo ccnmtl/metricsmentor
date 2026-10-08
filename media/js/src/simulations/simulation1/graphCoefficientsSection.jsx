@@ -26,7 +26,7 @@ export const GraphCoefficients = ({
                     <div className="simulation__step-content">
                         <div className="prompt-block">
                             <div className="prompt-gfx">
-                                <img src={`${STATIC_URL}/img/icon-bell.svg`}
+                                <img src={`${STATIC_URL}img/icon-bell.svg`}
                                     className="prompt-img"
                                     alt="Reminder:" />
                             </div>
@@ -88,7 +88,7 @@ export const GraphCoefficients = ({
                     <div className="simulation__step-content">
                         <div className="prompt-block">
                             <div className="prompt-gfx">
-                                <img src={`${STATIC_URL}/img/icon-bell.svg`}
+                                <img src={`${STATIC_URL}img/icon-bell.svg`}
                                     className="prompt-img"
                                     alt="Reminder:" />
                             </div>

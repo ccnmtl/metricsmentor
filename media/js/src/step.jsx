@@ -12,7 +12,7 @@ export const Step = (props) => {
             <div className={`simulation__step-num 
                         ${learningGoals ? 'tip-on' : ''}`}>
                 {learningGoals ?
-                    <img src={`${STATIC_URL}/img/icon-goal.svg`}
+                    <img src={`${STATIC_URL}img/icon-goal.svg`}
                         className="simulation__step-icon"
                         alt="Lightbulb icon: Learning goals" />
                     : <>&bull;</>

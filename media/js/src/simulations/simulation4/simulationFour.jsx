@@ -92,7 +92,7 @@ export const SimulationFour = () => {
     const polynomialSteps = [
         preambleStep,
         {
-            icon: `${STATIC_URL}/img/icon-goal.svg`,
+            icon: `${STATIC_URL}img/icon-goal.svg`,
             headerId: 'learningObjective',
             title: 'Learning objectives: Polynomials',
             content: <>
@@ -179,7 +179,7 @@ export const SimulationFour = () => {
     const logarithmSteps = [
         preambleStep,
         {
-            icon: `${STATIC_URL}/img/icon-goal.svg`,
+            icon: `${STATIC_URL}img/icon-goal.svg`,
             headerId: 'learningObjectiveLogs',
             title: 'Learning objectives: Logarithms',
             content: <>
