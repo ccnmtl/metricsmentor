@@ -294,8 +294,7 @@ export const QUIZ_DATA = {
                     'with firm sales scale?',
                 1: ' Incorrect. This matches a linear-linear model, and the ' +
                     'coefficient isn\'t right. Does the best-fit graph show ' +
-                    'a constant slope, or curvature suggesting diminishing ' +
-                    'effects as firms become larger?',
+                    'linear scaling for both variables?',
                 2: ' Incorrect. This assumes percentage changes in both ' +
                     'variables. Consider this, does CEO compensation grow ' +
                     'proportionally with sales, or does growth slow as ' +
