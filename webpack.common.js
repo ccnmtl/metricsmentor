@@ -29,7 +29,9 @@ module.exports = {
                         loader: 'babel-loader',
                         options: {
                             presets: ['@babel/preset-env',
-                                '@babel/preset-react'],
+                                ['@babel/preset-react', {
+                                    development: process.env.NODE_ENV === 'development'
+                                }]],
                             plugins: [
                                 process.env.NODE_ENV === 'development' && require.resolve('react-refresh/babel'),
                             ].filter(Boolean),
