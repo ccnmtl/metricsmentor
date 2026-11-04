@@ -21,15 +21,9 @@ export const WhatAreLogarithmRegs = ({
         setHighlightedFit('');
     };
 
-    const toggleFit = (fit) => {
-        setOpenFit(prev => {
-            if (prev[fit]) {
-                return {};
-            } else {
-                return { [fit]: true };
-            }
-        });
-        setHighlightedFit(prev => prev === fit ? '' : fit);
+    const selectFit = (fit) => {
+        setOpenFit({ [fit]: true });
+        setHighlightedFit(fit);
     };
 
     const formatFitName = (fit) =>
@@ -267,19 +261,23 @@ export const WhatAreLogarithmRegs = ({
                         {selectedModel === model && (
                             <div className="nested-radio ps-4">
                                 {fitOptions[model].map(fit => (
-                                    <div key={fit} className="collapsible-fit">
-                                        <button
-                                            type="button"
-                                            className="btn"
-                                            onClick={() => toggleFit(fit)}
-                                            aria-expanded={!!openFit[fit]}
-                                            aria-controls={`fit-panel-${fit}`}>
-                                            <span>
-                                                {openFit[fit] ? '▼' : '▶'}{' '}
-                                               With {formatFitName(fit)}{' '}
-                                               regression fit
-                                            </span>
-                                        </button>
+                                    <div key={fit} className="form-check mb-2">
+                                        <input
+                                            className="form-check-input"
+                                            type="radio"
+                                            name="model-fit-radio-group"
+                                            id={`model-fit-${fit}`}
+                                            value={fit}
+                                            checked={!!openFit[fit]}
+                                            onChange={() => selectFit(fit)}
+                                            aria-controls={`fit-panel-${fit}`}
+                                        />
+                                        <label
+                                            className="form-check-label"
+                                            htmlFor={`model-fit-${fit}`}>
+                                            With {formatFitName(fit)}{' '}
+                                            regression fit
+                                        </label>
                                         {openFit[fit] && (
                                             <div id={`fit-panel-${fit}`}
                                                 className="ps-4">
