@@ -5,7 +5,7 @@ WORKDIR /src
 COPY requirements.txt .
 
 RUN apt-get update && \
-    apt-get install -y curl && \
+    apt-get install -y curl git && \
     curl -L https://raw.githubusercontent.com/tj/n/master/bin/n -o n && \
     bash n 24 && \
     apt-get clean
