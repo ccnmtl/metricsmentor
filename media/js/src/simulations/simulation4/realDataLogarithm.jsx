@@ -103,13 +103,10 @@ export const RealDataLogarithm = ({
         }
     };
 
-    const toggleFit = (fit) => {
-        setOpenFit(prev => {
-            const isOpen = !!prev[fit];
-            return isOpen ? {} : { [fit]: true };
-        });
+    const selectFit = (fit) => {
+        setOpenFit({ [fit]: true });
         if (setHighlightedFit) {
-            setHighlightedFit(prev => prev === fit ? '' : fit);
+            setHighlightedFit(fit);
         }
     };
 
@@ -541,22 +538,29 @@ export const RealDataLogarithm = ({
                                             (fit, idx) => (
                                                 <div key={fit}
                                                     className={
-                                                        'collapsible-fit mb-2'}>
-                                                    <button type="button"
-                                                        className="btn"
-                                                        onClick={() =>
-                                                            toggleFit(fit)}
-                                                        aria-expanded={
-                                                            !!openFit[fit]
-                                                        }
+                                                        'form-check mb-2'}>
+                                                    <input
+                                                        className={
+                                                            'form-check-input'}
+                                                        type="radio"
+                                                        name="log-real-fit"
+                                                        id={
+                                                            `real-fit-${fit}`}
+                                                        value={fit}
+                                                        checked={
+                                                            !!openFit[fit]}
+                                                        onChange={() =>
+                                                            selectFit(fit)}
                                                         aria-controls={
-                                                            `fit-panel-${fit}`}>
-                                                        <span>
-                                                            {openFit[fit] ?
-                                                                '▼' : '▶'}{' '}
-                                                            {REG_LABELS[idx]}
-                                                        </span>
-                                                    </button>
+                                                            `fit-panel-${fit}`}
+                                                    />
+                                                    <label
+                                                        className={
+                                                            'form-check-label'}
+                                                        htmlFor={
+                                                            `real-fit-${fit}`}>
+                                                        {REG_LABELS[idx]}
+                                                    </label>
                                                     {openFit[fit] &&
                                                         renderFitPanel(
                                                             fit,
