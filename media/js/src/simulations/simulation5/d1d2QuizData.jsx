@@ -37,6 +37,90 @@ export const D1D2_QUIZ_DATA = {
                     'workers.'
             },
             questionNumber: 1
+        },
+        {
+            question: 'What is the mean wage for non-Black workers who ' +
+                'are not in the South according to the with-interaction ' +
+                'model regression equation?',
+            isTextInput: true,
+            correctTextAnswer: '1015',
+            correctFeedback: <p className="mb-0">
+                Correct! The constant term represents the wage when Black=0
+                and South=0, and it corresponds
+                to <Katex tex={'\\hat\\beta_0'} />. This is the reference
+                group or baseline group.
+            </p>,
+            incorrectFeedback: <p className="mb-0">
+                Please try again!<br />
+                Remember, for individuals who are Non-Black not in the
+                South, Black=0 and South=0.
+            </p>,
+            questionNumber: 2,
+            reveals: ['nonBlackNonSouth'],
+            // Turn on this model's checkbox when the question appears.
+            showModel: 'withInteraction'
+        },
+        {
+            question: <>
+                What is the wage of a person who is Black and lives in the
+                South? (B, S)
+            </>,
+            isTextInput: true,
+            correctTextAnswer: '664',
+            correctFeedback: 'Yes! It is 1015 \u2212 155 \u2212 83 \u2212 ' +
+                '113 = 664',
+            incorrectFeedback: <p className="mb-0">
+                Please try again!<br />
+                Remember in this case Black = 1, South = 1 and the
+                interaction term Black &times; South = 1
+            </p>,
+            questionNumber: 3,
+            reveals: ['blackSouth']
+        },
+        {
+            question: <>
+                What is the wage of a person who is Black and does not live
+                in the South? (B, NS)
+            </>,
+            isTextInput: true,
+            correctTextAnswer: '860',
+            correctFeedback: 'Yes! It is 1015 \u2212 155 = 860',
+            incorrectFeedback: <p className="mb-0">
+                Please try again!<br />
+                Remember in this case Black = 1, South = 0 and the
+                interaction term Black &times; South = 0
+            </p>,
+            questionNumber: 4,
+            reveals: ['blackNonSouth']
+        },
+        {
+            question: 'What is the advantage of the interaction term in ' +
+                'this example?',
+            options: [
+                'We can compare the wages of people in the South and the ' +
+                    'rest of the country',
+                'We can compare the wages of Blacks and Non-Blacks',
+                'We can compare the wages of Blacks who live in the South ' +
+                    'and those who don’t.'
+            ],
+            correctAnswerIndex: 2,
+            correctFeedback: <p className="mb-0">
+                We cannot do this comparison unless we have the interaction
+                term in the regression. With the interaction term, we can
+                compare wages of four groups: (1) Blacks in the South, (2)
+                Non-Blacks in the South, (3) Blacks who do not live in the
+                South, and (4) Non-Blacks who do not live in the South.
+                Without the interaction term, we can only compare the wages
+                of Blacks and Non-Blacks or compare South and Non-South
+                people, but not the four groups listed above.
+            </p>,
+            incorrectFeedback: {
+                0: 'We do not need the interaction term to make that ' +
+                    'comparison.',
+                1: 'We do not need the interaction term to make that ' +
+                    'comparison.'
+            },
+            questionNumber: 5
         }
     ],
     // Learning app intervention
@@ -59,7 +143,18 @@ export const D1D2_QUIZ_DATA = {
     ]
 };
 
-export const D1D2Quizzes = ({ datasetIdx, submissionId, onComplete }) => {
+// Keys of the hidden table/graph values
+//   nonBlackNonSouth: 1015 and -83 (Black-South, with interaction)
+//   blackSouth:       664 and -196
+//   blackNonSouth:    860
+export const getRevealedValues = (datasetIdx, numCorrect) =>
+    (D1D2_QUIZ_DATA[datasetIdx] || [])
+        .slice(0, numCorrect)
+        .flatMap(q => q.reveals || []);
+
+export const D1D2Quizzes = ({
+    datasetIdx, submissionId, onComplete, onProgress, onShowModel
+}) => {
     const questions = D1D2_QUIZ_DATA[datasetIdx] || [];
     const [selectedOptions, setSelectedOptions] = useState(
         questions.map(() => null));
@@ -72,6 +167,20 @@ export const D1D2Quizzes = ({ datasetIdx, submissionId, onComplete }) => {
             onComplete(datasetIdx);
         }
     }, [isComplete, datasetIdx, onComplete]);
+
+    useEffect(() => {
+        if (onProgress) {
+            onProgress(datasetIdx, numCorrect);
+        }
+    }, [numCorrect, datasetIdx, onProgress]);
+
+    // When a new question appears, switch on the model it refers to.
+    useEffect(() => {
+        const next = questions[numCorrect];
+        if (next && next.showModel && onShowModel) {
+            onShowModel(next.showModel);
+        }
+    }, [numCorrect, onShowModel]);
 
     const handleIsCorrect = (idx) => (result) => {
         if (result) {
@@ -90,8 +199,11 @@ export const D1D2Quizzes = ({ datasetIdx, submissionId, onComplete }) => {
                 <div className="mt-3" key={q.questionNumber}>
                     <QuizComponent
                         question={q.question}
-                        options={q.options}
-                        correctAnswerIndex={q.correctAnswerIndex}
+                        options={q.options || []}
+                        correctAnswerIndex={q.correctAnswerIndex || 0}
+                        isTextInput={q.isTextInput}
+                        isNumericInput={q.isTextInput}
+                        correctTextAnswer={q.correctTextAnswer}
                         correctFeedback={q.correctFeedback}
                         incorrectFeedback={q.incorrectFeedback}
                         setIsCorrect={handleIsCorrect(idx)}
@@ -116,5 +228,7 @@ export const D1D2Quizzes = ({ datasetIdx, submissionId, onComplete }) => {
 D1D2Quizzes.propTypes = {
     datasetIdx: PropTypes.number.isRequired,
     submissionId: PropTypes.number,
-    onComplete: PropTypes.func
+    onComplete: PropTypes.func,
+    onProgress: PropTypes.func,
+    onShowModel: PropTypes.func
 };
