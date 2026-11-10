@@ -1,14 +1,16 @@
-import React from 'react';
+import React, { useCallback } from 'react';
 import PropTypes from 'prop-types';
 import { PromptBlock } from '../../PromptBlock';
 import { Katex } from '../../utils/katexComponent';
 import { WageNoInteractionTable, WageWithInteractionTable,
     QuizScoreNoInteractionTable,
     QuizScoreWithInteractionTable } from './d1xd2Tables';
+import { D1D2Quizzes } from './d1d2QuizData';
 
 
 export const RealDataD1D2 = ({
-    selected, setSelected, checkedModels, setCheckedModels
+    selected, setSelected, checkedModels, setCheckedModels,
+    submissionId, completedDatasets, setCompletedDatasets
 }) => {
     const DATASETS = [
         {
@@ -31,6 +33,11 @@ export const RealDataD1D2 = ({
         setSelected(idx);
         setCheckedModels({ noInteraction: true, withInteraction: false });
     };
+
+    const handleComplete = useCallback((idx) => {
+        setCompletedDatasets(prev =>
+            prev.includes(idx) ? prev : [...prev, idx]);
+    }, [setCompletedDatasets]);
 
     const handleCheckbox = (model) => {
         setCheckedModels(prev => ({
@@ -65,6 +72,11 @@ export const RealDataD1D2 = ({
                             className="form-check-label pb-2 me-2">
                             <p className="mb-0">
                                 {dataset.name}
+                                {completedDatasets.includes(i) && (
+                                    <span className="ms-2 status-checkmark">
+                                        &#10003;
+                                    </span>
+                                )}
                             </p>
                             <p className="mb-0">
                                 {dataset.description}
@@ -255,6 +267,18 @@ export const RealDataD1D2 = ({
                     <div className="dataset-variable-item" />
                 )}
             </>}
+            {/* Quizzes for both datasets stay mounted so progress is kept
+                when switching between datasets. */}
+            {selected !== null && DATASETS.map((dataset, i) => (
+                <div key={dataset.id}
+                    className={selected === i ? '' : 'd-none'}>
+                    <D1D2Quizzes
+                        datasetIdx={i}
+                        submissionId={submissionId}
+                        onComplete={handleComplete}
+                    />
+                </div>
+            ))}
         </>
     );
 };
@@ -267,4 +291,7 @@ RealDataD1D2.propTypes = {
         withInteraction: PropTypes.bool,
     }).isRequired,
     setCheckedModels: PropTypes.func.isRequired,
+    submissionId: PropTypes.number,
+    completedDatasets: PropTypes.arrayOf(PropTypes.number).isRequired,
+    setCompletedDatasets: PropTypes.func.isRequired,
 };
