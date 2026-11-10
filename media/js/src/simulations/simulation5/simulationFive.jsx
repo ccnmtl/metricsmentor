@@ -24,6 +24,7 @@ export const SimulationFive = () => {
         noInteraction: true,
         withInteraction: false,
     });
+    const [realDataCompleted, setRealDataCompleted] = useState([]);
     const initialized = useRef(false);
     const noModelSelected = !checkedModels.noInteraction
         && !checkedModels.withInteraction
@@ -121,16 +122,22 @@ export const SimulationFive = () => {
                             setSelected={setRealDataSelected}
                             checkedModels={realDataModels}
                             setCheckedModels={setRealDataModels}
+                            submissionId={submissionId}
+                            completedDatasets={realDataCompleted}
+                            setCompletedDatasets={setRealDataCompleted}
                         />
                     )}
-                    <StepProgressButton
-                        progress={progress}
-                        stage={stage}
-                        setProgress={setProgress}
-                        continueLabel="Continue »"
-                        reviewLabel="Review »"
-                        progressNumber={2}
-                    />
+                    {(realDataCompleted.length > 0 || progress[stage] > 1)
+                        && (
+                            <StepProgressButton
+                                progress={progress}
+                                stage={stage}
+                                setProgress={setProgress}
+                                continueLabel="Continue »"
+                                reviewLabel="Review »"
+                                progressNumber={2}
+                            />
+                        )}
                 </>
             }]
             : []),
