@@ -201,7 +201,8 @@ export const getRevealedValues = (datasetIdx, numCorrect) =>
         .flatMap(q => q.reveals || []);
 
 export const D1D2Quizzes = ({
-    datasetIdx, submissionId, onComplete, onProgress, onShowModel
+    datasetIdx, submissionId, onComplete, onProgress, onShowModel,
+    onContinue
 }) => {
     const questions = D1D2_QUIZ_DATA[datasetIdx] || [];
     const [selectedOptions, setSelectedOptions] = useState(
@@ -267,6 +268,12 @@ export const D1D2Quizzes = ({
                     <p className="text-success fw-bold">
                         You&apos;ve completed the analysis of this dataset.
                     </p>
+                    {onContinue && (
+                        <button className="btn btn-sm btn-success"
+                            onClick={onContinue}>
+                            Continue &raquo;
+                        </button>
+                    )}
                 </div>
             )}
         </div>
@@ -278,5 +285,6 @@ D1D2Quizzes.propTypes = {
     submissionId: PropTypes.number,
     onComplete: PropTypes.func,
     onProgress: PropTypes.func,
-    onShowModel: PropTypes.func
+    onShowModel: PropTypes.func,
+    onContinue: PropTypes.func
 };

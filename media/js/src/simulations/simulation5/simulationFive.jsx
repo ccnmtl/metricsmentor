@@ -144,7 +144,7 @@ export const SimulationFive = () => {
                                 progress={progress}
                                 stage={stage}
                                 setProgress={setProgress}
-                                continueLabel="Continue »"
+                                continueLabel="Continue to Takeaway »"
                                 reviewLabel="Review »"
                                 progressNumber={2}
                             />
