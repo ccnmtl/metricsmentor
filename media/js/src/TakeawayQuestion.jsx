@@ -140,9 +140,9 @@ TakeawayQuestion.propTypes = {
         PropTypes.shape({
             id: PropTypes.string.isRequired,
             index: PropTypes.string.isRequired,
-            text: PropTypes.string.isRequired,
+            text: PropTypes.node.isRequired,
             isCorrect: PropTypes.bool.isRequired,
-            feedback: PropTypes.string.isRequired
+            feedback: PropTypes.node.isRequired
         })
     ).isRequired,
     onCorrect: PropTypes.func,
