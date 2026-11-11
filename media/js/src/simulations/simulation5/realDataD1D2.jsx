@@ -1,4 +1,4 @@
-import React, { useCallback } from 'react';
+import React, { useCallback, useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
 import { PromptBlock } from '../../PromptBlock';
 import { Katex } from '../../utils/katexComponent';
@@ -6,6 +6,7 @@ import { WageNoInteractionTable, WageWithInteractionTable,
     QuizScoreNoInteractionTable,
     QuizScoreWithInteractionTable } from './d1xd2Tables';
 import { D1D2Quizzes } from './d1d2QuizData';
+import { scrollTo } from '../../utils/utils';
 
 
 export const RealDataD1D2 = ({
@@ -35,6 +36,23 @@ export const RealDataD1D2 = ({
         setCheckedModels({ noInteraction: true, withInteraction: false });
     };
 
+    const continued = useRef(false);
+    const handleContinue = () => {
+        continued.current = true;
+        setSelected(null);
+        // re-hide any values user had unlocked.
+        if (onQuizProgress) {
+            DATASETS.forEach((_, i) => onQuizProgress(i, 0));
+        }
+    };
+
+    useEffect(() => {
+        if (continued.current && selected === null) {
+            continued.current = false;
+            scrollTo('d1d2-choose-dataset');
+        }
+    }, [selected]);
+
     const handleComplete = useCallback((idx) => {
         setCompletedDatasets(prev =>
             prev.includes(idx) ? prev : [...prev, idx]);
@@ -58,7 +76,7 @@ export const RealDataD1D2 = ({
                 learned about <Katex tex={'D_1 x D_2'} />
                 using real-world datasets.
             </p>
-            <p>
+            <p id="d1d2-choose-dataset">
                 Choose a dataset for your analysis:
             </p>
             <ul className='choice-list dataset-opt'>
@@ -75,7 +93,7 @@ export const RealDataD1D2 = ({
                         />
                         <label htmlFor={dataset.id}
                             className="form-check-label pb-2 me-2">
-                            <p className="mb-0">
+                            <p className="mb-0 d-flex align-items-center">
                                 {dataset.name}
                                 {completedDatasets.includes(i) && (
                                     <span className="ms-2 status-checkmark">
@@ -90,6 +108,12 @@ export const RealDataD1D2 = ({
                     </li>
                 ))}
             </ul>
+            {selected === null && completedDatasets.length > 0 && (
+                <p className="fw-bold">
+                    You can analyze another dataset, or proceed to Takeaway
+                    questions.
+                </p>
+            )}
             <PromptBlock text={<>
                 Review the regression equation forms and coefficients. This may
                 help as you continue with your analysis.
@@ -284,6 +308,7 @@ export const RealDataD1D2 = ({
                         onComplete={handleComplete}
                         onProgress={onQuizProgress}
                         onShowModel={handleShowModel}
+                        onContinue={handleContinue}
                     />
                 </div>
             ))}
