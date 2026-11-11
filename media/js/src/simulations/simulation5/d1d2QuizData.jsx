@@ -139,6 +139,54 @@ export const D1D2_QUIZ_DATA = {
                     'can’t tell.'
             },
             questionNumber: 11
+        },
+        {
+            question: 'Based on the regression with the interaction term, ' +
+                'how did the students in the Treatment group perform ' +
+                'compared with those in the Control group? Think about ' +
+                'which coefficient to use to determine this.',
+            options: ['Better', 'Worse', 'Uncertain'],
+            correctAnswerIndex: 0,
+            correctFeedback: 'We must use the interaction term to answer ' +
+                'this question; it is the differences-in-differences ' +
+                'coefficient, which is positive. This indicates that the ' +
+                'treatment group improved more than the control group after ' +
+                'the treatment.',
+            incorrectFeedback: {
+                1: 'The differences-in-differences coefficient is positive ' +
+                    'and significant, indicating that the treatment group ' +
+                    'performed better than the control group on the ' +
+                    'post-quiz.',
+                2: 'We can be certain because the differences-in-differences ' +
+                    'coefficient is positive, indicating that the treatment ' +
+                    'group performed better than the control group on the ' +
+                    'post-quiz.'
+            },
+            questionNumber: 12,
+            // Turn on this model's checkbox when the question appears.
+            showModel: 'withInteraction'
+        },
+        {
+            question: 'Based on these results, what do you conclude about ' +
+                'including the interaction term?',
+            options: [
+                'The interaction term should be included',
+                'The interaction term should not be included',
+                'It is unclear whether the interaction term should be ' +
+                    'included'
+            ],
+            correctAnswerIndex: 0,
+            correctFeedback: 'The interaction term helps us compare students ' +
+                'in the treatment group to those in the control group. ' +
+                'Without this comparison, the study would be misleading.',
+            incorrectFeedback: {
+                1: 'If we do not include the interaction term, we cannot ' +
+                    'know whether the treatment group did better without ' +
+                    'comparing it to a control group.',
+                2: 'We should include the interaction term to understand the ' +
+                    'amount of improvement in the treatment group.'
+            },
+            questionNumber: 13
         }
     ]
 };
