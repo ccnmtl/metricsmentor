@@ -13,10 +13,12 @@ export const QuizComponent = ({
 
     const coursePk = getCoursePk();
 
+    const parseNumber = (str) => parseFloat(str.replace(/[$,\s]/g, ''));
+
     const isCorrect = isTextInput
         ? (isNumericInput
-            ? parseFloat(textInputAnswer.trim()) ===
-                parseFloat(correctTextAnswer.trim())
+            ? parseNumber(textInputAnswer) ===
+                parseNumber(correctTextAnswer)
             : textInputAnswer.toLowerCase().trim()
                 === correctTextAnswer.toLowerCase().trim())
         : selectedOption === correctAnswerIndex;

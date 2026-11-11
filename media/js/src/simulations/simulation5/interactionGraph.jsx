@@ -11,13 +11,20 @@ const MODEL_COLORS = {
     withInteraction: { a: COLOR_A, b: COLOR_B },
 };
 
-export const InteractionGraph = ({ dataset, models }) => {
+// Label shown in place of a value that is still locked behind a quiz.
+const HIDDEN_LABEL = '?';
+
+// `revealed` (optional) lists the value keys that have been
+// unlocked (see getRevealedValues in d1d2QuizData.jsx). Datasets declare
+// hidden labels with `quizGatedLabels`; if `revealed` is
+// omitted, every label is shown.
+export const InteractionGraph = ({ dataset, models, revealed }) => {
     const config = DATASETS[dataset];
     const {
         xTitle, xTicks, yTitle, yRange, format, titleSuffix,
         seriesA, seriesB, counterfactual, diffLabel,
         counterfactualName = 'C: Counterfactual', title,
-        diffStyle = 'arrow',
+        diffStyle = 'arrow', quizGatedLabels,
     } = config;
 
     const showNo = !!models.noInteraction;
@@ -58,7 +65,13 @@ export const InteractionGraph = ({ dataset, models }) => {
             name: series.name + suffix,
             line: { color, width: 3 },
             marker: { size: 10, color },
-            text: y.map(format),
+            text: y.map((v, i) => {
+                const gated = quizGatedLabels && quizGatedLabels[series.key];
+                const key = model === 'withInteraction' && revealed
+                    && gated && gated[i];
+                return key && !revealed.includes(key)
+                    ? HIDDEN_LABEL : format(v);
+            }),
             textposition,
             textfont: { color, size: 12 },
             cliponaxis: false,
@@ -197,6 +210,7 @@ InteractionGraph.propTypes = {
         noInteraction: PropTypes.bool,
         withInteraction: PropTypes.bool,
     }).isRequired,
+    revealed: PropTypes.arrayOf(PropTypes.string),
 };
 
 const BLACK_SOUTH_GRAPH = {
@@ -211,16 +225,24 @@ const BLACK_SOUTH_GRAPH = {
         withInteraction: [640, 1080],
     },
     seriesA: {
+        key: 'A',
         name: 'A: Non-Black',
         noInteraction: [1020, 921],
         withInteraction: [1015, 932],
     },
     seriesB: {
+        key: 'B',
         name: 'B: Black',
         noInteraction: [798, 700],
         withInteraction: [860, 664],
     },
     counterfactual: [860, 777],
+    // With-interaction labels hidden until the related mini quiz question
+    // is answered
+    quizGatedLabels: {
+        A: ['nonBlackNonSouth', null], // 1015
+        B: ['blackNonSouth', 'blackSouth'], // 860, 664
+    },
 };
 
 const QUIZ_SCORE_GRAPH = {

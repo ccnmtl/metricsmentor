@@ -1,4 +1,5 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 import { Katex } from '../../utils/katexComponent';
 import { Table } from '../../Table';
 
@@ -259,8 +260,16 @@ export const WageNoInteractionTable = () => (
     </>
 );
 
-export const WageWithInteractionTable = () => (
-    <>
+// Placeholder for values hidden until the related quiz question is
+// answered correctly.
+const HIDDEN_VALUE = '?';
+
+// `revealed` lists which values to show (see getRevealedValues
+// in d1d2QuizData.jsx). Group B's wage value is always shown.
+export const WageWithInteractionTable = ({ revealed }) => {
+    const show = (key, value) =>
+        revealed.includes(key) ? value : HIDDEN_VALUE;
+    return <>
         <p className="fw-bold mt-4">
             With-interaction-Table of mean{' '}
             <Katex tex={'\\textit{Wage}'} /> values:
@@ -284,7 +293,7 @@ export const WageWithInteractionTable = () => (
                     {content: 'A: Non-Black, Non-South',
                         isHeader: true},
                     {content: '0, 0'},
-                    {content: '1015'},
+                    {content: show('nonBlackNonSouth', '1015')},
                     {content: '\u2013'},
                 ],
                 [
@@ -292,28 +301,32 @@ export const WageWithInteractionTable = () => (
                         isHeader: true},
                     {content: '1, 0'},
                     {content: '932'},
-                    {content: <Katex tex={
-                        '-83~(\\hat\\beta_1)'} />},
+                    {content: show('nonBlackNonSouth', <Katex tex={
+                        '-83~(\\hat\\beta_1)'} />)},
                 ],
                 [
                     {content: 'C: Black, Non-South',
                         isHeader: true},
                     {content: '0, 1'},
-                    {content: '860'},
+                    {content: show('blackNonSouth', '860')},
                     {content: '\u2013'},
                 ],
                 [
                     {content: 'D: Black, South',
                         isHeader: true},
                     {content: '1, 1'},
-                    {content: '664'},
-                    {content: <Katex tex={
-                        '-196~(\\hat\\beta_1 + \\hat\\beta_3)'} />},
+                    {content: show('blackSouth', '664')},
+                    {content: show('blackSouth', <Katex tex={
+                        '-196~(\\hat\\beta_1 + \\hat\\beta_3)'} />)},
                 ],
             ]}
         />
-    </>
-);
+    </>;
+};
+
+WageWithInteractionTable.propTypes = {
+    revealed: PropTypes.arrayOf(PropTypes.string).isRequired,
+};
 
 export const QuizScoreNoInteractionTable = () => (
     <>

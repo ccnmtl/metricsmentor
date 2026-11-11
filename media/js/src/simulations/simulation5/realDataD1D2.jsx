@@ -10,7 +10,8 @@ import { D1D2Quizzes } from './d1d2QuizData';
 
 export const RealDataD1D2 = ({
     selected, setSelected, checkedModels, setCheckedModels,
-    submissionId, completedDatasets, setCompletedDatasets
+    submissionId, completedDatasets, setCompletedDatasets,
+    onQuizProgress, blackSouthRevealed
 }) => {
     const DATASETS = [
         {
@@ -38,6 +39,10 @@ export const RealDataD1D2 = ({
         setCompletedDatasets(prev =>
             prev.includes(idx) ? prev : [...prev, idx]);
     }, [setCompletedDatasets]);
+
+    const handleShowModel = useCallback((model) => {
+        setCheckedModels(prev => ({ ...prev, [model]: true }));
+    }, [setCheckedModels]);
 
     const handleCheckbox = (model) => {
         setCheckedModels(prev => ({
@@ -174,7 +179,8 @@ export const RealDataD1D2 = ({
                             + '\\text{South} - 155\\text{Black}'
                             + '- 113 (\\text{Black} \\times \\text{South})'
                         } />
-                        <WageWithInteractionTable />
+                        <WageWithInteractionTable
+                            revealed={blackSouthRevealed} />
                     </div>
                 ) : (
                     <div className="dataset-variable-item" />
@@ -276,6 +282,8 @@ export const RealDataD1D2 = ({
                         datasetIdx={i}
                         submissionId={submissionId}
                         onComplete={handleComplete}
+                        onProgress={onQuizProgress}
+                        onShowModel={handleShowModel}
                     />
                 </div>
             ))}
@@ -294,4 +302,6 @@ RealDataD1D2.propTypes = {
     submissionId: PropTypes.number,
     completedDatasets: PropTypes.arrayOf(PropTypes.number).isRequired,
     setCompletedDatasets: PropTypes.func.isRequired,
+    onQuizProgress: PropTypes.func,
+    blackSouthRevealed: PropTypes.arrayOf(PropTypes.string).isRequired,
 };

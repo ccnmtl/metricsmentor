@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { SimulationPanel } from '../../SimulationPanel';
 import { STATIC_URL, createSubmission, getCoursePk } from '../../utils/utils';
 import { StepProgressButton } from '../../StepProgressButton';
@@ -7,6 +7,7 @@ import { InteractionsD1D2Modal } from './interactionD1D2modal';
 import { NoInteractionTable, WithInteractionTable } from './d1xd2Tables';
 import { InteractionGraph } from './interactionGraph';
 import { RealDataD1D2 } from './realDataD1D2';
+import { getRevealedValues } from './d1d2QuizData';
 
 // const coursePk = getCoursePk();
 
@@ -25,6 +26,14 @@ export const SimulationFive = () => {
         withInteraction: false,
     });
     const [realDataCompleted, setRealDataCompleted] = useState([]);
+    // Number of mini quiz questions answered correctly, per dataset.
+    const [realDataQuizProgress, setRealDataQuizProgress] = useState([0, 0]);
+    const handleQuizProgress = useCallback((idx, numCorrect) => {
+        setRealDataQuizProgress(prev =>
+            prev.map((x, i) => i === idx ? numCorrect : x));
+    }, []);
+    const blackSouthRevealed = getRevealedValues(
+        0, realDataQuizProgress[0]);
     const initialized = useRef(false);
     const noModelSelected = !checkedModels.noInteraction
         && !checkedModels.withInteraction
@@ -125,6 +134,8 @@ export const SimulationFive = () => {
                             submissionId={submissionId}
                             completedDatasets={realDataCompleted}
                             setCompletedDatasets={setRealDataCompleted}
+                            onQuizProgress={handleQuizProgress}
+                            blackSouthRevealed={blackSouthRevealed}
                         />
                     )}
                     {(realDataCompleted.length > 0 || progress[stage] > 1)
@@ -348,6 +359,7 @@ export const SimulationFive = () => {
                                     <InteractionGraph
                                         dataset="blackSouth"
                                         models={realDataModels}
+                                        revealed={blackSouthRevealed}
                                     />
                                 ) : realDataSelected === 1 ? (
                                     <InteractionGraph
