@@ -1,4 +1,3 @@
-import React from 'react';
 import Plot from 'react-plotly.js';
 import GENDATA from './multicollinearityGeneratedData.json';
 import REALDATA from './multicollinearityRealData.json';

@@ -1,4 +1,3 @@
-import React from 'react';
 import Plot from 'react-plotly.js';
 import baseDataset from './logarithm.json';
 import realDataset from './logarithReal.json';
@@ -59,7 +58,7 @@ export const LogarithmGraph = ({
         const logY = model.log_Y || y;
         let plotX = x;
         let plotY = y;
-        let lineX = [], lineY = [];
+        let lineX, lineY;
         let xAxisType = 'linear';
         let yAxisType = 'linear';
         let xAxisTitle = model.xLabel || 'X';

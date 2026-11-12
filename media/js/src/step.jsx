@@ -1,4 +1,3 @@
-import React from 'react';
 import PropTypes from 'prop-types';
 import { STATIC_URL } from './utils/utils';
 
@@ -9,7 +8,7 @@ export const Step = (props) => {
 
     return (
         <div className="simulation__step-container d-flex">
-            <div className={`simulation__step-num 
+            <div className={`simulation__step-num
                         ${learningGoals ? 'tip-on' : ''}`}>
                 {learningGoals ?
                     <img src={`${STATIC_URL}img/icon-goal.svg`}

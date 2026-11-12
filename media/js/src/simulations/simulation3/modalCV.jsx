@@ -1,4 +1,3 @@
-import React from 'react';
 import { GenericModal } from '../../Modal';
 import { STATIC_URL } from '../../utils/utils';
 

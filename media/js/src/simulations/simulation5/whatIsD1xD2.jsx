@@ -1,4 +1,3 @@
-import React from 'react';
 import PropTypes from 'prop-types';
 import { PromptBlock } from '../../PromptBlock';
 import { Katex } from '../../utils/katexComponent';
@@ -140,7 +139,7 @@ export const WhatIsD1xD2 = ({ checkedModels, setCheckedModels }) => {
 
                     <div className='mt-4'>
                         <PromptBlock text=
-                            {`Compare Group B to Group D and check to see 
+                            {`Compare Group B to Group D and check to see
                             if the values are the same.`} />
                     </div>
                     <div><b>Key Points:</b>

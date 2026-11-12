@@ -1,4 +1,4 @@
-import React, { useCallback, useEffect, useRef } from 'react';
+import { useCallback, useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
 import { PromptBlock } from '../../PromptBlock';
 import { Katex } from '../../utils/katexComponent';

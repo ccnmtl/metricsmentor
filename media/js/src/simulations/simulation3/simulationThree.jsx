@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useRef } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import { SkedasticityScatterPlot } from './skedasticityPlot';
 import { MulticollinearityScatterPlot } from './multicollinearityPlot';
 import { SimulationPanel } from '../../SimulationPanel';

@@ -1,4 +1,3 @@
-import React from 'react';
 import PropTypes from 'prop-types';
 import { formulaText, inlineKatex } from '../../../utils/utils';
 import { labelIndex } from '../dataAttr';
@@ -81,7 +80,7 @@ export const ControlVariable = ({
                                         ? 'text-primary'
                                         : ''
                                 }`}>
-                                {inlineKatex(`x_1\\ and\\ x_${i+2} 
+                                {inlineKatex(`x_1\\ and\\ x_${i+2}
                                     \\text{ (${labelIndex[dType]}})`)}
                             </label>
                             {controls[dType] === true && (<>

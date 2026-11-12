@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { Fragment, useState, useEffect } from 'react';
 import { PromptBlock } from '../../PromptBlock';
 import PropTypes from 'prop-types';
 import { Katex } from '../../utils/katexComponent';
@@ -113,20 +113,24 @@ export const RealDataPolynomials = ({
                 'administered in the Introduction to Econometrics ' +
                 '(ECON UN3412) courses at Columbia University, Department of ' +
                 'Economics, from Fall 2022 to Spring 2025.',
-            <>In this dataset, our goal is to examine the relationship
-            between the dependent
-            variable, {inlineKatex('\\text{Grade}')}, as a result of time
-            spent studying, independent
-            variable {inlineKatex('\\text{StudyTime.}')}</>
+            <Fragment key="grade-study">
+                In this dataset, our goal is to examine the relationship
+                between the dependent
+                variable, {inlineKatex('\\text{Grade}')}, as a result of time
+                spent studying, independent
+                variable {inlineKatex('\\text{StudyTime.}')}
+            </Fragment>
         ],
         [  // real2 dataset
             'Standard of Living Index and Income',
             'World Bank Database.',
-            <>In this dataset, our goal is to examine the relationship
-            between the dependent
-            variable, {inlineKatex('\\text{StandardofLiving}')} index and
-            the independent
-            variable {inlineKatex('\\text{Income}')} (in thousand).</>
+            <Fragment key="standard-income">
+                In this dataset, our goal is to examine the relationship
+                between the dependent
+                variable, {inlineKatex('\\text{StandardofLiving}')} index and
+                the independent
+                variable {inlineKatex('\\text{Income}')} (in thousand).
+            </Fragment>
         ]
     ];
 
@@ -280,7 +284,7 @@ export const RealDataPolynomials = ({
                 <span className="ms-2 align-middle">
                     {compareRegLine.length !== 2
                         ? 'Select two to run the test'
-                        : `${compareRegLine[0]} and 
+                        : `${compareRegLine[0]} and
                             ${compareRegLine[1]}`}
                 </span>
                 {showTest && displayRegLineTest()}

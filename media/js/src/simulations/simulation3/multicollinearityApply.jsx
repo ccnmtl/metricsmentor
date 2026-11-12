@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { Fragment, useState } from 'react';
 import PropTypes from 'prop-types';
 import { inlineKatex} from '../../utils/utils';
 import { Katex } from '../../utils/katexComponent';
@@ -16,10 +16,14 @@ export const MulticollinearityApply = ({
     const [selectedOption, setSelectedOption] = useState(null);
 
     const options1 = [
-        <>Exclude {inlineKatex('x_3')} (Sales) from the regression
-            analysis.</>,
-        <>Keep {inlineKatex('x_3')} (Sales), and conduct a joint hypothesis
-            test.</>
+        <Fragment key="exclude">
+            Exclude {inlineKatex('x_3')} (Sales) from the regression
+            analysis.
+        </Fragment>,
+        <Fragment key="keep">
+            Keep {inlineKatex('x_3')} (Sales), and conduct a joint hypothesis
+            test.
+        </Fragment>
     ];
     const correctAnswerIndex1 = 1;
     const correctFeedback1 = 'This is correct. Intuitively, we should keep ' +
@@ -96,10 +100,10 @@ export const MulticollinearityApply = ({
                 'compare it to the original',
                 'Compare the correlation coefficients of the independent ' +
                 'variables',
-                <>
+                <Fragment key="contrast">
             Contrast the resulting {inlineKatex('SE(\\hat{\\beta_1})~')}
             values
-                </>,
+                </Fragment>,
                 'Contrast the related component values, and the hypothesis ' +
                 'test results.'
             ]}
@@ -128,26 +132,26 @@ export const MulticollinearityApply = ({
             Regression line equations:
         </h4>
         <div className="container">
-            <p>{inlineKatex('x_1')} only:&emsp;{inlineKatex(`\\hat{y} = 
+            <p>{inlineKatex('x_1')} only:&emsp;{inlineKatex(`\\hat{y} =
                     ${DATA.x1.intercept} + ${DATA.x1.slope}x_1`)}</p>
             {controls[0] ?
                 <p data-cy="x2equation">
-                    With {inlineKatex('x_2')}:&emsp;{inlineKatex(`\\hat{y} = 
-                    ${DATA.x2.intercept} 
-                    ${DATA.x2.slope_x1 < 0 ? '-' : '+'} 
-                    ${Math.abs(DATA.x2.slope_x1)}x_1 
-                    ${DATA.x2.slope_x2 < 0 ? '-' : '+'} 
+                    With {inlineKatex('x_2')}:&emsp;{inlineKatex(`\\hat{y} =
+                    ${DATA.x2.intercept}
+                    ${DATA.x2.slope_x1 < 0 ? '-' : '+'}
+                    ${Math.abs(DATA.x2.slope_x1)}x_1
+                    ${DATA.x2.slope_x2 < 0 ? '-' : '+'}
                     ${Math.abs(DATA.x2.slope_x2)}x_2`)}</p>
                 :
                 null
             }
             {controls[1] ?
                 <p data-cy="x3equation">
-                    With {inlineKatex('x_3')}:&emsp;{inlineKatex(`\\hat{y} = 
-                    ${DATA.x3.intercept} 
-                    ${DATA.x3.slope_x1 < 0 ? '-' : '+'} 
-                    ${Math.abs(DATA.x3.slope_x1)}x_1 
-                    ${DATA.x3.slope_x2 < 0 ? '-' : '+'} 
+                    With {inlineKatex('x_3')}:&emsp;{inlineKatex(`\\hat{y} =
+                    ${DATA.x3.intercept}
+                    ${DATA.x3.slope_x1 < 0 ? '-' : '+'}
+                    ${Math.abs(DATA.x3.slope_x1)}x_1
+                    ${DATA.x3.slope_x2 < 0 ? '-' : '+'}
                     ${Math.abs(DATA.x3.slope_x2)}x_3`)}</p>
                 :
                 null
@@ -167,8 +171,8 @@ export const MulticollinearityApply = ({
             </div>
             <Katex
                 tex={`
-                    H_0: \\beta_1 = 0; ~ 
-                    H_1: \\beta_1 \\neq 0; ~ 
+                    H_0: \\beta_1 = 0; ~
+                    H_1: \\beta_1 \\neq 0; ~
                     \\alpha = 0.05
                 `}
             />

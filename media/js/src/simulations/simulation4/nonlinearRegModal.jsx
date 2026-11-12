@@ -1,4 +1,3 @@
-import React from 'react';
 import { GenericModal } from '../../Modal';
 
 

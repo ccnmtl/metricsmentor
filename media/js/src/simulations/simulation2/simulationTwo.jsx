@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { ScatterPlot2 } from './components/scatterPlot2';
 import { Variables } from './components/variables';
 import { ControlVariable } from './components/controlVariable';

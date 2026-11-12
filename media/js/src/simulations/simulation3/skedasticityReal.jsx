@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 import PropTypes from 'prop-types';
 import { inlineKatex } from '../../utils/utils';
 import { Katex } from '../../utils/katexComponent';

@@ -1,4 +1,3 @@
-import React from 'react';
 import { inlineKatex } from '../../utils/utils';
 
 export const dataAttr = {

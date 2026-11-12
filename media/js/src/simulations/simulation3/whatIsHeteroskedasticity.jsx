@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { HeteroskedasticitySlider } from './heteroskedasticitySlider';
 import PropTypes from 'prop-types';
 import { inlineKatex } from '../../utils/utils';
@@ -126,8 +126,8 @@ export const WhatIsHeteroskedasticity = ({
                 </div>
                 <Katex
                     tex={`
-                        H_0: \\beta_1 = 0; ~ 
-                        H_1: \\beta_1 \\neq 0; ~ 
+                        H_0: \\beta_1 = 0; ~
+                        H_1: \\beta_1 \\neq 0; ~
                         \\alpha = 0.05
                     `}
                 />

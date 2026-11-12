@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import Plot from 'react-plotly.js';
 import PropTypes from 'prop-types';
 import { authedFetch, seededRandom } from '../../utils/utils';
