@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { ScatterPlot } from './scatterPlot';
 import { Katex } from '../../utils/katexComponent';
 import {

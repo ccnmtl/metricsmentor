@@ -1,4 +1,3 @@
-import React from 'react';
 import { Katex } from '../../utils/katexComponent';
 import { STATIC_URL } from '../../utils/utils';
 

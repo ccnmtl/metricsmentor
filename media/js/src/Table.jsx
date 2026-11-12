@@ -1,4 +1,3 @@
-import React from 'react';
 import PropTypes from 'prop-types';
 
 export const Table = ({ headers = [], rows = [], tableClass = '' }) => {
@@ -40,5 +39,3 @@ Table.propTypes = {
     }))),
     tableClass: PropTypes.string,
 };
-
-

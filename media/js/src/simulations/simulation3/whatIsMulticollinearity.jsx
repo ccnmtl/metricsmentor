@@ -1,4 +1,4 @@
-import React from 'react';
+import { Fragment } from 'react';
 import PropTypes from 'prop-types';
 import { inlineKatex} from '../../utils/utils';
 import { Katex } from '../../utils/katexComponent';
@@ -9,7 +9,7 @@ import DATA from './multicollinearityGeneratedData.json';
 export const WhatIsMulticollinearity = ({
     controls, handleControls, handleProgress
 }) => {
-    return <>
+    return <Fragment key="what-is-multicollinearity">
         <p>
             Let&lsquo;s now learn to identify multicollinearity in a dataset
             and then examine how this leads to
@@ -46,10 +46,10 @@ export const WhatIsMulticollinearity = ({
                 'compare it to the original',
                 'Compare the correlation coefficients of the independent ' +
                 'variables',
-                <>
+                <Fragment key="contrast-1">
             Contrast the resulting {inlineKatex('SE(\\hat{\\beta_1})')}
             values
-                </>,
+                </Fragment>,
                 'Contrast the related component values, and the hypothesis ' +
                 'test results.'
             ]}
@@ -77,26 +77,26 @@ export const WhatIsMulticollinearity = ({
             Regression line equations:
         </h4>
         <div className="container">
-            <p>{inlineKatex('x_1')} only:&emsp;{inlineKatex(`\\hat{y} = 
+            <p>{inlineKatex('x_1')} only:&emsp;{inlineKatex(`\\hat{y} =
                     ${DATA.x1.intercept} + ${DATA.x1.slope}x_1`)}</p>
             {controls[0] ?
                 <p data-cy="x2equation">
-                    With {inlineKatex('x_2')}:&emsp;{inlineKatex(`\\hat{y} = 
-                    ${DATA.x2.intercept} 
-                    ${DATA.x2.slope_x1 < 0 ? '-' : '+'} 
-                    ${Math.abs(DATA.x2.slope_x1)}x_1 
-                    ${DATA.x2.slope_x2 < 0 ? '-' : '+'} 
+                    With {inlineKatex('x_2')}:&emsp;{inlineKatex(`\\hat{y} =
+                    ${DATA.x2.intercept}
+                    ${DATA.x2.slope_x1 < 0 ? '-' : '+'}
+                    ${Math.abs(DATA.x2.slope_x1)}x_1
+                    ${DATA.x2.slope_x2 < 0 ? '-' : '+'}
                     ${Math.abs(DATA.x2.slope_x2)}x_2`)}</p>
                 :
                 null
             }
             {controls[1] ?
                 <p data-cy="x3equation">
-                    With {inlineKatex('x_3')}:&emsp;{inlineKatex(`\\hat{y} = 
-                    ${DATA.x3.intercept} 
-                    ${DATA.x3.slope_x1 < 0 ? '-' : '+'} 
-                    ${Math.abs(DATA.x3.slope_x1)}x_1 
-                    ${DATA.x3.slope_x2 < 0 ? '-' : '+'} 
+                    With {inlineKatex('x_3')}:&emsp;{inlineKatex(`\\hat{y} =
+                    ${DATA.x3.intercept}
+                    ${DATA.x3.slope_x1 < 0 ? '-' : '+'}
+                    ${Math.abs(DATA.x3.slope_x1)}x_1
+                    ${DATA.x3.slope_x2 < 0 ? '-' : '+'}
                     ${Math.abs(DATA.x3.slope_x2)}x_3`)}</p>
                 :
                 null
@@ -108,8 +108,8 @@ export const WhatIsMulticollinearity = ({
             </div>
             <Katex
                 tex={`
-                    H_0: \\beta_1 = 0; ~ 
-                    H_1: \\beta_1 \\neq 0; ~ 
+                    H_0: \\beta_1 = 0; ~
+                    H_1: \\beta_1 \\neq 0; ~
                     \\alpha = 0.05
                 `}
             />
@@ -209,7 +209,7 @@ export const WhatIsMulticollinearity = ({
                 Continue to Real dataset &raquo;
             </button>
         </div>
-    </>;
+    </Fragment>;
 };
 
 WhatIsMulticollinearity.propTypes = {

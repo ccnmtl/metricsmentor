@@ -1,4 +1,3 @@
-import React from 'react';
 import PropTypes from 'prop-types';
 import { inlineKatex, formulaText } from '../../../utils/utils';
 import { labelIndex as label } from '../dataAttr';

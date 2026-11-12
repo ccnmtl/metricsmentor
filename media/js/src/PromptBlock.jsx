@@ -1,4 +1,3 @@
-import React from 'react';
 import { STATIC_URL } from './utils/utils';
 import PropTypes from 'prop-types';
 

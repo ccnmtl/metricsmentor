@@ -1,12 +1,12 @@
 import { defineConfig } from 'eslint/config';
 import globals from 'globals';
 import js from '@eslint/js';
-import pluginReact from 'eslint-plugin-react';
+import eslintReact from '@eslint-react/eslint-plugin';
 import pluginCypress from 'eslint-plugin-cypress';
 
 export default defineConfig([
     js.configs.recommended,
-    pluginReact.configs.flat.recommended,
+    eslintReact.configs['recommended'],
     {
         files: ['**/*.{js,mjs,cjs,jsx}'],
         plugins: {

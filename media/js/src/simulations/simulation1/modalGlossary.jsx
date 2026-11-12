@@ -1,4 +1,3 @@
-import React from 'react';
 import { Katex } from '../../utils/katexComponent';
 
 

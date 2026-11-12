@@ -1,4 +1,3 @@
-import React from 'react';
 import { inlineKatex } from '../../utils/utils';
 import { GenericModal } from '../../Modal';
 import { STATIC_URL } from '../../utils/utils';

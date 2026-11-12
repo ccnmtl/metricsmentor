@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import { PromptBlock } from '../../PromptBlock';
 import { Katex } from '../../utils/katexComponent';
 import { LogarithmQuizzes } from './logarithmQuizData';
@@ -392,7 +392,7 @@ export const RealDataLogarithm = ({
                     />
                     <label htmlFor="group-1"
                         className={`form-check-label fw-semibold
-                            d-flex align-items-center 
+                            d-flex align-items-center
                             ${datasetStarted ? 'text-muted' : ''}`}>
                         Group 1
                         {isGroupComplete.includes(1) && (
@@ -431,7 +431,7 @@ export const RealDataLogarithm = ({
                     />
                     <label htmlFor="group-2"
                         className={`form-check-label fw-semibold
-                            d-flex align-items-center 
+                            d-flex align-items-center
                             ${datasetStarted ? 'text-muted' : ''}`}>
                         Group 2
                         {isGroupComplete.includes(2) && (

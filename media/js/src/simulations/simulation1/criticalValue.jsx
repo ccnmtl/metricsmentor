@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 import PropTypes from 'prop-types';
 import { Katex } from '../../utils/katexComponent';
 import { getCoursePk, saveAnswer, STATIC_URL } from '../../utils/utils';

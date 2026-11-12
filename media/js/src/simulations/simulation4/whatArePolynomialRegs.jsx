@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import {useState, useEffect} from 'react';
 import { PromptBlock } from '../../PromptBlock';
 import PropTypes from 'prop-types';
 import { Katex } from '../../utils/katexComponent';
@@ -263,7 +263,7 @@ export const WhatArePolynomialRegressions = ({
                         <span className="ms-2 align-middle">
                             {compareRegLine.length !== 2
                                 ? 'Select two to run the test'
-                                : `${compareRegLine[0]} and 
+                                : `${compareRegLine[0]} and
                                     ${compareRegLine[1]}`}
                         </span>
                     </>
