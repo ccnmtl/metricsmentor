@@ -8,6 +8,7 @@ import { NoInteractionTable, WithInteractionTable } from './d1xd2Tables';
 import { InteractionGraph } from './interactionGraph';
 import { RealDataD1D2 } from './realDataD1D2';
 import { getRevealedValues } from './d1d2QuizData';
+import { D1xD2Takeaway } from './d1xd2Takeaway';
 
 // const coursePk = getCoursePk();
 
@@ -154,18 +155,17 @@ export const SimulationFive = () => {
             : []),
         ...(progress[stage] > 1
             ? [{
-                headerId: 'assessInteractions',
-                title: 'Part 3: Assessing Interactions',
-                content: <>
-                    <p>
-                        Donec eu libero sit amet quam egestas semper. Aenean
-                        ultricies mi vitae est. Mauris placerat eleifend leo.
-                    </p>
-                    <p>
-                        Simulation complete! You have learned the basics of
-                        Interactions.
-                    </p>
-                </>
+                headerId: 'takeAwayD1D2',
+                title: 'Takeaway questions',
+                content: (
+                    <D1xD2Takeaway
+                        submissionId={submissionId}
+                        setStage={setStage}
+                        setProgress={setProgress}
+                        progress={progress}
+                        stage={stage}
+                    />
+                )
             }]
             : [])
     ];
