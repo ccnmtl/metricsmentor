@@ -23,7 +23,7 @@ export const WhatIsD1xD2 = ({ checkedModels, setCheckedModels }) => {
 
     return (
         <>
-            <p>
+            <div className="mb-3">
                 Interactions between two dummies have two separate use cases:
                 <ul>
                     <li>
@@ -35,7 +35,7 @@ export const WhatIsD1xD2 = ({ checkedModels, setCheckedModels }) => {
                         variables, as long as there is an interaction term.
                     </li>
                 </ul>
-            </p>
+            </div>
             <PromptBlock
                 text="First, take a moment to review the basic concepts relevant
                 to interaction of variables. This will help you continue
