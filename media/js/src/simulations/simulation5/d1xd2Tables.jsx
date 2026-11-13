@@ -248,7 +248,7 @@ export const WageNoInteractionTable = () => (
                     {content: 'D: Black, South',
                         isHeader: true},
                     {content: '1, 1'},
-                    {content: '700'},
+                    {content: '699'},
                     {content: <Katex tex={
                         '- 99~(\\hat\\beta_1)'} />},
                 ],
