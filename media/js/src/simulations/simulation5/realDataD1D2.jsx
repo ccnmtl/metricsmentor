@@ -36,9 +36,9 @@ export const RealDataD1D2 = ({
         setCheckedModels({ noInteraction: true, withInteraction: false });
     };
 
-    const continued = useRef(false);
+    const continuedRef = useRef(false);
     const handleContinue = () => {
-        continued.current = true;
+        continuedRef.current = true;
         setSelected(null);
         // re-hide any values user had unlocked.
         if (onQuizProgress) {
@@ -47,8 +47,8 @@ export const RealDataD1D2 = ({
     };
 
     useEffect(() => {
-        if (continued.current && selected === null) {
-            continued.current = false;
+        if (continuedRef.current && selected === null) {
+            continuedRef.current = false;
             scrollTo('d1d2-choose-dataset');
         }
     }, [selected]);

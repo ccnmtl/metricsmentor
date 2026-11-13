@@ -13,11 +13,16 @@ const MODEL_COLORS = {
 // Label shown in place of a value that is still locked behind a quiz.
 const HIDDEN_LABEL = '?';
 
-// `revealed` (optional) lists the value keys that have been
-// unlocked (see getRevealedValues in d1d2QuizData.jsx). Datasets declare
-// hidden labels with `quizGatedLabels`; if `revealed` is
-// omitted, every label is shown.
-export const InteractionGraph = ({ dataset, models, revealed }) => {
+const MODEL_TITLES = {
+    noInteraction: 'No-interaction',
+    withInteraction: 'With-interaction',
+};
+
+// Plots one model (`noInteraction` or `withInteraction`) for a dataset.
+// `revealed` (optional) lists the value keys that have been unlocked (see
+// getRevealedValues in d1d2QuizData.jsx). Datasets declare hidden labels
+// with `quizGatedLabels`; if `revealed` is omitted, every label is shown.
+export const InteractionGraph = ({ dataset, model, revealed }) => {
     const config = DATASETS[dataset];
     const {
         xTitle, xTicks, yTitle, yRange, format, titleSuffix,
@@ -26,48 +31,26 @@ export const InteractionGraph = ({ dataset, models, revealed }) => {
         diffStyle = 'arrow', quizGatedLabels,
     } = config;
 
-    const showNo = !!models.noInteraction;
-    const showWith = !!models.withInteraction;
-    const bothShown = showNo && showWith;
+    const isWith = model === 'withInteraction';
 
-    const seriesTrace = (series, model, colorKey) => {
+    const seriesTrace = (series, colorKey) => {
         const y = series[model];
         const color = series.color || MODEL_COLORS[model][colorKey];
-        const suffix = bothShown
-            ? ` (${model === 'noInteraction' ? 'no' : 'with'} interaction)`
-            : '';
-        // When both models overlay, the two lines cross, so place each label
-        // away from the lines: above if this line is the higher one at that
-        // point (below otherwise), and outward (left at the first point,
-        // right at the last). For a single model, push the first point's
-        // label left and the last point's right, off the sloped line.
-        let textposition;
-        if (bothShown) {
-            const other = model === 'noInteraction'
-                ? 'withInteraction' : 'noInteraction';
-            const otherY = series[other];
-            textposition = y.map((v, i) => {
-                const vert = v >= otherY[i] ? 'top' : 'bottom';
-                const side = i === 0 ? 'left' : 'right';
-                return `${vert} ${side}`;
-            });
-        } else if (colorKey === 'a') {
-            textposition = ['top left', 'top right'];
-        } else {
-            textposition = series.textposition
-                || ['bottom left', 'bottom right'];
-        }
+        // Push the first point's label left and the last point's right,
+        // off the sloped line.
+        const textposition = colorKey === 'a'
+            ? ['top left', 'top right']
+            : series.textposition || ['bottom left', 'bottom right'];
+        const gated = quizGatedLabels && quizGatedLabels[series.key];
         return {
             x: [0, 1],
             y,
             mode: 'lines+markers+text',
-            name: series.name + suffix,
+            name: series.name,
             line: { color, width: 3 },
             marker: { size: 10, color },
             text: y.map((v, i) => {
-                const gated = quizGatedLabels && quizGatedLabels[series.key];
-                const key = model === 'withInteraction' && revealed
-                    && gated && gated[i];
+                const key = isWith && revealed && gated && gated[i];
                 return key && !revealed.includes(key)
                     ? HIDDEN_LABEL : format(v);
             }),
@@ -77,14 +60,8 @@ export const InteractionGraph = ({ dataset, models, revealed }) => {
         };
     };
 
-    const data = [];
-    if (showNo) {
-        data.push(seriesTrace(seriesA, 'noInteraction', 'a'));
-        data.push(seriesTrace(seriesB, 'noInteraction', 'b'));
-    }
-    if (showWith) {
-        data.push(seriesTrace(seriesA, 'withInteraction', 'a'));
-        data.push(seriesTrace(seriesB, 'withInteraction', 'b'));
+    const data = [seriesTrace(seriesA, 'a'), seriesTrace(seriesB, 'b')];
+    if (isWith) {
         data.push({
             x: [0, 1],
             y: counterfactual,
@@ -98,10 +75,18 @@ export const InteractionGraph = ({ dataset, models, revealed }) => {
         });
     }
 
-    const yBWith = seriesB.withInteraction;
-    const diff = showWith ? yBWith[1] - counterfactual[1] : null;
+    // No hover tooltips on with-interaction graphs that hide values
+    const noHover = isWith && !!quizGatedLabels;
+    if (noHover) {
+        data.forEach(trace => {
+            trace.hoverinfo = 'skip';
+        });
+    }
 
-    // Combined y-range so the scale stays constant across both models.
+    const yBWith = seriesB.withInteraction;
+    const diff = isWith ? yBWith[1] - counterfactual[1] : null;
+
+    // Same y-range for both models so the stacked graphs are comparable.
     const combinedRange = [
         Math.min(yRange.noInteraction[0], yRange.withInteraction[0]),
         Math.max(yRange.noInteraction[1], yRange.withInteraction[1]),
@@ -109,7 +94,9 @@ export const InteractionGraph = ({ dataset, models, revealed }) => {
 
     const layout = {
         title: {
-            text: title ? title({ diff }) : titleSuffix,
+            text: title
+                ? title({ diff })
+                : `${MODEL_TITLES[model]}: ${titleSuffix}`,
             font: { size: 16 },
         },
         xaxis: {
@@ -138,9 +125,10 @@ export const InteractionGraph = ({ dataset, models, revealed }) => {
         showlegend: true,
         paper_bgcolor: 'white',
         plot_bgcolor: 'white',
+        hovermode: noHover ? false : 'closest',
     };
 
-    if (showWith) {
+    if (isWith) {
         const mid = (yBWith[1] + counterfactual[1]) / 2;
         if (diffStyle === 'bracket') {
             // Bracket lines between counterfactual and series B
@@ -205,6 +193,42 @@ export const InteractionGraph = ({ dataset, models, revealed }) => {
 
 InteractionGraph.propTypes = {
     dataset: PropTypes.oneOf(['blackSouth', 'quizScore', 'did']).isRequired,
+    model: PropTypes.oneOf(['noInteraction', 'withInteraction']).isRequired,
+    revealed: PropTypes.arrayOf(PropTypes.string),
+};
+
+
+export const InteractionGraphs = ({ dataset, models, revealed }) => {
+    const shown = ['noInteraction', 'withInteraction']
+        .filter(m => models[m]);
+
+    if (shown.length === 0) {
+        return (
+            <div className="interaction-graphs__empty">
+                Select a model to see its graph
+            </div>
+        );
+    }
+
+    return (
+        <div className={'interaction-graphs' +
+            (shown.length > 1 ? ' interaction-graphs--multi' : '')}>
+            {shown.map(m => (
+                <div className="interaction-graphs__item"
+                    key={`${m}-${shown.length}`}>
+                    <InteractionGraph
+                        dataset={dataset}
+                        model={m}
+                        revealed={revealed}
+                    />
+                </div>
+            ))}
+        </div>
+    );
+};
+
+InteractionGraphs.propTypes = {
+    dataset: PropTypes.oneOf(['blackSouth', 'quizScore']).isRequired,
     models: PropTypes.shape({
         noInteraction: PropTypes.bool,
         withInteraction: PropTypes.bool,

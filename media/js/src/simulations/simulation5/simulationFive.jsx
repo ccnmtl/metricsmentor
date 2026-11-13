@@ -5,7 +5,7 @@ import { StepProgressButton } from '../../StepProgressButton';
 import { WhatIsD1xD2 } from './whatIsD1xD2';
 import { InteractionsD1D2Modal } from './interactionD1D2modal';
 import { NoInteractionTable, WithInteractionTable } from './d1xd2Tables';
-import { InteractionGraph } from './interactionGraph';
+import { InteractionGraph, InteractionGraphs } from './interactionGraph';
 import { RealDataD1D2 } from './realDataD1D2';
 import { getRevealedValues } from './d1d2QuizData';
 import { D1xD2Takeaway } from './d1xd2Takeaway';
@@ -349,20 +349,20 @@ export const SimulationFive = () => {
             {stage === 0 && (
                 <SimulationPanel steps={d1xd2Steps}
                     graphContent={
-                        <div className="p-4" style={{
+                        <div className="p-2 p-lg-4" style={{
                             height: '100%',
                             display: 'flex',
                             flexDirection: 'column',
                         }}>
                             {progress[stage] >= 1 ? (
                                 realDataSelected === 0 ? (
-                                    <InteractionGraph
+                                    <InteractionGraphs
                                         dataset="blackSouth"
                                         models={realDataModels}
                                         revealed={blackSouthRevealed}
                                     />
                                 ) : realDataSelected === 1 ? (
-                                    <InteractionGraph
+                                    <InteractionGraphs
                                         dataset="quizScore"
                                         models={realDataModels}
                                     />
@@ -381,7 +381,7 @@ export const SimulationFive = () => {
                             ) : checkedModels.effectsDiD ? (
                                 <InteractionGraph
                                     dataset="did"
-                                    models={{ withInteraction: true }}
+                                    model="withInteraction"
                                 />
                             ) : noModelSelected ? (
                                 <div style={{

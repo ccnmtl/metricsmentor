@@ -23,7 +23,8 @@ module.exports = merge(common, {
             publicPath: '/media/build/',
         },
         static: {
-            directory: './'
+            directory: './',
+            watch: false,
         },
         allowedHosts: 'all',
         headers: {
