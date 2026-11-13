@@ -17,20 +17,14 @@ export const D1D2_QUIZ_DATA = {
                 'We don’t know',
                 'Yes. The South effect is more negative for Black workers.'
             ],
-            correctAnswerIndex: 1,
-            correctFeedback: <p className="mb-0">
-                The no-interaction model estimates one common South
-                effect, <Katex tex={'\\hat\\beta_1 = -99'} />. This model
-                assumes the South effect is the same regardless of Black
-                status. It doesn&rsquo;t allow us to estimate whether the
-                South effect is different for Black and non-Black
-                individuals.
-            </p>,
+            correctAnswerIndex: 0,
+            correctFeedback: 'The no-interaction model gives the same South ' +
+                'effect, −99, for both Black and non-Blacks. But, this is ' +
+                'because the model forces the South effect to be the same ' +
+                'for both groups.',
             incorrectFeedback: {
-                0: 'The no-interaction model gives the same South effect, ' +
-                    '−99, for both Black and non-Blacks. But, this is ' +
-                    'because the model forces the South effect to be the ' +
-                    'same for both groups.',
+                1: 'We know the change, by looking at the regression ' +
+                    'slopes. Are they different or the same?',
                 2: 'The no-interaction model does not estimate a separate ' +
                     'South effect for Black workers. The South coefficient, ' +
                     '−99, applies equally to both Black and non-Black ' +
