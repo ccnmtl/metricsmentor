@@ -34,7 +34,7 @@ export const QuizComponent = ({
     };
 
     useEffect(() => {
-        if (textInputAnswer.length > 0) {
+        if (textInputAnswer.length > 0 && !isSubmitDisabled) {
             setFeedback(incorrectFeedback);
         }
     }, [incorrectFeedback]);
