@@ -256,7 +256,7 @@ const BLACK_SOUTH_GRAPH = {
     seriesB: {
         key: 'B',
         name: 'B: Black',
-        noInteraction: [798, 700],
+        noInteraction: [798, 699],
         withInteraction: [860, 664],
     },
     counterfactual: [860, 777],
