@@ -234,3 +234,39 @@
     text-align: center;
     font-weight: bold;
 }
+
+.interaction-graphs {
+    display: flex;
+    flex-direction: column;
+    flex: 1 1 auto;
+    min-height: 0;
+    gap: 0.5rem;
+    overflow-y: auto;
+    &__item {
+        flex: 1 1 0;
+        min-width: 0;
+        min-height: 18rem;
+    }
+    &--multi {
+        @include media-breakpoint-up(md) {
+            flex-direction: row;
+        }
+        @include media-breakpoint-up(lg) {
+            flex-direction: column;
+        }
+    }
+    @include media-breakpoint-up(md) {
+        overflow-y: visible;
+        &__item {
+            min-height: 0;
+        }
+    }
+    &__empty {
+        display: flex;
+        flex: 1 1 auto;
+        align-items: center;
+        justify-content: center;
+        color: #555;
+        font-size: 1.2rem;
+    }
+}

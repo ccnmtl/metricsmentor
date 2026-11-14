@@ -162,9 +162,7 @@ export const D1D2_QUIZ_DATA = {
                     'group performed better than the control group on the ' +
                     'post-quiz.'
             },
-            questionNumber: 12,
-            // Turn on this model's checkbox when the question appears.
-            showModel: 'withInteraction'
+            questionNumber: 12
         },
         {
             question: 'Based on these results, what do you conclude about ' +
@@ -225,11 +223,11 @@ export const D1D2Quizzes = ({
 
     // When a new question appears, switch on the model it refers to.
     useEffect(() => {
-        const next = questions[numCorrect];
+        const next = (D1D2_QUIZ_DATA[datasetIdx] || [])[numCorrect];
         if (next && next.showModel && onShowModel) {
             onShowModel(next.showModel);
         }
-    }, [numCorrect, onShowModel]);
+    }, [numCorrect, datasetIdx, onShowModel]);
 
     const handleIsCorrect = (idx) => (result) => {
         if (result) {
