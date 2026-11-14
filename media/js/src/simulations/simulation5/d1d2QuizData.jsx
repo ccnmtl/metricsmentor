@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useMemo } from 'react';
 import PropTypes from 'prop-types';
 import { QuizComponent } from '../../Quiz';
 import { Katex } from '../../utils/katexComponent';
@@ -198,6 +198,7 @@ export const getRevealedValues = (datasetIdx, numCorrect) =>
         .slice(0, numCorrect)
         .flatMap(q => q.reveals || []);
 
+
 export const D1D2Quizzes = ({
     datasetIdx, submissionId, onComplete, onProgress, onShowModel,
     onContinue
@@ -229,6 +230,26 @@ export const D1D2Quizzes = ({
         }
     }, [numCorrect, datasetIdx, onShowModel]);
 
+    const [answerShown, setAnswerShown] = useState([]);
+    const incorrectFeedbacks = useMemo(() => (
+        D1D2_QUIZ_DATA[datasetIdx] || []
+    ).map((q, idx) => !q.isTextInput ? q.incorrectFeedback : (
+        <div key={q.questionNumber}>
+            {q.incorrectFeedback}
+            {answerShown.includes(idx) ? (
+                <p className="mb-0 mt-2">
+                    The correct answer is{' '}
+                    <strong>{q.correctTextAnswer}</strong>.
+                </p>
+            ) : (
+                <button className="btn btn-link btn-reveal mt-2"
+                    onClick={() => setAnswerShown(prev => [...prev, idx])}>
+                    Or would you rather see the correct answer?
+                </button>
+            )}
+        </div>
+    )), [datasetIdx, answerShown]);
+
     const handleIsCorrect = (idx) => (result) => {
         if (result) {
             setNumCorrect(prev => Math.max(prev, idx + 1));
@@ -252,7 +273,7 @@ export const D1D2Quizzes = ({
                         isNumericInput={q.isTextInput}
                         correctTextAnswer={q.correctTextAnswer}
                         correctFeedback={q.correctFeedback}
-                        incorrectFeedback={q.incorrectFeedback}
+                        incorrectFeedback={incorrectFeedbacks[idx]}
                         setIsCorrect={handleIsCorrect(idx)}
                         questionNumber={q.questionNumber}
                         selectedOption={selectedOptions[idx]}
